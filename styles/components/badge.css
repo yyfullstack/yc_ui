@@ -1,0 +1,108 @@
+@charset "UTF-8";
+
+.yc-badge {
+    position: relative;
+    display: inline-flex;
+    vertical-align: middle;
+}
+
+.yc-badge__content {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 var(--yc-spacing-xs);
+    font-size: var(--yc-font-size-extra-small);
+    font-weight: var(--yc-font-weight-medium);
+    color: var(--yc-color-white);
+    background-color: var(--yc-color-danger);
+    border-radius: var(--yc-border-radius-round);
+    line-height: 1;
+}
+
+.yc-badge__content--dot {
+    width: 8px;
+    height: 8px;
+    min-width: 8px;
+    padding: 0;
+    border-radius: 50%;
+}
+
+.yc-badge__content--large {
+    min-width: 22px;
+    height: 22px;
+    font-size: var(--yc-font-size-small);
+}
+
+.yc-badge__content--small {
+    min-width: 14px;
+    height: 14px;
+    font-size: 10px;
+}
+
+.yc-badge--primary .yc-badge__content {
+    background-color: var(--yc-color-primary);
+}
+
+.yc-badge--success .yc-badge__content {
+    background-color: var(--yc-color-success);
+}
+
+.yc-badge--warning .yc-badge__content {
+    background-color: var(--yc-color-warning);
+}
+
+.yc-badge--info .yc-badge__content {
+    background-color: var(--yc-color-info);
+}
+
+.yc-badge--danger .yc-badge__content {
+    background-color: var(--yc-color-danger);
+}
+
+.yc-badge.is-fixed {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(50%, -50%);
+    z-index: 1;
+}
+
+.yc-badge.is-static {
+    position: static;
+    transform: none;
+    margin-left: var(--yc-spacing-xs);
+}
+
+.yc-badge--bottom {
+    position: absolute;
+    top: auto;
+    bottom: 0;
+    transform: translate(50%, 50%);
+}
+
+.yc-badge--left {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: auto;
+    transform: translate(-50%, -50%);
+}
+
+.yc-badge--corner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+}
+
+.yc-badge-group {
+    display: inline-flex;
+    gap: var(--yc-spacing-xs);
+}
+
+.yc-badge-count {
+    font-family: var(--yc-font-family);
+    font-weight: var(--yc-font-weight-medium);
+}

@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TimePicker 时间选择器组件示例</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+    <link rel="stylesheet" href="../styles/index.css">
+</head>
+
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1>TimePicker 时间选择器组件示例</h1>
+            <p class="demo-description">用于选择时间的组件，支持不同尺寸、范围选择、禁用等功能</p>
+        </div>
+
+        <div class="demo-section">
+            <div class="demo-section-title">基础用法</div>
+            <div class="demo-block">
+                <div class="demo-block-item">
+                    <label class="demo-block-label">选择时间</label>
+                    <div class="yc-time-picker" id="pickerBasic">
+                        <div class="yc-time-picker__input-wrapper">
+                            <input type="text" class="yc-time-picker__input" value="14:30:00" readonly placeholder="选择时间">
+                            <i class="fas fa-clock yc-time-picker__icon"></i>
+                            <span class="yc-time-picker__clear"><i class="fas fa-times"></i></span>
+                        </div>
+                        <div class="yc-time-picker__popper">
+                            <div class="yc-time-panel yc-time-panel--with-seconds">
+                                <div class="yc-time-panel__content">
+                                    <div class="yc-time-panel__column" data-type="hour">
+                                        <div class="yc-time-panel__list"></div>
+                                        <div class="yc-time-panel__arrow yc-time-panel__arrow--up"><i class="fas fa-chevron-up"></i></div>
+                                        <div class="yc-time-panel__arrow yc-time-panel__arrow--down"><i class="fas fa-chevron-down"></i></div>
+                                    </div>
+                                    <div class="yc-time-panel__column" data-type="minute">
+                                        <div class="yc-time-panel__list"></div>
+                                        <div class="yc-time-panel__arrow yc-time-panel__arrow--up"><i class="fas fa-chevron-up"></i></div>
+                                        <div class="yc-time-panel__arrow yc-time-panel__arrow--down"><i class="fas fa-chevron-down"></i></div>
+                                    </div>
+                                    <div class="yc-time-panel__column" data-type="second">
+                                        <div class="yc-time-panel__list"></div>
+                                        <div class="yc-time-panel__arrow yc-time-panel__arrow--up"><i class="fas fa-chevron-up"></i></div>
+                                        <div class="yc-time-panel__arrow yc-time-panel__arrow--down"><i class="fas fa-chevron-down"></i></div>
+                                    </div>
+                                </div>
+                                <div class="yc-time-panel__footer">
+                                    <button class="yc-time-panel__btn yc-time-panel__btn--text" data-action="now">此刻</button>
+                                    <button class="yc-time-panel__btn" data-action="cancel">取消</button>
+                                    <button class="yc-time-panel__btn yc-time-panel__btn--primary" data-action="confirm">确定</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="demo-result" id="pickerBasicResult">当前值：14:30:00</div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <div class="demo-section-title">不同尺寸</div>
+            <div class="demo-block">
+                <div class="demo-block-item">
+                    <label class="demo-block-label">尺寸变体</label>
+                    <div class="demo-time-sizes">
+                        <div class="demo-time-item">
+                            <span class="demo-time-label">大</span>
+                            <div class="yc-time-picker" id="pickerLarge">
+                                <div class="yc-time-picker__input-wrapper">
+                                    <input type="text" class="yc-time-picker__input yc-time-picker__input--large" value="09:00" readonly>
+                                    <i class="fas fa-clock yc-time-picker__icon"></i>
+                                </div>
+                                <div class="yc-time-picker__popper">
+                                    <div class="yc-time-panel">
+                                        <div class="yc-time-panel__content">
+                                            <div class="yc-time-panel__column" data-type="hour"><div class="yc-time-panel__list"></div></div>
+                                            <div class="yc-time-panel__column" data-type="minute"><div class="yc-time-panel__list"></div></div>
+                                        </div>
+                                        <div class="yc-time-panel__footer">
+                                            <button class="yc-time-panel__btn yc-time-panel__btn--text" data-action="now">此刻</button>
+                                            <button class="yc-time-panel__btn" data-action="cancel">取消</button>
+                                            <button class="yc-time-panel__btn yc-time-panel__btn--primary" data-action="confirm">确定</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="demo-time-item">
+                            <span class="demo-time-label">中</span>
+                            <div class="yc-time-picker" id="pickerMedium">
+                                <div class="yc-time-picker__input-wrapper">
+                                    <input type="text" class="yc-time-picker__input" value="12:00" readonly>
+                                    <i class="fas fa-clock yc-time-picker__icon"></i>
+                                </div>
+                                <div class="yc-time-picker__popper">
+                                    <div class="yc-time-panel">
+                                        <div class="yc-time-panel__content">
+                                            <div class="yc-time-panel__column" data-type="hour"><div class="yc-time-panel__list"></div></div>
+                                            <div class="yc-time-panel__column" data-type="minute"><div class="yc-time-panel__list"></div></div>
+                                        </div>
+                                        <div class="yc-time-panel__footer">
+                                            <button class="yc-time-panel__btn yc-time-panel__btn--text" data-action="now">此刻</button>
+                                            <button class="yc-time-panel__btn" data-action="cancel">取消</button>
+                                            <button class="yc-time-panel__btn yc-time-panel__btn--primary" data-action="confirm">确定</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="demo-time-item">
+                            <span class="demo-time-label">小</span>
+                            <div class="yc-time-picker" id="pickerSmall">
+                                <div class="yc-time-picker__input-wrapper">
+                                    <input type="text" class="yc-time-picker__input yc-time-picker__input--small" value="18:30" readonly>
+                                    <i class="fas fa-clock yc-time-picker__icon"></i>
+                                </div>
+                                <div class="yc-time-picker__popper">
+                                    <div class="yc-time-panel">
+                                        <div class="yc-time-panel__content">
+                                            <div class="yc-time-panel__column" data-type="hour"><div class="yc-time-panel__list"></div></div>
+                                            <div class="yc-time-panel__column" data-type="minute"><div class="yc-time-panel__list"></div></div>
+                                        </div>
+                                        <div class="yc-time-panel__footer">
+                                            <button class="yc-time-panel__btn yc-time-panel__btn--text" data-action="now">此刻</button>
+                                            <button class="yc-time-panel__btn" data-action="cancel">取消</button>
+                                            <button class="yc-time-panel__btn yc-time-panel__btn--primary" data-action="confirm">确定</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <div class="demo-section-title">允许清除</div>
+            <div class="demo-block">
+                <div class="demo-block-item">
+                    <label class="demo-block-label">可清空</label>
+                    <div class="yc-time-picker is-clearable" id="pickerClearable">
+                        <div class="yc-time-picker__input-wrapper">
+                            <input type="text" class="yc-time-picker__input" value="10:15" readonly>
+                            <i class="fas fa-clock yc-time-picker__icon"></i>
+                            <span class="yc-time-picker__clear"><i class="fas fa-times"></i></span>
+                        </div>
+                        <div class="yc-time-picker__popper">
+                            <div class="yc-time-panel">
+                                <div class="yc-time-panel__content">
+                                    <div class="yc-time-panel__column" data-type="hour"><div class="yc-time-panel__list"></div></div>
+                                    <div class="yc-time-panel__column" data-type="minute"><div class="yc-time-panel__list"></div></div>
+                                </div>
+                                <div class="yc-time-panel__footer">
+                                    <button class="yc-time-panel__btn yc-time-panel__btn--text" data-action="now">此刻</button>
+                                    <button class="yc-time-panel__btn" data-action="cancel">取消</button>
+                                    <button class="yc-time-panel__btn yc-time-panel__btn--primary" data-action="confirm">确定</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="demo-result" id="pickerClearableResult">当前值：10:15</div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <div class="demo-section-title">禁用状态</div>
+            <div class="demo-block">
+                <div class="demo-block-item">
+                    <label class="demo-block-label">禁用</label>
+                    <div class="yc-time-picker is-disabled" id="pickerDisabled">
+                        <div class="yc-time-picker__input-wrapper">
+                            <input type="text" class="yc-time-picker__input" value="08:00" disabled>
+                            <i class="fas fa-clock yc-time-picker__icon"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="demo-result">状态：已禁用</div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <div class="demo-section-title">时间范围选择</div>
+            <div class="demo-block">
+                <div class="demo-block-item">
+                    <label class="demo-block-label">时间范围</label>
+                    <div class="yc-time-picker yc-time-range-picker" id="pickerRange">
+                        <div class="yc-time-range-picker__input">
+                            <div class="yc-time-picker__input-wrapper">
+                                <input type="text" class="yc-time-picker__input" value="09:00" readonly>
+                                <i class="fas fa-clock yc-time-picker__icon"></i>
+                            </div>
+                            <span class="yc-time-range-picker__separator">至</span>
+                            <div class="yc-time-picker__input-wrapper">
+                                <input type="text" class="yc-time-picker__input" value="18:00" readonly>
+                                <i class="fas fa-clock yc-time-picker__icon"></i>
+                            </div>
+                        </div>
+                        <div class="yc-time-picker__popper">
+                            <div class="yc-time-panel yc-time-panel--range">
+                                <div class="yc-time-panel__header">
+                                    <span class="yc-time-panel__header-item">开始时间</span>
+                                    <span class="yc-time-panel__header-item">09:00</span>
+                                    <span class="yc-time-panel__header-separator">~</span>
+                                    <span class="yc-time-panel__header-item">结束时间</span>
+                                    <span class="yc-time-panel__header-item">18:00</span>
+                                </div>
+                                <div class="yc-time-panel__content">
+                                    <div class="yc-time-panel__column" data-type="hour-start"><div class="yc-time-panel__list"></div></div>
+                                    <div class="yc-time-panel__column" data-type="minute-start"><div class="yc-time-panel__list"></div></div>
+                                    <div class="yc-time-panel__column" data-type="hour-end"><div class="yc-time-panel__list"></div></div>
+                                    <div class="yc-time-panel__column" data-type="minute-end"><div class="yc-time-panel__list"></div></div>
+                                </div>
+                                <div class="yc-time-panel__footer">
+                                    <button class="yc-time-panel__btn yc-time-panel__btn--text" data-action="now">此刻</button>
+                                    <button class="yc-time-panel__btn" data-action="cancel">取消</button>
+                                    <button class="yc-time-panel__btn yc-time-panel__btn--primary" data-action="confirm">确定</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="demo-result" id="pickerRangeResult">时间范围：09:00 - 18:00</div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <div class="demo-section-title">动态控制</div>
+            <div class="demo-block">
+                <div class="demo-block-item">
+                    <label class="demo-block-label">动态设置</label>
+                    <div class="yc-time-picker" id="pickerDynamic">
+                        <div class="yc-time-picker__input-wrapper">
+                            <input type="text" class="yc-time-picker__input" value="12:00" readonly>
+                            <i class="fas fa-clock yc-time-picker__icon"></i>
+                        </div>
+                        <div class="yc-time-picker__popper">
+                            <div class="yc-time-panel">
+                                <div class="yc-time-panel__content">
+                                    <div class="yc-time-panel__column" data-type="hour"><div class="yc-time-panel__list"></div></div>
+                                    <div class="yc-time-panel__column" data-type="minute"><div class="yc-time-panel__list"></div></div>
+                                </div>
+                                <div class="yc-time-panel__footer">
+                                    <button class="yc-time-panel__btn yc-time-panel__btn--text" data-action="now">此刻</button>
+                                    <button class="yc-time-panel__btn" data-action="cancel">取消</button>
+                                    <button class="yc-time-panel__btn yc-time-panel__btn--primary" data-action="confirm">确定</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="demo-button-group" style="margin-top: 16px;">
+                    <button class="yc-button yc-button--small" onclick="setTime('pickerDynamic', '08:00')">08:00</button>
+                    <button class="yc-button yc-button--small" onclick="setTime('pickerDynamic', '12:00')">12:00</button>
+                    <button class="yc-button yc-button--small" onclick="setTime('pickerDynamic', '18:00')">18:00</button>
+                    <button class="yc-button yc-button--small" onclick="setTime('pickerDynamic', '23:59')">23:59</button>
+                    <button class="yc-button yc-button--small" onclick="clearTime('pickerDynamic')">清空</button>
+                </div>
+                <div class="demo-result" id="pickerDynamicResult">当前值：12:00</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function padZero(num) {
+            return String(num).padStart(2, '0');
+        }
+
+        function parseTime(timeStr) {
+            if (!timeStr) return { hour: '00', minute: '00', second: '00' };
+            const parts = timeStr.split(':');
+            return {
+                hour: parts[0] || '00',
+                minute: parts[1] || '00',
+                second: parts[2] || '00'
+            };
+        }
+
+        function formatTime(hour, minute, second, withSeconds = false) {
+            if (withSeconds) {
+                return `${padZero(hour)}:${padZero(minute)}:${padZero(second)}`;
+            }
+            return `${padZero(hour)}:${padZero(minute)}`;
+        }
+
+        function generateColumnList(list, type, selectedValue) {
+            if (!list) return;
+            let max = 59;
+            if (type === 'hour' || type === 'hour-start' || type === 'hour-end') max = 23;
+
+            list.innerHTML = '';
+            for (let i = 0; i <= max; i++) {
+                const item = document.createElement('div');
+                item.className = 'yc-time-panel__item';
+                item.textContent = padZero(i);
+                item.dataset.value = padZero(i);
+                if (padZero(i) === selectedValue) {
+                    item.classList.add('is-selected');
+                }
+                list.appendChild(item);
+            }
+            const selectedIndex = parseInt(selectedValue) || 0;
+            list.scrollTop = Math.max(0, (selectedIndex - 2) * 32);
+        }
+
+        function updateDisplay(picker) {
+            const input = picker.querySelector('.yc-time-picker__input');
+            const popper = picker.querySelector('.yc-time-panel');
+            if (!popper) return;
+
+            const hourCol = popper.querySelector('[data-type="hour"] .yc-time-panel__list, [data-type="hour-start"] .yc-time-panel__list, [data-type="hour-end"] .yc-time-panel__list');
+            const minuteCol = popper.querySelector('[data-type="minute"] .yc-time-panel__list, [data-type="minute-start"] .yc-time-panel__list, [data-type="minute-end"] .yc-time-panel__list');
+            const secondCol = popper.querySelector('[data-type="second"] .yc-time-panel__list');
+            const getSelected = (col) => col?.querySelector('.is-selected')?.dataset.value || '00';
+
+            const hour = getSelected(hourCol);
+            const minute = getSelected(minuteCol);
+            const second = getSelected(secondCol);
+            const hasSeconds = popper.classList.contains('yc-time-panel--with-seconds');
+            const timeStr = formatTime(hour, minute, second, hasSeconds);
+
+            if (input) input.value = timeStr;
+            const resultId = picker.id + 'Result';
+            const resultEl = document.getElementById(resultId);
+            if (resultEl) resultEl.textContent = `当前值：${timeStr}`;
+        }
+
+        function scrollToItem(list, value) {
+            if (!list) return;
+            const index = parseInt(value) || 0;
+            list.scrollTo({ top: Math.max(0, (index - 2) * 32), behavior: 'smooth' });
+        }
+
+        function handleColumnClick(e, picker, popper) {
+            const item = e.target.closest('.yc-time-panel__item');
+            if (!item || item.classList.contains('is-disabled')) return;
+
+            const column = item.closest('.yc-time-panel__column');
+            const list = column.querySelector('.yc-time-panel__list');
+            list.querySelectorAll('.yc-time-panel__item').forEach(el => el.classList.remove('is-selected'));
+            item.classList.add('is-selected');
+            scrollToItem(list, item.dataset.value);
+
+            if (picker.id === 'pickerRange') {
+                updateRangeDisplay(picker);
+            } else {
+                updateDisplay(picker);
+            }
+        }
+
+        function handleArrowClick(e, column) {
+            const arrow = e.target.closest('.yc-time-panel__arrow');
+            if (!arrow) return;
+
+            const list = column.querySelector('.yc-time-panel__list');
+            const items = list.querySelectorAll('.yc-time-panel__item');
+            const selected = list.querySelector('.is-selected');
+            const currentIndex = selected ? parseInt(selected.dataset.value) : 0;
+
+            let newIndex;
+            if (arrow.classList.contains('yc-time-panel__arrow--up')) {
+                newIndex = Math.max(0, currentIndex - 1);
+            } else {
+                newIndex = Math.min(items.length - 1, currentIndex + 1);
+            }
+
+            items.forEach(el => el.classList.remove('is-selected'));
+            items[newIndex].classList.add('is-selected');
+            scrollToItem(list, items[newIndex].dataset.value);
+
+            const picker = column.closest('.yc-time-picker');
+            if (picker.id === 'pickerRange') {
+                updateRangeDisplay(picker);
+            } else {
+                updateDisplay(picker);
+            }
+        }
+
+        function handleWheel(e, column) {
+            e.preventDefault();
+            const list = column.querySelector('.yc-time-panel__list');
+            const items = list.querySelectorAll('.yc-time-panel__item');
+            const selected = list.querySelector('.is-selected');
+            const currentIndex = selected ? parseInt(selected.dataset.value) : 0;
+
+            let newIndex;
+            if (e.deltaY < 0) {
+                newIndex = Math.max(0, currentIndex - 1);
+            } else {
+                newIndex = Math.min(items.length - 1, currentIndex + 1);
+            }
+
+            items.forEach(el => el.classList.remove('is-selected'));
+            items[newIndex].classList.add('is-selected');
+            scrollToItem(list, items[newIndex].dataset.value);
+
+            const picker = column.closest('.yc-time-picker');
+            if (picker.id === 'pickerRange') {
+                updateRangeDisplay(picker);
+            } else {
+                updateDisplay(picker);
+            }
+        }
+
+        function updateRangeDisplay(picker) {
+            const popper = picker.querySelector('.yc-time-panel');
+            if (!popper) return;
+
+            const hourStartCol = popper.querySelector('[data-type="hour-start"] .yc-time-panel__list');
+            const minuteStartCol = popper.querySelector('[data-type="minute-start"] .yc-time-panel__list');
+            const hourEndCol = popper.querySelector('[data-type="hour-end"] .yc-time-panel__list');
+            const minuteEndCol = popper.querySelector('[data-type="minute-end"] .yc-time-panel__list');
+
+            const getSelected = (col) => col?.querySelector('.is-selected')?.dataset.value || '00';
+            const startTime = `${getSelected(hourStartCol)}:${getSelected(minuteStartCol)}`;
+            const endTime = `${getSelected(hourEndCol)}:${getSelected(minuteEndCol)}`;
+
+            const inputs = picker.querySelectorAll('.yc-time-picker__input');
+            if (inputs[0]) inputs[0].value = startTime;
+            if (inputs[1]) inputs[1].value = endTime;
+
+            const headers = popper.querySelectorAll('.yc-time-panel__header-item');
+            if (headers[1]) headers[1].textContent = startTime;
+            if (headers[4]) headers[4].textContent = endTime;
+
+            const resultEl = document.getElementById('pickerRangeResult');
+            if (resultEl) resultEl.textContent = `时间范围：${startTime} - ${endTime}`;
+        }
+
+        function initPicker(picker) {
+            if (!picker) return;
+
+            const input = picker.querySelector('.yc-time-picker__input');
+            const popper = picker.querySelector('.yc-time-picker__popper');
+            const clearBtn = picker.querySelector('.yc-time-picker__clear');
+
+            if (picker.classList.contains('is-disabled')) return;
+
+            input?.addEventListener('click', (e) => {
+                e.stopPropagation();
+                document.querySelectorAll('.yc-time-picker.is-active').forEach(p => {
+                    if (p !== picker) p.classList.remove('is-active');
+                });
+                document.querySelectorAll('.yc-time-picker__popper.is-visible').forEach(pop => {
+                    if (pop !== popper) pop.classList.remove('is-visible');
+                });
+
+                picker.classList.toggle('is-active');
+                popper?.classList.toggle('is-visible');
+
+                if (popper?.classList.contains('is-visible')) {
+                    initPickerData(picker);
+                }
+            });
+
+            clearBtn?.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (input) input.value = '';
+                const resultEl = document.getElementById(picker.id + 'Result');
+                if (resultEl) resultEl.textContent = '当前值：无';
+            });
+
+            const cancelBtn = popper?.querySelector('[data-action="cancel"]');
+            const confirmBtn = popper?.querySelector('[data-action="confirm"]');
+            const nowBtn = popper?.querySelector('[data-action="now"]');
+
+            cancelBtn?.addEventListener('click', (e) => {
+                e.stopPropagation();
+                picker.classList.remove('is-active');
+                popper?.classList.remove('is-visible');
+            });
+
+            confirmBtn?.addEventListener('click', (e) => {
+                e.stopPropagation();
+                picker.classList.remove('is-active');
+                popper?.classList.remove('is-visible');
+                if (picker.id === 'pickerRange') {
+                    updateRangeDisplay(picker);
+                } else {
+                    updateDisplay(picker);
+                }
+            });
+
+            nowBtn?.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const now = new Date();
+                const h = padZero(now.getHours());
+                const m = padZero(now.getMinutes());
+                const s = padZero(now.getSeconds());
+
+                if (picker.id === 'pickerRange') {
+                    const hourStartCol = popper.querySelector('[data-type="hour-start"] .yc-time-panel__list');
+                    const minuteStartCol = popper.querySelector('[data-type="minute-start"] .yc-time-panel__list');
+                    const hourEndCol = popper.querySelector('[data-type="hour-end"] .yc-time-panel__list');
+                    const minuteEndCol = popper.querySelector('[data-type="minute-end"] .yc-time-panel__list');
+
+                    generateColumnList(hourStartCol, 'hour-start', h);
+                    generateColumnList(minuteStartCol, 'minute-start', m);
+                    generateColumnList(hourEndCol, 'hour-end', h);
+                    generateColumnList(minuteEndCol, 'minute-end', m);
+                    updateRangeDisplay(picker);
+                } else {
+                    const hourCol = popper.querySelector('[data-type="hour"] .yc-time-panel__list');
+                    const minuteCol = popper.querySelector('[data-type="minute"] .yc-time-panel__list');
+                    const secondCol = popper.querySelector('[data-type="second"] .yc-time-panel__list');
+
+                    generateColumnList(hourCol, 'hour', h);
+                    generateColumnList(minuteCol, 'minute', m);
+                    generateColumnList(secondCol, 'second', s);
+                    updateDisplay(picker);
+                }
+            });
+
+            popper?.querySelectorAll('.yc-time-panel__column').forEach(column => {
+                const list = column.querySelector('.yc-time-panel__list');
+                list?.addEventListener('click', (e) => handleColumnClick(e, picker, popper));
+                list?.addEventListener('wheel', (e) => handleWheel(e, column), { passive: false });
+
+                column.addEventListener('click', (e) => {
+                    if (e.target.closest('.yc-time-panel__arrow')) {
+                        handleArrowClick(e, column);
+                    }
+                });
+            });
+        }
+
+        function initPickerData(picker) {
+            const popper = picker.querySelector('.yc-time-panel');
+            if (!popper) return;
+
+            const input = picker.querySelector('.yc-time-picker__input');
+            const value = input?.value || '00:00:00';
+            const { hour, minute, second } = parseTime(value);
+
+            const isRange = picker.id === 'pickerRange';
+
+            if (isRange) {
+                const [start, end] = value.split(' - ');
+                const startTime = parseTime(start);
+                const endTime = parseTime(end);
+
+                const hourStartCol = popper.querySelector('[data-type="hour-start"] .yc-time-panel__list');
+                const minuteStartCol = popper.querySelector('[data-type="minute-start"] .yc-time-panel__list');
+                const hourEndCol = popper.querySelector('[data-type="hour-end"] .yc-time-panel__list');
+                const minuteEndCol = popper.querySelector('[data-type="minute-end"] .yc-time-panel__list');
+
+                generateColumnList(hourStartCol, 'hour-start', startTime.hour);
+                generateColumnList(minuteStartCol, 'minute-start', startTime.minute);
+                generateColumnList(hourEndCol, 'hour-end', endTime.hour);
+                generateColumnList(minuteEndCol, 'minute-end', endTime.minute);
+            } else {
+                const hourCol = popper.querySelector('[data-type="hour"] .yc-time-panel__list');
+                const minuteCol = popper.querySelector('[data-type="minute"] .yc-time-panel__list');
+                const secondCol = popper.querySelector('[data-type="second"] .yc-time-panel__list');
+
+                generateColumnList(hourCol, 'hour', hour);
+                generateColumnList(minuteCol, 'minute', minute);
+                generateColumnList(secondCol, 'second', second);
+            }
+        }
+
+        function setTime(id, time) {
+            const picker = document.getElementById(id);
+            if (!picker) return;
+            const input = picker.querySelector('.yc-time-picker__input');
+            if (input) input.value = time;
+            const resultEl = document.getElementById(id + 'Result');
+            if (resultEl) resultEl.textContent = `当前值：${time}`;
+        }
+
+        function clearTime(id) {
+            const picker = document.getElementById(id);
+            if (!picker) return;
+            const input = picker.querySelector('.yc-time-picker__input');
+            if (input) input.value = '';
+            const resultEl = document.getElementById(id + 'Result');
+            if (resultEl) resultEl.textContent = '当前值：无';
+        }
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.yc-time-picker')) {
+                document.querySelectorAll('.yc-time-picker.is-active').forEach(p => p.classList.remove('is-active'));
+                document.querySelectorAll('.yc-time-picker__popper.is-visible').forEach(pop => pop.classList.remove('is-visible'));
+            }
+        });
+
+        document.querySelectorAll('.yc-time-picker').forEach(initPicker);
+    </script>
+</body>
+
+</html>

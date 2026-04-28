@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InputNumber 数字输入框组件示例 - YC UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">InputNumber 数字输入框组件</h1>
+            <p class="demo-page-subtitle">带数值增减按钮的输入框，支持多种配置和状态</p>
+        </div>
+
+        <div class="demo-section">
+            <h3>基础用法</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">默认数字输入框</div>
+                <div class="demo-row">
+                    <div class="yc-input-number" id="inputNumber1">
+                        <input type="number" class="yc-input-number__input" value="1" min="0" max="100">
+                        <div class="yc-input-number__controls">
+                            <div class="yc-input-number__increase"><span></span></div>
+                            <div class="yc-input-number__decrease"><span></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>带前缀</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">输入框带前缀图标或文字</div>
+                <div class="demo-row" style="gap: 20px; flex-wrap: wrap;">
+                    <div class="yc-input-number yc-input-number--with-prefix" id="inputNumber2">
+                        <span class="yc-input-number__prefix"><i class="fas fa-coins"></i></span>
+                        <input type="number" class="yc-input-number__input" value="100" min="0">
+                        <div class="yc-input-number__controls">
+                            <div class="yc-input-number__increase"><span></span></div>
+                            <div class="yc-input-number__decrease"><span></span></div>
+                        </div>
+                    </div>
+                    <div class="yc-input-number yc-input-number--with-prefix" id="inputNumber3">
+                        <span class="yc-input-number__prefix">¥</span>
+                        <input type="number" class="yc-input-number__input" value="99.99" step="0.01" min="0">
+                        <div class="yc-input-number__controls">
+                            <div class="yc-input-number__increase"><span></span></div>
+                            <div class="yc-input-number__decrease"><span></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>带后缀</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">输入框带后缀</div>
+                <div class="demo-row" style="gap: 20px; flex-wrap: wrap;">
+                    <div class="yc-input-number yc-input-number--with-suffix" id="inputNumber4">
+                        <input type="number" class="yc-input-number__input" value="100" min="0">
+                        <span class="yc-input-number__suffix">%</span>
+                        <div class="yc-input-number__controls">
+                            <div class="yc-input-number__increase"><span></span></div>
+                            <div class="yc-input-number__decrease"><span></span></div>
+                        </div>
+                    </div>
+                    <div class="yc-input-number yc-input-number--with-suffix" id="inputNumber5">
+                        <input type="number" class="yc-input-number__input" value="1024" min="0">
+                        <span class="yc-input-number__suffix">GB</span>
+                        <div class="yc-input-number__controls">
+                            <div class="yc-input-number__increase"><span></span></div>
+                            <div class="yc-input-number__decrease"><span></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>禁用状态</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">禁止交互</div>
+                <div class="demo-row">
+                    <div class="yc-input-number is-disabled" id="inputNumber6">
+                        <input type="number" class="yc-input-number__input" value="10" disabled>
+                        <div class="yc-input-number__controls">
+                            <div class="yc-input-number__increase"><span></span></div>
+                            <div class="yc-input-number__decrease"><span></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>不同尺寸</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">大中小三种尺寸</div>
+                <div class="demo-row" style="gap: 20px; flex-wrap: wrap;">
+                    <div class="yc-input-number yc-input-number--large" id="inputNumber7">
+                        <input type="number" class="yc-input-number__input" value="1" min="0">
+                        <div class="yc-input-number__controls">
+                            <div class="yc-input-number__increase"><span></span></div>
+                            <div class="yc-input-number__decrease"><span></span></div>
+                        </div>
+                    </div>
+                    <div class="yc-input-number" id="inputNumber8">
+                        <input type="number" class="yc-input-number__input" value="1" min="0">
+                        <div class="yc-input-number__controls">
+                            <div class="yc-input-number__increase"><span></span></div>
+                            <div class="yc-input-number__decrease"><span></span></div>
+                        </div>
+                    </div>
+                    <div class="yc-input-number yc-input-number--small" id="inputNumber9">
+                        <input type="number" class="yc-input-number__input" value="1" min="0">
+                        <div class="yc-input-number__controls">
+                            <div class="yc-input-number__increase"><span></span></div>
+                            <div class="yc-input-number__decrease"><span></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>步长和精度</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">设置 step 和精度</div>
+                <div class="demo-row" style="gap: 20px; flex-wrap: wrap;">
+                    <div class="yc-input-number" id="inputNumber10">
+                        <input type="number" class="yc-input-number__input" value="10" min="0" step="10">
+                        <div class="yc-input-number__controls">
+                            <div class="yc-input-number__increase"><span></span></div>
+                            <div class="yc-input-number__decrease"><span></span></div>
+                        </div>
+                    </div>
+                    <div class="yc-input-number" id="inputNumber11">
+                        <input type="number" class="yc-input-number__input" value="3.14" min="0" step="0.01" data-precision="2">
+                        <div class="yc-input-number__controls">
+                            <div class="yc-input-number__increase"><span></span></div>
+                            <div class="yc-input-number__decrease"><span></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>数值边界</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">设置 min 和 max</div>
+                <div class="demo-row">
+                    <div class="yc-input-number" id="inputNumber12">
+                        <input type="number" class="yc-input-number__input" value="5" min="1" max="10">
+                        <div class="yc-input-number__controls">
+                            <div class="yc-input-number__increase"><span></span></div>
+                            <div class="yc-input-number__decrease"><span></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>JavaScript 操作</h3>
+            <div class="demo-block">
+                <div class="demo-btn-row">
+                    <button class="yc-button yc-button--primary" onclick="increaseValue()">
+                        <i class="fas fa-plus"></i> 增加
+                    </button>
+                    <button class="yc-button yc-button--info" onclick="decreaseValue()">
+                        <i class="fas fa-minus"></i> 减少
+                    </button>
+                    <button class="yc-button yc-button--success" onclick="setRandomValue()">
+                        <i class="fas fa-dice"></i> 随机值
+                    </button>
+                    <button class="yc-button" onclick="resetValue()">
+                        <i class="fas fa-undo"></i> 重置
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function initInputNumbers() {
+            const inputNumbers = document.querySelectorAll('.yc-input-number');
+
+            inputNumbers.forEach(container => {
+                if (container.classList.contains('is-disabled')) return;
+
+                const input = container.querySelector('.yc-input-number__input');
+                const increaseBtn = container.querySelector('.yc-input-number__increase');
+                const decreaseBtn = container.querySelector('.yc-input-number__decrease');
+
+                if (!input || !increaseBtn || !decreaseBtn) return;
+
+                const min = parseFloat(input.min) || -Infinity;
+                const max = parseFloat(input.max) || Infinity;
+                const step = parseFloat(input.step) || 1;
+                const precision = input.dataset.precision ? parseInt(input.dataset.precision) : 0;
+
+                function updateButtons() {
+                    const value = parseFloat(input.value) || 0;
+                    decreaseBtn.style.pointerEvents = value <= min ? 'none' : 'auto';
+                    decreaseBtn.style.opacity = value <= min ? '0.5' : '1';
+                    increaseBtn.style.pointerEvents = value >= max ? 'none' : 'auto';
+                    increaseBtn.style.opacity = value >= max ? '0.5' : '1';
+                }
+
+                function formatValue(val) {
+                    return Number(val).toFixed(precision);
+                }
+
+                increaseBtn.addEventListener('click', () => {
+                    let value = parseFloat(input.value) || 0;
+                    value = Math.min(max, value + step);
+                    input.value = formatValue(value);
+                    updateButtons();
+                    input.dispatchEvent(new Event('change'));
+                });
+
+                decreaseBtn.addEventListener('click', () => {
+                    let value = parseFloat(input.value) || 0;
+                    value = Math.max(min, value - step);
+                    input.value = formatValue(value);
+                    updateButtons();
+                    input.dispatchEvent(new Event('change'));
+                });
+
+                input.addEventListener('input', () => {
+                    let value = parseFloat(input.value) || 0;
+                    if (value > max) input.value = formatValue(max);
+                    if (value < min) input.value = formatValue(min);
+                    updateButtons();
+                });
+
+                input.addEventListener('blur', () => {
+                    let value = parseFloat(input.value) || 0;
+                    value = Math.max(min, Math.min(max, value));
+                    input.value = formatValue(value);
+                    updateButtons();
+                });
+
+                updateButtons();
+            });
+        }
+
+        function getFirstInputNumber() {
+            return document.querySelector('.yc-input-number:not(.is-disabled)');
+        }
+
+        function increaseValue() {
+            const container = getFirstInputNumber();
+            if (container) {
+                const input = container.querySelector('.yc-input-number__input');
+                const increaseBtn = container.querySelector('.yc-input-number__increase');
+                if (increaseBtn) increaseBtn.click();
+            }
+        }
+
+        function decreaseValue() {
+            const container = getFirstInputNumber();
+            if (container) {
+                const decreaseBtn = container.querySelector('.yc-input-number__decrease');
+                if (decreaseBtn) decreaseBtn.click();
+            }
+        }
+
+        function setRandomValue() {
+            const container = getFirstInputNumber();
+            if (container) {
+                const input = container.querySelector('.yc-input-number__input');
+                const min = parseFloat(input.min) || 0;
+                const max = parseFloat(input.max) || 100;
+                const precision = input.dataset.precision ? parseInt(input.dataset.precision) : 0;
+                const randomValue = Math.random() * (max - min) + min;
+                input.value = Number(randomValue).toFixed(precision);
+                input.dispatchEvent(new Event('change'));
+            }
+        }
+
+        function resetValue() {
+            const container = getFirstInputNumber();
+            if (container) {
+                const input = container.querySelector('.yc-input-number__input');
+                const precision = input.dataset.precision ? parseInt(input.dataset.precision) : 0;
+                const min = parseFloat(input.min) || 0;
+                input.value = Number(min).toFixed(precision);
+                input.dispatchEvent(new Event('change'));
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', initInputNumbers);
+    </script>
+</body>
+</html>

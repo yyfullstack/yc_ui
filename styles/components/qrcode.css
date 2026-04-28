@@ -1,0 +1,95 @@
+@charset "UTF-8";
+
+.yc-qrcode {
+    display: inline-block;
+}
+
+.yc-qrcode canvas,
+.yc-qrcode img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+.yc-barcode-svg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.yc-barcode-svg rect,
+.yc-barcode-svg path {
+    fill: var(--yc-barcode-color, var(--yc-text-color-primary));
+}
+
+.yc-barcode-label {
+    display: block;
+    margin-top: var(--yc-spacing-sm);
+    font-size: var(--yc-font-size-base);
+    color: var(--yc-color-text-regular);
+    text-align: center;
+    line-height: 1.5;
+}
+
+.yc-barcode-loading {
+    position: relative;
+    min-height: 100px;
+}
+
+.yc-barcode-loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid var(--yc-color-border);
+    border-top-color: var(--yc-color-primary);
+    border-radius: 50%;
+    animation: yc-barcode-spin 0.8s linear infinite;
+}
+
+@keyframes yc-barcode-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.yc-barcode-error {
+    padding: var(--yc-spacing-lg);
+    background-color: var(--yc-color-bg);
+    border: var(--yc-border-width-thin) solid var(--yc-color-danger);
+    border-radius: var(--yc-border-radius-base);
+    color: var(--yc-color-danger);
+    font-size: var(--yc-font-size-base);
+    text-align: center;
+}
+
+.yc-barcode-small {
+    --yc-barcode-scale: 0.8;
+}
+
+.yc-barcode-large {
+    --yc-barcode-scale: 1.2;
+}
+
+.yc-barcode-small .yc-qrcode,
+.yc-barcode-small .yc-barcode-svg {
+    transform: scale(var(--yc-barcode-scale, 1));
+}
+
+.yc-barcode-large .yc-qrcode,
+.yc-barcode-large .yc-barcode-svg {
+    transform: scale(var(--yc-barcode-scale, 1));
+}
+
+@media (max-width: 768px) {
+    .yc-barcode {
+        padding: var(--yc-spacing-sm);
+    }
+
+    .yc-barcode-label {
+        font-size: var(--yc-font-size-small);
+    }
+}

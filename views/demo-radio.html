@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radio 单选框组件示例 - YC UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">Radio 单选框组件</h1>
+            <p class="demo-page-subtitle">基础单选框、禁用状态、单选组等用法示例</p>
+        </div>
+
+        <div class="demo-section">
+            <h3>基础用法</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">默认单选框</div>
+                <div class="demo-row" style="flex-direction: column; align-items: flex-start; gap: 12px;">
+                    <div class="yc-radio-group" id="radioGroup1">
+                        <div class="yc-radio is-checked">
+                            <input type="radio" class="yc-radio__input" name="radio1" value="option1" checked>
+                            <span class="yc-radio__wrapper"></span>
+                            <span class="yc-radio__label">选项一</span>
+                        </div>
+                        <div class="yc-radio">
+                            <input type="radio" class="yc-radio__input" name="radio1" value="option2">
+                            <span class="yc-radio__wrapper"></span>
+                            <span class="yc-radio__label">选项二</span>
+                        </div>
+                        <div class="yc-radio">
+                            <input type="radio" class="yc-radio__input" name="radio1" value="option3">
+                            <span class="yc-radio__wrapper"></span>
+                            <span class="yc-radio__label">选项三</span>
+                        </div>
+                    </div>
+                    <div class="demo-result" id="radioGroup1Result">当前选中: 选项一</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>禁用状态</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">禁用的单选框</div>
+                <div class="demo-row" style="flex-direction: column; align-items: flex-start; gap: 12px;">
+                    <div class="yc-radio-group">
+                        <div class="yc-radio is-disabled">
+                            <input type="radio" class="yc-radio__input" name="radio2" value="option1" disabled>
+                            <span class="yc-radio__wrapper"></span>
+                            <span class="yc-radio__label">禁用选项</span>
+                        </div>
+                        <div class="yc-radio is-disabled is-checked">
+                            <input type="radio" class="yc-radio__input" name="radio2" value="option2" checked disabled>
+                            <span class="yc-radio__wrapper"></span>
+                            <span class="yc-radio__label">已选中禁用</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>垂直排列</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">垂直排列的单选组</div>
+                <div class="demo-row" style="flex-direction: column; align-items: flex-start; gap: 12px;">
+                    <div class="yc-radio-group yc-radio-group--vertical" id="radioGroup2">
+                        <div class="yc-radio is-checked">
+                            <input type="radio" class="yc-radio__input" name="radio3" value="beijing" checked>
+                            <span class="yc-radio__wrapper"></span>
+                            <span class="yc-radio__label">北京</span>
+                        </div>
+                        <div class="yc-radio">
+                            <input type="radio" class="yc-radio__input" name="radio3" value="shanghai">
+                            <span class="yc-radio__wrapper"></span>
+                            <span class="yc-radio__label">上海</span>
+                        </div>
+                        <div class="yc-radio">
+                            <input type="radio" class="yc-radio__input" name="radio3" value="guangzhou">
+                            <span class="yc-radio__wrapper"></span>
+                            <span class="yc-radio__label">广州</span>
+                        </div>
+                    </div>
+                    <div class="demo-result" id="radioGroup2Result">当前选中: 北京</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>不同尺寸</h3>
+            <div class="demo-block">
+                <div class="demo-row" style="flex-direction: column; align-items: flex-start; gap: 16px;">
+                    <div class="demo-row">
+                        <span class="demo-label">大尺寸:</span>
+                        <div class="yc-radio-group">
+                            <div class="yc-radio yc-radio--large">
+                                <input type="radio" class="yc-radio__input" name="radioSize1" value="large">
+                                <span class="yc-radio__wrapper"></span>
+                                <span class="yc-radio__label">大</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="demo-row">
+                        <span class="demo-label">默认:</span>
+                        <div class="yc-radio-group">
+                            <div class="yc-radio">
+                                <input type="radio" class="yc-radio__input" name="radioSize2" value="default">
+                                <span class="yc-radio__wrapper"></span>
+                                <span class="yc-radio__label">默认</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="demo-row">
+                        <span class="demo-label">小尺寸:</span>
+                        <div class="yc-radio-group">
+                            <div class="yc-radio yc-radio--small">
+                                <input type="radio" class="yc-radio__input" name="radioSize3" value="small">
+                                <span class="yc-radio__wrapper"></span>
+                                <span class="yc-radio__label">小</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>不同颜色</h3>
+            <div class="demo-block">
+                <div class="demo-row" style="flex-direction: column; align-items: flex-start; gap: 12px;">
+                    <div class="yc-radio yc-radio--primary is-checked">
+                        <input type="radio" class="yc-radio__input" name="radioColor1" value="primary" checked>
+                        <span class="yc-radio__wrapper"></span>
+                        <span class="yc-radio__label">主要</span>
+                    </div>
+                    <div class="yc-radio yc-radio--success is-checked">
+                        <input type="radio" class="yc-radio__input" name="radioColor2" value="success" checked>
+                        <span class="yc-radio__wrapper"></span>
+                        <span class="yc-radio__label">成功</span>
+                    </div>
+                    <div class="yc-radio yc-radio--warning is-checked">
+                        <input type="radio" class="yc-radio__input" name="radioColor3" value="warning" checked>
+                        <span class="yc-radio__wrapper"></span>
+                        <span class="yc-radio__label">警告</span>
+                    </div>
+                    <div class="yc-radio yc-radio--danger is-checked">
+                        <input type="radio" class="yc-radio__input" name="radioColor4" value="danger" checked>
+                        <span class="yc-radio__wrapper"></span>
+                        <span class="yc-radio__label">危险</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>按钮样式</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">按钮样式的单选组</div>
+                <div class="demo-row" style="flex-direction: column; align-items: flex-start; gap: 12px;">
+                    <div class="yc-radio-button-group" id="radioButtonGroup1">
+                        <div class="yc-radio-button is-checked" data-value="weekday">工作日</div>
+                        <div class="yc-radio-button" data-value="weekend">周末</div>
+                    </div>
+                    <div class="demo-result" id="radioButtonGroup1Result">当前选中: 工作日</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function initRadioInteraction() {
+            document.querySelectorAll('.yc-radio-group').forEach(group => {
+                const radios = group.querySelectorAll('.yc-radio');
+                const resultId = group.id + 'Result';
+                const resultEl = document.getElementById(resultId);
+
+                radios.forEach(radio => {
+                    const input = radio.querySelector('.yc-radio__input');
+                    if (!input) return;
+
+                    radio.addEventListener('click', function() {
+                        if (radio.classList.contains('is-disabled')) return;
+
+                        radios.forEach(r => r.classList.remove('is-checked'));
+                        radio.classList.add('is-checked');
+                        input.checked = true;
+
+                        if (resultEl) {
+                            const label = radio.querySelector('.yc-radio__label');
+                            resultEl.textContent = `当前选中: ${label ? label.textContent : input.value}`;
+                        }
+                    });
+
+                    input.addEventListener('change', function() {
+                        radios.forEach(r => r.classList.remove('is-checked'));
+                        if (input.checked) {
+                            radio.classList.add('is-checked');
+                        }
+                        if (resultEl) {
+                            const label = radio.querySelector('.yc-radio__label');
+                            resultEl.textContent = `当前选中: ${label ? label.textContent : input.value}`;
+                        }
+                    });
+                });
+            });
+
+            document.querySelectorAll('.yc-radio-button-group').forEach(group => {
+                const buttons = group.querySelectorAll('.yc-radio-button');
+                const resultId = group.id + 'Result';
+                const resultEl = document.getElementById(resultId);
+
+                buttons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        if (button.classList.contains('is-disabled')) return;
+
+                        buttons.forEach(b => b.classList.remove('is-checked'));
+                        button.classList.add('is-checked');
+
+                        if (resultEl) {
+                            resultEl.textContent = `当前选中: ${button.textContent}`;
+                        }
+                    });
+                });
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', initRadioInteraction);
+    </script>
+</body>
+</html>

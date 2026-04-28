@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MessageBox 消息弹框组件示例 - YC UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">MessageBox 消息弹框</h1>
+            <p class="demo-page-subtitle">模拟系统的消息提示，用于消息提示、确认操作和输入内容</p>
+        </div>
+
+        <div class="demo-section">
+            <h3>消息提示</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">用于反馈操作结果，带有状态图标</div>
+                <div class="demo-row" style="gap: 12px; flex-wrap: wrap;">
+                    <button class="yc-button" onclick="showInfoAlert()">
+                        <i class="fas fa-info-circle"></i> 信息提示
+                    </button>
+                    <button class="yc-button yc-button--success" onclick="showSuccessAlert()">
+                        <i class="fas fa-check-circle"></i> 成功提示
+                    </button>
+                    <button class="yc-button yc-button--warning" onclick="showWarningAlert()">
+                        <i class="fas fa-exclamation-triangle"></i> 警告提示
+                    </button>
+                    <button class="yc-button yc-button--danger" onclick="showErrorAlert()">
+                        <i class="fas fa-times-circle"></i> 错误提示
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>确认消息</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">用于确认操作，带有取消按钮</div>
+                <div class="demo-row" style="gap: 12px; flex-wrap: wrap;">
+                    <button class="yc-button" onclick="showBasicConfirm()">
+                        <i class="fas fa-question-circle"></i> 基本确认
+                    </button>
+                    <button class="yc-button yc-button--warning" onclick="showWarningConfirm()">
+                        <i class="fas fa-exclamation-circle"></i> 警告确认
+                    </button>
+                    <button class="yc-button yc-button--danger" onclick="showDangerConfirm()">
+                        <i class="fas fa-trash-alt"></i> 删除确认
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>输入内容</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">弹出一个需要输入内容的对话框</div>
+                <div class="demo-row" style="gap: 12px; flex-wrap: wrap;">
+                    <button class="yc-button" onclick="showBasicPrompt()">
+                        <i class="fas fa-keyboard"></i> 基本输入
+                    </button>
+                    <button class="yc-button yc-button--success" onclick="showNamePrompt()">
+                        <i class="fas fa-user"></i> 输入姓名
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>自定义选项</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">可自定义按钮文字和标题</div>
+                <div class="demo-row" style="gap: 12px; flex-wrap: wrap;">
+                    <button class="yc-button" onclick="showCustomButtons()">
+                        <i class="fas fa-cog"></i> 自定义按钮
+                    </button>
+                    <button class="yc-button" onclick="showLongContent()">
+                        <i class="fas fa-align-left"></i> 长内容
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class MessageBox {
+            static instance = null;
+
+            static alert(message, options = {}) {
+                options.message = message;
+                options.type = options.type || 'info';
+                options.mode = 'alert';
+                return this.create(options);
+            }
+
+            static confirm(message, options = {}) {
+                options.message = message;
+                options.showCancelButton = true;
+                options.mode = 'confirm';
+                return this.create(options);
+            }
+
+            static prompt(message, options = {}) {
+                options.message = message;
+                options.showCancelButton = true;
+                options.showInput = true;
+                options.inputValue = options.inputValue || '';
+                options.mode = 'prompt';
+                return this.create(options);
+            }
+
+            static create(options = {}) {
+                if (this.instance) {
+                    this.instance.close();
+                }
+                this.instance = new this(options);
+                return this.instance;
+            }
+
+            constructor(options = {}) {
+                this.title = options.title || '提示';
+                this.message = options.message || '';
+                this.type = options.type || 'info';
+                this.mode = options.mode || 'alert';
+                this.showCancelButton = options.showCancelButton || false;
+                this.showInput = options.showInput || false;
+                this.inputValue = options.inputValue || '';
+                this.confirmButtonText = options.confirmButtonText || '确定';
+                this.cancelButtonText = options.cancelButtonText || '取消';
+                this.callback = options.callback || function() {};
+
+                this.init();
+            }
+
+            init() {
+                this.mask = document.createElement('div');
+                this.mask.className = 'yc-messagebox-mask';
+
+                this.container = document.createElement('div');
+                this.container.className = `yc-messagebox yc-messagebox-${this.mode}`;
+
+                const header = document.createElement('div');
+                header.className = 'yc-messagebox-header';
+
+                const title = document.createElement('div');
+                title.className = 'yc-messagebox-title';
+                title.textContent = this.title;
+                header.appendChild(title);
+
+                this.container.appendChild(header);
+
+                const body = document.createElement('div');
+                body.className = 'yc-messagebox-body';
+
+                if (this.type) {
+                    const content = document.createElement('div');
+                    content.className = 'yc-messagebox-content';
+
+                    const icon = document.createElement('div');
+                    icon.className = `yc-messagebox-icon yc-messagebox-icon-${this.type}`;
+                    let iconClass = '';
+                    switch (this.type) {
+                        case 'success': iconClass = 'fas fa-check-circle'; break;
+                        case 'warning': iconClass = 'fas fa-exclamation-triangle'; break;
+                        case 'error': iconClass = 'fas fa-times-circle'; break;
+                        case 'info':
+                        default: iconClass = 'fas fa-info-circle'; break;
+                    }
+                    icon.innerHTML = `<i class="${iconClass}"></i>`;
+                    content.appendChild(icon);
+
+                    const message = document.createElement('div');
+                    message.className = 'yc-messagebox-message';
+                    message.textContent = this.message;
+                    content.appendChild(message);
+
+                    body.appendChild(content);
+                }
+
+                if (this.showInput) {
+                    const inputWrapper = document.createElement('div');
+                    inputWrapper.className = 'yc-messagebox-input';
+
+                    this.input = document.createElement('input');
+                    this.input.type = 'text';
+                    this.input.className = 'yc-input';
+                    this.input.value = this.inputValue;
+                    inputWrapper.appendChild(this.input);
+
+                    body.appendChild(inputWrapper);
+                }
+
+                this.container.appendChild(body);
+
+                const footer = document.createElement('div');
+                footer.className = 'yc-messagebox-footer';
+
+                if (this.showCancelButton) {
+                    const cancelButton = document.createElement('button');
+                    cancelButton.className = 'yc-messagebox-button';
+                    cancelButton.textContent = this.cancelButtonText;
+                    cancelButton.addEventListener('click', () => {
+                        this.handleCancel();
+                    });
+                    footer.appendChild(cancelButton);
+                }
+
+                const confirmButton = document.createElement('button');
+                confirmButton.className = `yc-messagebox-button yc-messagebox-button-confirm yc-messagebox-button-${this.type}`;
+                confirmButton.textContent = this.confirmButtonText;
+                confirmButton.addEventListener('click', () => {
+                    this.handleConfirm();
+                });
+                footer.appendChild(confirmButton);
+
+                this.container.appendChild(footer);
+
+                document.body.appendChild(this.mask);
+                document.body.appendChild(this.container);
+
+                setTimeout(() => {
+                    this.mask.classList.add('yc-messagebox-mask-visible');
+                    this.container.classList.add('yc-messagebox-visible');
+                }, 0);
+
+                if (this.showInput) {
+                    setTimeout(() => {
+                        this.input.focus();
+                    }, 300);
+                }
+
+                this._handleKeydown = this.handleKeydown.bind(this);
+                document.addEventListener('keydown', this._handleKeydown);
+            }
+
+            handleKeydown(e) {
+                if (e.key === 'Enter') {
+                    this.handleConfirm();
+                } else if (e.key === 'Escape') {
+                    this.handleCancel();
+                }
+            }
+
+            handleConfirm() {
+                const value = this.showInput ? this.input.value : '';
+                this.callback(value, 'confirm');
+                this.close();
+            }
+
+            handleCancel() {
+                this.callback('', 'cancel');
+                this.close();
+            }
+
+            close() {
+                this.mask.classList.remove('yc-messagebox-mask-visible');
+                this.container.classList.remove('yc-messagebox-visible');
+
+                setTimeout(() => {
+                    if (this.mask.parentNode) {
+                        this.mask.parentNode.removeChild(this.mask);
+                    }
+                    if (this.container.parentNode) {
+                        this.container.parentNode.removeChild(this.container);
+                    }
+                    MessageBox.instance = null;
+                    document.removeEventListener('keydown', this._handleKeydown);
+                }, 300);
+            }
+        }
+
+        window.showInfoAlert = function() {
+            MessageBox.alert('这是一条消息提示', { title: '信息', type: 'info' });
+        };
+
+        window.showSuccessAlert = function() {
+            MessageBox.alert('操作成功！', { title: '成功', type: 'success' });
+        };
+
+        window.showWarningAlert = function() {
+            MessageBox.alert('警告！操作需要谨慎', { title: '警告', type: 'warning' });
+        };
+
+        window.showErrorAlert = function() {
+            MessageBox.alert('操作失败，请重试', { title: '错误', type: 'error' });
+        };
+
+        window.showBasicConfirm = function() {
+            MessageBox.confirm('确定要执行此操作吗？', {
+                title: '确认',
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                callback: function(value, action) {
+                    console.log('Action:', action);
+                }
+            });
+        };
+
+        window.showWarningConfirm = function() {
+            MessageBox.confirm('此操作可能会导致数据丢失，是否继续？', {
+                title: '警告确认',
+                type: 'warning',
+                confirmButtonText: '继续',
+                cancelButtonText: '取消',
+                callback: function(value, action) {
+                    console.log('Action:', action);
+                }
+            });
+        };
+
+        window.showDangerConfirm = function() {
+            MessageBox.confirm('确定要删除此项目吗？此操作无法撤销', {
+                title: '删除确认',
+                type: 'error',
+                confirmButtonText: '删除',
+                cancelButtonText: '取消',
+                callback: function(value, action) {
+                    console.log('Action:', action);
+                }
+            });
+        };
+
+        window.showBasicPrompt = function() {
+            MessageBox.prompt('请输入内容', {
+                title: '输入',
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                callback: function(value, action) {
+                    console.log('Value:', value, 'Action:', action);
+                }
+            });
+        };
+
+        window.showNamePrompt = function() {
+            MessageBox.prompt('请输入您的姓名', {
+                title: '姓名',
+                type: 'success',
+                inputValue: '',
+                confirmButtonText: '提交',
+                cancelButtonText: '取消',
+                callback: function(value, action) {
+                    console.log('Name:', value, 'Action:', action);
+                }
+            });
+        };
+
+        window.showCustomButtons = function() {
+            MessageBox.confirm('请选择以下选项之一', {
+                title: '自定义',
+                confirmButtonText: '接受',
+                cancelButtonText: '拒绝',
+                type: 'success',
+                callback: function(value, action) {
+                    console.log('Action:', action);
+                }
+            });
+        };
+
+        window.showLongContent = function() {
+            MessageBox.alert('这是一段较长的消息内容，用于测试当消息文本较多时的显示效果。系统会自适应高度，确保内容完整显示。', {
+                title: '长内容消息',
+                type: 'info'
+            });
+        };
+    </script>
+</body>
+</html>

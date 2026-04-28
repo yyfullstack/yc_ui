@@ -1,0 +1,170 @@
+/* ==========================================================================
+   InputTag 标签输入框组件样式
+   ========================================================================== */
+
+.yc-input-tag {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--yc-spacing-xs);
+    min-height: var(--yc-input-height);
+    padding: var(--yc-spacing-xs) var(--yc-spacing-sm);
+    border: var(--yc-border-width-base) var(--yc-border-style) var(--yc-input-border-color);
+    border-radius: var(--yc-input-border-radius);
+    background-color: var(--yc-input-bg-color);
+    transition: var(--yc-transition-base);
+    cursor: text;
+}
+
+.yc-input-tag:hover {
+    border-color: var(--yc-input-hover-border-color);
+}
+
+.yc-input-tag.is-focus {
+    border-color: var(--yc-input-focus-border-color);
+    box-shadow: var(--yc-input-focus-shadow);
+}
+
+.yc-input-tag.is-disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+    background-color: var(--yc-color-bg-disabled);
+}
+
+.yc-input-tag.is-disabled .yc-input-tag__input {
+    cursor: not-allowed;
+}
+
+.yc-input-tag__tag {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--yc-spacing-xs);
+    padding: 0 var(--yc-spacing-sm);
+    height: 22px;
+    border: var(--yc-border-width-base) var(--yc-border-style) var(--yc-color-border);
+    border-radius: var(--yc-border-radius-small);
+    background-color: var(--yc-color-bg-light);
+    color: var(--yc-color-text-primary);
+    font-size: var(--yc-font-size-small);
+    line-height: 1;
+    white-space: nowrap;
+    user-select: none;
+    transition: var(--yc-transition-base);
+}
+
+.yc-input-tag__tag:hover {
+    border-color: var(--yc-color-primary);
+    color: var(--yc-color-primary);
+}
+
+.yc-input-tag__tag--success {
+    background-color: var(--yc-color-success-light-3);
+    border-color: var(--yc-color-success);
+    color: var(--yc-color-success);
+}
+
+.yc-input-tag__tag--warning {
+    background-color: var(--yc-color-warning-light-3);
+    border-color: var(--yc-color-warning);
+    color: var(--yc-color-warning);
+}
+
+.yc-input-tag__tag--danger {
+    background-color: var(--yc-color-danger-light-3);
+    border-color: var(--yc-color-danger);
+    color: var(--yc-color-danger);
+}
+
+.yc-input-tag__tag--info {
+    background-color: var(--yc-color-primary-light-3);
+    border-color: var(--yc-color-primary);
+    color: var(--yc-color-primary);
+}
+
+.yc-input-tag__tag-close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    font-size: 10px;
+    cursor: pointer;
+    transition: var(--yc-transition-base);
+    color: inherit;
+}
+
+.yc-input-tag__tag-close:hover {
+    background-color: rgba(0, 0, 0, 0.15);
+}
+
+.yc-input-tag__input {
+    flex: 1;
+    min-width: 60px;
+    height: 22px;
+    padding: 0;
+    border: none;
+    outline: none;
+    font-size: var(--yc-font-size-base);
+    color: var(--yc-input-text-color);
+    background-color: transparent;
+}
+
+.yc-input-tag__input::placeholder {
+    color: var(--yc-input-placeholder-color);
+}
+
+.yc-input-tag__count {
+    font-size: var(--yc-font-size-small);
+    color: var(--yc-color-text-secondary);
+    margin-left: var(--yc-spacing-xs);
+    white-space: nowrap;
+}
+
+.yc-input-tag--large {
+    min-height: var(--yc-component-size-large);
+    padding: var(--yc-spacing-sm) var(--yc-spacing-base);
+}
+
+.yc-input-tag--large .yc-input-tag__tag {
+    height: 26px;
+    font-size: var(--yc-font-size-base);
+}
+
+.yc-input-tag--large .yc-input-tag__input {
+    height: 26px;
+    font-size: var(--yc-font-size-medium);
+}
+
+.yc-input-tag--small {
+    min-height: var(--yc-component-size-small);
+    padding: 2px var(--yc-spacing-xs);
+}
+
+.yc-input-tag--small .yc-input-tag__tag {
+    height: 18px;
+    font-size: var(--yc-font-size-small);
+}
+
+.yc-input-tag--small .yc-input-tag__input {
+    height: 18px;
+    font-size: var(--yc-font-size-small);
+}
+
+.yc-input-tag--drag .yc-input-tag__tag {
+    cursor: grab;
+}
+
+.yc-input-tag--drag .yc-input-tag__tag:active {
+    cursor: grabbing;
+}
+
+.yc-input-tag__tag.is-dragging {
+    opacity: 0.5;
+}
+
+.yc-input-tag__tag--closable {
+    padding-right: var(--yc-spacing-xs);
+}
+
+/* InputTag 组件样式结束 */

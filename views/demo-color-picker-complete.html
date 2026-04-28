@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ColorPicker 颜色选择器组件示例 - YC UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">ColorPicker 颜色选择器组件</h1>
+            <p class="demo-page-subtitle">颜色选择器组件，支持透明度、多种颜色格式、预设颜色等功能</p>
+        </div>
+
+        <div class="demo-section">
+            <h3>基础用法</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">默认颜色选择器</div>
+                <div class="color-picker-wrapper">
+                    <div class="yc-color-picker" id="colorPicker1">
+                        <div class="yc-color-picker__trigger">
+                            <div class="yc-color-picker__color" style="background-color: #409EFF;"></div>
+                            <i class="fas fa-chevron-down yc-color-picker__dropdown-icon"></i>
+                        </div>
+                        <div class="yc-color-picker__panel">
+                            <div class="yc-color-picker__panel-content">
+                                <div class="yc-color-picker__body">
+                                    <div class="yc-color-saturation" id="saturation1">
+                                        <div class="yc-color-saturation__white"></div>
+                                        <div class="yc-color-saturation__black"></div>
+                                        <div class="yc-color-saturation__cursor" style="top: 20px; left: 80%;"></div>
+                                    </div>
+                                    <div class="yc-color-hue" id="hue1">
+                                        <div class="yc-color-hue__cursor" style="left: 50%;"></div>
+                                    </div>
+                                    <div class="yc-color-alpha" id="alpha1">
+                                        <div class="yc-color-alpha__gradient"></div>
+                                        <div class="yc-color-alpha__cursor" style="left: 100%;"></div>
+                                    </div>
+                                    <div class="yc-color-value">
+                                        <input type="text" class="yc-color-value__input" value="#409EFF" id="colorValue1">
+                                    </div>
+                                    <div class="yc-color-format">
+                                        <button class="yc-color-format__btn is-active" data-format="hex">HEX</button>
+                                        <button class="yc-color-format__btn" data-format="rgb">RGB</button>
+                                        <button class="yc-color-format__btn" data-format="hsl">HSL</button>
+                                    </div>
+                                    <div class="yc-color-presets">
+                                        <div class="yc-color-preset" style="background-color: #409EFF;"></div>
+                                        <div class="yc-color-preset" style="background-color: #67C23A;"></div>
+                                        <div class="yc-color-preset" style="background-color: #E6A23C;"></div>
+                                        <div class="yc-color-preset" style="background-color: #F56C6C;"></div>
+                                        <div class="yc-color-preset" style="background-color: #909399;"></div>
+                                        <div class="yc-color-preset" style="background-color: #1890FF;"></div>
+                                        <div class="yc-color-preset" style="background-color: #36CFc9;"></div>
+                                        <div class="yc-color-preset" style="background-color: #722ED1;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="color-preview" id="colorPreview1" style="background-color: #409EFF;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>带默认值</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">预设默认颜色</div>
+                <div class="color-picker-wrapper">
+                    <div class="yc-color-picker" id="colorPicker2">
+                        <div class="yc-color-picker__trigger">
+                            <div class="yc-color-picker__color" style="background-color: #67C23A;"></div>
+                            <i class="fas fa-chevron-down yc-color-picker__dropdown-icon"></i>
+                        </div>
+                        <div class="yc-color-picker__panel">
+                            <div class="yc-color-picker__panel-content">
+                                <div class="yc-color-picker__body">
+                                    <div class="yc-color-saturation" id="saturation2">
+                                        <div class="yc-color-saturation__white"></div>
+                                        <div class="yc-color-saturation__black"></div>
+                                        <div class="yc-color-saturation__cursor" style="top: 30px; left: 60%;"></div>
+                                    </div>
+                                    <div class="yc-color-hue" id="hue2">
+                                        <div class="yc-color-hue__cursor" style="left: 25%;"></div>
+                                    </div>
+                                    <div class="yc-color-alpha" id="alpha2">
+                                        <div class="yc-color-alpha__gradient"></div>
+                                        <div class="yc-color-alpha__cursor" style="left: 100%;"></div>
+                                    </div>
+                                    <div class="yc-color-value">
+                                        <input type="text" class="yc-color-value__input" value="#67C23A" id="colorValue2">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="color-preview" id="colorPreview2" style="background-color: #67C23A;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>带透明度</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">支持 Alpha 通道调节</div>
+                <div class="color-picker-wrapper">
+                    <div class="yc-color-picker" id="colorPicker3">
+                        <div class="yc-color-picker__trigger">
+                            <div class="yc-color-picker__color" style="background-color: rgba(245, 108, 108, 0.5);"></div>
+                            <i class="fas fa-chevron-down yc-color-picker__dropdown-icon"></i>
+                        </div>
+                        <div class="yc-color-picker__panel">
+                            <div class="yc-color-picker__panel-content">
+                                <div class="yc-color-picker__body">
+                                    <div class="yc-color-saturation" id="saturation3">
+                                        <div class="yc-color-saturation__white"></div>
+                                        <div class="yc-color-saturation__black"></div>
+                                        <div class="yc-color-saturation__cursor" style="top: 40px; left: 80%;"></div>
+                                    </div>
+                                    <div class="yc-color-hue" id="hue3">
+                                        <div class="yc-color-hue__cursor" style="left: 10%;"></div>
+                                    </div>
+                                    <div class="yc-color-alpha" id="alpha3">
+                                        <div class="yc-color-alpha__gradient"></div>
+                                        <div class="yc-color-alpha__cursor" style="left: 50%;"></div>
+                                    </div>
+                                    <div class="yc-color-value">
+                                        <input type="text" class="yc-color-value__input" value="rgba(245, 108, 108, 0.5)" id="colorValue3">
+                                    </div>
+                                    <div class="yc-color-format">
+                                        <button class="yc-color-format__btn" data-format="hex">HEX</button>
+                                        <button class="yc-color-format__btn is-active" data-format="rgb">RGB</button>
+                                        <button class="yc-color-format__btn" data-format="hsl">HSL</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="color-preview" id="colorPreview3" style="background-color: rgba(245, 108, 108, 0.5);"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>不同尺寸</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">大中小三种尺寸</div>
+                <div class="demo-row" style="gap: 20px; flex-wrap: wrap;">
+                    <div class="yc-color-picker yc-color-picker--large" id="colorPicker4">
+                        <div class="yc-color-picker__trigger">
+                            <div class="yc-color-picker__color" style="background-color: #409EFF;"></div>
+                            <i class="fas fa-chevron-down yc-color-picker__dropdown-icon"></i>
+                        </div>
+                        <div class="yc-color-picker__panel">
+                            <div class="yc-color-picker__panel-content">
+                                <div class="yc-color-picker__body">
+                                    <div class="yc-color-saturation" id="saturation4">
+                                        <div class="yc-color-saturation__white"></div>
+                                        <div class="yc-color-saturation__black"></div>
+                                        <div class="yc-color-saturation__cursor" style="top: 20px; left: 80%;"></div>
+                                    </div>
+                                    <div class="yc-color-hue" id="hue4">
+                                        <div class="yc-color-hue__cursor" style="left: 50%;"></div>
+                                    </div>
+                                    <div class="yc-color-alpha" id="alpha4">
+                                        <div class="yc-color-alpha__gradient"></div>
+                                        <div class="yc-color-alpha__cursor" style="left: 100%;"></div>
+                                    </div>
+                                    <div class="yc-color-value">
+                                        <input type="text" class="yc-color-value__input" value="#409EFF" id="colorValue4">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="yc-color-picker" id="colorPicker5">
+                        <div class="yc-color-picker__trigger">
+                            <div class="yc-color-picker__color" style="background-color: #409EFF;"></div>
+                            <i class="fas fa-chevron-down yc-color-picker__dropdown-icon"></i>
+                        </div>
+                        <div class="yc-color-picker__panel">
+                            <div class="yc-color-picker__panel-content">
+                                <div class="yc-color-picker__body">
+                                    <div class="yc-color-saturation" id="saturation5">
+                                        <div class="yc-color-saturation__white"></div>
+                                        <div class="yc-color-saturation__black"></div>
+                                        <div class="yc-color-saturation__cursor" style="top: 20px; left: 80%;"></div>
+                                    </div>
+                                    <div class="yc-color-hue" id="hue5">
+                                        <div class="yc-color-hue__cursor" style="left: 50%;"></div>
+                                    </div>
+                                    <div class="yc-color-alpha" id="alpha5">
+                                        <div class="yc-color-alpha__gradient"></div>
+                                        <div class="yc-color-alpha__cursor" style="left: 100%;"></div>
+                                    </div>
+                                    <div class="yc-color-value">
+                                        <input type="text" class="yc-color-value__input" value="#409EFF" id="colorValue5">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="yc-color-picker yc-color-picker--small" id="colorPicker6">
+                        <div class="yc-color-picker__trigger">
+                            <div class="yc-color-picker__color" style="background-color: #409EFF;"></div>
+                            <i class="fas fa-chevron-down yc-color-picker__dropdown-icon"></i>
+                        </div>
+                        <div class="yc-color-picker__panel">
+                            <div class="yc-color-picker__panel-content">
+                                <div class="yc-color-picker__body">
+                                    <div class="yc-color-saturation" id="saturation6">
+                                        <div class="yc-color-saturation__white"></div>
+                                        <div class="yc-color-saturation__black"></div>
+                                        <div class="yc-color-saturation__cursor" style="top: 20px; left: 80%;"></div>
+                                    </div>
+                                    <div class="yc-color-hue" id="hue6">
+                                        <div class="yc-color-hue__cursor" style="left: 50%;"></div>
+                                    </div>
+                                    <div class="yc-color-alpha" id="alpha6">
+                                        <div class="yc-color-alpha__gradient"></div>
+                                        <div class="yc-color-alpha__cursor" style="left: 100%;"></div>
+                                    </div>
+                                    <div class="yc-color-value">
+                                        <input type="text" class="yc-color-value__input" value="#409EFF" id="colorValue6">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>禁用状态</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">禁止交互</div>
+                <div class="demo-row">
+                    <div class="yc-color-picker is-disabled" id="colorPicker7">
+                        <div class="yc-color-picker__trigger">
+                            <div class="yc-color-picker__color" style="background-color: #409EFF;"></div>
+                            <i class="fas fa-chevron-down yc-color-picker__dropdown-icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>预定义颜色</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">自定义预设色板</div>
+                <div class="demo-row">
+                    <div class="yc-color-picker" id="colorPicker8">
+                        <div class="yc-color-picker__trigger">
+                            <div class="yc-color-picker__color" style="background-color: #409EFF;"></div>
+                            <i class="fas fa-chevron-down yc-color-picker__dropdown-icon"></i>
+                        </div>
+                        <div class="yc-color-picker__panel">
+                            <div class="yc-color-picker__panel-content">
+                                <div class="yc-color-picker__body">
+                                    <div class="yc-color-saturation" id="saturation8">
+                                        <div class="yc-color-saturation__white"></div>
+                                        <div class="yc-color-saturation__black"></div>
+                                        <div class="yc-color-saturation__cursor" style="top: 20px; left: 80%;"></div>
+                                    </div>
+                                    <div class="yc-color-hue" id="hue8">
+                                        <div class="yc-color-hue__cursor" style="left: 50%;"></div>
+                                    </div>
+                                    <div class="yc-color-alpha" id="alpha8">
+                                        <div class="yc-color-alpha__gradient"></div>
+                                        <div class="yc-color-alpha__cursor" style="left: 100%;"></div>
+                                    </div>
+                                    <div class="yc-color-value">
+                                        <input type="text" class="yc-color-value__input" value="#409EFF" id="colorValue8">
+                                    </div>
+                                    <div class="yc-color-presets">
+                                        <div class="yc-color-preset" style="background-color: #FF6B6B;"></div>
+                                        <div class="yc-color-preset" style="background-color: #4ECDC4;"></div>
+                                        <div class="yc-color-preset" style="background-color: #45B7D1;"></div>
+                                        <div class="yc-color-preset" style="background-color: #96CEB4;"></div>
+                                        <div class="yc-color-preset" style="background-color: #FFEAA7;"></div>
+                                        <div class="yc-color-preset" style="background-color: #DDA0DD;"></div>
+                                        <div class="yc-color-preset" style="background-color: #98D8C8;"></div>
+                                        <div class="yc-color-preset" style="background-color: #F7DC6F;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>不同颜色格式</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">HEX / RGB / HSL 格式切换</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div class="yc-color-picker" id="colorPicker9">
+                        <div class="yc-color-picker__trigger">
+                            <div class="yc-color-picker__color" style="background-color: #409EFF;"></div>
+                            <i class="fas fa-chevron-down yc-color-picker__dropdown-icon"></i>
+                        </div>
+                        <div class="yc-color-picker__panel">
+                            <div class="yc-color-picker__panel-content">
+                                <div class="yc-color-picker__body">
+                                    <div class="yc-color-saturation" id="saturation9">
+                                        <div class="yc-color-saturation__white"></div>
+                                        <div class="yc-color-saturation__black"></div>
+                                        <div class="yc-color-saturation__cursor" style="top: 20px; left: 80%;"></div>
+                                    </div>
+                                    <div class="yc-color-hue" id="hue9">
+                                        <div class="yc-color-hue__cursor" style="left: 50%;"></div>
+                                    </div>
+                                    <div class="yc-color-alpha" id="alpha9">
+                                        <div class="yc-color-alpha__gradient"></div>
+                                        <div class="yc-color-alpha__cursor" style="left: 100%;"></div>
+                                    </div>
+                                    <div class="yc-color-value">
+                                        <input type="text" class="yc-color-value__input" value="#409EFF" id="colorValue9">
+                                    </div>
+                                    <div class="yc-color-format">
+                                        <button class="yc-color-format__btn is-active" data-format="hex">HEX</button>
+                                        <button class="yc-color-format__btn" data-format="rgb">RGB</button>
+                                        <button class="yc-color-format__btn" data-format="hsl">HSL</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="result-display" id="colorFormatResult">当前格式: HEX</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>自定义下拉位置</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">向上弹出面板</div>
+                <div class="demo-row">
+                    <div class="yc-color-picker" id="colorPicker10">
+                        <div class="yc-color-picker__trigger">
+                            <div class="yc-color-picker__color" style="background-color: #409EFF;"></div>
+                            <i class="fas fa-chevron-down yc-color-picker__dropdown-icon"></i>
+                        </div>
+                        <div class="yc-color-picker__panel yc-color-picker__panel--top">
+                            <div class="yc-color-picker__panel-content">
+                                <div class="yc-color-picker__body">
+                                    <div class="yc-color-saturation" id="saturation10">
+                                        <div class="yc-color-saturation__white"></div>
+                                        <div class="yc-color-saturation__black"></div>
+                                        <div class="yc-color-saturation__cursor" style="top: 20px; left: 80%;"></div>
+                                    </div>
+                                    <div class="yc-color-hue" id="hue10">
+                                        <div class="yc-color-hue__cursor" style="left: 50%;"></div>
+                                    </div>
+                                    <div class="yc-color-alpha" id="alpha10">
+                                        <div class="yc-color-alpha__gradient"></div>
+                                        <div class="yc-color-alpha__cursor" style="left: 100%;"></div>
+                                    </div>
+                                    <div class="yc-color-value">
+                                        <input type="text" class="yc-color-value__input" value="#409EFF" id="colorValue10">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>JavaScript 创建</h3>
+            <div class="demo-block">
+                <div class="demo-btn-row">
+                    <button class="yc-button yc-button--primary" onclick="resetColorPicker()">
+                        <i class="fas fa-sync-alt"></i> 重置颜色
+                    </button>
+                    <button class="yc-button yc-button--success" onclick="setRandomColor()">
+                        <i class="fas fa-palette"></i> 随机颜色
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class ColorUtils {
+            static hsvToRgb(h, s, v) {
+                let r, g, b;
+                const i = Math.floor(h * 6);
+                const f = h * 6 - i;
+                const p = v * (1 - s);
+                const q = v * (1 - f * s);
+                const t = v * (1 - (1 - f) * s);
+
+                switch (i % 6) {
+                    case 0: r = v; g = t; b = p; break;
+                    case 1: r = q; g = v; b = p; break;
+                    case 2: r = p; g = v; b = t; break;
+                    case 3: r = p; g = q; b = v; break;
+                    case 4: r = t; g = p; b = v; break;
+                    case 5: r = v; g = p; b = q; break;
+                }
+
+                return {
+                    r: Math.round(r * 255),
+                    g: Math.round(g * 255),
+                    b: Math.round(b * 255)
+                };
+            }
+
+            static rgbToHsv(r, g, b) {
+                r /= 255;
+                g /= 255;
+                b /= 255;
+
+                const max = Math.max(r, g, b);
+                const min = Math.min(r, g, b);
+                let h, s, v = max;
+
+                const d = max - min;
+                s = max === 0 ? 0 : d / max;
+
+                if (max === min) {
+                    h = 0;
+                } else {
+                    switch (max) {
+                        case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+                        case g: h = (b - r) / d + 2; break;
+                        case b: h = (r - g) / d + 4; break;
+                    }
+                    h /= 6;
+                }
+
+                return { h, s, v };
+            }
+
+            static rgbToHex(r, g, b) {
+                const toHex = (n) => {
+                    const hex = n.toString(16);
+                    return hex.length === 1 ? '0' + hex : hex;
+                };
+                return `#${toHex(r)}${toHex(g)}${toHex(b)}`.toUpperCase();
+            }
+
+            static hexToRgb(hex) {
+                hex = hex.replace('#', '');
+                if (hex.length === 3) {
+                    hex = hex.split('').map(c => c + c).join('');
+                }
+                if (hex.length === 6) {
+                    return {
+                        r: parseInt(hex.substring(0, 2), 16),
+                        g: parseInt(hex.substring(2, 4), 16),
+                        b: parseInt(hex.substring(4, 6), 16),
+                        a: 1
+                    };
+                }
+                return null;
+            }
+
+            static parseColor(color) {
+                if (color.startsWith('#')) {
+                    return this.hexToRgb(color);
+                }
+                if (color.startsWith('rgb')) {
+                    const match = color.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?\)$/);
+                    if (match) {
+                        return {
+                            r: parseInt(match[1]),
+                            g: parseInt(match[2]),
+                            b: parseInt(match[3]),
+                            a: match[4] ? parseFloat(match[4]) : 1
+                        };
+                    }
+                }
+                return null;
+            }
+
+            static formatColor(rgb, format) {
+                switch (format) {
+                    case 'hex':
+                        return ColorUtils.rgbToHex(rgb.r, rgb.g, rgb.b);
+                    case 'rgb':
+                        return `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
+                    case 'hsl':
+                        const hsl = this.rgbToHsl(rgb.r, rgb.g, rgb.b);
+                        return `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`;
+                    default:
+                        return ColorUtils.rgbToHex(rgb.r, rgb.g, rgb.b);
+                }
+            }
+
+            static rgbToHsl(r, g, b) {
+                r /= 255;
+                g /= 255;
+                b /= 255;
+                const max = Math.max(r, g, b);
+                const min = Math.min(r, g, b);
+                let h, s, l = (max + min) / 2;
+
+                if (max === min) {
+                    h = s = 0;
+                } else {
+                    const d = max - min;
+                    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+                    switch (max) {
+                        case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+                        case g: h = (b - r) / d + 2; break;
+                        case b: h = (r - g) / d + 4; break;
+                    }
+                    h /= 6;
+                }
+
+                return {
+                    h: Math.round(h * 360),
+                    s: Math.round(s * 100),
+                    l: Math.round(l * 100)
+                };
+            }
+        }
+
+        function initColorPickers() {
+            const colorPickers = document.querySelectorAll('.yc-color-picker');
+
+            colorPickers.forEach(picker => {
+                if (picker.classList.contains('is-disabled')) return;
+
+                const trigger = picker.querySelector('.yc-color-picker__trigger');
+                const panel = picker.querySelector('.yc-color-picker__panel');
+                const color = picker.querySelector('.yc-color-picker__color');
+                const colorValue = picker.querySelector('.yc-color-value__input');
+                const colorPreview = document.getElementById(picker.id.replace('colorPicker', 'colorPreview'));
+
+                const saturation = picker.querySelector('.yc-color-saturation');
+                const hue = picker.querySelector('.yc-color-hue');
+                const alpha = picker.querySelector('.yc-color-alpha');
+
+                const saturationCursor = saturation?.querySelector('.yc-color-saturation__cursor');
+                const hueCursor = hue?.querySelector('.yc-color-hue__cursor');
+                const alphaCursor = alpha?.querySelector('.yc-color-alpha__cursor');
+                const alphaGradient = alpha?.querySelector('.yc-color-alpha__gradient');
+
+                let currentColor = ColorUtils.parseColor(color.style.backgroundColor) || { r: 64, g: 158, b: 255, a: 1 };
+                let currentFormat = 'hex';
+
+                const updateUI = () => {
+                    const colorString = ColorUtils.formatColor(currentColor, currentFormat);
+                    if (color) {
+                        color.style.backgroundColor = colorString;
+                    }
+                    if (colorPreview) {
+                        colorPreview.style.backgroundColor = colorString;
+                    }
+                    if (colorValue) {
+                        colorValue.value = colorString;
+                    }
+
+                    if (saturation && saturationCursor) {
+                        const hsv = ColorUtils.rgbToHsv(currentColor.r, currentColor.g, currentColor.b);
+                        saturation.style.background = `linear-gradient(to right, #fff 0%, hsl(${hsv.h * 360}, 100%, 50%) 100%), linear-gradient(to top, #000 0%, transparent 100%)`;
+                        saturation.style.backgroundBlendMode = 'overlay';
+                        saturationCursor.style.left = (hsv.s * saturation.offsetWidth) + 'px';
+                        saturationCursor.style.top = ((1 - hsv.v) * saturation.offsetHeight) + 'px';
+                    }
+
+                    if (hue && hueCursor) {
+                        const hsv = ColorUtils.rgbToHsv(currentColor.r, currentColor.g, currentColor.b);
+                        hueCursor.style.left = (hsv.h * hue.offsetWidth) + 'px';
+                    }
+
+                    if (alpha && alphaCursor && alphaGradient) {
+                        const alphaBg = `rgb(${currentColor.r}, ${currentColor.g}, ${currentColor.b})`;
+                        alphaGradient.style.background = `linear-gradient(to right, rgba(${currentColor.r}, ${currentColor.g}, ${currentColor.b}, 0), ${alphaBg})`;
+                        alphaCursor.style.left = (currentColor.a * alpha.offsetWidth) + 'px';
+                    }
+                };
+
+                const initDragInteraction = (element, callback) => {
+                    let isDragging = false;
+
+                    const handleMove = (e) => {
+                        if (!isDragging) return;
+                        const rect = element.getBoundingClientRect();
+                        const x = Math.max(0, Math.min(rect.width, e.clientX - rect.left));
+                        const y = Math.max(0, Math.min(rect.height, e.clientY - rect.top));
+                        callback(x, y);
+                    };
+
+                    element.addEventListener('mousedown', (e) => {
+                        isDragging = true;
+                        handleMove(e);
+                        document.addEventListener('mousemove', handleMove);
+                        document.addEventListener('mouseup', () => {
+                            isDragging = false;
+                            document.removeEventListener('mousemove', handleMove);
+                        }, { once: true });
+                    });
+                };
+
+                if (saturation) {
+                    initDragInteraction(saturation, (x, y) => {
+                        const s = x / saturation.offsetWidth;
+                        const v = 1 - (y / saturation.offsetHeight);
+                        const hsv = ColorUtils.rgbToHsv(currentColor.r, currentColor.g, currentColor.b);
+                        hsv.s = Math.max(0, Math.min(1, s));
+                        hsv.v = Math.max(0, Math.min(1, v));
+                        const rgb = ColorUtils.hsvToRgb(hsv.h, hsv.s, hsv.v);
+                        currentColor = { ...rgb, a: currentColor.a };
+                        updateUI();
+                    });
+                }
+
+                if (hue) {
+                    initDragInteraction(hue, (x) => {
+                        const h = x / hue.offsetWidth;
+                        const hsv = ColorUtils.rgbToHsv(currentColor.r, currentColor.g, currentColor.b);
+                        hsv.h = Math.max(0, Math.min(1, h));
+                        const rgb = ColorUtils.hsvToRgb(hsv.h, hsv.s, hsv.v);
+                        currentColor = { ...rgb, a: currentColor.a };
+                        updateUI();
+                    });
+                }
+
+                if (alpha) {
+                    initDragInteraction(alpha, (x) => {
+                        currentColor.a = Math.max(0, Math.min(1, x / alpha.offsetWidth));
+                        updateUI();
+                    });
+                }
+
+                let isPanelOpen = false;
+                trigger.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    if (panel) {
+                        isPanelOpen = !isPanelOpen;
+                        picker.classList.toggle('is-open', isPanelOpen);
+                        panel.classList.toggle('is-open', isPanelOpen);
+                        if (isPanelOpen) {
+                            updateUI();
+                        }
+                    }
+                });
+
+                document.addEventListener('click', function(e) {
+                    if (isPanelOpen && !picker.contains(e.target)) {
+                        isPanelOpen = false;
+                        picker.classList.remove('is-open');
+                        panel.classList.remove('is-open');
+                    }
+                });
+
+                const presets = picker.querySelectorAll('.yc-color-preset');
+                presets.forEach(preset => {
+                    preset.addEventListener('click', function() {
+                        const bgColor = getComputedStyle(this).backgroundColor;
+                        const rgb = ColorUtils.parseColor(bgColor);
+                        if (rgb) {
+                            currentColor = rgb;
+                            updateUI();
+                        }
+                    });
+                });
+
+                const formatBtns = picker.querySelectorAll('.yc-color-format__btn');
+                formatBtns.forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        formatBtns.forEach(b => b.classList.remove('is-active'));
+                        this.classList.add('is-active');
+                        currentFormat = this.dataset.format;
+                        updateUI();
+
+                        if (picker.id === 'colorPicker9') {
+                            const result = document.getElementById('colorFormatResult');
+                            result.textContent = `当前格式: ${currentFormat.toUpperCase()}`;
+                        }
+                    });
+                });
+
+                if (colorValue) {
+                    colorValue.addEventListener('input', function() {
+                        const rgb = ColorUtils.parseColor(this.value);
+                        if (rgb) {
+                            currentColor = rgb;
+                            updateUI();
+                        }
+                    });
+                }
+
+                updateUI();
+            });
+        }
+
+        function resetColorPicker() {
+            const picker = document.querySelector('#colorPicker1');
+            if (picker) {
+                picker.querySelector('.yc-color-picker__color').style.backgroundColor = '#409EFF';
+                picker.querySelector('.yc-color-value__input').value = '#409EFF';
+                const preview = document.getElementById('colorPreview1');
+                if (preview) preview.style.backgroundColor = '#409EFF';
+            }
+        }
+
+        function setRandomColor() {
+            const r = Math.floor(Math.random() * 256);
+            const g = Math.floor(Math.random() * 256);
+            const b = Math.floor(Math.random() * 256);
+            const hex = ColorUtils.rgbToHex(r, g, b);
+
+            const picker = document.querySelector('#colorPicker1');
+            if (picker) {
+                picker.querySelector('.yc-color-picker__color').style.backgroundColor = hex;
+                picker.querySelector('.yc-color-value__input').value = hex;
+                const preview = document.getElementById('colorPreview1');
+                if (preview) preview.style.backgroundColor = hex;
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', initColorPickers);
+    </script>
+</body>
+</html>

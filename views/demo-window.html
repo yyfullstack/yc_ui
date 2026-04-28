@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Window 窗口组件示例 - YC UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">Window 窗口组件</h1>
+            <p class="demo-page-subtitle">支持拖拽、调整大小、最小化、最大化等功能的高级窗口组件</p>
+        </div>
+
+        <div class="demo-section">
+            <h3>基础用法</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">基本窗口</div>
+                <div class="demo-row">
+                    <button class="yc-button yc-button--primary" onclick="openBasicDialog()">
+                        <i class="fas fa-window-maximize"></i> 打开窗口
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>功能测试</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">测试拖拽、调整大小、最小化、最大化</div>
+                <div class="demo-row">
+                    <button class="yc-button yc-button--primary" onclick="openFeatureDialog()">
+                        <i class="fas fa-cogs"></i> 打开功能窗口
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>自定义内容</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">自定义窗口内容</div>
+                <div class="demo-row">
+                    <button class="yc-button yc-button--primary" onclick="openCustomDialog()">
+                        <i class="fas fa-edit"></i> 打开自定义窗口
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>居中定位</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">窗口自动居中显示</div>
+                <div class="demo-row">
+                    <button class="yc-button yc-button--primary" onclick="openCenteredDialog()">
+                        <i class="fas fa-arrows-alt"></i> 打开居中窗口
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class YcWindow {
+            static windows = new Map();
+            static instanceId = 0;
+
+            constructor(options = {}) {
+                this.id = ++YcWindow.instanceId;
+                this.options = {
+                    title: options.title || 'Window Title',
+                    content: options.content || 'Window content goes here.',
+                    width: options.width || 600,
+                    height: options.height || 400,
+                    cancelText: options.cancelText || 'Cancel',
+                    okText: options.okText || 'OK',
+                    alignCenter: options.alignCenter || false,
+                    draggable: options.draggable !== false,
+                    resizable: options.resizable !== false,
+                    minWidth: options.minWidth || 300,
+                    minHeight: options.minHeight || 200,
+                    onOpen: options.onOpen || null,
+                    onClose: options.onClose || null,
+                    onOk: options.onOk || null,
+                    onCancel: options.onCancel || null
+                };
+
+                this.element = null;
+                this.isDragging = false;
+                this.isResizing = false;
+                this.dragStart = {x: 0, y: 0};
+                this.resizeStart = {x: 0, y: 0, width: 0, height: 0, left: 0, top: 0};
+                this.windowStart = {left: 0, top: 0, width: 0, height: 0};
+                this.resizeDirection = '';
+                this.resizeFrameId = null;
+                this.boundHandleDrag = this.handleDrag.bind(this);
+                this.boundStopDrag = this.stopDrag.bind(this);
+                this.boundHandleResize = this.handleResize.bind(this);
+                this.boundStopResize = this.stopResize.bind(this);
+            }
+
+            open() {
+                this.createElement();
+                document.body.appendChild(this.element);
+                this.bindEvents();
+                this.updatePosition();
+
+                if (this.options.onOpen) {
+                    this.options.onOpen(this);
+                }
+
+                YcWindow.windows.set(this.id, this);
+                return this;
+            }
+
+            close() {
+                if (this.options.onClose) {
+                    this.options.onClose(this);
+                }
+
+                this.unbindEvents();
+
+                if (this.element && this.element.parentNode) {
+                    this.element.parentNode.removeChild(this.element);
+                }
+
+                YcWindow.windows.delete(this.id);
+            }
+
+            createElement() {
+                const {title, content, width, height, cancelText, okText} = this.options;
+
+                const template = `
+                    <div class="yc-window" style="width: ${width}px; height: ${height}px;">
+                        <div class="yc-window-resize-handle yc-window-resize-n"></div>
+                        <div class="yc-window-resize-handle yc-window-resize-ne"></div>
+                        <div class="yc-window-resize-handle yc-window-resize-e"></div>
+                        <div class="yc-window-resize-handle yc-window-resize-se"></div>
+                        <div class="yc-window-resize-handle yc-window-resize-s"></div>
+                        <div class="yc-window-resize-handle yc-window-resize-sw"></div>
+                        <div class="yc-window-resize-handle yc-window-resize-w"></div>
+                        <div class="yc-window-resize-handle yc-window-resize-nw"></div>
+
+                        <div class="yc-window-header">
+                            <div class="yc-window-title">${title}</div>
+                            <div class="yc-window-header-buttons">
+                                <button class="yc-window-minimize"><i class="fas fa-minus"></i></button>
+                                <button class="yc-window-maximize"><i class="far fa-square"></i></button>
+                                <button class="yc-window-close"><i class="fas fa-times"></i></button>
+                            </div>
+                        </div>
+                        <div class="yc-window-body">
+                            ${content}
+                        </div>
+                        <div class="yc-window-footer">
+                            <button class="yc-button yc-button--small yc-window-btn-cancel">${cancelText}</button>
+                            <button class="yc-button yc-button--small yc-button--primary yc-window-btn-primary">${okText}</button>
+                        </div>
+                    </div>
+                `;
+
+                const container = document.createElement('div');
+                container.innerHTML = template;
+                this.element = container.firstElementChild;
+            }
+
+            bindEvents() {
+                const header = this.element.querySelector('.yc-window-header');
+                const closeBtn = this.element.querySelector('.yc-window-close');
+                const minimizeBtn = this.element.querySelector('.yc-window-minimize');
+                const maximizeBtn = this.element.querySelector('.yc-window-maximize');
+                const cancelBtn = this.element.querySelector('.yc-window-btn-cancel');
+                const okBtn = this.element.querySelector('.yc-window-btn-primary');
+                const resizeHandles = this.element.querySelectorAll('.yc-window-resize-handle');
+
+                if (this.options.draggable && header) {
+                    header.addEventListener('mousedown', this.initDrag.bind(this));
+                }
+
+                if (resizeHandles.length > 0) {
+                    resizeHandles.forEach(handle => {
+                        handle.addEventListener('mousedown', this.initResize.bind(this));
+                    });
+                }
+
+                if (closeBtn) {
+                    closeBtn.addEventListener('click', () => this.close());
+                }
+
+                if (minimizeBtn) {
+                    minimizeBtn.addEventListener('click', () => this.toggleMinimize());
+                }
+
+                if (maximizeBtn) {
+                    maximizeBtn.addEventListener('click', () => this.toggleMaximize());
+                }
+
+                if (cancelBtn) {
+                    cancelBtn.addEventListener('click', () => {
+                        if (this.options.onCancel) {
+                            this.options.onCancel(this);
+                        }
+                        this.close();
+                    });
+                }
+
+                if (okBtn) {
+                    okBtn.addEventListener('click', () => {
+                        if (this.options.onOk) {
+                            this.options.onOk(this);
+                        }
+                        this.close();
+                    });
+                }
+
+                const headerButtons = this.element.querySelector('.yc-window-header-buttons');
+                if (headerButtons) {
+                    headerButtons.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                    });
+                }
+            }
+
+            unbindEvents() {
+                document.removeEventListener('mousemove', this.boundHandleDrag);
+                document.removeEventListener('mouseup', this.boundStopDrag);
+                document.removeEventListener('mousemove', this.boundHandleResize);
+                document.removeEventListener('mouseup', this.boundStopResize);
+            }
+
+            initDrag(e) {
+                if (e.target.closest('.yc-window-header-buttons')) return;
+                if (this.element.classList.contains('maximized')) return;
+
+                if (this.element.style.position !== 'absolute') {
+                    const rect = this.element.getBoundingClientRect();
+                    this.element.style.position = 'absolute';
+                    this.element.style.left = `${rect.left}px`;
+                    this.element.style.top = `${rect.top}px`;
+                    this.element.style.transform = 'none';
+                }
+
+                const rect = this.element.getBoundingClientRect();
+                this.isDragging = true;
+                this.dragStart = {x: e.clientX, y: e.clientY};
+                this.windowStart = {left: rect.left, top: rect.top};
+
+                this.element.classList.add('is-dragging');
+                document.addEventListener('mousemove', this.boundHandleDrag);
+                document.addEventListener('mouseup', this.boundStopDrag);
+                e.preventDefault();
+            }
+
+            handleDrag(e) {
+                if (!this.isDragging) return;
+
+                const dx = e.clientX - this.dragStart.x;
+                const dy = e.clientY - this.dragStart.y;
+
+                const newLeft = this.windowStart.left + dx;
+                const newTop = this.windowStart.top + dy;
+
+                const viewportWidth = window.innerWidth;
+                const viewportHeight = window.innerHeight;
+                const windowWidth = this.element.offsetWidth;
+                const windowHeight = this.element.offsetHeight;
+
+                const boundedLeft = Math.max(0, Math.min(newLeft, viewportWidth - windowWidth));
+                const boundedTop = Math.max(0, Math.min(newTop, viewportHeight - windowHeight));
+
+                this.element.style.transform = `translate(${boundedLeft - this.windowStart.left}px, ${boundedTop - this.windowStart.top}px)`;
+            }
+
+            stopDrag() {
+                if (this.isDragging) {
+                    const rect = this.element.getBoundingClientRect();
+                    this.element.style.left = `${rect.left}px`;
+                    this.element.style.top = `${rect.top}px`;
+                    this.element.style.transform = 'none';
+                    this.element.classList.remove('is-dragging');
+                }
+                this.isDragging = false;
+
+                document.removeEventListener('mousemove', this.boundHandleDrag);
+                document.removeEventListener('mouseup', this.boundStopDrag);
+            }
+
+            updatePosition() {
+                const rect = this.element.getBoundingClientRect();
+                this.windowStart = {
+                    left: rect.left,
+                    top: rect.top,
+                    width: rect.width,
+                    height: rect.height
+                };
+
+                this.element.style.position = 'absolute';
+
+                const scrollX = window.pageXOffset || document.documentElement.scrollLeft;
+                const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+
+                if (this.options.alignCenter) {
+                    this.element.style.left = `calc(50% + ${scrollX}px)`;
+                    this.element.style.top = `calc(50% + ${scrollY}px)`;
+                    this.element.style.transform = 'translate(-50%, -50%)';
+
+                    if (this.element.dataset) {
+                        this.element.dataset.originalStyle = JSON.stringify({
+                            width: this.options.width,
+                            height: this.options.height,
+                            left: `calc(50% + ${scrollX}px)`,
+                            top: `calc(50% + ${scrollY}px)`,
+                            transform: 'none'
+                        });
+                    }
+                } else {
+                    const viewportWidth = window.innerWidth;
+                    const viewportHeight = window.innerHeight;
+                    const windowWidth = this.element.offsetWidth;
+                    const windowHeight = this.element.offsetHeight;
+
+                    const left = (viewportWidth - windowWidth) / 2 + scrollX;
+                    const top = (viewportHeight - windowHeight) / 2 + scrollY;
+
+                    this.element.style.left = `${left}px`;
+                    this.element.style.top = `${top}px`;
+                    this.element.style.transform = 'none';
+
+                    if (this.element.dataset) {
+                        this.element.dataset.originalStyle = JSON.stringify({
+                            width: this.options.width,
+                            height: this.options.height,
+                            left: `${left}px`,
+                            top: `${top}px`,
+                            transform: 'none'
+                        });
+                    }
+                }
+            }
+
+            initResize(e) {
+                e.stopPropagation();
+
+                const handle = e.target;
+                const handleClass = handle.className;
+                let direction = '';
+
+                if (handleClass.includes('nw')) direction = 'nw';
+                else if (handleClass.includes('ne')) direction = 'ne';
+                else if (handleClass.includes('se')) direction = 'se';
+                else if (handleClass.includes('sw')) direction = 'sw';
+                else if (handleClass.includes('n')) direction = 'n';
+                else if (handleClass.includes('e')) direction = 'e';
+                else if (handleClass.includes('s')) direction = 's';
+                else if (handleClass.includes('w')) direction = 'w';
+
+                if (!direction) return;
+
+                const rect = this.element.getBoundingClientRect();
+                this.element.style.position = 'absolute';
+                this.element.style.left = `${rect.left}px`;
+                this.element.style.top = `${rect.top}px`;
+                this.element.style.transform = 'none';
+
+                this.isResizing = true;
+                this.resizeDirection = direction;
+                this.resizeStart = {
+                    x: e.clientX,
+                    y: e.clientY,
+                    width: rect.width,
+                    height: rect.height,
+                    left: rect.left,
+                    top: rect.top
+                };
+
+                document.addEventListener('mousemove', this.boundHandleResize);
+                document.addEventListener('mouseup', this.boundStopResize);
+                e.preventDefault();
+            }
+
+            handleResize(e) {
+                if (!this.isResizing) return;
+
+                if (!this.resizeFrameId) {
+                    this.resizeFrameId = requestAnimationFrame(() => {
+                        const dx = e.clientX - this.resizeStart.x;
+                        const dy = e.clientY - this.resizeStart.y;
+                        const {minWidth, minHeight} = this.options;
+
+                        let newWidth = this.resizeStart.width;
+                        let newHeight = this.resizeStart.height;
+                        let newLeft = this.resizeStart.left;
+                        let newTop = this.resizeStart.top;
+
+                        switch (this.resizeDirection) {
+                            case 'nw':
+                                newWidth = Math.max(minWidth, this.resizeStart.width - dx);
+                                newHeight = Math.max(minHeight, this.resizeStart.height - dy);
+                                newLeft = this.resizeStart.left + dx;
+                                newTop = this.resizeStart.top + dy;
+                                break;
+                            case 'ne':
+                                newWidth = Math.max(minWidth, this.resizeStart.width + dx);
+                                newHeight = Math.max(minHeight, this.resizeStart.height - dy);
+                                newTop = this.resizeStart.top + dy;
+                                break;
+                            case 'sw':
+                                newWidth = Math.max(minWidth, this.resizeStart.width - dx);
+                                newHeight = Math.max(minHeight, this.resizeStart.height + dy);
+                                newLeft = this.resizeStart.left + dx;
+                                break;
+                            case 'se':
+                                newWidth = Math.max(minWidth, this.resizeStart.width + dx);
+                                newHeight = Math.max(minHeight, this.resizeStart.height + dy);
+                                break;
+                            case 'w':
+                                newWidth = Math.max(minWidth, this.resizeStart.width - dx);
+                                newLeft = this.resizeStart.left + dx;
+                                break;
+                            case 'e':
+                                newWidth = Math.max(minWidth, this.resizeStart.width + dx);
+                                break;
+                            case 'n':
+                                newHeight = Math.max(minHeight, this.resizeStart.height - dy);
+                                newTop = this.resizeStart.top + dy;
+                                break;
+                            case 's':
+                                newHeight = Math.max(minHeight, this.resizeStart.height + dy);
+                                break;
+                        }
+
+                        this.element.style.width = `${newWidth}px`;
+                        this.element.style.height = `${newHeight}px`;
+                        this.element.style.left = `${newLeft}px`;
+                        this.element.style.top = `${newTop}px`;
+                        this.element.style.transform = 'none';
+
+                        this.resizeFrameId = null;
+                    });
+                }
+            }
+
+            stopResize() {
+                this.isResizing = false;
+                this.resizeDirection = '';
+
+                if (this.resizeFrameId) {
+                    cancelAnimationFrame(this.resizeFrameId);
+                    this.resizeFrameId = null;
+                }
+
+                document.removeEventListener('mousemove', this.boundHandleResize);
+                document.removeEventListener('mouseup', this.boundStopResize);
+            }
+
+            toggleMinimize() {
+                const minimizeBtn = this.element.querySelector('.yc-window-minimize i');
+                const header = this.element.querySelector('.yc-window-header');
+                const body = this.element.querySelector('.yc-window-body');
+                const footer = this.element.querySelector('.yc-window-footer');
+                const headerHeight = header ? header.offsetHeight : 40;
+
+                if (this.element.classList.contains('is-minimized')) {
+                    this.element.classList.remove('is-minimized');
+                    if (body) body.style.display = '';
+                    if (footer) footer.style.display = '';
+
+                    const originalHeight = this.element.dataset && this.element.dataset.originalStyle ?
+                        JSON.parse(this.element.dataset.originalStyle).height : '400px';
+
+                    this.element.style.transition = 'height 0.2s ease';
+                    setTimeout(() => {
+                        this.element.style.height = originalHeight;
+                    }, 10);
+
+                    if (minimizeBtn) {
+                        minimizeBtn.className = 'fas fa-minus';
+                    }
+                } else {
+                    this.element.classList.add('is-minimized');
+
+                    if (body) body.style.display = 'none';
+                    if (footer) footer.style.display = 'none';
+
+                    this.element.style.transition = 'height 0.2s ease';
+                    this.element.style.height = `${headerHeight}px`;
+
+                    if (minimizeBtn) {
+                        minimizeBtn.className = 'fas fa-expand-alt';
+                    }
+                }
+            }
+
+            toggleMaximize() {
+                const maximizeBtn = this.element.querySelector('.yc-window-maximize i');
+
+                if (this.element.classList.contains('is-maximized')) {
+                    this.element.classList.remove('is-maximized');
+                    if (this.element.dataset && this.element.dataset.originalStyle) {
+                        try {
+                            const originalStyle = JSON.parse(this.element.dataset.originalStyle);
+                            this.element.style.width = originalStyle.width;
+                            this.element.style.height = originalStyle.height;
+                            this.element.style.left = originalStyle.left;
+                            this.element.style.top = originalStyle.top;
+                            this.element.style.transform = originalStyle.transform;
+                        } catch (e) {
+                            console.error('Failed to parse original style:', e);
+                        }
+                    }
+
+                    if (maximizeBtn) {
+                        maximizeBtn.className = 'far fa-square';
+                    }
+                } else {
+                    if (this.element.classList.contains('is-minimized')) {
+                        this.toggleMinimize();
+                    }
+
+                    if (this.element.dataset) {
+                        this.element.dataset.originalStyle = JSON.stringify({
+                            width: this.element.style.width || '600px',
+                            height: this.element.style.height || '400px',
+                            left: this.element.style.left || '50%',
+                            top: this.element.style.top || '50%',
+                            transform: this.element.style.transform || 'translate(-50%, -50%)'
+                        });
+                    }
+
+                    this.element.style.position = 'absolute';
+                    this.element.style.top = '0';
+                    this.element.style.left = '0';
+                    this.element.style.width = '100vw';
+                    this.element.style.height = '100vh';
+                    this.element.style.transform = 'none';
+                    this.element.classList.add('is-maximized');
+
+                    if (maximizeBtn) {
+                        maximizeBtn.className = 'far fa-clone';
+                    }
+                }
+            }
+        }
+
+        function createWindow(options) {
+            return new YcWindow(options).open();
+        }
+
+        function openBasicDialog() {
+            createWindow({
+                title: '基本窗口',
+                content: '<p>这是一个基础的窗口组件，可以拖拽、调整大小、最小化和最大化。</p>'
+            });
+        }
+
+        function openFeatureDialog() {
+            createWindow({
+                title: '功能测试窗口',
+                content: `
+                    <div style="padding: 10px;">
+                        <h4>窗口功能测试</h4>
+                        <ul style="line-height: 2;">
+                            <li><i class="fas fa-arrows-alt"></i> 拖拽：通过标题栏拖动窗口</li>
+                            <li><i class="fas fa-expand-arrows-alt"></i> 调整大小：通过边缘或角落调整</li>
+                            <li><i class="fas fa-minus"></i> 最小化：点击最小化按钮</li>
+                            <li><i class="far fa-square"></i> 最大化：点击最大化按钮</li>
+                            <li><i class="fas fa-times"></i> 关闭：点击关闭按钮</li>
+                        </ul>
+                    </div>
+                `,
+                width: 500,
+                height: 350
+            });
+        }
+
+        function openCustomDialog() {
+            createWindow({
+                title: '自定义窗口',
+                content: '<p>这是一个自定义内容的窗口，可以根据需要修改标题、内容和按钮文本。</p>',
+                width: 450,
+                height: 280,
+                cancelText: '取消',
+                okText: '确定'
+            });
+        }
+
+        function openCenteredDialog() {
+            createWindow({
+                title: '居中窗口',
+                content: '<p>这个窗口会在屏幕中央显示。</p>',
+                width: 400,
+                height: 250,
+                alignCenter: true
+            });
+        }
+    </script>
+</body>
+</html>

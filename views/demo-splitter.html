@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Splitter 分割面板组件示例 - YC UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">Splitter 分割面板组件</h1>
+            <p class="demo-page-subtitle">用于将页面分割为多个可调整大小的面板，支持水平和垂直分割</p>
+        </div>
+
+        <div class="demo-section">
+            <h3>基础用法</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">水平分割（左右）</div>
+                <div class="demo-splitter-wrapper" id="horizontal-splitter"></div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>垂直分割</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">垂直分割（上下）</div>
+                <div class="demo-splitter-wrapper demo-splitter-wrapper--small" id="vertical-splitter"></div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>嵌套分割</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">嵌套使用多个分割器</div>
+                <div class="demo-splitter-wrapper" id="nested-splitter"></div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>可折叠面板</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">点击按钮折叠/展开面板</div>
+                <div class="demo-splitter-wrapper demo-splitter-wrapper--small" id="collapsible-splitter"></div>
+                <div class="demo-btn-row" style="margin-top: 16px;">
+                    <button class="yc-button yc-button--small" onclick="togglePane(0)">
+                        <i class="fas fa-chevron-left"></i> 折叠左侧
+                    </button>
+                    <button class="yc-button yc-button--small" onclick="togglePane(1)">
+                        折叠右侧 <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class Splitter {
+            constructor(options) {
+                if (options.container instanceof HTMLElement) {
+                    this.container = options.container;
+                } else {
+                    this.container = document.querySelector(options.container);
+                }
+                this.layout = options.layout || 'horizontal';
+                this.panes = options.panes || [];
+                this.splitBars = [];
+                this.isDragging = false;
+                this.dragIndex = -1;
+                this.startPos = 0;
+                this.startSize = 0;
+                this.tempSize = 0;
+
+                this.containerWidth = this.container.offsetWidth || 600;
+                this.containerHeight = this.container.offsetHeight || 300;
+
+                this.events = {
+                    'resize-start': [],
+                    'resize': [],
+                    'resize-end': [],
+                    'collapse': []
+                };
+
+                this.init();
+            }
+
+            init() {
+                this.container.innerHTML = '';
+                this.container.className = 'yc-splitter yc-splitter-' + this.layout;
+
+                for (let i = 0; i < this.panes.length; i++) {
+                    this.createPane(i);
+                }
+
+                this.bindEvents();
+            }
+
+            on(event, handler) {
+                if (this.events[event]) {
+                    this.events[event].push(handler);
+                }
+            }
+
+            off(event, handler) {
+                if (this.events[event]) {
+                    this.events[event] = this.events[event].filter(h => h !== handler);
+                }
+            }
+
+            emit(event, ...args) {
+                if (this.events[event]) {
+                    this.events[event].forEach(handler => handler(...args));
+                }
+            }
+
+            createPane(index) {
+                const pane = this.panes[index];
+
+                if (index > 0) {
+                    this.createSplitBar(index - 1);
+                }
+
+                const paneEl = document.createElement('div');
+                paneEl.className = 'yc-splitter-pane';
+
+                if (pane.size) {
+                    if (this.layout === 'horizontal') {
+                        paneEl.style.flexBasis = pane.size;
+                        paneEl.style.width = '0';
+                    } else {
+                        paneEl.style.flexBasis = pane.size;
+                        paneEl.style.height = '0';
+                    }
+                }
+
+                if (pane.className) {
+                    paneEl.classList.add(pane.className);
+                }
+
+                const contentEl = document.createElement('div');
+                contentEl.className = 'yc-splitter-pane-content';
+
+                if (pane.content) {
+                    if (typeof pane.content === 'function') {
+                        const result = pane.content();
+                        if (result instanceof HTMLElement) {
+                            contentEl.appendChild(result);
+                        } else if (typeof result === 'string') {
+                            contentEl.innerHTML = result;
+                        }
+                    } else {
+                        contentEl.innerHTML = pane.content;
+                    }
+                }
+
+                if (pane.collapsible) {
+                    const collapseBtn = document.createElement('div');
+                    collapseBtn.className = 'yc-splitter-collapse-btn';
+                    collapseBtn.innerHTML = this.layout === 'horizontal' ? '<i class="fas fa-chevron-right"></i>' : '<i class="fas fa-chevron-down"></i>';
+                    collapseBtn.addEventListener('click', () => {
+                        this.togglePane(index);
+                    });
+                    paneEl.appendChild(collapseBtn);
+                }
+
+                paneEl.appendChild(contentEl);
+                this.container.appendChild(paneEl);
+
+                pane.element = paneEl;
+                pane.content = contentEl;
+                pane.resizable = pane.resizable !== false;
+                pane.collapsible = pane.collapsible || false;
+                pane.min = pane.min || 0;
+                pane.max = pane.max || Infinity;
+            }
+
+            createSplitBar(index) {
+                const splitBar = document.createElement('div');
+                splitBar.className = 'yc-splitter-bar yc-splitter-bar-' + this.layout;
+
+                const resizeHandle = document.createElement('div');
+                resizeHandle.className = 'yc-splitter-resize-handle';
+
+                splitBar.appendChild(resizeHandle);
+                this.container.appendChild(splitBar);
+                this.splitBars.push(splitBar);
+            }
+
+            bindEvents() {
+                this.container.addEventListener('mousedown', (e) => {
+                    const splitBar = this.findSplitBar(e.target);
+                    if (splitBar) {
+                        const index = this.splitBars.indexOf(splitBar);
+                        const currentPane = this.panes[index];
+                        const adjacentPane = this.panes[index + 1];
+                        if (currentPane && adjacentPane && currentPane.resizable !== false && adjacentPane.resizable !== false) {
+                            this.startDrag(e, index);
+                        }
+                    }
+                });
+
+                document.addEventListener('mousemove', (e) => {
+                    if (this.isDragging) {
+                        this.onDrag(e);
+                    }
+                });
+
+                document.addEventListener('mouseup', (e) => {
+                    if (this.isDragging) {
+                        this.endDrag(e);
+                    }
+                });
+            }
+
+            findSplitBar(element) {
+                while (element && element !== this.container) {
+                    if (element.classList && element.classList.contains('yc-splitter-bar')) {
+                        return element;
+                    }
+                    element = element.parentNode;
+                }
+                return null;
+            }
+
+            startDrag(e, index) {
+                this.isDragging = true;
+                this.dragIndex = index;
+                this.startPos = this.layout === 'horizontal' ? e.clientX : e.clientY;
+
+                const pane = this.panes[index];
+                this.startSize = this.layout === 'horizontal' ? pane.element.offsetWidth : pane.element.offsetHeight;
+                this.tempSize = this.startSize;
+
+                this.emit('resize-start', index, this.getPaneSizes());
+
+                if (this.splitBars[index]) {
+                    this.splitBars[index].classList.add('dragging');
+                }
+                document.body.classList.add('yc-splitter-dragging');
+                if (this.layout === 'vertical') {
+                    document.body.classList.add('vertical');
+                }
+
+                e.preventDefault();
+            }
+
+            onDrag(e) {
+                if (!this.isDragging) return;
+
+                const currentPos = this.layout === 'horizontal' ? e.clientX : e.clientY;
+                const delta = currentPos - this.startPos;
+                let newSize = this.startSize + delta;
+
+                if (this.dragIndex + 1 < this.panes.length) {
+                    const currentPane = this.panes[this.dragIndex];
+                    const adjacentPane = this.panes[this.dragIndex + 1];
+                    const containerSize = this.layout === 'horizontal' ?
+                        this.containerWidth : this.containerHeight;
+                    const splitBarSize = this.layout === 'horizontal' ?
+                        this.splitBars[this.dragIndex].offsetWidth : this.splitBars[this.dragIndex].offsetHeight;
+
+                    let adjacentSize = containerSize - newSize - splitBarSize;
+
+                    if (currentPane.min) {
+                        newSize = Math.max(newSize, currentPane.min);
+                    }
+                    if (currentPane.max) {
+                        newSize = Math.min(newSize, currentPane.max);
+                    }
+
+                    if (adjacentPane.min) {
+                        adjacentSize = Math.max(adjacentSize, adjacentPane.min);
+                        newSize = containerSize - adjacentSize - splitBarSize;
+                    }
+                    if (adjacentPane.max) {
+                        adjacentSize = Math.min(adjacentSize, adjacentPane.max);
+                        newSize = containerSize - adjacentSize - splitBarSize;
+                    }
+
+                    newSize = Math.max(newSize, 0);
+                    newSize = Math.min(newSize, containerSize - splitBarSize);
+                    adjacentSize = containerSize - newSize - splitBarSize;
+
+                    if (this.layout === 'horizontal') {
+                        currentPane.element.style.flexBasis = newSize + 'px';
+                        currentPane.element.style.width = '0';
+                        adjacentPane.element.style.flexBasis = adjacentSize + 'px';
+                        adjacentPane.element.style.width = '0';
+                    } else {
+                        currentPane.element.style.flexBasis = newSize + 'px';
+                        currentPane.element.style.height = '0';
+                        adjacentPane.element.style.flexBasis = adjacentSize + 'px';
+                        adjacentPane.element.style.height = '0';
+                    }
+
+                    this.tempSize = newSize;
+                    this.emit('resize', this.dragIndex, this.getPaneSizes());
+                }
+            }
+
+            endDrag(e) {
+                if (this.dragIndex >= 0 && this.dragIndex + 1 < this.panes.length) {
+                    const currentPane = this.panes[this.dragIndex];
+                    const adjacentPane = this.panes[this.dragIndex + 1];
+                    const containerSize = this.layout === 'horizontal' ?
+                        this.containerWidth : this.containerHeight;
+                    const splitBarSize = this.layout === 'horizontal' ?
+                        this.splitBars[this.dragIndex].offsetWidth : this.splitBars[this.dragIndex].offsetHeight;
+
+                    let finalSize = this.tempSize;
+                    if (currentPane.min) {
+                        finalSize = Math.max(finalSize, currentPane.min);
+                    }
+                    if (currentPane.max) {
+                        finalSize = Math.min(finalSize, currentPane.max);
+                    }
+                    finalSize = Math.max(finalSize, 0);
+                    finalSize = Math.min(finalSize, containerSize - splitBarSize);
+
+                    let adjacentSize = containerSize - finalSize - splitBarSize;
+
+                    if (adjacentPane.min) {
+                        adjacentSize = Math.max(adjacentSize, adjacentPane.min);
+                        finalSize = containerSize - adjacentSize - splitBarSize;
+                    }
+                    if (adjacentPane.max) {
+                        adjacentSize = Math.min(adjacentSize, adjacentPane.max);
+                        finalSize = containerSize - adjacentSize - splitBarSize;
+                    }
+
+                    finalSize = Math.max(finalSize, 0);
+                    finalSize = Math.min(finalSize, containerSize - splitBarSize);
+                    adjacentSize = containerSize - finalSize - splitBarSize;
+
+                    if (this.layout === 'horizontal') {
+                        currentPane.element.style.flexBasis = finalSize + 'px';
+                        currentPane.element.style.width = '0';
+                        adjacentPane.element.style.flexBasis = adjacentSize + 'px';
+                        adjacentPane.element.style.width = '0';
+                    } else {
+                        currentPane.element.style.flexBasis = finalSize + 'px';
+                        currentPane.element.style.height = '0';
+                        adjacentPane.element.style.flexBasis = adjacentSize + 'px';
+                        adjacentPane.element.style.height = '0';
+                    }
+                }
+
+                if (this.dragIndex >= 0) {
+                    this.emit('resize-end', this.dragIndex, this.getPaneSizes());
+                }
+
+                this.isDragging = false;
+
+                if (this.dragIndex >= 0 && this.dragIndex < this.splitBars.length && this.splitBars[this.dragIndex]) {
+                    this.splitBars[this.dragIndex].classList.remove('dragging');
+                }
+
+                document.body.classList.remove('yc-splitter-dragging');
+                document.body.classList.remove('vertical');
+                this.dragIndex = -1;
+            }
+
+            getPaneSizes() {
+                const sizes = [];
+                for (let i = 0; i < this.panes.length; i++) {
+                    const pane = this.panes[i];
+                    if (this.layout === 'horizontal') {
+                        sizes.push(pane.element.offsetWidth);
+                    } else {
+                        sizes.push(pane.element.offsetHeight);
+                    }
+                }
+                return sizes;
+            }
+
+            setPaneSize(index, size) {
+                if (index < 0 || index >= this.panes.length) return;
+
+                const pane = this.panes[index];
+                if (this.layout === 'horizontal') {
+                    pane.element.style.width = size;
+                } else {
+                    pane.element.style.height = size;
+                }
+            }
+
+            togglePane(index) {
+                if (index < 0 || index >= this.panes.length) return;
+
+                const pane = this.panes[index];
+                if (!pane.collapsible) return;
+
+                if (pane.collapsed) {
+                    this.expandPane(index);
+                } else {
+                    this.collapsePane(index);
+                }
+            }
+
+            collapsePane(index) {
+                if (index < 0 || index >= this.panes.length) return;
+
+                const pane = this.panes[index];
+                if (!pane.collapsible || pane.collapsed) return;
+
+                pane.originalSize = pane.element.style.flexBasis || '';
+                pane.collapsed = true;
+
+                if (this.layout === 'horizontal') {
+                    pane.element.style.flexBasis = '0px';
+                    pane.element.style.width = '0px';
+                } else {
+                    pane.element.style.flexBasis = '0px';
+                    pane.element.style.height = '0px';
+                }
+
+                this.emit('collapse', index, index === 0 ? 'start' : 'end', this.getPaneSizes());
+            }
+
+            expandPane(index) {
+                if (index < 0 || index >= this.panes.length) return;
+
+                const pane = this.panes[index];
+                if (!pane.collapsible || !pane.collapsed) return;
+
+                pane.collapsed = false;
+
+                if (this.layout === 'horizontal') {
+                    pane.element.style.flexBasis = pane.originalSize || '';
+                } else {
+                    pane.element.style.flexBasis = pane.originalSize || '';
+                }
+
+                this.emit('collapse', index, index === 0 ? 'start' : 'end', this.getPaneSizes());
+            }
+
+            getShell() {
+                return this.container;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            window.horizontalSplitter = new Splitter({
+                container: '#horizontal-splitter',
+                layout: 'horizontal',
+                panes: [
+                    {
+                        size: '30%',
+                        min: 100,
+                        className: 'yc-splitter-pane--pane1',
+                        content: '<div style="padding: 20px;"><h4>左侧面板</h4><p>宽度: 30%</p><p>最小宽度: 100px</p></div>'
+                    },
+                    {
+                        size: '70%',
+                        className: 'yc-splitter-pane--pane2',
+                        content: '<div style="padding: 20px;"><h4>右侧面板</h4><p>宽度: 70%</p></div>'
+                    }
+                ]
+            });
+
+            window.verticalSplitter = new Splitter({
+                container: '#vertical-splitter',
+                layout: 'vertical',
+                panes: [
+                    {
+                        size: '40%',
+                        min: 80,
+                        className: 'yc-splitter-pane--pane3',
+                        content: '<div style="padding: 15px;"><h4>上部面板</h4><p>高度: 40%</p></div>'
+                    },
+                    {
+                        size: '60%',
+                        className: 'yc-splitter-pane--pane4',
+                        content: '<div style="padding: 15px;"><h4>下部面板</h4><p>高度: 60%</p></div>'
+                    }
+                ]
+            });
+
+            const nestedContainer = document.createElement('div');
+            nestedContainer.style.width = '100%';
+            nestedContainer.style.height = '100%';
+
+            const innerSplitter = new Splitter({
+                container: nestedContainer,
+                layout: 'vertical',
+                panes: [
+                    {
+                        size: '50%',
+                        className: 'yc-splitter-pane--pane2',
+                        content: '<div style="padding: 15px;"><h4>右上方面板</h4></div>'
+                    },
+                    {
+                        size: '50%',
+                        className: 'yc-splitter-pane--pane3',
+                        content: '<div style="padding: 15px;"><h4>右下面板</h4></div>'
+                    }
+                ]
+            });
+
+            window.nestedSplitter = new Splitter({
+                container: '#nested-splitter',
+                layout: 'horizontal',
+                panes: [
+                    {
+                        size: '30%',
+                        min: 100,
+                        className: 'yc-splitter-pane--pane1',
+                        content: '<div style="padding: 20px;"><h4>左侧面板</h4></div>'
+                    },
+                    {
+                        size: '70%',
+                        className: 'yc-splitter-pane--pane4',
+                        content: nestedContainer
+                    }
+                ]
+            });
+
+            window.collapsibleSplitter = new Splitter({
+                container: '#collapsible-splitter',
+                layout: 'horizontal',
+                panes: [
+                    {
+                        size: '30%',
+                        collapsible: true,
+                        className: 'yc-splitter-pane--pane1',
+                        content: '<div style="padding: 15px;"><h4>可折叠左侧</h4></div>'
+                    },
+                    {
+                        size: '70%',
+                        collapsible: true,
+                        className: 'yc-splitter-pane--pane2',
+                        content: '<div style="padding: 15px;"><h4>可折叠右侧</h4></div>'
+                    }
+                ]
+            });
+
+            window.collapsibleSplitter.on('collapse', function(index, type, sizes) {
+                console.log('Collapse event:', index, type, sizes);
+            });
+        });
+
+        function togglePane(index) {
+            if (window.collapsibleSplitter) {
+                window.collapsibleSplitter.togglePane(index);
+            }
+        }
+    </script>
+</body>
+</html>

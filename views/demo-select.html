@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select 选择器组件示例 - YC UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">Select 选择器</h1>
+            <p class="demo-page-subtitle">用于选择下拉选项的组件，支持单选、多选、搜索等功能</p>
+        </div>
+
+        <div class="demo-section">
+            <h3>基础用法</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">默认选择</div>
+                <div class="demo-row">
+                    <div class="yc-select" id="select1">
+                        <div class="yc-select__input-wrapper">
+                            <input type="text" class="yc-select__input" readonly placeholder="请选择">
+                            <i class="fas fa-chevron-down yc-select__arrow"></i>
+                        </div>
+                        <div class="yc-select__popper">
+                            <div class="yc-select-dropdown">
+                                <div class="yc-select-dropdown__list">
+                                    <div class="yc-select-dropdown__item" data-value="option1">选项 1</div>
+                                    <div class="yc-select-dropdown__item" data-value="option2">选项 2</div>
+                                    <div class="yc-select-dropdown__item" data-value="option3">选项 3</div>
+                                    <div class="yc-select-dropdown__item" data-value="option4">选项 4</div>
+                                    <div class="yc-select-dropdown__item" data-value="option5">选项 5</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="demo-result" id="select1Result">当前值: 无</div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>禁用状态</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">禁用选择器</div>
+                <div class="demo-row">
+                    <div class="yc-select is-disabled" id="select3">
+                        <div class="yc-select__input-wrapper">
+                            <input type="text" class="yc-select__input" value="禁用状态" disabled>
+                            <i class="fas fa-chevron-down yc-select__arrow"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>可清空</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">鼠标悬停显示清空按钮</div>
+                <div class="demo-row">
+                    <div class="yc-select has-value" id="select4">
+                        <div class="yc-select__input-wrapper">
+                            <input type="text" class="yc-select__input" readonly placeholder="请选择">
+                            <i class="fas fa-times yc-select__clear"></i>
+                            <i class="fas fa-chevron-down yc-select__arrow"></i>
+                        </div>
+                        <div class="yc-select__popper">
+                            <div class="yc-select-dropdown">
+                                <div class="yc-select-dropdown__list">
+                                    <div class="yc-select-dropdown__item" data-value="option1">选项 1</div>
+                                    <div class="yc-select-dropdown__item" data-value="option2">选项 2</div>
+                                    <div class="yc-select-dropdown__item is-selected" data-value="option3">选项 3</div>
+                                    <div class="yc-select-dropdown__item" data-value="option4">选项 4</div>
+                                    <div class="yc-select-dropdown__item" data-value="option5">选项 5</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="demo-result" id="select4Result">当前值: option3</div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>可搜索</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">输入关键词搜索</div>
+                <div class="demo-row">
+                    <div class="yc-select yc-select--searchable" id="select6">
+                        <div class="yc-select__input-wrapper">
+                            <input type="text" class="yc-select__input" placeholder="输入关键词搜索...">
+                            <i class="fas fa-chevron-down yc-select__arrow"></i>
+                        </div>
+                        <div class="yc-select__popper">
+                            <div class="yc-select-dropdown">
+                                <div class="yc-select-dropdown__search-wrapper">
+                                    <i class="fas fa-search yc-select-dropdown__search-icon"></i>
+                                    <input type="text" class="yc-select-dropdown__search" placeholder="输入关键词搜索...">
+                                </div>
+                                <div class="yc-select-dropdown__list">
+                                    <div class="yc-select-dropdown__item" data-value="beijing">北京</div>
+                                    <div class="yc-select-dropdown__item" data-value="shanghai">上海</div>
+                                    <div class="yc-select-dropdown__item" data-value="guangzhou">广州</div>
+                                    <div class="yc-select-dropdown__item" data-value="shenzhen">深圳</div>
+                                    <div class="yc-select-dropdown__item" data-value="hangzhou">杭州</div>
+                                    <div class="yc-select-dropdown__item" data-value="chengdu">成都</div>
+                                    <div class="yc-select-dropdown__item" data-value="wuhan">武汉</div>
+                                    <div class="yc-select-dropdown__item" data-value="xian">西安</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="demo-result" id="select6Result">当前值: 无</div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>不同尺寸</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">三种尺寸规格</div>
+                <div class="demo-select-sizes">
+                    <div class="yc-select yc-select--large" id="select7">
+                        <div class="yc-select__input-wrapper">
+                            <input type="text" class="yc-select__input" readonly placeholder="大尺寸">
+                            <i class="fas fa-chevron-down yc-select__arrow"></i>
+                        </div>
+                        <div class="yc-select__popper">
+                            <div class="yc-select-dropdown">
+                                <div class="yc-select-dropdown__list">
+                                    <div class="yc-select-dropdown__item" data-value="large1">大选项 1</div>
+                                    <div class="yc-select-dropdown__item" data-value="large2">大选项 2</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="yc-select" id="select8">
+                        <div class="yc-select__input-wrapper">
+                            <input type="text" class="yc-select__input" readonly placeholder="默认">
+                            <i class="fas fa-chevron-down yc-select__arrow"></i>
+                        </div>
+                        <div class="yc-select__popper">
+                            <div class="yc-select-dropdown">
+                                <div class="yc-select-dropdown__list">
+                                    <div class="yc-select-dropdown__item" data-value="default1">默认选项 1</div>
+                                    <div class="yc-select-dropdown__item" data-value="default2">默认选项 2</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="yc-select yc-select--small" id="select9">
+                        <div class="yc-select__input-wrapper">
+                            <input type="text" class="yc-select__input" readonly placeholder="小尺寸">
+                            <i class="fas fa-chevron-down yc-select__arrow"></i>
+                        </div>
+                        <div class="yc-select__popper">
+                            <div class="yc-select-dropdown">
+                                <div class="yc-select-dropdown__list">
+                                    <div class="yc-select-dropdown__item" data-value="small1">小选项 1</div>
+                                    <div class="yc-select-dropdown__item" data-value="small2">小选项 2</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function initSelect(selectEl) {
+            if (!selectEl) return;
+
+            const input = selectEl.querySelector('.yc-select__input');
+            const popper = selectEl.querySelector('.yc-select__popper');
+            const clearBtn = selectEl.querySelector('.yc-select__clear');
+            const arrow = selectEl.querySelector('.yc-select__arrow');
+            const isSearchable = selectEl.classList.contains('yc-select--searchable');
+
+            if (selectEl.classList.contains('is-disabled')) return;
+
+            selectEl.addEventListener('click', function(e) {
+                e.stopPropagation();
+                openDropdown(selectEl);
+            });
+
+            if (isSearchable) {
+                input.addEventListener('input', function() {
+                    const keyword = this.value.trim().toLowerCase();
+                    openDropdown(selectEl);
+                    filterItems(selectEl, keyword);
+                });
+
+                input.addEventListener('focus', function() {
+                    openDropdown(selectEl);
+                });
+
+                input.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape') {
+                        closeDropdown(selectEl);
+                    } else if (e.key === 'Enter') {
+                        const firstVisible = selectEl.querySelector('.yc-select-dropdown__item:not([style*="display: none"])');
+                        if (firstVisible) {
+                            selectItem(selectEl, firstVisible);
+                        }
+                    }
+                });
+            }
+
+            clearBtn?.addEventListener('click', function(e) {
+                e.stopPropagation();
+                clearValue(selectEl);
+            });
+
+            const items = selectEl.querySelectorAll('.yc-select-dropdown__item');
+            items.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    if (this.classList.contains('is-disabled')) return;
+                    selectItem(selectEl, this);
+                });
+
+                item.addEventListener('mouseenter', function() {
+                    if (this.classList.contains('is-disabled')) return;
+                    selectEl.querySelectorAll('.yc-select-dropdown__item').forEach(i => i.classList.remove('is-hovered'));
+                    this.classList.add('is-hovered');
+                });
+            });
+
+            const searchInput = selectEl.querySelector('.yc-select-dropdown__search');
+            if (searchInput) {
+                searchInput.addEventListener('input', function() {
+                    const keyword = this.value.trim().toLowerCase();
+                    filterItems(selectEl, keyword);
+                });
+
+                searchInput.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                });
+
+                searchInput.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape') {
+                        e.stopPropagation();
+                        closeDropdown(selectEl);
+                        input.focus();
+                    }
+                });
+            }
+        }
+
+        function openDropdown(selectEl) {
+            document.querySelectorAll('.yc-select.is-active').forEach(s => {
+                if (s !== selectEl) {
+                    s.classList.remove('is-active');
+                    const popper = s.querySelector('.yc-select__popper');
+                    if (popper) popper.classList.remove('is-visible');
+                }
+            });
+
+            selectEl.classList.add('is-active');
+            const popper = selectEl.querySelector('.yc-select__popper');
+            if (popper) popper.classList.add('is-visible');
+
+            const searchInput = selectEl.querySelector('.yc-select-dropdown__search');
+            if (searchInput) {
+                setTimeout(() => searchInput.focus(), 0);
+            }
+        }
+
+        function closeDropdown(selectEl) {
+            selectEl.classList.remove('is-active');
+            const popper = selectEl.querySelector('.yc-select__popper');
+            if (popper) popper.classList.remove('is-visible');
+
+            const searchInput = selectEl.querySelector('.yc-select-dropdown__search');
+            const dropdownSearchInput = selectEl.querySelector('.yc-select__input');
+            if (searchInput) {
+                searchInput.value = '';
+                filterItems(selectEl, '');
+            }
+        }
+
+        function selectItem(selectEl, itemEl) {
+            const input = selectEl.querySelector('.yc-select__input');
+            const popper = selectEl.querySelector('.yc-select__popper');
+            const isSearchable = selectEl.classList.contains('yc-select--searchable');
+
+            selectEl.querySelectorAll('.yc-select-dropdown__item.is-selected').forEach(i => {
+                i.classList.remove('is-selected');
+            });
+
+            itemEl.classList.add('is-selected');
+            const displayText = itemEl.textContent;
+            input.value = displayText;
+
+            if (!isSearchable) {
+                selectEl.classList.add('has-value');
+            }
+
+            popper.classList.remove('is-visible');
+            selectEl.classList.remove('is-active');
+
+            updateResult(selectEl.id, itemEl.dataset.value);
+        }
+
+        function clearValue(selectEl) {
+            const input = selectEl.querySelector('.yc-select__input');
+            input.value = '';
+            selectEl.classList.remove('has-value');
+
+            selectEl.querySelectorAll('.yc-select-dropdown__item.is-selected').forEach(item => {
+                item.classList.remove('is-selected');
+            });
+
+            updateResult(selectEl.id, '');
+        }
+
+        function filterItems(selectEl, keyword) {
+            const items = selectEl.querySelectorAll('.yc-select-dropdown__item');
+            let hasVisible = false;
+            let visibleCount = 0;
+            let firstVisible = null;
+
+            items.forEach(item => {
+                const text = item.textContent.toLowerCase();
+                if (text.includes(keyword)) {
+                    item.style.display = '';
+                    hasVisible = true;
+                    visibleCount++;
+                    if (!firstVisible) firstVisible = item;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            selectEl.querySelectorAll('.yc-select-dropdown__item').forEach(i => i.classList.remove('is-hovered'));
+            if (firstVisible) {
+                firstVisible.classList.add('is-hovered');
+            }
+
+            const noDataEl = selectEl.querySelector('.yc-select-dropdown__no-data');
+            if (!hasVisible) {
+                if (!noDataEl) {
+                    const noData = document.createElement('div');
+                    noData.className = 'yc-select-dropdown__no-data';
+                    noData.textContent = '无匹配数据';
+                    selectEl.querySelector('.yc-select-dropdown__list').appendChild(noData);
+                }
+            } else if (noDataEl) {
+                noDataEl.remove();
+            }
+        }
+
+        function updateResult(selectId, value) {
+            const resultEl = document.getElementById(selectId + 'Result');
+            if (resultEl) {
+                resultEl.textContent = value ? `当前值: ${value}` : '当前值: 无';
+            }
+        }
+
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.yc-select')) {
+                document.querySelectorAll('.yc-select.is-active').forEach(s => {
+                    s.classList.remove('is-active');
+                    const popper = s.querySelector('.yc-select__popper');
+                    if (popper) popper.classList.remove('is-visible');
+                });
+            }
+        });
+
+        document.querySelectorAll('.yc-select').forEach(initSelect);
+    </script>
+</body>
+</html>

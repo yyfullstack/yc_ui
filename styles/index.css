@@ -1,0 +1,90 @@
+@charset "UTF-8";
+
+/**
+ * YC UI Component Library - Entry Point
+ *
+ * A comprehensive CSS component library similar to Element Plus
+ *
+ * Structure:
+ * - Base: CSS variables, reset, typography
+ * - Components: All UI components
+ *
+ * Usage:
+ *   <link rel="stylesheet" href="path/to/styles/index.css">
+ *
+ * For modular imports, use individual component files:
+ *   @import url('./base/variables.css');
+ *   @import url('./base/reset.css');
+ *   @import url('./components/button.css');
+ *   etc.
+ *
+ * Theme switching:
+ *   <html yc-theme="light">  (default)
+ *   <html yc-theme="dark">
+ */
+
+/* Base styles - Variables and Reset */
+@import url('./base/variables.css');
+@import url('./base/reset.css');
+
+/* Core Layout Components */
+@import url('./components/grid.css');
+@import url('./components/container.css');
+
+/* Form Components */
+@import url('./components/button.css');
+@import url('./components/input.css');
+@import url('./components/input-number.css');
+@import url('./components/input-tag.css');
+@import url('./components/textarea.css');
+@import url('./components/select.css');
+@import url('./components/switch.css');
+@import url('./components/checkbox.css');
+@import url('./components/radio.css');
+@import url('./components/form.css');
+
+/* Date & Time Components */
+@import url('./components/date-picker.css');
+@import url('./components/time-picker.css');
+@import url('./components/color-picker.css');
+
+/* Navigation Components */
+@import url('./components/tabs.css');
+@import url('./components/breadcrumb.css');
+
+/* Layout & Display Components */
+@import url('./components/card.css');
+@import url('./components/collapse.css');
+@import url('./components/tag.css');
+@import url('./components/badge.css');
+@import url('./components/table.css');
+@import url('./components/splitter.css');
+@import url('./components/tilelayout.css');
+
+/* Overlay Components */
+@import url('./components/dialog.css');
+@import url('./components/window.css');
+@import url('./components/drawer.css');
+@import url('./components/notification.css');
+@import url('./components/messagebox.css');
+@import url('./components/popover.css');
+@import url('./components/loading.css');
+
+/* Feedback Components */
+@import url('./components/alert.css');
+
+/* Advanced Form Components */
+@import url('./components/autocomplete.css');
+@import url('./components/cascader.css');
+@import url('./components/tree-select.css');
+@import url('./components/transfer.css');
+@import url('./components/slider.css');
+@import url('./components/rating.css');
+@import url('./components/upload.css');
+
+/* Utility & Media */
+@import url('./components/qrcode.css');
+
+/* Optimized consolidated version (optional alternative) */
+/* Use this instead of the above imports for production: */
+/* @import url('./yc-ui-consolidated.css'); */

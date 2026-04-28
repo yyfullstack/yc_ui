@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Switch 开关组件示例 - YC UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">Switch 开关组件</h1>
+            <p class="demo-page-subtitle">基础开关、不同尺寸、禁用状态等用法示例</p>
+        </div>
+
+        <div class="demo-section">
+            <h3>基础用法</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">默认开关</div>
+                <div class="demo-row">
+                    <div class="demo-row" style="flex-direction: column; align-items: flex-start; gap: 16px;">
+                        <div class="demo-row">
+                            <label class="yc-switch" id="switch1">
+                                <input type="checkbox" class="yc-switch__input">
+                                <span class="yc-switch__wrapper">
+                                    <span class="yc-switch__slider"></span>
+                                </span>
+                                <span class="yc-switch__label">关闭</span>
+                            </label>
+                        </div>
+                        <div class="demo-row">
+                            <label class="yc-switch" id="switch1Checked">
+                                <input type="checkbox" class="yc-switch__input" checked>
+                                <span class="yc-switch__wrapper">
+                                    <span class="yc-switch__slider"></span>
+                                </span>
+                                <span class="yc-switch__label">开启</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>不同尺寸</h3>
+            <div class="demo-block">
+                <div class="demo-row" style="flex-direction: column; align-items: flex-start; gap: 16px;">
+                    <div class="demo-row">
+                        <span class="demo-label">小尺寸:</span>
+                        <label class="yc-switch yc-switch--small">
+                            <input type="checkbox" class="yc-switch__input">
+                            <span class="yc-switch__wrapper"><span class="yc-switch__slider"></span></span>
+                        </label>
+                    </div>
+                    <div class="demo-row">
+                        <span class="demo-label">默认:</span>
+                        <label class="yc-switch">
+                            <input type="checkbox" class="yc-switch__input" checked>
+                            <span class="yc-switch__wrapper"><span class="yc-switch__slider"></span></span>
+                        </label>
+                    </div>
+                    <div class="demo-row">
+                        <span class="demo-label">大尺寸:</span>
+                        <label class="yc-switch yc-switch--large">
+                            <input type="checkbox" class="yc-switch__input">
+                            <span class="yc-switch__wrapper"><span class="yc-switch__slider"></span></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>禁用状态</h3>
+            <div class="demo-block">
+                <div class="demo-row">
+                    <div class="demo-row" style="flex-direction: column; align-items: flex-start; gap: 16px;">
+                        <div class="demo-row">
+                            <label class="yc-switch is-disabled">
+                                <input type="checkbox" class="yc-switch__input" disabled>
+                                <span class="yc-switch__wrapper"><span class="yc-switch__slider"></span></span>
+                                <span class="yc-switch__label">禁用关闭</span>
+                            </label>
+                        </div>
+                        <div class="demo-row">
+                            <label class="yc-switch is-disabled">
+                                <input type="checkbox" class="yc-switch__input" checked disabled>
+                                <span class="yc-switch__wrapper"><span class="yc-switch__slider"></span></span>
+                                <span class="yc-switch__label">禁用开启</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>不同颜色</h3>
+            <div class="demo-block">
+                <div class="demo-row" style="flex-direction: column; align-items: flex-start; gap: 16px;">
+                    <div class="demo-row">
+                        <label class="yc-switch yc-switch--success">
+                            <input type="checkbox" class="yc-switch__input" checked>
+                            <span class="yc-switch__wrapper"><span class="yc-switch__slider"></span></span>
+                            <span class="yc-switch__label">成功</span>
+                        </label>
+                    </div>
+                    <div class="demo-row">
+                        <label class="yc-switch yc-switch--warning">
+                            <input type="checkbox" class="yc-switch__input" checked>
+                            <span class="yc-switch__wrapper"><span class="yc-switch__slider"></span></span>
+                            <span class="yc-switch__label">警告</span>
+                        </label>
+                    </div>
+                    <div class="demo-row">
+                        <label class="yc-switch yc-switch--danger">
+                            <input type="checkbox" class="yc-switch__input" checked>
+                            <span class="yc-switch__wrapper"><span class="yc-switch__slider"></span></span>
+                            <span class="yc-switch__label">危险</span>
+                        </label>
+                    </div>
+                    <div class="demo-row">
+                        <label class="yc-switch yc-switch--info">
+                            <input type="checkbox" class="yc-switch__input" checked>
+                            <span class="yc-switch__wrapper"><span class="yc-switch__slider"></span></span>
+                            <span class="yc-switch__label">信息</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>开关文字描述</h3>
+            <div class="demo-block">
+                <div class="demo-row" style="flex-direction: column; align-items: flex-start; gap: 16px;">
+                    <div class="demo-row">
+                        <i class="fas fa-moon" style="color: var(--yc-color-text-secondary); width: 24px;"></i>
+                        <label class="yc-switch" id="switchTheme">
+                            <input type="checkbox" class="yc-switch__input">
+                            <span class="yc-switch__wrapper"><span class="yc-switch__slider"></span></span>
+                            <span class="yc-switch__label">夜间模式</span>
+                        </label>
+                    </div>
+                    <div class="demo-row">
+                        <i class="fas fa-bell" style="color: var(--yc-color-text-secondary); width: 24px;"></i>
+                        <label class="yc-switch" id="switchNotify">
+                            <input type="checkbox" class="yc-switch__input" checked>
+                            <span class="yc-switch__wrapper"><span class="yc-switch__slider"></span></span>
+                            <span class="yc-switch__label">消息通知</span>
+                        </label>
+                    </div>
+                    <div class="demo-row">
+                        <i class="fas fa-wifi" style="color: var(--yc-color-text-secondary); width: 24px;"></i>
+                        <label class="yc-switch" id="switchWifi">
+                            <input type="checkbox" class="yc-switch__input" checked>
+                            <span class="yc-switch__wrapper"><span class="yc-switch__slider"></span></span>
+                            <span class="yc-switch__label">WiFi</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>动态控制</h3>
+            <div class="demo-block">
+                <div class="demo-row" style="flex-direction: column; align-items: flex-start; gap: 16px;">
+                    <div class="demo-row">
+                        <label class="yc-switch" id="switchControl">
+                            <input type="checkbox" class="yc-switch__input">
+                            <span class="yc-switch__wrapper"><span class="yc-switch__slider"></span></span>
+                            <span class="yc-switch__label">总开关</span>
+                        </label>
+                    </div>
+                    <div class="demo-btn-row">
+                        <button class="yc-button yc-button--small yc-button--primary" onclick="setSwitchState('switchControl', true)">打开</button>
+                        <button class="yc-button yc-button--small" onclick="setSwitchState('switchControl', false)">关闭</button>
+                        <button class="yc-button yc-button--small yc-button--warning" onclick="toggleSwitch('switchControl')">切换</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>应用场景</h3>
+            <div class="demo-block">
+                <div class="demo-row" style="flex-direction: column; gap: 16px;">
+                    <div class="yc-card" style="width: 100%;">
+                        <div class="yc-card__body" style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <div style="font-weight: 500;">自动保存</div>
+                                <div style="font-size: 12px; color: var(--yc-color-text-secondary);">启用后，系统将自动保存您的编辑</div>
+                            </div>
+                            <label class="yc-switch" id="autoSave">
+                                <input type="checkbox" class="yc-switch__input" checked>
+                                <span class="yc-switch__wrapper"><span class="yc-switch__slider"></span></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="yc-card" style="width: 100%;">
+                        <div class="yc-card__body" style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <div style="font-weight: 500;">调试模式</div>
+                                <div style="font-size: 12px; color: var(--yc-color-text-secondary);">启用后，显示详细的调试信息</div>
+                            </div>
+                            <label class="yc-switch" id="debugMode">
+                                <input type="checkbox" class="yc-switch__input">
+                                <span class="yc-switch__wrapper"><span class="yc-switch__slider"></span></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="yc-card" style="width: 100%;">
+                        <div class="yc-card__body" style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <div style="font-weight: 500;">公开个人资料</div>
+                                <div style="font-size: 12px; color: var(--yc-color-text-secondary);">允许其他人查看您的个人资料</div>
+                            </div>
+                            <label class="yc-switch" id="publicProfile">
+                                <input type="checkbox" class="yc-switch__input">
+                                <span class="yc-switch__wrapper"><span class="yc-switch__slider"></span></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function initSwitchListeners() {
+            document.querySelectorAll('.yc-switch').forEach(switchEl => {
+                const input = switchEl.querySelector('.yc-switch__input');
+                const label = switchEl.querySelector('.yc-switch__label');
+
+                if (input && label) {
+                    input.addEventListener('change', function() {
+                        if (input.checked) {
+                            label.textContent = '开启';
+                        } else {
+                            label.textContent = '关闭';
+                        }
+                    });
+                }
+            });
+        }
+
+        function setSwitchState(switchId, checked) {
+            const switchEl = document.getElementById(switchId);
+            if (switchEl) {
+                const input = switchEl.querySelector('.yc-switch__input');
+                const label = switchEl.querySelector('.yc-switch__label');
+                if (input) {
+                    input.checked = checked;
+                    if (label) {
+                        label.textContent = checked ? '开启' : '关闭';
+                    }
+                }
+            }
+        }
+
+        function toggleSwitch(switchId) {
+            const switchEl = document.getElementById(switchId);
+            if (switchEl) {
+                const input = switchEl.querySelector('.yc-switch__input');
+                const label = switchEl.querySelector('.yc-switch__label');
+                if (input) {
+                    input.checked = !input.checked;
+                    if (label) {
+                        label.textContent = input.checked ? '开启' : '关闭';
+                    }
+                }
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', initSwitchListeners);
+    </script>
+</body>
+</html>

@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabs 标签页组件示例 - YC UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">Tabs 标签页组件</h1>
+            <p class="demo-page-subtitle">基础的标签页、禁用状态、动态添加删除、事件监听等用法示例</p>
+        </div>
+
+        <div class="demo-section">
+            <h3>基本用法</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">基础的标签页</div>
+                <div class="yc-tabs" id="basic-tabs">
+                    <div class="yc-tabs__header">
+                        <div class="yc-tabs__nav">
+                            <div class="yc-tabs__item is-active">标签一</div>
+                            <div class="yc-tabs__item">标签二</div>
+                            <div class="yc-tabs__item">标签三</div>
+                        </div>
+                    </div>
+                    <div class="yc-tabs__content">
+                        <div class="yc-tabs__pane is-active">
+                            <div style="padding: 20px; color: var(--yc-color-text-regular);">
+                                标签一的内容
+                            </div>
+                        </div>
+                        <div class="yc-tabs__pane">
+                            <div style="padding: 20px; color: var(--yc-color-text-regular);">
+                                标签二的内容
+                            </div>
+                        </div>
+                        <div class="yc-tabs__pane">
+                            <div style="padding: 20px; color: var(--yc-color-text-regular);">
+                                标签三的内容
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>禁用状态</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">禁用某个标签</div>
+                <div class="yc-tabs" id="disabled-tabs">
+                    <div class="yc-tabs__header">
+                        <div class="yc-tabs__nav">
+                            <div class="yc-tabs__item is-active">标签一</div>
+                            <div class="yc-tabs__item is-disabled">标签二（禁用）</div>
+                            <div class="yc-tabs__item">标签三</div>
+                        </div>
+                    </div>
+                    <div class="yc-tabs__content">
+                        <div class="yc-tabs__pane is-active">
+                            <div style="padding: 20px; color: var(--yc-color-text-regular);">
+                                标签一的内容
+                            </div>
+                        </div>
+                        <div class="yc-tabs__pane">
+                            <div style="padding: 20px; color: var(--yc-color-text-regular);">
+                                标签二的内容（禁用不可见）
+                            </div>
+                        </div>
+                        <div class="yc-tabs__pane">
+                            <div style="padding: 20px; color: var(--yc-color-text-regular);">
+                                标签三的内容
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>卡片样式</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">带边框的卡片样式标签页</div>
+                <div class="yc-tabs yc-tabs--border-card">
+                    <div class="yc-tabs__header">
+                        <div class="yc-tabs__nav">
+                            <div class="yc-tabs__item is-active">用户管理</div>
+                            <div class="yc-tabs__item">配置管理</div>
+                            <div class="yc-tabs__item">角色管理</div>
+                            <div class="yc-tabs__item">定时任务</div>
+                        </div>
+                    </div>
+                    <div class="yc-tabs__content">
+                        <div class="yc-tabs__pane is-active">
+                            <div style="padding: 20px; color: var(--yc-color-text-regular);">
+                                <p><strong>用户管理内容区</strong></p>
+                                <p>这里是用户管理的相关内容，可以包含表格、表单等信息。</p>
+                            </div>
+                        </div>
+                        <div class="yc-tabs__pane">
+                            <div style="padding: 20px; color: var(--yc-color-text-regular);">
+                                <p><strong>配置管理内容区</strong></p>
+                                <p>这里是配置管理的相关内容。</p>
+                            </div>
+                        </div>
+                        <div class="yc-tabs__pane">
+                            <div style="padding: 20px; color: var(--yc-color-text-regular);">
+                                <p><strong>角色管理内容区</strong></p>
+                                <p>这里是角色管理的相关内容。</p>
+                            </div>
+                        </div>
+                        <div class="yc-tabs__pane">
+                            <div style="padding: 20px; color: var(--yc-color-text-regular);">
+                                <p><strong>定时任务内容区</strong></p>
+                                <p>这里是定时任务的相关内容。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>垂直标签页</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">垂直方向的标签页</div>
+                <div class="demo-row">
+                    <div class="yc-tabs yc-tabs--vertical" style="height: 300px;">
+                        <div class="yc-tabs__header">
+                            <div class="yc-tabs__nav">
+                                <div class="yc-tabs__item is-active">
+                                    <i class="fas fa-user"></i> 个人信息
+                                </div>
+                                <div class="yc-tabs__item">
+                                    <i class="fas fa-cog"></i> 账户设置
+                                </div>
+                                <div class="yc-tabs__item">
+                                    <i class="fas fa-bell"></i> 通知设置
+                                </div>
+                            </div>
+                        </div>
+                        <div class="yc-tabs__content">
+                            <div class="yc-tabs__pane is-active">
+                                <div style="padding: 20px;">
+                                    <p><strong>个人信息</strong></p>
+                                    <p>在这里编辑您的个人信息</p>
+                                </div>
+                            </div>
+                            <div class="yc-tabs__pane">
+                                <div style="padding: 20px;">
+                                    <p><strong>账户设置</strong></p>
+                                    <p>管理您的账户安全设置</p>
+                                </div>
+                            </div>
+                            <div class="yc-tabs__pane">
+                                <div style="padding: 20px;">
+                                    <p><strong>通知设置</strong></p>
+                                    <p>配置您想接收的通知</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>动态添加标签</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">动态添加和删除标签</div>
+                <div class="yc-tabs" id="dynamic-tabs">
+                    <div class="yc-tabs__header">
+                        <div class="yc-tabs__nav" id="dynamic-tabs-nav">
+                            <div class="yc-tabs__item is-active" data-index="0">标签一</div>
+                            <div class="yc-tabs__item" data-index="1">标签二</div>
+                        </div>
+                    </div>
+                    <div class="yc-tabs__content">
+                        <div class="yc-tabs__pane is-active">标签一的内容</div>
+                        <div class="yc-tabs__pane">标签二的内容</div>
+                    </div>
+                </div>
+                <div class="demo-btn-row" style="margin-top: 16px;">
+                    <button class="yc-button yc-button--primary" onclick="addTab()">
+                        <i class="fas fa-plus"></i> 添加标签
+                    </button>
+                    <button class="yc-button yc-button--danger" onclick="removeTab()">
+                        <i class="fas fa-minus"></i> 删除最后一个
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>可关闭标签</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">点击关闭按钮删除标签</div>
+                <div class="yc-tabs" id="closable-tabs">
+                    <div class="yc-tabs__header">
+                        <div class="yc-tabs__nav" id="closable-tabs-nav">
+                            <div class="yc-tabs__item is-active is-closable" data-index="0">
+                                标签一
+                                <span class="yc-tabs__item-close" onclick="closeTab(event, this)"><i class="fas fa-times"></i></span>
+                            </div>
+                            <div class="yc-tabs__item is-closable" data-index="1">
+                                标签二
+                                <span class="yc-tabs__item-close" onclick="closeTab(event, this)"><i class="fas fa-times"></i></span>
+                            </div>
+                            <div class="yc-tabs__item is-closable" data-index="2">
+                                标签三
+                                <span class="yc-tabs__item-close" onclick="closeTab(event, this)"><i class="fas fa-times"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="yc-tabs__content">
+                        <div class="yc-tabs__pane is-active">标签一的内容</div>
+                        <div class="yc-tabs__pane">标签二的内容</div>
+                        <div class="yc-tabs__pane">标签三的内容</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>不同尺寸</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">大尺寸标签页</div>
+                <div class="demo-row" style="flex-direction: column; gap: 24px;">
+                    <div class="yc-tabs yc-tabs--large">
+                        <div class="yc-tabs__header">
+                            <div class="yc-tabs__nav">
+                                <div class="yc-tabs__item is-active">大尺寸标签</div>
+                                <div class="yc-tabs__item">标签二</div>
+                                <div class="yc-tabs__item">标签三</div>
+                            </div>
+                        </div>
+                        <div class="yc-tabs__content">
+                            <div class="yc-tabs__pane is-active">大尺寸标签页的内容</div>
+                            <div class="yc-tabs__pane">标签二的内容</div>
+                            <div class="yc-tabs__pane">标签三的内容</div>
+                        </div>
+                    </div>
+                    <div class="yc-tabs yc-tabs--small">
+                        <div class="yc-tabs__header">
+                            <div class="yc-tabs__nav">
+                                <div class="yc-tabs__item is-active">小尺寸</div>
+                                <div class="yc-tabs__item">标签二</div>
+                                <div class="yc-tabs__item">标签三</div>
+                            </div>
+                        </div>
+                        <div class="yc-tabs__content">
+                            <div class="yc-tabs__pane is-active">小尺寸标签页的内容</div>
+                            <div class="yc-tabs__pane">标签二的内容</div>
+                            <div class="yc-tabs__pane">标签三的内容</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let dynamicTabCount = 2;
+
+        function addTab() {
+            dynamicTabCount++;
+            const nav = document.getElementById('dynamic-tabs-nav');
+            const content = document.querySelector('#dynamic-tabs .yc-tabs__content');
+
+            const newTab = document.createElement('div');
+            newTab.className = 'yc-tabs__item';
+            newTab.setAttribute('data-index', dynamicTabCount - 1);
+            newTab.textContent = `标签${dynamicTabCount}`;
+            nav.appendChild(newTab);
+
+            const newPane = document.createElement('div');
+            newPane.className = 'yc-tabs__pane';
+            newPane.textContent = `标签${dynamicTabCount}的内容`;
+            content.appendChild(newPane);
+
+            initTabsInteraction();
+        }
+
+        function removeTab() {
+            const nav = document.getElementById('dynamic-tabs-nav');
+            const content = document.querySelector('#dynamic-tabs .yc-tabs__content');
+            const tabs = nav.querySelectorAll('.yc-tabs__item');
+            const panes = content.querySelectorAll('.yc-tabs__pane');
+
+            if (tabs.length > 1) {
+                tabs[tabs.length - 1].remove();
+                panes[panes.length - 1].remove();
+                dynamicTabCount--;
+
+                const lastTab = nav.querySelector('.yc-tabs__item:last-child');
+                const lastPane = content.querySelector('.yc-tabs__pane:last-child');
+                if (lastTab) lastTab.classList.add('is-active');
+                if (lastPane) lastPane.classList.add('is-active');
+            }
+        }
+
+        function closeTab(event, closeBtn) {
+            event.stopPropagation();
+            const tabItem = closeBtn.closest('.yc-tabs__item');
+            const tabsContainer = tabItem.closest('.yc-tabs');
+            const nav = tabItem.closest('.yc-tabs__nav');
+            const content = tabsContainer.querySelector('.yc-tabs__content');
+            const tabs = nav.querySelectorAll('.yc-tabs__item');
+            const panes = content.querySelectorAll('.yc-tabs__pane');
+            const index = Array.from(tabs).indexOf(tabItem);
+
+            if (tabItem.classList.contains('is-disabled')) return;
+
+            const wasActive = tabItem.classList.contains('is-active');
+
+            tabItem.remove();
+            if (panes[index]) {
+                panes[index].remove();
+            }
+
+            if (wasActive && tabs.length > 0) {
+                const newActiveIndex = Math.min(index, tabs.length - 1);
+                const newActiveTab = nav.querySelectorAll('.yc-tabs__item')[newActiveIndex];
+                const newActivePane = content.querySelectorAll('.yc-tabs__pane')[newActiveIndex];
+                if (newActiveTab) newActiveTab.classList.add('is-active');
+                if (newActivePane) newActivePane.classList.add('is-active');
+            }
+        }
+
+        function initTabsInteraction() {
+            document.querySelectorAll('.yc-tabs').forEach(tabs => {
+                const items = tabs.querySelectorAll('.yc-tabs__item');
+                const panes = tabs.querySelectorAll('.yc-tabs__pane');
+
+                items.forEach((item, index) => {
+                    item.addEventListener('click', (e) => {
+                        if (e.target.closest('.yc-tabs__item-close')) return;
+                        if (item.classList.contains('is-disabled')) return;
+
+                        items.forEach(i => i.classList.remove('is-active'));
+                        panes.forEach(p => p.classList.remove('is-active'));
+
+                        item.classList.add('is-active');
+                        if (panes[index]) {
+                            panes[index].classList.add('is-active');
+                        }
+                    });
+                });
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', initTabsInteraction);
+    </script>
+</body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card 卡片组件示例 - YC UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">Card 卡片组件</h1>
+            <p class="demo-page-subtitle">基础的卡片、带阴影、可操作性等用法示例</p>
+        </div>
+
+        <div class="demo-section">
+            <h3>基本用法</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">基础卡片</div>
+                <div class="demo-row">
+                    <div class="yc-card" style="width: 300px;">
+                        <div class="yc-card__header">
+                            <h4 class="yc-card__title">卡片标题</h4>
+                        </div>
+                        <div class="yc-card__body">
+                            卡片内容区域，可以放置文本、图片等内容。
+                        </div>
+                        <div class="yc-card__footer">
+                            <button class="yc-button yc-button--small">操作一</button>
+                            <button class="yc-button yc-button--small yc-button--primary">操作二</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>带阴影卡片</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">hover时显示阴影</div>
+                <div class="demo-row">
+                    <div class="yc-card yc-card--hoverable" style="width: 300px;">
+                        <div class="yc-card__header">
+                            <h4 class="yc-card__title">可悬浮卡片</h4>
+                        </div>
+                        <div class="yc-card__body">
+                            鼠标悬停时显示阴影效果。
+                        </div>
+                    </div>
+                    <div class="yc-card yc-card--shadow" style="width: 300px;">
+                        <div class="yc-card__header">
+                            <h4 class="yc-card__title">始终带阴影</h4>
+                        </div>
+                        <div class="yc-card__body">
+                            默认就显示阴影效果。
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>简洁卡片</h3>
+            <div class="demo-block">
+                <div class="demo-row">
+                    <div class="yc-card yc-card--plain" style="width: 300px; border: 1px dashed var(--yc-color-border);">
+                        <div class="yc-card__body">
+                            这是一个简洁卡片，没有头部和底部。
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>不同类型卡片</h3>
+            <div class="demo-block">
+                <div class="demo-row" style="flex-wrap: wrap; gap: 16px;">
+                    <div class="yc-card yc-card--success" style="width: 280px;">
+                        <div class="yc-card__header">
+                            <h4 class="yc-card__title">成功卡片</h4>
+                        </div>
+                        <div class="yc-card__body">
+                            表示成功操作的卡片样式。
+                        </div>
+                    </div>
+                    <div class="yc-card yc-card--warning" style="width: 280px;">
+                        <div class="yc-card__header">
+                            <h4 class="yc-card__title">警告卡片</h4>
+                        </div>
+                        <div class="yc-card__body">
+                            表示警告信息的卡片样式。
+                        </div>
+                    </div>
+                    <div class="yc-card yc-card--danger" style="width: 280px;">
+                        <div class="yc-card__header">
+                            <h4 class="yc-card__title">危险卡片</h4>
+                        </div>
+                        <div class="yc-card__body">
+                            表示危险或错误信息的卡片样式。
+                        </div>
+                    </div>
+                    <div class="yc-card yc-card--primary" style="width: 280px;">
+                        <div class="yc-card__header">
+                            <h4 class="yc-card__title">主要卡片</h4>
+                        </div>
+                        <div class="yc-card__body">
+                            表示主要信息的卡片样式。
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>带图片卡片</h3>
+            <div class="demo-block">
+                <div class="demo-row" style="flex-wrap: wrap; gap: 16px;">
+                    <div class="yc-card" style="width: 280px;">
+                        <div class="yc-card__body" style="padding: 0;">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='160' fill='%23e0e0e0'%3E%3Crect width='280' height='160'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23999' font-family='sans-serif' font-size='14'%3E图片占位%3C/text%3E%3C/svg%3E" alt="示例图片" style="width: 100%; display: block;">
+                        </div>
+                        <div class="yc-card__body">
+                            <h4 style="margin: 0 0 8px 0; font-size: 16px;">图片卡片</h4>
+                            <p style="margin: 0; color: var(--yc-color-text-secondary); font-size: 14px;">这是一个带图片的卡片示例。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>卡片布局</h3>
+            <div class="demo-block">
+                <div class="demo-row" style="flex-wrap: wrap; gap: 16px;">
+                    <div class="yc-card" style="width: calc(50% - 8px);">
+                        <div class="yc-card__header">
+                            <h4 class="yc-card__title">卡片一</h4>
+                            <span class="yc-card__extra">额外信息</span>
+                        </div>
+                        <div class="yc-card__body">
+                            这里是卡片的内容区域，可以放置各种信息。
+                        </div>
+                    </div>
+                    <div class="yc-card" style="width: calc(50% - 8px);">
+                        <div class="yc-card__header">
+                            <h4 class="yc-card__title">卡片二</h4>
+                            <span class="yc-card__extra">
+                                <span class="yc-tag yc-tag--small yc-tag--success">进行中</span>
+                            </span>
+                        </div>
+                        <div class="yc-card__body">
+                            这里是另一张卡片的内容。
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>JavaScript 创建卡片</h3>
+            <div class="demo-block">
+                <div class="demo-btn-row">
+                    <button class="yc-button yc-button--primary" onclick="createCard()">
+                        <i class="fas fa-plus"></i> 创建卡片
+                    </button>
+                    <button class="yc-button yc-button--danger" onclick="removeAllCards()">
+                        <i class="fas fa-trash-alt"></i> 清除所有
+                    </button>
+                </div>
+                <div id="dynamic-cards" class="demo-row" style="margin-top: 16px; flex-wrap: wrap; gap: 16px;"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let cardCount = 0;
+
+        function createCard() {
+            cardCount++;
+            const container = document.getElementById('dynamic-cards');
+            const card = document.createElement('div');
+            card.className = 'yc-card';
+            card.style.width = '260px';
+            card.innerHTML = `
+                <div class="yc-card__header">
+                    <h4 class="yc-card__title">动态卡片 ${cardCount}</h4>
+                </div>
+                <div class="yc-card__body">
+                    <p>这是通过JavaScript创建的动态卡片。</p>
+                    <p style="color: var(--yc-color-text-secondary); font-size: 12px;">创建时间: ${new Date().toLocaleTimeString()}</p>
+                </div>
+                <div class="yc-card__footer">
+                    <button class="yc-button yc-button--small yc-button--primary" onclick="this.closest('.yc-card').remove()">删除</button>
+                </div>
+            `;
+            container.appendChild(card);
+        }
+
+        function removeAllCards() {
+            const container = document.getElementById('dynamic-cards');
+            container.innerHTML = '';
+            cardCount = 0;
+        }
+    </script>
+</body>
+</html>

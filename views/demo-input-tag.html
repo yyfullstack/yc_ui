@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InputTag 标签输入框组件示例</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+    <link rel="stylesheet" href="../styles/index.css">
+</head>
+
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1>InputTag 标签输入框组件示例</h1>
+            <p class="demo-description">用于输入标签的组件，支持添加、删除、类型、最大数量等功能</p>
+        </div>
+
+        <div class="demo-section">
+            <div class="demo-section-title">基础用法</div>
+            <div class="demo-block">
+                <div class="demo-block-item">
+                    <label class="demo-block-label">标签输入</label>
+                    <div class="yc-input-tag" id="inputTag1">
+                        <span class="yc-input-tag__tag yc-input-tag__tag--closable">
+                            标签1
+                            <span class="yc-input-tag__tag-close">×</span>
+                        </span>
+                        <span class="yc-input-tag__tag yc-input-tag__tag--closable">
+                            标签2
+                            <span class="yc-input-tag__tag-close">×</span>
+                        </span>
+                        <input type="text" class="yc-input-tag__input" placeholder="请输入标签">
+                    </div>
+                </div>
+                <div class="demo-result" id="inputTag1Result">当前标签: 标签1, 标签2</div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <div class="demo-section-title">不同类型标签</div>
+            <div class="demo-block">
+                <div class="demo-block-item">
+                    <label class="demo-block-label">标签类型</label>
+                    <div class="yc-input-tag" id="inputTag2">
+                        <span class="yc-input-tag__tag yc-input-tag__tag--info yc-input-tag__tag--closable">
+                            信息
+                            <span class="yc-input-tag__tag-close">×</span>
+                        </span>
+                        <span class="yc-input-tag__tag yc-input-tag__tag--success yc-input-tag__tag--closable">
+                            成功
+                            <span class="yc-input-tag__tag-close">×</span>
+                        </span>
+                        <span class="yc-input-tag__tag yc-input-tag__tag--warning yc-input-tag__tag--closable">
+                            警告
+                            <span class="yc-input-tag__tag-close">×</span>
+                        </span>
+                        <span class="yc-input-tag__tag yc-input-tag__tag--danger yc-input-tag__tag--closable">
+                            危险
+                            <span class="yc-input-tag__tag-close">×</span>
+                        </span>
+                        <input type="text" class="yc-input-tag__input" placeholder="请输入标签">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <div class="demo-section-title">不可关闭标签</div>
+            <div class="demo-block">
+                <div class="demo-block-item">
+                    <label class="demo-block-label">固定标签</label>
+                    <div class="yc-input-tag" id="inputTag3">
+                        <span class="yc-input-tag__tag">固定标签1</span>
+                        <span class="yc-input-tag__tag">固定标签2</span>
+                        <span class="yc-input-tag__tag yc-input-tag__tag--closable">
+                            可删除
+                            <span class="yc-input-tag__tag-close">×</span>
+                        </span>
+                        <input type="text" class="yc-input-tag__input" placeholder="请输入标签">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <div class="demo-section-title">最大标签数</div>
+            <div class="demo-block">
+                <div class="demo-block-item">
+                    <label class="demo-block-label">最多5个标签</label>
+                    <div class="yc-input-tag" id="inputTag4">
+                        <span class="yc-input-tag__tag yc-input-tag__tag--closable">
+                            标签1
+                            <span class="yc-input-tag__tag-close">×</span>
+                        </span>
+                        <span class="yc-input-tag__tag yc-input-tag__tag--closable">
+                            标签2
+                            <span class="yc-input-tag__tag-close">×</span>
+                        </span>
+                        <span class="yc-input-tag__tag yc-input-tag__tag--closable">
+                            标签3
+                            <span class="yc-input-tag__tag-close">×</span>
+                        </span>
+                        <input type="text" class="yc-input-tag__input" placeholder="请输入标签">
+                        <span class="yc-input-tag__count">3/5</span>
+                    </div>
+                </div>
+                <div class="demo-result" id="inputTag4Result">当前标签: 标签1, 标签2, 标签3</div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <div class="demo-section-title">不同尺寸</div>
+            <div class="demo-block">
+                <div class="demo-block-item">
+                    <label class="demo-block-label">尺寸变体</label>
+                    <div class="demo-input-tag-group">
+                        <div class="yc-input-tag yc-input-tag--large" id="inputTag5">
+                            <span class="yc-input-tag__tag yc-input-tag__tag--closable">
+                                大标签
+                                <span class="yc-input-tag__tag-close">×</span>
+                            </span>
+                            <input type="text" class="yc-input-tag__input" placeholder="大尺寸">
+                        </div>
+                        <div class="yc-input-tag" id="inputTag6">
+                            <span class="yc-input-tag__tag yc-input-tag__tag--closable">
+                                默认
+                                <span class="yc-input-tag__tag-close">×</span>
+                            </span>
+                            <input type="text" class="yc-input-tag__input" placeholder="默认">
+                        </div>
+                        <div class="yc-input-tag yc-input-tag--small" id="inputTag7">
+                            <span class="yc-input-tag__tag yc-input-tag__tag--closable">
+                                小
+                                <span class="yc-input-tag__tag-close">×</span>
+                            </span>
+                            <input type="text" class="yc-input-tag__input" placeholder="小尺寸">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <div class="demo-section-title">禁用状态</div>
+            <div class="demo-block">
+                <div class="demo-block-item">
+                    <label class="demo-block-label">禁用输入框</label>
+                    <div class="yc-input-tag is-disabled" id="inputTag8">
+                        <span class="yc-input-tag__tag">标签1</span>
+                        <span class="yc-input-tag__tag">标签2</span>
+                        <input type="text" class="yc-input-tag__input" placeholder="禁用状态" disabled>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <div class="demo-section-title">输入触发方式</div>
+            <div class="demo-block">
+                <div class="demo-block-item">
+                    <label class="demo-block-label">回车添加</label>
+                    <div class="yc-input-tag" id="inputTag9">
+                        <input type="text" class="yc-input-tag__input" placeholder="按回车添加标签">
+                    </div>
+                </div>
+                <div class="demo-result" id="inputTag9Result">当前标签: 无</div>
+            </div>
+            <div class="demo-block" style="margin-top: 16px;">
+                <div class="demo-block-item">
+                    <label class="demo-block-label">逗号添加</label>
+                    <div class="yc-input-tag" id="inputTag10">
+                        <input type="text" class="yc-input-tag__input" placeholder="输入逗号添加标签">
+                    </div>
+                </div>
+                <div class="demo-result" id="inputTag10Result">当前标签: 无</div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <div class="demo-section-title">自定义验证</div>
+            <div class="demo-block">
+                <div class="demo-block-item">
+                    <label class="demo-block-label">不允许重复</label>
+                    <div class="yc-input-tag" id="inputTag11">
+                        <span class="yc-input-tag__tag yc-input-tag__tag--closable">
+                            标签1
+                            <span class="yc-input-tag__tag-close">×</span>
+                        </span>
+                        <span class="yc-input-tag__tag yc-input-tag__tag--closable">
+                            标签2
+                            <span class="yc-input-tag__tag-close">×</span>
+                        </span>
+                        <input type="text" class="yc-input-tag__input" placeholder="不允许重复标签">
+                    </div>
+                </div>
+                <div class="demo-result" id="inputTag11Result">当前标签: 标签1, 标签2</div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <div class="demo-section-title">拖拽排序</div>
+            <div class="demo-block">
+                <div class="demo-block-item">
+                    <label class="demo-block-label">拖拽标签</label>
+                    <div class="yc-input-tag yc-input-tag--drag" id="inputTag12">
+                        <span class="yc-input-tag__tag yc-input-tag__tag--closable" draggable="true">
+                            可拖拽1
+                            <span class="yc-input-tag__tag-close">×</span>
+                        </span>
+                        <span class="yc-input-tag__tag yc-input-tag__tag--closable" draggable="true">
+                            可拖拽2
+                            <span class="yc-input-tag__tag-close">×</span>
+                        </span>
+                        <span class="yc-input-tag__tag yc-input-tag__tag--closable" draggable="true">
+                            可拖拽3
+                            <span class="yc-input-tag__tag-close">×</span>
+                        </span>
+                        <input type="text" class="yc-input-tag__input" placeholder="请输入标签">
+                    </div>
+                </div>
+                <div class="demo-result" id="inputTag12Result">当前标签: 可拖拽1, 可拖拽2, 可拖拽3</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function getTags(container) {
+            return Array.from(container.querySelectorAll('.yc-input-tag__tag'))
+                .map(tag => tag.textContent.replace('×', '').trim());
+        }
+
+        function updateResult(containerId, tags) {
+            const result = document.getElementById(containerId + 'Result');
+            if (result) {
+                result.textContent = `当前标签: ${tags.length > 0 ? tags.join(', ') : '无'}`;
+            }
+        }
+
+        function addTag(container, text, closable, type) {
+            if (!text.trim()) return false;
+
+            const input = container.querySelector('.yc-input-tag__input');
+            const tag = document.createElement('span');
+            let className = 'yc-input-tag__tag';
+            if (closable) className += ' yc-input-tag__tag--closable';
+            if (type) className += ` yc-input-tag__tag--${type}`;
+            tag.className = className;
+
+            tag.textContent = text.trim();
+
+            if (closable) {
+                const closeBtn = document.createElement('span');
+                closeBtn.className = 'yc-input-tag__tag-close';
+                closeBtn.textContent = '×';
+                closeBtn.addEventListener('click', function() {
+                    tag.remove();
+                    updateResult(container.id, getTags(container));
+                });
+                tag.appendChild(closeBtn);
+            }
+
+            container.insertBefore(tag, input);
+            input.value = '';
+            updateResult(container.id, getTags(container));
+            return true;
+        }
+
+        function initInputTags() {
+            const inputTags = document.querySelectorAll('.yc-input-tag');
+
+            inputTags.forEach(container => {
+                const input = container.querySelector('.yc-input-tag__input');
+                if (!input) return;
+
+                container.addEventListener('click', function() {
+                    if (!container.classList.contains('is-disabled')) {
+                        input.focus();
+                    }
+                });
+
+                input.addEventListener('focus', function() {
+                    container.classList.add('is-focus');
+                });
+
+                input.addEventListener('blur', function() {
+                    container.classList.remove('is-focus');
+                });
+
+                container.querySelectorAll('.yc-input-tag__tag-close').forEach(closeBtn => {
+                    closeBtn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const tag = this.parentElement;
+                        tag.remove();
+                        updateResult(container.id, getTags(container));
+                    });
+                });
+
+                const maxTags = container.id === 'inputTag4' ? 5 : Infinity;
+                const allowDuplicate = container.id !== 'inputTag11';
+                const triggerByComma = container.id === 'inputTag10';
+
+                input.addEventListener('keydown', function(e) {
+                    const value = this.value.trim();
+
+                    if (e.key === 'Enter' && value) {
+                        e.preventDefault();
+
+                        if (!allowDuplicate) {
+                            const existingTags = getTags(container);
+                            if (existingTags.includes(value)) {
+                                this.value = '';
+                                return;
+                            }
+                        }
+
+                        const currentTags = getTags(container);
+                        if (currentTags.length >= maxTags) {
+                            this.value = '';
+                            return;
+                        }
+
+                        addTag(container, value, true);
+
+                        const count = container.querySelector('.yc-input-tag__count');
+                        if (count) {
+                            count.textContent = `${getTags(container).length}/${maxTags}`;
+                        }
+                    }
+
+                    if (e.key === 'Backspace' && !value) {
+                        const lastTag = container.querySelectorAll('.yc-input-tag__tag');
+                        if (lastTag.length > 0) {
+                            const tag = lastTag[lastTag.length - 1];
+                            if (tag.querySelector('.yc-input-tag__tag-close')) {
+                                tag.remove();
+                                updateResult(container.id, getTags(container));
+                            }
+                        }
+                    }
+                });
+
+                if (triggerByComma) {
+                    input.addEventListener('input', function() {
+                        if (this.value.includes(',')) {
+                            const parts = this.value.split(',');
+                            parts.forEach((part, index) => {
+                                if (index < parts.length - 1 && part.trim()) {
+                                    addTag(container, part, true);
+                                }
+                            });
+                            this.value = parts[parts.length - 1];
+                        }
+                    });
+                }
+            });
+
+            initDragSort();
+        }
+
+        function initDragSort() {
+            const dragContainer = document.getElementById('inputTag12');
+            if (!dragContainer) return;
+
+            let draggedTag = null;
+
+            dragContainer.addEventListener('dragstart', function(e) {
+                if (e.target.classList.contains('yc-input-tag__tag')) {
+                    draggedTag = e.target;
+                    e.target.classList.add('is-dragging');
+                    e.dataTransfer.effectAllowed = 'move';
+                }
+            });
+
+            dragContainer.addEventListener('dragend', function(e) {
+                if (draggedTag) {
+                    draggedTag.classList.remove('is-dragging');
+                    draggedTag = null;
+                    updateResult(dragContainer.id, getTags(dragContainer));
+                }
+            });
+
+            dragContainer.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                e.dataTransfer.dropEffect = 'move';
+
+                const target = e.target.closest('.yc-input-tag__tag');
+                if (target && target !== draggedTag) {
+                    const rect = target.getBoundingClientRect();
+                    const midX = rect.left + rect.width / 2;
+
+                    if (e.clientX < midX) {
+                        dragContainer.insertBefore(draggedTag, target);
+                    } else {
+                        dragContainer.insertBefore(draggedTag, target.nextSibling);
+                    }
+                }
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', initInputTags);
+    </script>
+</body>
+
+</html>

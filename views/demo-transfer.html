@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transfer 穿梭框组件示例 - YC UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">Transfer 穿梭框组件</h1>
+            <p class="demo-page-subtitle">用于在两个面板之间移动数据的组件，支持搜索、禁用等功能</p>
+        </div>
+
+        <div class="demo-section">
+            <h3>基础用法</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">双栏选择</div>
+                <div class="demo-row">
+                    <div class="yc-transfer" id="transfer1">
+                        <div class="yc-transfer-panel" data-panel="source">
+                            <div class="yc-transfer-panel__header">
+                                <div class="yc-transfer-panel__header-left">
+                                    <label class="yc-transfer-panel__header-checkbox" data-check-all="source">
+                                        <input type="checkbox">
+                                        <span class="yc-transfer-panel__header-checkbox-box">
+                                            <i class="fas fa-check"></i>
+                                        </span>
+                                    </label>
+                                    <span class="yc-transfer-panel__header-title">源列表</span>
+                                    <span class="yc-transfer-panel__header-count">0/5</span>
+                                </div>
+                            </div>
+                            <div class="yc-transfer-panel__body"></div>
+                        </div>
+                        <div class="yc-transfer__buttons">
+                            <button class="yc-transfer__btn" data-action="to-right" title="添加到右侧">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                            <button class="yc-transfer__btn" data-action="to-left" title="移除到左侧">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                        </div>
+                        <div class="yc-transfer-panel" data-panel="target">
+                            <div class="yc-transfer-panel__header">
+                                <div class="yc-transfer-panel__header-left">
+                                    <label class="yc-transfer-panel__header-checkbox" data-check-all="target">
+                                        <input type="checkbox">
+                                        <span class="yc-transfer-panel__header-checkbox-box">
+                                            <i class="fas fa-check"></i>
+                                        </span>
+                                    </label>
+                                    <span class="yc-transfer-panel__header-title">目标列表</span>
+                                    <span class="yc-transfer-panel__header-count">0/0</span>
+                                </div>
+                            </div>
+                            <div class="yc-transfer-panel__body"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="demo-result" id="transfer1Result">已选择: 无</div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>可搜索</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">输入关键词搜索</div>
+                <div class="demo-row">
+                    <div class="yc-transfer" id="transfer4">
+                        <div class="yc-transfer-panel" data-panel="source">
+                            <div class="yc-transfer-panel__header">
+                                <div class="yc-transfer-panel__header-left">
+                                    <label class="yc-transfer-panel__header-checkbox" data-check-all="source">
+                                        <input type="checkbox">
+                                        <span class="yc-transfer-panel__header-checkbox-box">
+                                            <i class="fas fa-check"></i>
+                                        </span>
+                                    </label>
+                                    <span class="yc-transfer-panel__header-title">源列表</span>
+                                    <span class="yc-transfer-panel__header-count">0/10</span>
+                                </div>
+                            </div>
+                            <div class="yc-transfer-panel__footer">
+                                <div class="yc-transfer-panel__search-wrapper">
+                                    <i class="fas fa-search yc-transfer-panel__search-icon"></i>
+                                    <input type="text" class="yc-transfer-panel__search" placeholder="搜索...">
+                                </div>
+                            </div>
+                            <div class="yc-transfer-panel__body"></div>
+                        </div>
+                        <div class="yc-transfer__buttons">
+                            <button class="yc-transfer__btn" data-action="to-right" title="添加到右侧">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                            <button class="yc-transfer__btn" data-action="to-left" title="移除到左侧">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                        </div>
+                        <div class="yc-transfer-panel" data-panel="target">
+                            <div class="yc-transfer-panel__header">
+                                <div class="yc-transfer-panel__header-left">
+                                    <label class="yc-transfer-panel__header-checkbox" data-check-all="target">
+                                        <input type="checkbox">
+                                        <span class="yc-transfer-panel__header-checkbox-box">
+                                            <i class="fas fa-check"></i>
+                                        </span>
+                                    </label>
+                                    <span class="yc-transfer-panel__header-title">目标列表</span>
+                                    <span class="yc-transfer-panel__header-count">0/0</span>
+                                </div>
+                            </div>
+                            <div class="yc-transfer-panel__footer">
+                                <div class="yc-transfer-panel__search-wrapper">
+                                    <i class="fas fa-search yc-transfer-panel__search-icon"></i>
+                                    <input type="text" class="yc-transfer-panel__search" placeholder="搜索...">
+                                </div>
+                            </div>
+                            <div class="yc-transfer-panel__body"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="demo-result" id="transfer4Result">已选择: 无</div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>不同尺寸</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">小/大尺寸变体</div>
+                <div class="demo-transfer-sizes">
+                    <div class="yc-transfer yc-transfer--small" id="transfer2">
+                        <div class="yc-transfer-panel" data-panel="source">
+                            <div class="yc-transfer-panel__header">
+                                <div class="yc-transfer-panel__header-left">
+                                    <label class="yc-transfer-panel__header-checkbox" data-check-all="source">
+                                        <input type="checkbox">
+                                        <span class="yc-transfer-panel__header-checkbox-box">
+                                            <i class="fas fa-check"></i>
+                                        </span>
+                                    </label>
+                                    <span class="yc-transfer-panel__header-title">小尺寸</span>
+                                    <span class="yc-transfer-panel__header-count">0/4</span>
+                                </div>
+                            </div>
+                            <div class="yc-transfer-panel__body"></div>
+                        </div>
+                        <div class="yc-transfer__buttons">
+                            <button class="yc-transfer__btn" data-action="to-right">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                            <button class="yc-transfer__btn" data-action="to-left">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                        </div>
+                        <div class="yc-transfer-panel" data-panel="target">
+                            <div class="yc-transfer-panel__header">
+                                <div class="yc-transfer-panel__header-left">
+                                    <label class="yc-transfer-panel__header-checkbox" data-check-all="target">
+                                        <input type="checkbox">
+                                        <span class="yc-transfer-panel__header-checkbox-box">
+                                            <i class="fas fa-check"></i>
+                                        </span>
+                                    </label>
+                                    <span class="yc-transfer-panel__header-title">目标</span>
+                                    <span class="yc-transfer-panel__header-count">0/0</span>
+                                </div>
+                            </div>
+                            <div class="yc-transfer-panel__body"></div>
+                        </div>
+                    </div>
+                    <div class="yc-transfer yc-transfer--large" id="transfer3">
+                        <div class="yc-transfer-panel" data-panel="source">
+                            <div class="yc-transfer-panel__header">
+                                <div class="yc-transfer-panel__header-left">
+                                    <label class="yc-transfer-panel__header-checkbox" data-check-all="source">
+                                        <input type="checkbox">
+                                        <span class="yc-transfer-panel__header-checkbox-box">
+                                            <i class="fas fa-check"></i>
+                                        </span>
+                                    </label>
+                                    <span class="yc-transfer-panel__header-title">大尺寸</span>
+                                    <span class="yc-transfer-panel__header-count">0/4</span>
+                                </div>
+                            </div>
+                            <div class="yc-transfer-panel__body"></div>
+                        </div>
+                        <div class="yc-transfer__buttons">
+                            <button class="yc-transfer__btn" data-action="to-right">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                            <button class="yc-transfer__btn" data-action="to-left">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                        </div>
+                        <div class="yc-transfer-panel" data-panel="target">
+                            <div class="yc-transfer-panel__header">
+                                <div class="yc-transfer-panel__header-left">
+                                    <label class="yc-transfer-panel__header-checkbox" data-check-all="target">
+                                        <input type="checkbox">
+                                        <span class="yc-transfer-panel__header-checkbox-box">
+                                            <i class="fas fa-check"></i>
+                                        </span>
+                                    </label>
+                                    <span class="yc-transfer-panel__header-title">目标</span>
+                                    <span class="yc-transfer-panel__header-count">0/0</span>
+                                </div>
+                            </div>
+                            <div class="yc-transfer-panel__body"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>禁用状态</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">禁用整个穿梭框</div>
+                <div class="demo-row">
+                    <div class="yc-transfer is-disabled" id="transfer5">
+                        <div class="yc-transfer-panel" data-panel="source">
+                            <div class="yc-transfer-panel__header">
+                                <div class="yc-transfer-panel__header-left">
+                                    <label class="yc-transfer-panel__header-checkbox is-disabled">
+                                        <input type="checkbox" disabled>
+                                        <span class="yc-transfer-panel__header-checkbox-box">
+                                            <i class="fas fa-check"></i>
+                                        </span>
+                                    </label>
+                                    <span class="yc-transfer-panel__header-title">源列表</span>
+                                    <span class="yc-transfer-panel__header-count">0/4</span>
+                                </div>
+                            </div>
+                            <div class="yc-transfer-panel__body"></div>
+                        </div>
+                        <div class="yc-transfer__buttons">
+                            <button class="yc-transfer__btn" disabled>
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                            <button class="yc-transfer__btn" disabled>
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                        </div>
+                        <div class="yc-transfer-panel" data-panel="target">
+                            <div class="yc-transfer-panel__header">
+                                <div class="yc-transfer-panel__header-left">
+                                    <label class="yc-transfer-panel__header-checkbox is-disabled">
+                                        <input type="checkbox" disabled>
+                                        <span class="yc-transfer-panel__header-checkbox-box">
+                                            <i class="fas fa-check"></i>
+                                        </span>
+                                    </label>
+                                    <span class="yc-transfer-panel__header-title">目标列表</span>
+                                    <span class="yc-transfer-panel__header-count">0/0</span>
+                                </div>
+                            </div>
+                            <div class="yc-transfer-panel__body"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="demo-result" id="transfer5Result">状态: 已禁用</div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>带禁用选项</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">部分选项禁用</div>
+                <div class="demo-row">
+                    <div class="yc-transfer" id="transfer6">
+                        <div class="yc-transfer-panel" data-panel="source">
+                            <div class="yc-transfer-panel__header">
+                                <div class="yc-transfer-panel__header-left">
+                                    <label class="yc-transfer-panel__header-checkbox" data-check-all="source">
+                                        <input type="checkbox">
+                                        <span class="yc-transfer-panel__header-checkbox-box">
+                                            <i class="fas fa-check"></i>
+                                        </span>
+                                    </label>
+                                    <span class="yc-transfer-panel__header-title">源列表</span>
+                                    <span class="yc-transfer-panel__header-count">0/5</span>
+                                </div>
+                            </div>
+                            <div class="yc-transfer-panel__body"></div>
+                        </div>
+                        <div class="yc-transfer__buttons">
+                            <button class="yc-transfer__btn" data-action="to-right">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                            <button class="yc-transfer__btn" data-action="to-left">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                        </div>
+                        <div class="yc-transfer-panel" data-panel="target">
+                            <div class="yc-transfer-panel__header">
+                                <div class="yc-transfer-panel__header-left">
+                                    <label class="yc-transfer-panel__header-checkbox" data-check-all="target">
+                                        <input type="checkbox">
+                                        <span class="yc-transfer-panel__header-checkbox-box">
+                                            <i class="fas fa-check"></i>
+                                        </span>
+                                    </label>
+                                    <span class="yc-transfer-panel__header-title">目标列表</span>
+                                    <span class="yc-transfer-panel__header-count">0/0</span>
+                                </div>
+                            </div>
+                            <div class="yc-transfer-panel__body"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="demo-result" id="transfer6Result">已选择: 无</div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>动态操作</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">全部移动</div>
+                <div class="demo-row">
+                    <div class="yc-transfer" id="transfer7">
+                        <div class="yc-transfer-panel" data-panel="source">
+                            <div class="yc-transfer-panel__header">
+                                <div class="yc-transfer-panel__header-left">
+                                    <label class="yc-transfer-panel__header-checkbox" data-check-all="source">
+                                        <input type="checkbox">
+                                        <span class="yc-transfer-panel__header-checkbox-box">
+                                            <i class="fas fa-check"></i>
+                                        </span>
+                                    </label>
+                                    <span class="yc-transfer-panel__header-title">源列表</span>
+                                    <span class="yc-transfer-panel__header-count">0/5</span>
+                                </div>
+                            </div>
+                            <div class="yc-transfer-panel__body"></div>
+                        </div>
+                        <div class="yc-transfer__buttons">
+                            <button class="yc-transfer__btn" data-action="to-right">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                            <button class="yc-transfer__btn" data-action="to-left">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                        </div>
+                        <div class="yc-transfer-panel" data-panel="target">
+                            <div class="yc-transfer-panel__header">
+                                <div class="yc-transfer-panel__header-left">
+                                    <label class="yc-transfer-panel__header-checkbox" data-check-all="target">
+                                        <input type="checkbox">
+                                        <span class="yc-transfer-panel__header-checkbox-box">
+                                            <i class="fas fa-check"></i>
+                                        </span>
+                                    </label>
+                                    <span class="yc-transfer-panel__header-title">目标列表</span>
+                                    <span class="yc-transfer-panel__header-count">0/0</span>
+                                </div>
+                            </div>
+                            <div class="yc-transfer-panel__body"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="demo-btn-row" style="margin-top: 16px;">
+                    <button class="yc-button yc-button--small" onclick="moveAllToRight('transfer7')">
+                        <i class="fas fa-angle-double-right"></i> 全部右移
+                    </button>
+                    <button class="yc-button yc-button--small" onclick="moveAllToLeft('transfer7')">
+                        <i class="fas fa-angle-double-left"></i> 全部左移
+                    </button>
+                </div>
+                <div class="demo-result" id="transfer7Result">已选择: 无</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const transferData = {
+            transfer1: [
+                { key: 'user1', label: '用户 1', disabled: false },
+                { key: 'user2', label: '用户 2', disabled: false },
+                { key: 'user3', label: '用户 3', disabled: false },
+                { key: 'user4', label: '用户 4', disabled: false },
+                { key: 'user5', label: '用户 5', disabled: false }
+            ],
+            transfer2: [
+                { key: 'item1', label: '选项 1', disabled: false },
+                { key: 'item2', label: '选项 2', disabled: false },
+                { key: 'item3', label: '选项 3', disabled: false },
+                { key: 'item4', label: '选项 4', disabled: false }
+            ],
+            transfer3: [
+                { key: 'item1', label: '选项 1', disabled: false },
+                { key: 'item2', label: '选项 2', disabled: false },
+                { key: 'item3', label: '选项 3', disabled: false },
+                { key: 'item4', label: '选项 4', disabled: false }
+            ],
+            transfer4: [
+                { key: 'beijing', label: '北京', disabled: false },
+                { key: 'shanghai', label: '上海', disabled: false },
+                { key: 'guangzhou', label: '广州', disabled: false },
+                { key: 'shenzhen', label: '深圳', disabled: false },
+                { key: 'hangzhou', label: '杭州', disabled: false },
+                { key: 'nanjing', label: '南京', disabled: false },
+                { key: 'chengdu', label: '成都', disabled: false },
+                { key: 'wuhan', label: '武汉', disabled: false },
+                { key: 'xian', label: '西安', disabled: false },
+                { key: 'tianjin', label: '天津', disabled: false }
+            ],
+            transfer5: [
+                { key: 'opt1', label: '选项 1', disabled: false },
+                { key: 'opt2', label: '选项 2', disabled: false },
+                { key: 'opt3', label: '选项 3', disabled: false },
+                { key: 'opt4', label: '选项 4', disabled: false }
+            ],
+            transfer6: [
+                { key: 'item1', label: '选项 1', disabled: false },
+                { key: 'item2', label: '选项 2 (禁用)', disabled: true },
+                { key: 'item3', label: '选项 3', disabled: false },
+                { key: 'item4', label: '选项 4 (禁用)', disabled: true },
+                { key: 'item5', label: '选项 5', disabled: false }
+            ],
+            transfer7: [
+                { key: 'a', label: '选项 A', disabled: false },
+                { key: 'b', label: '选项 B', disabled: false },
+                { key: 'c', label: '选项 C', disabled: false },
+                { key: 'd', label: '选项 D', disabled: false },
+                { key: 'e', label: '选项 E', disabled: false }
+            ]
+        };
+
+        function initTransfer(transferEl) {
+            const transferId = transferEl.id;
+            const data = transferData[transferId] || [];
+            const isDisabled = transferEl.classList.contains('is-disabled');
+
+            transferEl.dataset.left = JSON.stringify(data.map(d => d.key));
+            transferEl.dataset.right = JSON.stringify([]);
+            transferEl.dataset.checkedLeft = JSON.stringify([]);
+            transferEl.dataset.checkedRight = JSON.stringify([]);
+
+            renderPanels(transferEl, data, isDisabled);
+            updateCounts(transferEl);
+            updateButtons(transferEl);
+            updateHeaderCheckboxes(transferEl);
+            bindTransferEvents(transferEl);
+        }
+
+        function bindTransferEvents(transferEl) {
+            const toRightBtn = transferEl.querySelector('[data-action="to-right"]');
+            const toLeftBtn = transferEl.querySelector('[data-action="to-left"]');
+            const isDisabled = transferEl.classList.contains('is-disabled');
+
+            if (toRightBtn && !isDisabled) {
+                toRightBtn.addEventListener('click', () => moveChecked(transferEl, 'left'));
+            }
+
+            if (toLeftBtn && !isDisabled) {
+                toLeftBtn.addEventListener('click', () => moveChecked(transferEl, 'right'));
+            }
+
+            const searchInputs = transferEl.querySelectorAll('.yc-transfer-panel__search');
+            searchInputs.forEach(input => {
+                input.addEventListener('input', function() {
+                    const panel = this.closest('.yc-transfer-panel');
+                    const keyword = this.value.trim().toLowerCase();
+                    filterPanelItems(panel, keyword);
+                });
+            });
+
+            const headerCheckboxes = transferEl.querySelectorAll('.yc-transfer-panel__header-checkbox[data-check-all]');
+            headerCheckboxes.forEach(checkbox => {
+                const input = checkbox.querySelector('input');
+                if (input && !isDisabled) {
+                    input.addEventListener('change', function() {
+                        const panelType = checkbox.dataset.checkAll;
+                        const panel = transferEl.querySelector(`[data-panel="${panelType}"]`);
+                        const items = panel.querySelectorAll('.yc-transfer-panel__item:not(.is-disabled)');
+                        const isChecked = this.checked;
+
+                        items.forEach(item => {
+                            if (isChecked) {
+                                item.classList.add('is-checked');
+                            } else {
+                                item.classList.remove('is-checked');
+                            }
+                        });
+
+                        updateCheckedState(transferEl);
+                    });
+                }
+            });
+        }
+
+        function renderPanels(transferEl, allData, isDisabled) {
+            const leftPanel = transferEl.querySelector('[data-panel="source"] .yc-transfer-panel__body');
+            const rightPanel = transferEl.querySelector('[data-panel="target"] .yc-transfer-panel__body');
+
+            const leftKeys = JSON.parse(transferEl.dataset.left || '[]');
+            const rightKeys = JSON.parse(transferEl.dataset.right || '[]');
+
+            leftPanel.innerHTML = '';
+            rightPanel.innerHTML = '';
+
+            if (leftKeys.length === 0) {
+                leftPanel.innerHTML = '<div class="yc-transfer-panel__empty">无数据</div>';
+            } else {
+                leftKeys.forEach(key => {
+                    const item = allData.find(d => d.key === key);
+                    if (item) leftPanel.appendChild(createItemEl(item, false, isDisabled));
+                });
+            }
+
+            if (rightKeys.length === 0) {
+                rightPanel.innerHTML = '<div class="yc-transfer-panel__empty">无数据</div>';
+            } else {
+                rightKeys.forEach(key => {
+                    const item = allData.find(d => d.key === key);
+                    if (item) rightPanel.appendChild(createItemEl(item, true, isDisabled));
+                });
+            }
+        }
+
+        function createItemEl(item, isRight, isDisabled) {
+            const div = document.createElement('div');
+            div.className = 'yc-transfer-panel__item';
+            div.dataset.key = item.key;
+
+            if (item.disabled || isDisabled) {
+                div.classList.add('is-disabled');
+            }
+
+            const checkbox = document.createElement('div');
+            checkbox.className = 'yc-transfer-panel__item-checkbox';
+            checkbox.innerHTML = '<i class="fas fa-check"></i>';
+
+            const label = document.createElement('span');
+            label.className = 'yc-transfer-panel__item-label';
+            label.textContent = item.label;
+
+            div.appendChild(checkbox);
+            div.appendChild(label);
+
+            if (!item.disabled && !isDisabled) {
+                div.addEventListener('click', function() {
+                    this.classList.toggle('is-checked');
+                    updateCheckedState(this.closest('.yc-transfer'));
+                });
+            }
+
+            return div;
+        }
+
+        function updateCheckedState(transferEl) {
+            const checkedLeft = [];
+            const checkedRight = [];
+
+            transferEl.querySelectorAll('[data-panel="source"] .yc-transfer-panel__item.is-checked').forEach(el => {
+                checkedLeft.push(el.dataset.key);
+            });
+            transferEl.querySelectorAll('[data-panel="target"] .yc-transfer-panel__item.is-checked').forEach(el => {
+                checkedRight.push(el.dataset.key);
+            });
+
+            transferEl.dataset.checkedLeft = JSON.stringify(checkedLeft);
+            transferEl.dataset.checkedRight = JSON.stringify(checkedRight);
+
+            updateCounts(transferEl);
+            updateButtons(transferEl);
+            updateHeaderCheckboxes(transferEl);
+            updateResult(transferEl);
+        }
+
+        function updateHeaderCheckboxes(transferEl) {
+            const sourceCheckbox = transferEl.querySelector('[data-panel="source"] .yc-transfer-panel__header-checkbox input');
+            const targetCheckbox = transferEl.querySelector('[data-panel="target"] .yc-transfer-panel__header-checkbox input');
+            const sourcePanel = transferEl.querySelector('[data-panel="source"]');
+            const targetPanel = transferEl.querySelector('[data-panel="target"]');
+
+            const sourceItems = sourcePanel.querySelectorAll('.yc-transfer-panel__item:not(.is-disabled)');
+            const targetItems = targetPanel.querySelectorAll('.yc-transfer-panel__item:not(.is-disabled)');
+            const sourceChecked = sourcePanel.querySelectorAll('.yc-transfer-panel__item.is-checked:not(.is-disabled)');
+            const targetChecked = targetPanel.querySelectorAll('.yc-transfer-panel__item.is-checked:not(.is-disabled)');
+
+            if (sourceCheckbox) {
+                const sourceLabel = sourceCheckbox.closest('.yc-transfer-panel__header-checkbox');
+                sourceCheckbox.checked = sourceItems.length > 0 && sourceChecked.length === sourceItems.length;
+                sourceCheckbox.indeterminate = sourceChecked.length > 0 && sourceChecked.length < sourceItems.length;
+                sourceLabel.classList.toggle('is-indeterminate', sourceCheckbox.indeterminate);
+            }
+
+            if (targetCheckbox) {
+                const targetLabel = targetCheckbox.closest('.yc-transfer-panel__header-checkbox');
+                targetCheckbox.checked = targetItems.length > 0 && targetChecked.length === targetItems.length;
+                targetCheckbox.indeterminate = targetChecked.length > 0 && targetChecked.length < targetItems.length;
+                targetLabel.classList.toggle('is-indeterminate', targetCheckbox.indeterminate);
+            }
+        }
+
+        function updateCounts(transferEl) {
+            const leftPanel = transferEl.querySelector('[data-panel="source"]');
+            const rightPanel = transferEl.querySelector('[data-panel="target"]');
+
+            const leftItems = leftPanel.querySelectorAll('.yc-transfer-panel__item');
+            const rightItems = rightPanel.querySelectorAll('.yc-transfer-panel__item');
+
+            const leftChecked = leftPanel.querySelectorAll('.yc-transfer-panel__item.is-checked').length;
+            const rightChecked = rightPanel.querySelectorAll('.yc-transfer-panel__item.is-checked').length;
+
+            leftPanel.querySelector('.yc-transfer-panel__header-count').textContent = `${leftChecked}/${leftItems.length}`;
+            rightPanel.querySelector('.yc-transfer-panel__header-count').textContent = `${rightChecked}/${rightItems.length}`;
+        }
+
+        function updateButtons(transferEl) {
+            const toRightBtn = transferEl.querySelector('[data-action="to-right"]');
+            const toLeftBtn = transferEl.querySelector('[data-action="to-left"]');
+
+            const leftChecked = JSON.parse(transferEl.dataset.checkedLeft || '[]');
+            const rightChecked = JSON.parse(transferEl.dataset.checkedRight || '[]');
+
+            if (toRightBtn) toRightBtn.disabled = leftChecked.length === 0;
+            if (toLeftBtn) toLeftBtn.disabled = rightChecked.length === 0;
+        }
+
+        function moveChecked(transferEl, direction) {
+            const allData = transferData[transferEl.id] || [];
+            const checked = direction === 'left'
+                ? JSON.parse(transferEl.dataset.checkedLeft || '[]')
+                : JSON.parse(transferEl.dataset.checkedRight || '[]');
+
+            if (checked.length === 0) return;
+
+            let leftKeys = JSON.parse(transferEl.dataset.left || '[]');
+            let rightKeys = JSON.parse(transferEl.dataset.right || '[]');
+
+            if (direction === 'left') {
+                leftKeys = leftKeys.filter(k => !checked.includes(k));
+                rightKeys = [...rightKeys, ...checked];
+            } else {
+                rightKeys = rightKeys.filter(k => !checked.includes(k));
+                leftKeys = [...leftKeys, ...checked];
+            }
+
+            transferEl.dataset.left = JSON.stringify(leftKeys);
+            transferEl.dataset.right = JSON.stringify(rightKeys);
+            transferEl.dataset.checkedLeft = JSON.stringify([]);
+            transferEl.dataset.checkedRight = JSON.stringify([]);
+
+            renderPanels(transferEl, allData, transferEl.classList.contains('is-disabled'));
+            bindTransferEvents(transferEl);
+            updateCounts(transferEl);
+            updateButtons(transferEl);
+            updateHeaderCheckboxes(transferEl);
+            updateResult(transferEl);
+        }
+
+        function filterPanelItems(panel, keyword) {
+            const items = panel.querySelectorAll('.yc-transfer-panel__item');
+            let hasVisible = false;
+
+            items.forEach(item => {
+                const label = item.querySelector('.yc-transfer-panel__item-label').textContent.toLowerCase();
+                if (label.includes(keyword)) {
+                    item.style.display = '';
+                    hasVisible = true;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            const emptyEl = panel.querySelector('.yc-transfer-panel__empty');
+            if (emptyEl) emptyEl.remove();
+
+            if (!hasVisible) {
+                const empty = document.createElement('div');
+                empty.className = 'yc-transfer-panel__empty';
+                empty.textContent = '无匹配数据';
+                panel.querySelector('.yc-transfer-panel__body').appendChild(empty);
+            }
+        }
+
+        function updateResult(transferEl) {
+            const resultEl = document.getElementById(transferEl.id + 'Result');
+            if (!resultEl) return;
+
+            const rightKeys = JSON.parse(transferEl.dataset.right || '[]');
+            const allData = transferData[transferEl.id] || [];
+
+            if (rightKeys.length === 0) {
+                resultEl.textContent = '已选择: 无';
+            } else {
+                const labels = rightKeys.map(k => {
+                    const item = allData.find(d => d.key === k);
+                    return item ? item.label : k;
+                });
+                resultEl.textContent = `已选择: ${labels.join(', ')}`;
+            }
+        }
+
+        function moveAllToRight(id) {
+            const transferEl = document.getElementById(id);
+            if (!transferEl) return;
+
+            const leftKeys = JSON.parse(transferEl.dataset.left || '[]');
+            const rightKeys = JSON.parse(transferEl.dataset.right || '[]');
+
+            transferEl.dataset.left = JSON.stringify([]);
+            transferEl.dataset.right = JSON.stringify([...rightKeys, ...leftKeys]);
+            transferEl.dataset.checkedLeft = JSON.stringify([]);
+            transferEl.dataset.checkedRight = JSON.stringify([]);
+
+            const allData = transferData[id] || [];
+            renderPanels(transferEl, allData, transferEl.classList.contains('is-disabled'));
+            bindTransferEvents(transferEl);
+            updateCounts(transferEl);
+            updateButtons(transferEl);
+            updateHeaderCheckboxes(transferEl);
+            updateResult(transferEl);
+        }
+
+        function moveAllToLeft(id) {
+            const transferEl = document.getElementById(id);
+            if (!transferEl) return;
+
+            const leftKeys = JSON.parse(transferEl.dataset.left || '[]');
+            const rightKeys = JSON.parse(transferEl.dataset.right || '[]');
+
+            transferEl.dataset.left = JSON.stringify([...leftKeys, ...rightKeys]);
+            transferEl.dataset.right = JSON.stringify([]);
+            transferEl.dataset.checkedLeft = JSON.stringify([]);
+            transferEl.dataset.checkedRight = JSON.stringify([]);
+
+            const allData = transferData[id] || [];
+            renderPanels(transferEl, allData, transferEl.classList.contains('is-disabled'));
+            bindTransferEvents(transferEl);
+            updateCounts(transferEl);
+            updateButtons(transferEl);
+            updateHeaderCheckboxes(transferEl);
+            updateResult(transferEl);
+        }
+
+        function initAll() {
+            document.querySelectorAll('.yc-transfer').forEach(initTransfer);
+        }
+
+        window.addEventListener('DOMContentLoaded', initAll);
+    </script>
+</body>
+</html>

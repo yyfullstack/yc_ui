@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form 表单组件示例 - YC UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">Form 表单组件</h1>
+            <p class="demo-page-subtitle">包含输入框、下拉选择、日期选择器等表单项的完整表单示例</p>
+        </div>
+
+        <div class="demo-section">
+            <h3>基础表单</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">默认表单布局</div>
+                <div class="demo-row">
+                    <form class="yc-form" id="basicForm" style="max-width: 500px;">
+                        <div class="yc-form-item">
+                            <label class="yc-form-item__label">用户名</label>
+                            <div class="yc-form-item__content">
+                                <input type="text" class="yc-input" placeholder="请输入用户名">
+                            </div>
+                        </div>
+                        <div class="yc-form-item">
+                            <label class="yc-form-item__label">邮箱</label>
+                            <div class="yc-form-item__content">
+                                <input type="email" class="yc-input" placeholder="请输入邮箱">
+                            </div>
+                        </div>
+                        <div class="yc-form-item">
+                            <label class="yc-form-item__label">密码</label>
+                            <div class="yc-form-item__content">
+                                <input type="password" class="yc-input" placeholder="请输入密码">
+                            </div>
+                        </div>
+                        <div class="yc-form-item">
+                            <div class="yc-form-item__content">
+                                <button type="button" class="yc-button yc-button--primary">提交</button>
+                                <button type="button" class="yc-button">重置</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>带图标的表单</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">输入框带前缀图标</div>
+                <div class="demo-row">
+                    <form class="yc-form" id="iconForm" style="max-width: 500px;">
+                        <div class="yc-form-item">
+                            <label class="yc-form-item__label">用户名</label>
+                            <div class="yc-form-item__content">
+                                <div class="yc-input yc-input--prefix">
+                                    <span class="yc-input__prefix"><i class="fas fa-user"></i></span>
+                                    <input type="text" placeholder="请输入用户名">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="yc-form-item">
+                            <label class="yc-form-item__label">邮箱</label>
+                            <div class="yc-form-item__content">
+                                <div class="yc-input yc-input--prefix">
+                                    <span class="yc-input__prefix"><i class="fas fa-envelope"></i></span>
+                                    <input type="email" placeholder="请输入邮箱">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="yc-form-item">
+                            <label class="yc-form-item__label">密码</label>
+                            <div class="yc-form-item__content">
+                                <div class="yc-input yc-input--suffix">
+                                    <input type="password" placeholder="请输入密码">
+                                    <span class="yc-input__suffix"><i class="fas fa-lock"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="yc-form-item">
+                            <div class="yc-form-item__content">
+                                <button type="button" class="yc-button yc-button--primary">登录</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>带验证的表单</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">表单验证示例</div>
+                <div class="demo-row">
+                    <form class="yc-form" id="validateForm" style="max-width: 500px;">
+                        <div class="yc-form-item">
+                            <label class="yc-form-item__label">用户名 <span class="yc-form-item__required">*</span></label>
+                            <div class="yc-form-item__content">
+                                <input type="text" class="yc-input" placeholder="请输入用户名（2-10个字符）">
+                            </div>
+                        </div>
+                        <div class="yc-form-item">
+                            <label class="yc-form-item__label">邮箱 <span class="yc-form-item__required">*</span></label>
+                            <div class="yc-form-item__content">
+                                <input type="email" class="yc-input" placeholder="请输入邮箱">
+                            </div>
+                        </div>
+                        <div class="yc-form-item">
+                            <label class="yc-form-item__label">年龄</label>
+                            <div class="yc-form-item__content">
+                                <input type="number" class="yc-input" placeholder="请输入年龄">
+                            </div>
+                        </div>
+                        <div class="yc-form-item">
+                            <label class="yc-form-item__label">个人网站</label>
+                            <div class="yc-form-item__content">
+                                <input type="url" class="yc-input" placeholder="请输入网址（选填）">
+                            </div>
+                        </div>
+                        <div class="yc-form-item">
+                            <div class="yc-form-item__content">
+                                <button type="button" class="yc-button yc-button--primary" onclick="validateForm()">验证表单</button>
+                                <button type="button" class="yc-button">重置</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>行内表单</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">表单行内排列</div>
+                <div class="demo-row">
+                    <form class="yc-form yc-form--inline" id="inlineForm">
+                        <div class="yc-form-item">
+                            <div class="yc-form-item__content">
+                                <input type="text" class="yc-input" placeholder="用户名">
+                            </div>
+                        </div>
+                        <div class="yc-form-item">
+                            <div class="yc-form-item__content">
+                                <input type="password" class="yc-input" placeholder="密码">
+                            </div>
+                        </div>
+                        <div class="yc-form-item">
+                            <div class="yc-form-item__content">
+                                <button type="button" class="yc-button yc-button--primary">登录</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>不同尺寸表单</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">大中小三种尺寸</div>
+                <div class="demo-row" style="flex-direction: column; gap: 20px;">
+                    <div>
+                        <label style="display: block; margin-bottom: 8px; font-weight: bold;">大尺寸</label>
+                        <form class="yc-form" style="max-width: 400px;">
+                            <div class="yc-form-item">
+                                <div class="yc-form-item__content">
+                                    <input type="text" class="yc-input yc-input--large" placeholder="大尺寸输入框">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: 8px; font-weight: bold;">默认尺寸</label>
+                        <form class="yc-form" style="max-width: 400px;">
+                            <div class="yc-form-item">
+                                <div class="yc-form-item__content">
+                                    <input type="text" class="yc-input" placeholder="默认尺寸输入框">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: 8px; font-weight: bold;">小尺寸</label>
+                        <form class="yc-form" style="max-width: 400px;">
+                            <div class="yc-form-item">
+                                <div class="yc-form-item__content">
+                                    <input type="text" class="yc-input yc-input--small" placeholder="小尺寸输入框">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>JavaScript 验证</h3>
+            <div class="demo-block">
+                <div class="demo-btn-row">
+                    <button class="yc-button yc-button--primary" onclick="validateForm()">
+                        <i class="fas fa-check-circle"></i> 验证表单
+                    </button>
+                    <button class="yc-button" onclick="resetForm()">
+                        <i class="fas fa-undo"></i> 重置表单
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function validateForm() {
+            const form = document.getElementById('validateForm');
+            const inputs = form.querySelectorAll('.yc-input');
+            let isValid = true;
+
+            inputs.forEach(input => {
+                input.classList.remove('is-error');
+                if (input.value.trim() === '' && input.hasAttribute('required')) {
+                    input.classList.add('is-error');
+                    isValid = false;
+                }
+            });
+
+            if (isValid) {
+                alert('表单验证通过！');
+            } else {
+                alert('请检查表单输入！');
+            }
+        }
+
+        function resetForm() {
+            const forms = document.querySelectorAll('.yc-form');
+            forms.forEach(form => {
+                form.reset();
+                form.querySelectorAll('.yc-input').forEach(input => {
+                    input.classList.remove('is-error');
+                });
+            });
+        }
+    </script>
+</body>
+</html>

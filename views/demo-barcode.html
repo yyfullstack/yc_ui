@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barcode 条码组件示例 - YC UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">Barcode 条码组件</h1>
+            <p class="demo-page-subtitle">二维码和条形码生成组件，支持多种格式和自定义配置</p>
+        </div>
+
+        <div class="demo-section">
+            <h3>二维码展示</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">基础二维码</div>
+                <div class="demo-row">
+                    <div class="yc-barcode">
+                        <div class="yc-qrcode" id="qrcode-basic"></div>
+                        <span class="yc-barcode-label">基础二维码</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>不同尺寸的二维码</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">尺寸变体</div>
+                <div class="demo-row" style="gap: 20px; flex-wrap: wrap;">
+                    <div class="yc-barcode">
+                        <div class="yc-qrcode" id="qrcode-small"></div>
+                        <span class="yc-barcode-label">小尺寸 64x64</span>
+                    </div>
+                    <div class="yc-barcode">
+                        <div class="yc-qrcode" id="qrcode-medium"></div>
+                        <span class="yc-barcode-label">中尺寸 128x128</span>
+                    </div>
+                    <div class="yc-barcode">
+                        <div class="yc-qrcode" id="qrcode-large"></div>
+                        <span class="yc-barcode-label">大尺寸 256x256</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>条形码展示</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">CODE128 格式</div>
+                <div class="demo-row">
+                    <div class="yc-barcode">
+                        <svg class="yc-barcode-svg" id="barcode-code128"></svg>
+                        <span class="yc-barcode-label">CODE128</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>商品条码</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">EAN-13 / UPC-A</div>
+                <div class="demo-row" style="gap: 20px; flex-wrap: wrap;">
+                    <div class="yc-barcode">
+                        <svg class="yc-barcode-svg" id="barcode-ean13"></svg>
+                        <span class="yc-barcode-label">EAN-13 商品条码</span>
+                    </div>
+                    <div class="yc-barcode">
+                        <svg class="yc-barcode-svg" id="barcode-upca"></svg>
+                        <span class="yc-barcode-label">UPC-A</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>不同宽度的条形码</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">线条宽度变体</div>
+                <div class="demo-row" style="gap: 20px; flex-wrap: wrap;">
+                    <div class="yc-barcode">
+                        <svg class="yc-barcode-svg" id="barcode-thin"></svg>
+                        <span class="yc-barcode-label">细线 (1px)</span>
+                    </div>
+                    <div class="yc-barcode">
+                        <svg class="yc-barcode-svg" id="barcode-medium"></svg>
+                        <span class="yc-barcode-label">中等 (2px)</span>
+                    </div>
+                    <div class="yc-barcode">
+                        <svg class="yc-barcode-svg" id="barcode-thick"></svg>
+                        <span class="yc-barcode-label">粗线 (4px)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>交互式生成</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">自定义生成二维码</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center;">
+                        <input type="text" class="yc-input" id="qrcode-input" value="https://example.com" placeholder="输入二维码内容" style="width: 250px;">
+                        <select class="yc-select" id="qrcode-size" style="width: 150px;">
+                            <option value="64">小 (64x64)</option>
+                            <option value="128" selected>中 (128x128)</option>
+                            <option value="256">大 (256x256)</option>
+                        </select>
+                        <button class="yc-button yc-button--primary" onclick="generateQRCode()">
+                            <i class="fas fa-qrcode"></i> 生成二维码
+                        </button>
+                    </div>
+                    <div class="yc-barcode">
+                        <div class="yc-qrcode" id="qrcode-dynamic"></div>
+                        <span class="yc-barcode-label">动态生成的二维码</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>自定义条形码</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">条形码生成器</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center;">
+                        <input type="text" class="yc-input" id="barcode-input" value="123456789012" placeholder="输入条形码内容" style="width: 200px;">
+                        <select class="yc-select" id="barcode-format" style="width: 150px;">
+                            <option value="CODE128">CODE128</option>
+                            <option value="EAN13">EAN-13</option>
+                            <option value="UPC">UPC</option>
+                            <option value="CODE39">CODE39</option>
+                        </select>
+                        <button class="yc-button yc-button--primary" onclick="generateBarcode()">
+                            <i class="fas fa-barcode"></i> 生成条形码
+                        </button>
+                    </div>
+                    <div class="yc-barcode">
+                        <svg class="yc-barcode-svg" id="barcode-dynamic"></svg>
+                        <span class="yc-barcode-label">动态生成的条形码</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>带标签的条码</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">显示商品编号</div>
+                <div class="demo-row">
+                    <div class="yc-barcode">
+                        <svg class="yc-barcode-svg" id="barcode-with-label"></svg>
+                        <span class="yc-barcode-label" id="barcode-label-text">1234567890123</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>尺寸变体</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">大小尺寸对比</div>
+                <div class="demo-row" style="gap: 20px; flex-wrap: wrap;">
+                    <div class="yc-barcode yc-barcode-small">
+                        <div class="yc-qrcode" id="qrcode-size-small"></div>
+                        <span class="yc-barcode-label">小二维码</span>
+                    </div>
+                    <div class="yc-barcode yc-barcode-small">
+                        <svg class="yc-barcode-svg" id="barcode-size-small"></svg>
+                        <span class="yc-barcode-label">小条形码</span>
+                    </div>
+                    <div class="yc-barcode yc-barcode-large">
+                        <div class="yc-qrcode" id="qrcode-size-large"></div>
+                        <span class="yc-barcode-label">大二维码</span>
+                    </div>
+                    <div class="yc-barcode yc-barcode-large">
+                        <svg class="yc-barcode-svg" id="barcode-size-large"></svg>
+                        <span class="yc-barcode-label">大条形码</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>JavaScript 创建</h3>
+            <div class="demo-block">
+                <div class="demo-btn-row">
+                    <button class="yc-button yc-button--primary" onclick="generateQRCode()">
+                        <i class="fas fa-sync-alt"></i> 刷新二维码
+                    </button>
+                    <button class="yc-button yc-button--success" onclick="generateBarcode()">
+                        <i class="fas fa-sync-alt"></i> 刷新条形码
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function initBasicQRCode() {
+            new QRCode(document.getElementById('qrcode-basic'), {
+                text: 'https://example.com',
+                width: 128,
+                height: 128,
+                colorDark: '#000000',
+                colorLight: '#ffffff',
+                correctLevel: QRCode.CorrectLevel.M
+            });
+
+            new QRCode(document.getElementById('qrcode-small'), {
+                text: 'Small QR',
+                width: 64,
+                height: 64
+            });
+
+            new QRCode(document.getElementById('qrcode-medium'), {
+                text: 'Medium QR',
+                width: 128,
+                height: 128
+            });
+
+            new QRCode(document.getElementById('qrcode-large'), {
+                text: 'Large QR',
+                width: 256,
+                height: 256
+            });
+        }
+
+        function initBarcodes() {
+            JsBarcode('#barcode-code128', 'Hello World', {
+                format: 'CODE128',
+                width: 2,
+                height: 60,
+                displayValue: true,
+                fontSize: 14,
+                margin: 10
+            });
+
+            JsBarcode('#barcode-ean13', '5901234123457', {
+                format: 'EAN13',
+                width: 2,
+                height: 60,
+                displayValue: true,
+                fontSize: 14,
+                margin: 10
+            });
+
+            JsBarcode('#barcode-upca', '012345678905', {
+                format: 'UPC',
+                width: 2,
+                height: 60,
+                displayValue: true,
+                fontSize: 14,
+                margin: 10
+            });
+
+            JsBarcode('#barcode-thin', 'Thin Bars', {
+                format: 'CODE128',
+                width: 1,
+                height: 50,
+                displayValue: true,
+                fontSize: 12,
+                margin: 5
+            });
+
+            JsBarcode('#barcode-medium', 'Medium Bars', {
+                format: 'CODE128',
+                width: 2,
+                height: 50,
+                displayValue: true,
+                fontSize: 12,
+                margin: 5
+            });
+
+            JsBarcode('#barcode-thick', 'Thick Bars', {
+                format: 'CODE128',
+                width: 4,
+                height: 50,
+                displayValue: true,
+                fontSize: 12,
+                margin: 5
+            });
+
+            JsBarcode('#barcode-with-label', '1234567890123', {
+                format: 'EAN13',
+                width: 2,
+                height: 60,
+                displayValue: false,
+                margin: 10
+            });
+
+            new QRCode(document.getElementById('qrcode-size-small'), {
+                text: 'Small',
+                width: 64,
+                height: 64
+            });
+
+            new QRCode(document.getElementById('qrcode-size-large'), {
+                text: 'Large',
+                width: 200,
+                height: 200
+            });
+
+            JsBarcode('#barcode-size-small', 'Small Bar', {
+                format: 'CODE128',
+                width: 1,
+                height: 30,
+                displayValue: false,
+                margin: 5
+            });
+
+            JsBarcode('#barcode-size-large', 'Large Bar', {
+                format: 'CODE128',
+                width: 3,
+                height: 80,
+                displayValue: false,
+                margin: 10
+            });
+        }
+
+        function generateQRCode() {
+            const content = document.getElementById('qrcode-input').value || 'https://example.com';
+            const size = parseInt(document.getElementById('qrcode-size').value);
+            const qrcodeContainer = document.getElementById('qrcode-dynamic');
+            qrcodeContainer.innerHTML = '';
+
+            new QRCode(qrcodeContainer, {
+                text: content,
+                width: size,
+                height: size,
+                colorDark: '#000000',
+                colorLight: '#ffffff',
+                correctLevel: QRCode.CorrectLevel.M
+            });
+        }
+
+        function generateBarcode() {
+            const content = document.getElementById('barcode-input').value;
+            const format = document.getElementById('barcode-format').value;
+
+            try {
+                JsBarcode('#barcode-dynamic', content, {
+                    format: format,
+                    width: 2,
+                    height: 60,
+                    displayValue: true,
+                    fontSize: 14,
+                    margin: 10
+                });
+            } catch (e) {
+                console.error('条形码生成失败:', e);
+                alert('条形码生成失败，请检查输入内容是否合法');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            initBasicQRCode();
+            initBarcodes();
+            generateQRCode();
+        });
+    </script>
+</body>
+</html>

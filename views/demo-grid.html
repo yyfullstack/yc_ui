@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid 栅格布局组件示例 - YC UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">Grid 栅格布局组件</h1>
+            <p class="demo-page-subtitle">24 栅格系统，将一行等分为 24 份，按照需求对元素的占比进行任意组合</p>
+        </div>
+
+        <div class="demo-section">
+            <h3>基础布局</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">等分混合</div>
+                <div class="demo-row">
+                    <div class="yc-row yc-row--plain" style="width: 100%;">
+                        <div class="yc-col-24"><div class="grid-demo-item">24</div></div>
+                    </div>
+                    <div class="yc-row yc-row--plain" style="width: 100%;">
+                        <div class="yc-col-12"><div class="grid-demo-item">12</div></div>
+                        <div class="yc-col-12"><div class="grid-demo-item yc-col--light">12</div></div>
+                    </div>
+                    <div class="yc-row yc-row--plain" style="width: 100%;">
+                        <div class="yc-col-8"><div class="grid-demo-item">8</div></div>
+                        <div class="yc-col-8"><div class="grid-demo-item yc-col--light">8</div></div>
+                        <div class="yc-col-8"><div class="grid-demo-item">8</div></div>
+                    </div>
+                    <div class="yc-row yc-row--plain" style="width: 100%;">
+                        <div class="yc-col-6"><div class="grid-demo-item">6</div></div>
+                        <div class="yc-col-6"><div class="grid-demo-item yc-col--light">6</div></div>
+                        <div class="yc-col-6"><div class="grid-demo-item">6</div></div>
+                        <div class="yc-col-6"><div class="grid-demo-item yc-col--light">6</div></div>
+                    </div>
+                    <div class="yc-row yc-row--plain" style="width: 100%;">
+                        <div class="yc-col-4"><div class="grid-demo-item">4</div></div>
+                        <div class="yc-col-4"><div class="grid-demo-item yc-col--light">4</div></div>
+                        <div class="yc-col-4"><div class="grid-demo-item">4</div></div>
+                        <div class="yc-col-4"><div class="grid-demo-item yc-col--light">4</div></div>
+                        <div class="yc-col-4"><div class="grid-demo-item">4</div></div>
+                        <div class="yc-col-4"><div class="grid-demo-item yc-col--light">4</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>混合布局</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">通过基础的 1/24 分栏进行组合</div>
+                <div class="demo-row">
+                    <div class="yc-row yc-row--plain" style="width: 100%;">
+                        <div class="yc-col-16"><div class="grid-demo-item">col-16</div></div>
+                        <div class="yc-col-8"><div class="grid-demo-item yc-col--light">col-8</div></div>
+                    </div>
+                    <div class="yc-row yc-row--plain" style="width: 100%;">
+                        <div class="yc-col-8"><div class="grid-demo-item">col-8</div></div>
+                        <div class="yc-col-8"><div class="grid-demo-item yc-col--light">col-8</div></div>
+                        <div class="yc-col-4"><div class="grid-demo-item">col-4</div></div>
+                        <div class="yc-col-4"><div class="grid-demo-item yc-col--light">col-4</div></div>
+                    </div>
+                    <div class="yc-row yc-row--plain" style="width: 100%;">
+                        <div class="yc-col-6"><div class="grid-demo-item">col-6</div></div>
+                        <div class="yc-col-6"><div class="grid-demo-item yc-col--light">col-6</div></div>
+                        <div class="yc-col-4"><div class="grid-demo-item">col-4</div></div>
+                        <div class="yc-col-4"><div class="grid-demo-item yc-col--light">col-4</div></div>
+                        <div class="yc-col-4"><div class="grid-demo-item">col-4</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>分栏间隔</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">列之间存在间隙</div>
+                <div class="yc-row" style="--yc-row-gutter: 20px;">
+                    <div class="yc-col-8"><div class="grid-demo-item">col-8</div></div>
+                    <div class="yc-col-8"><div class="grid-demo-item yc-col--light">col-8</div></div>
+                    <div class="yc-col-8"><div class="grid-demo-item">col-8</div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>分栏偏移</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">支持偏移指定列数</div>
+                <div class="demo-row">
+                    <div class="yc-row yc-row--plain" style="width: 100%;">
+                        <div class="yc-col-8"><div class="grid-demo-item">col-8</div></div>
+                        <div class="yc-col-8 yc-col-offset-8"><div class="grid-demo-item yc-col--light">col-8 offset-8</div></div>
+                    </div>
+                    <div class="yc-row yc-row--plain" style="width: 100%;">
+                        <div class="yc-col-6 yc-col-offset-6"><div class="grid-demo-item">col-6 offset-6</div></div>
+                        <div class="yc-col-6 yc-col-offset-6"><div class="grid-demo-item yc-col--light">col-6 offset-6</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>对齐方式</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">使用 flex 布局的对齐方式</div>
+                <div class="demo-row">
+                    <div class="yc-row yc-row--plain yc-row--justify-space-between" style="width: 100%; background: var(--yc-color-bg-page); padding: 10px;">
+                        <div class="yc-col-4"><div class="grid-demo-item">col-4</div></div>
+                        <div class="yc-col-4"><div class="grid-demo-item yc-col--light">col-4</div></div>
+                        <div class="yc-col-4"><div class="grid-demo-item">col-4</div></div>
+                    </div>
+                    <div class="yc-row yc-row--plain yc-row--align-middle" style="width: 100%; background: var(--yc-color-bg-page); padding: 10px; min-height: 80px; margin-top: 10px;">
+                        <div class="yc-col-4"><div class="grid-demo-item" style="height: 40px;">col-4</div></div>
+                        <div class="yc-col-4"><div class="grid-demo-item yc-col--light">col-4</div></div>
+                        <div class="yc-col-4"><div class="grid-demo-item">col-4</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>响应式布局</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">参照 Bootstrap 的响应式设计，预设四个响应尺寸</div>
+                <div class="demo-row">
+                    <div class="yc-row yc-row--plain" style="width: 100%;">
+                        <div class="yc-col-xs-24 yc-col-sm-12 yc-col-md-8 yc-col-lg-6">
+                            <div class="grid-demo-item">xs:24 / sm:12 / md:8 / lg:6</div>
+                        </div>
+                        <div class="yc-col-xs-24 yc-col-sm-12 yc-col-md-8 yc-col-lg-6">
+                            <div class="grid-demo-item yc-col--light">xs:24 / sm:12 / md:8 / lg:6</div>
+                        </div>
+                        <div class="yc-col-xs-24 yc-col-sm-12 yc-col-md-8 yc-col-lg-6">
+                            <div class="grid-demo-item">xs:24 / sm:12 / md:8 / lg:6</div>
+                        </div>
+                        <div class="yc-col-xs-24 yc-col-sm-12 yc-col-md-8 yc-col-lg-6">
+                            <div class="grid-demo-item yc-col--light">xs:24 / sm:12 / md:8 / lg:6</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="demo-row" style="margin-top: 10px;">
+                    <p style="color: var(--yc-color-text-secondary); font-size: var(--yc-font-size-small);">调整浏览器窗口大小查看响应式效果：在小屏幕上每行显示1列，中等屏幕2列，大屏幕3列，超大屏幕4列。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .grid-demo-item {
+            border-radius: var(--yc-border-radius-base);
+            min-height: 36px;
+            line-height: 36px;
+            text-align: center;
+            color: #fff;
+            background-color: var(--yc-color-primary);
+            font-size: var(--yc-font-size-small);
+            overflow: hidden;
+        }
+        .grid-demo-item.yc-col--light {
+            background-color: var(--yc-link-hover-color);
+        }
+    </style>
+</body>
+</html>

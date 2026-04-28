@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button 按钮组件示例 - YC UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">Button 按钮组件</h1>
+            <p class="demo-page-subtitle">基础按钮、图标按钮、禁用状态、按钮组等多种用法示例</p>
+        </div>
+
+        <div class="demo-section">
+            <h3>基础用法</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">基础的按钮用法</div>
+                <div class="demo-row">
+                    <button class="yc-button">默认按钮</button>
+                    <button class="yc-button yc-button--primary">主要按钮</button>
+                    <button class="yc-button yc-button--success">成功按钮</button>
+                    <button class="yc-button yc-button--warning">警告按钮</button>
+                    <button class="yc-button yc-button--danger">危险按钮</button>
+                    <button class="yc-button yc-button--info">信息按钮</button>
+                </div>
+            </div>
+
+            <div class="demo-divider"></div>
+
+            <div class="demo-block">
+                <div class="demo-block-title">朴素按钮</div>
+                <div class="demo-row">
+                    <button class="yc-button yc-button--plain">默认按钮</button>
+                    <button class="yc-button yc-button--primary yc-button--plain">主要按钮</button>
+                    <button class="yc-button yc-button--success yc-button--plain">成功按钮</button>
+                    <button class="yc-button yc-button--warning yc-button--plain">警告按钮</button>
+                    <button class="yc-button yc-button--danger yc-button--plain">危险按钮</button>
+                    <button class="yc-button yc-button--info yc-button--plain">信息按钮</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>禁用状态</h3>
+            <div class="demo-row">
+                <button class="yc-button" disabled>默认按钮</button>
+                <button class="yc-button yc-button--primary" disabled>主要按钮</button>
+                <button class="yc-button yc-button--success" disabled>成功按钮</button>
+                <button class="yc-button yc-button--warning" disabled>警告按钮</button>
+                <button class="yc-button yc-button--danger" disabled>危险按钮</button>
+                <button class="yc-button yc-button--info" disabled>信息按钮</button>
+            </div>
+            <div class="demo-divider"></div>
+            <div class="demo-block">
+                <div class="demo-block-title">朴素按钮禁用</div>
+                <div class="demo-row">
+                    <button class="yc-button yc-button--plain" disabled>默认按钮</button>
+                    <button class="yc-button yc-button--primary yc-button--plain" disabled>主要按钮</button>
+                    <button class="yc-button yc-button--success yc-button--plain" disabled>成功按钮</button>
+                    <button class="yc-button yc-button--warning yc-button--plain" disabled>警告按钮</button>
+                    <button class="yc-button yc-button--danger yc-button--plain" disabled>危险按钮</button>
+                    <button class="yc-button yc-button--info yc-button--plain" disabled>信息按钮</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>文字按钮</h3>
+            <div class="demo-row">
+                <button class="yc-button yc-button--text">文字按钮</button>
+                <button class="yc-button yc-button--text" disabled>文字按钮禁用</button>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>链接按钮</h3>
+            <div class="demo-row">
+                <button class="yc-button yc-button--link">链接按钮</button>
+                <button class="yc-button yc-button--link" disabled>链接按钮禁用</button>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>图标按钮</h3>
+            <div class="demo-row">
+                <button class="yc-button yc-button--primary">
+                    <i class="fas fa-edit"></i>
+                    编辑
+                </button>
+                <button class="yc-button yc-button--success">
+                    <i class="fas fa-check"></i>
+                    保存
+                </button>
+                <button class="yc-button yc-button--danger">
+                    <i class="fas fa-trash-alt"></i>
+                    删除
+                </button>
+                <button class="yc-button yc-button--warning">
+                    <i class="fas fa-download"></i>
+                    下载
+                </button>
+            </div>
+            <div class="demo-divider"></div>
+            <div class="demo-block">
+                <div class="demo-block-title">图标按钮（无文字）</div>
+                <div class="demo-row">
+                    <button class="yc-button yc-button--primary" title="编辑">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="yc-button yc-button--success" title="保存">
+                        <i class="fas fa-check"></i>
+                    </button>
+                    <button class="yc-button yc-button--danger" title="删除">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                    <button class="yc-button yc-button--warning" title="下载">
+                        <i class="fas fa-download"></i>
+                    </button>
+                    <button class="yc-button yc-button--info" title="信息">
+                        <i class="fas fa-info-circle"></i>
+                    </button>
+                    <button class="yc-button" title="搜索">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>不同尺寸</h3>
+            <div class="demo-flex-row demo-flex-start">
+                <div class="demo-row" style="flex-direction: column; align-items: flex-start; gap: 16px;">
+                    <div class="demo-label">大尺寸 (large)</div>
+                    <button class="yc-button yc-button--large yc-button--primary">大型按钮</button>
+                    <button class="yc-button yc-button--large">大型按钮</button>
+                </div>
+                <div class="demo-row" style="flex-direction: column; align-items: flex-start; gap: 16px;">
+                    <div class="demo-label">中等尺寸 (默认)</div>
+                    <button class="yc-button yc-button--primary">中等按钮</button>
+                    <button class="yc-button">中等按钮</button>
+                </div>
+                <div class="demo-row" style="flex-direction: column; align-items: flex-start; gap: 16px;">
+                    <div class="demo-label">小尺寸 (small)</div>
+                    <button class="yc-button yc-button--small yc-button--primary">小型按钮</button>
+                    <button class="yc-button yc-button--small">小型按钮</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>圆角按钮</h3>
+            <div class="demo-row">
+                <button class="yc-button yc-button--round">圆角按钮</button>
+                <button class="yc-button yc-button--primary yc-button--round">主要圆角</button>
+                <button class="yc-button yc-button--success yc-button--round">成功圆角</button>
+                <button class="yc-button yc-button--warning yc-button--round">警告圆角</button>
+                <button class="yc-button yc-button--danger yc-button--round">危险圆角</button>
+                <button class="yc-button yc-button--info yc-button--round">信息圆角</button>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>圆形按钮</h3>
+            <div class="demo-row">
+                <button class="yc-button yc-button--circle yc-button--primary" title="编辑">
+                    <i class="fas fa-edit"></i>
+                </button>
+                <button class="yc-button yc-button--circle yc-button--success" title="保存">
+                    <i class="fas fa-check"></i>
+                </button>
+                <button class="yc-button yc-button--circle yc-button--danger" title="删除">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+                <button class="yc-button yc-button--circle yc-button--warning" title="下载">
+                    <i class="fas fa-download"></i>
+                </button>
+                <button class="yc-button yc-button--circle" title="搜索">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>虚线按钮</h3>
+            <div class="demo-row">
+                <button class="yc-button yc-button--dashed">虚线按钮</button>
+                <button class="yc-button yc-button--primary yc-button--dashed">主要虚线</button>
+                <button class="yc-button yc-button--success yc-button--dashed">成功虚线</button>
+                <button class="yc-button yc-button--warning yc-button--dashed">警告虚线</button>
+                <button class="yc-button yc-button--danger yc-button--dashed">危险虚线</button>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>加载状态</h3>
+            <div class="demo-row">
+                <button class="yc-button yc-button--primary yc-button--loading" id="loadingBtn1" onclick="toggleLoading('loadingBtn1')">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    加载中...
+                </button>
+                <button class="yc-button yc-button--success yc-button--loading" id="loadingBtn2" onclick="toggleLoading('loadingBtn2')">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    加载完成
+                </button>
+                <button class="yc-button yc-button--warning yc-button--loading">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    处理中
+                </button>
+                <button class="yc-button yc-button--danger" disabled>
+                    <i class="fas fa-spinner fa-spin"></i>
+                    加载中
+                </button>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>按钮组</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">基本按钮组</div>
+                <div class="demo-row">
+                    <div class="yc-button-group">
+                        <button class="yc-button">按钮一</button>
+                        <button class="yc-button">按钮二</button>
+                        <button class="yc-button">按钮三</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="demo-divider"></div>
+
+            <div class="demo-block">
+                <div class="demo-block-title">带颜色按钮组</div>
+                <div class="demo-row">
+                    <div class="yc-button-group">
+                        <button class="yc-button yc-button--primary">北京</button>
+                        <button class="yc-button yc-button--primary">上海</button>
+                        <button class="yc-button yc-button--primary">广州</button>
+                        <button class="yc-button yc-button--primary">深圳</button>
+                    </div>
+                </div>
+                <div class="demo-row" style="margin-top: 12px;">
+                    <div class="yc-button-group">
+                        <button class="yc-button yc-button--success">
+                            <i class="fas fa-check"></i>
+                            确定
+                        </button>
+                        <button class="yc-button yc-button--danger">
+                            <i class="fas fa-times"></i>
+                            取消
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="demo-divider"></div>
+
+            <div class="demo-block">
+                <div class="demo-block-title">图标按钮组</div>
+                <div class="demo-row">
+                    <div class="yc-button-group">
+                        <button class="yc-button yc-button--primary">
+                            <i class="fas fa-align-left"></i>
+                        </button>
+                        <button class="yc-button yc-button--primary">
+                            <i class="fas fa-align-center"></i>
+                        </button>
+                        <button class="yc-button yc-button--primary">
+                            <i class="fas fa-align-right"></i>
+                        </button>
+                        <button class="yc-button yc-button--primary">
+                            <i class="fas fa-align-justify"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="demo-divider"></div>
+
+            <div class="demo-block">
+                <div class="demo-block-title">不同尺寸按钮组</div>
+                <div class="demo-flex-row demo-flex-start">
+                    <div class="demo-row" style="flex-direction: column; align-items: flex-start; gap: 12px;">
+                        <div class="demo-label">大尺寸</div>
+                        <div class="yc-button-group yc-button-group--large">
+                            <button class="yc-button yc-button--large yc-button--primary">大型</button>
+                            <button class="yc-button yc-button--large yc-button--primary">按钮</button>
+                            <button class="yc-button yc-button--large yc-button--primary">组</button>
+                        </div>
+                    </div>
+                    <div class="demo-row" style="flex-direction: column; align-items: flex-start; gap: 12px;">
+                        <div class="demo-label">中等尺寸</div>
+                        <div class="yc-button-group">
+                            <button class="yc-button yc-button--primary">中等</button>
+                            <button class="yc-button yc-button--primary">按钮</button>
+                            <button class="yc-button yc-button--primary">组</button>
+                        </div>
+                    </div>
+                    <div class="demo-row" style="flex-direction: column; align-items: flex-start; gap: 12px;">
+                        <div class="demo-label">小尺寸</div>
+                        <div class="yc-button-group yc-button-group--small">
+                            <button class="yc-button yc-button--small yc-button--primary">小型</button>
+                            <button class="yc-button yc-button--small yc-button--primary">按钮</button>
+                            <button class="yc-button yc-button--small yc-button--primary">组</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="demo-divider"></div>
+
+            <div class="demo-block">
+                <div class="demo-block-title">垂直按钮组</div>
+                <div class="demo-row">
+                    <div class="yc-button-group yc-button-group--vertical">
+                        <button class="yc-button">
+                            <i class="fas fa-home"></i>
+                            首页
+                        </button>
+                        <button class="yc-button yc-button--primary">
+                            <i class="fas fa-list"></i>
+                            分类
+                        </button>
+                        <button class="yc-button">
+                            <i class="fas fa-shopping-cart"></i>
+                            购物车
+                        </button>
+                        <button class="yc-button">
+                            <i class="fas fa-user"></i>
+                            我的
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="demo-divider"></div>
+
+            <div class="demo-block">
+                <div class="demo-block-title">混合按钮组</div>
+                <div class="demo-row">
+                    <div class="yc-button-group">
+                        <button class="yc-button yc-button--primary">
+                            <i class="fas fa-reply"></i>
+                            回复
+                        </button>
+                        <button class="yc-button yc-button--success">
+                            <i class="fas fa-share"></i>
+                            分享
+                        </button>
+                        <button class="yc-button yc-button--warning">
+                            <i class="fas fa-bookmark"></i>
+                            收藏
+                        </button>
+                        <button class="yc-button yc-button--danger">
+                            <i class="fas fa-trash-alt"></i>
+                            删除
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>事件处理</h3>
+            <div class="demo-row">
+                <button class="yc-button yc-button--primary" onclick="handleClick(this)">
+                    <i class="fas fa-hand-pointer"></i>
+                    点击我
+                </button>
+                <button class="yc-button yc-button--success" onclick="handleClick(this)">
+                    <i class="fas fa-check-circle"></i>
+                    成功提示
+                </button>
+                <button class="yc-button yc-button--warning" onclick="handleClick(this)">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    警告提示
+                </button>
+                <button class="yc-button yc-button--danger" onclick="handleClick(this)">
+                    <i class="fas fa-times-circle"></i>
+                    错误提示
+                </button>
+            </div>
+            <div class="demo-result" id="clickResult">状态：等待点击</div>
+        </div>
+
+        <div class="demo-section">
+            <h3>自定义颜色</h3>
+            <div class="demo-row">
+                <button class="yc-button" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-color: #764ba2; color: white;">
+                    渐变紫
+                </button>
+                <button class="yc-button" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); border-color: #f5576c; color: white;">
+                    渐变粉
+                </button>
+                <button class="yc-button" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); border-color: #00f2fe; color: white;">
+                    渐变蓝
+                </button>
+                <button class="yc-button" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); border-color: #38f9d7; color: white;">
+                    渐变绿
+                </button>
+                <button class="yc-button" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); border-color: #fee140; color: #333;">
+                    渐变橙
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function handleClick(btn) {
+            const resultEl = document.getElementById('clickResult');
+            const text = btn.textContent.trim();
+
+            btn.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                btn.style.transform = '';
+            }, 100);
+
+            const messages = {
+                '点击我': '已点击：触发了一个普通操作',
+                '成功提示': '已点击：操作成功完成！',
+                '警告提示': '已点击：这是一个警告信息',
+                '错误提示': '已点击：操作过程中发生错误'
+            };
+
+            if (messages[text]) {
+                resultEl.textContent = `状态：${messages[text]}`;
+            }
+        }
+
+        function toggleLoading(btnId) {
+            const btn = document.getElementById(btnId);
+            if (!btn) return;
+
+            const isLoading = btn.classList.contains('yc-button--loading');
+
+            if (isLoading) {
+                btn.classList.remove('yc-button--loading');
+                btn.innerHTML = '<i class="fas fa-check"></i> 加载完成';
+            } else {
+                btn.classList.add('yc-button--loading');
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 加载中...';
+            }
+        }
+    </script>
+</body>
+</html>

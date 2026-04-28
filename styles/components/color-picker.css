@@ -1,0 +1,315 @@
+@charset "UTF-8";
+
+/* ==========================================================================
+   ColorPicker 颜色选择器组件样式
+   ========================================================================== */
+
+.yc-color-picker {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.yc-color-picker__trigger {
+    display: flex;
+    align-items: center;
+    padding: var(--yc-spacing-xs);
+    border: 1px solid var(--yc-color-border);
+    border-radius: var(--yc-border-radius-base);
+    background: var(--yc-color-bg);
+    cursor: pointer;
+    transition: var(--yc-transition-base);
+}
+
+.yc-color-picker__trigger:hover {
+    border-color: var(--yc-color-primary);
+}
+
+.yc-color-picker__color {
+    width: 24px;
+    height: 24px;
+    border-radius: var(--yc-border-radius-small);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background-image: linear-gradient(45deg, #ccc 25%, transparent 25%),
+        linear-gradient(-45deg, #ccc 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #ccc 75%),
+        linear-gradient(-45deg, transparent 75%, #ccc 75%);
+    background-size: 8px 8px;
+    background-position: 0 0, 0 4px, 4px -4px, -4px 0px;
+    position: relative;
+    overflow: hidden;
+}
+
+.yc-color-picker__panel {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: var(--yc-index-popper, 2000);
+    margin-top: var(--yc-spacing-xs);
+    padding: var(--yc-spacing-sm);
+    background: var(--yc-color-bg);
+    border: 1px solid var(--yc-color-border);
+    border-radius: var(--yc-border-radius-base);
+    box-shadow: var(--yc-box-shadow-lg);
+    display: none;
+}
+
+.yc-color-picker__panel.is-open {
+    display: block;
+}
+
+.yc-color-picker__panel--top {
+    top: auto;
+    bottom: 100%;
+    margin-top: 0;
+    margin-bottom: var(--yc-spacing-xs);
+}
+
+.yc-color-picker__panel-content {
+    width: 220px;
+}
+
+.yc-color-picker__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--yc-spacing-sm);
+}
+
+.yc-color-saturation {
+    position: relative;
+    width: 100%;
+    height: 150px;
+    cursor: crosshair;
+    border-radius: var(--yc-border-radius-small);
+    background: linear-gradient(to bottom, #fff 0%, transparent 100%),
+        linear-gradient(to right, #fff 0%, hsl(0, 100%, 50%) 100%);
+}
+
+.yc-color-saturation__white {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, #fff 0%, transparent 100%);
+}
+
+.yc-color-saturation__black {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent 0%, #000 100%);
+}
+
+.yc-color-saturation__cursor {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+.yc-color-hue {
+    position: relative;
+    width: 100%;
+    height: 12px;
+    border-radius: 6px;
+    background: linear-gradient(to right,
+        #ff0000 0%, #ffff00 17%, #00ff00 33%, #00ffff 50%,
+        #0000ff 67%, #ff00ff 83%, #ff0000 100%);
+    cursor: pointer;
+}
+
+.yc-color-hue__cursor {
+    position: absolute;
+    top: -2px;
+    left: 0;
+    width: 4px;
+    height: 16px;
+    background-color: #fff;
+    border: 1px solid #333;
+    border-radius: 2px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    transform: translateX(-50%);
+    pointer-events: none;
+}
+
+.yc-color-alpha {
+    position: relative;
+    width: 100%;
+    height: 12px;
+    border-radius: 6px;
+    background-image: linear-gradient(45deg, #ccc 25%, transparent 25%),
+        linear-gradient(-45deg, #ccc 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #ccc 75%),
+        linear-gradient(-45deg, transparent 75%, #ccc 75%);
+    background-size: 8px 8px;
+    background-position: 0 0, 0 4px, 4px -4px, -4px 0px;
+    overflow: hidden;
+}
+
+.yc-color-alpha__gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 6px;
+}
+
+.yc-color-alpha__cursor {
+    position: absolute;
+    top: -2px;
+    left: 0;
+    width: 4px;
+    height: 16px;
+    background-color: #fff;
+    border: 1px solid #333;
+    border-radius: 2px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    transform: translateX(-50%);
+    pointer-events: none;
+}
+
+.yc-color-value {
+    margin-top: var(--yc-spacing-xs);
+}
+
+.yc-color-value__input {
+    width: 100%;
+    height: 28px;
+    padding: 0 var(--yc-spacing-sm);
+    border: 1px solid var(--yc-color-border);
+    border-radius: var(--yc-border-radius-small);
+    font-size: var(--yc-font-size-base);
+    font-family: var(--yc-font-family-mono, monospace);
+    text-align: center;
+    background: var(--yc-color-bg);
+    color: var(--yc-color-text-primary);
+}
+
+.yc-color-value__input:focus {
+    outline: none;
+    border-color: var(--yc-color-primary);
+}
+
+.yc-color-format {
+    display: flex;
+    gap: 4px;
+    margin-top: var(--yc-spacing-xs);
+}
+
+.yc-color-format__btn {
+    flex: 1;
+    height: 24px;
+    border: 1px solid var(--yc-color-border);
+    border-radius: var(--yc-border-radius-small);
+    background: var(--yc-color-bg);
+    font-size: var(--yc-font-size-small);
+    color: var(--yc-color-text-secondary);
+    cursor: pointer;
+    transition: var(--yc-transition-fast);
+}
+
+.yc-color-format__btn:hover {
+    border-color: var(--yc-color-primary);
+    color: var(--yc-color-primary);
+}
+
+.yc-color-format__btn.is-active {
+    background: var(--yc-color-primary);
+    border-color: var(--yc-color-primary);
+    color: #fff;
+}
+
+.yc-color-presets {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: var(--yc-spacing-xs);
+}
+
+.yc-color-preset {
+    width: 18px;
+    height: 18px;
+    border-radius: 3px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform var(--yc-transition-fast);
+}
+
+.yc-color-preset:hover {
+    transform: scale(1.2);
+}
+
+.yc-color-picker--large .yc-color-picker__trigger {
+    padding: var(--yc-spacing-sm);
+}
+
+.yc-color-picker--large .yc-color-picker__color {
+    width: 32px;
+    height: 32px;
+}
+
+.yc-color-picker--small .yc-color-picker__trigger {
+    padding: 2px;
+}
+
+.yc-color-picker--small .yc-color-picker__color {
+    width: 18px;
+    height: 18px;
+}
+
+.yc-color-picker.is-disabled .yc-color-picker__trigger {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.yc-color-picker__dropdown-icon {
+    margin-left: var(--yc-spacing-xs);
+    font-size: 12px;
+    color: var(--yc-color-text-secondary);
+    transition: transform var(--yc-transition-base);
+}
+
+.yc-color-picker.is-open .yc-color-picker__dropdown-icon {
+    transform: rotate(180deg);
+}
+
+.color-preview {
+    display: inline-block;
+    width: 60px;
+    height: 32px;
+    border: 1px solid var(--yc-color-border);
+    border-radius: var(--yc-border-radius-base);
+    background-image: linear-gradient(45deg, #ccc 25%, transparent 25%),
+        linear-gradient(-45deg, #ccc 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #ccc 75%),
+        linear-gradient(-45deg, transparent 75%, #ccc 75%);
+    background-size: 8px 8px;
+    background-position: 0 0, 0 4px, 4px -4px, -4px 0px;
+    position: relative;
+    overflow: hidden;
+}
+
+.color-picker-wrapper {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.result-display {
+    padding: 12px;
+    background-color: var(--yc-color-bg-light);
+    border-radius: var(--yc-border-radius-base);
+    border: 1px solid var(--yc-color-border-light);
+    font-family: monospace;
+    font-size: var(--yc-font-size-small);
+}
+
+/* ColorPicker 组件样式结束 */

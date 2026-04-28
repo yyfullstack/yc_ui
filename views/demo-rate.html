@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rate 评分组件示例</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+    <link rel="stylesheet" href="../styles/index.css">
+</head>
+
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1>Rate 评分组件示例</h1>
+            <p class="demo-description">用于评分的组件，支持半星、自定义图标、只读和禁用状态</p>
+        </div>
+
+        <div class="demo-section">
+            <div class="demo-section-title">基础用法</div>
+            <div class="demo-block">
+                <div class="demo-block-item">
+                    <label class="demo-block-label">默认评分</label>
+                    <div class="yc-rating" id="rate1" data-value="3" data-max="5"></div>
+                </div>
+                <div class="demo-result" id="rate1Result">当前评分: 3/5</div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <div class="demo-section-title">不同尺寸</div>
+            <div class="demo-block">
+                <div class="demo-block-item">
+                    <label class="demo-block-label">尺寸变体</label>
+                    <div class="demo-rating-sizes">
+                        <div class="demo-rating-item">
+                            <span class="demo-rating-label">Small</span>
+                            <div class="yc-rating yc-rating--small" id="rate2" data-value="2" data-max="5"></div>
+                        </div>
+                        <div class="demo-rating-item">
+                            <span class="demo-rating-label">Base</span>
+                            <div class="yc-rating" id="rate3" data-value="3" data-max="5"></div>
+                        </div>
+                        <div class="demo-rating-item">
+                            <span class="demo-rating-label">Large</span>
+                            <div class="yc-rating yc-rating--large" id="rate4" data-value="4" data-max="5"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="demo-result" id="rate2Result">Small: 2 | Base: 3 | Large: 4</div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <div class="demo-section-title">允许半星</div>
+            <div class="demo-block">
+                <div class="demo-block-item">
+                    <label class="demo-block-label">半星评分</label>
+                    <div class="yc-rating" id="rate5" data-value="3.5" data-max="5" data-allow-half="true"></div>
+                </div>
+                <div class="demo-result" id="rate5Result">当前评分: 3.5/5</div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <div class="demo-section-title">自定义图标</div>
+            <div class="demo-block">
+                <div class="demo-block-item">
+                    <label class="demo-block-label">心形图标</label>
+                    <div class="yc-rating" id="rate6" data-value="4" data-max="5" data-icon="fa-heart"></div>
+                </div>
+                <div class="demo-result" id="rate6Result">当前评分: 4/5</div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <div class="demo-section-title">自定义最大评分</div>
+            <div class="demo-block">
+                <div class="demo-block-item">
+                    <label class="demo-block-label">最大10分</label>
+                    <div class="yc-rating yc-rating--small" id="rate7" data-value="7" data-max="10"></div>
+                </div>
+                <div class="demo-result" id="rate7Result">当前评分: 7/10</div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <div class="demo-section-title">只读状态</div>
+            <div class="demo-block">
+                <div class="demo-block-item">
+                    <label class="demo-block-label">只读评分</label>
+                    <div class="yc-rating" id="rate8" data-value="4" data-max="5" data-readonly="true"></div>
+                </div>
+                <div class="demo-result" id="rate8Result">当前评分: 4/5 (只读)</div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <div class="demo-section-title">禁用状态</div>
+            <div class="demo-block">
+                <div class="demo-block-item">
+                    <label class="demo-block-label">禁用评分</label>
+                    <div class="yc-rating" id="rate9" data-value="3" data-max="5" data-disabled="true"></div>
+                </div>
+                <div class="demo-result" id="rate9Result">当前评分: 3/5 (禁用)</div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <div class="demo-section-title">带文字描述</div>
+            <div class="demo-block">
+                <div class="demo-block-item">
+                    <label class="demo-block-label">评分描述</label>
+                    <div class="yc-rating yc-rating--with-text" id="rate10" data-value="0" data-max="5"></div>
+                </div>
+                <div class="demo-result" id="rate10Result">请选择评分</div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <div class="demo-section-title">动态评分</div>
+            <div class="demo-block">
+                <div class="demo-block-item">
+                    <label class="demo-block-label">动态设置</label>
+                    <div class="yc-rating" id="rate11" data-value="0" data-max="5"></div>
+                </div>
+                <div class="demo-button-group" style="margin-top: 16px;">
+                    <button class="yc-button yc-button--small" onclick="setRate('rate11', 1)">1分</button>
+                    <button class="yc-button yc-button--small" onclick="setRate('rate11', 2)">2分</button>
+                    <button class="yc-button yc-button--small" onclick="setRate('rate11', 3)">3分</button>
+                    <button class="yc-button yc-button--small" onclick="setRate('rate11', 4)">4分</button>
+                    <button class="yc-button yc-button--small" onclick="setRate('rate11', 5)">5分</button>
+                    <button class="yc-button yc-button--small" onclick="clearRate('rate11')">清除</button>
+                </div>
+                <div class="demo-result" id="rate11Result">当前评分: 0/5</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function initRating(element) {
+            const value = parseFloat(element.dataset.value) || 0;
+            const max = parseInt(element.dataset.max) || 5;
+            const allowHalf = element.dataset.allowHalf === 'true';
+            const readonly = element.dataset.readonly === 'true';
+            const disabled = element.dataset.disabled === 'true';
+            const icon = element.dataset.icon || 'fa-star';
+            const withText = element.classList.contains('yc-rating--with-text');
+
+            element.innerHTML = '';
+
+            if (readonly || disabled) {
+                element.classList.add('is-disabled');
+            }
+
+            for (let i = 1; i <= max; i++) {
+                const star = document.createElement('button');
+                star.className = 'yc-rating__star';
+                star.type = 'button';
+                star.setAttribute('aria-label', `${i} star`);
+
+                if (i <= Math.floor(value)) {
+                    star.classList.add('is-active');
+                    star.innerHTML = `<span class="star-icon"><i class="fas ${icon}"></i></span>`;
+                } else if (allowHalf && i === Math.ceil(value) && value % 1 !== 0) {
+                    star.classList.add('is-half');
+                    star.innerHTML = `<span class="star-icon"><i class="far ${icon}"></i><span class="star-half"><i class="fas ${icon}"></i></span></span>`;
+                } else {
+                    star.innerHTML = `<span class="star-icon"><i class="far ${icon}"></i></span>`;
+                }
+
+                if (!readonly && !disabled) {
+                    star.addEventListener('click', function() {
+                        const newValue = allowHalf ? i - 0.5 : i;
+                        element.dataset.value = newValue;
+                        initRating(element);
+                        updateResult(element);
+                    });
+
+                    star.addEventListener('mouseenter', function() {
+                        if (!readonly && !disabled) {
+                            highlightStars(element, i, allowHalf);
+                        }
+                    });
+                }
+
+                element.appendChild(star);
+            }
+
+            if (withText) {
+                const textSpan = document.createElement('span');
+                textSpan.className = 'yc-rating__text';
+                textSpan.textContent = getText(value);
+                element.appendChild(textSpan);
+            }
+        }
+
+        function highlightStars(element, index, allowHalf) {
+            const stars = element.querySelectorAll('.yc-rating__star');
+            stars.forEach((star, i) => {
+                if (i < index) {
+                    star.classList.add('is-active');
+                    star.innerHTML = `<span class="star-icon"><i class="fas ${element.dataset.icon || 'fa-star'}"></i></span>`;
+                } else {
+                    star.classList.remove('is-active', 'is-half');
+                    star.innerHTML = `<span class="star-icon"><i class="far ${element.dataset.icon || 'fa-star'}"></i></span>`;
+                }
+            });
+        }
+
+        function getText(value) {
+            const texts = ['极差', '失望', '一般', '满意', '惊喜'];
+            if (value === 0) return '请选择评分';
+            return texts[Math.ceil(value) - 1] || '';
+        }
+
+        function updateResult(element) {
+            const value = parseFloat(element.dataset.value) || 0;
+            const max = parseInt(element.dataset.max) || 5;
+            const withText = element.classList.contains('yc-rating--with-text');
+
+            const resultId = element.id + 'Result';
+            const resultEl = document.getElementById(resultId);
+            if (resultEl) {
+                if (withText) {
+                    const textSpan = element.querySelector('.yc-rating__text');
+                    if (textSpan) {
+                        textSpan.textContent = getText(value);
+                    }
+                }
+                resultEl.textContent = `当前评分: ${value}/${max}`;
+            }
+        }
+
+        function setRate(id, value) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.dataset.value = value;
+                initRating(element);
+                updateResult(element);
+            }
+        }
+
+        function clearRate(id) {
+            setRate(id, 0);
+        }
+
+        function initAll() {
+            document.querySelectorAll('.yc-rating').forEach(initRating);
+        }
+
+        document.querySelectorAll('.yc-rating').forEach(rating => {
+            rating.addEventListener('mouseleave', function() {
+                initRating(this);
+            });
+        });
+
+        window.addEventListener('DOMContentLoaded', initAll);
+    </script>
+</body>
+
+</html>

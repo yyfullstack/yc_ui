@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input 输入框组件示例 - YC UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">Input 输入框组件</h1>
+            <p class="demo-page-subtitle">基础输入框、带前缀后缀、禁用状态、验证状态等多种用法示例</p>
+        </div>
+
+        <div class="demo-section">
+            <h3>基础输入框</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">默认输入框</div>
+                <div class="demo-row">
+                    <input type="text" class="yc-input" placeholder="请输入内容">
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>带前缀和后缀</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">带前缀图标</div>
+                <div class="demo-row">
+                    <div class="yc-input-wrapper" style="width: 250px;">
+                        <input type="text" class="yc-input yc-input--prefix" placeholder="请输入内容">
+                        <div class="yc-input-prefix">
+                            <i class="fas fa-at"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="demo-divider"></div>
+
+            <div class="demo-block">
+                <div class="demo-block-title">带后缀图标</div>
+                <div class="demo-row">
+                    <div class="yc-input-wrapper" style="width: 250px;">
+                        <input type="text" class="yc-input yc-input--suffix" placeholder="请输入内容">
+                        <div class="yc-input-suffix">
+                            <span class="yc-input-suffix-icon">
+                                <i class="fas fa-times-circle"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>不同尺寸</h3>
+            <div class="demo-block">
+                <div class="demo-row">
+                    <div class="yc-input-wrapper" style="width: 150px;">
+                        <input type="text" class="yc-input yc-input--large" placeholder="大尺寸">
+                    </div>
+                    <div class="yc-input-wrapper" style="width: 150px;">
+                        <input type="text" class="yc-input" placeholder="默认">
+                    </div>
+                    <div class="yc-input-wrapper" style="width: 150px;">
+                        <input type="text" class="yc-input yc-input--small" placeholder="小尺寸">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>禁用状态</h3>
+            <div class="demo-block">
+                <div class="demo-row">
+                    <input type="text" class="yc-input" placeholder="禁用状态" disabled style="width: 250px;">
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>只读状态</h3>
+            <div class="demo-block">
+                <div class="demo-row">
+                    <input type="text" class="yc-input" value="只读内容" readonly style="width: 250px;">
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>带验证状态</h3>
+            <div class="demo-block">
+                <div class="demo-row" style="flex-direction: column; align-items: flex-start; gap: 16px;">
+                    <div class="demo-row">
+                        <div class="demo-label" style="min-width: 80px;">成功状态</div>
+                        <div class="yc-input-wrapper yc-input-wrapper--success" style="width: 250px;">
+                            <input type="text" class="yc-input" value="成功内容" placeholder="请输入内容">
+                            <div class="yc-input-suffix">
+                                <i class="fas fa-check-circle yc-input-suffix-icon--success"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="demo-row">
+                        <div class="demo-label" style="min-width: 80px;">错误状态</div>
+                        <div class="yc-input-wrapper yc-input-wrapper--error" style="width: 250px;">
+                            <input type="text" class="yc-input" value="333333333" placeholder="请输入内容">
+                            <div class="yc-input-suffix">
+                                <i class="fas fa-exclamation-circle yc-input-suffix-icon--error"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="demo-row">
+                        <div class="demo-label" style="min-width: 80px;">警告状态</div>
+                        <div class="yc-input-wrapper yc-input-wrapper--warning" style="width: 250px;">
+                            <input type="text" class="yc-input" value="33333333" placeholder="请输入内容">
+                            <div class="yc-input-suffix">
+                                <i class="fas fa-exclamation-triangle yc-input-suffix-icon--warning"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>文本域</h3>
+            <div class="demo-block">
+                <div class="demo-row" style="flex-direction: column; align-items: flex-start; gap: 12px;">
+                    <div class="demo-label">多行文本</div>
+                    <textarea class="yc-textarea" rows="4" placeholder="请输入多行内容" style="width: 400px;"></textarea>
+                </div>
+            </div>
+            <div class="demo-divider"></div>
+            <div class="demo-block">
+                <div class="demo-row" style="flex-direction: column; align-items: flex-start; gap: 12px;">
+                    <div class="demo-label">禁用文本域</div>
+                    <textarea class="yc-textarea" rows="4" placeholder="禁用状态" disabled style="width: 400px;"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>密码输入框</h3>
+            <div class="demo-block">
+                <div class="demo-row">
+                    <div class="yc-input-wrapper" style="width: 250px;">
+                        <input type="password" class="yc-input yc-input--suffix" placeholder="请输入密码" id="passwordInput">
+                        <div class="yc-input-suffix">
+                            <span class="yc-input-suffix-icon" id="togglePassword">
+                                <i class="fas fa-eye"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>搜索框</h3>
+            <div class="demo-block">
+                <div class="demo-row">
+                    <div class="yc-input-wrapper" style="width: 300px;">
+                        <input type="search" class="yc-input yc-input--prefix yc-input--suffix" placeholder="请输入搜索内容" id="searchInput">
+                        <div class="yc-input-prefix">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <div class="yc-input-suffix">
+                            <span class="yc-input-suffix-icon" id="searchClearBtn">
+                                <i class="fas fa-times-circle"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>不同类型输入框</h3>
+            <div class="demo-block">
+                <div class="demo-row" style="flex-direction: column; align-items: flex-start; gap: 12px;">
+                    <div class="demo-row">
+                        <div class="demo-label" style="min-width: 100px;">数字输入</div>
+                        <input type="number" class="yc-input" placeholder="请输入数字" min="0" max="100" step="1" style="width: 200px;">
+                    </div>
+                    <div class="demo-row">
+                        <div class="demo-label" style="min-width: 100px;">日期输入</div>
+                        <input type="date" class="yc-input" placeholder="请选择日期" style="width: 200px;">
+                    </div>
+                    <div class="demo-row">
+                        <div class="demo-label" style="min-width: 100px;">电话输入</div>
+                        <input type="tel" class="yc-input" placeholder="请输入电话号码" style="width: 200px;">
+                    </div>
+                    <div class="demo-row">
+                        <div class="demo-label" style="min-width: 100px;">邮箱输入</div>
+                        <input type="email" class="yc-input" placeholder="请输入邮箱地址" style="width: 200px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function initPasswordToggle() {
+            const toggleBtn = document.getElementById('togglePassword');
+            if (toggleBtn) {
+                const input = toggleBtn.closest('.yc-input-wrapper').querySelector('input');
+                const icon = toggleBtn.querySelector('i');
+
+                toggleBtn.addEventListener('click', function() {
+                    const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+                    input.setAttribute('type', type);
+                    if (type === 'password') {
+                        icon.className = 'fas fa-eye';
+                    } else {
+                        icon.className = 'fas fa-eye-slash';
+                    }
+                });
+            }
+        }
+
+        function initSearchBox() {
+            const searchClearBtn = document.getElementById('searchClearBtn');
+            const searchInput = document.getElementById('searchInput');
+
+            if (searchClearBtn && searchInput) {
+                searchClearBtn.addEventListener('click', function() {
+                    searchInput.value = '';
+                    searchInput.focus();
+                });
+            }
+        }
+
+        function initAll() {
+            initPasswordToggle();
+            initSearchBox();
+        }
+
+        window.addEventListener('DOMContentLoaded', initAll);
+    </script>
+</body>
+</html>

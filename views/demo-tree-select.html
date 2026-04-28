@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TreeSelect 树形选择器组件示例 - YC UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">TreeSelect 树形选择器</h1>
+            <p class="demo-page-subtitle">带图标、单选多选的树形数据选择器，支持搜索、禁用、清空等功能</p>
+        </div>
+
+        <div class="demo-section">
+            <h3>基础用法</h3>
+            <div class="demo-row">
+                <div class="demo-item">
+                    <label>单选选择</label>
+                    <div class="yc-tree-select" id="treeSelectBasic" data-value="node12">
+                        <div class="yc-tree-select__input-wrapper">
+                            <input type="text" class="yc-tree-select__input" value="选项 1-2" readonly placeholder="请选择">
+                            <i class="fas fa-angle-down yc-tree-select__icon"></i>
+                        </div>
+                        <div class="yc-tree-select__popper">
+                            <div class="yc-tree" id="treeBasicData"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="demo-result" id="treeSelectBasicResult">当前值：node12 - 选项 1-2</div>
+        </div>
+
+        <div class="demo-section">
+            <h3>多选</h3>
+            <div class="demo-row">
+                <div class="demo-item">
+                    <label>多选选择</label>
+                    <div class="yc-tree-select yc-tree-select--multiple" id="treeSelectMultiple" data-value="node12,node31">
+                        <div class="yc-tree-select__input-wrapper">
+                            <div class="yc-tree-select__tags">
+                                <span class="yc-tree-select__tag">
+                                    <span class="yc-tree-select__tag-text">选项 1-2</span>
+                                    <span class="yc-tree-select__tag-close" data-id="node12"><i class="fas fa-times"></i></span>
+                                </span>
+                                <span class="yc-tree-select__tag">
+                                    <span class="yc-tree-select__tag-text">选项 3-1</span>
+                                    <span class="yc-tree-select__tag-close" data-id="node31"><i class="fas fa-times"></i></span>
+                                </span>
+                            </div>
+                            <i class="fas fa-angle-down yc-tree-select__icon"></i>
+                        </div>
+                        <div class="yc-tree-select__popper">
+                            <div class="yc-tree" id="treeMultipleData"></div>
+                            <div class="yc-tree-select__footer">
+                                <span class="yc-tree-select__footer-info">已选 2 项</span>
+                                <div class="yc-tree-select__footer-actions">
+                                    <button class="yc-tree-select__btn" data-action="clear">清空</button>
+                                    <button class="yc-tree-select__btn yc-tree-select__btn--primary" data-action="confirm">确定</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="demo-result" id="treeSelectMultipleResult">当前值：node12,node31</div>
+        </div>
+
+        <div class="demo-section">
+            <h3>带搜索</h3>
+            <div class="demo-row">
+                <div class="demo-item">
+                    <label>可搜索</label>
+                    <div class="yc-tree-select" id="treeSelectSearch" data-value="">
+                        <div class="yc-tree-select__input-wrapper">
+                            <input type="text" class="yc-tree-select__input" value="" readonly placeholder="请选择并搜索">
+                            <i class="fas fa-angle-down yc-tree-select__icon"></i>
+                        </div>
+                        <div class="yc-tree-select__popper">
+                            <div class="yc-tree-select__search">
+                                <i class="fas fa-search yc-tree-select__search-icon"></i>
+                                <input type="text" class="yc-tree-select__search-input" placeholder="搜索节点...">
+                            </div>
+                            <div class="yc-tree" id="treeSearchData"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="demo-result" id="treeSelectSearchResult">当前值：无</div>
+        </div>
+
+        <div class="demo-section">
+            <h3>不同尺寸</h3>
+            <div class="demo-row">
+                <div class="demo-item">
+                    <label>大</label>
+                    <div class="yc-tree-select yc-tree-select--large" id="treeSelectLarge" data-value="">
+                        <div class="yc-tree-select__input-wrapper">
+                            <input type="text" class="yc-tree-select__input" value="" readonly placeholder="请选择">
+                            <i class="fas fa-angle-down yc-tree-select__icon"></i>
+                        </div>
+                        <div class="yc-tree-select__popper">
+                            <div class="yc-tree" id="treeLargeData"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="demo-item">
+                    <label>中（默认）</label>
+                    <div class="yc-tree-select" id="treeSelectMedium" data-value="">
+                        <div class="yc-tree-select__input-wrapper">
+                            <input type="text" class="yc-tree-select__input" value="" readonly placeholder="请选择">
+                            <i class="fas fa-angle-down yc-tree-select__icon"></i>
+                        </div>
+                        <div class="yc-tree-select__popper">
+                            <div class="yc-tree" id="treeMediumData"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="demo-item">
+                    <label>小</label>
+                    <div class="yc-tree-select yc-tree-select--small" id="treeSelectSmall" data-value="">
+                        <div class="yc-tree-select__input-wrapper">
+                            <input type="text" class="yc-tree-select__input" value="" readonly placeholder="请选择">
+                            <i class="fas fa-angle-down yc-tree-select__icon"></i>
+                        </div>
+                        <div class="yc-tree-select__popper">
+                            <div class="yc-tree" id="treeSmallData"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>可清空</h3>
+            <div class="demo-row">
+                <div class="demo-item">
+                    <label>可清空</label>
+                    <div class="yc-tree-select" id="treeSelectClearable" data-value="node12">
+                        <div class="yc-tree-select__input-wrapper">
+                            <input type="text" class="yc-tree-select__input" value="选项 1-2" readonly placeholder="请选择">
+                            <i class="fas fa-angle-down yc-tree-select__icon"></i>
+                            <span class="yc-tree-select__clear"><i class="fas fa-times"></i></span>
+                        </div>
+                        <div class="yc-tree-select__popper">
+                            <div class="yc-tree" id="treeClearableData"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="demo-result" id="treeSelectClearableResult">当前值：node12 - 选项 1-2</div>
+        </div>
+
+        <div class="demo-section">
+            <h3>禁用状态</h3>
+            <div class="demo-row">
+                <div class="demo-item">
+                    <label>禁用</label>
+                    <div class="yc-tree-select is-disabled" id="treeSelectDisabled" data-value="node11">
+                        <div class="yc-tree-select__input-wrapper">
+                            <input type="text" class="yc-tree-select__input" value="选项 1-1" disabled placeholder="请选择">
+                            <i class="fas fa-angle-down yc-tree-select__icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="demo-result">状态：已禁用</div>
+        </div>
+
+        <div class="demo-section">
+            <h3>禁用节点</h3>
+            <div class="demo-row">
+                <div class="demo-item">
+                    <label>禁用选项</label>
+                    <div class="yc-tree-select" id="treeSelectNodeDisabled" data-value="">
+                        <div class="yc-tree-select__input-wrapper">
+                            <input type="text" class="yc-tree-select__input" value="" readonly placeholder="请选择">
+                            <i class="fas fa-angle-down yc-tree-select__icon"></i>
+                        </div>
+                        <div class="yc-tree-select__popper">
+                            <div class="yc-tree" id="treeNodeDisabledData"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="demo-result" id="treeSelectNodeDisabledResult">当前值：无</div>
+        </div>
+
+        <div class="demo-section">
+            <h3>动态控制</h3>
+            <div class="demo-row">
+                <div class="demo-item">
+                    <label>动态设置</label>
+                    <div class="yc-tree-select" id="treeSelectDynamic" data-value="node11">
+                        <div class="yc-tree-select__input-wrapper">
+                            <input type="text" class="yc-tree-select__input" value="选项 1-1" readonly placeholder="请选择">
+                            <i class="fas fa-angle-down yc-tree-select__icon"></i>
+                            <span class="yc-tree-select__clear"><i class="fas fa-times"></i></span>
+                        </div>
+                        <div class="yc-tree-select__popper">
+                            <div class="yc-tree" id="treeDynamicData"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="demo-btn-row">
+                <button class="yc-button yc-button--small" onclick="setTreeSelectValue('treeSelectDynamic', 'node11', '选项 1-1')">选项 1-1</button>
+                <button class="yc-button yc-button--small" onclick="setTreeSelectValue('treeSelectDynamic', 'node21', '选项 2-1')">选项 2-1</button>
+                <button class="yc-button yc-button--small" onclick="setTreeSelectValue('treeSelectDynamic', 'node32', '选项 3-2')">选项 3-2</button>
+                <button class="yc-button yc-button--small" onclick="clearTreeSelect('treeSelectDynamic')">清空</button>
+            </div>
+            <div class="demo-result" id="treeSelectDynamicResult">当前值：node11 - 选项 1-1</div>
+        </div>
+    </div>
+
+    <script>
+        const treeData = [
+            {
+                id: 'node1',
+                label: '选项 1',
+                children: [
+                    { id: 'node11', label: '选项 1-1' },
+                    { id: 'node12', label: '选项 1-2', disabled: true },
+                    { id: 'node13', label: '选项 1-3' }
+                ]
+            },
+            {
+                id: 'node2',
+                label: '选项 2',
+                children: [
+                    { id: 'node21', label: '选项 2-1' },
+                    { id: 'node22', label: '选项 2-2' },
+                    { id: 'node23', label: '选项 2-3' }
+                ]
+            },
+            {
+                id: 'node3',
+                label: '选项 3',
+                children: [
+                    { id: 'node31', label: '选项 3-1' },
+                    { id: 'node32', label: '选项 3-2' },
+                    { id: 'node33', label: '选项 3-3' }
+                ]
+            }
+        ];
+
+        const disabledTreeData = [
+            {
+                id: 'node1',
+                label: '选项 1（禁用）',
+                disabled: true,
+                children: [
+                    { id: 'node11', label: '选项 1-1' },
+                    { id: 'node12', label: '选项 1-2' }
+                ]
+            },
+            {
+                id: 'node2',
+                label: '选项 2',
+                children: [
+                    { id: 'node21', label: '选项 2-1' },
+                    { id: 'node22', label: '选项 2-2（禁用）', disabled: true }
+                ]
+            }
+        ];
+
+        function renderTreeNode(node, level = 0) {
+            const hasChildren = node.children && node.children.length > 0;
+            const isDisabled = node.disabled;
+            const indent = level * 18;
+
+            let html = `
+                <div class="yc-tree-node ${hasChildren ? '' : 'is-leaf'} ${isDisabled ? 'is-disabled' : ''}"
+                     data-id="${node.id}"
+                     data-label="${node.label}"
+                     data-level="${level}"
+                     data-disabled="${isDisabled || false}">
+                    <div class="yc-tree-node__content">
+                        <span class="yc-tree-node__indent" style="width: ${indent}px;"></span>
+                        ${hasChildren ? '<i class="fas fa-chevron-right yc-tree-node__expand-icon"></i>' : '<span class="yc-tree-node__indent"></span>'}
+                        <div class="yc-tree-node__label-wrapper">
+                            <span class="yc-tree-node__label">${node.label}</span>
+                        </div>
+                    </div>
+            `;
+
+            if (hasChildren) {
+                html += '<div class="yc-tree-node__children">';
+                node.children.forEach(child => {
+                    html += renderTreeNode(child, level + 1);
+                });
+                html += '</div>';
+            }
+
+            html += '</div>';
+            return html;
+        }
+
+        function renderTree(data, containerId) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+
+            if (!data || data.length === 0) {
+                container.innerHTML = `
+                    <div class="yc-tree-empty">
+                        <div class="yc-tree-empty__icon"><i class="fas fa-folder-open"></i></div>
+                        <div>暂无数据</div>
+                    </div>
+                `;
+                return;
+            }
+
+            let html = '';
+            data.forEach(node => {
+                html += renderTreeNode(node, 0);
+            });
+            container.innerHTML = html;
+        }
+
+        function toggleNode(nodeEl) {
+            if (nodeEl.classList.contains('is-expanded')) {
+                nodeEl.classList.remove('is-expanded');
+            } else {
+                nodeEl.classList.add('is-expanded');
+            }
+        }
+
+        function selectNode(treeSelect, nodeEl) {
+            if (nodeEl.classList.contains('is-disabled')) return;
+
+            const isMultiple = treeSelect.classList.contains('yc-tree-select--multiple');
+
+            if (isMultiple) {
+                nodeEl.classList.toggle('is-selected');
+                updateMultipleTags(treeSelect);
+                updateMultipleFooterInfo(treeSelect);
+            } else {
+                const prevSelected = treeSelect.querySelector('.yc-tree-node.is-selected');
+                if (prevSelected) {
+                    prevSelected.classList.remove('is-selected');
+                }
+                nodeEl.classList.add('is-selected');
+
+                const id = nodeEl.dataset.id;
+                const label = nodeEl.dataset.label;
+                const input = treeSelect.querySelector('.yc-tree-select__input');
+                if (input) {
+                    input.value = label;
+                }
+                treeSelect.dataset.value = id;
+
+                const resultEl = document.getElementById(treeSelect.id + 'Result');
+                if (resultEl) {
+                    resultEl.textContent = `当前值：${id} - ${label}`;
+                }
+
+                closePopper(treeSelect);
+            }
+        }
+
+        function updateMultipleTags(treeSelect) {
+            const tagsContainer = treeSelect.querySelector('.yc-tree-select__tags');
+            if (!tagsContainer) return;
+
+            const selectedNodes = treeSelect.querySelectorAll('.yc-tree-node.is-selected');
+            const selectedValues = [];
+
+            tagsContainer.innerHTML = '';
+
+            selectedNodes.forEach(node => {
+                const id = node.dataset.id;
+                const label = node.dataset.label;
+                selectedValues.push(id);
+
+                const tag = document.createElement('span');
+                tag.className = 'yc-tree-select__tag';
+                tag.innerHTML = `
+                    <span class="yc-tree-select__tag-text">${label}</span>
+                    <span class="yc-tree-select__tag-close" data-id="${id}"><i class="fas fa-times"></i></span>
+                `;
+                tagsContainer.appendChild(tag);
+            });
+
+            treeSelect.dataset.value = selectedValues.join(',');
+
+            const resultEl = document.getElementById(treeSelect.id + 'Result');
+            if (resultEl) {
+                resultEl.textContent = `当前值：${selectedValues.join(',')}`;
+            }
+
+            tagCloseEvent(treeSelect);
+        }
+
+        function updateMultipleFooterInfo(treeSelect) {
+            const footerInfo = treeSelect.querySelector('.yc-tree-select__footer-info');
+            const selectedNodes = treeSelect.querySelectorAll('.yc-tree-node.is-selected');
+            if (footerInfo) {
+                footerInfo.textContent = `已选 ${selectedNodes.length} 项`;
+            }
+        }
+
+        function tagCloseEvent(treeSelect) {
+            const closeButtons = treeSelect.querySelectorAll('.yc-tree-select__tag-close');
+            closeButtons.forEach(btn => {
+                btn.onclick = function(e) {
+                    e.stopPropagation();
+                    const id = this.dataset.id;
+                    const nodeEl = treeSelect.querySelector(`.yc-tree-node[data-id="${id}"]`);
+                    if (nodeEl) {
+                        nodeEl.classList.remove('is-selected');
+                    }
+                    updateMultipleTags(treeSelect);
+                    updateMultipleFooterInfo(treeSelect);
+                };
+            });
+        }
+
+        function openPopper(treeSelect) {
+            treeSelect.classList.add('is-active');
+            const popper = treeSelect.querySelector('.yc-tree-select__popper');
+            if (popper) {
+                popper.classList.add('is-visible');
+            }
+        }
+
+        function closePopper(treeSelect) {
+            treeSelect.classList.remove('is-active');
+            const popper = treeSelect.querySelector('.yc-tree-select__popper');
+            if (popper) {
+                popper.classList.remove('is-visible');
+            }
+        }
+
+        function handleTreeClick(e, treeSelect) {
+            const nodeEl = e.target.closest('.yc-tree-node');
+            if (!nodeEl) return;
+
+            const expandIcon = e.target.closest('.yc-tree-node__expand-icon');
+            if (expandIcon) {
+                e.stopPropagation();
+                toggleNode(nodeEl);
+                return;
+            }
+
+            const content = e.target.closest('.yc-tree-node__content');
+            if (content) {
+                e.stopPropagation();
+                selectNode(treeSelect, nodeEl);
+            }
+        }
+
+        function handleSearch(e, treeSelect) {
+            const searchValue = e.target.value.toLowerCase().trim();
+            const allNodes = treeSelect.querySelectorAll('.yc-tree-node');
+
+            if (!searchValue) {
+                allNodes.forEach(node => {
+                    node.classList.remove('is-hidden');
+                    node.classList.remove('is-expanded');
+                });
+                return;
+            }
+
+            allNodes.forEach(node => {
+                const label = node.dataset.label.toLowerCase();
+                if (label.includes(searchValue)) {
+                    node.classList.remove('is-hidden');
+                    node.classList.add('is-expanded');
+                    let parent = node.parentElement;
+                    while (parent && parent.classList) {
+                        if (parent.classList.contains('yc-tree-node__children')) {
+                            parent.parentElement.classList.add('is-expanded');
+                        }
+                        parent = parent.parentElement;
+                    }
+                } else {
+                    node.classList.add('is-hidden');
+                }
+            });
+        }
+
+        function initTreeSelect(treeSelect) {
+            if (!treeSelect) return;
+
+            const input = treeSelect.querySelector('.yc-tree-select__input');
+            const inputWrapper = treeSelect.querySelector('.yc-tree-select__input-wrapper');
+            const clearBtn = treeSelect.querySelector('.yc-tree-select__clear');
+            const isMultiple = treeSelect.classList.contains('yc-tree-select--multiple');
+
+            if (treeSelect.classList.contains('is-disabled')) return;
+
+            const openHandler = (e) => {
+                e.stopPropagation();
+                document.querySelectorAll('.yc-tree-select.is-active').forEach(ts => {
+                    if (ts !== treeSelect) closePopper(ts);
+                });
+                openPopper(treeSelect);
+            };
+
+            if (isMultiple) {
+                inputWrapper?.addEventListener('click', openHandler);
+            } else {
+                input?.addEventListener('click', openHandler);
+            }
+
+            clearBtn?.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (!isMultiple && input) input.value = '';
+                treeSelect.dataset.value = '';
+
+                treeSelect.querySelectorAll('.yc-tree-node.is-selected').forEach(node => {
+                    node.classList.remove('is-selected');
+                });
+
+                if (isMultiple) {
+                    const tagsContainer = treeSelect.querySelector('.yc-tree-select__tags');
+                    if (tagsContainer) tagsContainer.innerHTML = '';
+                    updateMultipleFooterInfo(treeSelect);
+                }
+
+                const resultEl = document.getElementById(treeSelect.id + 'Result');
+                if (resultEl) {
+                    resultEl.textContent = '当前值：无';
+                }
+            });
+
+            const tree = treeSelect.querySelector('.yc-tree');
+            tree?.addEventListener('click', (e) => handleTreeClick(e, treeSelect));
+
+            const searchInput = treeSelect.querySelector('.yc-tree-select__search-input');
+            searchInput?.addEventListener('input', (e) => handleSearch(e, treeSelect));
+
+            const footerBtns = treeSelect.querySelectorAll('.yc-tree-select__btn');
+            footerBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const action = btn.dataset.action;
+                    if (action === 'clear') {
+                        treeSelect.querySelectorAll('.yc-tree-node.is-selected').forEach(node => {
+                            node.classList.remove('is-selected');
+                        });
+                        updateMultipleTags(treeSelect);
+                        updateMultipleFooterInfo(treeSelect);
+                    } else if (action === 'confirm') {
+                        closePopper(treeSelect);
+                    }
+                });
+            });
+        }
+
+        function setTreeSelectValue(id, value, label) {
+            const treeSelect = document.getElementById(id);
+            if (!treeSelect) return;
+
+            treeSelect.dataset.value = value;
+            const input = treeSelect.querySelector('.yc-tree-select__input');
+            if (input) {
+                input.value = label;
+            }
+
+            treeSelect.querySelectorAll('.yc-tree-node.is-selected').forEach(node => {
+                node.classList.remove('is-selected');
+            });
+
+            const nodeEl = treeSelect.querySelector(`.yc-tree-node[data-id="${value}"]`);
+            if (nodeEl) {
+                nodeEl.classList.add('is-selected');
+                let parent = nodeEl.parentElement;
+                while (parent && parent.classList) {
+                    if (parent.classList.contains('yc-tree-node__children')) {
+                        parent.parentElement.classList.add('is-expanded');
+                    }
+                    parent = parent.parentElement;
+                }
+            }
+
+            const resultEl = document.getElementById(id + 'Result');
+            if (resultEl) {
+                resultEl.textContent = `当前值：${value} - ${label}`;
+            }
+        }
+
+        function clearTreeSelect(id) {
+            const treeSelect = document.getElementById(id);
+            if (!treeSelect) return;
+
+            treeSelect.dataset.value = '';
+            const input = treeSelect.querySelector('.yc-tree-select__input');
+            if (input) input.value = '';
+
+            treeSelect.querySelectorAll('.yc-tree-node.is-selected').forEach(node => {
+                node.classList.remove('is-selected');
+            });
+
+            const isMultiple = treeSelect.classList.contains('yc-tree-select--multiple');
+            if (isMultiple) {
+                const tagsContainer = treeSelect.querySelector('.yc-tree-select__tags');
+                if (tagsContainer) tagsContainer.innerHTML = '';
+                updateMultipleFooterInfo(treeSelect);
+            }
+
+            const resultEl = document.getElementById(id + 'Result');
+            if (resultEl) {
+                resultEl.textContent = '当前值：无';
+            }
+        }
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.yc-tree-select')) {
+                document.querySelectorAll('.yc-tree-select.is-active').forEach(ts => {
+                    closePopper(ts);
+                });
+            }
+        });
+
+        document.querySelectorAll('.yc-tree-select').forEach(initTreeSelect);
+
+        renderTree(treeData, 'treeBasicData');
+        renderTree(treeData, 'treeMultipleData');
+        renderTree(treeData, 'treeSearchData');
+        renderTree(treeData, 'treeLargeData');
+        renderTree(treeData, 'treeMediumData');
+        renderTree(treeData, 'treeSmallData');
+        renderTree(treeData, 'treeClearableData');
+        renderTree(disabledTreeData, 'treeNodeDisabledData');
+        renderTree(treeData, 'treeDynamicData');
+
+        document.querySelectorAll('.yc-tree-select').forEach(ts => {
+            const value = ts.dataset.value;
+            const isMultiple = ts.classList.contains('yc-tree-select--multiple');
+
+            if (value && !isMultiple) {
+                const nodeEl = ts.querySelector(`.yc-tree-node[data-id="${value}"]`);
+                if (nodeEl) {
+                    nodeEl.classList.add('is-selected');
+                    let parent = nodeEl.parentElement;
+                    while (parent && parent.classList) {
+                        if (parent.classList.contains('yc-tree-node__children')) {
+                            parent.parentElement.classList.add('is-expanded');
+                        }
+                        parent = parent.parentElement;
+                    }
+                }
+            } else if (isMultiple && value) {
+                const values = value.split(',');
+                values.forEach(val => {
+                    const nodeEl = ts.querySelector(`.yc-tree-node[data-id="${val}"]`);
+                    if (nodeEl) {
+                        nodeEl.classList.add('is-selected');
+                    }
+                });
+                updateMultipleTags(ts);
+            }
+        });
+
+        tagCloseEvent(document.getElementById('treeSelectMultiple'));
+    </script>
+</body>
+</html>

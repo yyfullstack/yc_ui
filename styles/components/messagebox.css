@@ -1,0 +1,251 @@
+@charset "UTF-8";
+
+.yc-messagebox {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 420px;
+    max-width: 90vw;
+    background-color: var(--yc-color-bg);
+    border: var(--yc-border-width-base) solid var(--yc-color-border);
+    border-radius: var(--yc-border-radius-large);
+    box-shadow: var(--yc-box-shadow-2xl);
+    z-index: calc(var(--yc-index-top) + 1000);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.yc-messagebox-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--yc-spacing-md) var(--yc-spacing-lg);
+    border-bottom: var(--yc-border-width-thin) solid var(--yc-color-border);
+}
+
+.yc-messagebox-title {
+    font-weight: var(--yc-font-weight-semibold);
+    font-size: var(--yc-font-size-medium);
+    color: var(--yc-color-text-primary);
+    margin: 0;
+}
+
+.yc-messagebox-close {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: transparent;
+    color: var(--yc-color-text-secondary);
+    cursor: pointer;
+    border-radius: var(--yc-border-radius-small);
+    transition: var(--yc-transition-fast);
+    font-size: var(--yc-font-size-base);
+}
+
+.yc-messagebox-close:hover {
+    background-color: var(--yc-color-bg-page);
+    color: var(--yc-color-text-primary);
+}
+
+.yc-messagebox-body {
+    padding: var(--yc-spacing-lg);
+    color: var(--yc-color-text-regular);
+    line-height: var(--yc-line-height-base);
+}
+
+.yc-messagebox-content {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--yc-spacing-md);
+}
+
+.yc-messagebox-icon {
+    font-size: var(--yc-font-size-extra-large);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.yc-messagebox-icon-success { color: var(--yc-color-success); }
+.yc-messagebox-icon-warning { color: var(--yc-color-warning); }
+.yc-messagebox-icon-danger { color: var(--yc-color-danger); }
+.yc-messagebox-icon-info { color: var(--yc-color-primary); }
+
+.yc-messagebox-message {
+    flex: 1;
+    min-width: 0;
+}
+
+.yc-messagebox-input {
+    margin-top: var(--yc-spacing-md);
+}
+
+.yc-messagebox-input .yc-input {
+    width: 100%;
+}
+
+.yc-messagebox-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: var(--yc-spacing-md) var(--yc-spacing-lg);
+    border-top: var(--yc-border-width-thin) solid var(--yc-color-border);
+    gap: var(--yc-spacing-sm);
+}
+
+.yc-messagebox-button {
+    padding: var(--yc-spacing-sm) var(--yc-spacing-base);
+    border: var(--yc-border-width-base) solid var(--yc-color-border);
+    background-color: var(--yc-color-bg);
+    color: var(--yc-color-text-primary);
+    border-radius: var(--yc-border-radius-base);
+    cursor: pointer;
+    font-size: var(--yc-font-size-base);
+    transition: all var(--yc-transition-fast);
+    outline: none;
+}
+
+.yc-messagebox-button:focus {
+    box-shadow: 0 0 0 2px rgba(var(--yc-color-primary-rgb), 0.2);
+}
+
+.yc-messagebox-button:hover {
+    border-color: var(--yc-color-primary);
+    color: var(--yc-color-primary);
+}
+
+.yc-messagebox-button:active {
+    transform: scale(0.98);
+}
+
+.yc-messagebox-button-confirm {
+    border-color: var(--yc-color-primary);
+    background-color: var(--yc-color-primary);
+    color: var(--yc-color-white);
+}
+
+.yc-messagebox-button-confirm:hover {
+    background-color: var(--yc-color-primary-hover);
+    border-color: var(--yc-color-primary-hover);
+    color: var(--yc-color-white);
+}
+
+.yc-messagebox-button-confirm:active {
+    /* background-color: var(--yc-color-primary-active);
+    border-color: var(--yc-color-primary-active); */
+}
+
+.yc-messagebox-button-info {
+    border-color: var(--yc-color-primary);
+    background-color: var(--yc-color-primary);
+    color: var(--yc-color-white);
+}
+
+.yc-messagebox-button-info:hover {
+    background-color: var(--yc-color-primary-hover);
+    border-color: var(--yc-color-primary-hover);
+    color: var(--yc-color-white);
+}
+
+.yc-messagebox-button-info:active {
+    /* background-color: var(--yc-color-primary-active);
+    border-color: var(--yc-color-primary-active); */
+}
+
+.yc-messagebox-button-success {
+    border-color: var(--yc-color-success);
+    background-color: var(--yc-color-success);
+    color: var(--yc-color-white);
+}
+
+.yc-messagebox-button-success:hover {
+    background-color: #5aab3e;
+    border-color: #5aab3e;
+    color: var(--yc-color-white);
+}
+
+.yc-messagebox-button-success:active {
+    background-color: #4e9a36;
+    border-color: #4e9a36;
+}
+
+.yc-messagebox-button-warning {
+    border-color: var(--yc-color-warning);
+    background-color: var(--yc-color-warning);
+    color: var(--yc-color-white);
+}
+
+.yc-messagebox-button-warning:hover {
+    background-color: #cf9236;
+    border-color: #cf9236;
+    color: var(--yc-color-white);
+}
+
+.yc-messagebox-button-warning:active {
+    background-color: #b8852f;
+    border-color: #b8852f;
+}
+
+.yc-messagebox-button-danger {
+    border-color: var(--yc-color-danger);
+    background-color: var(--yc-color-danger);
+    color: var(--yc-color-white);
+}
+
+.yc-messagebox-button-danger:hover {
+    background-color: #e04545;
+    border-color: #e04545;
+    color: var(--yc-color-white);
+}
+
+.yc-messagebox-button-danger:active {
+    background-color: #c93c3c;
+    border-color: #c93c3c;
+}
+
+.yc-messagebox-mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--yc-overlay-color);
+    z-index: calc(var(--yc-index-top) + 999);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--yc-transition-duration-slow);
+}
+
+.yc-messagebox-mask-visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.yc-messagebox-visible {
+    opacity: 1;
+}
+
+.yc-messagebox:not(.yc-messagebox-visible) {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.9);
+}
+
+.yc-messagebox.yc-messagebox-visible {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.yc-messagebox-prompt .yc-messagebox-body {
+    text-align: center;
+}
+
+.yc-messagebox-alert .yc-messagebox-footer {
+    justify-content: center;
+}

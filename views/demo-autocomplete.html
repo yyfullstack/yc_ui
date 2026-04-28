@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autocomplete 自动补全输入框组件示例 - YC UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">Autocomplete 自动补全输入框组件</h1>
+            <p class="demo-page-subtitle">带输入建议的自动补全输入框，支持远程搜索、键盘导航等高级用法</p>
+        </div>
+
+        <div class="demo-section">
+            <h3>基础用法</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">用户名搜索</div>
+                <div class="demo-row">
+                    <div class="yc-autocomplete" id="basicAutocomplete" style="width: 300px;">
+                        <div class="yc-autocomplete__input-wrapper">
+                            <input type="text" class="yc-input" placeholder="请输入用户名" autocomplete="off">
+                        </div>
+                        <div class="yc-autocomplete__suggestions" style="display: none;">
+                            <div class="yc-autocomplete__suggestion-item" data-value="张三">张三</div>
+                            <div class="yc-autocomplete__suggestion-item" data-value="张四">张四</div>
+                            <div class="yc-autocomplete__suggestion-item" data-value="张五">张五</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>带图标的自动补全</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">邮箱输入</div>
+                <div class="demo-row">
+                    <div class="yc-autocomplete yc-autocomplete--prefix" id="emailAutocomplete" style="width: 300px;">
+                        <div class="yc-autocomplete__input-wrapper">
+                            <span class="yc-autocomplete__prefix-icon">@</span>
+                            <input type="text" class="yc-input" placeholder="请输入邮箱" autocomplete="off">
+                        </div>
+                        <div class="yc-autocomplete__suggestions" style="display: none;">
+                            <div class="yc-autocomplete__suggestion-item" data-value="zhangsan@example.com">zhangsan@example.com</div>
+                            <div class="yc-autocomplete__suggestion-item" data-value="zhangsi@example.com">zhangsi@example.com</div>
+                            <div class="yc-autocomplete__suggestion-item" data-value="zhangwu@example.com">zhangwu@example.com</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>可清空的自动补全</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">地址输入</div>
+                <div class="demo-row">
+                    <div class="yc-autocomplete yc-autocomplete--clearable" id="addressAutocomplete" style="width: 300px;">
+                        <div class="yc-autocomplete__input-wrapper">
+                            <input type="text" class="yc-input" placeholder="请输入地址" autocomplete="off">
+                            <span class="yc-autocomplete__clear" style="display: none;">×</span>
+                        </div>
+                        <div class="yc-autocomplete__suggestions" style="display: none;">
+                            <div class="yc-autocomplete__suggestion-item" data-value="北京市朝阳区">北京市朝阳区</div>
+                            <div class="yc-autocomplete__suggestion-item" data-value="北京市海淀区">北京市海淀区</div>
+                            <div class="yc-autocomplete__suggestion-item" data-value="北京市东城区">北京市东城区</div>
+                            <div class="yc-autocomplete__suggestion-item" data-value="北京市西城区">北京市西城区</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>带标签的自动补全</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">城市选择（带区域标签）</div>
+                <div class="demo-row">
+                    <div class="yc-autocomplete" id="cityAutocomplete" style="width: 300px;">
+                        <div class="yc-autocomplete__input-wrapper">
+                            <input type="text" class="yc-input" placeholder="请输入城市" autocomplete="off" value="北京">
+                        </div>
+                        <div class="yc-autocomplete__suggestions" style="display: none;">
+                            <div class="yc-autocomplete__suggestion-item" data-value="北京市" data-tag="华北">
+                                <div class="yc-autocomplete__suggestion-item__content">
+                                    <span class="yc-autocomplete__suggestion-item__label">北京市</span>
+                                    <span class="yc-autocomplete__suggestion-item__value">华北</span>
+                                </div>
+                            </div>
+                            <div class="yc-autocomplete__suggestion-item" data-value="北海市" data-tag="华南">
+                                <div class="yc-autocomplete__suggestion-item__content">
+                                    <span class="yc-autocomplete__suggestion-item__label">北海市</span>
+                                    <span class="yc-autocomplete__suggestion-item__value">华南</span>
+                                </div>
+                            </div>
+                            <div class="yc-autocomplete__suggestion-item" data-value="北安市" data-tag="东北">
+                                <div class="yc-autocomplete__suggestion-item__content">
+                                    <span class="yc-autocomplete__suggestion-item__label">北安市</span>
+                                    <span class="yc-autocomplete__suggestion-item__value">东北</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>高亮第一个选项</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">搜索编程语言</div>
+                <div class="demo-row">
+                    <div class="yc-autocomplete" id="searchAutocomplete" style="width: 300px;">
+                        <div class="yc-autocomplete__input-wrapper">
+                            <input type="text" class="yc-input" placeholder="请输入搜索内容" autocomplete="off">
+                        </div>
+                        <div class="yc-autocomplete__suggestions" style="display: none;">
+                            <div class="yc-autocomplete__suggestion-item is-highlighted" data-value="JavaScript">JavaScript</div>
+                            <div class="yc-autocomplete__suggestion-item" data-value="Java">Java</div>
+                            <div class="yc-autocomplete__suggestion-item" data-value="Python">Python</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>禁用状态</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">禁止输入</div>
+                <div class="demo-row">
+                    <div class="yc-autocomplete is-disabled" id="disabledAutocomplete" style="width: 300px;">
+                        <div class="yc-autocomplete__input-wrapper">
+                            <input type="text" class="yc-input" placeholder="禁用状态" disabled>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>尺寸变体</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">不同尺寸输入框</div>
+                <div class="demo-row" style="gap: 20px; flex-wrap: wrap;">
+                    <div class="yc-autocomplete yc-autocomplete--large" id="largeAutocomplete" style="width: 300px;">
+                        <div class="yc-autocomplete__input-wrapper">
+                            <input type="text" class="yc-input" placeholder="大尺寸输入框" autocomplete="off">
+                        </div>
+                        <div class="yc-autocomplete__suggestions" style="display: none;">
+                            <div class="yc-autocomplete__suggestion-item" data-value="大选项1">大选项1</div>
+                            <div class="yc-autocomplete__suggestion-item" data-value="大选项2">大选项2</div>
+                        </div>
+                    </div>
+                    <div class="yc-autocomplete yc-autocomplete--small" id="smallAutocomplete" style="width: 300px;">
+                        <div class="yc-autocomplete__input-wrapper">
+                            <input type="text" class="yc-input" placeholder="小尺寸输入框" autocomplete="off">
+                        </div>
+                        <div class="yc-autocomplete__suggestions" style="display: none;">
+                            <div class="yc-autocomplete__suggestion-item" data-value="小选项1">小选项1</div>
+                            <div class="yc-autocomplete__suggestion-item" data-value="小选项2">小选项2</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>远程搜索</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">模拟远程API搜索</div>
+                <div class="demo-row">
+                    <div class="yc-autocomplete" id="remoteAutocomplete" style="width: 300px;">
+                        <div class="yc-autocomplete__input-wrapper">
+                            <input type="text" class="yc-input" placeholder="请输入关键词搜索" autocomplete="off">
+                        </div>
+                        <div class="yc-autocomplete__suggestions is-loading" style="display: none;">
+                            <div class="yc-autocomplete__empty">加载中...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>JavaScript 创建</h3>
+            <div class="demo-block">
+                <div class="demo-btn-row">
+                    <button class="yc-button yc-button--primary" id="showAutocompleteBtn">
+                        <i class="fas fa-search"></i> 显示搜索框
+                    </button>
+                    <button class="yc-button yc-button--info" id="clearAutocompleteBtn">
+                        <i class="fas fa-trash-alt"></i> 清空输入
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const suggestionsData = {
+            basic: [
+                { value: '张三', label: '张三' },
+                { value: '张四', label: '张四' },
+                { value: '张五', label: '张五' },
+                { value: '李四', label: '李四' },
+                { value: '王五', label: '王五' }
+            ],
+            email: [
+                { value: 'zhangsan@example.com', label: 'zhangsan@example.com' },
+                { value: 'zhangsi@example.com', label: 'zhangsi@example.com' },
+                { value: 'zhangwu@example.com', label: 'zhangwu@example.com' }
+            ],
+            address: [
+                { value: '北京市朝阳区', label: '北京市朝阳区' },
+                { value: '北京市海淀区', label: '北京市海淀区' },
+                { value: '北京市东城区', label: '北京市东城区' },
+                { value: '北京市西城区', label: '北京市西城区' },
+                { value: '上海市浦东新区', label: '上海市浦东新区' },
+                { value: '上海市静安区', label: '上海市静安区' }
+            ],
+            city: [
+                { value: '北京市', label: '北京市', tag: '华北' },
+                { value: '北海市', label: '北海市', tag: '华南' },
+                { value: '北安市', label: '北安市', tag: '东北' },
+                { value: '南京市', label: '南京市', tag: '华东' },
+                { value: '武汉市', label: '武汉市', tag: '华中' }
+            ]
+        };
+
+        function highlightText(text, keyword) {
+            if (!text || !keyword) return text;
+            const regex = new RegExp(`(${escapeRegExp(keyword)})`, 'gi');
+            return text.replace(regex, '<span class="yc-autocomplete__suggestion-item__highlight">$1</span>');
+        }
+
+        function escapeRegExp(string) {
+            return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function debounce(func, wait) {
+            let timeout;
+            return function(...args) {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(this, args), wait);
+            };
+        }
+
+        function renderSuggestions(suggestions, filtered, value) {
+            if (filtered.length === 0) {
+                suggestions.innerHTML = '<div class="yc-autocomplete__empty">无匹配结果</div>';
+                return false;
+            }
+            suggestions.innerHTML = filtered.map(item => `
+                <div class="yc-autocomplete__suggestion-item" data-value="${escapeHtml(item.value)}">
+                    ${item.tag ? `
+                        <div class="yc-autocomplete__suggestion-item__content">
+                            <span class="yc-autocomplete__suggestion-item__label">${highlightText(item.label, value)}</span>
+                            <span class="yc-autocomplete__suggestion-item__value">${item.tag}</span>
+                        </div>
+                    ` : highlightText(item.label, value)}
+                </div>
+            `).join('');
+            return true;
+        }
+
+        function initAutocomplete(selector, data) {
+            const container = document.querySelector(selector);
+            if (!container) return;
+
+            const input = container.querySelector('input');
+            const suggestions = container.querySelector('.yc-autocomplete__suggestions');
+            const clearBtn = container.querySelector('.yc-autocomplete__clear');
+            let highlightedIndex = -1;
+
+            function showSuggestions() {
+                suggestions.style.display = 'block';
+                highlightedIndex = -1;
+                clearHighlighted();
+            }
+
+            function hideSuggestions() {
+                suggestions.style.display = 'none';
+                highlightedIndex = -1;
+                clearHighlighted();
+            }
+
+            function clearHighlighted() {
+                suggestions.querySelectorAll('.yc-autocomplete__suggestion-item').forEach(item => {
+                    item.classList.remove('is-highlighted');
+                });
+            }
+
+            function setHighlighted(index) {
+                const items = suggestions.querySelectorAll('.yc-autocomplete__suggestion-item');
+                if (items.length === 0) return;
+
+                clearHighlighted();
+                highlightedIndex = Math.max(-1, Math.min(index, items.length - 1));
+
+                if (highlightedIndex >= 0) {
+                    items[highlightedIndex].classList.add('is-highlighted');
+                    items[highlightedIndex].scrollIntoView({ block: 'nearest' });
+                }
+            }
+
+            function selectItem(item) {
+                if (!item) return;
+                input.value = item.dataset.value || item.textContent.trim();
+                hideSuggestions();
+                updateClearButton();
+                input.dispatchEvent(new Event('change'));
+            }
+
+            function updateClearButton() {
+                if (clearBtn) {
+                    clearBtn.style.display = input.value.trim() ? 'block' : 'none';
+                }
+            }
+
+            const filterAndShow = debounce((value) => {
+                updateClearButton();
+                if (!value) {
+                    hideSuggestions();
+                    return;
+                }
+
+                const filtered = data.filter(item =>
+                    item.label.toLowerCase().includes(value.toLowerCase()) ||
+                    item.value.toLowerCase().includes(value.toLowerCase())
+                );
+
+                const hasItems = renderSuggestions(suggestions, filtered, value);
+                if (hasItems) {
+                    showSuggestions();
+                } else {
+                    hideSuggestions();
+                }
+            }, 150);
+
+            input.addEventListener('input', (e) => {
+                filterAndShow(e.target.value.trim());
+            });
+
+            input.addEventListener('focus', () => {
+                if (input.value.trim() && suggestions.children.length > 0) {
+                    showSuggestions();
+                }
+            });
+
+            input.addEventListener('keydown', (e) => {
+                const items = suggestions.querySelectorAll('.yc-autocomplete__suggestion-item');
+                if (items.length === 0) return;
+
+                switch (e.key) {
+                    case 'ArrowDown':
+                        e.preventDefault();
+                        if (suggestions.style.display === 'none') {
+                            filterAndShow(input.value.trim());
+                        }
+                        setHighlighted(highlightedIndex + 1);
+                        break;
+                    case 'ArrowUp':
+                        e.preventDefault();
+                        setHighlighted(highlightedIndex - 1);
+                        break;
+                    case 'Enter':
+                        e.preventDefault();
+                        if (highlightedIndex >= 0 && items[highlightedIndex]) {
+                            selectItem(items[highlightedIndex]);
+                        }
+                        break;
+                    case 'Escape':
+                        e.preventDefault();
+                        hideSuggestions();
+                        break;
+                }
+            });
+
+            suggestions.addEventListener('click', (e) => {
+                const item = e.target.closest('.yc-autocomplete__suggestion-item');
+                if (item) {
+                    selectItem(item);
+                }
+            });
+
+            suggestions.addEventListener('mouseover', (e) => {
+                const item = e.target.closest('.yc-autocomplete__suggestion-item');
+                if (item) {
+                    const items = Array.from(suggestions.querySelectorAll('.yc-autocomplete__suggestion-item'));
+                    highlightedIndex = items.indexOf(item);
+                    clearHighlighted();
+                    item.classList.add('is-highlighted');
+                }
+            });
+
+            if (clearBtn) {
+                clearBtn.addEventListener('click', () => {
+                    input.value = '';
+                    updateClearButton();
+                    hideSuggestions();
+                    input.focus();
+                });
+            }
+
+            document.addEventListener('click', (e) => {
+                if (!container.contains(e.target)) {
+                    hideSuggestions();
+                }
+            });
+        }
+
+        initAutocomplete('#basicAutocomplete', suggestionsData.basic);
+        initAutocomplete('#emailAutocomplete', suggestionsData.email);
+        initAutocomplete('#addressAutocomplete', suggestionsData.address);
+        initAutocomplete('#cityAutocomplete', suggestionsData.city);
+
+        const searchContainer = document.querySelector('#searchAutocomplete');
+        if (searchContainer) {
+            const searchInput = searchContainer.querySelector('input');
+            const searchSuggestions = searchContainer.querySelector('.yc-autocomplete__suggestions');
+            const searchData = ['JavaScript', 'Java', 'Python', 'TypeScript', 'PHP', 'Go', 'Rust'];
+
+            const handleSearch = debounce((value) => {
+                if (!value) {
+                    searchSuggestions.style.display = 'none';
+                    return;
+                }
+
+                const filtered = searchData
+                    .filter(item => item.toLowerCase().includes(value.toLowerCase()))
+                    .map(item => ({ label: item, value: item }));
+
+                const hasItems = renderSuggestions(searchSuggestions, filtered, value);
+                searchSuggestions.style.display = hasItems ? 'block' : 'none';
+
+                if (hasItems) {
+                    const firstItem = searchSuggestions.querySelector('.yc-autocomplete__suggestion-item');
+                    if (firstItem) firstItem.classList.add('is-highlighted');
+                }
+            }, 150);
+
+            searchInput.addEventListener('input', (e) => handleSearch(e.target.value.trim()));
+            searchInput.addEventListener('focus', () => {
+                if (searchInput.value.trim()) handleSearch(searchInput.value.trim());
+            });
+
+            searchInput.addEventListener('keydown', (e) => {
+                const items = searchSuggestions.querySelectorAll('.yc-autocomplete__suggestion-item');
+                let highlighted = searchSuggestions.querySelector('.is-highlighted');
+                let index = Array.from(items).indexOf(highlighted);
+
+                switch (e.key) {
+                    case 'ArrowDown':
+                        e.preventDefault();
+                        if (searchSuggestions.style.display === 'none') {
+                            handleSearch(searchInput.value.trim());
+                        }
+                        index = Math.min(index + 1, items.length - 1);
+                        items.forEach(i => i.classList.remove('is-highlighted'));
+                        if (items[index]) items[index].classList.add('is-highlighted');
+                        break;
+                    case 'ArrowUp':
+                        e.preventDefault();
+                        index = Math.max(index - 1, 0);
+                        items.forEach(i => i.classList.remove('is-highlighted'));
+                        if (items[index]) items[index].classList.add('is-highlighted');
+                        break;
+                    case 'Enter':
+                        e.preventDefault();
+                        if (highlighted) {
+                            searchInput.value = highlighted.dataset.value;
+                            searchSuggestions.style.display = 'none';
+                        }
+                        break;
+                    case 'Escape':
+                        searchSuggestions.style.display = 'none';
+                        break;
+                }
+            });
+
+            searchSuggestions.addEventListener('click', (e) => {
+                const item = e.target.closest('.yc-autocomplete__suggestion-item');
+                if (item) {
+                    searchInput.value = item.dataset.value;
+                    searchSuggestions.style.display = 'none';
+                }
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!searchContainer.contains(e.target)) {
+                    searchSuggestions.style.display = 'none';
+                }
+            });
+        }
+
+        initAutocomplete('#largeAutocomplete', [
+            { value: '大选项1', label: '大选项1' },
+            { value: '大选项2', label: '大选项2' },
+            { value: '大选项3', label: '大选项3' }
+        ]);
+
+        initAutocomplete('#smallAutocomplete', [
+            { value: '小选项1', label: '小选项1' },
+            { value: '小选项2', label: '小选项2' },
+            { value: '小选项3', label: '小选项3' }
+        ]);
+
+        const remoteContainer = document.querySelector('#remoteAutocomplete');
+        if (remoteContainer) {
+            const remoteInput = remoteContainer.querySelector('input');
+            const remoteSuggestions = remoteContainer.querySelector('.yc-autocomplete__suggestions');
+
+            const mockRemoteFetch = async (query) => {
+                await new Promise(resolve => setTimeout(resolve, 500));
+                return [
+                    { value: `remote1-${query}`, label: `远程结果1 - ${query}` },
+                    { value: `remote2-${query}`, label: `远程结果2 - ${query}` },
+                    { value: `remote3-${query}`, label: `远程结果3 - ${query}` }
+                ];
+            };
+
+            const handleRemoteSearch = debounce(async (value) => {
+                if (!value) {
+                    remoteSuggestions.style.display = 'none';
+                    return;
+                }
+
+                remoteSuggestions.innerHTML = '<div class="yc-autocomplete__empty"><i class="yc-loading"></i> 加载中...</div>';
+                remoteSuggestions.classList.add('is-loading');
+                remoteSuggestions.style.display = 'block';
+
+                try {
+                    const data = await mockRemoteFetch(value);
+                    remoteSuggestions.classList.remove('is-loading');
+                    renderSuggestions(remoteSuggestions, data, value);
+                } catch (error) {
+                    remoteSuggestions.innerHTML = '<div class="yc-autocomplete__empty">加载失败，请重试</div>';
+                    remoteSuggestions.classList.remove('is-loading');
+                }
+            }, 300);
+
+            remoteInput.addEventListener('input', (e) => handleRemoteSearch(e.target.value.trim()));
+
+            remoteSuggestions.addEventListener('click', (e) => {
+                const item = e.target.closest('.yc-autocomplete__suggestion-item');
+                if (item) {
+                    remoteInput.value = item.dataset.value;
+                    remoteSuggestions.style.display = 'none';
+                }
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!remoteContainer.contains(e.target)) {
+                    remoteSuggestions.style.display = 'none';
+                }
+            });
+        }
+
+        document.getElementById('showAutocompleteBtn')?.addEventListener('click', () => {
+            const input = document.querySelector('#basicAutocomplete input');
+            if (input) {
+                input.focus();
+            }
+        });
+
+        document.getElementById('clearAutocompleteBtn')?.addEventListener('click', () => {
+            document.querySelectorAll('.yc-autocomplete input').forEach(input => {
+                input.value = '';
+            });
+        });
+    </script>
+</body>
+</html>

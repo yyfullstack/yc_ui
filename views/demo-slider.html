@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slider 滑块组件示例 - YC UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">Slider 滑块</h1>
+            <p class="demo-page-subtitle">用于选择数值范围的组件，支持滑块、范围选择、禁用等功能</p>
+        </div>
+
+        <div class="demo-section">
+            <h3>基础用法</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">拖动滑块选择数值</div>
+                <div class="slider-group">
+                    <div class="yc-slider" id="slider1" data-value="50" data-min="0" data-max="100" data-step="1"></div>
+                    <span class="slider-value" id="slider1Value">50</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>区间选择</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">拖动两个滑块选择数值范围</div>
+                <div class="slider-group">
+                    <div class="yc-slider yc-slider--range" id="slider-range1" data-min-value="20" data-max-value="80" data-min="0" data-max="100" data-step="1"></div>
+                </div>
+                <div class="slider-range-display" style="margin-top: 12px;">
+                    <span>最小值: <strong id="slider-range1Min">20</strong></span>
+                    <span>最大值: <strong id="slider-range1Max">80</strong></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>不同尺寸</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">三种尺寸规格</div>
+                <div class="demo-slider-sizes">
+                    <div class="slider-group">
+                        <span class="slider-label">Small</span>
+                        <div class="yc-slider yc-slider--small" id="slider2" data-value="30" data-min="0" data-max="100" data-step="1"></div>
+                        <span class="slider-value" id="slider2Value">30</span>
+                    </div>
+                    <div class="slider-group">
+                        <span class="slider-label">Base</span>
+                        <div class="yc-slider" id="slider3" data-value="50" data-min="0" data-max="100" data-step="1"></div>
+                        <span class="slider-value" id="slider3Value">50</span>
+                    </div>
+                    <div class="slider-group">
+                        <span class="slider-label">Large</span>
+                        <div class="yc-slider yc-slider--large" id="slider4" data-value="70" data-min="0" data-max="100" data-step="1"></div>
+                        <span class="slider-value" id="slider4Value">70</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>步长设置</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">设置步长值</div>
+                <div class="slider-group">
+                    <span class="slider-label">步长 10</span>
+                    <div class="yc-slider" id="slider5" data-value="50" data-min="0" data-max="100" data-step="10"></div>
+                    <span class="slider-value" id="slider5Value">50</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>禁用状态</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">禁用滑块</div>
+                <div class="slider-group">
+                    <div class="yc-slider is-disabled" id="slider9" data-value="50" data-min="0" data-max="100" data-step="1"></div>
+                    <span class="slider-value">禁用</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>带输入框</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">滑块配合输入框</div>
+                <div class="slider-group">
+                    <div class="yc-slider" id="slider12" data-value="50" data-min="0" data-max="100" data-step="1"></div>
+                    <div class="yc-slider__range-inputs">
+                        <input type="number" class="yc-slider__range-input" id="slider12Input" value="50" min="0" max="100" step="1">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>垂直滑块</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">垂直方向的滑块</div>
+                <div class="demo-slider-vertical">
+                    <div class="demo-slider-vertical-item">
+                        <div class="yc-slider yc-slider--vertical yc-slider--small" id="slider10" data-value="30" data-min="0" data-max="100" data-step="1" style="height: 150px;"></div>
+                        <span class="slider-value" id="slider10Value">30</span>
+                    </div>
+                    <div class="demo-slider-vertical-item">
+                        <div class="yc-slider yc-slider--vertical" id="slider11" data-value="50" data-min="0" data-max="100" data-step="1" style="height: 180px;"></div>
+                        <span class="slider-value" id="slider11Value">50</span>
+                    </div>
+                    <div class="demo-slider-vertical-item">
+                        <div class="yc-slider yc-slider--vertical yc-slider--large" id="slider13" data-value="70" data-min="0" data-max="100" data-step="1" style="height: 200px;"></div>
+                        <span class="slider-value" id="slider13Value">70</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function initSlider(element) {
+            const isDisabled = element.classList.contains('is-disabled');
+            const isVertical = element.classList.contains('yc-slider--vertical');
+            const isRange = element.classList.contains('yc-slider--range');
+            const min = parseFloat(element.dataset.min) || 0;
+            const max = parseFloat(element.dataset.max) || 100;
+            const step = parseFloat(element.dataset.step) || 1;
+
+            element.innerHTML = '';
+
+            const track = document.createElement('div');
+            track.className = 'yc-slider__track';
+
+            const trackFill = document.createElement('div');
+            trackFill.className = 'yc-slider__track-fill';
+            track.appendChild(trackFill);
+
+            if (isRange) {
+                initRangeSlider(element, track, trackFill, min, max, step, isVertical, isDisabled);
+            } else {
+                initSingleSlider(element, track, trackFill, min, max, step, isVertical, isDisabled);
+            }
+
+            element.appendChild(track);
+        }
+
+        function initSingleSlider(element, track, trackFill, min, max, step, isVertical, isDisabled) {
+            const value = parseFloat(element.dataset.value) || min;
+            const percent = ((value - min) / (max - min)) * 100;
+
+            if (isVertical) {
+                trackFill.style.height = percent + '%';
+                trackFill.style.bottom = '0';
+            } else {
+                trackFill.style.width = percent + '%';
+            }
+
+            const buttonWrapper = document.createElement('div');
+            buttonWrapper.className = 'yc-slider__button-wrapper';
+            buttonWrapper.innerHTML = `<div class="yc-slider__button"></div><div class="yc-slider__tooltip">${value}</div>`;
+
+            if (isVertical) {
+                buttonWrapper.style.bottom = percent + '%';
+                buttonWrapper.style.top = 'auto';
+            } else {
+                buttonWrapper.style.left = percent + '%';
+            }
+
+            track.appendChild(buttonWrapper);
+
+            if (!isDisabled) {
+                let isDragging = false;
+
+                buttonWrapper.addEventListener('mousedown', startDrag);
+                buttonWrapper.addEventListener('touchstart', startDrag, { passive: false });
+                track.addEventListener('click', handleClick);
+
+                function startDrag(e) {
+                    e.preventDefault();
+                    isDragging = true;
+                    buttonWrapper.classList.add('is-active');
+                    updateValue(e);
+
+                    const moveHandler = (e) => {
+                        if (!isDragging) return;
+                        e.preventDefault();
+                        updateValue(e);
+                    };
+
+                    const endHandler = () => {
+                        isDragging = false;
+                        buttonWrapper.classList.remove('is-active');
+                        document.removeEventListener('mousemove', moveHandler);
+                        document.removeEventListener('mouseup', endHandler);
+                        document.removeEventListener('touchmove', moveHandler);
+                        document.removeEventListener('touchend', endHandler);
+                    };
+
+                    document.addEventListener('mousemove', moveHandler);
+                    document.addEventListener('mouseup', endHandler);
+                    document.addEventListener('touchmove', moveHandler, { passive: false });
+                    document.addEventListener('touchend', endHandler);
+                }
+
+                function updateValue(e) {
+                    const rect = track.getBoundingClientRect();
+                    let percent;
+
+                    if (isVertical) {
+                        const clientPos = e.touches ? e.touches[0].clientY : e.clientY;
+                        percent = 1 - (clientPos - rect.top) / rect.height;
+                    } else {
+                        const clientPos = e.touches ? e.touches[0].clientX : e.clientX;
+                        percent = (clientPos - rect.left) / rect.width;
+                    }
+                    percent = Math.max(0, Math.min(1, percent));
+
+                    let newValue = min + percent * (max - min);
+                    newValue = Math.round(newValue / step) * step;
+                    newValue = Math.max(min, Math.min(max, newValue));
+
+                    element.dataset.value = newValue;
+                    updateSliderUI(newValue);
+                }
+
+                function updateSliderUI(currentValue) {
+                    const currentPercent = ((currentValue - min) / (max - min)) * 100;
+
+                    if (isVertical) {
+                        trackFill.style.height = currentPercent + '%';
+                        buttonWrapper.style.bottom = currentPercent + '%';
+                    } else {
+                        trackFill.style.width = currentPercent + '%';
+                        buttonWrapper.style.left = currentPercent + '%';
+                    }
+
+                    buttonWrapper.querySelector('.yc-slider__tooltip').textContent = currentValue;
+
+                    const valueEl = document.getElementById(element.id + 'Value');
+                    if (valueEl) valueEl.textContent = currentValue;
+
+                    const inputEl = document.getElementById(element.id + 'Input');
+                    if (inputEl) inputEl.value = currentValue;
+                }
+
+                function handleClick(e) {
+                    if (isDragging) return;
+                    updateValue(e);
+                }
+            }
+        }
+
+        function initRangeSlider(element, track, trackFill, min, max, step, isVertical, isDisabled) {
+            let minVal = parseFloat(element.dataset.minValue) || min;
+            let maxVal = parseFloat(element.dataset.maxValue) || max;
+
+            function updateRangeUI() {
+                const minPercent = ((minVal - min) / (max - min)) * 100;
+                const maxPercent = ((maxVal - min) / (max - min)) * 100;
+
+                if (isVertical) {
+                    trackFill.style.height = (maxPercent - minPercent) + '%';
+                    trackFill.style.bottom = minPercent + '%';
+                    minButton.style.bottom = minPercent + '%';
+                    maxButton.style.bottom = maxPercent + '%';
+                } else {
+                    trackFill.style.left = minPercent + '%';
+                    trackFill.style.width = (maxPercent - minPercent) + '%';
+                    minButton.style.left = minPercent + '%';
+                    maxButton.style.left = maxPercent + '%';
+                }
+
+                minButton.querySelector('.yc-slider__tooltip').textContent = minVal;
+                maxButton.querySelector('.yc-slider__tooltip').textContent = maxVal;
+
+                document.getElementById(element.id + 'Min').textContent = minVal;
+                document.getElementById(element.id + 'Max').textContent = maxVal;
+            }
+
+            const minButton = document.createElement('div');
+            minButton.className = 'yc-slider__button-wrapper';
+            minButton.innerHTML = `<div class="yc-slider__button"></div><div class="yc-slider__tooltip">${minVal}</div>`;
+
+            const maxButton = document.createElement('div');
+            maxButton.className = 'yc-slider__button-wrapper';
+            maxButton.innerHTML = `<div class="yc-slider__button"></div><div class="yc-slider__tooltip">${maxVal}</div>`;
+
+            track.appendChild(minButton);
+            track.appendChild(maxButton);
+
+            updateRangeUI();
+
+            if (!isDisabled) {
+                let draggingMin = false;
+                let draggingMax = false;
+
+                function handleDrag(btn, type) {
+                    return function(e) {
+                        e.preventDefault();
+                        if (type === 'min') draggingMin = true;
+                        else draggingMax = true;
+                        btn.classList.add('is-active', 'is-dragging');
+
+                        const moveHandler = (e) => {
+                            e.preventDefault();
+                            const rect = track.getBoundingClientRect();
+                            let percent;
+
+                            if (isVertical) {
+                                const clientPos = e.touches ? e.touches[0].clientY : e.clientY;
+                                percent = 1 - (clientPos - rect.top) / rect.height;
+                            } else {
+                                const clientPos = e.touches ? e.touches[0].clientX : e.clientX;
+                                percent = (clientPos - rect.left) / rect.width;
+                            }
+                            percent = Math.max(0, Math.min(1, percent));
+
+                            let newValue = min + percent * (max - min);
+                            newValue = Math.round(newValue / step) * step;
+                            newValue = Math.max(min, Math.min(max, newValue));
+
+                            if (type === 'min') {
+                                if (newValue >= maxVal - step) newValue = maxVal - step;
+                                minVal = newValue;
+                            } else {
+                                if (newValue <= minVal + step) newValue = minVal + step;
+                                maxVal = newValue;
+                            }
+
+                            updateRangeUI();
+                        };
+
+                        const endHandler = () => {
+                            if (type === 'min') draggingMin = false;
+                            else draggingMax = false;
+                            btn.classList.remove('is-active', 'is-dragging');
+                            document.removeEventListener('mousemove', moveHandler);
+                            document.removeEventListener('mouseup', endHandler);
+                            document.removeEventListener('touchmove', moveHandler);
+                            document.removeEventListener('touchend', endHandler);
+                        };
+
+                        document.addEventListener('mousemove', moveHandler);
+                        document.addEventListener('mouseup', endHandler);
+                        document.addEventListener('touchmove', moveHandler, { passive: false });
+                        document.addEventListener('touchend', endHandler);
+                    };
+                }
+
+                minButton.addEventListener('mousedown', handleDrag(minButton, 'min'));
+                minButton.addEventListener('touchstart', handleDrag(minButton, 'min'), { passive: false });
+                maxButton.addEventListener('mousedown', handleDrag(maxButton, 'max'));
+                maxButton.addEventListener('touchstart', handleDrag(maxButton, 'max'), { passive: false });
+
+                track.addEventListener('click', function(e) {
+                    if (e.target === minButton || e.target === maxButton ||
+                        e.target.closest('.yc-slider__button-wrapper')) return;
+
+                    const rect = track.getBoundingClientRect();
+                    let percent;
+
+                    if (isVertical) {
+                        percent = 1 - (e.clientY - rect.top) / rect.height;
+                    } else {
+                        percent = (e.clientX - rect.left) / rect.width;
+                    }
+                    percent = Math.max(0, Math.min(1, percent));
+
+                    let newValue = min + percent * (max - min);
+                    newValue = Math.round(newValue / step) * step;
+                    newValue = Math.max(min, Math.min(max, newValue));
+
+                    const distToMin = Math.abs(newValue - minVal);
+                    const distToMax = Math.abs(newValue - maxVal);
+
+                    if (distToMin < distToMax) {
+                        minVal = newValue;
+                        if (minVal >= maxVal - step) minVal = maxVal - step;
+                    } else {
+                        maxVal = newValue;
+                        if (maxVal <= minVal + step) maxVal = minVal + step;
+                    }
+
+                    updateRangeUI();
+                });
+            }
+        }
+
+        function initAll() {
+            document.querySelectorAll('.yc-slider').forEach(initSlider);
+
+            document.querySelectorAll('.yc-slider__range-input').forEach(input => {
+                input.addEventListener('input', function() {
+                    const sliderId = this.id.replace('Input', '');
+                    const slider = document.getElementById(sliderId);
+                    if (slider) {
+                        let value = parseFloat(this.value) || 0;
+                        const min = parseFloat(slider.dataset.min) || 0;
+                        const max = parseFloat(slider.dataset.max) || 100;
+                        value = Math.max(min, Math.min(max, value));
+                        slider.dataset.value = value;
+                        initSlider(slider);
+                    }
+                });
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', initAll);
+    </script>
+</body>
+</html>

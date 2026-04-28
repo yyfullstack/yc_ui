@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cascader 级联选择器组件示例 - YC UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">Cascader 级联选择器组件</h1>
+            <p class="demo-page-subtitle">多级数据的级联选择器，支持单选、多选、搜索等功能</p>
+        </div>
+
+        <div class="demo-section">
+            <h3>基础用法</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">默认展开方式</div>
+                <div class="demo-row">
+                    <div class="yc-cascader" id="basicCascader">
+                        <div class="yc-cascader__input-wrapper">
+                            <input type="text" class="yc-cascader__input" placeholder="请选择" readonly>
+                            <span class="yc-cascader__dropdown-icon"><i class="fas fa-chevron-down"></i></span>
+                        </div>
+                        <div class="yc-cascader__dropdown" style="display: none;">
+                            <div class="yc-cascader__panel">
+                                <div class="yc-cascader__option" data-value="guide" data-level="0">指南</div>
+                                <div class="yc-cascader__option" data-value="component" data-level="0">组件</div>
+                                <div class="yc-cascader__option" data-value="resource" data-level="0">资源</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>禁用选项</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">禁用示例</div>
+                <div class="demo-row">
+                    <div class="yc-cascader" id="disabledCascader">
+                        <div class="yc-cascader__input-wrapper">
+                            <input type="text" class="yc-cascader__input" placeholder="请选择" readonly>
+                            <span class="yc-cascader__dropdown-icon"><i class="fas fa-chevron-down"></i></span>
+                        </div>
+                        <div class="yc-cascader__dropdown" style="display: none;">
+                            <div class="yc-cascader__panel">
+                                <div class="yc-cascader__option is-disabled" data-value="guide" data-level="0">指南 (禁用)</div>
+                                <div class="yc-cascader__option" data-value="component" data-level="0">组件</div>
+                                <div class="yc-cascader__option" data-value="resource" data-level="0">资源</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>可清空</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">可清空示例</div>
+                <div class="demo-row">
+                    <div class="yc-cascader" id="clearableCascader">
+                        <div class="yc-cascader__input-wrapper">
+                            <input type="text" class="yc-cascader__input" placeholder="请选择" readonly>
+                            <span class="yc-cascader__clear" style="display: none;"><i class="fas fa-times"></i></span>
+                            <span class="yc-cascader__dropdown-icon"><i class="fas fa-chevron-down"></i></span>
+                        </div>
+                        <div class="yc-cascader__dropdown" style="display: none;">
+                            <div class="yc-cascader__panel">
+                                <div class="yc-cascader__option" data-value="guide" data-level="0">指南</div>
+                                <div class="yc-cascader__option" data-value="component" data-level="0">组件</div>
+                                <div class="yc-cascader__option" data-value="resource" data-level="0">资源</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>仅显示最后一级</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">最后一级示例</div>
+                <div class="demo-row">
+                    <div class="yc-cascader" id="lastLevelCascader">
+                        <div class="yc-cascader__input-wrapper">
+                            <input type="text" class="yc-cascader__input" placeholder="请选择" readonly>
+                            <span class="yc-cascader__dropdown-icon"><i class="fas fa-chevron-down"></i></span>
+                        </div>
+                        <div class="yc-cascader__dropdown" style="display: none;">
+                            <div class="yc-cascader__panel">
+                                <div class="yc-cascader__option" data-value="guide" data-level="0">指南</div>
+                                <div class="yc-cascader__option" data-value="component" data-level="0">组件</div>
+                                <div class="yc-cascader__option" data-value="resource" data-level="0">资源</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>多选</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">多选示例</div>
+                <div class="demo-row">
+                    <div class="yc-cascader yc-cascader--multiple" id="multipleCascader">
+                        <div class="yc-cascader__input-wrapper">
+                            <div class="yc-cascader__tags" style="display: none;"></div>
+                            <input type="text" class="yc-cascader__input" placeholder="请选择" readonly>
+                            <span class="yc-cascader__dropdown-icon"><i class="fas fa-chevron-down"></i></span>
+                        </div>
+                        <div class="yc-cascader__dropdown" style="display: none;">
+                            <div class="yc-cascader__panel">
+                                <div class="yc-cascader__option" data-value="guide" data-level="0">指南</div>
+                                <div class="yc-cascader__option" data-value="component" data-level="0">组件</div>
+                                <div class="yc-cascader__option" data-value="resource" data-level="0">资源</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>选择任意一级选项</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">任意级别选择</div>
+                <div class="demo-row">
+                    <div class="yc-cascader" id="anyLevelCascader">
+                        <div class="yc-cascader__input-wrapper">
+                            <input type="text" class="yc-cascader__input" placeholder="请选择" readonly>
+                            <span class="yc-cascader__dropdown-icon"><i class="fas fa-chevron-down"></i></span>
+                        </div>
+                        <div class="yc-cascader__dropdown" style="display: none;">
+                            <div class="yc-cascader__panel">
+                                <div class="yc-cascader__option" data-value="guide" data-level="0">指南</div>
+                                <div class="yc-cascader__option" data-value="component" data-level="0">组件</div>
+                                <div class="yc-cascader__option" data-value="resource" data-level="0">资源</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>可搜索</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">搜索示例</div>
+                <div class="demo-row">
+                    <div class="yc-cascader" id="searchableCascader">
+                        <div class="yc-cascader__input-wrapper">
+                            <input type="text" class="yc-cascader__input" placeholder="请选择或搜索" readonly>
+                            <span class="yc-cascader__dropdown-icon"><i class="fas fa-chevron-down"></i></span>
+                        </div>
+                        <div class="yc-cascader__dropdown" style="display: none;">
+                            <input type="text" class="yc-cascader__search-input" placeholder="搜索">
+                            <div class="yc-cascader__panel">
+                                <div class="yc-cascader__option" data-value="guide" data-level="0">指南</div>
+                                <div class="yc-cascader__option" data-value="component" data-level="0">组件</div>
+                                <div class="yc-cascader__option" data-value="resource" data-level="0">资源</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>尺寸变体</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">不同尺寸输入框</div>
+                <div class="demo-row" style="gap: 20px; flex-wrap: wrap;">
+                    <div class="yc-cascader yc-cascader--large" id="largeCascader">
+                        <div class="yc-cascader__input-wrapper">
+                            <input type="text" class="yc-cascader__input" placeholder="大尺寸" readonly>
+                            <span class="yc-cascader__dropdown-icon"><i class="fas fa-chevron-down"></i></span>
+                        </div>
+                        <div class="yc-cascader__dropdown" style="display: none;">
+                            <div class="yc-cascader__panel">
+                                <div class="yc-cascader__option" data-value="guide" data-level="0">指南</div>
+                                <div class="yc-cascader__option" data-value="component" data-level="0">组件</div>
+                                <div class="yc-cascader__option" data-value="resource" data-level="0">资源</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="yc-cascader yc-cascader--small" id="smallCascader">
+                        <div class="yc-cascader__input-wrapper">
+                            <input type="text" class="yc-cascader__input" placeholder="小尺寸" readonly>
+                            <span class="yc-cascader__dropdown-icon"><i class="fas fa-chevron-down"></i></span>
+                        </div>
+                        <div class="yc-cascader__dropdown" style="display: none;">
+                            <div class="yc-cascader__panel">
+                                <div class="yc-cascader__option" data-value="guide" data-level="0">指南</div>
+                                <div class="yc-cascader__option" data-value="component" data-level="0">组件</div>
+                                <div class="yc-cascader__option" data-value="resource" data-level="0">资源</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>级联面板</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">面板示例</div>
+                <div class="demo-row">
+                    <div class="yc-cascader-panel" id="cascaderPanel">
+                        <div class="yc-cascader-panel__body">
+                            <div class="yc-cascader__panel">
+                                <div class="yc-cascader__option" data-value="guide" data-level="0">指南</div>
+                                <div class="yc-cascader__option" data-value="component" data-level="0">组件</div>
+                                <div class="yc-cascader__option" data-value="resource" data-level="0">资源</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const cascaderData = {
+            guide: {
+                label: '指南',
+                value: 'guide',
+                children: [
+                    { value: 'installation', label: '安装' },
+                    { value: 'quick-start', label: '快速开始' },
+                    { value: 'customization', label: '定制主题' },
+                    { value: 'internationalization', label: '国际化' }
+                ]
+            },
+            component: {
+                label: '组件',
+                value: 'component',
+                children: [
+                    { value: 'basic', label: '基础组件', children: [
+                        { value: 'button', label: '按钮' },
+                        { value: 'input', label: '输入框' },
+                        { value: 'select', label: '选择器' }
+                    ]},
+                    { value: 'form', label: '表单组件', children: [
+                        { value: 'form', label: '表单' },
+                        { value: 'cascader', label: '级联选择器' },
+                        { value: 'date-picker', label: '日期选择器' }
+                    ]},
+                    { value: 'data', label: '数据展示', children: [
+                        { value: 'table', label: '表格' },
+                        { value: 'tree', label: '树' },
+                        { value: 'pagination', label: '分页' }
+                    ]}
+                ]
+            },
+            resource: {
+                label: '资源',
+                value: 'resource',
+                children: [
+                    { value: 'api', label: 'API文档' },
+                    { value: 'examples', label: '示例' },
+                    { value: 'github', label: 'GitHub' }
+                ]
+            }
+        };
+
+        const rootOptions = [cascaderData.guide, cascaderData.component, cascaderData.resource];
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function debounce(func, wait) {
+            let timeout;
+            return function(...args) {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(this, args), wait);
+            };
+        }
+
+        function findNodeData(options, value) {
+            for (const option of options) {
+                if (option.value === value) return option;
+                if (option.children) {
+                    const found = findNodeData(option.children, value);
+                    if (found) return found;
+                }
+            }
+            return null;
+        }
+
+        function getPathText(activePath) {
+            return activePath.map(node => node.label).join(' / ');
+        }
+
+        function createOptionElement(item, level, isActive) {
+            const option = document.createElement('div');
+            option.className = 'yc-cascader__option' + (isActive ? ' is-active' : '') + (item.disabled ? ' is-disabled' : '');
+            option.dataset.value = item.value;
+            option.dataset.level = level;
+
+            const hasChildren = item.children && item.children.length > 0;
+            option.innerHTML = `
+                <span class="yc-cascader__option__label">${escapeHtml(item.label)}</span>
+                ${hasChildren ? '<span class="yc-cascader__option__arrow"><i class="fas fa-chevron-right"></i></span>' : ''}
+            `;
+
+            return option;
+        }
+
+        function initCascader(selector, data, options = {}) {
+            const container = document.querySelector(selector);
+            if (!container) return;
+
+            const {
+                multiple = false,
+                showAllLevels = true,
+                checkStrictly = false,
+                clearable = false,
+                searchable = false
+            } = options;
+
+            const inputWrapper = container.querySelector('.yc-cascader__input-wrapper');
+            const input = container.querySelector('.yc-cascader__input');
+            const dropdown = container.querySelector('.yc-cascader__dropdown');
+            const dropdownIcon = container.querySelector('.yc-cascader__dropdown-icon');
+            const clearBtn = container.querySelector('.yc-cascader__clear');
+            const tagsContainer = container.querySelector('.yc-cascader__tags');
+            const searchInput = container.querySelector('.yc-cascader__search-input');
+
+            let activePath = [];
+            let selectedValues = multiple ? [] : null;
+            let highlightedIndex = -1;
+
+            function initFirstPanel() {
+                const firstPanel = dropdown.querySelector('.yc-cascader__panel');
+                if (!firstPanel) return;
+
+                firstPanel.innerHTML = '';
+                data.forEach(item => {
+                    const option = createOptionElement(item, 0, false);
+                    firstPanel.appendChild(option);
+                });
+            }
+
+            function showDropdown() {
+                dropdown.style.display = 'flex';
+                dropdownIcon?.classList.add('is-reverse');
+                highlightedIndex = -1;
+            }
+
+            function hideDropdown() {
+                dropdown.style.display = 'none';
+                dropdownIcon?.classList.remove('is-reverse');
+                highlightedIndex = -1;
+            }
+
+            function updateDisplay() {
+                if (multiple && tagsContainer) {
+                    updateTags();
+                } else if (activePath.length > 0) {
+                    input.value = showAllLevels ? getPathText(activePath) : activePath[activePath.length - 1].label;
+                    clearBtn?.style && (clearBtn.style.display = 'inline-flex');
+                } else {
+                    input.value = '';
+                    clearBtn?.style && (clearBtn.style.display = 'none');
+                }
+            }
+
+            function updateTags() {
+                if (!tagsContainer || !selectedValues) return;
+                tagsContainer.innerHTML = '';
+
+                if (selectedValues.length === 0) {
+                    tagsContainer.style.display = 'none';
+                    input.style.display = 'block';
+                    input.placeholder = '请选择';
+                    return;
+                }
+
+                tagsContainer.style.display = 'flex';
+                input.style.display = 'none';
+                input.placeholder = '';
+
+                selectedValues.forEach(value => {
+                    const nodeData = findNodeData(data, value);
+                    if (nodeData) {
+                        const tag = document.createElement('div');
+                        tag.className = 'yc-cascader__tag';
+                        tag.dataset.value = value;
+                        tag.innerHTML = `<span>${escapeHtml(nodeData.label)}</span><span class="yc-cascader__tag__close"><i class="fas fa-times"></i></span>`;
+                        tagsContainer.appendChild(tag);
+
+                        tag.querySelector('.yc-cascader__tag__close').addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            selectedValues = selectedValues.filter(v => v !== value);
+                            updateTags();
+                        });
+                    }
+                });
+            }
+
+            function createChildPanel(parentOption, children) {
+                const level = parseInt(parentOption.dataset.level) + 1;
+                const parentPanel = parentOption.closest('.yc-cascader__panel');
+
+                let nextPanel = parentPanel.nextElementSibling;
+                while (nextPanel && nextPanel.classList.contains('yc-cascader__panel')) {
+                    const toRemove = nextPanel;
+                    nextPanel = nextPanel.nextElementSibling;
+                    toRemove.remove();
+                }
+
+                const panel = document.createElement('div');
+                panel.className = 'yc-cascader__panel';
+                children.forEach(item => {
+                    const option = createOptionElement(item, level, false);
+                    panel.appendChild(option);
+                });
+                parentPanel.parentElement.appendChild(panel);
+
+                panel.addEventListener('click', handleOptionClick);
+            }
+
+            function handleOptionClick(e) {
+                const option = e.target.closest('.yc-cascader__option');
+                if (!option || option.classList.contains('is-disabled')) return;
+
+                const value = option.dataset.value;
+                const level = parseInt(option.dataset.level);
+                const nodeData = findNodeData(data, value);
+                const hasChildren = nodeData && nodeData.children && nodeData.children.length > 0;
+
+                const panel = option.closest('.yc-cascader__panel');
+                panel.querySelectorAll('.yc-cascader__option').forEach(opt => opt.classList.remove('is-active'));
+                option.classList.add('is-active');
+
+                activePath = activePath.slice(0, level);
+                activePath[level] = { value, label: nodeData.label };
+
+                if (hasChildren && !checkStrictly) {
+                    createChildPanel(option, nodeData.children);
+                } else {
+                    if (multiple) {
+                        if (!selectedValues.includes(value)) {
+                            selectedValues.push(value);
+                        }
+                        updateTags();
+                    } else {
+                        updateDisplay();
+                        hideDropdown();
+                    }
+                }
+            }
+
+            function handleKeyboardNavigation(e) {
+                if (dropdown.style.display === 'none') return;
+
+                const panels = dropdown.querySelectorAll('.yc-cascader__panel');
+                const lastPanel = panels[panels.length - 1];
+                const options = Array.from(lastPanel.querySelectorAll('.yc-cascader__option:not(.is-disabled)'));
+
+                if (options.length === 0) return;
+
+                switch (e.key) {
+                    case 'ArrowDown':
+                        e.preventDefault();
+                        highlightedIndex = Math.min(highlightedIndex + 1, options.length - 1);
+                        updateKeyboardHighlight(options);
+                        break;
+                    case 'ArrowUp':
+                        e.preventDefault();
+                        highlightedIndex = Math.max(highlightedIndex - 1, 0);
+                        updateKeyboardHighlight(options);
+                        break;
+                    case 'ArrowRight':
+                        e.preventDefault();
+                        const highlighted = options[highlightedIndex];
+                        if (highlighted) {
+                            handleOptionClick({ target: highlighted });
+                        }
+                        break;
+                    case 'ArrowLeft':
+                        e.preventDefault();
+                        if (panels.length > 1) {
+                            const currentPanel = panels[panels.length - 1];
+                            const prevPanel = panels[panels.length - 2];
+                            currentPanel.remove();
+                            const prevActive = prevPanel.querySelector('.yc-cascader__option.is-active');
+                            if (prevActive) {
+                                activePath = activePath.slice(0, parseInt(prevActive.dataset.level));
+                            }
+                        }
+                        break;
+                    case 'Enter':
+                        e.preventDefault();
+                        if (highlightedIndex >= 0 && options[highlightedIndex]) {
+                            handleOptionClick({ target: options[highlightedIndex] });
+                        }
+                        break;
+                    case 'Escape':
+                        e.preventDefault();
+                        hideDropdown();
+                        break;
+                }
+            }
+
+            function updateKeyboardHighlight(options) {
+                options.forEach((opt, idx) => {
+                    if (idx === highlightedIndex) {
+                        opt.classList.add('is-highlighted');
+                        opt.scrollIntoView({ block: 'nearest' });
+                    } else {
+                        opt.classList.remove('is-highlighted');
+                    }
+                });
+            }
+
+            inputWrapper.addEventListener('click', (e) => {
+                if (e.target.closest('.yc-cascader__clear') || e.target.closest('.yc-cascader__tag__close')) return;
+                if (dropdown.style.display === 'none') {
+                    showDropdown();
+                    input.focus();
+                } else {
+                    hideDropdown();
+                }
+            });
+
+            const firstPanel = dropdown.querySelector('.yc-cascader__panel');
+            if (firstPanel) {
+                firstPanel.addEventListener('click', handleOptionClick);
+            }
+
+            input.addEventListener('keydown', handleKeyboardNavigation);
+
+            document.addEventListener('click', (e) => {
+                if (!container.contains(e.target)) {
+                    hideDropdown();
+                }
+            });
+
+            clearBtn?.addEventListener('click', (e) => {
+                e.stopPropagation();
+                activePath = [];
+                selectedValues = multiple ? [] : null;
+                input.value = '';
+                clearBtn.style.display = 'none';
+                tagsContainer?.innerHTML && (tagsContainer.innerHTML = '');
+                tagsContainer?.style && (tagsContainer.style.display = 'none');
+                input.style.display = 'block';
+                initFirstPanel();
+                const panels = dropdown.querySelectorAll('.yc-cascader__panel');
+                panels.forEach((panel, idx) => {
+                    if (idx > 0) panel.remove();
+                });
+            });
+
+            if (searchInput) {
+                input.style.display = 'none';
+
+                const handleSearch = debounce((keyword) => {
+                    if (!keyword) {
+                        initFirstPanel();
+                        const panels = dropdown.querySelectorAll('.yc-cascader__panel');
+                        panels.forEach((panel, idx) => { if (idx > 0) panel.remove(); });
+                        dropdown.style.display = 'flex';
+                        return;
+                    }
+
+                    const lowerKeyword = keyword.toLowerCase();
+                    const results = [];
+
+                    function searchNodes(nodes, path) {
+                        for (const node of nodes) {
+                            const currentPath = [...path, node];
+                            if (node.label.toLowerCase().includes(lowerKeyword)) {
+                                results.push({ node, path: currentPath });
+                            }
+                            if (node.children) {
+                                searchNodes(node.children, currentPath);
+                            }
+                        }
+                    }
+                    searchNodes(data, []);
+
+                    const panels = dropdown.querySelectorAll('.yc-cascader__panel');
+                    panels.forEach(p => p.remove());
+
+                    const searchPanel = document.createElement('div');
+                    searchPanel.className = 'yc-cascader__panel';
+                    searchPanel.dataset.search = 'true';
+
+                    if (results.length === 0) {
+                        searchPanel.innerHTML = '<div class="yc-cascader__empty">无匹配结果</div>';
+                    } else {
+                        results.forEach(result => {
+                            const option = document.createElement('div');
+                            option.className = 'yc-cascader__option';
+                            option.dataset.value = result.node.value;
+                            option.dataset.level = result.path.length - 1;
+                            option.dataset.path = result.path.map(n => n.value).join(',');
+                            option.innerHTML = `<span class="yc-cascader__option__label">${escapeHtml(result.path.map(n => n.label).join(' / '))}</span>`;
+                            searchPanel.appendChild(option);
+                        });
+                    }
+                    dropdown.appendChild(searchPanel);
+                }, 200);
+
+                searchInput.addEventListener('input', (e) => {
+                    handleSearch(e.target.value.trim());
+                });
+            }
+
+            initFirstPanel();
+            if (multiple) selectedValues = [];
+        }
+
+        initCascader('#basicCascader', rootOptions);
+
+        initCascader('#disabledCascader', [
+            { ...cascaderData.guide, label: '指南 (禁用)', disabled: true },
+            cascaderData.component,
+            cascaderData.resource
+        ]);
+
+        initCascader('#clearableCascader', rootOptions, { clearable: true });
+        initCascader('#lastLevelCascader', rootOptions, { showAllLevels: false });
+        initCascader('#multipleCascader', rootOptions, { multiple: true });
+        initCascader('#anyLevelCascader', rootOptions, { checkStrictly: true });
+        initCascader('#searchableCascader', rootOptions, { searchable: true });
+
+        initCascader('#largeCascader', rootOptions);
+        initCascader('#smallCascader', rootOptions);
+
+        function initCascaderPanel() {
+            const panel = document.querySelector('#cascaderPanel');
+            if (!panel) return;
+
+            const panelBody = panel.querySelector('.yc-cascader-panel__body');
+            if (!panelBody) return;
+
+            function createPanelOption(item, level) {
+                const hasChildren = item.children && item.children.length > 0;
+                const option = document.createElement('div');
+                option.className = 'yc-cascader__option' + (item.disabled ? ' is-disabled' : '');
+                option.dataset.value = item.value;
+                option.dataset.level = level;
+                option.innerHTML = `
+                    <span class="yc-cascader__option__label">${escapeHtml(item.label)}</span>
+                    ${hasChildren ? '<span class="yc-cascader__option__arrow"><i class="fas fa-chevron-right"></i></span>' : ''}
+                `;
+                return option;
+            }
+
+            function initPanel(panelElement, items, level) {
+                panelElement.innerHTML = '';
+                items.forEach(item => {
+                    panelElement.appendChild(createPanelOption(item, level));
+                });
+            }
+
+            const firstPanel = panelBody.querySelector('.yc-cascader__panel');
+            if (firstPanel) {
+                initPanel(firstPanel, rootOptions, 0);
+            }
+
+            panelBody.addEventListener('click', (e) => {
+                const option = e.target.closest('.yc-cascader__option');
+                if (!option || option.classList.contains('is-disabled')) return;
+
+                const value = option.dataset.value;
+                const level = parseInt(option.dataset.level);
+                const nodeData = findNodeData(rootOptions, value);
+                const hasChildren = nodeData && nodeData.children && nodeData.children.length > 0;
+
+                const panel = option.closest('.yc-cascader__panel');
+                panel.querySelectorAll('.yc-cascader__option').forEach(opt => opt.classList.remove('is-active'));
+                option.classList.add('is-active');
+
+                if (hasChildren) {
+                    let nextPanel = panel.nextElementSibling;
+                    while (nextPanel && nextPanel.classList.contains('yc-cascader__panel')) {
+                        const toRemove = nextPanel;
+                        nextPanel = nextPanel.nextElementSibling;
+                        toRemove.remove();
+                    }
+
+                    const childPanel = document.createElement('div');
+                    childPanel.className = 'yc-cascader__panel';
+                    nodeData.children.forEach(item => {
+                        childPanel.appendChild(createPanelOption(item, level + 1));
+                    });
+                    panelBody.appendChild(childPanel);
+                }
+            });
+        }
+
+        initCascaderPanel();
+    </script>
+</body>
+</html>

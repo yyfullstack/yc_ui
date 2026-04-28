@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading 加载组件示例 - YC UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">Loading 加载</h1>
+            <p class="demo-page-subtitle">用于显示操作状态的加载指示器</p>
+        </div>
+
+        <div class="demo-section">
+            <h3>全屏加载</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">显示全屏加载指示器</div>
+                <div class="demo-row">
+                    <button class="yc-button yc-button--primary" onclick="showFullscreenLoading()">
+                        <i class="fas fa-spinner fa-pulse"></i> 显示全屏加载
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>局部加载</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">显示在容器内的加载指示器</div>
+                <div class="yc-loading-parent" id="local-loading-demo" style="min-height: 150px; border: 1px solid var(--yc-color-border-light); border-radius: var(--yc-border-radius-base); padding: 20px;">
+                    <p style="color: var(--yc-color-text-regular); margin: 0;">这是一段模拟的内容区域，点击下方按钮会在此区域显示加载状态</p>
+                </div>
+                <div class="demo-row" style="margin-top: 16px;">
+                    <button class="yc-button yc-button--primary" onclick="showLocalLoading()">
+                        <i class="fas fa-spinner fa-pulse"></i> 显示加载
+                    </button>
+                    <button class="yc-button" onclick="hideLocalLoading()">
+                        <i class="fas fa-times"></i> 隐藏加载
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>尺寸</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">三种尺寸规格</div>
+                <div class="demo-row" style="gap: 24px; align-items: center;">
+                    <div class="yc-loading-inline yc-loading-small">
+                        <div class="yc-loading-spinner"></div>
+                    </div>
+                    <div class="yc-loading-inline">
+                        <div class="yc-loading-spinner"></div>
+                    </div>
+                    <div class="yc-loading-inline yc-loading-large">
+                        <div class="yc-loading-spinner"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>加载文案</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">显示加载文字提示</div>
+                <div class="demo-row" style="gap: 24px; align-items: center;">
+                    <div class="yc-loading-inline">
+                        <div class="yc-loading-spinner"></div>
+                        <span class="yc-loading-text">加载中...</span>
+                    </div>
+                    <div class="yc-loading-inline">
+                        <div class="yc-loading-spinner"></div>
+                        <span class="yc-loading-text">拼命加载中</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>自定义颜色</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">使用 CSS 变量定制颜色</div>
+                <div class="demo-row" style="gap: 24px; align-items: center;">
+                    <div class="yc-loading-inline" style="--yc-color-primary: #409eff;">
+                        <div class="yc-loading-spinner"></div>
+                    </div>
+                    <div class="yc-loading-inline" style="--yc-color-primary: #67c23a;">
+                        <div class="yc-loading-spinner"></div>
+                    </div>
+                    <div class="yc-loading-inline" style="--yc-color-primary: #e6a23c;">
+                        <div class="yc-loading-spinner"></div>
+                    </div>
+                    <div class="yc-loading-inline" style="--yc-color-primary: #f56c6c;">
+                        <div class="yc-loading-spinner"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class Loading {
+            static instance = null;
+
+            static show(options = {}) {
+                if (this.instance) {
+                    this.instance.close();
+                }
+                this.instance = new this(options);
+                return this.instance;
+            }
+
+            static hide() {
+                if (this.instance) {
+                    this.instance.close();
+                    this.instance = null;
+                }
+            }
+
+            constructor(options = {}) {
+                this.target = options.target;
+                this.text = options.text || '';
+                this.fullscreen = options.fullscreen !== false;
+                this.init();
+            }
+
+            init() {
+                this.container = document.createElement('div');
+                this.container.className = 'yc-loading';
+
+                if (this.fullscreen) {
+                    this.container.classList.add('is-fullscreen');
+                }
+
+                const wrapper = document.createElement('div');
+                wrapper.className = 'yc-loading-spinner-wrapper';
+
+                const spinner = document.createElement('div');
+                spinner.className = 'yc-loading-spinner';
+                wrapper.appendChild(spinner);
+
+                if (this.text) {
+                    const textEl = document.createElement('div');
+                    textEl.className = 'yc-loading-text';
+                    textEl.textContent = this.text;
+                    wrapper.appendChild(textEl);
+                }
+
+                this.container.appendChild(wrapper);
+
+                if (this.target) {
+                    const targetElement = document.querySelector(this.target);
+                    if (targetElement) {
+                        targetElement.appendChild(this.container);
+                    }
+                } else {
+                    document.body.appendChild(this.container);
+                }
+
+                setTimeout(() => {
+                    this.container.classList.add('is-loading');
+                }, 0);
+            }
+
+            close() {
+                this.container.classList.remove('is-loading');
+                setTimeout(() => {
+                    if (this.container.parentNode) {
+                        this.container.parentNode.removeChild(this.container);
+                    }
+                }, 300);
+            }
+        }
+
+        window.showFullscreenLoading = function() {
+            Loading.show({ text: '加载中...' });
+            setTimeout(() => {
+                Loading.hide();
+            }, 3000);
+        };
+
+        window.hideFullscreenLoading = function() {
+            Loading.hide();
+        };
+
+        window.showLocalLoading = function() {
+            Loading.show({
+                target: '#local-loading-demo',
+                text: '加载中...',
+                fullscreen: false
+            });
+        };
+
+        window.hideLocalLoading = function() {
+            Loading.hide();
+        };
+    </script>
+</body>
+</html>

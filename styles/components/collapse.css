@@ -1,0 +1,95 @@
+@charset "UTF-8";
+
+.yc-collapse {
+    border: var(--yc-border-width-thin) solid var(--yc-color-border);
+    border-radius: var(--yc-border-radius-base);
+    overflow: hidden;
+}
+
+.yc-collapse-item {
+    border-bottom: var(--yc-border-width-thin) solid var(--yc-color-border);
+}
+
+.yc-collapse-item:last-child {
+    border-bottom: none;
+}
+
+.yc-collapse-item__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--yc-spacing-md) var(--yc-spacing-base);
+    background-color: var(--yc-color-bg-page);
+    cursor: pointer;
+    user-select: none;
+    transition: var(--yc-transition-fast);
+}
+
+.yc-collapse-item__header:hover {
+    background-color: var(--yc-color-bg-secondary);
+}
+
+.yc-collapse-item__title {
+    font-weight: var(--yc-font-weight-medium);
+    color: var(--yc-color-text-primary);
+    font-size: var(--yc-font-size-base);
+}
+
+.yc-collapse-item__arrow {
+    transition: transform var(--yc-transition-duration-base);
+    color: var(--yc-color-text-secondary);
+}
+
+.yc-collapse-item.is-active .yc-collapse-item__arrow {
+    transform: rotate(90deg);
+}
+
+.yc-collapse-item__content {
+    display: none;
+    padding: var(--yc-spacing-base);
+    background-color: var(--yc-color-bg);
+    color: var(--yc-color-text-regular);
+    line-height: var(--yc-line-height-base);
+}
+
+.yc-collapse-item.is-active .yc-collapse-item__content {
+    display: block;
+}
+
+.yc-collapse-item.is-disabled .yc-collapse-item__header {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.yc-collapse-item.is-disabled .yc-collapse-item__title {
+    color: var(--yc-color-text-placeholder);
+}
+
+.yc-collapse--accordion {
+    border-radius: var(--yc-border-radius-base);
+}
+
+.yc-collapse--accordion .yc-collapse-item:not(:last-child) {
+    border-bottom: var(--yc-border-width-thin) solid var(--yc-color-border);
+}
+
+.yc-collapse--plain {
+    border: none;
+    background: transparent;
+}
+
+.yc-collapse--plain .yc-collapse-item {
+    border: none;
+    background: transparent;
+}
+
+.yc-collapse--plain .yc-collapse-item__header {
+    background: transparent;
+    border-bottom: var(--yc-border-width-thin) solid var(--yc-color-border-light);
+    border-radius: 0;
+}
+
+.yc-collapse--plain .yc-collapse-item__content {
+    background: transparent;
+    padding-left: 0;
+}

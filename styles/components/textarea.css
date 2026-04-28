@@ -1,0 +1,106 @@
+/* ==========================================================================
+   Textarea 文本域组件样式
+   ========================================================================== */
+
+.yc-textarea {
+    width: 100%;
+    padding: var(--yc-spacing-sm) var(--yc-spacing-base);
+    border: var(--yc-border-width-base) var(--yc-border-style) var(--yc-input-border-color);
+    border-radius: var(--yc-input-border-radius);
+    font-size: var(--yc-font-size-base);
+    color: var(--yc-input-text-color);
+    background-color: var(--yc-input-bg-color);
+    resize: vertical;
+    transition: var(--yc-transition-base);
+    outline: none;
+    min-height: 100px;
+    max-height: 300px;
+}
+
+.yc-textarea:focus {
+    border-color: var(--yc-input-focus-border-color);
+    box-shadow: var(--yc-input-focus-shadow);
+}
+
+.yc-textarea::placeholder {
+    color: var(--yc-input-placeholder-color);
+}
+
+.yc-textarea:disabled {
+    cursor: not-allowed;
+    background-color: var(--yc-color-bg-disabled);
+    color: var(--yc-color-text-placeholder);
+}
+
+.yc-textarea-counter {
+    position: absolute;
+    bottom: var(--yc-spacing-xs);
+    right: var(--yc-spacing-base);
+    font-size: var(--yc-font-size-extra-small);
+    color: var(--yc-color-text-secondary);
+    user-select: none;
+}
+
+.yc-textarea--large {
+    min-height: 120px;
+    padding: var(--yc-spacing-base);
+    font-size: var(--yc-font-size-medium);
+}
+
+.yc-textarea--small {
+    min-height: 60px;
+    padding: var(--yc-spacing-xs) var(--yc-spacing-sm);
+    font-size: var(--yc-font-size-small);
+}
+
+.yc-textarea--inner {
+    border: none;
+    padding: 0;
+    background: transparent;
+}
+
+.yc-textarea--inner:focus {
+    box-shadow: none;
+}
+
+.yc-textarea-group {
+    position: relative;
+    display: flex;
+    width: 100%;
+}
+
+.yc-textarea-group .yc-textarea {
+    border-radius: var(--yc-input-border-radius) 0 0 var(--yc-input-border-radius);
+}
+
+.yc-textarea-group__append {
+    display: flex;
+    align-items: center;
+    padding: 0 var(--yc-spacing-base);
+    border: 1px solid var(--yc-input-border-color);
+    border-left: none;
+    border-radius: 0 var(--yc-input-border-radius) var(--yc-input-border-radius) 0;
+    background-color: var(--yc-color-bg-light);
+    color: var(--yc-color-text-secondary);
+    font-size: var(--yc-font-size-base);
+    white-space: nowrap;
+}
+
+.yc-textarea-group__prepend {
+    display: flex;
+    align-items: center;
+    padding: 0 var(--yc-spacing-base);
+    border: 1px solid var(--yc-input-border-color);
+    border-right: none;
+    border-radius: var(--yc-input-border-radius) 0 0 var(--yc-input-border-radius);
+    background-color: var(--yc-color-bg-light);
+    color: var(--yc-color-text-secondary);
+    font-size: var(--yc-font-size-base);
+    white-space: nowrap;
+}
+
+textarea.yc-textarea {
+    height: auto;
+}
+
+/* Textarea 组件样式结束 */

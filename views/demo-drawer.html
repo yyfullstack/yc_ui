@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drawer 抽屉组件示例 - YC UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">Drawer 抽屉组件</h1>
+            <p class="demo-page-subtitle">从页面边缘滑出的面板，支持多种方向和配置</p>
+        </div>
+
+        <div class="demo-section">
+            <h3>基础用法</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">左侧抽屉</div>
+                <div class="demo-row">
+                    <button class="yc-button yc-button--primary" onclick="openBasicDrawer()">
+                        <i class="fas fa-bars"></i> 打开抽屉
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>不同方向</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">四个方向抽屉</div>
+                <div class="demo-row" style="gap: 12px; flex-wrap: wrap;">
+                    <button class="yc-button" onclick="openLeftDrawer()">
+                        <i class="fas fa-arrow-left"></i> 左侧抽屉
+                    </button>
+                    <button class="yc-button" onclick="openRightDrawer()">
+                        <i class="fas fa-arrow-right"></i> 右侧抽屉
+                    </button>
+                    <button class="yc-button" onclick="openTopDrawer()">
+                        <i class="fas fa-arrow-up"></i> 顶部抽屉
+                    </button>
+                    <button class="yc-button" onclick="openBottomDrawer()">
+                        <i class="fas fa-arrow-down"></i> 底部抽屉
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>带遮罩层</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">点击遮罩可关闭</div>
+                <div class="demo-row">
+                    <button class="yc-button" onclick="openMaskDrawer()">
+                        <i class="fas fa-layer-group"></i> 打开带遮罩的抽屉
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>自定义内容</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">包含表单的抽屉</div>
+                <div class="demo-row">
+                    <button class="yc-button" onclick="openCustomDrawer()">
+                        <i class="fas fa-edit"></i> 打开自定义内容抽屉
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>JavaScript 创建</h3>
+            <div class="demo-block">
+                <div class="demo-btn-row">
+                    <button class="yc-button yc-button--primary" onclick="openBasicDrawer()">
+                        <i class="fas fa-play"></i> 打开基本抽屉
+                    </button>
+                    <button class="yc-button yc-button--info" onclick="openMaskDrawer()">
+                        <i class="fas fa-clone"></i> 打开遮罩抽屉
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class Drawer {
+            constructor(options) {
+                this.title = options.title || '';
+                this.content = options.content || '';
+                this.width = options.width || '300px';
+                this.height = options.height || '300px';
+                this.direction = options.direction || 'ltr';
+                this.mask = options.mask !== false;
+                this.visible = false;
+
+                this.init();
+            }
+
+            init() {
+                this.maskEl = document.createElement('div');
+                this.maskEl.className = 'yc-drawer-mask';
+                this.maskEl.style.display = 'none';
+                this.maskEl.addEventListener('click', () => {
+                    this.close();
+                });
+                document.body.appendChild(this.maskEl);
+
+                this.drawerEl = document.createElement('div');
+                this.drawerEl.className = 'yc-drawer';
+                this.drawerEl.style.display = 'none';
+                this.drawerEl.className += ' yc-drawer-' + this.direction;
+
+                if (this.direction === 'ltr' || this.direction === 'rtl') {
+                    this.drawerEl.style.width = this.width;
+                } else {
+                    this.drawerEl.style.height = this.height;
+                }
+
+                const header = document.createElement('div');
+                header.className = 'yc-drawer-header';
+
+                const title = document.createElement('div');
+                title.className = 'yc-drawer-title';
+                title.textContent = this.title;
+                header.appendChild(title);
+
+                const closeBtn = document.createElement('div');
+                closeBtn.className = 'yc-drawer-close';
+                closeBtn.innerHTML = '<i class="fas fa-times"></i>';
+                closeBtn.addEventListener('click', () => {
+                    this.close();
+                });
+                header.appendChild(closeBtn);
+
+                this.drawerEl.appendChild(header);
+
+                this.contentEl = document.createElement('div');
+                this.contentEl.className = 'yc-drawer-body';
+
+                if (typeof this.content === 'function') {
+                    const result = this.content();
+                    if (result instanceof HTMLElement) {
+                        this.contentEl.appendChild(result);
+                    } else if (typeof result === 'string') {
+                        this.contentEl.innerHTML = result;
+                    }
+                } else {
+                    this.contentEl.innerHTML = this.content;
+                }
+
+                this.drawerEl.appendChild(this.contentEl);
+                document.body.appendChild(this.drawerEl);
+            }
+
+            open() {
+                if (this.visible) return;
+                this.visible = true;
+
+                if (this.mask) {
+                    this.maskEl.style.display = 'block';
+                    setTimeout(() => {
+                        this.maskEl.classList.add('yc-drawer-mask-visible');
+                    }, 0);
+                }
+
+                this.drawerEl.style.display = 'block';
+                setTimeout(() => {
+                    this.drawerEl.classList.add('yc-drawer-visible');
+                }, 0);
+
+                document.body.style.overflow = 'hidden';
+            }
+
+            close() {
+                if (!this.visible) return;
+                this.visible = false;
+
+                this.drawerEl.classList.remove('yc-drawer-visible');
+
+                if (this.mask) {
+                    this.maskEl.classList.remove('yc-drawer-mask-visible');
+                }
+
+                document.body.style.overflow = '';
+
+                setTimeout(() => {
+                    this.drawerEl.style.display = 'none';
+                    if (this.mask) {
+                        this.maskEl.style.display = 'none';
+                    }
+                }, 300);
+            }
+
+            setContent(content) {
+                this.content = content;
+                this.contentEl.innerHTML = '';
+
+                if (typeof content === 'function') {
+                    const result = content();
+                    if (result instanceof HTMLElement) {
+                        this.contentEl.appendChild(result);
+                    } else if (typeof result === 'string') {
+                        this.contentEl.innerHTML = result;
+                    }
+                } else {
+                    this.contentEl.innerHTML = content;
+                }
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            window.basicDrawer = new Drawer({
+                title: '基本抽屉',
+                content: '<div style="padding: 20px;">这是一个基本抽屉，内容区域从左侧滑入</div>',
+                width: '300px'
+            });
+
+            window.leftDrawer = new Drawer({
+                title: '左侧抽屉',
+                content: '<div style="padding: 20px;">这是一个左侧抽屉</div>',
+                direction: 'ltr',
+                width: '300px'
+            });
+
+            window.rightDrawer = new Drawer({
+                title: '右侧抽屉',
+                content: '<div style="padding: 20px;">这是一个右侧抽屉</div>',
+                direction: 'rtl',
+                width: '300px'
+            });
+
+            window.topDrawer = new Drawer({
+                title: '顶部抽屉',
+                content: '<div style="padding: 20px;">这是一个顶部抽屉</div>',
+                direction: 'ttb',
+                height: '200px'
+            });
+
+            window.bottomDrawer = new Drawer({
+                title: '底部抽屉',
+                content: '<div style="padding: 20px;">这是一个底部抽屉</div>',
+                direction: 'btt',
+                height: '200px'
+            });
+
+            window.maskDrawer = new Drawer({
+                title: '带遮罩层的抽屉',
+                content: '<div style="padding: 20px;">这是一个带遮罩层的抽屉，点击遮罩可关闭</div>',
+                width: '300px',
+                mask: true
+            });
+
+            window.customDrawer = new Drawer({
+                title: '自定义内容抽屉',
+                content: function() {
+                    const content = document.createElement('div');
+                    content.style.padding = '20px';
+                    content.innerHTML = `
+                        <h3 style="margin-bottom: 15px;">表单内容</h3>
+                        <div class="yc-form-item">
+                            <label class="yc-form-item__label">用户名</label>
+                            <div class="yc-form-item__content">
+                                <input type="text" class="yc-input" placeholder="请输入用户名">
+                            </div>
+                        </div>
+                        <div class="yc-form-item">
+                            <label class="yc-form-item__label">邮箱</label>
+                            <div class="yc-form-item__content">
+                                <input type="email" class="yc-input" placeholder="请输入邮箱">
+                            </div>
+                        </div>
+                        <div style="margin-top: 20px; display: flex; gap: 10px;">
+                            <button class="yc-button" onclick="customDrawer.close()">取消</button>
+                            <button class="yc-button yc-button--primary" onclick="customDrawer.close()">确定</button>
+                        </div>
+                    `;
+                    return content;
+                },
+                width: '400px'
+            });
+        });
+
+        function openBasicDrawer() { window.basicDrawer.open(); }
+        function openLeftDrawer() { window.leftDrawer.open(); }
+        function openRightDrawer() { window.rightDrawer.open(); }
+        function openTopDrawer() { window.topDrawer.open(); }
+        function openBottomDrawer() { window.bottomDrawer.open(); }
+        function openMaskDrawer() { window.maskDrawer.open(); }
+        function openCustomDrawer() { window.customDrawer.open(); }
+    </script>
+</body>
+</html>

@@ -1,0 +1,178 @@
+@charset "UTF-8";
+
+.yc-radio {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.1s;
+}
+
+.yc-radio:hover {
+    transform: scale(1.02);
+}
+
+.yc-radio.is-disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.yc-radio__input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.yc-radio__wrapper {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    border: var(--yc-border-width-base) solid var(--yc-color-border);
+    border-radius: 50%;
+    background-color: var(--yc-color-bg);
+    transition: var(--yc-transition-fast);
+    margin-right: var(--yc-spacing-sm);
+}
+
+.yc-radio__input:checked + .yc-radio__wrapper {
+    background-color: var(--yc-color-primary);
+    border-color: var(--yc-color-primary);
+}
+
+.yc-radio__input:checked + .yc-radio__wrapper::after {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: white;
+}
+
+.yc-radio__input:disabled + .yc-radio__wrapper {
+    cursor: not-allowed;
+}
+
+.yc-radio__label {
+    font-size: var(--yc-font-size-base);
+    color: var(--yc-color-text-regular);
+    line-height: 1.5;
+}
+
+.yc-radio--primary .yc-radio__input:checked + .yc-radio__wrapper {
+    background-color: var(--yc-color-primary);
+    border-color: var(--yc-color-primary);
+}
+
+.yc-radio--success .yc-radio__input:checked + .yc-radio__wrapper {
+    background-color: var(--yc-color-success);
+    border-color: var(--yc-color-success);
+}
+
+.yc-radio--warning .yc-radio__input:checked + .yc-radio__wrapper {
+    background-color: var(--yc-color-warning);
+    border-color: var(--yc-color-warning);
+}
+
+.yc-radio--danger .yc-radio__input:checked + .yc-radio__wrapper {
+    background-color: var(--yc-color-danger);
+    border-color: var(--yc-color-danger);
+}
+
+.yc-radio--large .yc-radio__wrapper {
+    width: 20px;
+    height: 20px;
+}
+
+.yc-radio--large .yc-radio__input:checked + .yc-radio__wrapper::after {
+    width: 8px;
+    height: 8px;
+}
+
+.yc-radio--small .yc-radio__wrapper {
+    width: 14px;
+    height: 14px;
+}
+
+.yc-radio--small .yc-radio__input:checked + .yc-radio__wrapper::after {
+    width: 4px;
+    height: 4px;
+}
+
+.yc-radio-group {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: var(--yc-spacing-sm);
+}
+
+.yc-radio-group--vertical {
+    flex-direction: column;
+}
+
+.yc-radio-group--large {
+    gap: var(--yc-spacing-md);
+}
+
+.yc-radio-group--small {
+    gap: var(--yc-spacing-xs);
+}
+
+.yc-radio-button {
+    display: inline-flex;
+}
+
+.yc-radio-button__input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.yc-radio-button__wrapper {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--yc-spacing-sm) var(--yc-spacing-md);
+    font-size: var(--yc-font-size-base);
+    color: var(--yc-color-text-regular);
+    background-color: var(--yc-color-bg);
+    border: var(--yc-border-width-base) solid var(--yc-color-border);
+    cursor: pointer;
+    transition: var(--yc-transition-fast);
+}
+
+.yc-radio-button__input:checked + .yc-radio-button__wrapper {
+    background-color: var(--yc-color-primary);
+    border-color: var(--yc-color-primary);
+    color: var(--yc-color-white);
+}
+
+.yc-radio-button__input:disabled + .yc-radio-button__wrapper {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.yc-radio-button:first-child .yc-radio-button__wrapper {
+    border-top-left-radius: var(--yc-border-radius-base);
+    border-bottom-left-radius: var(--yc-border-radius-base);
+}
+
+.yc-radio-button:last-child .yc-radio-button__wrapper {
+    border-top-right-radius: var(--yc-border-radius-base);
+    border-bottom-right-radius: var(--yc-border-radius-base);
+}
+
+.yc-radio-button:not(:last-child) .yc-radio-button__wrapper {
+    border-right: none;
+}
+
+.yc-radio-button--large .yc-radio-button__wrapper {
+    padding: var(--yc-spacing-md) var(--yc-spacing-lg);
+    font-size: var(--yc-font-size-medium);
+}
+
+.yc-radio-button--small .yc-radio-button__wrapper {
+    padding: var(--yc-spacing-xs) var(--yc-spacing-sm);
+    font-size: var(--yc-font-size-small);
+}

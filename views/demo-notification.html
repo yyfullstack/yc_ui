@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notification 通知组件示例 - YC UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">Notification 通知</h1>
+            <p class="demo-page-subtitle">在界面角落显示通知信息，具有移除按钮</p>
+        </div>
+
+        <div class="demo-section">
+            <h3>基本用法</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">最基础的通知功能</div>
+                <div class="demo-row">
+                    <button class="yc-button" onclick="showBasicNotification()">
+                        <i class="fas fa-bell"></i> 显示通知
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>带图标</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">带有状态图标的通知类型</div>
+                <div class="demo-row" style="gap: 12px; flex-wrap: wrap;">
+                    <button class="yc-button yc-button--success" onclick="showSuccessNotification()">
+                        <i class="fas fa-check-circle"></i> 成功
+                    </button>
+                    <button class="yc-button yc-button--warning" onclick="showWarningNotification()">
+                        <i class="fas fa-exclamation-triangle"></i> 警告
+                    </button>
+                    <button class="yc-button yc-button--danger" onclick="showErrorNotification()">
+                        <i class="fas fa-times-circle"></i> 错误
+                    </button>
+                    <button class="yc-button" onclick="showInfoNotification()">
+                        <i class="fas fa-info-circle"></i> 信息
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>自定义位置</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">通知可以从四个角落弹出</div>
+                <div class="demo-row" style="gap: 12px; flex-wrap: wrap;">
+                    <button class="yc-button" onclick="showTopLeftNotification()">
+                        <i class="fas fa-arrow-left"></i> 左上角
+                    </button>
+                    <button class="yc-button" onclick="showTopRightNotification()">
+                        <i class="fas fa-arrow-right"></i> 右上角
+                    </button>
+                    <button class="yc-button" onclick="showBottomLeftNotification()">
+                        <i class="fas fa-arrow-left"></i> 左下角
+                    </button>
+                    <button class="yc-button" onclick="showBottomRightNotification()">
+                        <i class="fas fa-arrow-right"></i> 右下角
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>不自动关闭</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">设置 duration 为 0 则不会自动关闭</div>
+                <div class="demo-row">
+                    <button class="yc-button" onclick="showNoCloseNotification()">
+                        <i class="fas fa-clock"></i> 不会自动关闭
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>手动关闭</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">使用关闭按钮手动移除通知</div>
+                <div class="demo-row">
+                    <button class="yc-button yc-button--danger" onclick="showCloseableNotification()">
+                        <i class="fas fa-times"></i> 显示可关闭通知
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class Notification {
+            static containers = {};
+            static notifications = [];
+            static notificationId = 0;
+
+            static getContainer(position) {
+                if (!this.containers[position]) {
+                    const container = document.createElement('div');
+                    container.className = `yc-notification yc-notification-${position}`;
+                    container.innerHTML = '<div class="yc-notification-group"></div>';
+                    document.body.appendChild(container);
+                    this.containers[position] = container;
+                }
+                return this.containers[position];
+            }
+
+            static success(options) {
+                options.type = 'success';
+                return this.create(options);
+            }
+
+            static warning(options) {
+                options.type = 'warning';
+                return this.create(options);
+            }
+
+            static error(options) {
+                options.type = 'error';
+                return this.create(options);
+            }
+
+            static info(options) {
+                options.type = 'info';
+                return this.create(options);
+            }
+
+            static create(options) {
+                const id = ++this.notificationId;
+                const notification = new this(id, options);
+                this.notifications.push(notification);
+                return id;
+            }
+
+            static close(id) {
+                const index = this.notifications.findIndex(n => n.id === id);
+                if (index !== -1) {
+                    this.notifications[index].close();
+                    this.notifications.splice(index, 1);
+                }
+            }
+
+            static closeAll() {
+                this.notifications.forEach(notification => notification.close());
+                this.notifications = [];
+            }
+
+            constructor(id, options) {
+                this.id = id;
+                this.title = options.title || '';
+                this.message = options.message || '';
+                this.type = options.type || 'info';
+                this.duration = options.duration || 3000;
+                this.position = options.position || 'top-right';
+
+                this.init();
+            }
+
+            init() {
+                const container = Notification.getContainer(this.position);
+                const group = container.querySelector('.yc-notification-group');
+
+                this.item = document.createElement('div');
+                this.item.className = `yc-notification-item yc-notification-${this.type}`;
+
+                const icon = document.createElement('div');
+                icon.className = 'yc-notification-icon';
+                let iconClass = '';
+                switch (this.type) {
+                    case 'success': iconClass = 'fas fa-check-circle'; break;
+                    case 'warning': iconClass = 'fas fa-exclamation-triangle'; break;
+                    case 'error': iconClass = 'fas fa-times-circle'; break;
+                    case 'info':
+                    default: iconClass = 'fas fa-info-circle'; break;
+                }
+                icon.innerHTML = `<i class="${iconClass}"></i>`;
+                this.item.appendChild(icon);
+
+                const content = document.createElement('div');
+                content.className = 'yc-notification-content';
+
+                if (this.title) {
+                    const title = document.createElement('div');
+                    title.className = 'yc-notification-title';
+                    title.textContent = this.title;
+                    content.appendChild(title);
+                }
+
+                const message = document.createElement('div');
+                message.className = 'yc-notification-message';
+                message.textContent = this.message;
+                content.appendChild(message);
+
+                this.item.appendChild(content);
+
+                const closeBtn = document.createElement('div');
+                closeBtn.className = 'yc-notification-close';
+                closeBtn.innerHTML = '<i class="fas fa-times"></i>';
+                closeBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    this.close();
+                });
+                this.item.appendChild(closeBtn);
+
+                group.appendChild(this.item);
+
+                setTimeout(() => {
+                    this.item.classList.add('is-visible');
+                }, 0);
+
+                if (this.duration > 0) {
+                    this.timer = setTimeout(() => {
+                        this.close();
+                    }, this.duration);
+                }
+            }
+
+            close() {
+                if (this.timer) {
+                    clearTimeout(this.timer);
+                }
+
+                this.item.classList.remove('is-visible');
+
+                setTimeout(() => {
+                    if (this.item.parentNode) {
+                        this.item.parentNode.removeChild(this.item);
+                    }
+                }, 300);
+            }
+        }
+
+        window.showBasicNotification = function() {
+            Notification.info({
+                title: '通知标题',
+                message: '这是一条基本通知消息',
+                duration: 3000
+            });
+        };
+
+        window.showSuccessNotification = function() {
+            Notification.success({
+                title: '成功',
+                message: '操作成功完成！',
+                duration: 3000
+            });
+        };
+
+        window.showWarningNotification = function() {
+            Notification.warning({
+                title: '警告',
+                message: '这是一个警告提示！',
+                duration: 3000
+            });
+        };
+
+        window.showErrorNotification = function() {
+            Notification.error({
+                title: '错误',
+                message: '操作失败，请重试',
+                duration: 3000
+            });
+        };
+
+        window.showInfoNotification = function() {
+            Notification.info({
+                title: '信息',
+                message: '这是一条信息提示',
+                duration: 3000
+            });
+        };
+
+        window.showTopLeftNotification = function() {
+            Notification.info({
+                title: '左上角',
+                message: '通知从左上角弹出',
+                position: 'top-left',
+                duration: 3000
+            });
+        };
+
+        window.showTopRightNotification = function() {
+            Notification.info({
+                title: '右上角',
+                message: '通知从右上角弹出（默认）',
+                position: 'top-right',
+                duration: 3000
+            });
+        };
+
+        window.showBottomLeftNotification = function() {
+            Notification.info({
+                title: '左下角',
+                message: '通知从左下角弹出',
+                position: 'bottom-left',
+                duration: 3000
+            });
+        };
+
+        window.showBottomRightNotification = function() {
+            Notification.info({
+                title: '右下角',
+                message: '通知从右下角弹出',
+                position: 'bottom-right',
+                duration: 3000
+            });
+        };
+
+        window.showNoCloseNotification = function() {
+            Notification.info({
+                title: '不会自动关闭',
+                message: '这条通知需要手动关闭',
+                duration: 0
+            });
+        };
+
+        window.showCloseableNotification = function() {
+            Notification.error({
+                title: '可关闭',
+                message: '点击关闭按钮移除此通知',
+                duration: 0
+            });
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collapse 折叠面板组件示例 - YC UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">Collapse 折叠面板组件</h1>
+            <p class="demo-page-subtitle">可折叠的内容面板，支持手风琴模式、禁用面板、事件监听等</p>
+        </div>
+
+        <div class="demo-section">
+            <h3>基本用法</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">默认展开方式</div>
+                <div class="demo-row">
+                    <div id="basic-collapse" style="width: 100%;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>手风琴模式</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">同时只能展开一个面板</div>
+                <div class="demo-row">
+                    <div id="accordion-collapse" style="width: 100%;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>禁用面板</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">禁用第二个面板</div>
+                <div class="demo-row">
+                    <div id="disabled-collapse" style="width: 100%;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>事件监听</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">监听面板切换事件</div>
+                <div class="demo-row">
+                    <div id="event-collapse" style="width: 100%;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>JavaScript 创建</h3>
+            <div class="demo-block">
+                <div class="demo-btn-row">
+                    <button class="yc-button yc-button--primary" onclick="openAllPanels()">
+                        <i class="fas fa-angle-double-down"></i> 展开全部
+                    </button>
+                    <button class="yc-button yc-button--info" onclick="closeAllPanels()">
+                        <i class="fas fa-angle-double-up"></i> 收起全部
+                    </button>
+                    <button class="yc-button yc-button--success" onclick="openFirstPanel()">
+                        <i class="fas fa-play"></i> 打开第一个
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class Collapse {
+            constructor(options) {
+                if (options.container instanceof HTMLElement) {
+                    this.container = options.container;
+                } else {
+                    this.container = document.querySelector(options.container);
+                }
+                this.panels = options.panels || [];
+                this.accordion = options.accordion || false;
+                this.panelHeaders = [];
+                this.panelContents = [];
+
+                this.events = {
+                    'panel-change': []
+                };
+
+                this.init();
+            }
+
+            init() {
+                this.container.innerHTML = '';
+
+                this.container.className = 'yc-collapse';
+                if (this.accordion) {
+                    this.container.classList.add('yc-collapse--accordion');
+                }
+
+                for (let i = 0; i < this.panels.length; i++) {
+                    this.createPanel(i);
+                }
+            }
+
+            createPanel(index) {
+                const panel = this.panels[index];
+
+                const panelContainer = document.createElement('div');
+                panelContainer.className = 'yc-collapse-item';
+                if (panel.active) {
+                    panelContainer.classList.add('is-active');
+                }
+                if (panel.disabled) {
+                    panelContainer.classList.add('is-disabled');
+                }
+
+                const panelHeader = document.createElement('div');
+                panelHeader.className = 'yc-collapse-item__header';
+
+                const panelTitle = document.createElement('span');
+                panelTitle.className = 'yc-collapse-item__title';
+                panelTitle.textContent = panel.title;
+                panelHeader.appendChild(panelTitle);
+
+                const arrow = document.createElement('span');
+                arrow.className = 'yc-collapse-item__arrow';
+                arrow.innerHTML = '<i class="fas fa-chevron-right"></i>';
+                panelHeader.appendChild(arrow);
+
+                if (!panel.disabled) {
+                    panelHeader.addEventListener('click', () => {
+                        this.togglePanel(index);
+                    });
+                }
+
+                const panelContent = document.createElement('div');
+                panelContent.className = 'yc-collapse-item__content';
+                if (typeof panel.content === 'function') {
+                    const result = panel.content();
+                    if (result instanceof HTMLElement) {
+                        panelContent.appendChild(result);
+                    } else if (typeof result === 'string') {
+                        panelContent.innerHTML = result;
+                    }
+                } else {
+                    panelContent.innerHTML = panel.content;
+                }
+
+                panelContainer.appendChild(panelHeader);
+                panelContainer.appendChild(panelContent);
+                this.container.appendChild(panelContainer);
+
+                this.panelHeaders.push(panelHeader);
+                this.panelContents.push(panelContent);
+            }
+
+            togglePanel(index) {
+                if (index < 0 || index >= this.panels.length) return;
+
+                const panel = this.panels[index];
+                if (panel.disabled) return;
+
+                const panelContainer = this.panelHeaders[index].parentElement;
+
+                if (this.accordion) {
+                    for (let i = 0; i < this.panels.length; i++) {
+                        if (i !== index) {
+                            this.panels[i].active = false;
+                            this.panelHeaders[i].parentElement.classList.remove('is-active');
+                        }
+                    }
+                }
+
+                panel.active = !panel.active;
+                panelContainer.classList.toggle('is-active');
+
+                this.emit('panel-change', index, panel, panel.active);
+            }
+
+            setActivePanel(index) {
+                if (index < 0 || index >= this.panels.length) return;
+
+                if (this.accordion) {
+                    for (let i = 0; i < this.panels.length; i++) {
+                        if (i !== index) {
+                            this.panels[i].active = false;
+                            this.panelHeaders[i].parentElement.classList.remove('is-active');
+                        }
+                    }
+                }
+
+                this.panels[index].active = true;
+                this.panelHeaders[index].parentElement.classList.add('is-active');
+
+                this.emit('panel-change', index, this.panels[index], true);
+            }
+
+            openAll() {
+                this.panels.forEach((panel, index) => {
+                    if (!panel.disabled) {
+                        panel.active = true;
+                        this.panelHeaders[index].parentElement.classList.add('is-active');
+                    }
+                });
+            }
+
+            closeAll() {
+                this.panels.forEach((panel, index) => {
+                    panel.active = false;
+                    this.panelHeaders[index].parentElement.classList.remove('is-active');
+                });
+            }
+
+            getPanels() {
+                return this.panels;
+            }
+
+            on(event, handler) {
+                if (this.events[event]) {
+                    this.events[event].push(handler);
+                }
+            }
+
+            off(event, handler) {
+                if (this.events[event]) {
+                    this.events[event] = this.events[event].filter(h => h !== handler);
+                }
+            }
+
+            emit(event, ...args) {
+                if (this.events[event]) {
+                    this.events[event].forEach(handler => handler(...args));
+                }
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const basicCollapse = new Collapse({
+                container: '#basic-collapse',
+                panels: [
+                    {
+                        title: '面板1',
+                        content: '<div style="padding: 20px;">面板1的内容区域</div>',
+                        active: true
+                    },
+                    {
+                        title: '面板2',
+                        content: '<div style="padding: 20px;">面板2的内容区域</div>'
+                    },
+                    {
+                        title: '面板3',
+                        content: '<div style="padding: 20px;">面板3的内容区域</div>'
+                    }
+                ]
+            });
+
+            const accordionCollapse = new Collapse({
+                container: '#accordion-collapse',
+                accordion: true,
+                panels: [
+                    {
+                        title: '面板1',
+                        content: '<div style="padding: 20px;">面板1的内容区域</div>',
+                        active: true
+                    },
+                    {
+                        title: '面板2',
+                        content: '<div style="padding: 20px;">面板2的内容区域</div>'
+                    },
+                    {
+                        title: '面板3',
+                        content: '<div style="padding: 20px;">面板3的内容区域</div>'
+                    }
+                ]
+            });
+
+            const disabledCollapse = new Collapse({
+                container: '#disabled-collapse',
+                panels: [
+                    {
+                        title: '面板1',
+                        content: '<div style="padding: 20px;">面板1的内容区域</div>',
+                        active: true
+                    },
+                    {
+                        title: '面板2（禁用）',
+                        content: '<div style="padding: 20px;">面板2的内容区域</div>',
+                        disabled: true
+                    },
+                    {
+                        title: '面板3',
+                        content: '<div style="padding: 20px;">面板3的内容区域</div>'
+                    }
+                ]
+            });
+
+            const eventCollapse = new Collapse({
+                container: '#event-collapse',
+                panels: [
+                    {
+                        title: '面板1',
+                        content: '<div style="padding: 20px;">面板1的内容区域</div>',
+                        active: true
+                    },
+                    {
+                        title: '面板2',
+                        content: '<div style="padding: 20px;">面板2的内容区域</div>'
+                    },
+                    {
+                        title: '面板3',
+                        content: '<div style="padding: 20px;">面板3的内容区域</div>'
+                    }
+                ]
+            });
+
+            eventCollapse.on('panel-change', function(index, panel, active) {
+                console.log('Panel changed:', index, panel.title, active ? '展开' : '收起');
+            });
+
+            window.basicCollapseInstance = basicCollapse;
+            window.accordionCollapseInstance = accordionCollapse;
+            window.disabledCollapseInstance = disabledCollapse;
+            window.eventCollapseInstance = eventCollapse;
+        });
+
+        function openAllPanels() {
+            if (window.basicCollapseInstance) window.basicCollapseInstance.openAll();
+            if (window.accordionCollapseInstance) window.accordionCollapseInstance.openAll();
+            if (window.disabledCollapseInstance) window.disabledCollapseInstance.openAll();
+            if (window.eventCollapseInstance) window.eventCollapseInstance.openAll();
+        }
+
+        function closeAllPanels() {
+            if (window.basicCollapseInstance) window.basicCollapseInstance.closeAll();
+            if (window.accordionCollapseInstance) window.accordionCollapseInstance.closeAll();
+            if (window.disabledCollapseInstance) window.disabledCollapseInstance.closeAll();
+            if (window.eventCollapseInstance) window.eventCollapseInstance.closeAll();
+        }
+
+        function openFirstPanel() {
+            if (window.basicCollapseInstance) window.basicCollapseInstance.setActivePanel(0);
+            if (window.accordionCollapseInstance) window.accordionCollapseInstance.setActivePanel(0);
+            if (window.disabledCollapseInstance) window.disabledCollapseInstance.setActivePanel(0);
+            if (window.eventCollapseInstance) window.eventCollapseInstance.setActivePanel(0);
+        }
+    </script>
+</body>
+</html>

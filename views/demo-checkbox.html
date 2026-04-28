@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkbox 多选框组件示例 - YC UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">Checkbox 多选框组件</h1>
+            <p class="demo-page-subtitle">基础多选框、禁用状态、多选组、全选等用法示例</p>
+        </div>
+
+        <div class="demo-section">
+            <h3>基础用法</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">默认多选框</div>
+                <div class="demo-row" style="flex-direction: column; align-items: flex-start; gap: 12px;">
+                    <div class="yc-checkbox" id="checkbox1">
+                        <input type="checkbox" class="yc-checkbox__input" value="option1">
+                        <span class="yc-checkbox__wrapper"></span>
+                        <span class="yc-checkbox__label">选项一</span>
+                    </div>
+                    <div class="yc-checkbox is-checked" id="checkbox2">
+                        <input type="checkbox" class="yc-checkbox__input" value="option2" checked>
+                        <span class="yc-checkbox__wrapper"></span>
+                        <span class="yc-checkbox__label">选项二（已选中）</span>
+                    </div>
+                    <div class="yc-checkbox" id="checkbox3">
+                        <input type="checkbox" class="yc-checkbox__input" value="option3">
+                        <span class="yc-checkbox__wrapper"></span>
+                        <span class="yc-checkbox__label">选项三</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>禁用状态</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">禁用的多选框</div>
+                <div class="demo-row" style="flex-direction: column; align-items: flex-start; gap: 12px;">
+                    <div class="yc-checkbox is-disabled">
+                        <input type="checkbox" class="yc-checkbox__input" value="option1" disabled>
+                        <span class="yc-checkbox__wrapper"></span>
+                        <span class="yc-checkbox__label">禁用选项</span>
+                    </div>
+                    <div class="yc-checkbox is-disabled is-checked">
+                        <input type="checkbox" class="yc-checkbox__input" value="option2" checked disabled>
+                        <span class="yc-checkbox__wrapper"></span>
+                        <span class="yc-checkbox__label">已选中禁用</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>多选框组</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">横向排列</div>
+                <div class="yc-checkbox-group" id="checkboxGroup1">
+                    <div class="yc-checkbox">
+                        <input type="checkbox" class="yc-checkbox__input" value="beijing">
+                        <span class="yc-checkbox__wrapper"></span>
+                        <span class="yc-checkbox__label">北京</span>
+                    </div>
+                    <div class="yc-checkbox">
+                        <input type="checkbox" class="yc-checkbox__input" value="shanghai">
+                        <span class="yc-checkbox__wrapper"></span>
+                        <span class="yc-checkbox__label">上海</span>
+                    </div>
+                    <div class="yc-checkbox">
+                        <input type="checkbox" class="yc-checkbox__input" value="guangzhou">
+                        <span class="yc-checkbox__wrapper"></span>
+                        <span class="yc-checkbox__label">广州</span>
+                    </div>
+                    <div class="yc-checkbox">
+                        <input type="checkbox" class="yc-checkbox__input" value="shenzhen">
+                        <span class="yc-checkbox__wrapper"></span>
+                        <span class="yc-checkbox__label">深圳</span>
+                    </div>
+                </div>
+                <div class="demo-result" id="checkboxGroup1Result">已选中: 无</div>
+            </div>
+
+            <div class="demo-divider"></div>
+
+            <div class="demo-block">
+                <div class="demo-block-title">垂直排列</div>
+                <div class="yc-checkbox-group yc-checkbox-group--vertical" id="checkboxGroup2">
+                    <div class="yc-checkbox">
+                        <input type="checkbox" class="yc-checkbox__input" value="read">
+                        <span class="yc-checkbox__wrapper"></span>
+                        <span class="yc-checkbox__label">阅读</span>
+                    </div>
+                    <div class="yc-checkbox">
+                        <input type="checkbox" class="yc-checkbox__input" value="music">
+                        <span class="yc-checkbox__wrapper"></span>
+                        <span class="yc-checkbox__label">音乐</span>
+                    </div>
+                    <div class="yc-checkbox">
+                        <input type="checkbox" class="yc-checkbox__input" value="sports">
+                        <span class="yc-checkbox__wrapper"></span>
+                        <span class="yc-checkbox__label">运动</span>
+                    </div>
+                </div>
+                <div class="demo-result" id="checkboxGroup2Result">已选中: 无</div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>不同尺寸</h3>
+            <div class="demo-block">
+                <div class="demo-row" style="flex-direction: column; align-items: flex-start; gap: 12px;">
+                    <div class="demo-row">
+                        <span class="demo-label">大尺寸:</span>
+                        <div class="yc-checkbox yc-checkbox--large">
+                            <input type="checkbox" class="yc-checkbox__input">
+                            <span class="yc-checkbox__wrapper"></span>
+                            <span class="yc-checkbox__label">大</span>
+                        </div>
+                    </div>
+                    <div class="demo-row">
+                        <span class="demo-label">默认:</span>
+                        <div class="yc-checkbox">
+                            <input type="checkbox" class="yc-checkbox__input">
+                            <span class="yc-checkbox__wrapper"></span>
+                            <span class="yc-checkbox__label">默认</span>
+                        </div>
+                    </div>
+                    <div class="demo-row">
+                        <span class="demo-label">小尺寸:</span>
+                        <div class="yc-checkbox yc-checkbox--small">
+                            <input type="checkbox" class="yc-checkbox__input">
+                            <span class="yc-checkbox__wrapper"></span>
+                            <span class="yc-checkbox__label">小</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>全选功能</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">带全选功能的多选组</div>
+                <div class="demo-checkbox-select-all-wrapper">
+                    <div class="yc-checkbox yc-checkbox--primary" id="selectAll">
+                        <input type="checkbox" class="yc-checkbox__input" id="selectAllInput">
+                        <span class="yc-checkbox__wrapper"></span>
+                        <span class="yc-checkbox__label">全选</span>
+                    </div>
+                    <div class="yc-checkbox-group yc-checkbox-group--vertical" id="selectAllGroup">
+                        <div class="yc-checkbox" data-value="item1">
+                            <input type="checkbox" class="yc-checkbox__input" value="item1">
+                            <span class="yc-checkbox__wrapper"></span>
+                            <span class="yc-checkbox__label">选项一</span>
+                        </div>
+                        <div class="yc-checkbox" data-value="item2">
+                            <input type="checkbox" class="yc-checkbox__input" value="item2">
+                            <span class="yc-checkbox__wrapper"></span>
+                            <span class="yc-checkbox__label">选项二</span>
+                        </div>
+                        <div class="yc-checkbox" data-value="item3">
+                            <input type="checkbox" class="yc-checkbox__input" value="item3">
+                            <span class="yc-checkbox__wrapper"></span>
+                            <span class="yc-checkbox__label">选项三</span>
+                        </div>
+                    </div>
+                    <div class="demo-result" id="selectAllResult">已选中: 无</div>
+                    <div class="demo-button-group" style="margin-top: 12px;">
+                        <button class="yc-button yc-button--small" onclick="checkAll('selectAllGroup')">全选</button>
+                        <button class="yc-button yc-button--small" onclick="uncheckAll('selectAllGroup')">全不选</button>
+                        <button class="yc-button yc-button--small" onclick="reverseCheck('selectAllGroup')">反选</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>不同颜色</h3>
+            <div class="demo-block">
+                <div class="demo-row" style="flex-direction: column; align-items: flex-start; gap: 12px;">
+                    <div class="yc-checkbox yc-checkbox--primary is-checked">
+                        <input type="checkbox" class="yc-checkbox__input" checked>
+                        <span class="yc-checkbox__wrapper"></span>
+                        <span class="yc-checkbox__label">主要</span>
+                    </div>
+                    <div class="yc-checkbox yc-checkbox--success is-checked">
+                        <input type="checkbox" class="yc-checkbox__input" checked>
+                        <span class="yc-checkbox__wrapper"></span>
+                        <span class="yc-checkbox__label">成功</span>
+                    </div>
+                    <div class="yc-checkbox yc-checkbox--warning is-checked">
+                        <input type="checkbox" class="yc-checkbox__input" checked>
+                        <span class="yc-checkbox__wrapper"></span>
+                        <span class="yc-checkbox__label">警告</span>
+                    </div>
+                    <div class="yc-checkbox yc-checkbox--danger is-checked">
+                        <input type="checkbox" class="yc-checkbox__input" checked>
+                        <span class="yc-checkbox__wrapper"></span>
+                        <span class="yc-checkbox__label">危险</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class CheckboxGroup {
+            constructor(groupEl, options = {}) {
+                this.groupEl = groupEl;
+                this.resultEl = options.resultEl || null;
+                this.onChange = options.onChange || null;
+                this.checkboxes = [];
+                this.init();
+            }
+
+            init() {
+                this.groupEl.querySelectorAll('.yc-checkbox').forEach(checkbox => {
+                    this.checkboxes.push(new CheckboxItem(checkbox, this));
+                });
+                this.updateResult();
+            }
+
+            getCheckedValues() {
+                return this.checkboxes
+                    .filter(item => item.isChecked())
+                    .map(item => item.getValue());
+            }
+
+            getCheckedItems() {
+                return this.checkboxes.filter(item => item.isChecked());
+            }
+
+            getAllItems() {
+                return this.checkboxes;
+            }
+
+            getTotalCount() {
+                return this.checkboxes.length;
+            }
+
+            getCheckedCount() {
+                return this.getCheckedItems().length;
+            }
+
+            isAllChecked() {
+                return this.getCheckedCount() === this.getTotalCount();
+            }
+
+            isNoneChecked() {
+                return this.getCheckedCount() === 0;
+            }
+
+            checkAll() {
+                this.checkboxes.forEach(item => item.setChecked(true));
+                this.updateResult();
+                this.notifyChange();
+            }
+
+            uncheckAll() {
+                this.checkboxes.forEach(item => item.setChecked(false));
+                this.updateResult();
+                this.notifyChange();
+            }
+
+            reverseCheck() {
+                this.checkboxes.forEach(item => item.setChecked(!item.isChecked()));
+                this.updateResult();
+                this.notifyChange();
+            }
+
+            updateResult() {
+                if (!this.resultEl) return;
+                const checked = this.getCheckedValues();
+                const count = checked.length;
+                const total = this.getTotalCount();
+
+                if (count === 0) {
+                    this.resultEl.textContent = '已选中: 无';
+                } else if (count === total) {
+                    this.resultEl.textContent = `已选中: 全部 (${count}/${total})`;
+                } else {
+                    this.resultEl.textContent = `已选中: ${checked.join(', ')} (${count}/${total})`;
+                }
+            }
+
+            notifyChange() {
+                if (this.onChange) {
+                    this.onChange({
+                        checked: this.getCheckedValues(),
+                        count: this.getCheckedCount(),
+                        total: this.getTotalCount(),
+                        isAllChecked: this.isAllChecked(),
+                        isNoneChecked: this.isNoneChecked()
+                    });
+                }
+            }
+
+            refresh() {
+                this.checkboxes.forEach(item => item.updateState());
+                this.updateResult();
+            }
+        }
+
+        class CheckboxItem {
+            constructor(checkboxEl, group) {
+                this.checkboxEl = checkboxEl;
+                this.group = group;
+                this.input = checkboxEl.querySelector('.yc-checkbox__input');
+                if (!this.input) return;
+
+                this.isBound = false;
+                this.bindEvents();
+            }
+
+            bindEvents() {
+                if (this.isBound) return;
+                this.isBound = true;
+
+                this.checkboxEl.addEventListener('click', (e) => {
+                    if (e.target.tagName === 'INPUT' || this.input.disabled) return;
+                    this.toggle();
+                });
+
+                this.input.addEventListener('change', () => {
+                    this.updateState();
+                    this.group.refresh();
+                });
+            }
+
+            isChecked() {
+                return this.input.checked;
+            }
+
+            getValue() {
+                return this.input.value || this.checkboxEl.dataset.value || '';
+            }
+
+            setChecked(checked) {
+                if (this.input.disabled) return;
+                this.input.checked = checked;
+                this.updateState();
+            }
+
+            toggle() {
+                if (this.input.disabled) return;
+                this.input.checked = !this.input.checked;
+                this.updateState();
+                this.group.refresh();
+            }
+
+            updateState() {
+                this.checkboxEl.classList.toggle('is-checked', this.isChecked());
+            }
+        }
+
+        class SelectAllController {
+            constructor() {
+                this.selectAllEl = document.getElementById('selectAll');
+                this.selectAllInput = document.getElementById('selectAllInput');
+                this.group = new CheckboxGroup(
+                    document.getElementById('selectAllGroup'),
+                    { resultEl: document.getElementById('selectAllResult') }
+                );
+
+                if (this.selectAllEl && this.selectAllInput) {
+                    this.bindEvents();
+                }
+            }
+
+            bindEvents() {
+                let isProgrammaticToggle = false;
+
+                this.selectAllEl.addEventListener('click', (e) => {
+                    if (e.target.tagName === 'INPUT') return;
+                    e.preventDefault();
+                    isProgrammaticToggle = true;
+                    this.toggleAll();
+                    setTimeout(() => {
+                        isProgrammaticToggle = false;
+                    }, 0);
+                });
+
+                this.selectAllInput.addEventListener('change', () => {
+                    if (isProgrammaticToggle) return;
+                    this.handleSelectAllChange();
+                });
+
+                this.group.onChange = (data) => {
+                    this.updateSelectAllState(data);
+                };
+            }
+
+            toggleAll() {
+                const currentlyAllChecked = this.group.isAllChecked();
+                if (currentlyAllChecked) {
+                    this.group.uncheckAll();
+                } else {
+                    this.group.checkAll();
+                }
+            }
+
+            handleSelectAllChange() {
+                if (this.selectAllInput.checked) {
+                    this.group.checkAll();
+                } else {
+                    this.group.uncheckAll();
+                }
+            }
+
+            updateSelectAllState(data) {
+                this.selectAllInput.checked = data.isAllChecked;
+                this.selectAllInput.indeterminate = !data.isAllChecked && !data.isNoneChecked;
+
+                this.selectAllEl.classList.toggle('is-checked', data.isAllChecked);
+                this.selectAllEl.classList.toggle('is-indeterminate', !data.isAllChecked && !data.isNoneChecked);
+                this.selectAllEl.classList.toggle('yc-checkbox--indeterminate', !data.isAllChecked && !data.isNoneChecked);
+            }
+        }
+
+        function checkAll(groupId) {
+            const groupEl = document.getElementById(groupId);
+            if (groupEl && groupEl.checkboxGroup) {
+                groupEl.checkboxGroup.checkAll();
+            }
+        }
+
+        function uncheckAll(groupId) {
+            const groupEl = document.getElementById(groupId);
+            if (groupEl && groupEl.checkboxGroup) {
+                groupEl.checkboxGroup.uncheckAll();
+            }
+        }
+
+        function reverseCheck(groupId) {
+            const groupEl = document.getElementById(groupId);
+            if (groupEl && groupEl.checkboxGroup) {
+                groupEl.checkboxGroup.reverseCheck();
+            }
+        }
+
+        function initCheckboxGroups() {
+            document.querySelectorAll('.yc-checkbox-group').forEach(groupEl => {
+                const resultEl = groupEl.nextElementSibling?.classList.contains('demo-result')
+                    ? groupEl.nextElementSibling
+                    : null;
+
+                const group = new CheckboxGroup(groupEl, { resultEl });
+
+                if (groupEl.id === 'selectAllGroup') {
+                    groupEl.checkboxGroup = group;
+                }
+            });
+        }
+
+        function initBasicCheckboxes() {
+            document.querySelectorAll('.yc-checkbox').forEach(checkbox => {
+                if (checkbox.closest('.yc-checkbox-group')) return;
+
+                const input = checkbox.querySelector('.yc-checkbox__input');
+                if (!input || input.disabled) return;
+
+                checkbox.addEventListener('click', function(e) {
+                    if (e.target.tagName === 'INPUT') return;
+                    input.checked = !input.checked;
+                    input.dispatchEvent(new Event('change'));
+                });
+
+                input.addEventListener('change', function() {
+                    checkbox.classList.toggle('is-checked', !!input.checked);
+                });
+            });
+        }
+
+        function initAll() {
+            initBasicCheckboxes();
+            initCheckboxGroups();
+            new SelectAllController();
+        }
+
+        window.addEventListener('DOMContentLoaded', initAll);
+
+        window.checkAll = checkAll;
+        window.uncheckAll = uncheckAll;
+        window.reverseCheck = reverseCheck;
+    </script>
+</body>
+</html>
