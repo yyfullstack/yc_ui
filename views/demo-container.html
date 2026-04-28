@@ -9,235 +9,481 @@
     <link rel="stylesheet" href="../styles/demo.css">
 </head>
 <body>
-    <div class="demo-container">
-        <div class="demo-page-header">
-            <h1 class="demo-page-title">Container 布局容器组件</h1>
-            <p class="demo-page-subtitle">用于承载内容的容器组件，支持多种布局方式，帮你快速构建页面结构</p>
-        </div>
+    <div class="yc-demo-layout">
+        <header class="yc-demo-header">
+            <div class="yc-demo-header__logo">
+                <i class="fas fa-palette"></i>
+                <span>YC UI</span>
+            </div>
+            <nav class="yc-demo-header__nav">
+                <a href="../index.html" class="yc-demo-header__nav-item">首页</a>
+                <span class="yc-demo-header__nav-item is-active">组件</span>
+            </nav>
+            <div class="yc-demo-header__theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+                <span>切换主题</span>
+            </div>
+            <div class="yc-demo-header__menu-toggle" id="menuToggle" style="display: none;">
+                <i class="fas fa-bars"></i>
+            </div>
+        </header>
 
-        <div class="demo-section">
-            <h3>基础用法</h3>
-            <div class="demo-block">
-                <div class="demo-block-title">典型页面布局</div>
-                <div class="demo-layout-wrapper">
-                    <div class="demo-layout-label">示例预览</div>
-                    <div class="yc-container is-vertical" style="height: 280px;">
-                        <header class="yc-header">
-                            <span><i class="fas fa-gem"></i> YC UI 管理系统</span>
-                            <span><i class="fas fa-user-circle"></i> 管理员</span>
-                        </header>
-                        <div style="display: flex; flex: 1;">
-                            <aside class="yc-aside yc-aside--width-small">
-                                <div class="demo-layout-aside-item"><i class="fas fa-home"></i> 首页</div>
-                                <div class="demo-layout-aside-item"><i class="fas fa-th"></i> 组件</div>
-                                <div class="demo-layout-aside-item"><i class="fas fa-file-alt"></i> 文档</div>
-                                <div class="demo-layout-aside-item"><i class="fas fa-cog"></i> 设置</div>
-                            </aside>
-                            <main class="yc-main">
-                                <p><i class="fas fa-info-circle"></i> 这是主内容区域，可以放置页面主要内容。</p>
-                                <p class="demo-mt-12">容器组件采用 Flex 布局，开箱即用。</p>
-                            </main>
+        <div class="yc-demo-content">
+            <aside class="yc-demo-sidebar yc-demo-scrollbar" id="sidebar">
+                <div class="yc-demo-sidebar__title">快速开始</div>
+                <ul class="yc-demo-sidebar__menu">
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="../index.html#features" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-star"></i>
+                            <span>特性</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="../index.html#components" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-th"></i>
+                            <span>组件展示</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="../index.html#quickstart" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-rocket"></i>
+                            <span>快速开始</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="yc-demo-sidebar__title">基础组件</div>
+                <ul class="yc-demo-sidebar__menu">
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-button.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-square"></i>
+                            <span>Button 按钮</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-input.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-keyboard"></i>
+                            <span>Input 输入框</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-radio.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-circle"></i>
+                            <span>Radio 单选框</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-checkbox.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-check-square"></i>
+                            <span>Checkbox 多选框</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-switch.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-toggle-on"></i>
+                            <span>Switch 开关</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-select.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-chevron-down"></i>
+                            <span>Select 选择器</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="yc-demo-sidebar__title">布局组件</div>
+                <ul class="yc-demo-sidebar__menu">
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-container.html" class="yc-demo-sidebar__menu-link is-active">
+                            <i class="fas fa-border-all"></i>
+                            <span>Container 布局</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-grid.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-th-large"></i>
+                            <span>Grid 栅格</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-card.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-window-maximize"></i>
+                            <span>Card 卡片</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-tabs.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-columns"></i>
+                            <span>Tabs 标签页</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="yc-demo-sidebar__title">反馈组件</div>
+                <ul class="yc-demo-sidebar__menu">
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-alert.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <span>Alert 警告</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-loading.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-spinner"></i>
+                            <span>Loading 加载</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-notification.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-bell"></i>
+                            <span>Notification 通知</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="yc-demo-sidebar__title">弹窗组件</div>
+                <ul class="yc-demo-sidebar__menu">
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-dialog.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-window-close"></i>
+                            <span>Dialog 对话框</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-drawer.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-sliders-h"></i>
+                            <span>Drawer 抽屉</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="yc-demo-sidebar__title">高级组件</div>
+                <ul class="yc-demo-sidebar__menu">
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-date-picker.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-calendar"></i>
+                            <span>DatePicker 日期选择</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-color-picker.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-palette"></i>
+                            <span>ColorPicker 颜色选择</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-slider.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-sliders"></i>
+                            <span>Slider 滑块</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-upload.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-upload"></i>
+                            <span>Upload 上传</span>
+                        </a>
+                    </li>
+                </ul>
+            </aside>
+
+            <main class="yc-demo-main">
+                <div class="yc-demo-page">
+                    <div class="yc-demo-page__header">
+                        <h1 class="yc-demo-page__title">Container 布局容器</h1>
+                        <p class="yc-demo-page__subtitle">用于承载内容的容器组件，支持多种布局方式，帮你快速构建页面结构</p>
+                    </div>
+
+                    <section class="yc-demo-section">
+                        <div class="yc-demo-section__header">
+                            <div class="yc-demo-section__icon"></div>
+                            <h2 class="yc-demo-section__title">基本用法</h2>
                         </div>
-                        <footer class="yc-footer">
-                            <span>© 2024 YC UI. All rights reserved.</span>
-                            <span>v1.0.0</span>
-                        </footer>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="demo-section">
-            <h3>带侧边栏</h3>
-            <div class="demo-block">
-                <div class="demo-block-title">左侧边栏布局</div>
-                <div class="demo-layout-wrapper">
-                    <div class="demo-layout-label">示例预览</div>
-                    <div class="yc-container" style="height: 220px;">
-                        <aside class="yc-aside yc-aside--width-small">
-                            <div class="demo-layout-aside-item"><i class="fas fa-home"></i> 首页</div>
-                            <div class="demo-layout-aside-item"><i class="fas fa-th"></i> 组件</div>
-                            <div class="demo-layout-aside-item"><i class="fas fa-file-alt"></i> 文档</div>
-                            <div class="demo-layout-aside-item"><i class="fas fa-cog"></i> 设置</div>
-                        </aside>
-                        <main class="yc-main">
-                            <p><i class="fas fa-columns"></i> 带有侧边栏的布局，适用于管理后台。</p>
-                            <p class="demo-mt-12 demo-text-placeholder">
-                                侧边栏宽度为 200px，主内容区域自适应剩余宽度。
-                            </p>
-                        </main>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="demo-section">
-            <h3>完整布局</h3>
-            <div class="demo-block">
-                <div class="demo-block-title">带 Header、Aside 和 Footer</div>
-                <div class="demo-layout-wrapper">
-                    <div class="demo-layout-label">示例预览</div>
-                    <div class="yc-container is-vertical" style="height: 320px;">
-                        <header class="yc-header yc-header--dark">
-                            <span><i class="fas fa-chart-bar"></i> 数据统计</span>
-                            <span>
-                                <i class="fas fa-bell demo-mr-16"></i>
-                                <i class="fas fa-cog"></i>
-                            </span>
-                        </header>
-                        <div style="display: flex; flex: 1;">
-                            <aside class="yc-aside" style="width: 220px;">
-                                <div class="demo-layout-aside-item"><i class="fas fa-chart-line"></i> 数据概览</div>
-                                <div class="demo-layout-aside-item"><i class="fas fa-chart-pie"></i> 报表分析</div>
-                                <div class="demo-layout-aside-item"><i class="fas fa-users"></i> 用户管理</div>
-                                <div class="demo-layout-aside-item"><i class="fas fa-box"></i> 商品管理</div>
-                                <div class="demo-layout-aside-item"><i class="fas fa-shopping-cart"></i> 订单管理</div>
-                            </aside>
-                            <main class="yc-main">
-                                <h4 class="demo-mb-16 demo-text-primary">
-                                    <i class="fas fa-tachometer-alt"></i> 控制台
-                                </h4>
-                                <div class="demo-stat-cards">
-                                    <div class="demo-stat-card demo-stat-card--purple">
-                                        <div class="demo-stat-card__value">1,234</div>
-                                        <div class="demo-stat-card__label">总访问量</div>
-                                    </div>
-                                    <div class="demo-stat-card demo-stat-card--pink">
-                                        <div class="demo-stat-card__value">567</div>
-                                        <div class="demo-stat-card__label">活跃用户</div>
-                                    </div>
-                                    <div class="demo-stat-card demo-stat-card--blue">
-                                        <div class="demo-stat-card__value">89</div>
-                                        <div class="demo-stat-card__label">新订单</div>
-                                    </div>
-                                    <div class="demo-stat-card demo-stat-card--green">
-                                        <div class="demo-stat-card__value">¥12,580</div>
-                                        <div class="demo-stat-card__label">销售额</div>
+                        <div class="yc-demo-block">
+                            <div class="yc-demo-block__title">典型页面布局</div>
+                            <div class="yc-demo-block__content">
+                                <div class="demo-layout-wrapper">
+                                    <div class="yc-container is-vertical" style="height: 280px;">
+                                        <header class="yc-header">
+                                            <span><i class="fas fa-gem"></i> YC UI 管理系统</span>
+                                            <span><i class="fas fa-user-circle"></i> 管理员</span>
+                                        </header>
+                                        <div style="display: flex; flex: 1;">
+                                            <aside class="yc-aside yc-aside--width-small">
+                                                <div class="demo-layout-aside-item"><i class="fas fa-home"></i> 首页</div>
+                                                <div class="demo-layout-aside-item"><i class="fas fa-th"></i> 组件</div>
+                                                <div class="demo-layout-aside-item"><i class="fas fa-file-alt"></i> 文档</div>
+                                                <div class="demo-layout-aside-item"><i class="fas fa-cog"></i> 设置</div>
+                                            </aside>
+                                            <main class="yc-main">
+                                                <p><i class="fas fa-info-circle"></i> 这是主内容区域，可以放置页面主要内容。</p>
+                                                <p class="demo-mt-12">容器组件采用 Flex 布局，开箱即用。</p>
+                                            </main>
+                                        </div>
+                                        <footer class="yc-footer">
+                                            <span>© 2024 YC UI. All rights reserved.</span>
+                                            <span>v1.0.0</span>
+                                        </footer>
                                     </div>
                                 </div>
-                            </main>
+                            </div>
                         </div>
-                        <footer class="yc-footer">
-                            <span>登录时间: 2024-01-15 10:30:00</span>
-                            <span>v1.0.0</span>
-                        </footer>
-                    </div>
+                    </section>
+
+                    <section class="yc-demo-section">
+                        <div class="yc-demo-section__header">
+                            <div class="yc-demo-section__icon"></div>
+                            <h2 class="yc-demo-section__title">带侧边栏</h2>
+                        </div>
+                        <div class="yc-demo-block">
+                            <div class="yc-demo-block__title">左侧边栏布局</div>
+                            <div class="yc-demo-block__content">
+                                <div class="demo-layout-wrapper">
+                                    <div class="yc-container" style="height: 220px;">
+                                        <aside class="yc-aside yc-aside--width-small">
+                                            <div class="demo-layout-aside-item"><i class="fas fa-home"></i> 首页</div>
+                                            <div class="demo-layout-aside-item"><i class="fas fa-th"></i> 组件</div>
+                                            <div class="demo-layout-aside-item"><i class="fas fa-file-alt"></i> 文档</div>
+                                            <div class="demo-layout-aside-item"><i class="fas fa-cog"></i> 设置</div>
+                                        </aside>
+                                        <main class="yc-main">
+                                            <p><i class="fas fa-columns"></i> 带有侧边栏的布局，适用于管理后台。</p>
+                                            <p class="demo-mt-12 demo-text-placeholder">
+                                                侧边栏宽度为 200px，主内容区域自适应剩余宽度。
+                                            </p>
+                                        </main>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="yc-demo-section">
+                        <div class="yc-demo-section__header">
+                            <div class="yc-demo-section__icon"></div>
+                            <h2 class="yc-demo-section__title">完整布局</h2>
+                        </div>
+                        <div class="yc-demo-block">
+                            <div class="yc-demo-block__title">带 Header、Aside 和 Footer</div>
+                            <div class="yc-demo-block__content">
+                                <div class="demo-layout-wrapper">
+                                    <div class="yc-container is-vertical" style="height: 320px;">
+                                        <header class="yc-header yc-header--dark">
+                                            <span><i class="fas fa-chart-bar"></i> 数据统计</span>
+                                            <span>
+                                                <i class="fas fa-bell demo-mr-16"></i>
+                                                <i class="fas fa-cog"></i>
+                                            </span>
+                                        </header>
+                                        <div style="display: flex; flex: 1;">
+                                            <aside class="yc-aside" style="width: 220px;">
+                                                <div class="demo-layout-aside-item"><i class="fas fa-chart-line"></i> 数据概览</div>
+                                                <div class="demo-layout-aside-item"><i class="fas fa-chart-pie"></i> 报表分析</div>
+                                                <div class="demo-layout-aside-item"><i class="fas fa-users"></i> 用户管理</div>
+                                                <div class="demo-layout-aside-item"><i class="fas fa-box"></i> 商品管理</div>
+                                                <div class="demo-layout-aside-item"><i class="fas fa-shopping-cart"></i> 订单管理</div>
+                                            </aside>
+                                            <main class="yc-main">
+                                                <h4 class="demo-mb-16 demo-text-primary">
+                                                    <i class="fas fa-tachometer-alt"></i> 控制台
+                                                </h4>
+                                                <div class="demo-stat-cards">
+                                                    <div class="demo-stat-card demo-stat-card--purple">
+                                                        <div class="demo-stat-card__value">1,234</div>
+                                                        <div class="demo-stat-card__label">总访问量</div>
+                                                    </div>
+                                                    <div class="demo-stat-card demo-stat-card--pink">
+                                                        <div class="demo-stat-card__value">567</div>
+                                                        <div class="demo-stat-card__label">活跃用户</div>
+                                                    </div>
+                                                    <div class="demo-stat-card demo-stat-card--blue">
+                                                        <div class="demo-stat-card__value">89</div>
+                                                        <div class="demo-stat-card__label">新订单</div>
+                                                    </div>
+                                                    <div class="demo-stat-card demo-stat-card--green">
+                                                        <div class="demo-stat-card__value">¥12,580</div>
+                                                        <div class="demo-stat-card__label">销售额</div>
+                                                    </div>
+                                                </div>
+                                            </main>
+                                        </div>
+                                        <footer class="yc-footer">
+                                            <span>登录时间: 2024-01-15 10:30:00</span>
+                                            <span>v1.0.0</span>
+                                        </footer>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="yc-demo-section">
+                        <div class="yc-demo-section__header">
+                            <div class="yc-demo-section__icon"></div>
+                            <h2 class="yc-demo-section__title">不同方向</h2>
+                        </div>
+                        <div class="yc-demo-block">
+                            <div class="yc-demo-block__title">垂直布局与水平布局对比</div>
+                            <div class="yc-demo-block__content">
+                                <div class="demo-layout-wrapper">
+                                    <div class="demo-layout-row-gap">
+                                        <div class="demo-layout-direction-demo">
+                                            <div class="demo-layout-direction-title">
+                                                <span class="demo-tag">水平布局 (默认)</span>
+                                                <code class="demo-code">flex-direction: row</code>
+                                            </div>
+                                            <div class="yc-container" style="height: 120px;">
+                                                <aside class="yc-aside yc-aside--width-small demo-flex-center">
+                                                    <span>侧边栏</span>
+                                                </aside>
+                                                <main class="yc-main demo-flex-center">
+                                                    <span>主内容</span>
+                                                </main>
+                                            </div>
+                                        </div>
+                                        <div class="demo-layout-direction-demo">
+                                            <div class="demo-layout-direction-title">
+                                                <span class="demo-tag demo-tag--success">垂直布局</span>
+                                                <code class="demo-code">flex-direction: column</code>
+                                            </div>
+                                            <div class="yc-container is-vertical" style="height: 180px;">
+                                                <header class="yc-header demo-flex-center" style="background: var(--yc-color-success);">
+                                                    <span>Header 顶部</span>
+                                                </header>
+                                                <main class="yc-main demo-flex-center">
+                                                    <span>Main 主内容</span>
+                                                </main>
+                                                <footer class="yc-footer demo-flex-center">
+                                                    <span>Footer 底部</span>
+                                                </footer>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="yc-demo-section">
+                        <div class="yc-demo-section__header">
+                            <div class="yc-demo-section__icon"></div>
+                            <h2 class="yc-demo-section__title">响应式布局</h2>
+                        </div>
+                        <div class="yc-demo-block">
+                            <div class="yc-demo-block__title">移动端适配示例</div>
+                            <div class="yc-demo-block__content">
+                                <div class="demo-layout-wrapper">
+                                    <div class="demo-layout-label">尝试缩放浏览器窗口查看效果</div>
+                                    <div class="demo-layout-row-gap">
+                                        <div class="demo-layout-direction-demo">
+                                            <div class="demo-layout-direction-title">
+                                                <span class="demo-tag">桌面端 (&gt; 767px)</span>
+                                            </div>
+                                            <div class="yc-container" style="height: 160px;">
+                                                <aside class="yc-aside yc-aside--width-small">
+                                                    <div class="demo-layout-aside-item"><i class="fas fa-home"></i> 菜单</div>
+                                                    <div class="demo-layout-aside-item"><i class="fas fa-user"></i> 用户</div>
+                                                </aside>
+                                                <main class="yc-main">
+                                                    <p class="demo-text-small"><i class="fas fa-desktop"></i> 侧边栏在左侧</p>
+                                                </main>
+                                            </div>
+                                        </div>
+                                        <div class="demo-layout-direction-demo">
+                                            <div class="demo-layout-direction-title">
+                                                <span class="demo-tag demo-tag--warning">移动端 (≤ 767px)</span>
+                                            </div>
+                                            <div class="yc-container is-vertical" style="height: 220px;">
+                                                <header class="yc-header demo-flex-center" style="background: var(--yc-color-warning); color: var(--yc-color-white);">
+                                                    <span><i class="fas fa-bars"></i> 顶部导航</span>
+                                                </header>
+                                                <aside class="yc-aside demo-mobile-aside">
+                                                    <div class="demo-layout-aside-item"><i class="fas fa-home"></i> 菜单</div>
+                                                    <div class="demo-layout-aside-item"><i class="fas fa-user"></i> 用户</div>
+                                                </aside>
+                                                <main class="yc-main demo-flex-center">
+                                                    <p class="demo-text-small"><i class="fas fa-mobile-alt"></i> 侧边栏切换到顶部</p>
+                                                </main>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="yc-demo-section">
+                        <div class="yc-demo-section__header">
+                            <div class="yc-demo-section__icon"></div>
+                            <h2 class="yc-demo-section__title">深色主题</h2>
+                        </div>
+                        <div class="yc-demo-block">
+                            <div class="yc-demo-block__title">深色 Header 和 Footer</div>
+                            <div class="yc-demo-block__content">
+                                <div class="demo-layout-wrapper">
+                                    <div class="yc-container is-vertical" style="height: 200px;">
+                                        <header class="yc-header yc-header--dark">
+                                            <span><i class="fas fa-moon"></i> 深色主题</span>
+                                            <span>
+                                                <i class="fas fa-search demo-mr-16"></i>
+                                                <i class="fas fa-bell demo-mr-16"></i>
+                                                <i class="fas fa-user"></i>
+                                            </span>
+                                        </header>
+                                        <main class="yc-main">
+                                            <p><i class="fas fa-palette"></i> 深色主题的 Header 和 Footer，适用于需要突出导航的场景。</p>
+                                        </main>
+                                        <footer class="yc-footer yc-footer--dark">
+                                            <span>© 2024 YC UI. All rights reserved.</span>
+                                            <span>v1.0.0</span>
+                                        </footer>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                 </div>
-            </div>
+            </main>
         </div>
 
-        <div class="demo-section">
-            <h3>不同方向</h3>
-            <div class="demo-block">
-                <div class="demo-block-title">垂直布局与水平布局对比</div>
-                <div class="demo-layout-wrapper">
-                    <div class="demo-layout-label">示例预览</div>
-                    <div class="demo-layout-row-gap">
-                        <div class="demo-layout-direction-demo">
-                            <div class="demo-layout-direction-title">
-                                <span class="demo-tag">水平布局 (默认)</span>
-                                <code class="demo-code">flex-direction: row</code>
-                            </div>
-                            <div class="yc-container" style="height: 120px;">
-                                <aside class="yc-aside yc-aside--width-small demo-flex-center">
-                                    <span>侧边栏</span>
-                                </aside>
-                                <main class="yc-main demo-flex-center">
-                                    <span>主内容</span>
-                                </main>
-                            </div>
-                        </div>
-                        <div class="demo-layout-direction-demo">
-                            <div class="demo-layout-direction-title">
-                                <span class="demo-tag demo-tag--success">垂直布局</span>
-                                <code class="demo-code">flex-direction: column</code>
-                            </div>
-                            <div class="yc-container is-vertical" style="height: 180px;">
-                                <header class="yc-header demo-flex-center" style="background: var(--yc-color-success);">
-                                    <span>Header 顶部</span>
-                                </header>
-                                <main class="yc-main demo-flex-center">
-                                    <span>Main 主内容</span>
-                                </main>
-                                <footer class="yc-footer demo-flex-center">
-                                    <span>Footer 底部</span>
-                                </footer>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="demo-section">
-            <h3>响应式布局</h3>
-            <div class="demo-block">
-                <div class="demo-block-title">移动端适配示例</div>
-                <div class="demo-layout-wrapper">
-                    <div class="demo-layout-label">示例预览 - 尝试缩放浏览器窗口查看效果</div>
-                    <div class="demo-layout-row-gap">
-                        <div class="demo-layout-direction-demo">
-                            <div class="demo-layout-direction-title">
-                                <span class="demo-tag">桌面端 (&gt; 767px)</span>
-                            </div>
-                            <div class="yc-container" style="height: 160px;">
-                                <aside class="yc-aside yc-aside--width-small">
-                                    <div class="demo-layout-aside-item"><i class="fas fa-home"></i> 菜单</div>
-                                    <div class="demo-layout-aside-item"><i class="fas fa-user"></i> 用户</div>
-                                </aside>
-                                <main class="yc-main">
-                                    <p class="demo-text-small"><i class="fas fa-desktop"></i> 侧边栏在左侧</p>
-                                </main>
-                            </div>
-                        </div>
-                        <div class="demo-layout-direction-demo">
-                            <div class="demo-layout-direction-title">
-                                <span class="demo-tag demo-tag--warning">移动端 (≤ 767px)</span>
-                            </div>
-                            <div class="yc-container is-vertical" style="height: 220px;">
-                                <header class="yc-header demo-flex-center" style="background: var(--yc-color-warning); color: var(--yc-color-white);">
-                                    <span><i class="fas fa-bars"></i> 顶部导航</span>
-                                </header>
-                                <aside class="yc-aside demo-mobile-aside">
-                                    <div class="demo-layout-aside-item"><i class="fas fa-home"></i> 菜单</div>
-                                    <div class="demo-layout-aside-item"><i class="fas fa-user"></i> 用户</div>
-                                </aside>
-                                <main class="yc-main demo-flex-center">
-                                    <p class="demo-text-small"><i class="fas fa-mobile-alt"></i> 侧边栏切换到顶部</p>
-                                </main>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="demo-section">
-            <h3>深色主题</h3>
-            <div class="demo-block">
-                <div class="demo-block-title">深色 Header 和 Footer</div>
-                <div class="demo-layout-wrapper">
-                    <div class="demo-layout-label">示例预览</div>
-                    <div class="yc-container is-vertical" style="height: 200px;">
-                        <header class="yc-header yc-header--dark">
-                            <span><i class="fas fa-moon"></i> 深色主题</span>
-                            <span>
-                                <i class="fas fa-search demo-mr-16"></i>
-                                <i class="fas fa-bell demo-mr-16"></i>
-                                <i class="fas fa-user"></i>
-                            </span>
-                        </header>
-                        <main class="yc-main">
-                            <p><i class="fas fa-palette"></i> 深色主题的 Header 和 Footer，适用于需要突出导航的场景。</p>
-                        </main>
-                        <footer class="yc-footer yc-footer--dark">
-                            <span>© 2024 YC UI. All rights reserved.</span>
-                            <span>v1.0.0</span>
-                        </footer>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div class="yc-demo-backdrop" id="backdrop"></div>
     </div>
+
+    <script>
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('yc-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('yc-theme', newTheme);
+            localStorage.setItem('yc-theme', newTheme);
+        }
+
+        function toggleMenu() {
+            const sidebar = document.getElementById('sidebar');
+            const backdrop = document.getElementById('backdrop');
+            sidebar.classList.toggle('is-visible');
+            backdrop.classList.toggle('is-visible');
+        }
+
+        const savedTheme = localStorage.getItem('yc-theme') || 'light';
+        document.documentElement.setAttribute('yc-theme', savedTheme);
+
+        document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+        document.getElementById('menuToggle').addEventListener('click', toggleMenu);
+        document.getElementById('backdrop').addEventListener('click', toggleMenu);
+
+        const menuToggle = document.getElementById('menuToggle');
+        function checkScreenWidth() {
+            if (window.innerWidth <= 992) {
+                menuToggle.style.display = 'flex';
+            } else {
+                menuToggle.style.display = 'none';
+                document.getElementById('sidebar').classList.remove('is-visible');
+                document.getElementById('backdrop').classList.remove('is-visible');
+            }
+        }
+
+        checkScreenWidth();
+        window.addEventListener('resize', checkScreenWidth);
+    </script>
 </body>
 </html>

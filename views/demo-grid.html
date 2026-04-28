@@ -9,146 +9,360 @@
     <link rel="stylesheet" href="../styles/demo.css">
 </head>
 <body>
-    <div class="demo-container">
-        <div class="demo-page-header">
-            <h1 class="demo-page-title">Grid 栅格布局组件</h1>
-            <p class="demo-page-subtitle">24 栅格系统，将一行等分为 24 份，按照需求对元素的占比进行任意组合</p>
-        </div>
-
-        <div class="demo-section">
-            <h3>基础布局</h3>
-            <div class="demo-block">
-                <div class="demo-block-title">等分混合</div>
-                <div class="demo-row">
-                    <div class="yc-row yc-row--plain" style="width: 100%;">
-                        <div class="yc-col-24"><div class="grid-demo-item">24</div></div>
-                    </div>
-                    <div class="yc-row yc-row--plain" style="width: 100%;">
-                        <div class="yc-col-12"><div class="grid-demo-item">12</div></div>
-                        <div class="yc-col-12"><div class="grid-demo-item yc-col--light">12</div></div>
-                    </div>
-                    <div class="yc-row yc-row--plain" style="width: 100%;">
-                        <div class="yc-col-8"><div class="grid-demo-item">8</div></div>
-                        <div class="yc-col-8"><div class="grid-demo-item yc-col--light">8</div></div>
-                        <div class="yc-col-8"><div class="grid-demo-item">8</div></div>
-                    </div>
-                    <div class="yc-row yc-row--plain" style="width: 100%;">
-                        <div class="yc-col-6"><div class="grid-demo-item">6</div></div>
-                        <div class="yc-col-6"><div class="grid-demo-item yc-col--light">6</div></div>
-                        <div class="yc-col-6"><div class="grid-demo-item">6</div></div>
-                        <div class="yc-col-6"><div class="grid-demo-item yc-col--light">6</div></div>
-                    </div>
-                    <div class="yc-row yc-row--plain" style="width: 100%;">
-                        <div class="yc-col-4"><div class="grid-demo-item">4</div></div>
-                        <div class="yc-col-4"><div class="grid-demo-item yc-col--light">4</div></div>
-                        <div class="yc-col-4"><div class="grid-demo-item">4</div></div>
-                        <div class="yc-col-4"><div class="grid-demo-item yc-col--light">4</div></div>
-                        <div class="yc-col-4"><div class="grid-demo-item">4</div></div>
-                        <div class="yc-col-4"><div class="grid-demo-item yc-col--light">4</div></div>
-                    </div>
-                </div>
+    <div class="yc-demo-layout">
+        <header class="yc-demo-header">
+            <div class="yc-demo-header__logo">
+                <i class="fas fa-palette"></i>
+                <span>YC UI</span>
             </div>
-        </div>
-
-        <div class="demo-section">
-            <h3>混合布局</h3>
-            <div class="demo-block">
-                <div class="demo-block-title">通过基础的 1/24 分栏进行组合</div>
-                <div class="demo-row">
-                    <div class="yc-row yc-row--plain" style="width: 100%;">
-                        <div class="yc-col-16"><div class="grid-demo-item">col-16</div></div>
-                        <div class="yc-col-8"><div class="grid-demo-item yc-col--light">col-8</div></div>
-                    </div>
-                    <div class="yc-row yc-row--plain" style="width: 100%;">
-                        <div class="yc-col-8"><div class="grid-demo-item">col-8</div></div>
-                        <div class="yc-col-8"><div class="grid-demo-item yc-col--light">col-8</div></div>
-                        <div class="yc-col-4"><div class="grid-demo-item">col-4</div></div>
-                        <div class="yc-col-4"><div class="grid-demo-item yc-col--light">col-4</div></div>
-                    </div>
-                    <div class="yc-row yc-row--plain" style="width: 100%;">
-                        <div class="yc-col-6"><div class="grid-demo-item">col-6</div></div>
-                        <div class="yc-col-6"><div class="grid-demo-item yc-col--light">col-6</div></div>
-                        <div class="yc-col-4"><div class="grid-demo-item">col-4</div></div>
-                        <div class="yc-col-4"><div class="grid-demo-item yc-col--light">col-4</div></div>
-                        <div class="yc-col-4"><div class="grid-demo-item">col-4</div></div>
-                    </div>
-                </div>
+            <nav class="yc-demo-header__nav">
+                <a href="../index.html" class="yc-demo-header__nav-item">首页</a>
+                <span class="yc-demo-header__nav-item is-active">组件</span>
+            </nav>
+            <div class="yc-demo-header__theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+                <span>切换主题</span>
             </div>
-        </div>
-
-        <div class="demo-section">
-            <h3>分栏间隔</h3>
-            <div class="demo-block">
-                <div class="demo-block-title">列之间存在间隙</div>
-                <div class="yc-row" style="--yc-row-gutter: 20px;">
-                    <div class="yc-col-8"><div class="grid-demo-item">col-8</div></div>
-                    <div class="yc-col-8"><div class="grid-demo-item yc-col--light">col-8</div></div>
-                    <div class="yc-col-8"><div class="grid-demo-item">col-8</div></div>
-                </div>
+            <div class="yc-demo-header__menu-toggle" id="menuToggle" style="display: none;">
+                <i class="fas fa-bars"></i>
             </div>
-        </div>
+        </header>
 
-        <div class="demo-section">
-            <h3>分栏偏移</h3>
-            <div class="demo-block">
-                <div class="demo-block-title">支持偏移指定列数</div>
-                <div class="demo-row">
-                    <div class="yc-row yc-row--plain" style="width: 100%;">
-                        <div class="yc-col-8"><div class="grid-demo-item">col-8</div></div>
-                        <div class="yc-col-8 yc-col-offset-8"><div class="grid-demo-item yc-col--light">col-8 offset-8</div></div>
-                    </div>
-                    <div class="yc-row yc-row--plain" style="width: 100%;">
-                        <div class="yc-col-6 yc-col-offset-6"><div class="grid-demo-item">col-6 offset-6</div></div>
-                        <div class="yc-col-6 yc-col-offset-6"><div class="grid-demo-item yc-col--light">col-6 offset-6</div></div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div class="yc-demo-content">
+            <aside class="yc-demo-sidebar yc-demo-scrollbar" id="sidebar">
+                <div class="yc-demo-sidebar__title">快速开始</div>
+                <ul class="yc-demo-sidebar__menu">
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="../index.html#features" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-star"></i>
+                            <span>特性</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="../index.html#components" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-th"></i>
+                            <span>组件展示</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="../index.html#quickstart" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-rocket"></i>
+                            <span>快速开始</span>
+                        </a>
+                    </li>
+                </ul>
 
-        <div class="demo-section">
-            <h3>对齐方式</h3>
-            <div class="demo-block">
-                <div class="demo-block-title">使用 flex 布局的对齐方式</div>
-                <div class="demo-row">
-                    <div class="yc-row yc-row--plain yc-row--justify-space-between" style="width: 100%; background: var(--yc-color-bg-page); padding: 10px;">
-                        <div class="yc-col-4"><div class="grid-demo-item">col-4</div></div>
-                        <div class="yc-col-4"><div class="grid-demo-item yc-col--light">col-4</div></div>
-                        <div class="yc-col-4"><div class="grid-demo-item">col-4</div></div>
-                    </div>
-                    <div class="yc-row yc-row--plain yc-row--align-middle" style="width: 100%; background: var(--yc-color-bg-page); padding: 10px; min-height: 80px; margin-top: 10px;">
-                        <div class="yc-col-4"><div class="grid-demo-item" style="height: 40px;">col-4</div></div>
-                        <div class="yc-col-4"><div class="grid-demo-item yc-col--light">col-4</div></div>
-                        <div class="yc-col-4"><div class="grid-demo-item">col-4</div></div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                <div class="yc-demo-sidebar__title">基础组件</div>
+                <ul class="yc-demo-sidebar__menu">
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-button.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-square"></i>
+                            <span>Button 按钮</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-input.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-keyboard"></i>
+                            <span>Input 输入框</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-radio.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-circle"></i>
+                            <span>Radio 单选框</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-checkbox.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-check-square"></i>
+                            <span>Checkbox 多选框</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-switch.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-toggle-on"></i>
+                            <span>Switch 开关</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-select.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-chevron-down"></i>
+                            <span>Select 选择器</span>
+                        </a>
+                    </li>
+                </ul>
 
-        <div class="demo-section">
-            <h3>响应式布局</h3>
-            <div class="demo-block">
-                <div class="demo-block-title">参照 Bootstrap 的响应式设计，预设四个响应尺寸</div>
-                <div class="demo-row">
-                    <div class="yc-row yc-row--plain" style="width: 100%;">
-                        <div class="yc-col-xs-24 yc-col-sm-12 yc-col-md-8 yc-col-lg-6">
-                            <div class="grid-demo-item">xs:24 / sm:12 / md:8 / lg:6</div>
+                <div class="yc-demo-sidebar__title">布局组件</div>
+                <ul class="yc-demo-sidebar__menu">
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-container.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-border-all"></i>
+                            <span>Container 布局</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-grid.html" class="yc-demo-sidebar__menu-link is-active">
+                            <i class="fas fa-th-large"></i>
+                            <span>Grid 栅格</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-card.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-window-maximize"></i>
+                            <span>Card 卡片</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-tabs.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-columns"></i>
+                            <span>Tabs 标签页</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="yc-demo-sidebar__title">反馈组件</div>
+                <ul class="yc-demo-sidebar__menu">
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-alert.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <span>Alert 警告</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-loading.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-spinner"></i>
+                            <span>Loading 加载</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-notification.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-bell"></i>
+                            <span>Notification 通知</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="yc-demo-sidebar__title">弹窗组件</div>
+                <ul class="yc-demo-sidebar__menu">
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-dialog.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-window-close"></i>
+                            <span>Dialog 对话框</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-drawer.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-sliders-h"></i>
+                            <span>Drawer 抽屉</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="yc-demo-sidebar__title">高级组件</div>
+                <ul class="yc-demo-sidebar__menu">
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-date-picker.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-calendar"></i>
+                            <span>DatePicker 日期选择</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-color-picker.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-palette"></i>
+                            <span>ColorPicker 颜色选择</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-slider.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-sliders"></i>
+                            <span>Slider 滑块</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-upload.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-upload"></i>
+                            <span>Upload 上传</span>
+                        </a>
+                    </li>
+                </ul>
+            </aside>
+
+            <main class="yc-demo-main">
+                <div class="yc-demo-page">
+                    <div class="yc-demo-page__header">
+                        <h1 class="yc-demo-page__title">Grid 栅格布局</h1>
+                        <p class="yc-demo-page__subtitle">24 栅格系统，将一行等分为 24 份，按照需求对元素的占比进行任意组合</p>
+                    </div>
+
+                    <section class="yc-demo-section">
+                        <div class="yc-demo-section__header">
+                            <div class="yc-demo-section__icon"></div>
+                            <h2 class="yc-demo-section__title">基础布局</h2>
                         </div>
-                        <div class="yc-col-xs-24 yc-col-sm-12 yc-col-md-8 yc-col-lg-6">
-                            <div class="grid-demo-item yc-col--light">xs:24 / sm:12 / md:8 / lg:6</div>
+                        <div class="yc-demo-block">
+                            <div class="yc-demo-block__title">等分混合</div>
+                            <div class="yc-demo-block__content">
+                                <div class="demo-row">
+                                    <div class="yc-row yc-row--plain" style="width: 100%;">
+                                        <div class="yc-col-24"><div class="grid-demo-item">24</div></div>
+                                    </div>
+                                    <div class="yc-row yc-row--plain" style="width: 100%;">
+                                        <div class="yc-col-12"><div class="grid-demo-item">12</div></div>
+                                        <div class="yc-col-12"><div class="grid-demo-item yc-col--light">12</div></div>
+                                    </div>
+                                    <div class="yc-row yc-row--plain" style="width: 100%;">
+                                        <div class="yc-col-8"><div class="grid-demo-item">8</div></div>
+                                        <div class="yc-col-8"><div class="grid-demo-item yc-col--light">8</div></div>
+                                        <div class="yc-col-8"><div class="grid-demo-item">8</div></div>
+                                    </div>
+                                    <div class="yc-row yc-row--plain" style="width: 100%;">
+                                        <div class="yc-col-6"><div class="grid-demo-item">6</div></div>
+                                        <div class="yc-col-6"><div class="grid-demo-item yc-col--light">6</div></div>
+                                        <div class="yc-col-6"><div class="grid-demo-item">6</div></div>
+                                        <div class="yc-col-6"><div class="grid-demo-item yc-col--light">6</div></div>
+                                    </div>
+                                    <div class="yc-row yc-row--plain" style="width: 100%;">
+                                        <div class="yc-col-4"><div class="grid-demo-item">4</div></div>
+                                        <div class="yc-col-4"><div class="grid-demo-item yc-col--light">4</div></div>
+                                        <div class="yc-col-4"><div class="grid-demo-item">4</div></div>
+                                        <div class="yc-col-4"><div class="grid-demo-item yc-col--light">4</div></div>
+                                        <div class="yc-col-4"><div class="grid-demo-item">4</div></div>
+                                        <div class="yc-col-4"><div class="grid-demo-item yc-col--light">4</div></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="yc-col-xs-24 yc-col-sm-12 yc-col-md-8 yc-col-lg-6">
-                            <div class="grid-demo-item">xs:24 / sm:12 / md:8 / lg:6</div>
+                    </section>
+
+                    <section class="yc-demo-section">
+                        <div class="yc-demo-section__header">
+                            <div class="yc-demo-section__icon"></div>
+                            <h2 class="yc-demo-section__title">混合布局</h2>
                         </div>
-                        <div class="yc-col-xs-24 yc-col-sm-12 yc-col-md-8 yc-col-lg-6">
-                            <div class="grid-demo-item yc-col--light">xs:24 / sm:12 / md:8 / lg:6</div>
+                        <div class="yc-demo-block">
+                            <div class="yc-demo-block__title">通过基础的 1/24 分栏进行组合</div>
+                            <div class="yc-demo-block__content">
+                                <div class="demo-row">
+                                    <div class="yc-row yc-row--plain" style="width: 100%;">
+                                        <div class="yc-col-16"><div class="grid-demo-item">col-16</div></div>
+                                        <div class="yc-col-8"><div class="grid-demo-item yc-col--light">col-8</div></div>
+                                    </div>
+                                    <div class="yc-row yc-row--plain" style="width: 100%;">
+                                        <div class="yc-col-8"><div class="grid-demo-item">col-8</div></div>
+                                        <div class="yc-col-8"><div class="grid-demo-item yc-col--light">col-8</div></div>
+                                        <div class="yc-col-4"><div class="grid-demo-item">col-4</div></div>
+                                        <div class="yc-col-4"><div class="grid-demo-item yc-col--light">col-4</div></div>
+                                    </div>
+                                    <div class="yc-row yc-row--plain" style="width: 100%;">
+                                        <div class="yc-col-6"><div class="grid-demo-item">col-6</div></div>
+                                        <div class="yc-col-6"><div class="grid-demo-item yc-col--light">col-6</div></div>
+                                        <div class="yc-col-4"><div class="grid-demo-item">col-4</div></div>
+                                        <div class="yc-col-4"><div class="grid-demo-item yc-col--light">col-4</div></div>
+                                        <div class="yc-col-4"><div class="grid-demo-item">col-4</div></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    </section>
+
+                    <section class="yc-demo-section">
+                        <div class="yc-demo-section__header">
+                            <div class="yc-demo-section__icon"></div>
+                            <h2 class="yc-demo-section__title">分栏间隔</h2>
+                        </div>
+                        <div class="yc-demo-block">
+                            <div class="yc-demo-block__title">列之间存在间隙</div>
+                            <div class="yc-demo-block__content">
+                                <div class="yc-row" style="--yc-row-gutter: 20px;">
+                                    <div class="yc-col-8"><div class="grid-demo-item">col-8</div></div>
+                                    <div class="yc-col-8"><div class="grid-demo-item yc-col--light">col-8</div></div>
+                                    <div class="yc-col-8"><div class="grid-demo-item">col-8</div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="yc-demo-section">
+                        <div class="yc-demo-section__header">
+                            <div class="yc-demo-section__icon"></div>
+                            <h2 class="yc-demo-section__title">分栏偏移</h2>
+                        </div>
+                        <div class="yc-demo-block">
+                            <div class="yc-demo-block__title">支持偏移指定列数</div>
+                            <div class="yc-demo-block__content">
+                                <div class="demo-row">
+                                    <div class="yc-row yc-row--plain" style="width: 100%;">
+                                        <div class="yc-col-8"><div class="grid-demo-item">col-8</div></div>
+                                        <div class="yc-col-8 yc-col-offset-8"><div class="grid-demo-item yc-col--light">col-8 offset-8</div></div>
+                                    </div>
+                                    <div class="yc-row yc-row--plain" style="width: 100%;">
+                                        <div class="yc-col-6 yc-col-offset-6"><div class="grid-demo-item">col-6 offset-6</div></div>
+                                        <div class="yc-col-6 yc-col-offset-6"><div class="grid-demo-item yc-col--light">col-6 offset-6</div></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="yc-demo-section">
+                        <div class="yc-demo-section__header">
+                            <div class="yc-demo-section__icon"></div>
+                            <h2 class="yc-demo-section__title">对齐方式</h2>
+                        </div>
+                        <div class="yc-demo-block">
+                            <div class="yc-demo-block__title">使用 flex 布局的对齐方式</div>
+                            <div class="yc-demo-block__content">
+                                <div class="demo-row">
+                                    <div class="yc-row yc-row--plain yc-row--justify-space-between" style="width: 100%; background: var(--yc-color-bg-page); padding: 10px;">
+                                        <div class="yc-col-4"><div class="grid-demo-item">col-4</div></div>
+                                        <div class="yc-col-4"><div class="grid-demo-item yc-col--light">col-4</div></div>
+                                        <div class="yc-col-4"><div class="grid-demo-item">col-4</div></div>
+                                    </div>
+                                    <div class="yc-row yc-row--plain yc-row--align-middle" style="width: 100%; background: var(--yc-color-bg-page); padding: 10px; min-height: 80px; margin-top: 10px;">
+                                        <div class="yc-col-4"><div class="grid-demo-item" style="height: 40px;">col-4</div></div>
+                                        <div class="yc-col-4"><div class="grid-demo-item yc-col--light">col-4</div></div>
+                                        <div class="yc-col-4"><div class="grid-demo-item">col-4</div></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="yc-demo-section">
+                        <div class="yc-demo-section__header">
+                            <div class="yc-demo-section__icon"></div>
+                            <h2 class="yc-demo-section__title">响应式布局</h2>
+                        </div>
+                        <div class="yc-demo-block">
+                            <div class="yc-demo-block__title">参照 Bootstrap 的响应式设计，预设四个响应尺寸</div>
+                            <div class="yc-demo-block__content">
+                                <div class="demo-row">
+                                    <div class="yc-row yc-row--plain" style="width: 100%;">
+                                        <div class="yc-col-xs-24 yc-col-sm-12 yc-col-md-8 yc-col-lg-6">
+                                            <div class="grid-demo-item">xs:24 / sm:12 / md:8 / lg:6</div>
+                                        </div>
+                                        <div class="yc-col-xs-24 yc-col-sm-12 yc-col-md-8 yc-col-lg-6">
+                                            <div class="grid-demo-item yc-col--light">xs:24 / sm:12 / md:8 / lg:6</div>
+                                        </div>
+                                        <div class="yc-col-xs-24 yc-col-sm-12 yc-col-md-8 yc-col-lg-6">
+                                            <div class="grid-demo-item">xs:24 / sm:12 / md:8 / lg:6</div>
+                                        </div>
+                                        <div class="yc-col-xs-24 yc-col-sm-12 yc-col-md-8 yc-col-lg-6">
+                                            <div class="grid-demo-item yc-col--light">xs:24 / sm:12 / md:8 / lg:6</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="demo-row" style="margin-top: 10px;">
+                                    <p style="color: var(--yc-color-text-secondary); font-size: var(--yc-font-size-small);">调整浏览器窗口大小查看响应式效果：在小屏幕上每行显示1列，中等屏幕2列，大屏幕3列，超大屏幕4列。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                 </div>
-                <div class="demo-row" style="margin-top: 10px;">
-                    <p style="color: var(--yc-color-text-secondary); font-size: var(--yc-font-size-small);">调整浏览器窗口大小查看响应式效果：在小屏幕上每行显示1列，中等屏幕2列，大屏幕3列，超大屏幕4列。</p>
-                </div>
-            </div>
+            </main>
         </div>
+
+        <div class="yc-demo-backdrop" id="backdrop"></div>
     </div>
 
     <style>
@@ -166,5 +380,42 @@
             background-color: var(--yc-link-hover-color);
         }
     </style>
+
+    <script>
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('yc-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('yc-theme', newTheme);
+            localStorage.setItem('yc-theme', newTheme);
+        }
+
+        function toggleMenu() {
+            const sidebar = document.getElementById('sidebar');
+            const backdrop = document.getElementById('backdrop');
+            sidebar.classList.toggle('is-visible');
+            backdrop.classList.toggle('is-visible');
+        }
+
+        const savedTheme = localStorage.getItem('yc-theme') || 'light';
+        document.documentElement.setAttribute('yc-theme', savedTheme);
+
+        document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+        document.getElementById('menuToggle').addEventListener('click', toggleMenu);
+        document.getElementById('backdrop').addEventListener('click', toggleMenu);
+
+        const menuToggle = document.getElementById('menuToggle');
+        function checkScreenWidth() {
+            if (window.innerWidth <= 992) {
+                menuToggle.style.display = 'flex';
+            } else {
+                menuToggle.style.display = 'none';
+                document.getElementById('sidebar').classList.remove('is-visible');
+                document.getElementById('backdrop').classList.remove('is-visible');
+            }
+        }
+
+        checkScreenWidth();
+        window.addEventListener('resize', checkScreenWidth);
+    </script>
 </body>
 </html>

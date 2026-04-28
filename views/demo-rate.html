@@ -1,141 +1,384 @@
 <!DOCTYPE html>
 <html lang="zh-CN" yc-theme="light">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rate 评分组件示例</title>
+    <title>Rate 评分组件示例 - YC UI</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../styles/demo.css">
     <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
 </head>
-
 <body>
-    <div class="demo-container">
-        <div class="demo-page-header">
-            <h1>Rate 评分组件示例</h1>
-            <p class="demo-description">用于评分的组件，支持半星、自定义图标、只读和禁用状态</p>
-        </div>
-
-        <div class="demo-section">
-            <div class="demo-section-title">基础用法</div>
-            <div class="demo-block">
-                <div class="demo-block-item">
-                    <label class="demo-block-label">默认评分</label>
-                    <div class="yc-rating" id="rate1" data-value="3" data-max="5"></div>
-                </div>
-                <div class="demo-result" id="rate1Result">当前评分: 3/5</div>
+    <div class="yc-demo-layout">
+        <header class="yc-demo-header">
+            <div class="yc-demo-header__logo">
+                <i class="fas fa-palette"></i>
+                <span>YC UI</span>
             </div>
-        </div>
+            <nav class="yc-demo-header__nav">
+                <a href="../index.html" class="yc-demo-header__nav-item">首页</a>
+                <span class="yc-demo-header__nav-item is-active">组件</span>
+            </nav>
+            <div class="yc-demo-header__theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+                <span>切换主题</span>
+            </div>
+            <div class="yc-demo-header__menu-toggle" id="menuToggle" style="display: none;">
+                <i class="fas fa-bars"></i>
+            </div>
+        </header>
 
-        <div class="demo-section">
-            <div class="demo-section-title">不同尺寸</div>
-            <div class="demo-block">
-                <div class="demo-block-item">
-                    <label class="demo-block-label">尺寸变体</label>
-                    <div class="demo-rating-sizes">
-                        <div class="demo-rating-item">
-                            <span class="demo-rating-label">Small</span>
-                            <div class="yc-rating yc-rating--small" id="rate2" data-value="2" data-max="5"></div>
-                        </div>
-                        <div class="demo-rating-item">
-                            <span class="demo-rating-label">Base</span>
-                            <div class="yc-rating" id="rate3" data-value="3" data-max="5"></div>
-                        </div>
-                        <div class="demo-rating-item">
-                            <span class="demo-rating-label">Large</span>
-                            <div class="yc-rating yc-rating--large" id="rate4" data-value="4" data-max="5"></div>
-                        </div>
+        <div class="yc-demo-content">
+            <aside class="yc-demo-sidebar yc-demo-scrollbar" id="sidebar">
+                <div class="yc-demo-sidebar__title">快速开始</div>
+                <ul class="yc-demo-sidebar__menu">
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="../index.html#features" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-star"></i>
+                            <span>特性</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="../index.html#components" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-th"></i>
+                            <span>组件展示</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="../index.html#quickstart" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-rocket"></i>
+                            <span>快速开始</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="yc-demo-sidebar__title">基础组件</div>
+                <ul class="yc-demo-sidebar__menu">
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-button.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-square"></i>
+                            <span>Button 按钮</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-input.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-keyboard"></i>
+                            <span>Input 输入框</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-radio.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-circle"></i>
+                            <span>Radio 单选框</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-checkbox.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-check-square"></i>
+                            <span>Checkbox 多选框</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-switch.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-toggle-on"></i>
+                            <span>Switch 开关</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-select.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-chevron-down"></i>
+                            <span>Select 选择器</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="yc-demo-sidebar__title">布局组件</div>
+                <ul class="yc-demo-sidebar__menu">
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-container.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-border-all"></i>
+                            <span>Container 布局</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-grid.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-th-large"></i>
+                            <span>Grid 栅格</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-card.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-window-maximize"></i>
+                            <span>Card 卡片</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-tabs.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-columns"></i>
+                            <span>Tabs 标签页</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="yc-demo-sidebar__title">反馈组件</div>
+                <ul class="yc-demo-sidebar__menu">
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-alert.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <span>Alert 警告</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-loading.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-spinner"></i>
+                            <span>Loading 加载</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-notification.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-bell"></i>
+                            <span>Notification 通知</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="yc-demo-sidebar__title">弹窗组件</div>
+                <ul class="yc-demo-sidebar__menu">
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-dialog.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-window-close"></i>
+                            <span>Dialog 对话框</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-drawer.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-sliders-h"></i>
+                            <span>Drawer 抽屉</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="yc-demo-sidebar__title">高级组件</div>
+                <ul class="yc-demo-sidebar__menu">
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-tree-select.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-sitemap"></i>
+                            <span>TreeSelect 树形选择器</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-transfer.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-exchange-alt"></i>
+                            <span>Transfer 穿梭框</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-cascader.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-share-alt"></i>
+                            <span>Cascader 级联选择器</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-autocomplete.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-search-plus"></i>
+                            <span>Autocomplete 自动补全</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-date-picker.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-calendar"></i>
+                            <span>DatePicker 日期选择器</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-time-picker.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-clock"></i>
+                            <span>TimePicker 时间选择器</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-color-picker.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-palette"></i>
+                            <span>ColorPicker 颜色选择器</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-slider.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-sliders"></i>
+                            <span>Slider 滑块</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-rate.html" class="yc-demo-sidebar__menu-link is-active">
+                            <i class="fas fa-star"></i>
+                            <span>Rate 评分</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-upload.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-upload"></i>
+                            <span>Upload 上传</span>
+                        </a>
+                    </li>
+                </ul>
+            </aside>
+
+            <main class="yc-demo-main">
+                <div class="yc-demo-page">
+                    <div class="yc-demo-page__header">
+                        <h1 class="yc-demo-page__title">Rate 评分</h1>
+                        <p class="yc-demo-page__subtitle">用于评分的组件，支持半星、自定义图标、只读和禁用状态</p>
                     </div>
+
+                    <section class="yc-demo-section">
+                        <div class="yc-demo-section__header">
+                            <div class="yc-demo-section__icon"></div>
+                            <h2 class="yc-demo-section__title">基础用法</h2>
+                        </div>
+                        <div class="demo-block">
+                            <div class="demo-block-title">默认评分</div>
+                            <div class="demo-block-item">
+                                <div class="yc-rating" id="rate1" data-value="3" data-max="5"></div>
+                            </div>
+                            <div class="demo-result" id="rate1Result">当前评分: 3/5</div>
+                        </div>
+                    </section>
+
+                    <section class="yc-demo-section">
+                        <div class="yc-demo-section__header">
+                            <div class="yc-demo-section__icon"></div>
+                            <h2 class="yc-demo-section__title">不同尺寸</h2>
+                        </div>
+                        <div class="demo-block">
+                            <div class="demo-block-title">尺寸变体</div>
+                            <div class="demo-rating-sizes">
+                                <div class="demo-rating-item">
+                                    <span class="demo-rating-label">Small</span>
+                                    <div class="yc-rating yc-rating--small" id="rate2" data-value="2" data-max="5"></div>
+                                </div>
+                                <div class="demo-rating-item">
+                                    <span class="demo-rating-label">Base</span>
+                                    <div class="yc-rating" id="rate3" data-value="3" data-max="5"></div>
+                                </div>
+                                <div class="demo-rating-item">
+                                    <span class="demo-rating-label">Large</span>
+                                    <div class="yc-rating yc-rating--large" id="rate4" data-value="4" data-max="5"></div>
+                                </div>
+                            </div>
+                            <div class="demo-result" id="rate2Result">Small: 2 | Base: 3 | Large: 4</div>
+                        </div>
+                    </section>
+
+                    <section class="yc-demo-section">
+                        <div class="yc-demo-section__header">
+                            <div class="yc-demo-section__icon"></div>
+                            <h2 class="yc-demo-section__title">允许半星</h2>
+                        </div>
+                        <div class="demo-block">
+                            <div class="demo-block-title">半星评分</div>
+                            <div class="demo-block-item">
+                                <div class="yc-rating" id="rate5" data-value="3.5" data-max="5" data-allow-half="true"></div>
+                            </div>
+                            <div class="demo-result" id="rate5Result">当前评分: 3.5/5</div>
+                        </div>
+                    </section>
+
+                    <section class="yc-demo-section">
+                        <div class="yc-demo-section__header">
+                            <div class="yc-demo-section__icon"></div>
+                            <h2 class="yc-demo-section__title">自定义图标</h2>
+                        </div>
+                        <div class="demo-block">
+                            <div class="demo-block-title">心形图标</div>
+                            <div class="demo-block-item">
+                                <div class="yc-rating" id="rate6" data-value="4" data-max="5" data-icon="fa-heart"></div>
+                            </div>
+                            <div class="demo-result" id="rate6Result">当前评分: 4/5</div>
+                        </div>
+                    </section>
+
+                    <section class="yc-demo-section">
+                        <div class="yc-demo-section__header">
+                            <div class="yc-demo-section__icon"></div>
+                            <h2 class="yc-demo-section__title">自定义最大评分</h2>
+                        </div>
+                        <div class="demo-block">
+                            <div class="demo-block-title">最大10分</div>
+                            <div class="demo-block-item">
+                                <div class="yc-rating yc-rating--small" id="rate7" data-value="7" data-max="10"></div>
+                            </div>
+                            <div class="demo-result" id="rate7Result">当前评分: 7/10</div>
+                        </div>
+                    </section>
+
+                    <section class="yc-demo-section">
+                        <div class="yc-demo-section__header">
+                            <div class="yc-demo-section__icon"></div>
+                            <h2 class="yc-demo-section__title">只读状态</h2>
+                        </div>
+                        <div class="demo-block">
+                            <div class="demo-block-title">只读评分</div>
+                            <div class="demo-block-item">
+                                <div class="yc-rating" id="rate8" data-value="4" data-max="5" data-readonly="true"></div>
+                            </div>
+                            <div class="demo-result" id="rate8Result">当前评分: 4/5 (只读)</div>
+                        </div>
+                    </section>
+
+                    <section class="yc-demo-section">
+                        <div class="yc-demo-section__header">
+                            <div class="yc-demo-section__icon"></div>
+                            <h2 class="yc-demo-section__title">禁用状态</h2>
+                        </div>
+                        <div class="demo-block">
+                            <div class="demo-block-title">禁用评分</div>
+                            <div class="demo-block-item">
+                                <div class="yc-rating" id="rate9" data-value="3" data-max="5" data-disabled="true"></div>
+                            </div>
+                            <div class="demo-result" id="rate9Result">当前评分: 3/5 (禁用)</div>
+                        </div>
+                    </section>
+
+                    <section class="yc-demo-section">
+                        <div class="yc-demo-section__header">
+                            <div class="yc-demo-section__icon"></div>
+                            <h2 class="yc-demo-section__title">带文字描述</h2>
+                        </div>
+                        <div class="demo-block">
+                            <div class="demo-block-title">评分描述</div>
+                            <div class="demo-block-item">
+                                <div class="yc-rating yc-rating--with-text" id="rate10" data-value="0" data-max="5"></div>
+                            </div>
+                            <div class="demo-result" id="rate10Result">请选择评分</div>
+                        </div>
+                    </section>
+
+                    <section class="yc-demo-section">
+                        <div class="yc-demo-section__header">
+                            <div class="yc-demo-section__icon"></div>
+                            <h2 class="yc-demo-section__title">动态评分</h2>
+                        </div>
+                        <div class="demo-block">
+                            <div class="demo-block-title">动态设置</div>
+                            <div class="demo-block-item">
+                                <div class="yc-rating" id="rate11" data-value="0" data-max="5"></div>
+                            </div>
+                            <div class="demo-button-group" style="margin-top: 16px;">
+                                <button class="yc-button yc-button--small" onclick="setRate('rate11', 1)">1分</button>
+                                <button class="yc-button yc-button--small" onclick="setRate('rate11', 2)">2分</button>
+                                <button class="yc-button yc-button--small" onclick="setRate('rate11', 3)">3分</button>
+                                <button class="yc-button yc-button--small" onclick="setRate('rate11', 4)">4分</button>
+                                <button class="yc-button yc-button--small" onclick="setRate('rate11', 5)">5分</button>
+                                <button class="yc-button yc-button--small" onclick="clearRate('rate11')">清除</button>
+                            </div>
+                            <div class="demo-result" id="rate11Result">当前评分: 0/5</div>
+                        </div>
+                    </section>
                 </div>
-                <div class="demo-result" id="rate2Result">Small: 2 | Base: 3 | Large: 4</div>
-            </div>
+            </main>
         </div>
 
-        <div class="demo-section">
-            <div class="demo-section-title">允许半星</div>
-            <div class="demo-block">
-                <div class="demo-block-item">
-                    <label class="demo-block-label">半星评分</label>
-                    <div class="yc-rating" id="rate5" data-value="3.5" data-max="5" data-allow-half="true"></div>
-                </div>
-                <div class="demo-result" id="rate5Result">当前评分: 3.5/5</div>
-            </div>
-        </div>
-
-        <div class="demo-section">
-            <div class="demo-section-title">自定义图标</div>
-            <div class="demo-block">
-                <div class="demo-block-item">
-                    <label class="demo-block-label">心形图标</label>
-                    <div class="yc-rating" id="rate6" data-value="4" data-max="5" data-icon="fa-heart"></div>
-                </div>
-                <div class="demo-result" id="rate6Result">当前评分: 4/5</div>
-            </div>
-        </div>
-
-        <div class="demo-section">
-            <div class="demo-section-title">自定义最大评分</div>
-            <div class="demo-block">
-                <div class="demo-block-item">
-                    <label class="demo-block-label">最大10分</label>
-                    <div class="yc-rating yc-rating--small" id="rate7" data-value="7" data-max="10"></div>
-                </div>
-                <div class="demo-result" id="rate7Result">当前评分: 7/10</div>
-            </div>
-        </div>
-
-        <div class="demo-section">
-            <div class="demo-section-title">只读状态</div>
-            <div class="demo-block">
-                <div class="demo-block-item">
-                    <label class="demo-block-label">只读评分</label>
-                    <div class="yc-rating" id="rate8" data-value="4" data-max="5" data-readonly="true"></div>
-                </div>
-                <div class="demo-result" id="rate8Result">当前评分: 4/5 (只读)</div>
-            </div>
-        </div>
-
-        <div class="demo-section">
-            <div class="demo-section-title">禁用状态</div>
-            <div class="demo-block">
-                <div class="demo-block-item">
-                    <label class="demo-block-label">禁用评分</label>
-                    <div class="yc-rating" id="rate9" data-value="3" data-max="5" data-disabled="true"></div>
-                </div>
-                <div class="demo-result" id="rate9Result">当前评分: 3/5 (禁用)</div>
-            </div>
-        </div>
-
-        <div class="demo-section">
-            <div class="demo-section-title">带文字描述</div>
-            <div class="demo-block">
-                <div class="demo-block-item">
-                    <label class="demo-block-label">评分描述</label>
-                    <div class="yc-rating yc-rating--with-text" id="rate10" data-value="0" data-max="5"></div>
-                </div>
-                <div class="demo-result" id="rate10Result">请选择评分</div>
-            </div>
-        </div>
-
-        <div class="demo-section">
-            <div class="demo-section-title">动态评分</div>
-            <div class="demo-block">
-                <div class="demo-block-item">
-                    <label class="demo-block-label">动态设置</label>
-                    <div class="yc-rating" id="rate11" data-value="0" data-max="5"></div>
-                </div>
-                <div class="demo-button-group" style="margin-top: 16px;">
-                    <button class="yc-button yc-button--small" onclick="setRate('rate11', 1)">1分</button>
-                    <button class="yc-button yc-button--small" onclick="setRate('rate11', 2)">2分</button>
-                    <button class="yc-button yc-button--small" onclick="setRate('rate11', 3)">3分</button>
-                    <button class="yc-button yc-button--small" onclick="setRate('rate11', 4)">4分</button>
-                    <button class="yc-button yc-button--small" onclick="setRate('rate11', 5)">5分</button>
-                    <button class="yc-button yc-button--small" onclick="clearRate('rate11')">清除</button>
-                </div>
-                <div class="demo-result" id="rate11Result">当前评分: 0/5</div>
-            </div>
-        </div>
+        <div class="yc-demo-backdrop" id="backdrop"></div>
     </div>
 
     <script>
@@ -258,6 +501,42 @@
 
         window.addEventListener('DOMContentLoaded', initAll);
     </script>
-</body>
 
+    <script>
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('yc-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('yc-theme', newTheme);
+            localStorage.setItem('yc-theme', newTheme);
+        }
+
+        function toggleMenu() {
+            const sidebar = document.getElementById('sidebar');
+            const backdrop = document.getElementById('backdrop');
+            sidebar.classList.toggle('is-visible');
+            backdrop.classList.toggle('is-visible');
+        }
+
+        const savedTheme = localStorage.getItem('yc-theme') || 'light';
+        document.documentElement.setAttribute('yc-theme', savedTheme);
+
+        document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+        document.getElementById('menuToggle').addEventListener('click', toggleMenu);
+        document.getElementById('backdrop').addEventListener('click', toggleMenu);
+
+        const menuToggle = document.getElementById('menuToggle');
+        function checkScreenWidth() {
+            if (window.innerWidth <= 992) {
+                menuToggle.style.display = 'flex';
+            } else {
+                menuToggle.style.display = 'none';
+                document.getElementById('sidebar').classList.remove('is-visible');
+                document.getElementById('backdrop').classList.remove('is-visible');
+            }
+        }
+
+        checkScreenWidth();
+        window.addEventListener('resize', checkScreenWidth);
+    </script>
+</body>
 </html>

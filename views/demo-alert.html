@@ -9,212 +9,431 @@
     <link rel="stylesheet" href="../styles/demo.css">
 </head>
 <body>
-    <div class="demo-container">
-        <div class="demo-page-header">
-            <h1 class="demo-page-title">Alert 提示组件</h1>
-            <p class="demo-page-subtitle">带图标的信息提示、成功、警告、错误等提示用法示例</p>
+    <div class="yc-demo-layout">
+        <header class="yc-demo-header">
+            <div class="yc-demo-header__logo">
+                <i class="fas fa-palette"></i>
+                <span>YC UI</span>
+            </div>
+            <nav class="yc-demo-header__nav">
+                <a href="../index.html" class="yc-demo-header__nav-item">首页</a>
+                <span class="yc-demo-header__nav-item is-active">组件</span>
+            </nav>
+            <div class="yc-demo-header__theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+                <span>切换主题</span>
+            </div>
+            <div class="yc-demo-header__menu-toggle" id="menuToggle" style="display: none;">
+                <i class="fas fa-bars"></i>
+            </div>
+        </header>
+
+        <div class="yc-demo-content">
+            <aside class="yc-demo-sidebar yc-demo-scrollbar" id="sidebar">
+                <div class="yc-demo-sidebar__title">快速开始</div>
+                <ul class="yc-demo-sidebar__menu">
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="../index.html#features" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-star"></i>
+                            <span>特性</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="../index.html#components" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-th"></i>
+                            <span>组件展示</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="../index.html#quickstart" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-rocket"></i>
+                            <span>快速开始</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="yc-demo-sidebar__title">基础组件</div>
+                <ul class="yc-demo-sidebar__menu">
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-button.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-square"></i>
+                            <span>Button 按钮</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-input.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-keyboard"></i>
+                            <span>Input 输入框</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-radio.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-circle"></i>
+                            <span>Radio 单选框</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-checkbox.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-check-square"></i>
+                            <span>Checkbox 多选框</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-switch.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-toggle-on"></i>
+                            <span>Switch 开关</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-select.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-chevron-down"></i>
+                            <span>Select 选择器</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="yc-demo-sidebar__title">布局组件</div>
+                <ul class="yc-demo-sidebar__menu">
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-container.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-border-all"></i>
+                            <span>Container 布局</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-grid.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-th-large"></i>
+                            <span>Grid 栅格</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-card.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-window-maximize"></i>
+                            <span>Card 卡片</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-tabs.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-columns"></i>
+                            <span>Tabs 标签页</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="yc-demo-sidebar__title">反馈组件</div>
+                <ul class="yc-demo-sidebar__menu">
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-alert.html" class="yc-demo-sidebar__menu-link is-active">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <span>Alert 警告</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-loading.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-spinner"></i>
+                            <span>Loading 加载</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-notification.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-bell"></i>
+                            <span>Notification 通知</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="yc-demo-sidebar__title">弹窗组件</div>
+                <ul class="yc-demo-sidebar__menu">
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-dialog.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-window-close"></i>
+                            <span>Dialog 对话框</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-drawer.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-sliders-h"></i>
+                            <span>Drawer 抽屉</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="yc-demo-sidebar__title">高级组件</div>
+                <ul class="yc-demo-sidebar__menu">
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-date-picker.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-calendar"></i>
+                            <span>DatePicker 日期选择</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-color-picker.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-palette"></i>
+                            <span>ColorPicker 颜色选择</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-slider.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-sliders"></i>
+                            <span>Slider 滑块</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-upload.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-upload"></i>
+                            <span>Upload 上传</span>
+                        </a>
+                    </li>
+                </ul>
+            </aside>
+
+            <main class="yc-demo-main">
+                <div class="yc-demo-page">
+                    <div class="yc-demo-page__header">
+                        <h1 class="yc-demo-page__title">Alert 提示组件</h1>
+                        <p class="yc-demo-page__subtitle">带图标的信息提示、成功、警告、错误等提示用法示例</p>
+                    </div>
+
+                    <section class="yc-demo-section">
+                        <div class="yc-demo-section__header">
+                            <div class="yc-demo-section__icon"></div>
+                            <h2 class="yc-demo-section__title">基本用法</h2>
+                        </div>
+                        <div class="yc-demo-block">
+                            <div class="yc-demo-block__title">不同类型提示</div>
+                            <div class="yc-demo-block__content">
+                                <div class="yc-demo-row" style="flex-direction: column; gap: 12px;">
+                                    <div class="yc-alert yc-alert--success">
+                                        <i class="fas fa-check-circle yc-alert__icon"></i>
+                                        <div class="yc-alert__content">
+                                            <div class="yc-alert__message">这是一条成功提示</div>
+                                        </div>
+                                        <button class="yc-alert__close"><i class="fas fa-times"></i></button>
+                                    </div>
+                                    <div class="yc-alert yc-alert--warning">
+                                        <i class="fas fa-exclamation-triangle yc-alert__icon"></i>
+                                        <div class="yc-alert__content">
+                                            <div class="yc-alert__message">这是一条警告提示</div>
+                                        </div>
+                                        <button class="yc-alert__close"><i class="fas fa-times"></i></button>
+                                    </div>
+                                    <div class="yc-alert yc-alert--danger">
+                                        <i class="fas fa-times-circle yc-alert__icon"></i>
+                                        <div class="yc-alert__content">
+                                            <div class="yc-alert__message">这是一条错误提示</div>
+                                        </div>
+                                        <button class="yc-alert__close"><i class="fas fa-times"></i></button>
+                                    </div>
+                                    <div class="yc-alert yc-alert--info">
+                                        <i class="fas fa-info-circle yc-alert__icon"></i>
+                                        <div class="yc-alert__content">
+                                            <div class="yc-alert__message">这是一条信息提示</div>
+                                        </div>
+                                        <button class="yc-alert__close"><i class="fas fa-times"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="yc-demo-section">
+                        <div class="yc-demo-section__header">
+                            <div class="yc-demo-section__icon"></div>
+                            <h2 class="yc-demo-section__title">带标题提示</h2>
+                        </div>
+                        <div class="yc-demo-block">
+                            <div class="yc-demo-block__content">
+                                <div class="yc-demo-row" style="flex-direction: column; gap: 12px;">
+                                    <div class="yc-alert yc-alert--success">
+                                        <i class="fas fa-check-circle yc-alert__icon"></i>
+                                        <div class="yc-alert__content">
+                                            <div class="yc-alert__title">成功提示</div>
+                                            <div class="yc-alert__message">这是一条带有标题的成功提示，包含更多详细内容</div>
+                                        </div>
+                                        <button class="yc-alert__close"><i class="fas fa-times"></i></button>
+                                    </div>
+                                    <div class="yc-alert yc-alert--warning">
+                                        <i class="fas fa-exclamation-triangle yc-alert__icon"></i>
+                                        <div class="yc-alert__content">
+                                            <div class="yc-alert__title">警告提示</div>
+                                            <div class="yc-alert__message">这是一条带有标题的警告提示，包含更多详细内容</div>
+                                        </div>
+                                        <button class="yc-alert__close"><i class="fas fa-times"></i></button>
+                                    </div>
+                                    <div class="yc-alert yc-alert--danger">
+                                        <i class="fas fa-times-circle yc-alert__icon"></i>
+                                        <div class="yc-alert__content">
+                                            <div class="yc-alert__title">错误提示</div>
+                                            <div class="yc-alert__message">这是一条带有标题的错误提示，包含更多详细内容</div>
+                                        </div>
+                                        <button class="yc-alert__close"><i class="fas fa-times"></i></button>
+                                    </div>
+                                    <div class="yc-alert yc-alert--info">
+                                        <i class="fas fa-info-circle yc-alert__icon"></i>
+                                        <div class="yc-alert__content">
+                                            <div class="yc-alert__title">信息提示</div>
+                                            <div class="yc-alert__message">这是一条带有标题的信息提示，包含更多详细内容</div>
+                                        </div>
+                                        <button class="yc-alert__close"><i class="fas fa-times"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="yc-demo-section">
+                        <div class="yc-demo-section__header">
+                            <div class="yc-demo-section__icon"></div>
+                            <h2 class="yc-demo-section__title">不同尺寸</h2>
+                        </div>
+                        <div class="yc-demo-block">
+                            <div class="yc-demo-block__content">
+                                <div class="yc-demo-row" style="flex-direction: column; gap: 12px;">
+                                    <div class="yc-alert yc-alert--primary yc-alert--large">
+                                        <i class="fas fa-info-circle yc-alert__icon"></i>
+                                        <div class="yc-alert__content">
+                                            <div class="yc-alert__title">大尺寸提示</div>
+                                            <div class="yc-alert__message">这是一条大尺寸的提示信息</div>
+                                        </div>
+                                    </div>
+                                    <div class="yc-alert yc-alert--success">
+                                        <i class="fas fa-check-circle yc-alert__icon"></i>
+                                        <div class="yc-alert__content">
+                                            <div class="yc-alert__title">默认尺寸提示</div>
+                                            <div class="yc-alert__message">这是一条默认尺寸的提示信息</div>
+                                        </div>
+                                    </div>
+                                    <div class="yc-alert yc-alert--warning yc-alert--small">
+                                        <i class="fas fa-exclamation-triangle yc-alert__icon"></i>
+                                        <div class="yc-alert__content">
+                                            <div class="yc-alert__title">小尺寸提示</div>
+                                            <div class="yc-alert__message">这是一条小尺寸的提示信息</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="yc-demo-section">
+                        <div class="yc-demo-section__header">
+                            <div class="yc-demo-section__icon"></div>
+                            <h2 class="yc-demo-section__title">居中显示</h2>
+                        </div>
+                        <div class="yc-demo-block">
+                            <div class="yc-demo-block__content">
+                                <div class="yc-demo-row" style="flex-direction: column; gap: 12px;">
+                                    <div class="yc-alert yc-alert--success yc-alert--center">
+                                        <i class="fas fa-check-circle yc-alert__icon"></i>
+                                        <div class="yc-alert__content" style="text-align: center;">
+                                            <div class="yc-alert__title">居中成功提示</div>
+                                            <div class="yc-alert__message">这是一条居中显示的提示信息</div>
+                                        </div>
+                                    </div>
+                                    <div class="yc-alert yc-alert--info yc-alert--center">
+                                        <i class="fas fa-info-circle yc-alert__icon"></i>
+                                        <div class="yc-alert__content" style="text-align: center;">
+                                            <div class="yc-alert__title">居中信息提示</div>
+                                            <div class="yc-alert__message">这是一条居中显示的提示信息</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="yc-demo-section">
+                        <div class="yc-demo-section__header">
+                            <div class="yc-demo-section__icon"></div>
+                            <h2 class="yc-demo-section__title">轮廓样式</h2>
+                        </div>
+                        <div class="yc-demo-block">
+                            <div class="yc-demo-block__content">
+                                <div class="yc-demo-row" style="flex-direction: column; gap: 12px;">
+                                    <div class="yc-alert yc-alert--success yc-alert--outline">
+                                        <i class="fas fa-check-circle yc-alert__icon"></i>
+                                        <div class="yc-alert__content">
+                                            <div class="yc-alert__title">轮廓成功提示</div>
+                                            <div class="yc-alert__message">这是一条轮廓样式的成功提示</div>
+                                        </div>
+                                    </div>
+                                    <div class="yc-alert yc-alert--warning yc-alert--outline">
+                                        <i class="fas fa-exclamation-triangle yc-alert__icon"></i>
+                                        <div class="yc-alert__content">
+                                            <div class="yc-alert__title">轮廓警告提示</div>
+                                            <div class="yc-alert__message">这是一条轮廓样式的警告提示</div>
+                                        </div>
+                                    </div>
+                                    <div class="yc-alert yc-alert--danger yc-alert--outline">
+                                        <i class="fas fa-times-circle yc-alert__icon"></i>
+                                        <div class="yc-alert__content">
+                                            <div class="yc-alert__title">轮廓错误提示</div>
+                                            <div class="yc-alert__message">这是一条轮廓样式的错误提示</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="yc-demo-section">
+                        <div class="yc-demo-section__header">
+                            <div class="yc-demo-section__icon"></div>
+                            <h2 class="yc-demo-section__title">可关闭提示</h2>
+                        </div>
+                        <div class="yc-demo-block">
+                            <div class="yc-demo-block__content">
+                                <div class="yc-demo-row" style="flex-direction: column; gap: 12px;">
+                                    <div class="yc-alert yc-alert--info" id="closableAlert1">
+                                        <i class="fas fa-info-circle yc-alert__icon"></i>
+                                        <div class="yc-alert__content">
+                                            <div class="yc-alert__title">可关闭的信息提示</div>
+                                            <div class="yc-alert__message">点击右侧关闭按钮可以关闭此提示</div>
+                                        </div>
+                                        <button class="yc-alert__close" onclick="closeAlert('closableAlert1')"><i class="fas fa-times"></i></button>
+                                    </div>
+                                    <div class="yc-alert yc-alert--success" id="closableAlert2">
+                                        <i class="fas fa-check-circle yc-alert__icon"></i>
+                                        <div class="yc-alert__content">
+                                            <div class="yc-alert__title">可关闭的成功提示</div>
+                                            <div class="yc-alert__message">点击右侧关闭按钮可以关闭此提示</div>
+                                        </div>
+                                        <button class="yc-alert__close" onclick="closeAlert('closableAlert2')"><i class="fas fa-times"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="yc-demo-section">
+                        <div class="yc-demo-section__header">
+                            <div class="yc-demo-section__icon"></div>
+                            <h2 class="yc-demo-section__title">JavaScript 创建提示</h2>
+                        </div>
+                        <div class="yc-demo-block">
+                            <div class="yc-demo-block__content">
+                                <div class="yc-demo-row">
+                                    <button class="yc-button yc-button--primary" onclick="showAlert('success')">
+                                        <i class="fas fa-check"></i> 成功提示
+                                    </button>
+                                    <button class="yc-button yc-button--warning" onclick="showAlert('warning')">
+                                        <i class="fas fa-exclamation-triangle"></i> 警告提示
+                                    </button>
+                                    <button class="yc-button yc-button--danger" onclick="showAlert('danger')">
+                                        <i class="fas fa-times"></i> 错误提示
+                                    </button>
+                                    <button class="yc-button yc-button--info" onclick="showAlert('info')">
+                                        <i class="fas fa-info"></i> 信息提示
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </main>
         </div>
 
-        <div class="demo-section">
-            <h3>基本用法</h3>
-            <div class="demo-block">
-                <div class="demo-block-title">不同类型提示</div>
-                <div class="demo-row" style="flex-direction: column; gap: 12px;">
-                    <div class="yc-alert yc-alert--success">
-                        <i class="fas fa-check-circle yc-alert__icon"></i>
-                        <div class="yc-alert__content">
-                            <div class="yc-alert__message">这是一条成功提示</div>
-                        </div>
-                        <button class="yc-alert__close"><i class="fas fa-times"></i></button>
-                    </div>
-                    <div class="yc-alert yc-alert--warning">
-                        <i class="fas fa-exclamation-triangle yc-alert__icon"></i>
-                        <div class="yc-alert__content">
-                            <div class="yc-alert__message">这是一条警告提示</div>
-                        </div>
-                        <button class="yc-alert__close"><i class="fas fa-times"></i></button>
-                    </div>
-                    <div class="yc-alert yc-alert--danger">
-                        <i class="fas fa-times-circle yc-alert__icon"></i>
-                        <div class="yc-alert__content">
-                            <div class="yc-alert__message">这是一条错误提示</div>
-                        </div>
-                        <button class="yc-alert__close"><i class="fas fa-times"></i></button>
-                    </div>
-                    <div class="yc-alert yc-alert--info">
-                        <i class="fas fa-info-circle yc-alert__icon"></i>
-                        <div class="yc-alert__content">
-                            <div class="yc-alert__message">这是一条信息提示</div>
-                        </div>
-                        <button class="yc-alert__close"><i class="fas fa-times"></i></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="demo-section">
-            <h3>带标题提示</h3>
-            <div class="demo-block">
-                <div class="demo-row" style="flex-direction: column; gap: 12px;">
-                    <div class="yc-alert yc-alert--success">
-                        <i class="fas fa-check-circle yc-alert__icon"></i>
-                        <div class="yc-alert__content">
-                            <div class="yc-alert__title">成功提示</div>
-                            <div class="yc-alert__message">这是一条带有标题的成功提示，包含更多详细内容</div>
-                        </div>
-                        <button class="yc-alert__close"><i class="fas fa-times"></i></button>
-                    </div>
-                    <div class="yc-alert yc-alert--warning">
-                        <i class="fas fa-exclamation-triangle yc-alert__icon"></i>
-                        <div class="yc-alert__content">
-                            <div class="yc-alert__title">警告提示</div>
-                            <div class="yc-alert__message">这是一条带有标题的警告提示，包含更多详细内容</div>
-                        </div>
-                        <button class="yc-alert__close"><i class="fas fa-times"></i></button>
-                    </div>
-                    <div class="yc-alert yc-alert--danger">
-                        <i class="fas fa-times-circle yc-alert__icon"></i>
-                        <div class="yc-alert__content">
-                            <div class="yc-alert__title">错误提示</div>
-                            <div class="yc-alert__message">这是一条带有标题的错误提示，包含更多详细内容</div>
-                        </div>
-                        <button class="yc-alert__close"><i class="fas fa-times"></i></button>
-                    </div>
-                    <div class="yc-alert yc-alert--info">
-                        <i class="fas fa-info-circle yc-alert__icon"></i>
-                        <div class="yc-alert__content">
-                            <div class="yc-alert__title">信息提示</div>
-                            <div class="yc-alert__message">这是一条带有标题的信息提示，包含更多详细内容</div>
-                        </div>
-                        <button class="yc-alert__close"><i class="fas fa-times"></i></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="demo-section">
-            <h3>不同尺寸</h3>
-            <div class="demo-block">
-                <div class="demo-row" style="flex-direction: column; gap: 12px;">
-                    <div class="yc-alert yc-alert--primary yc-alert--large">
-                        <i class="fas fa-info-circle yc-alert__icon"></i>
-                        <div class="yc-alert__content">
-                            <div class="yc-alert__title">大尺寸提示</div>
-                            <div class="yc-alert__message">这是一条大尺寸的提示信息</div>
-                        </div>
-                    </div>
-                    <div class="yc-alert yc-alert--success">
-                        <i class="fas fa-check-circle yc-alert__icon"></i>
-                        <div class="yc-alert__content">
-                            <div class="yc-alert__title">默认尺寸提示</div>
-                            <div class="yc-alert__message">这是一条默认尺寸的提示信息</div>
-                        </div>
-                    </div>
-                    <div class="yc-alert yc-alert--warning yc-alert--small">
-                        <i class="fas fa-exclamation-triangle yc-alert__icon"></i>
-                        <div class="yc-alert__content">
-                            <div class="yc-alert__title">小尺寸提示</div>
-                            <div class="yc-alert__message">这是一条小尺寸的提示信息</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="demo-section">
-            <h3>居中显示</h3>
-            <div class="demo-block">
-                <div class="demo-row" style="flex-direction: column; gap: 12px;">
-                    <div class="yc-alert yc-alert--success yc-alert--center">
-                        <i class="fas fa-check-circle yc-alert__icon"></i>
-                        <div class="yc-alert__content" style="text-align: center;">
-                            <div class="yc-alert__title">居中成功提示</div>
-                            <div class="yc-alert__message">这是一条居中显示的提示信息</div>
-                        </div>
-                    </div>
-                    <div class="yc-alert yc-alert--info yc-alert--center">
-                        <i class="fas fa-info-circle yc-alert__icon"></i>
-                        <div class="yc-alert__content" style="text-align: center;">
-                            <div class="yc-alert__title">居中信息提示</div>
-                            <div class="yc-alert__message">这是一条居中显示的提示信息</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="demo-section">
-            <h3>轮廓样式</h3>
-            <div class="demo-block">
-                <div class="demo-row" style="flex-direction: column; gap: 12px;">
-                    <div class="yc-alert yc-alert--success yc-alert--outline">
-                        <i class="fas fa-check-circle yc-alert__icon"></i>
-                        <div class="yc-alert__content">
-                            <div class="yc-alert__title">轮廓成功提示</div>
-                            <div class="yc-alert__message">这是一条轮廓样式的成功提示</div>
-                        </div>
-                    </div>
-                    <div class="yc-alert yc-alert--warning yc-alert--outline">
-                        <i class="fas fa-exclamation-triangle yc-alert__icon"></i>
-                        <div class="yc-alert__content">
-                            <div class="yc-alert__title">轮廓警告提示</div>
-                            <div class="yc-alert__message">这是一条轮廓样式的警告提示</div>
-                        </div>
-                    </div>
-                    <div class="yc-alert yc-alert--danger yc-alert--outline">
-                        <i class="fas fa-times-circle yc-alert__icon"></i>
-                        <div class="yc-alert__content">
-                            <div class="yc-alert__title">轮廓错误提示</div>
-                            <div class="yc-alert__message">这是一条轮廓样式的错误提示</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="demo-section">
-            <h3>可关闭提示</h3>
-            <div class="demo-block">
-                <div class="demo-row" style="flex-direction: column; gap: 12px;">
-                    <div class="yc-alert yc-alert--info" id="closableAlert1">
-                        <i class="fas fa-info-circle yc-alert__icon"></i>
-                        <div class="yc-alert__content">
-                            <div class="yc-alert__title">可关闭的信息提示</div>
-                            <div class="yc-alert__message">点击右侧关闭按钮可以关闭此提示</div>
-                        </div>
-                        <button class="yc-alert__close" onclick="closeAlert('closableAlert1')"><i class="fas fa-times"></i></button>
-                    </div>
-                    <div class="yc-alert yc-alert--success" id="closableAlert2">
-                        <i class="fas fa-check-circle yc-alert__icon"></i>
-                        <div class="yc-alert__content">
-                            <div class="yc-alert__title">可关闭的成功提示</div>
-                            <div class="yc-alert__message">点击右侧关闭按钮可以关闭此提示</div>
-                        </div>
-                        <button class="yc-alert__close" onclick="closeAlert('closableAlert2')"><i class="fas fa-times"></i></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="demo-section">
-            <h3>JavaScript 创建提示</h3>
-            <div class="demo-block">
-                <div class="demo-btn-row">
-                    <button class="yc-button yc-button--primary" onclick="showAlert('success')">
-                        <i class="fas fa-check"></i> 成功提示
-                    </button>
-                    <button class="yc-button yc-button--warning" onclick="showAlert('warning')">
-                        <i class="fas fa-exclamation-triangle"></i> 警告提示
-                    </button>
-                    <button class="yc-button yc-button--danger" onclick="showAlert('danger')">
-                        <i class="fas fa-times"></i> 错误提示
-                    </button>
-                    <button class="yc-button yc-button--info" onclick="showAlert('info')">
-                        <i class="fas fa-info"></i> 信息提示
-                    </button>
-                </div>
-            </div>
-        </div>
+        <div class="yc-demo-backdrop" id="backdrop"></div>
     </div>
 
     <script>
@@ -257,7 +476,7 @@
             alert.style.transform = 'translateY(-10px)';
             alert.style.transition = 'all 0.3s ease';
 
-            document.querySelector('.demo-container').appendChild(alert);
+            document.querySelector('.yc-demo-page').appendChild(alert);
 
             setTimeout(() => {
                 alert.style.opacity = '1';
@@ -276,6 +495,41 @@
                 }
             }, 3000);
         }
+
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('yc-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('yc-theme', newTheme);
+            localStorage.setItem('yc-theme', newTheme);
+        }
+
+        function toggleMenu() {
+            const sidebar = document.getElementById('sidebar');
+            const backdrop = document.getElementById('backdrop');
+            sidebar.classList.toggle('is-visible');
+            backdrop.classList.toggle('is-visible');
+        }
+
+        const savedTheme = localStorage.getItem('yc-theme') || 'light';
+        document.documentElement.setAttribute('yc-theme', savedTheme);
+
+        document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+        document.getElementById('menuToggle').addEventListener('click', toggleMenu);
+        document.getElementById('backdrop').addEventListener('click', toggleMenu);
+
+        const menuToggle = document.getElementById('menuToggle');
+        function checkScreenWidth() {
+            if (window.innerWidth <= 992) {
+                menuToggle.style.display = 'flex';
+            } else {
+                menuToggle.style.display = 'none';
+                document.getElementById('sidebar').classList.remove('is-visible');
+                document.getElementById('backdrop').classList.remove('is-visible');
+            }
+        }
+
+        checkScreenWidth();
+        window.addEventListener('resize', checkScreenWidth);
     </script>
 </body>
 </html>

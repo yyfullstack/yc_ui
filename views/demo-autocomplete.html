@@ -9,196 +9,443 @@
     <link rel="stylesheet" href="../styles/demo.css">
 </head>
 <body>
-    <div class="demo-container">
-        <div class="demo-page-header">
-            <h1 class="demo-page-title">Autocomplete 自动补全输入框组件</h1>
-            <p class="demo-page-subtitle">带输入建议的自动补全输入框，支持远程搜索、键盘导航等高级用法</p>
-        </div>
-
-        <div class="demo-section">
-            <h3>基础用法</h3>
-            <div class="demo-block">
-                <div class="demo-block-title">用户名搜索</div>
-                <div class="demo-row">
-                    <div class="yc-autocomplete" id="basicAutocomplete" style="width: 300px;">
-                        <div class="yc-autocomplete__input-wrapper">
-                            <input type="text" class="yc-input" placeholder="请输入用户名" autocomplete="off">
-                        </div>
-                        <div class="yc-autocomplete__suggestions" style="display: none;">
-                            <div class="yc-autocomplete__suggestion-item" data-value="张三">张三</div>
-                            <div class="yc-autocomplete__suggestion-item" data-value="张四">张四</div>
-                            <div class="yc-autocomplete__suggestion-item" data-value="张五">张五</div>
-                        </div>
-                    </div>
-                </div>
+    <div class="yc-demo-layout">
+        <header class="yc-demo-header">
+            <div class="yc-demo-header__logo">
+                <i class="fas fa-palette"></i>
+                <span>YC UI</span>
             </div>
-        </div>
-
-        <div class="demo-section">
-            <h3>带图标的自动补全</h3>
-            <div class="demo-block">
-                <div class="demo-block-title">邮箱输入</div>
-                <div class="demo-row">
-                    <div class="yc-autocomplete yc-autocomplete--prefix" id="emailAutocomplete" style="width: 300px;">
-                        <div class="yc-autocomplete__input-wrapper">
-                            <span class="yc-autocomplete__prefix-icon">@</span>
-                            <input type="text" class="yc-input" placeholder="请输入邮箱" autocomplete="off">
-                        </div>
-                        <div class="yc-autocomplete__suggestions" style="display: none;">
-                            <div class="yc-autocomplete__suggestion-item" data-value="zhangsan@example.com">zhangsan@example.com</div>
-                            <div class="yc-autocomplete__suggestion-item" data-value="zhangsi@example.com">zhangsi@example.com</div>
-                            <div class="yc-autocomplete__suggestion-item" data-value="zhangwu@example.com">zhangwu@example.com</div>
-                        </div>
-                    </div>
-                </div>
+            <nav class="yc-demo-header__nav">
+                <a href="../index.html" class="yc-demo-header__nav-item">首页</a>
+                <span class="yc-demo-header__nav-item is-active">组件</span>
+            </nav>
+            <div class="yc-demo-header__theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+                <span>切换主题</span>
             </div>
-        </div>
-
-        <div class="demo-section">
-            <h3>可清空的自动补全</h3>
-            <div class="demo-block">
-                <div class="demo-block-title">地址输入</div>
-                <div class="demo-row">
-                    <div class="yc-autocomplete yc-autocomplete--clearable" id="addressAutocomplete" style="width: 300px;">
-                        <div class="yc-autocomplete__input-wrapper">
-                            <input type="text" class="yc-input" placeholder="请输入地址" autocomplete="off">
-                            <span class="yc-autocomplete__clear" style="display: none;">×</span>
-                        </div>
-                        <div class="yc-autocomplete__suggestions" style="display: none;">
-                            <div class="yc-autocomplete__suggestion-item" data-value="北京市朝阳区">北京市朝阳区</div>
-                            <div class="yc-autocomplete__suggestion-item" data-value="北京市海淀区">北京市海淀区</div>
-                            <div class="yc-autocomplete__suggestion-item" data-value="北京市东城区">北京市东城区</div>
-                            <div class="yc-autocomplete__suggestion-item" data-value="北京市西城区">北京市西城区</div>
-                        </div>
-                    </div>
-                </div>
+            <div class="yc-demo-header__menu-toggle" id="menuToggle" style="display: none;">
+                <i class="fas fa-bars"></i>
             </div>
-        </div>
+        </header>
 
-        <div class="demo-section">
-            <h3>带标签的自动补全</h3>
-            <div class="demo-block">
-                <div class="demo-block-title">城市选择（带区域标签）</div>
-                <div class="demo-row">
-                    <div class="yc-autocomplete" id="cityAutocomplete" style="width: 300px;">
-                        <div class="yc-autocomplete__input-wrapper">
-                            <input type="text" class="yc-input" placeholder="请输入城市" autocomplete="off" value="北京">
+        <div class="yc-demo-content">
+            <aside class="yc-demo-sidebar yc-demo-scrollbar" id="sidebar">
+                <div class="yc-demo-sidebar__title">快速开始</div>
+                <ul class="yc-demo-sidebar__menu">
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="../index.html#features" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-star"></i>
+                            <span>特性</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="../index.html#components" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-th"></i>
+                            <span>组件展示</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="../index.html#quickstart" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-rocket"></i>
+                            <span>快速开始</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="yc-demo-sidebar__title">基础组件</div>
+                <ul class="yc-demo-sidebar__menu">
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-button.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-square"></i>
+                            <span>Button 按钮</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-input.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-keyboard"></i>
+                            <span>Input 输入框</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-radio.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-circle"></i>
+                            <span>Radio 单选框</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-checkbox.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-check-square"></i>
+                            <span>Checkbox 多选框</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-switch.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-toggle-on"></i>
+                            <span>Switch 开关</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-select.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-chevron-down"></i>
+                            <span>Select 选择器</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="yc-demo-sidebar__title">布局组件</div>
+                <ul class="yc-demo-sidebar__menu">
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-container.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-border-all"></i>
+                            <span>Container 布局</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-grid.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-th-large"></i>
+                            <span>Grid 栅格</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-card.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-window-maximize"></i>
+                            <span>Card 卡片</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-tabs.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-columns"></i>
+                            <span>Tabs 标签页</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="yc-demo-sidebar__title">反馈组件</div>
+                <ul class="yc-demo-sidebar__menu">
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-alert.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <span>Alert 警告</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-loading.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-spinner"></i>
+                            <span>Loading 加载</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-notification.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-bell"></i>
+                            <span>Notification 通知</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="yc-demo-sidebar__title">弹窗组件</div>
+                <ul class="yc-demo-sidebar__menu">
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-dialog.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-window-close"></i>
+                            <span>Dialog 对话框</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-drawer.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-sliders-h"></i>
+                            <span>Drawer 抽屉</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="yc-demo-sidebar__title">高级组件</div>
+                <ul class="yc-demo-sidebar__menu">
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-tree-select.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-sitemap"></i>
+                            <span>TreeSelect 树形选择器</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-transfer.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-exchange-alt"></i>
+                            <span>Transfer 穿梭框</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-cascader.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-share-alt"></i>
+                            <span>Cascader 级联选择器</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-autocomplete.html" class="yc-demo-sidebar__menu-link is-active">
+                            <i class="fas fa-search-plus"></i>
+                            <span>Autocomplete 自动补全</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-date-picker.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-calendar"></i>
+                            <span>DatePicker 日期选择器</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-time-picker.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-clock"></i>
+                            <span>TimePicker 时间选择器</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-color-picker.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-palette"></i>
+                            <span>ColorPicker 颜色选择器</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-slider.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-sliders"></i>
+                            <span>Slider 滑块</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-rate.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-star"></i>
+                            <span>Rate 评分</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-upload.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-upload"></i>
+                            <span>Upload 上传</span>
+                        </a>
+                    </li>
+                </ul>
+            </aside>
+
+            <main class="yc-demo-main">
+                <div class="yc-demo-page">
+                    <div class="yc-demo-page__header">
+                        <h1 class="yc-demo-page__title">Autocomplete 自动补全</h1>
+                        <p class="yc-demo-page__subtitle">带输入建议的自动补全输入框，支持远程搜索、键盘导航等高级用法</p>
+                    </div>
+
+                    <section class="yc-demo-section">
+                        <div class="yc-demo-section__header">
+                            <div class="yc-demo-section__icon"></div>
+                            <h2 class="yc-demo-section__title">基础用法</h2>
                         </div>
-                        <div class="yc-autocomplete__suggestions" style="display: none;">
-                            <div class="yc-autocomplete__suggestion-item" data-value="北京市" data-tag="华北">
-                                <div class="yc-autocomplete__suggestion-item__content">
-                                    <span class="yc-autocomplete__suggestion-item__label">北京市</span>
-                                    <span class="yc-autocomplete__suggestion-item__value">华北</span>
+                        <div class="demo-block">
+                            <div class="demo-block-title">用户名搜索</div>
+                            <div class="demo-row">
+                                <div class="yc-autocomplete" id="basicAutocomplete" style="width: 300px;">
+                                    <div class="yc-autocomplete__input-wrapper">
+                                        <input type="text" class="yc-input" placeholder="请输入用户名" autocomplete="off">
+                                    </div>
+                                    <div class="yc-autocomplete__suggestions" style="display: none;">
+                                        <div class="yc-autocomplete__suggestion-item" data-value="张三">张三</div>
+                                        <div class="yc-autocomplete__suggestion-item" data-value="张四">张四</div>
+                                        <div class="yc-autocomplete__suggestion-item" data-value="张五">张五</div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="yc-autocomplete__suggestion-item" data-value="北海市" data-tag="华南">
-                                <div class="yc-autocomplete__suggestion-item__content">
-                                    <span class="yc-autocomplete__suggestion-item__label">北海市</span>
-                                    <span class="yc-autocomplete__suggestion-item__value">华南</span>
+                        </div>
+                    </section>
+
+                    <section class="yc-demo-section">
+                        <div class="yc-demo-section__header">
+                            <div class="yc-demo-section__icon"></div>
+                            <h2 class="yc-demo-section__title">带图标的自动补全</h2>
+                        </div>
+                        <div class="demo-block">
+                            <div class="demo-block-title">邮箱输入</div>
+                            <div class="demo-row">
+                                <div class="yc-autocomplete yc-autocomplete--prefix" id="emailAutocomplete" style="width: 300px;">
+                                    <div class="yc-autocomplete__input-wrapper">
+                                        <span class="yc-autocomplete__prefix-icon">@</span>
+                                        <input type="text" class="yc-input" placeholder="请输入邮箱" autocomplete="off">
+                                    </div>
+                                    <div class="yc-autocomplete__suggestions" style="display: none;">
+                                        <div class="yc-autocomplete__suggestion-item" data-value="zhangsan@example.com">zhangsan@example.com</div>
+                                        <div class="yc-autocomplete__suggestion-item" data-value="zhangsi@example.com">zhangsi@example.com</div>
+                                        <div class="yc-autocomplete__suggestion-item" data-value="zhangwu@example.com">zhangwu@example.com</div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="yc-autocomplete__suggestion-item" data-value="北安市" data-tag="东北">
-                                <div class="yc-autocomplete__suggestion-item__content">
-                                    <span class="yc-autocomplete__suggestion-item__label">北安市</span>
-                                    <span class="yc-autocomplete__suggestion-item__value">东北</span>
+                        </div>
+                    </section>
+
+                    <section class="yc-demo-section">
+                        <div class="yc-demo-section__header">
+                            <div class="yc-demo-section__icon"></div>
+                            <h2 class="yc-demo-section__title">可清空的自动补全</h2>
+                        </div>
+                        <div class="demo-block">
+                            <div class="demo-block-title">地址输入</div>
+                            <div class="demo-row">
+                                <div class="yc-autocomplete yc-autocomplete--clearable" id="addressAutocomplete" style="width: 300px;">
+                                    <div class="yc-autocomplete__input-wrapper">
+                                        <input type="text" class="yc-input" placeholder="请输入地址" autocomplete="off">
+                                        <span class="yc-autocomplete__clear" style="display: none;">×</span>
+                                    </div>
+                                    <div class="yc-autocomplete__suggestions" style="display: none;">
+                                        <div class="yc-autocomplete__suggestion-item" data-value="北京市朝阳区">北京市朝阳区</div>
+                                        <div class="yc-autocomplete__suggestion-item" data-value="北京市海淀区">北京市海淀区</div>
+                                        <div class="yc-autocomplete__suggestion-item" data-value="北京市东城区">北京市东城区</div>
+                                        <div class="yc-autocomplete__suggestion-item" data-value="北京市西城区">北京市西城区</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </section>
+
+                    <section class="yc-demo-section">
+                        <div class="yc-demo-section__header">
+                            <div class="yc-demo-section__icon"></div>，
+                            <h2 class="yc-demo-section__title">带标签的自动补全</h2>
+                        </div>
+                        <div class="demo-block">
+                            <div class="demo-block-title">城市选择（带区域标签）</div>
+                            <div class="demo-row">
+                                <div class="yc-autocomplete" id="cityAutocomplete" style="width: 300px;">
+                                    <div class="yc-autocomplete__input-wrapper">
+                                        <input type="text" class="yc-input" placeholder="请输入城市" autocomplete="off" value="北京">
+                                    </div>
+                                    <div class="yc-autocomplete__suggestions" style="display: none;">
+                                        <div class="yc-autocomplete__suggestion-item" data-value="北京市" data-tag="华北">
+                                            <div class="yc-autocomplete__suggestion-item__content">
+                                                <span class="yc-autocomplete__suggestion-item__label">北京市</span>
+                                                <span class="yc-autocomplete__suggestion-item__value">华北</span>
+                                            </div>
+                                        </div>
+                                        <div class="yc-autocomplete__suggestion-item" data-value="北海市" data-tag="华南">
+                                            <div class="yc-autocomplete__suggestion-item__content">
+                                                <span class="yc-autocomplete__suggestion-item__label">北海市</span>
+                                                <span class="yc-autocomplete__suggestion-item__value">华南</span>
+                                            </div>
+                                        </div>
+                                        <div class="yc-autocomplete__suggestion-item" data-value="北安市" data-tag="东北">
+                                            <div class="yc-autocomplete__suggestion-item__content">
+                                                <span class="yc-autocomplete__suggestion-item__label">北安市</span>
+                                                <span class="yc-autocomplete__suggestion-item__value">东北</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="yc-demo-section">
+                        <div class="yc-demo-section__header">
+                            <div class="yc-demo-section__icon"></div>，
+                            <h2 class="yc-demo-section__title">高亮第一个选项</h2>
+                        </div>
+                        <div class="demo-block">
+                            <div class="demo-block-title">搜索编程语言</div>
+                            <div class="demo-row">
+                                <div class="yc-autocomplete" id="searchAutocomplete" style="width: 300px;">
+                                    <div class="yc-autocomplete__input-wrapper">
+                                        <input type="text" class="yc-input" placeholder="请输入搜索内容" autocomplete="off">
+                                    </div>
+                                    <div class="yc-autocomplete__suggestions" style="display: none;">
+                                        <div class="yc-autocomplete__suggestion-item is-highlighted" data-value="JavaScript">JavaScript</div>
+                                        <div class="yc-autocomplete__suggestion-item" data-value="Java">Java</div>
+                                        <div class="yc-autocomplete__suggestion-item" data-value="Python">Python</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="yc-demo-section">
+                        <div class="yc-demo-section__header">
+                            <div class="yc-demo-section__icon"></div>，
+                            <h2 class="yc-demo-section__title">禁用状态</h2>
+                        </div>
+                        <div class="demo-block">
+                            <div class="demo-block-title">禁止输入</div>
+                            <div class="demo-row">
+                                <div class="yc-autocomplete is-disabled" id="disabledAutocomplete" style="width: 300px;">
+                                    <div class="yc-autocomplete__input-wrapper">
+                                        <input type="text" class="yc-input" placeholder="禁用状态" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="yc-demo-section">
+                        <div class="yc-demo-section__header">
+                            <div class="yc-demo-section__icon"></div>
+                            <h2 class="yc-demo-section__title">尺寸变体</h2>
+                        </div>
+                        <div class="demo-block">
+                            <div class="demo-block-title">不同尺寸输入框</div>
+                            <div class="demo-row" style="gap: 20px; flex-wrap: wrap;">
+                                <div class="yc-autocomplete yc-autocomplete--large" id="largeAutocomplete" style="width: 300px;">
+                                    <div class="yc-autocomplete__input-wrapper">
+                                        <input type="text" class="yc-input" placeholder="大尺寸输入框" autocomplete="off">
+                                    </div>
+                                    <div class="yc-autocomplete__suggestions" style="display: none;">
+                                        <div class="yc-autocomplete__suggestion-item" data-value="大选项1">大选项1</div>
+                                        <div class="yc-autocomplete__suggestion-item" data-value="大选项2">大选项2</div>
+                                    </div>
+                                </div>
+                                <div class="yc-autocomplete yc-autocomplete--small" id="smallAutocomplete" style="width: 300px;">
+                                    <div class="yc-autocomplete__input-wrapper">
+                                        <input type="text" class="yc-input" placeholder="小尺寸输入框" autocomplete="off">
+                                    </div>
+                                    <div class="yc-autocomplete__suggestions" style="display: none;">
+                                        <div class="yc-autocomplete__suggestion-item" data-value="小选项1">小选项1</div>
+                                        <div class="yc-autocomplete__suggestion-item" data-value="小选项2">小选项2</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="yc-demo-section">
+                        <div class="yc-demo-section__header">
+                            <div class="yc-demo-section__icon"></div>
+                            <h2 class="yc-demo-section__title">远程搜索</h2>
+                        </div>
+                        <div class="demo-block">
+                            <div class="demo-block-title">模拟远程API搜索</div>
+                            <div class="demo-row">
+                                <div class="yc-autocomplete" id="remoteAutocomplete" style="width: 300px;">
+                                    <div class="yc-autocomplete__input-wrapper">
+                                        <input type="text" class="yc-input" placeholder="请输入关键词搜索" autocomplete="off">
+                                    </div>
+                                    <div class="yc-autocomplete__suggestions is-loading" style="display: none;">
+                                        <div class="yc-autocomplete__empty">加载中...</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="yc-demo-section">
+                        <div class="yc-demo-section__header">
+                            <div class="yc-demo-section__icon"></div>
+                            <h2 class="yc-demo-section__title">JavaScript 创建</h2>
+                        </div>
+                        <div class="demo-block">
+                            <div class="demo-btn-row">
+                                <button class="yc-button yc-button--primary" id="showAutocompleteBtn">
+                                    <i class="fas fa-search"></i> 显示搜索框
+                                </button>
+                                <button class="yc-button yc-button--info" id="clearAutocompleteBtn">
+                                    <i class="fas fa-trash-alt"></i> 清空输入
+                                </button>
+                            </div>
+                        </div>
+                    </section>
                 </div>
-            </div>
+            </main>
         </div>
 
-        <div class="demo-section">
-            <h3>高亮第一个选项</h3>
-            <div class="demo-block">
-                <div class="demo-block-title">搜索编程语言</div>
-                <div class="demo-row">
-                    <div class="yc-autocomplete" id="searchAutocomplete" style="width: 300px;">
-                        <div class="yc-autocomplete__input-wrapper">
-                            <input type="text" class="yc-input" placeholder="请输入搜索内容" autocomplete="off">
-                        </div>
-                        <div class="yc-autocomplete__suggestions" style="display: none;">
-                            <div class="yc-autocomplete__suggestion-item is-highlighted" data-value="JavaScript">JavaScript</div>
-                            <div class="yc-autocomplete__suggestion-item" data-value="Java">Java</div>
-                            <div class="yc-autocomplete__suggestion-item" data-value="Python">Python</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="demo-section">
-            <h3>禁用状态</h3>
-            <div class="demo-block">
-                <div class="demo-block-title">禁止输入</div>
-                <div class="demo-row">
-                    <div class="yc-autocomplete is-disabled" id="disabledAutocomplete" style="width: 300px;">
-                        <div class="yc-autocomplete__input-wrapper">
-                            <input type="text" class="yc-input" placeholder="禁用状态" disabled>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="demo-section">
-            <h3>尺寸变体</h3>
-            <div class="demo-block">
-                <div class="demo-block-title">不同尺寸输入框</div>
-                <div class="demo-row" style="gap: 20px; flex-wrap: wrap;">
-                    <div class="yc-autocomplete yc-autocomplete--large" id="largeAutocomplete" style="width: 300px;">
-                        <div class="yc-autocomplete__input-wrapper">
-                            <input type="text" class="yc-input" placeholder="大尺寸输入框" autocomplete="off">
-                        </div>
-                        <div class="yc-autocomplete__suggestions" style="display: none;">
-                            <div class="yc-autocomplete__suggestion-item" data-value="大选项1">大选项1</div>
-                            <div class="yc-autocomplete__suggestion-item" data-value="大选项2">大选项2</div>
-                        </div>
-                    </div>
-                    <div class="yc-autocomplete yc-autocomplete--small" id="smallAutocomplete" style="width: 300px;">
-                        <div class="yc-autocomplete__input-wrapper">
-                            <input type="text" class="yc-input" placeholder="小尺寸输入框" autocomplete="off">
-                        </div>
-                        <div class="yc-autocomplete__suggestions" style="display: none;">
-                            <div class="yc-autocomplete__suggestion-item" data-value="小选项1">小选项1</div>
-                            <div class="yc-autocomplete__suggestion-item" data-value="小选项2">小选项2</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="demo-section">
-            <h3>远程搜索</h3>
-            <div class="demo-block">
-                <div class="demo-block-title">模拟远程API搜索</div>
-                <div class="demo-row">
-                    <div class="yc-autocomplete" id="remoteAutocomplete" style="width: 300px;">
-                        <div class="yc-autocomplete__input-wrapper">
-                            <input type="text" class="yc-input" placeholder="请输入关键词搜索" autocomplete="off">
-                        </div>
-                        <div class="yc-autocomplete__suggestions is-loading" style="display: none;">
-                            <div class="yc-autocomplete__empty">加载中...</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="demo-section">
-            <h3>JavaScript 创建</h3>
-            <div class="demo-block">
-                <div class="demo-btn-row">
-                    <button class="yc-button yc-button--primary" id="showAutocompleteBtn">
-                        <i class="fas fa-search"></i> 显示搜索框
-                    </button>
-                    <button class="yc-button yc-button--info" id="clearAutocompleteBtn">
-                        <i class="fas fa-trash-alt"></i> 清空输入
-                    </button>
-                </div>
-            </div>
-        </div>
+        <div class="yc-demo-backdrop" id="backdrop"></div>
     </div>
 
     <script>
@@ -524,9 +771,9 @@
             const mockRemoteFetch = async (query) => {
                 await new Promise(resolve => setTimeout(resolve, 500));
                 return [
-                    { value: `remote1-${query}`, label: `远程结果1 - ${query}` },
-                    { value: `remote2-${query}`, label: `远程结果2 - ${query}` },
-                    { value: `remote3-${query}`, label: `远程结果3 - ${query}` }
+                    { value: `remote1-${query}`, label: `远程结果1-${query}` },
+                    { value: `remote2-${query}`, label: `远程结果2-${query}` },
+                    { value: `remote3-${query}`, label: `远程结果3-${query}` }
                 ];
             };
 
@@ -536,7 +783,7 @@
                     return;
                 }
 
-                remoteSuggestions.innerHTML = '<div class="yc-autocomplete__empty"><i class="yc-loading"></i> 加载中...</div>';
+                remoteSuggestions.innerHTML = '<div class="yc-autocomplete__empty"><i class="fas fa-spinner fa-spin"></i> 加载中...</div>';
                 remoteSuggestions.classList.add('is-loading');
                 remoteSuggestions.style.display = 'block';
 
@@ -579,6 +826,43 @@
                 input.value = '';
             });
         });
+    </script>
+
+    <script>
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('yc-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('yc-theme', newTheme);
+            localStorage.setItem('yc-theme', newTheme);
+        }
+
+        function toggleMenu() {
+            const sidebar = document.getElementById('sidebar');
+            const backdrop = document.getElementById('backdrop');
+            sidebar.classList.toggle('is-visible');
+            backdrop.classList.toggle('is-visible');
+        }
+
+        const savedTheme = localStorage.getItem('yc-theme') || 'light';
+        document.documentElement.setAttribute('yc-theme', savedTheme);
+
+        document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+        document.getElementById('menuToggle').addEventListener('click', toggleMenu);
+        document.getElementById('backdrop').addEventListener('click', toggleMenu);
+
+        const menuToggle = document.getElementById('menuToggle');
+        function checkScreenWidth() {
+            if (window.innerWidth <= 992) {
+                menuToggle.style.display = 'flex';
+            } else {
+                menuToggle.style.display = 'none';
+                document.getElementById('sidebar').classList.remove('is-visible');
+                document.getElementById('backdrop').classList.remove('is-visible');
+            }
+        }
+
+        checkScreenWidth();
+        window.addEventListener('resize', checkScreenWidth);
     </script>
 </body>
 </html>

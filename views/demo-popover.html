@@ -9,443 +9,697 @@
     <link rel="stylesheet" href="../styles/demo.css">
 </head>
 <body>
-<div class="demo-container">
-    <div class="demo-page-header">
-        <h1 class="demo-page-title">Popover 弹出框</h1>
-        <p class="demo-page-subtitle">常用于展示某个元素的补充信息，支持多种弹出方向</p>
-    </div>
-
-    <div class="demo-section">
-        <h3>基础用法</h3>
-        <div class="demo-block">
-            <div class="demo-block-title">悬浮出框</div>
-            <div class="demo-row">
-                <div id="hover-popover-target" class="yc-button yc-button--primary">
-                    <i class="fas fa-mouse-pointer"></i> 悬停我
-                </div>
+    <div class="yc-demo-layout">
+        <header class="yc-demo-header">
+            <div class="yc-demo-header__logo">
+                <i class="fas fa-palette"></i>
+                <span>YC UI</span>
             </div>
-        </div>
-    </div>
-
-    <div class="demo-section">
-        <h3>点击触发</h3>
-        <div class="demo-block">
-            <div class="demo-block-title">点击出框</div>
-            <div class="demo-row">
-                <div id="click-popover-target" class="yc-button yc-button--primary">
-                    <i class="fas fa-hand-pointer"></i> 点击我
-                </div>
+            <nav class="yc-demo-header__nav">
+                <a href="../index.html" class="yc-demo-header__nav-item">首页</a>
+                <span class="yc-demo-header__nav-item is-active">组件</span>
+            </nav>
+            <div class="yc-demo-header__theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+                <span>切换主题</span>
             </div>
-        </div>
-    </div>
+            <div class="yc-demo-header__menu-toggle" id="menuToggle" style="display: none;">
+                <i class="fas fa-bars"></i>
+            </div>
+        </header>
 
-    <div class="demo-section">
-        <h3>弹出位置</h3>
-        <div class="demo-block">
-            <div class="demo-block-title">点击各个按钮查看位置效果</div>
-            <div class="demo-popover-placements">
-                <div class="demo-popover-placement-grid">
-                    <div></div>
-                    <div>
-                        <button class="yc-button yc-button--small " id="top-popover-target">上 (Top)</button>
+        <div class="yc-demo-content">
+            <aside class="yc-demo-sidebar yc-demo-scrollbar" id="sidebar">
+                <div class="yc-demo-sidebar__title">快速开始</div>
+                <ul class="yc-demo-sidebar__menu">
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="../index.html#features" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-star"></i>
+                            <span>特性</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="../index.html#components" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-th"></i>
+                            <span>组件展示</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="../index.html#quickstart" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-rocket"></i>
+                            <span>快速开始</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="yc-demo-sidebar__title">基础组件</div>
+                <ul class="yc-demo-sidebar__menu">
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-button.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-square"></i>
+                            <span>Button 按钮</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-input.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-keyboard"></i>
+                            <span>Input 输入框</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-radio.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-circle"></i>
+                            <span>Radio 单选框</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-checkbox.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-check-square"></i>
+                            <span>Checkbox 多选框</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-switch.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-toggle-on"></i>
+                            <span>Switch 开关</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-select.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-chevron-down"></i>
+                            <span>Select 选择器</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="yc-demo-sidebar__title">布局组件</div>
+                <ul class="yc-demo-sidebar__menu">
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-container.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-border-all"></i>
+                            <span>Container 布局</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-grid.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-th-large"></i>
+                            <span>Grid 栅格</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-card.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-window-maximize"></i>
+                            <span>Card 卡片</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-tabs.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-columns"></i>
+                            <span>Tabs 标签页</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="yc-demo-sidebar__title">反馈组件</div>
+                <ul class="yc-demo-sidebar__menu">
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-alert.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <span>Alert 警告</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-loading.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-spinner"></i>
+                            <span>Loading 加载</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-notification.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-bell"></i>
+                            <span>Notification 通知</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="yc-demo-sidebar__title">弹窗组件</div>
+                <ul class="yc-demo-sidebar__menu">
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-dialog.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-window-close"></i>
+                            <span>Dialog 对话框</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-drawer.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-sliders-h"></i>
+                            <span>Drawer 抽屉</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="yc-demo-sidebar__title">高级组件</div>
+                <ul class="yc-demo-sidebar__menu">
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-date-picker.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-calendar"></i>
+                            <span>DatePicker 日期选择</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-color-picker.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-palette"></i>
+                            <span>ColorPicker 颜色选择</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-slider.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-sliders"></i>
+                            <span>Slider 滑块</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="demo-upload.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-upload"></i>
+                            <span>Upload 上传</span>
+                        </a>
+                    </li>
+                </ul>
+            </aside>
+
+            <main class="yc-demo-main">
+                <div class="yc-demo-page">
+                    <div class="yc-demo-page__header">
+                        <h1 class="yc-demo-page__title">Popover 弹出框</h1>
+                        <p class="yc-demo-page__subtitle">常用于展示某个元素的补充信息，支持多种弹出方向</p>
                     </div>
-                    <div></div>
-                    <div>
-                        <button class="yc-button yc-button--small" id="left-popover-target">左 (Left)</button>
-                    </div>
-                    <div class="demo-popover-reference">
-                        <i class="fas fa-crosshairs"></i> 参考元素
-                    </div>
-                    <div>
-                        <button class="yc-button yc-button--small" id="right-popover-target">右 (Right)</button>
-                    </div>
-                    <div></div>
-                    <div>
-                        <button class="yc-button yc-button--small" id="bottom-popover-target">下 (Bottom)</button>
-                    </div>
-                    <div></div>
+
+                    <section class="yc-demo-section">
+                        <div class="yc-demo-section__header">
+                            <div class="yc-demo-section__icon"></div>
+                            <h2 class="yc-demo-section__title">基础用法</h2>
+                        </div>
+                        <div class="yc-demo-block">
+                            <div class="yc-demo-block__title">悬浮出框</div>
+                            <div class="yc-demo-block__content">
+                                <div class="yc-demo-row">
+                                    <div id="hover-popover-target" class="yc-button yc-button--primary">
+                                        <i class="fas fa-mouse-pointer"></i> 悬停我
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="yc-demo-section">
+                        <div class="yc-demo-section__header">
+                            <div class="yc-demo-section__icon"></div>
+                            <h2 class="yc-demo-section__title">点击触发</h2>
+                        </div>
+                        <div class="yc-demo-block">
+                            <div class="yc-demo-block__title">点击出框</div>
+                            <div class="yc-demo-block__content">
+                                <div class="yc-demo-row">
+                                    <div id="click-popover-target" class="yc-button yc-button--primary">
+                                        <i class="fas fa-hand-pointer"></i> 点击我
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="yc-demo-section">
+                        <div class="yc-demo-section__header">
+                            <div class="yc-demo-section__icon"></div>
+                            <h2 class="yc-demo-section__title">弹出位置</h2>
+                        </div>
+                        <div class="yc-demo-block">
+                            <div class="yc-demo-block__title">点击各个按钮查看位置效果</div>
+                            <div class="yc-demo-block__content">
+                                <div class="demo-popover-placements">
+                                    <div class="demo-popover-placement-grid">
+                                        <div></div>
+                                        <div>
+                                            <button class="yc-button yc-button--small " id="top-popover-target">上 (Top)</button>
+                                        </div>
+                                        <div></div>
+                                        <div>
+                                            <button class="yc-button yc-button--small" id="left-popover-target">左 (Left)</button>
+                                        </div>
+                                        <div class="demo-popover-reference">
+                                            <i class="fas fa-crosshairs"></i> 参考元素
+                                        </div>
+                                        <div>
+                                            <button class="yc-button yc-button--small" id="right-popover-target">右 (Right)</button>
+                                        </div>
+                                        <div></div>
+                                        <div>
+                                            <button class="yc-button yc-button--small" id="bottom-popover-target">下 (Bottom)</button>
+                                        </div>
+                                        <div></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="yc-demo-section">
+                        <div class="yc-demo-section__header">
+                            <div class="yc-demo-section__icon"></div>
+                            <h2 class="yc-demo-section__title">对齐位置</h2>
+                        </div>
+                        <div class="yc-demo-block">
+                            <div class="yc-demo-block__title">不同对齐位置</div>
+                            <div class="yc-demo-block__content">
+                                <div class="yc-demo-row" style="flex-wrap: wrap; gap: 12px;">
+                                    <button class="yc-button yc-button--small" id="top-start-target">上-左 (top-start)</button>
+                                    <button class="yc-button yc-button--small" id="top-end-target">上-右 (top-end)</button>
+                                    <button class="yc-button yc-button--small" id="bottom-start-target">下-左 (bottom-start)</button>
+                                    <button class="yc-button yc-button--small" id="bottom-end-target">下-右 (bottom-end)</button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="yc-demo-section">
+                        <div class="yc-demo-section__header">
+                            <div class="yc-demo-section__icon"></div>
+                            <h2 class="yc-demo-section__title">主题</h2>
+                        </div>
+                        <div class="yc-demo-block">
+                            <div class="yc-demo-block__title">支持多种主题颜色</div>
+                            <div class="yc-demo-block__content">
+                                <div class="yc-demo-row" style="gap: 16px; flex-wrap: wrap;">
+                                    <button class="yc-button yc-button--small" id="dark-popover-target">深色 (dark)</button>
+                                    <button class="yc-button yc-button--small" id="primary-popover-target">Primary</button>
+                                    <button class="yc-button yc-button--small yc-button--success" id="success-popover-target">Success</button>
+                                    <button class="yc-button yc-button--small yc-button--warning" id="warning-popover-target">Warning</button>
+                                    <button class="yc-button yc-button--small yc-button--danger" id="danger-popover-target">Danger</button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="yc-demo-section">
+                        <div class="yc-demo-section__header">
+                            <div class="yc-demo-section__icon"></div>
+                            <h2 class="yc-demo-section__title">手动关闭</h2>
+                        </div>
+                        <div class="yc-demo-block">
+                            <div class="yc-demo-block__title">使用 trigger='manual' 手动控制</div>
+                            <div class="yc-demo-block__content">
+                                <div class="yc-demo-row" style="gap: 16px;">
+                                    <div id="manual-popover-target" class="yc-button yc-button--primary">
+                                        <i class="fas fa-cog"></i> 手动控制
+                                    </div>
+                                    <button class="yc-button yc-button--primary" onclick="manualPopover.show()">
+                                        <i class="fas fa-folder-open"></i> 显示
+                                    </button>
+                                    <button class="yc-button" onclick="manualPopover.hide()">
+                                        <i class="fas fa-times"></i> 隐藏
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="yc-demo-section">
+                        <div class="yc-demo-section__header">
+                            <div class="yc-demo-section__icon"></div>
+                            <h2 class="yc-demo-section__title">嵌套操作</h2>
+                        </div>
+                        <div class="yc-demo-block">
+                            <div class="yc-demo-block__title">可以在弹出框中嵌套操作按钮</div>
+                            <div class="yc-demo-block__content">
+                                <div class="yc-demo-row">
+                                    <div id="nested-popover-target" class="yc-button yc-button--primary">
+                                        <i class="fas fa-edit"></i> 嵌套操作
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                 </div>
-            </div>
+            </main>
         </div>
+
+        <div class="yc-demo-backdrop" id="backdrop"></div>
     </div>
 
-    <div class="demo-section">
-        <h3>对齐位置</h3>
-        <div class="demo-block">
-            <div class="demo-block-title">不同对齐位置</div>
-            <div class="demo-row" style="flex-wrap: wrap; gap: 12px;">
-                <button class="yc-button yc-button--small" id="top-start-target">上-左 (top-start)</button>
-                <button class="yc-button yc-button--small" id="top-end-target">上-右 (top-end)</button>
-                <button class="yc-button yc-button--small" id="bottom-start-target">下-左 (bottom-start)</button>
-                <button class="yc-button yc-button--small" id="bottom-end-target">下-右 (bottom-end)</button>
-            </div>
-        </div>
-    </div>
+    <script>
+        class Popover {
+            constructor(options = {}) {
+                if (options.target instanceof HTMLElement) {
+                    this.target = options.target;
+                } else {
+                    this.target = document.querySelector(options.target);
+                }
+                this.content = options.content || '';
+                this.title = options.title || '';
+                this.trigger = options.trigger || 'click';
+                this.placement = options.placement || 'bottom';
+                this.theme = options.theme || '';
+                this.width = options.width || 'auto';
+                this.visible = false;
+                this.popoverEl = null;
+                this.arrowEl = null;
+                this.innerEl = null;
 
-    <div class="demo-section">
-        <h3>主题</h3>
-        <div class="demo-block">
-            <div class="demo-block-title">支持多种主题颜色</div>
-            <div class="demo-row" style="gap: 16px; flex-wrap: wrap;">
-                <button class="yc-button yc-button--small" id="dark-popover-target">深色 (dark)</button>
-                <button class="yc-button yc-button--small" id="primary-popover-target">Primary</button>
-                <button class="yc-button yc-button--small yc-button--success" id="success-popover-target">Success</button>
-                <button class="yc-button yc-button--small yc-button--warning" id="warning-popover-target">Warning</button>
-                <button class="yc-button yc-button--small yc-button--danger" id="danger-popover-target">Danger</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="demo-section">
-        <h3>手动关闭</h3>
-        <div class="demo-block">
-            <div class="demo-block-title">使用 trigger='manual' 手动控制</div>
-            <div class="demo-row" style="gap: 16px;">
-                <div id="manual-popover-target" class="yc-button yc-button--primary">
-                    <i class="fas fa-cog"></i> 手动控制
-                </div>
-                <button class="yc-button yc-button--primary" onclick="manualPopover.show()">
-                    <i class="fas fa-folder-open"></i> 显示
-                </button>
-                <button class="yc-button" onclick="manualPopover.hide()">
-                    <i class="fas fa-times"></i> 隐藏
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <div class="demo-section">
-        <h3>嵌套操作</h3>
-        <div class="demo-block">
-            <div class="demo-block-title">可以在弹出框中嵌套操作按钮</div>
-            <div class="demo-row">
-                <div id="nested-popover-target" class="yc-button yc-button--primary">
-                    <i class="fas fa-edit"></i> 嵌套操作
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script>
-    class Popover {
-        constructor(options = {}) {
-            if (options.target instanceof HTMLElement) {
-                this.target = options.target;
-            } else {
-                this.target = document.querySelector(options.target);
-            }
-            this.content = options.content || '';
-            this.title = options.title || '';
-            this.trigger = options.trigger || 'click';
-            this.placement = options.placement || 'bottom';
-            this.theme = options.theme || '';
-            this.width = options.width || 'auto';
-            this.visible = false;
-            this.popoverEl = null;
-            this.arrowEl = null;
-            this.innerEl = null;
-
-            if (this.target && this.trigger !== 'manual') {
-                this.init();
-            }
-        }
-
-        init() {
-            this.popoverEl = document.createElement('div');
-            this.popoverEl.className = 'yc-popover';
-            if (this.theme) {
-                this.popoverEl.classList.add(`yc-popover-${this.theme}`);
+                if (this.target && this.trigger !== 'manual') {
+                    this.init();
+                }
             }
 
-            this.popoverEl.style.width = this.width !== 'auto' ? this.width : '';
+            init() {
+                this.popoverEl = document.createElement('div');
+                this.popoverEl.className = 'yc-popover';
+                if (this.theme) {
+                    this.popoverEl.classList.add(`yc-popover-${this.theme}`);
+                }
 
-            this.arrowEl = document.createElement('div');
-            this.arrowEl.className = `yc-popover-arrow yc-popover-arrow-${this.placement}`;
-            this.popoverEl.appendChild(this.arrowEl);
+                this.popoverEl.style.width = this.width !== 'auto' ? this.width : '';
 
-            this.innerEl = document.createElement('div');
-            this.innerEl.className = 'yc-popover-inner';
+                this.arrowEl = document.createElement('div');
+                this.arrowEl.className = `yc-popover-arrow yc-popover-arrow-${this.placement}`;
+                this.popoverEl.appendChild(this.arrowEl);
 
-            if (this.title) {
-                const titleEl = document.createElement('div');
-                titleEl.className = 'yc-popover-title';
-                titleEl.textContent = this.title;
-                this.innerEl.appendChild(titleEl);
+                this.innerEl = document.createElement('div');
+                this.innerEl.className = 'yc-popover-inner';
+
+                if (this.title) {
+                    const titleEl = document.createElement('div');
+                    titleEl.className = 'yc-popover-title';
+                    titleEl.textContent = this.title;
+                    this.innerEl.appendChild(titleEl);
+                }
+
+                const contentEl = document.createElement('div');
+                contentEl.className = 'yc-popover-content';
+                if (typeof this.content === 'function') {
+                    contentEl.appendChild(this.content());
+                } else if (this.content instanceof HTMLElement) {
+                    contentEl.appendChild(this.content);
+                } else {
+                    contentEl.innerHTML = this.content;
+                }
+                this.innerEl.appendChild(contentEl);
+                this.popoverEl.appendChild(this.innerEl);
+                document.body.appendChild(this.popoverEl);
+
+                this.bindEvents();
             }
 
-            const contentEl = document.createElement('div');
-            contentEl.className = 'yc-popover-content';
-            if (typeof this.content === 'function') {
-                contentEl.appendChild(this.content());
-            } else if (this.content instanceof HTMLElement) {
-                contentEl.appendChild(this.content);
-            } else {
-                contentEl.innerHTML = this.content;
-            }
-            this.innerEl.appendChild(contentEl);
-            this.popoverEl.appendChild(this.innerEl);
-            document.body.appendChild(this.popoverEl);
+            bindEvents() {
+                if (this.trigger === 'hover') {
+                    this.target.addEventListener('mouseenter', () => this.show());
+                    this.target.addEventListener('mouseleave', () => this.hide());
+                    this.popoverEl.addEventListener('mouseenter', () => this.show());
+                    this.popoverEl.addEventListener('mouseleave', () => this.hide());
+                } else if (this.trigger === 'click') {
+                    this.target.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        this.toggle();
+                    });
+                    document.addEventListener('click', (e) => {
+                        if (!this.popoverEl.contains(e.target) && !this.target.contains(e.target)) {
+                            this.hide();
+                        }
+                    });
+                }
 
-            this.bindEvents();
-        }
-
-        bindEvents() {
-            if (this.trigger === 'hover') {
-                this.target.addEventListener('mouseenter', () => this.show());
-                this.target.addEventListener('mouseleave', () => this.hide());
-                this.popoverEl.addEventListener('mouseenter', () => this.show());
-                this.popoverEl.addEventListener('mouseleave', () => this.hide());
-            } else if (this.trigger === 'click') {
-                this.target.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    this.toggle();
-                });
-                document.addEventListener('click', (e) => {
-                    if (!this.popoverEl.contains(e.target) && !this.target.contains(e.target)) {
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && this.visible) {
                         this.hide();
                     }
                 });
             }
 
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && this.visible) {
-                    this.hide();
-                }
-            });
-        }
+            show() {
+                if (this.visible) return;
+                this.visible = true;
+                this.popoverEl.style.display = 'block';
+                this.popoverEl.classList.add('yc-popover--visible');
 
-        show() {
-            if (this.visible) return;
-            this.visible = true;
-            this.popoverEl.style.display = 'block';
-            this.popoverEl.classList.add('yc-popover--visible');
-
-            requestAnimationFrame(() => {
-                this.updatePosition();
-            });
-        }
-
-        hide() {
-            if (!this.visible) return;
-            this.visible = false;
-            this.popoverEl.classList.remove('yc-popover--visible');
-            setTimeout(() => {
-                if (!this.visible) {
-                    this.popoverEl.style.display = 'none';
-                }
-            }, 200);
-        }
-
-        toggle() {
-            this.visible ? this.hide() : this.show();
-        }
-
-        updatePosition() {
-            if (!this.target || !this.popoverEl) return;
-
-            const targetRect = this.target.getBoundingClientRect();
-            const popoverRect = this.popoverEl.getBoundingClientRect();
-            const gap = 10;
-
-            let top, left;
-
-            switch (this.placement) {
-                case 'top':
-                    top = targetRect.top - popoverRect.height - gap;
-                    left = targetRect.left + (targetRect.width - popoverRect.width) / 2;
-                    break;
-                case 'top-start':
-                    top = targetRect.top - popoverRect.height - gap;
-                    left = targetRect.left;
-                    break;
-                case 'top-end':
-                    top = targetRect.top - popoverRect.height - gap;
-                    left = targetRect.right - popoverRect.width;
-                    break;
-                case 'bottom':
-                    top = targetRect.bottom + gap;
-                    left = targetRect.left + (targetRect.width - popoverRect.width) / 2;
-                    break;
-                case 'bottom-start':
-                    top = targetRect.bottom + gap;
-                    left = targetRect.left;
-                    break;
-                case 'bottom-end':
-                    top = targetRect.bottom + gap;
-                    left = targetRect.right - popoverRect.width;
-                    break;
-                case 'left':
-                    top = targetRect.top + (targetRect.height - popoverRect.height) / 2;
-                    left = targetRect.left - popoverRect.width - gap;
-                    break;
-                case 'left-start':
-                    top = targetRect.top;
-                    left = targetRect.left - popoverRect.width - gap;
-                    break;
-                case 'left-end':
-                    top = targetRect.bottom - popoverRect.height;
-                    left = targetRect.left - popoverRect.width - gap;
-                    break;
-                case 'right':
-                    top = targetRect.top + (targetRect.height - popoverRect.height) / 2;
-                    left = targetRect.right + gap;
-                    break;
-                case 'right-start':
-                    top = targetRect.top;
-                    left = targetRect.right + gap;
-                    break;
-                case 'right-end':
-                    top = targetRect.bottom - popoverRect.height;
-                    left = targetRect.right + gap;
-                    break;
-                default:
-                    top = targetRect.bottom + gap;
-                    left = targetRect.left + (targetRect.width - popoverRect.width) / 2;
+                requestAnimationFrame(() => {
+                    this.updatePosition();
+                });
             }
 
-            const minX = gap;
-            const maxX = window.innerWidth - popoverRect.width - gap;
-            const minY = gap;
-            const maxY = window.innerHeight - popoverRect.height - gap;
+            hide() {
+                if (!this.visible) return;
+                this.visible = false;
+                this.popoverEl.classList.remove('yc-popover--visible');
+                setTimeout(() => {
+                    if (!this.visible) {
+                        this.popoverEl.style.display = 'none';
+                    }
+                }, 200);
+            }
 
-            left = Math.max(minX, Math.min(left, maxX));
-            top = Math.max(minY, Math.min(top, maxY));
+            toggle() {
+                this.visible ? this.hide() : this.show();
+            }
 
-            this.popoverEl.style.top = top + 'px';
-            this.popoverEl.style.left = left + 'px';
+            updatePosition() {
+                if (!this.target || !this.popoverEl) return;
 
-            this.updateArrowPosition(targetRect, top, left, popoverRect.width, popoverRect.height);
-        }
+                const targetRect = this.target.getBoundingClientRect();
+                const popoverRect = this.popoverEl.getBoundingClientRect();
+                const gap = 10;
 
-        updateArrowPosition(targetRect, popoverTop, popoverLeft, popoverWidth, popoverHeight) {
-            if (!this.arrowEl) return;
+                let top, left;
 
-            const isVertical = ['top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end'].includes(this.placement);
-
-            this.arrowEl.style.left = '';
-            this.arrowEl.style.right = '';
-            this.arrowEl.style.top = '';
-            this.arrowEl.style.bottom = '';
-            this.arrowEl.style.marginLeft = '';
-            this.arrowEl.style.marginTop = '';
-
-            if (isVertical) {
-                let arrowLeft;
-                const targetCenterX = targetRect.left + targetRect.width / 2;
-                arrowLeft = targetCenterX - popoverLeft - 6;
-
-                if (this.placement.includes('start')) {
-                    arrowLeft = targetRect.left - popoverLeft + 15;
-                } else if (this.placement.includes('end')) {
-                    arrowLeft = targetRect.right - popoverLeft - 15;
+                switch (this.placement) {
+                    case 'top':
+                        top = targetRect.top - popoverRect.height - gap;
+                        left = targetRect.left + (targetRect.width - popoverRect.width) / 2;
+                        break;
+                    case 'top-start':
+                        top = targetRect.top - popoverRect.height - gap;
+                        left = targetRect.left;
+                        break;
+                    case 'top-end':
+                        top = targetRect.top - popoverRect.height - gap;
+                        left = targetRect.right - popoverRect.width;
+                        break;
+                    case 'bottom':
+                        top = targetRect.bottom + gap;
+                        left = targetRect.left + (targetRect.width - popoverRect.width) / 2;
+                        break;
+                    case 'bottom-start':
+                        top = targetRect.bottom + gap;
+                        left = targetRect.left;
+                        break;
+                    case 'bottom-end':
+                        top = targetRect.bottom + gap;
+                        left = targetRect.right - popoverRect.width;
+                        break;
+                    case 'left':
+                        top = targetRect.top + (targetRect.height - popoverRect.height) / 2;
+                        left = targetRect.left - popoverRect.width - gap;
+                        break;
+                    case 'left-start':
+                        top = targetRect.top;
+                        left = targetRect.left - popoverRect.width - gap;
+                        break;
+                    case 'left-end':
+                        top = targetRect.bottom - popoverRect.height;
+                        left = targetRect.left - popoverRect.width - gap;
+                        break;
+                    case 'right':
+                        top = targetRect.top + (targetRect.height - popoverRect.height) / 2;
+                        left = targetRect.right + gap;
+                        break;
+                    case 'right-start':
+                        top = targetRect.top;
+                        left = targetRect.right + gap;
+                        break;
+                    case 'right-end':
+                        top = targetRect.bottom - popoverRect.height;
+                        left = targetRect.right + gap;
+                        break;
+                    default:
+                        top = targetRect.bottom + gap;
+                        left = targetRect.left + (targetRect.width - popoverRect.width) / 2;
                 }
 
-                arrowLeft = Math.max(10, Math.min(arrowLeft, popoverWidth - 22));
-                this.arrowEl.style.left = arrowLeft + 'px';
+                const minX = gap;
+                const maxX = window.innerWidth - popoverRect.width - gap;
+                const minY = gap;
+                const maxY = window.innerHeight - popoverRect.height - gap;
 
-                if (this.placement.includes('top')) {
-                    this.arrowEl.style.top = '-6px';
+                left = Math.max(minX, Math.min(left, maxX));
+                top = Math.max(minY, Math.min(top, maxY));
+
+                this.popoverEl.style.top = top + 'px';
+                this.popoverEl.style.left = left + 'px';
+
+                this.updateArrowPosition(targetRect, top, left, popoverRect.width, popoverRect.height);
+            }
+
+            updateArrowPosition(targetRect, popoverTop, popoverLeft, popoverWidth, popoverHeight) {
+                if (!this.arrowEl) return;
+
+                const isVertical = ['top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end'].includes(this.placement);
+
+                this.arrowEl.style.left = '';
+                this.arrowEl.style.right = '';
+                this.arrowEl.style.top = '';
+                this.arrowEl.style.bottom = '';
+                this.arrowEl.style.marginLeft = '';
+                this.arrowEl.style.marginTop = '';
+
+                if (isVertical) {
+                    let arrowLeft;
+                    const targetCenterX = targetRect.left + targetRect.width / 2;
+                    arrowLeft = targetCenterX - popoverLeft - 6;
+
+                    if (this.placement.includes('start')) {
+                        arrowLeft = targetRect.left - popoverLeft + 15;
+                    } else if (this.placement.includes('end')) {
+                        arrowLeft = targetRect.right - popoverLeft - 15;
+                    }
+
+                    arrowLeft = Math.max(10, Math.min(arrowLeft, popoverWidth - 22));
+                    this.arrowEl.style.left = arrowLeft + 'px';
+
+                    if (this.placement.includes('top')) {
+                        this.arrowEl.style.top = '-6px';
+                    } else {
+                        this.arrowEl.style.bottom = '-6px';
+                    }
                 } else {
-                    this.arrowEl.style.bottom = '-6px';
-                }
-            } else {
-                let arrowTop;
-                const targetCenterY = targetRect.top + targetRect.height / 2;
-                arrowTop = targetCenterY - popoverTop - 6;
+                    let arrowTop;
+                    const targetCenterY = targetRect.top + targetRect.height / 2;
+                    arrowTop = targetCenterY - popoverTop - 6;
 
-                if (this.placement.includes('start')) {
-                    arrowTop = targetRect.top - popoverTop + 10;
-                } else if (this.placement.includes('end')) {
-                    arrowTop = targetRect.bottom - popoverTop - 10;
-                }
+                    if (this.placement.includes('start')) {
+                        arrowTop = targetRect.top - popoverTop + 10;
+                    } else if (this.placement.includes('end')) {
+                        arrowTop = targetRect.bottom - popoverTop - 10;
+                    }
 
-                arrowTop = Math.max(10, Math.min(arrowTop, popoverHeight - 22));
-                this.arrowEl.style.top = arrowTop + 'px';
+                    arrowTop = Math.max(10, Math.min(arrowTop, popoverHeight - 22));
+                    this.arrowEl.style.top = arrowTop + 'px';
 
-                if (this.placement.includes('left')) {
-                    this.arrowEl.style.left = '-6px';
-                } else {
-                    this.arrowEl.style.right = '-6px';
+                    if (this.placement.includes('left')) {
+                        this.arrowEl.style.left = '-6px';
+                    } else {
+                        this.arrowEl.style.right = '-6px';
+                    }
                 }
             }
         }
-    }
 
-    function createPopover(target, title, content, placement, theme) {
-        return new Popover({
-            target: target,
-            title: title,
-            content: content,
-            trigger: 'click',
-            placement: placement,
-            theme: theme
+        function createPopover(target, title, content, placement, theme) {
+            return new Popover({
+                target: target,
+                title: title,
+                content: content,
+                trigger: 'click',
+                placement: placement,
+                theme: theme
+            });
+        }
+
+        const hoverPopover = new Popover({
+            target: '#hover-popover-target',
+            title: '鼠标悬停',
+            content: '这是一段提示内容，鼠标悬停时显示',
+            trigger: 'hover',
+            placement: 'bottom'
         });
-    }
 
-    const hoverPopover = new Popover({
-        target: '#hover-popover-target',
-        title: '鼠标悬停',
-        content: '这是一段提示内容，鼠标悬停时显示',
-        trigger: 'hover',
-        placement: 'bottom'
-    });
+        const clickPopover = new Popover({
+            target: '#click-popover-target',
+            title: '点击触发',
+            content: '这是一段提示内容，点击时显示',
+            trigger: 'click',
+            placement: 'bottom'
+        });
 
-    const clickPopover = new Popover({
-        target: '#click-popover-target',
-        title: '点击触发',
-        content: '这是一段提示内容，点击时显示',
-        trigger: 'click',
-        placement: 'bottom'
-    });
+        const topPopover = createPopover('#top-popover-target', '上', '弹出框显示在目标上方', 'top', '');
+        const bottomPopover = createPopover('#bottom-popover-target', '下', '弹出框显示在目标下方', 'bottom', '');
+        const leftPopover = createPopover('#left-popover-target', '左', '弹出框显示在目标左侧', 'left', '');
+        const rightPopover = createPopover('#right-popover-target', '右', '弹出框显示在目标右侧', 'right', '');
 
-    const topPopover = createPopover('#top-popover-target', '上', '弹出框显示在目标上方', 'top', '');
-    const bottomPopover = createPopover('#bottom-popover-target', '下', '弹出框显示在目标下方', 'bottom', '');
-    const leftPopover = createPopover('#left-popover-target', '左', '弹出框显示在目标左侧', 'left', '');
-    const rightPopover = createPopover('#right-popover-target', '右', '弹出框显示在目标右侧', 'right', '');
+        const topStartPopover = createPopover('#top-start-target', '上-左对齐', '弹出框左边缘与目标左边缘对齐', 'top-start', '');
+        const topEndPopover = createPopover('#top-end-target', '上-右对齐', '弹出框右边缘与目标右边缘对齐', 'top-end', '');
+        const bottomStartPopover = createPopover('#bottom-start-target', '下-左对齐', '弹出框左边缘与目标左边缘对齐', 'bottom-start', '');
+        const bottomEndPopover = createPopover('#bottom-end-target', '下-右对齐', '弹出框右边缘与目标右边缘对齐', 'bottom-end', '');
 
-    const topStartPopover = createPopover('#top-start-target', '上-左对齐', '弹出框左边缘与目标左边缘对齐', 'top-start', '');
-    const topEndPopover = createPopover('#top-end-target', '上-右对齐', '弹出框右边缘与目标右边缘对齐', 'top-end', '');
-    const bottomStartPopover = createPopover('#bottom-start-target', '下-左对齐', '弹出框左边缘与目标左边缘对齐', 'bottom-start', '');
-    const bottomEndPopover = createPopover('#bottom-end-target', '下-右对齐', '弹出框右边缘与目标右边缘对齐', 'bottom-end', '');
+        const darkPopover = createPopover('#dark-popover-target', '深色主题', '这是一段深色主题的弹出框内容', 'bottom', 'dark');
+        const primaryPopover = createPopover('#primary-popover-target', 'Primary', '这是一段 primary 主题的弹出框内容', 'bottom', 'primary');
+        const successPopover = createPopover('#success-popover-target', 'Success', '这是一段 success 主题的弹出框内容', 'bottom', 'success');
+        const warningPopover = createPopover('#warning-popover-target', 'Warning', '这是一段 warning 主题的弹出框内容', 'bottom', 'warning');
+        const dangerPopover = createPopover('#danger-popover-target', 'Danger', '这是一段 danger 主题的弹出框内容', 'bottom', 'danger');
 
-    const darkPopover = createPopover('#dark-popover-target', '深色主题', '这是一段深色主题的弹出框内容', 'bottom', 'dark');
-    const primaryPopover = createPopover('#primary-popover-target', 'Primary', '这是一段 primary 主题的弹出框内容', 'bottom', 'primary');
-    const successPopover = createPopover('#success-popover-target', 'Success', '这是一段 success 主题的弹出框内容', 'bottom', 'success');
-    const warningPopover = createPopover('#warning-popover-target', 'Warning', '这是一段 warning 主题的弹出框内容', 'bottom', 'warning');
-    const dangerPopover = createPopover('#danger-popover-target', 'Danger', '这是一段 danger 主题的弹出框内容', 'bottom', 'danger');
-
-    const manualPopover = new Popover({
-        target: '#manual-popover-target',
-        title: '手动控制',
-        content: `
+        const manualPopover = new Popover({
+            target: '#manual-popover-target',
+            title: '手动控制',
+            content: `
                 <p>这是一个可以通过按钮手动打开和关闭的弹出框</p>
                 <div style="display: flex; gap: 8px; margin-top: 12px;">
                     <button class="yc-button yc-button--small yc-button--primary" onclick="manualPopover.hide()">确定</button>
                     <button class="yc-button yc-button--small" onclick="manualPopover.hide()">取消</button>
                 </div>
             `,
-        trigger: 'manual',
-        width: '220px'
-    });
+            trigger: 'manual',
+            width: '220px'
+        });
 
-    const nestedContent = document.createElement('div');
-    nestedContent.innerHTML = `
+        const nestedContent = document.createElement('div');
+        nestedContent.innerHTML = `
             <p>这是一段嵌套操作的弹出框内容</p>
             <div style="display: flex; gap: 8px; margin-top: 12px;">
                 <button class="yc-button yc-button--small yc-button--primary" onclick="alert('确认操作')">确认</button>
                 <button class="yc-button yc-button--small" onclick="nestedPopover.hide()">取消</button>
             </div>
         `;
-    const nestedPopover = new Popover({
-        target: '#nested-popover-target',
-        title: '嵌套操作',
-        content: nestedContent,
-        trigger: 'click',
-        width: '240px'
-    });
-    window.nestedPopover = nestedPopover;
-    window.manualPopover = manualPopover;
-</script>
+        const nestedPopover = new Popover({
+            target: '#nested-popover-target',
+            title: '嵌套操作',
+            content: nestedContent,
+            trigger: 'click',
+            width: '240px'
+        });
+        window.nestedPopover = nestedPopover;
+        window.manualPopover = manualPopover;
+
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('yc-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('yc-theme', newTheme);
+            localStorage.setItem('yc-theme', newTheme);
+        }
+
+        function toggleMenu() {
+            const sidebar = document.getElementById('sidebar');
+            const backdrop = document.getElementById('backdrop');
+            sidebar.classList.toggle('is-visible');
+            backdrop.classList.toggle('is-visible');
+        }
+
+        const savedTheme = localStorage.getItem('yc-theme') || 'light';
+        document.documentElement.setAttribute('yc-theme', savedTheme);
+
+        document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+        document.getElementById('menuToggle').addEventListener('click', toggleMenu);
+        document.getElementById('backdrop').addEventListener('click', toggleMenu);
+
+        const menuToggle = document.getElementById('menuToggle');
+        function checkScreenWidth() {
+            if (window.innerWidth <= 992) {
+                menuToggle.style.display = 'flex';
+            } else {
+                menuToggle.style.display = 'none';
+                document.getElementById('sidebar').classList.remove('is-visible');
+                document.getElementById('backdrop').classList.remove('is-visible');
+            }
+        }
+
+        checkScreenWidth();
+        window.addEventListener('resize', checkScreenWidth);
+    </script>
 </body>
 </html>
