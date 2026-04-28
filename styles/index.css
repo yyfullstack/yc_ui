@@ -23,9 +23,10 @@
  *   <html yc-theme="dark">
  */
 
-/* Base styles - Variables and Reset */
+/* Base styles - Variables, Reset and Utilities */
 @import url('./base/variables.css');
 @import url('./base/reset.css');
+@import url('./base/utils.css');
 
 /* Core Layout Components */
 @import url('./components/grid.css');

@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YC UI - 综合Web组件平台</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./styles/index.css">
+    <link rel="stylesheet" href="./styles/demo.css">
+    <style>
+        .feature-card {
+            transition: all 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--yc-box-shadow-lg);
+        }
+    </style>
+</head>
+<body>
+    <div class="yc-demo-layout">
+        <header class="yc-demo-header">
+            <div class="yc-demo-header__logo">
+                <i class="fas fa-palette"></i>
+                <span>YC UI</span>
+            </div>
+            <nav class="yc-demo-header__nav">
+                <span class="yc-demo-header__nav-item is-active">首页</span>
+                <span class="yc-demo-header__nav-item" onclick="navigateTo('components')">组件</span>
+                <span class="yc-demo-header__nav-item" onclick="navigateTo('guide')">指南</span>
+                <span class="yc-demo-header__nav-item" onclick="navigateTo('resources')">资源</span>
+            </nav>
+            <div class="yc-demo-header__theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+                <span>切换主题</span>
+            </div>
+            <div class="yc-demo-header__menu-toggle" id="menuToggle" style="display: none;">
+                <i class="fas fa-bars"></i>
+            </div>
+        </header>
+
+        <div class="yc-demo-content">
+            <aside class="yc-demo-sidebar yc-demo-scrollbar" id="sidebar">
+                <div class="yc-demo-sidebar__title">快速开始</div>
+                <ul class="yc-demo-sidebar__menu">
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="#features" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-star"></i>
+                            <span>特性</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="#components" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-th"></i>
+                            <span>组件展示</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="#quickstart" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-rocket"></i>
+                            <span>快速开始</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="#theming" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-paint-brush"></i>
+                            <span>主题定制</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="yc-demo-sidebar__title">基础组件</div>
+                <ul class="yc-demo-sidebar__menu">
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="./views/demo-button.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-square"></i>
+                            <span>Button 按钮</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="./views/demo-input.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-keyboard"></i>
+                            <span>Input 输入框</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="./views/demo-radio.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-circle"></i>
+                            <span>Radio 单选框</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="./views/demo-checkbox.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-check-square"></i>
+                            <span>Checkbox 多选框</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="./views/demo-switch.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-toggle-on"></i>
+                            <span>Switch 开关</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="./views/demo-select.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-chevron-down"></i>
+                            <span>Select 选择器</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="yc-demo-sidebar__title">数据组件</div>
+                <ul class="yc-demo-sidebar__menu">
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="./views/demo-table.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-table"></i>
+                            <span>Table 表格</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="./views/demo-tag.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-tags"></i>
+                            <span>Tag 标签</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="./views/demo-badge.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-flag"></i>
+                            <span>Badge 徽章</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="yc-demo-sidebar__title">反馈组件</div>
+                <ul class="yc-demo-sidebar__menu">
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="./views/demo-alert.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <span>Alert 警告</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="./views/demo-loading.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-spinner"></i>
+                            <span>Loading 加载</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="./views/demo-notification.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-bell"></i>
+                            <span>Notification 通知</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="./views/demo-messagebox.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-info-circle"></i>
+                            <span>MessageBox 弹框</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="yc-demo-sidebar__title">布局组件</div>
+                <ul class="yc-demo-sidebar__menu">
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="./views/demo-container.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-border-all"></i>
+                            <span>Container 布局</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="./views/demo-grid.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-th-large"></i>
+                            <span>Grid 栅格</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="./views/demo-card.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-window-maximize"></i>
+                            <span>Card 卡片</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="./views/demo-tabs.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-columns"></i>
+                            <span>Tabs 标签页</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="./views/demo-collapse.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-angle-down"></i>
+                            <span>Collapse 折叠</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="yc-demo-sidebar__title">弹窗组件</div>
+                <ul class="yc-demo-sidebar__menu">
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="./views/demo-dialog.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-window-close"></i>
+                            <span>Dialog 对话框</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="./views/demo-drawer.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-sliders-h"></i>
+                            <span>Drawer 抽屉</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="./views/demo-popover.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-external-link-alt"></i>
+                            <span>Popover 弹出框</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="yc-demo-sidebar__title">高级组件</div>
+                <ul class="yc-demo-sidebar__menu">
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="./views/demo-date-picker.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-calendar"></i>
+                            <span>DatePicker 日期选择</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="./views/demo-time-picker.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-clock"></i>
+                            <span>TimePicker 时间选择</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="./views/demo-color-picker.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-palette"></i>
+                            <span>ColorPicker 颜色选择</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="./views/demo-slider.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-sliders"></i>
+                            <span>Slider 滑块</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="./views/demo-rate.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-star"></i>
+                            <span>Rate 评分</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="./views/demo-upload.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-upload"></i>
+                            <span>Upload 上传</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="./views/demo-tree-select.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-tree"></i>
+                            <span>TreeSelect 树选择</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="./views/demo-transfer.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-exchange-alt"></i>
+                            <span>Transfer 穿梭框</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="./views/demo-cascader.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-list"></i>
+                            <span>Cascader 级联选择</span>
+                        </a>
+                    </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="./views/demo-autocomplete.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-search"></i>
+                            <span>AutoComplete 自动完成</span>
+                        </a>
+                    </li>
+                </ul>
+            </aside>
+
+            <main class="yc-demo-main">
+                <div class="yc-demo-page">
+                    <section class="yc-demo-section" style="text-align: center; padding: 60px 24px; background: linear-gradient(135deg, var(--yc-color-primary-light-5) 0%, var(--yc-color-bg) 100%);">
+                        <div style="max-width: 800px; margin: 0 auto;">
+                            <div style="font-size: 72px; margin-bottom: 24px; color: var(--yc-color-primary);">
+                                <i class="fas fa-palette"></i>
+                            </div>
+                            <h1 class="yc-demo-page__title" style="font-size: 42px; margin-bottom: 16px;">YC UI</h1>
+                            <p class="yc-demo-page__subtitle" style="font-size: 18px; margin-bottom: 32px; color: var(--yc-color-text-regular);">
+                                参考 Element Plus 构建的现代化前端组件库，支持响应式布局和主题切换
+                            </p>
+                            <div class="yc-demo-btn-row" style="justify-content: center; gap: 16px;">
+                                <a href="#quickstart" class="yc-button yc-button--primary yc-button--large">
+                                    <i class="fas fa-rocket"></i>
+                                    快速开始
+                                </a>
+                                <a href="#components" class="yc-button yc-button--large">
+                                    <i class="fas fa-th"></i>
+                                    组件文档
+                                </a>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="features" class="yc-demo-section">
+                        <div class="yc-demo-section__header">
+                            <div class="yc-demo-section__icon"></div>
+                            <h2 class="yc-demo-section__title">核心特性</h2>
+                        </div>
+                        <div class="yc-demo-stat-cards" style="grid-template-columns: repeat(3, 1fr);">
+                            <div class="feature-card yc-card" style="padding: 24px; border-radius: var(--yc-border-radius-base);">
+                                <div style="font-size: 40px; color: var(--yc-color-primary); margin-bottom: 16px;">
+                                    <i class="fas fa-mobile-alt"></i>
+                                </div>
+                                <h3 style="font-size: var(--yc-font-size-medium); font-weight: var(--yc-font-weight-semibold); margin-bottom: 8px;">响应式设计</h3>
+                                <p style="font-size: var(--yc-font-size-small); color: var(--yc-color-text-secondary);">
+                                    完美适配各种屏幕尺寸，从手机到桌面端
+                                </p>
+                            </div>
+                            <div class="feature-card yc-card" style="padding: 24px; border-radius: var(--yc-border-radius-base);">
+                                <div style="font-size: 40px; color: var(--yc-color-success); margin-bottom: 16px;">
+                                    <i class="fas fa-paint-brush"></i>
+                                </div>
+                                <h3 style="font-size: var(--yc-font-size-medium); font-weight: var(--yc-font-weight-semibold); margin-bottom: 8px;">主题定制</h3>
+                                <p style="font-size: var(--yc-font-size-small); color: var(--yc-color-text-secondary);">
+                                    支持明暗主题切换，轻松定制品牌风格
+                                </p>
+                            </div>
+                            <div class="feature-card yc-card" style="padding: 24px; border-radius: var(--yc-border-radius-base);">
+                                <div style="font-size: 40px; color: var(--yc-color-warning); margin-bottom: 16px;">
+                                    <i class="fas fa-code"></i>
+                                </div>
+                                <h3 style="font-size: var(--yc-font-size-medium); font-weight: var(--yc-font-weight-semibold); margin-bottom: 8px;">易于使用</h3>
+                                <p style="font-size: var(--yc-font-size-small); color: var(--yc-color-text-secondary);">
+                                    简洁的 API 设计，开箱即用
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="components" class="yc-demo-section">
+                        <div class="yc-demo-section__header">
+                            <div class="yc-demo-section__icon"></div>
+                            <h2 class="yc-demo-section__title">组件展示</h2>
+                        </div>
+                        <div class="yc-demo-card-demo">
+                            <a href="./views/demo-button.html" class="yc-card yc-card--hoverable" style="text-decoration: none;">
+                                <div class="yc-card__header">
+                                    <h3 class="yc-card__title">Button 按钮</h3>
+                                </div>
+                                <div class="yc-card__body">
+                                    <div class="yc-demo-btn-row">
+                                        <button class="yc-button yc-button--primary">主要按钮</button>
+                                        <button class="yc-button">默认按钮</button>
+                                        <button class="yc-button yc-button--success">成功按钮</button>
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="./views/demo-input.html" class="yc-card yc-card--hoverable" style="text-decoration: none;">
+                                <div class="yc-card__header">
+                                    <h3 class="yc-card__title">Input 输入框</h3>
+                                </div>
+                                <div class="yc-card__body">
+                                    <input class="yc-input" placeholder="请输入内容" style="width: 100%;">
+                                </div>
+                            </a>
+                            <a href="./views/demo-select.html" class="yc-card yc-card--hoverable" style="text-decoration: none;">
+                                <div class="yc-card__header">
+                                    <h3 class="yc-card__title">Select 选择器</h3>
+                                </div>
+                                <div class="yc-card__body">
+                                    <div class="yc-select">
+                                        <div class="yc-select__input">
+                                            <span>请选择</span>
+                                            <i class="fas fa-chevron-down"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="./views/demo-table.html" class="yc-card yc-card--hoverable" style="text-decoration: none;">
+                                <div class="yc-card__header">
+                                    <h3 class="yc-card__title">Table 表格</h3>
+                                </div>
+                                <div class="yc-card__body">
+                                    <table class="yc-table">
+                                        <thead>
+                                            <tr>
+                                                <th>姓名</th>
+                                                <th>年龄</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>张三</td>
+                                                <td>28</td>
+                                            </tr>
+                                            <tr>
+                                                <td>李四</td>
+                                                <td>32</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </a>
+                            <a href="./views/demo-dialog.html" class="yc-card yc-card--hoverable" style="text-decoration: none;">
+                                <div class="yc-card__header">
+                                    <h3 class="yc-card__title">Dialog 对话框</h3>
+                                </div>
+                                <div class="yc-card__body">
+                                    <button class="yc-button yc-button--primary" onclick="openDemoDialog()">打开对话框</button>
+                                </div>
+                            </a>
+                            <a href="./views/demo-card.html" class="yc-card yc-card--hoverable" style="text-decoration: none;">
+                                <div class="yc-card__header">
+                                    <h3 class="yc-card__title">Card 卡片</h3>
+                                </div>
+                                <div class="yc-card__body">
+                                    <p style="color: var(--yc-color-text-regular);">卡片内容示例...</p>
+                                </div>
+                            </a>
+                        </div>
+                    </section>
+
+                    <section id="quickstart" class="yc-demo-section">
+                        <div class="yc-demo-section__header">
+                            <div class="yc-demo-section__icon"></div>
+                            <h2 class="yc-demo-section__title">快速开始</h2>
+                        </div>
+                        <div class="yc-demo-block">
+                            <div class="yc-demo-block__title">安装</div>
+                            <div class="yc-demo-code-block">
+                                <pre><code>npm install yc-ui</code></pre>
+                            </div>
+                        </div>
+                        <div class="yc-demo-block">
+                            <div class="yc-demo-block__title">引入样式</div>
+                            <div class="yc-demo-code-block">
+                                <pre><code>&lt;link rel="stylesheet" href="path/to/yc-ui/styles/index.css"&gt;</code></pre>
+                            </div>
+                        </div>
+                        <div class="yc-demo-block">
+                            <div class="yc-demo-block__title">使用组件</div>
+                            <div class="yc-demo-code-block">
+                                <pre><code>&lt;button class="yc-button yc-button--primary"&gt;
+  主要按钮
+&lt;/button&gt;</code></pre>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="theming" class="yc-demo-section">
+                        <div class="yc-demo-section__header">
+                            <div class="yc-demo-section__icon"></div>
+                            <h2 class="yc-demo-section__title">主题定制</h2>
+                        </div>
+                        <div class="yc-demo-block">
+                            <div class="yc-demo-block__title">切换主题</div>
+                            <div class="yc-demo-flex-row">
+                                <button class="yc-button yc-button--primary" onclick="setTheme('light')">
+                                    <i class="fas fa-sun"></i>
+                                    浅色主题
+                                </button>
+                                <button class="yc-button yc-button--dark" onclick="setTheme('dark')">
+                                    <i class="fas fa-moon"></i>
+                                    深色主题
+                                </button>
+                            </div>
+                        </div>
+                        <div class="yc-demo-block">
+                            <div class="yc-demo-block__title">颜色系统</div>
+                            <div class="yc-demo-color-swatches">
+                                <div class="yc-demo-color-swatch" style="background: var(--yc-color-primary);">Primary</div>
+                                <div class="yc-demo-color-swatch" style="background: var(--yc-color-success);">Success</div>
+                                <div class="yc-demo-color-swatch" style="background: var(--yc-color-warning);">Warning</div>
+                                <div class="yc-demo-color-swatch" style="background: var(--yc-color-danger);">Danger</div>
+                                <div class="yc-demo-color-swatch" style="background: var(--yc-color-info);">Info</div>
+                                <div class="yc-demo-color-swatch yc-demo-color-swatch--light" style="background: var(--yc-color-text-primary);">Text</div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </main>
+        </div>
+
+        <div class="yc-demo-backdrop" id="backdrop"></div>
+    </div>
+
+    <div class="yc-dialog" id="demoDialog" style="display: none;">
+        <div class="yc-dialog__header">
+            <span class="yc-dialog__title">对话框标题</span>
+            <button class="yc-dialog__close" onclick="closeDemoDialog()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="yc-dialog__body">
+            这是一个对话框示例内容。
+        </div>
+        <div class="yc-dialog__footer">
+            <button class="yc-button" onclick="closeDemoDialog()">取消</button>
+            <button class="yc-button yc-button--primary" onclick="closeDemoDialog()">确定</button>
+        </div>
+    </div>
+
+    <script>
+        function setTheme(theme) {
+            document.documentElement.setAttribute('yc-theme', theme);
+            localStorage.setItem('yc-theme', theme);
+        }
+
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('yc-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            setTheme(newTheme);
+        }
+
+        function openDemoDialog() {
+            document.getElementById('demoDialog').style.display = 'block';
+        }
+
+        function closeDemoDialog() {
+            document.getElementById('demoDialog').style.display = 'none';
+        }
+
+        function toggleMenu() {
+            const sidebar = document.getElementById('sidebar');
+            const backdrop = document.getElementById('backdrop');
+            sidebar.classList.toggle('is-visible');
+            backdrop.classList.toggle('is-visible');
+        }
+
+        function navigateTo(section) {
+            const element = document.getElementById(section);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        const savedTheme = localStorage.getItem('yc-theme') || 'light';
+        setTheme(savedTheme);
+
+        document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+        document.getElementById('menuToggle').addEventListener('click', toggleMenu);
+        document.getElementById('backdrop').addEventListener('click', toggleMenu);
+
+        const menuToggle = document.getElementById('menuToggle');
+        function checkScreenWidth() {
+            if (window.innerWidth <= 992) {
+                menuToggle.style.display = 'flex';
+            } else {
+                menuToggle.style.display = 'none';
+                document.getElementById('sidebar').classList.remove('is-visible');
+                document.getElementById('backdrop').classList.remove('is-visible');
+            }
+        }
+
+        checkScreenWidth();
+        window.addEventListener('resize', checkScreenWidth);
+    </script>
+</body>
+</html>
