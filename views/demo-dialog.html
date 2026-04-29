@@ -120,7 +120,7 @@
                 showFooter = true,
                 footerButtons = [
                     { text: '取消', class: '', action: 'cancel' },
-                    { text: '确定', class: 'yc-dialog-btn-primary', action: 'ok' }
+                    { text: '确定', class: 'yc-button--primary', action: 'ok' }
                 ]
             } = options;
 
@@ -132,7 +132,7 @@
             let footerHTML = '';
             if (showFooter) {
                 footerHTML = `<div class="yc-dialog-footer">
-                    ${footerButtons.map(btn => `<button class="yc-dialog-btn ${btn.class}" data-action="${btn.action}">${btn.text}</button>`).join('')}
+                    ${footerButtons.map(btn => `<button class="yc-button ${btn.class}" data-action="${btn.action}">${btn.text}</button>`).join('')}
                 </div>`;
             }
 
@@ -217,7 +217,7 @@
                 `,
                 width: '400px',
                 footerButtons: [
-                    { text: '确定', class: 'yc-dialog-btn-primary', action: 'ok' }
+                    { text: '确定', class: 'yc-button--primary', action: 'ok' }
                 ]
             });
         }
@@ -241,7 +241,7 @@
                 width: '500px',
                 footerButtons: [
                     { text: '取消', class: '', action: 'cancel' },
-                    { text: '提交', class: 'yc-dialog-btn-primary', action: 'ok' }
+                    { text: '提交', class: 'yc-button--primary', action: 'ok' }
                 ],
                 onOk: () => console.log('表单提交')
             });
@@ -306,7 +306,7 @@
                 `,
                 width: '400px',
                 footerButtons: [
-                    { text: '确定', class: 'yc-dialog-btn-primary', action: 'ok' }
+                    { text: '确定', class: 'yc-button--primary', action: 'ok' }
                 ]
             });
         }

@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../styles/demo.css">
     <style>
         .demo-diagram-container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 24px;
         }
@@ -47,110 +47,168 @@
                 <div class="yc-diagram">
                     <div class="yc-diagram__toolbar">
                         <div class="yc-diagram__toolbar-group">
-                            <button class="yc-diagram__toolbar-btn" title="撤销"><i class="fas fa-undo"></i></button>
-                            <button class="yc-diagram__toolbar-btn" title="重做"><i class="fas fa-redo"></i></button>
+                            <button class="yc-diagram__toolbar-btn" title="撤销" disabled><i class="fas fa-undo"></i></button>
+                            <button class="yc-diagram__toolbar-btn" title="重做" disabled><i class="fas fa-redo"></i></button>
                         </div>
                         <div class="yc-diagram__toolbar-group">
                             <button class="yc-diagram__toolbar-btn is-active" title="选择"><i class="fas fa-mouse-pointer"></i></button>
+                            <button class="yc-diagram__toolbar-btn" title="移动画布"><i class="fas fa-arrows-alt"></i></button>
                             <button class="yc-diagram__toolbar-btn" title="连线"><i class="fas fa-link"></i></button>
                             <button class="yc-diagram__toolbar-btn" title="文本"><i class="fas fa-font"></i></button>
                         </div>
                         <div class="yc-diagram__toolbar-group">
-                            <button class="yc-diagram__toolbar-btn" title="删除"><i class="fas fa-trash"></i></button>
-                            <button class="yc-diagram__toolbar-btn" title="导出"><i class="fas fa-download"></i></button>
+                            <button class="yc-diagram__toolbar-btn" title="缩放至适应"><i class="fas fa-expand"></i></button>
+                        </div>
+                        <div class="yc-diagram__toolbar-group">
+                            <button class="yc-diagram__toolbar-btn" title="删除选中"><i class="fas fa-trash"></i></button>
+                            <button class="yc-diagram__toolbar-btn" title="导出图片"><i class="fas fa-download"></i></button>
                         </div>
                     </div>
-                    <div class="yc-diagram__palette">
-                        <div class="yc-diagram__palette-title">组件库</div>
-                        <div class="yc-diagram__palette-item" draggable="true">
-                            <i class="fas fa-play-circle"></i>
-                            <span>开始节点</span>
-                        </div>
-                        <div class="yc-diagram__palette-item" draggable="true">
-                            <i class="fas fa-square"></i>
-                            <span>处理节点</span>
-                        </div>
-                        <div class="yc-diagram__palette-item" draggable="true">
-                            <i class="fas fa-diamond"></i>
-                            <span>判断节点</span>
-                        </div>
-                        <div class="yc-diagram__palette-item" draggable="true">
-                            <i class="fas fa-stop-circle"></i>
-                            <span>结束节点</span>
-                        </div>
-                    </div>
-                    <div class="yc-diagram__canvas" id="diagramCanvas" style="margin-left: 200px;">
-                        <svg id="diagramSvg">
-                            <defs>
-                                <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
-                                    <polygon points="0 0, 10 3.5, 0 7" fill="#409eff" />
-                                </marker>
-                            </defs>
-                            <path class="yc-diagram__connection" d="M 160 100 L 160 160" marker-end="url(#arrowhead)" />
-                            <path class="yc-diagram__connection" d="M 160 200 L 160 260" marker-end="url(#arrowhead)" />
-                            <path class="yc-diagram__connection yc-diagram__connection--success" d="M 100 320 L 100 380" marker-end="url(#arrowhead)" />
-                            <path class="yc-diagram__connection yc-diagram__connection--danger" d="M 220 320 L 220 380" marker-end="url(#arrowhead)" />
-                            <text class="yc-diagram__connection-label" x="85" y="350">是</text>
-                            <text class="yc-diagram__connection-label" x="235" y="350">否</text>
-                            <path class="yc-diagram__connection" d="M 100 420 L 100 460" marker-end="url(#arrowhead)" />
-                            <path class="yc-diagram__connection" d="M 220 420 L 220 460" marker-end="url(#arrowhead)" />
-                        </svg>
-
-                        <div class="yc-diagram__node yc-diagram__node--start" style="left: 80px; top: 40px;">
-                            <div class="yc-diagram__node-content">开始</div>
-                            <div class="yc-diagram__node-ports">
-                                <div class="yc-diagram__node-port yc-diagram__node-port--bottom"></div>
+                    <div class="yc-diagram__wrapper">
+                        <div class="yc-diagram__sidebar">
+                            <div class="yc-diagram__sidebar-header">
+                                <div class="yc-diagram__sidebar-title">组件库</div>
+                            </div>
+                            <div class="yc-diagram__palette">
+                                <div class="yc-diagram__palette-section">
+                                    <div class="yc-diagram__palette-section-title">基础节点</div>
+                                    <div class="yc-diagram__palette-item yc-diagram__palette-item--start" draggable="true">
+                                        <i class="fas fa-play-circle"></i>
+                                        <span>开始节点</span>
+                                    </div>
+                                    <div class="yc-diagram__palette-item yc-diagram__palette-item--process" draggable="true">
+                                        <i class="fas fa-square"></i>
+                                        <span>处理节点</span>
+                                    </div>
+                                    <div class="yc-diagram__palette-item yc-diagram__palette-item--decision" draggable="true">
+                                        <i class="fas fa-diamond"></i>
+                                        <span>判断节点</span>
+                                    </div>
+                                    <div class="yc-diagram__palette-item yc-diagram__palette-item--end" draggable="true">
+                                        <i class="fas fa-stop-circle"></i>
+                                        <span>结束节点</span>
+                                    </div>
+                                </div>
+                                <div class="yc-diagram__palette-section">
+                                    <div class="yc-diagram__palette-section-title">高级节点</div>
+                                    <div class="yc-diagram__palette-item" draggable="true">
+                                        <i class="fas fa-database"></i>
+                                        <span>数据节点</span>
+                                    </div>
+                                    <div class="yc-diagram__palette-item" draggable="true">
+                                        <i class="fas fa-cog"></i>
+                                        <span>配置节点</span>
+                                    </div>
+                                    <div class="yc-diagram__palette-item" draggable="true">
+                                        <i class="fas fa-user"></i>
+                                        <span>用户节点</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                        <div class="yc-diagram__canvas-container">
+                            <div class="yc-diagram__canvas" id="diagramCanvas">
+                                <svg id="diagramSvg">
+                                    <defs>
+                                        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+                                            <polygon points="0 0, 10 3.5, 0 7" fill="#409eff" />
+                                        </marker>
+                                        <marker id="arrowhead-success" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+                                            <polygon points="0 0, 10 3.5, 0 7" fill="#67c23a" />
+                                        </marker>
+                                        <marker id="arrowhead-danger" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+                                            <polygon points="0 0, 10 3.5, 0 7" fill="#f56c6c" />
+                                        </marker>
+                                    </defs>
+                                    <path class="yc-diagram__connection" d="M 150 90 L 150 150" marker-end="url(#arrowhead)" />
+                                    <path class="yc-diagram__connection" d="M 150 200 L 150 260" marker-end="url(#arrowhead)" />
+                                    <path class="yc-diagram__connection yc-diagram__connection--success" d="M 90 320 L 90 380" marker-end="url(#arrowhead-success)" />
+                                    <path class="yc-diagram__connection yc-diagram__connection--danger" d="M 210 320 L 210 380" marker-end="url(#arrowhead-danger)" />
+                                    <rect class="yc-diagram__connection-label-bg" x="70" y="330" width="24" height="18" rx="4" />
+                                    <text class="yc-diagram__connection-label" x="82" y="342">是</text>
+                                    <rect class="yc-diagram__connection-label-bg" x="195" y="330" width="24" height="18" rx="4" />
+                                    <text class="yc-diagram__connection-label" x="207" y="342">否</text>
+                                    <path class="yc-diagram__connection" d="M 90 420 L 90 450" marker-end="url(#arrowhead)" />
+                                    <path class="yc-diagram__connection" d="M 210 420 L 210 450" marker-end="url(#arrowhead)" />
+                                </svg>
 
-                        <div class="yc-diagram__node yc-diagram__node--process" style="left: 60px; top: 160px;">
-                            <div class="yc-diagram__node-title">处理数据</div>
-                            <div class="yc-diagram__node-content">验证输入并处理</div>
-                            <div class="yc-diagram__node-ports">
-                                <div class="yc-diagram__node-port yc-diagram__node-port--top"></div>
-                                <div class="yc-diagram__node-port yc-diagram__node-port--bottom"></div>
+                                <div class="yc-diagram__node yc-diagram__node--start" style="left: 70px; top: 30px;">
+                                    <div class="yc-diagram__node-content">开始</div>
+                                    <div class="yc-diagram__node-ports">
+                                        <div class="yc-diagram__node-port yc-diagram__node-port--bottom"></div>
+                                    </div>
+                                </div>
+
+                                <div class="yc-diagram__node yc-diagram__node--process" style="left: 50px; top: 150px;">
+                                    <div class="yc-diagram__node-title">处理数据</div>
+                                    <div class="yc-diagram__node-content">验证输入并处理</div>
+                                    <div class="yc-diagram__node-ports">
+                                        <div class="yc-diagram__node-port yc-diagram__node-port--top"></div>
+                                        <div class="yc-diagram__node-port yc-diagram__node-port--bottom"></div>
+                                    </div>
+                                </div>
+
+                                <div class="yc-diagram__node yc-diagram__node--decision" style="left: 95px; top: 260px;">
+                                    <div class="yc-diagram__node-content">判断</div>
+                                    <div class="yc-diagram__node-ports">
+                                        <div class="yc-diagram__node-port yc-diagram__node-port--top"></div>
+                                        <div class="yc-diagram__node-port yc-diagram__node-port--bottom"></div>
+                                        <div class="yc-diagram__node-port yc-diagram__node-port--left"></div>
+                                        <div class="yc-diagram__node-port yc-diagram__node-port--right"></div>
+                                    </div>
+                                </div>
+
+                                <div class="yc-diagram__node yc-diagram__node--process" style="left: 30px; top: 380px;">
+                                    <div class="yc-diagram__node-title">执行操作A</div>
+                                    <div class="yc-diagram__node-content">成功分支处理</div>
+                                    <div class="yc-diagram__node-ports">
+                                        <div class="yc-diagram__node-port yc-diagram__node-port--top"></div>
+                                        <div class="yc-diagram__node-port yc-diagram__node-port--bottom"></div>
+                                    </div>
+                                </div>
+
+                                <div class="yc-diagram__node yc-diagram__node--process" style="left: 150px; top: 380px;">
+                                    <div class="yc-diagram__node-title">执行操作B</div>
+                                    <div class="yc-diagram__node-content">失败分支处理</div>
+                                    <div class="yc-diagram__node-ports">
+                                        <div class="yc-diagram__node-port yc-diagram__node-port--top"></div>
+                                        <div class="yc-diagram__node-port yc-diagram__node-port--bottom"></div>
+                                    </div>
+                                </div>
+
+                                <div class="yc-diagram__node yc-diagram__node--end" style="left: 70px; top: 450px;">
+                                    <div class="yc-diagram__node-content">结束</div>
+                                    <div class="yc-diagram__node-ports">
+                                        <div class="yc-diagram__node-port yc-diagram__node-port--top"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="yc-diagram__minimap">
+                                <div class="yc-diagram__minimap-header">小地图</div>
+                                <div class="yc-diagram__minimap-content">
+                                    <div class="yc-diagram__minimap-viewport" id="minimapViewport" style="left: 40px; top: 20px; width: 60px; height: 40px;"></div>
+                                </div>
+                            </div>
+
+                            <div class="yc-diagram__zoom-controls">
+                                <button class="yc-diagram__zoom-btn" id="diagZoomIn" title="放大"><i class="fas fa-plus"></i></button>
+                                <div class="yc-diagram__zoom-level" id="diagZoomLevel">100%</div>
+                                <button class="yc-diagram__zoom-btn" id="diagZoomOut" title="缩小"><i class="fas fa-minus"></i></button>
+                                <button class="yc-diagram__zoom-btn" id="diagZoomReset" title="重置"><i class="fas fa-compress-arrows-alt"></i></button>
+                            </div>
+
+                            <div class="yc-diagram__context-menu" id="diagramContextMenu">
+                                <div class="yc-diagram__context-menu-item"><i class="fas fa-copy"></i> 复制</div>
+                                <div class="yc-diagram__context-menu-item"><i class="fas fa-paste"></i> 粘贴</div>
+                                <div class="yc-diagram__context-menu-item"><i class="fas fa-cut"></i> 剪切</div>
+                                <div class="yc-diagram__context-menu-divider"></div>
+                                <div class="yc-diagram__context-menu-item"><i class="fas fa-edit"></i> 重命名</div>
+                                <div class="yc-diagram__context-menu-item"><i class="fas fa-copy"></i> 复制样式</div>
+                                <div class="yc-diagram__context-menu-divider"></div>
+                                <div class="yc-diagram__context-menu-item" style="color: #f56c6c;"><i class="fas fa-trash"></i> 删除</div>
                             </div>
                         </div>
-
-                        <div class="yc-diagram__node yc-diagram__node--decision" style="left: 100px; top: 260px;">
-                            <div class="yc-diagram__node-content">条件判断</div>
-                            <div class="yc-diagram__node-ports">
-                                <div class="yc-diagram__node-port yc-diagram__node-port--top"></div>
-                                <div class="yc-diagram__node-port yc-diagram__node-port--bottom"></div>
-                                <div class="yc-diagram__node-port yc-diagram__node-port--left"></div>
-                                <div class="yc-diagram__node-port yc-diagram__node-port--right"></div>
-                            </div>
-                        </div>
-
-                        <div class="yc-diagram__node yc-diagram__node--process" style="left: 40px; top: 380px;">
-                            <div class="yc-diagram__node-title">执行操作A</div>
-                            <div class="yc-diagram__node-ports">
-                                <div class="yc-diagram__node-port yc-diagram__node-port--top"></div>
-                                <div class="yc-diagram__node-port yc-diagram__node-port--bottom"></div>
-                            </div>
-                        </div>
-
-                        <div class="yc-diagram__node yc-diagram__node--process" style="left: 160px; top: 380px;">
-                            <div class="yc-diagram__node-title">执行操作B</div>
-                            <div class="yc-diagram__node-ports">
-                                <div class="yc-diagram__node-port yc-diagram__node-port--top"></div>
-                                <div class="yc-diagram__node-port yc-diagram__node-port--bottom"></div>
-                            </div>
-                        </div>
-
-                        <div class="yc-diagram__node yc-diagram__node--end" style="left: 100px; top: 460px;">
-                            <div class="yc-diagram__node-content">结束</div>
-                            <div class="yc-diagram__node-ports">
-                                <div class="yc-diagram__node-port yc-diagram__node-port--top"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="yc-diagram__zoom-controls">
-                        <button class="yc-diagram__zoom-btn" id="diagZoomIn"><i class="fas fa-plus"></i></button>
-                        <div class="yc-diagram__zoom-level" id="diagZoomLevel">100%</div>
-                        <button class="yc-diagram__zoom-btn" id="diagZoomOut"><i class="fas fa-minus"></i></button>
-                        <button class="yc-diagram__zoom-btn" id="diagZoomReset"><i class="fas fa-expand"></i></button>
                     </div>
                 </div>
             </section>
@@ -159,30 +217,30 @@
                 <h2 class="demo-section__title">节点类型说明</h2>
                 <div class="yc-space yc-space--vertical" style="gap: 16px;">
                     <div style="display: flex; gap: 24px; flex-wrap: wrap;">
-                        <div class="yc-card" style="padding: 16px;">
-                            <div class="yc-diagram__node yc-diagram__node--start" style="position: static; margin-bottom: 8px;">
+                        <div class="yc-card" style="padding: 20px;">
+                            <div class="yc-diagram__node yc-diagram__node--start" style="position: static; margin-bottom: 12px;">
                                 <div class="yc-diagram__node-content">开始</div>
                             </div>
-                            <p style="font-size: 12px; color: var(--yc-color-text-secondary);">开始节点 - 表示流程的起点</p>
+                            <p style="font-size: 13px; color: var(--yc-color-text-secondary); margin: 0;">开始节点 - 流程起点，使用绿色渐变背景</p>
                         </div>
-                        <div class="yc-card" style="padding: 16px;">
-                            <div class="yc-diagram__node yc-diagram__node--process" style="position: static; margin-bottom: 8px; min-width: 120px;">
+                        <div class="yc-card" style="padding: 20px;">
+                            <div class="yc-diagram__node yc-diagram__node--process" style="position: static; margin-bottom: 12px; min-width: 140px;">
                                 <div class="yc-diagram__node-title">处理</div>
                                 <div class="yc-diagram__node-content">执行操作</div>
                             </div>
-                            <p style="font-size: 12px; color: var(--yc-color-text-secondary);">处理节点 - 表示执行某个操作</p>
+                            <p style="font-size: 13px; color: var(--yc-color-text-secondary); margin: 0;">处理节点 - 执行具体操作，使用蓝色渐变背景</p>
                         </div>
-                        <div class="yc-card" style="padding: 16px;">
-                            <div class="yc-diagram__node yc-diagram__node--decision" style="position: static; margin-bottom: 8px;">
+                        <div class="yc-card" style="padding: 20px;">
+                            <div class="yc-diagram__node yc-diagram__node--decision" style="position: static; margin-bottom: 12px;">
                                 <div class="yc-diagram__node-content">判断</div>
                             </div>
-                            <p style="font-size: 12px; color: var(--yc-color-text-secondary);">判断节点 - 表示条件分支</p>
+                            <p style="font-size: 13px; color: var(--yc-color-text-secondary); margin: 0;">判断节点 - 条件分支，使用橙色渐变菱形</p>
                         </div>
-                        <div class="yc-card" style="padding: 16px;">
-                            <div class="yc-diagram__node yc-diagram__node--end" style="position: static; margin-bottom: 8px;">
+                        <div class="yc-card" style="padding: 20px;">
+                            <div class="yc-diagram__node yc-diagram__node--end" style="position: static; margin-bottom: 12px;">
                                 <div class="yc-diagram__node-content">结束</div>
                             </div>
-                            <p style="font-size: 12px; color: var(--yc-color-text-secondary);">结束节点 - 表示流程的终点</p>
+                            <p style="font-size: 13px; color: var(--yc-color-text-secondary); margin: 0;">结束节点 - 流程终点，使用红色渐变背景</p>
                         </div>
                     </div>
                 </div>
@@ -207,27 +265,32 @@
             });
         });
 
-        document.getElementById('diagramCanvas').addEventListener('click', function() {
+        const diagramCanvas = document.getElementById('diagramCanvas');
+        diagramCanvas.addEventListener('click', function() {
             document.querySelectorAll('.yc-diagram__node').forEach(n => n.classList.remove('is-selected'));
         });
 
         let diagZoomLevel = 100;
         const diagZoomLevelEl = document.getElementById('diagZoomLevel');
-        const diagramCanvas = document.getElementById('diagramCanvas');
 
         document.getElementById('diagZoomIn').addEventListener('click', function() {
             diagZoomLevel = Math.min(diagZoomLevel + 10, 200);
             diagZoomLevelEl.textContent = diagZoomLevel + '%';
+            diagramCanvas.style.transform = `scale(${diagZoomLevel / 100})`;
+            diagramCanvas.style.transformOrigin = 'top left';
         });
 
         document.getElementById('diagZoomOut').addEventListener('click', function() {
             diagZoomLevel = Math.max(diagZoomLevel - 10, 50);
             diagZoomLevelEl.textContent = diagZoomLevel + '%';
+            diagramCanvas.style.transform = `scale(${diagZoomLevel / 100})`;
+            diagramCanvas.style.transformOrigin = 'top left';
         });
 
         document.getElementById('diagZoomReset').addEventListener('click', function() {
             diagZoomLevel = 100;
             diagZoomLevelEl.textContent = diagZoomLevel + '%';
+            diagramCanvas.style.transform = 'scale(1)';
         });
 
         let isDragging = false;
@@ -240,6 +303,7 @@
                 if (e.target.classList.contains('yc-diagram__node-port')) return;
                 isDragging = true;
                 currentDragNode = this;
+                currentDragNode.classList.add('is-dragging');
                 const rect = this.getBoundingClientRect();
                 const canvasRect = diagramCanvas.getBoundingClientRect();
                 dragOffsetX = e.clientX - rect.left;
@@ -260,11 +324,56 @@
 
         document.addEventListener('mouseup', function() {
             if (currentDragNode) {
+                currentDragNode.classList.remove('is-dragging');
                 currentDragNode.style.cursor = 'move';
             }
             isDragging = false;
             currentDragNode = null;
         });
+
+        const contextMenu = document.getElementById('diagramContextMenu');
+        diagramCanvas.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            contextMenu.style.left = e.offsetX + 'px';
+            contextMenu.style.top = e.offsetY + 'px';
+            contextMenu.classList.add('is-visible');
+        });
+
+        document.addEventListener('click', function() {
+            contextMenu.classList.remove('is-visible');
+        });
+
+        document.querySelectorAll('.yc-diagram__context-menu-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.stopPropagation();
+                contextMenu.classList.remove('is-visible');
+            });
+        });
+
+        const minimapViewport = document.getElementById('minimapViewport');
+        const minimapContent = document.querySelector('.yc-diagram__minimap-content');
+
+        function updateMinimap() {
+            const canvasRect = diagramCanvas.getBoundingClientRect();
+            const scrollLeft = diagramCanvas.scrollLeft;
+            const scrollTop = diagramCanvas.scrollTop;
+            const contentWidth = 600;
+            const contentHeight = 500;
+            const scale = 0.15;
+
+            const viewWidth = (canvasRect.width / contentWidth) * 180;
+            const viewHeight = (canvasRect.height / contentHeight) * 107;
+            const viewLeft = (scrollLeft / contentWidth) * 180;
+            const viewTop = (scrollTop / contentHeight) * 107;
+
+            minimapViewport.style.width = Math.max(viewWidth, 20) + 'px';
+            minimapViewport.style.height = Math.max(viewHeight, 15) + 'px';
+            minimapViewport.style.left = viewLeft + 'px';
+            minimapViewport.style.top = viewTop + 'px';
+        }
+
+        diagramCanvas.addEventListener('scroll', updateMinimap);
+        updateMinimap();
     </script>
 </body>
 </html>

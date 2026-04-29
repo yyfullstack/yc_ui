@@ -106,12 +106,20 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    padding: var(--yc-spacing-md) var(--yc-spacing-base);
+    padding: var(--yc-spacing-base);
     background: var(--yc-color-bg-element);
     border-top: var(--yc-border-width-thin) solid var(--yc-color-border);
     gap: var(--yc-spacing-sm);
     min-height: 50px;
     transition: background-color var(--yc-transition-duration-base), border-color var(--yc-transition-duration-base);
+}
+
+.yc-dialog-footer .yc-button {
+    margin-left: 8px;
+}
+
+.yc-dialog-footer .yc-button:first-child {
+    margin-left: 0;
 }
 
 .yc-dialog-btn {

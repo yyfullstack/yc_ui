@@ -12,46 +12,40 @@
     <div class="demo-container">
         <div class="demo-page-header">
             <h1 class="demo-page-title">DateTimePicker 日期时间选择器</h1>
-            <p class="demo-page-subtitle">支持日期选择、时间选择、日期范围、时间范围等多种选择模式</p>
+            <p class="demo-page-subtitle">支持日期时间选择、日期范围选择等多种模式</p>
         </div>
 
         <div class="demo-section">
             <h3>基础用法</h3>
-            <div class="demo-row">
-                <div class="demo-item">
-                    <label>日期时间选择器</label>
-                    <div class="yc-date-picker yc-date-picker--datetime" id="datetime1" data-format="YYYY-MM-DD HH:mm" data-value="2024-03-15 14:30">
+            <div class="demo-block">
+                <div class="demo-block-title">日期时间选择器</div>
+                <div class="demo-row">
+                    <div class="yc-date-picker yc-date-picker--datetime" id="datetime1">
                         <div class="yc-date-picker__trigger">
-                            <div class="yc-date-picker__trigger-content">
-                                <span>2024-03-15 14:30</span>
-                            </div>
-                            <span class="yc-date-picker__icon"><i class="fas fa-calendar"></i></span>
+                            <span class="yc-date-picker__trigger-content" id="datetime1Value">2024-03-15 14:30:00</span>
+                            <span class="yc-date-picker__icon"><i class="fas fa-chevron-down"></i></span>
                         </div>
                         <div class="yc-date-picker__panel">
                             <div class="yc-date-picker__datetime-inputs">
-                                <div class="yc-date-picker__datetime-input is-active">
-                                    <span class="yc-date-picker__datetime-label">日期</span>
-                                    <span class="yc-date-picker__datetime-value">2024-03-15</span>
+                                <div class="yc-date-picker__datetime-input is-active" id="datetime1DateInput" data-toggle="calendar">
+                                    <span class="yc-date-picker__datetime-label" id="datetime1DateLabel">2024-03-15</span>
                                 </div>
-                                <div class="yc-date-picker__datetime-input">
-                                    <span class="yc-date-picker__datetime-label">时间</span>
-                                    <span class="yc-date-picker__datetime-value">14:30</span>
+                                <div class="yc-date-picker__datetime-input" id="datetime1TimeInput" data-toggle="time">
+                                    <span class="yc-date-picker__datetime-label" id="datetime1TimeLabel">14:30:00</span>
                                 </div>
                             </div>
-                            <div class="yc-date-picker__header">
-                                <div class="yc-date-picker__header-nav">
-                                    <button class="yc-date-picker__header-prev"><i class="fas fa-chevron-left"></i></button>
-                                    <button class="yc-date-picker__header-next"><i class="fas fa-chevron-right"></i></button>
+                            <div class="yc-date-picker__calendar-panel" id="datetime1Calendar">
+                                <div class="yc-date-picker__header">
+                                    <div class="yc-date-picker__header-nav">
+                                        <button class="yc-date-picker__header-prev-year"><i class="fas fa-angle-double-left"></i></button>
+                                        <button class="yc-date-picker__header-prev"><i class="fas fa-chevron-left"></i></button>
+                                    </div>
+                                    <div class="yc-date-picker__header-label">2024年3月</div>
+                                    <div class="yc-date-picker__header-nav">
+                                        <button class="yc-date-picker__header-next"><i class="fas fa-chevron-right"></i></button>
+                                        <button class="yc-date-picker__header-next-year"><i class="fas fa-angle-double-right"></i></button>
+                                    </div>
                                 </div>
-                                <div class="yc-date-picker__header-label">
-                                    <span class="yc-date-picker__header-month">三月 2024</span>
-                                </div>
-                                <div class="yc-date-picker__header-nav">
-                                    <button class="yc-date-picker__header-prev-year"><i class="fas fa-angle-double-left"></i></button>
-                                    <button class="yc-date-picker__header-next-year"><i class="fas fa-angle-double-right"></i></button>
-                                </div>
-                            </div>
-                            <div class="yc-date-picker__content-wrapper">
                                 <div class="yc-date-picker__weekdays">
                                     <div class="yc-date-picker__weekday">日</div>
                                     <div class="yc-date-picker__weekday">一</div>
@@ -61,59 +55,28 @@
                                     <div class="yc-date-picker__weekday">五</div>
                                     <div class="yc-date-picker__weekday">六</div>
                                 </div>
-                                <div class="yc-date-picker__dates"></div>
+                                <div class="yc-date-picker__dates" id="dateGrid1"></div>
                             </div>
-                            <div class="yc-date-picker__time-wrapper">
-                                <div class="yc-time-picker__columns">
-                                    <div class="yc-time-picker__column">
-                                        <div class="yc-time-picker__highlight"></div>
-                                        <div class="yc-time-picker__item">00</div>
-                                        <div class="yc-time-picker__item">01</div>
-                                        <div class="yc-time-picker__item">02</div>
-                                        <div class="yc-time-picker__item">03</div>
-                                        <div class="yc-time-picker__item">04</div>
-                                        <div class="yc-time-picker__item">05</div>
-                                        <div class="yc-time-picker__item">06</div>
-                                        <div class="yc-time-picker__item">07</div>
-                                        <div class="yc-time-picker__item">08</div>
-                                        <div class="yc-time-picker__item is-selected">09</div>
-                                        <div class="yc-time-picker__item">10</div>
-                                        <div class="yc-time-picker__item">11</div>
-                                        <div class="yc-time-picker__item">12</div>
-                                        <div class="yc-time-picker__item">13</div>
-                                        <div class="yc-time-picker__item">14</div>
-                                        <div class="yc-time-picker__item">15</div>
-                                        <div class="yc-time-picker__item">16</div>
-                                        <div class="yc-time-picker__item">17</div>
-                                        <div class="yc-time-picker__item">18</div>
-                                        <div class="yc-time-picker__item">19</div>
-                                        <div class="yc-time-picker__item">20</div>
-                                        <div class="yc-time-picker__item">21</div>
-                                        <div class="yc-time-picker__item">22</div>
-                                        <div class="yc-time-picker__item">23</div>
+                            <div class="yc-date-picker__time-wrapper" id="datetime1TimePanel" style="display:none;">
+                                <div class="yc-date-picker__time-columns">
+                                    <div class="yc-date-picker__time-column">
+                                        <div class="yc-date-picker__time-list" id="datetime1HourColumn"></div>
                                     </div>
-                                    <div class="yc-time-picker__column">
-                                        <div class="yc-time-picker__highlight"></div>
-                                        <div class="yc-time-picker__item">00</div>
-                                        <div class="yc-time-picker__item">05</div>
-                                        <div class="yc-time-picker__item">10</div>
-                                        <div class="yc-time-picker__item">15</div>
-                                        <div class="yc-time-picker__item">20</div>
-                                        <div class="yc-time-picker__item is-selected">25</div>
-                                        <div class="yc-time-picker__item">30</div>
-                                        <div class="yc-time-picker__item">35</div>
-                                        <div class="yc-time-picker__item">40</div>
-                                        <div class="yc-time-picker__item">45</div>
-                                        <div class="yc-time-picker__item">50</div>
-                                        <div class="yc-time-picker__item">55</div>
+                                    <div class="yc-date-picker__time-column">
+                                        <div class="yc-date-picker__time-list" id="datetime1MinuteColumn"></div>
+                                    </div>
+                                    <div class="yc-date-picker__time-column">
+                                        <div class="yc-date-picker__time-list" id="datetime1SecondColumn"></div>
                                     </div>
                                 </div>
                             </div>
                             <div class="yc-date-picker__footer">
-                                <div class="yc-date-picker__footer--left"></div>
+                                <div class="yc-date-picker__footer--left">
+                                    <button class="yc-date-picker__footer-btn yc-date-picker__footer-btn--text" data-action="now">此刻</button>
+                                </div>
                                 <div class="yc-date-picker__footer--right">
-                                    <button class="yc-date-picker__footer-btn js-cancel-btn">取消</button>
-                                    <button class="yc-date-picker__footer-btn yc-date-picker__footer-btn--primary js-confirm-btn">确定</button>
+                                    <button class="yc-date-picker__footer-btn yc-date-picker__footer-btn--link" data-action="cancel">取消</button>
+                                    <button class="yc-date-picker__footer-btn yc-date-picker__footer-btn--primary" data-action="confirm">确定</button>
                                 </div>
                             </div>
                         </div>
@@ -124,41 +87,35 @@
 
         <div class="demo-section">
             <h3>不同尺寸</h3>
-            <div class="demo-row">
-                <div class="demo-item">
-                    <label>小尺寸</label>
-                    <div class="yc-date-picker yc-date-picker--datetime yc-date-picker--small" id="datetime-small" data-format="YYYY-MM-DD HH:mm">
+            <div class="demo-block">
+                <div class="demo-block-title">大中小三种尺寸</div>
+                <div class="demo-row" style="gap: 20px; flex-wrap: wrap;">
+                    <div class="yc-date-picker yc-date-picker--datetime yc-date-picker--large" id="datetimeLarge">
                         <div class="yc-date-picker__trigger">
-                            <div class="yc-date-picker__trigger-content">
-                                <span>请选择</span>
-                            </div>
-                            <span class="yc-date-picker__icon"><i class="fas fa-calendar"></i></span>
+                            <span class="yc-date-picker__trigger-content" id="datetimeLargeValue">请选择日期时间</span>
+                            <span class="yc-date-picker__icon"><i class="fas fa-chevron-down"></i></span>
                         </div>
                         <div class="yc-date-picker__panel">
                             <div class="yc-date-picker__datetime-inputs">
-                                <div class="yc-date-picker__datetime-input is-active">
-                                    <span class="yc-date-picker__datetime-label">日期</span>
-                                    <span class="yc-date-picker__datetime-value">-</span>
+                                <div class="yc-date-picker__datetime-input is-active" id="datetimeLargeDateInput" data-toggle="calendar">
+                                    <span class="yc-date-picker__datetime-label" id="datetimeLargeDateLabel">日期</span>
                                 </div>
-                                <div class="yc-date-picker__datetime-input">
-                                    <span class="yc-date-picker__datetime-label">时间</span>
-                                    <span class="yc-date-picker__datetime-value">-</span>
+                                <div class="yc-date-picker__datetime-input" id="datetimeLargeTimeInput" data-toggle="time">
+                                    <span class="yc-date-picker__datetime-label" id="datetimeLargeTimeLabel">时间</span>
                                 </div>
                             </div>
-                            <div class="yc-date-picker__header">
-                                <div class="yc-date-picker__header-nav">
-                                    <button class="yc-date-picker__header-prev"><i class="fas fa-chevron-left"></i></button>
-                                    <button class="yc-date-picker__header-next"><i class="fas fa-chevron-right"></i></button>
+                            <div class="yc-date-picker__calendar-panel" id="datetimeLargeCalendar">
+                                <div class="yc-date-picker__header">
+                                    <div class="yc-date-picker__header-nav">
+                                        <button class="yc-date-picker__header-prev-year"><i class="fas fa-angle-double-left"></i></button>
+                                        <button class="yc-date-picker__header-prev"><i class="fas fa-chevron-left"></i></button>
+                                    </div>
+                                    <div class="yc-date-picker__header-label"></div>
+                                    <div class="yc-date-picker__header-nav">
+                                        <button class="yc-date-picker__header-next"><i class="fas fa-chevron-right"></i></button>
+                                        <button class="yc-date-picker__header-next-year"><i class="fas fa-angle-double-right"></i></button>
+                                    </div>
                                 </div>
-                                <div class="yc-date-picker__header-label">
-                                    <span class="yc-date-picker__header-month"></span>
-                                </div>
-                                <div class="yc-date-picker__header-nav">
-                                    <button class="yc-date-picker__header-prev-year"><i class="fas fa-angle-double-left"></i></button>
-                                    <button class="yc-date-picker__header-next-year"><i class="fas fa-angle-double-right"></i></button>
-                                </div>
-                            </div>
-                            <div class="yc-date-picker__content-wrapper">
                                 <div class="yc-date-picker__weekdays">
                                     <div class="yc-date-picker__weekday">日</div>
                                     <div class="yc-date-picker__weekday">一</div>
@@ -168,98 +125,59 @@
                                     <div class="yc-date-picker__weekday">五</div>
                                     <div class="yc-date-picker__weekday">六</div>
                                 </div>
-                                <div class="yc-date-picker__dates"></div>
+                                <div class="yc-date-picker__dates" id="dateGridLarge"></div>
                             </div>
-                            <div class="yc-date-picker__time-wrapper">
-                                <div class="yc-time-picker__columns">
-                                    <div class="yc-time-picker__column">
-                                        <div class="yc-time-picker__highlight"></div>
-                                        <div class="yc-time-picker__item">00</div>
-                                        <div class="yc-time-picker__item">01</div>
-                                        <div class="yc-time-picker__item">02</div>
-                                        <div class="yc-time-picker__item">03</div>
-                                        <div class="yc-time-picker__item">04</div>
-                                        <div class="yc-time-picker__item">05</div>
-                                        <div class="yc-time-picker__item">06</div>
-                                        <div class="yc-time-picker__item">07</div>
-                                        <div class="yc-time-picker__item">08</div>
-                                        <div class="yc-time-picker__item">09</div>
-                                        <div class="yc-time-picker__item">10</div>
-                                        <div class="yc-time-picker__item">11</div>
-                                        <div class="yc-time-picker__item">12</div>
-                                        <div class="yc-time-picker__item">13</div>
-                                        <div class="yc-time-picker__item">14</div>
-                                        <div class="yc-time-picker__item">15</div>
-                                        <div class="yc-time-picker__item">16</div>
-                                        <div class="yc-time-picker__item">17</div>
-                                        <div class="yc-time-picker__item">18</div>
-                                        <div class="yc-time-picker__item">19</div>
-                                        <div class="yc-time-picker__item">20</div>
-                                        <div class="yc-time-picker__item">21</div>
-                                        <div class="yc-time-picker__item">22</div>
-                                        <div class="yc-time-picker__item">23</div>
+                            <div class="yc-date-picker__time-wrapper" id="datetimeLargeTimePanel" style="display:none;">
+                                <div class="yc-date-picker__time-columns">
+                                    <div class="yc-date-picker__time-column">
+                                        <div class="yc-date-picker__time-list" id="datetimeLargeHourColumn"></div>
                                     </div>
-                                    <div class="yc-time-picker__column">
-                                        <div class="yc-time-picker__highlight"></div>
-                                        <div class="yc-time-picker__item">00</div>
-                                        <div class="yc-time-picker__item">05</div>
-                                        <div class="yc-time-picker__item">10</div>
-                                        <div class="yc-time-picker__item">15</div>
-                                        <div class="yc-time-picker__item">20</div>
-                                        <div class="yc-time-picker__item">25</div>
-                                        <div class="yc-time-picker__item">30</div>
-                                        <div class="yc-time-picker__item">35</div>
-                                        <div class="yc-time-picker__item">40</div>
-                                        <div class="yc-time-picker__item">45</div>
-                                        <div class="yc-time-picker__item">50</div>
-                                        <div class="yc-time-picker__item">55</div>
+                                    <div class="yc-date-picker__time-column">
+                                        <div class="yc-date-picker__time-list" id="datetimeLargeMinuteColumn"></div>
+                                    </div>
+                                    <div class="yc-date-picker__time-column">
+                                        <div class="yc-date-picker__time-list" id="datetimeLargeSecondColumn"></div>
                                     </div>
                                 </div>
                             </div>
                             <div class="yc-date-picker__footer">
-                                <div class="yc-date-picker__footer--left"></div>
+                                <div class="yc-date-picker__footer--left">
+                                    <button class="yc-date-picker__footer-btn yc-date-picker__footer-btn--text" data-action="now">此刻</button>
+                                </div>
                                 <div class="yc-date-picker__footer--right">
-                                    <button class="yc-date-picker__footer-btn js-cancel-btn">取消</button>
-                                    <button class="yc-date-picker__footer-btn yc-date-picker__footer-btn--primary js-confirm-btn">确定</button>
+                                    <button class="yc-date-picker__footer-btn yc-date-picker__footer-btn--link" data-action="cancel">取消</button>
+                                    <button class="yc-date-picker__footer-btn yc-date-picker__footer-btn--primary" data-action="confirm">确定</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="demo-item">
-                    <label>默认尺寸</label>
-                    <div class="yc-date-picker yc-date-picker--datetime" id="datetime-base" data-format="YYYY-MM-DD HH:mm">
+
+                    <div class="yc-date-picker yc-date-picker--datetime" id="datetimeBase">
                         <div class="yc-date-picker__trigger">
-                            <div class="yc-date-picker__trigger-content">
-                                <span>请选择</span>
-                            </div>
-                            <span class="yc-date-picker__icon"><i class="fas fa-calendar"></i></span>
+                            <span class="yc-date-picker__trigger-content" id="datetimeBaseValue">请选择日期时间</span>
+                            <span class="yc-date-picker__icon"><i class="fas fa-chevron-down"></i></span>
                         </div>
                         <div class="yc-date-picker__panel">
                             <div class="yc-date-picker__datetime-inputs">
-                                <div class="yc-date-picker__datetime-input is-active">
-                                    <span class="yc-date-picker__datetime-label">日期</span>
-                                    <span class="yc-date-picker__datetime-value">-</span>
+                                <div class="yc-date-picker__datetime-input is-active" id="datetimeBaseDateInput" data-toggle="calendar">
+                                    <span class="yc-date-picker__datetime-label" id="datetimeBaseDateLabel">日期</span>
                                 </div>
-                                <div class="yc-date-picker__datetime-input">
-                                    <span class="yc-date-picker__datetime-label">时间</span>
-                                    <span class="yc-date-picker__datetime-value">-</span>
+                                <div class="yc-date-picker__datetime-input" id="datetimeBaseTimeInput" data-toggle="time">
+                                    <span class="yc-date-picker__datetime-label" id="datetimeBaseTimeLabel">时间</span>
                                 </div>
                             </div>
-                            <div class="yc-date-picker__header">
-                                <div class="yc-date-picker__header-nav">
-                                    <button class="yc-date-picker__header-prev"><i class="fas fa-chevron-left"></i></button>
-                                    <button class="yc-date-picker__header-next"><i class="fas fa-chevron-right"></i></button>
+                            <div class="yc-date-picker__calendar-panel" id="datetimeBaseCalendar">
+                                <div class="yc-date-picker__header">
+                                    <div class="yc-date-picker__header-nav">
+                                        <button class="yc-date-picker__header-prev-year"><i class="fas fa-angle-double-left"></i></button>
+                                        <button class="yc-date-picker__header-prev"><i class="fas fa-chevron-left"></i></button>
+                                    </div>
+                                    <div class="yc-date-picker__header-label"></div>
+                                    <div class="yc-date-picker__header-nav">
+                                        <button class="yc-date-picker__header-next"><i class="fas fa-chevron-right"></i></button>
+                                        <button class="yc-date-picker__header-next-year"><i class="fas fa-angle-double-right"></i></button>
+                                    </div>
                                 </div>
-                                <div class="yc-date-picker__header-label">
-                                    <span class="yc-date-picker__header-month"></span>
-                                </div>
-                                <div class="yc-date-picker__header-nav">
-                                    <button class="yc-date-picker__header-prev-year"><i class="fas fa-angle-double-left"></i></button>
-                                    <button class="yc-date-picker__header-next-year"><i class="fas fa-angle-double-right"></i></button>
-                                </div>
-                            </div>
-                            <div class="yc-date-picker__content-wrapper">
                                 <div class="yc-date-picker__weekdays">
                                     <div class="yc-date-picker__weekday">日</div>
                                     <div class="yc-date-picker__weekday">一</div>
@@ -269,98 +187,59 @@
                                     <div class="yc-date-picker__weekday">五</div>
                                     <div class="yc-date-picker__weekday">六</div>
                                 </div>
-                                <div class="yc-date-picker__dates"></div>
+                                <div class="yc-date-picker__dates" id="dateGridBase"></div>
                             </div>
-                            <div class="yc-date-picker__time-wrapper">
-                                <div class="yc-time-picker__columns">
-                                    <div class="yc-time-picker__column">
-                                        <div class="yc-time-picker__highlight"></div>
-                                        <div class="yc-time-picker__item">00</div>
-                                        <div class="yc-time-picker__item">01</div>
-                                        <div class="yc-time-picker__item">02</div>
-                                        <div class="yc-time-picker__item">03</div>
-                                        <div class="yc-time-picker__item">04</div>
-                                        <div class="yc-time-picker__item">05</div>
-                                        <div class="yc-time-picker__item">06</div>
-                                        <div class="yc-time-picker__item">07</div>
-                                        <div class="yc-time-picker__item">08</div>
-                                        <div class="yc-time-picker__item">09</div>
-                                        <div class="yc-time-picker__item">10</div>
-                                        <div class="yc-time-picker__item">11</div>
-                                        <div class="yc-time-picker__item">12</div>
-                                        <div class="yc-time-picker__item">13</div>
-                                        <div class="yc-time-picker__item">14</div>
-                                        <div class="yc-time-picker__item">15</div>
-                                        <div class="yc-time-picker__item">16</div>
-                                        <div class="yc-time-picker__item">17</div>
-                                        <div class="yc-time-picker__item">18</div>
-                                        <div class="yc-time-picker__item">19</div>
-                                        <div class="yc-time-picker__item">20</div>
-                                        <div class="yc-time-picker__item">21</div>
-                                        <div class="yc-time-picker__item">22</div>
-                                        <div class="yc-time-picker__item">23</div>
+                            <div class="yc-date-picker__time-wrapper" id="datetimeBaseTimePanel" style="display:none;">
+                                <div class="yc-date-picker__time-columns">
+                                    <div class="yc-date-picker__time-column">
+                                        <div class="yc-date-picker__time-list" id="datetimeBaseHourColumn"></div>
                                     </div>
-                                    <div class="yc-time-picker__column">
-                                        <div class="yc-time-picker__highlight"></div>
-                                        <div class="yc-time-picker__item">00</div>
-                                        <div class="yc-time-picker__item">05</div>
-                                        <div class="yc-time-picker__item">10</div>
-                                        <div class="yc-time-picker__item">15</div>
-                                        <div class="yc-time-picker__item">20</div>
-                                        <div class="yc-time-picker__item">25</div>
-                                        <div class="yc-time-picker__item">30</div>
-                                        <div class="yc-time-picker__item">35</div>
-                                        <div class="yc-time-picker__item">40</div>
-                                        <div class="yc-time-picker__item">45</div>
-                                        <div class="yc-time-picker__item">50</div>
-                                        <div class="yc-time-picker__item">55</div>
+                                    <div class="yc-date-picker__time-column">
+                                        <div class="yc-date-picker__time-list" id="datetimeBaseMinuteColumn"></div>
+                                    </div>
+                                    <div class="yc-date-picker__time-column">
+                                        <div class="yc-date-picker__time-list" id="datetimeBaseSecondColumn"></div>
                                     </div>
                                 </div>
                             </div>
                             <div class="yc-date-picker__footer">
-                                <div class="yc-date-picker__footer--left"></div>
+                                <div class="yc-date-picker__footer--left">
+                                    <button class="yc-date-picker__footer-btn yc-date-picker__footer-btn--text" data-action="now">此刻</button>
+                                </div>
                                 <div class="yc-date-picker__footer--right">
-                                    <button class="yc-date-picker__footer-btn js-cancel-btn">取消</button>
-                                    <button class="yc-date-picker__footer-btn yc-date-picker__footer-btn--primary js-confirm-btn">确定</button>
+                                    <button class="yc-date-picker__footer-btn yc-date-picker__footer-btn--link" data-action="cancel">取消</button>
+                                    <button class="yc-date-picker__footer-btn yc-date-picker__footer-btn--primary" data-action="confirm">确定</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="demo-item">
-                    <label>大尺寸</label>
-                    <div class="yc-date-picker yc-date-picker--datetime yc-date-picker--large" id="datetime-large" data-format="YYYY-MM-DD HH:mm">
+
+                    <div class="yc-date-picker yc-date-picker--datetime yc-date-picker--small" id="datetimeSmall">
                         <div class="yc-date-picker__trigger">
-                            <div class="yc-date-picker__trigger-content">
-                                <span>请选择</span>
-                            </div>
-                            <span class="yc-date-picker__icon"><i class="fas fa-calendar"></i></span>
+                            <span class="yc-date-picker__trigger-content" id="datetimeSmallValue">请选择日期时间</span>
+                            <span class="yc-date-picker__icon"><i class="fas fa-chevron-down"></i></span>
                         </div>
                         <div class="yc-date-picker__panel">
                             <div class="yc-date-picker__datetime-inputs">
-                                <div class="yc-date-picker__datetime-input is-active">
-                                    <span class="yc-date-picker__datetime-label">日期</span>
-                                    <span class="yc-date-picker__datetime-value">-</span>
+                                <div class="yc-date-picker__datetime-input is-active" id="datetimeSmallDateInput" data-toggle="calendar">
+                                    <span class="yc-date-picker__datetime-label" id="datetimeSmallDateLabel">日期</span>
                                 </div>
-                                <div class="yc-date-picker__datetime-input">
-                                    <span class="yc-date-picker__datetime-label">时间</span>
-                                    <span class="yc-date-picker__datetime-value">-</span>
+                                <div class="yc-date-picker__datetime-input" id="datetimeSmallTimeInput" data-toggle="time">
+                                    <span class="yc-date-picker__datetime-label" id="datetimeSmallTimeLabel">时间</span>
                                 </div>
                             </div>
-                            <div class="yc-date-picker__header">
-                                <div class="yc-date-picker__header-nav">
-                                    <button class="yc-date-picker__header-prev"><i class="fas fa-chevron-left"></i></button>
-                                    <button class="yc-date-picker__header-next"><i class="fas fa-chevron-right"></i></button>
+                            <div class="yc-date-picker__calendar-panel" id="datetimeSmallCalendar">
+                                <div class="yc-date-picker__header">
+                                    <div class="yc-date-picker__header-nav">
+                                        <button class="yc-date-picker__header-prev-year"><i class="fas fa-angle-double-left"></i></button>
+                                        <button class="yc-date-picker__header-prev"><i class="fas fa-chevron-left"></i></button>
+                                    </div>
+                                    <div class="yc-date-picker__header-label"></div>
+                                    <div class="yc-date-picker__header-nav">
+                                        <button class="yc-date-picker__header-next"><i class="fas fa-chevron-right"></i></button>
+                                        <button class="yc-date-picker__header-next-year"><i class="fas fa-angle-double-right"></i></button>
+                                    </div>
                                 </div>
-                                <div class="yc-date-picker__header-label">
-                                    <span class="yc-date-picker__header-month"></span>
-                                </div>
-                                <div class="yc-date-picker__header-nav">
-                                    <button class="yc-date-picker__header-prev-year"><i class="fas fa-angle-double-left"></i></button>
-                                    <button class="yc-date-picker__header-next-year"><i class="fas fa-angle-double-right"></i></button>
-                                </div>
-                            </div>
-                            <div class="yc-date-picker__content-wrapper">
                                 <div class="yc-date-picker__weekdays">
                                     <div class="yc-date-picker__weekday">日</div>
                                     <div class="yc-date-picker__weekday">一</div>
@@ -370,59 +249,28 @@
                                     <div class="yc-date-picker__weekday">五</div>
                                     <div class="yc-date-picker__weekday">六</div>
                                 </div>
-                                <div class="yc-date-picker__dates"></div>
+                                <div class="yc-date-picker__dates" id="dateGridSmall"></div>
                             </div>
-                            <div class="yc-date-picker__time-wrapper">
-                                <div class="yc-time-picker__columns">
-                                    <div class="yc-time-picker__column">
-                                        <div class="yc-time-picker__highlight"></div>
-                                        <div class="yc-time-picker__item">00</div>
-                                        <div class="yc-time-picker__item">01</div>
-                                        <div class="yc-time-picker__item">02</div>
-                                        <div class="yc-time-picker__item">03</div>
-                                        <div class="yc-time-picker__item">04</div>
-                                        <div class="yc-time-picker__item">05</div>
-                                        <div class="yc-time-picker__item">06</div>
-                                        <div class="yc-time-picker__item">07</div>
-                                        <div class="yc-time-picker__item">08</div>
-                                        <div class="yc-time-picker__item">09</div>
-                                        <div class="yc-time-picker__item">10</div>
-                                        <div class="yc-time-picker__item">11</div>
-                                        <div class="yc-time-picker__item">12</div>
-                                        <div class="yc-time-picker__item">13</div>
-                                        <div class="yc-time-picker__item">14</div>
-                                        <div class="yc-time-picker__item">15</div>
-                                        <div class="yc-time-picker__item">16</div>
-                                        <div class="yc-time-picker__item">17</div>
-                                        <div class="yc-time-picker__item">18</div>
-                                        <div class="yc-time-picker__item">19</div>
-                                        <div class="yc-time-picker__item">20</div>
-                                        <div class="yc-time-picker__item">21</div>
-                                        <div class="yc-time-picker__item">22</div>
-                                        <div class="yc-time-picker__item">23</div>
+                            <div class="yc-date-picker__time-wrapper" id="datetimeSmallTimePanel" style="display:none;">
+                                <div class="yc-date-picker__time-columns">
+                                    <div class="yc-date-picker__time-column">
+                                        <div class="yc-date-picker__time-list" id="datetimeSmallHourColumn"></div>
                                     </div>
-                                    <div class="yc-time-picker__column">
-                                        <div class="yc-time-picker__highlight"></div>
-                                        <div class="yc-time-picker__item">00</div>
-                                        <div class="yc-time-picker__item">05</div>
-                                        <div class="yc-time-picker__item">10</div>
-                                        <div class="yc-time-picker__item">15</div>
-                                        <div class="yc-time-picker__item">20</div>
-                                        <div class="yc-time-picker__item">25</div>
-                                        <div class="yc-time-picker__item">30</div>
-                                        <div class="yc-time-picker__item">35</div>
-                                        <div class="yc-time-picker__item">40</div>
-                                        <div class="yc-time-picker__item">45</div>
-                                        <div class="yc-time-picker__item">50</div>
-                                        <div class="yc-time-picker__item">55</div>
+                                    <div class="yc-date-picker__time-column">
+                                        <div class="yc-date-picker__time-list" id="datetimeSmallMinuteColumn"></div>
+                                    </div>
+                                    <div class="yc-date-picker__time-column">
+                                        <div class="yc-date-picker__time-list" id="datetimeSmallSecondColumn"></div>
                                     </div>
                                 </div>
                             </div>
                             <div class="yc-date-picker__footer">
-                                <div class="yc-date-picker__footer--left"></div>
+                                <div class="yc-date-picker__footer--left">
+                                    <button class="yc-date-picker__footer-btn yc-date-picker__footer-btn--text" data-action="now">此刻</button>
+                                </div>
                                 <div class="yc-date-picker__footer--right">
-                                    <button class="yc-date-picker__footer-btn js-cancel-btn">取消</button>
-                                    <button class="yc-date-picker__footer-btn yc-date-picker__footer-btn--primary js-confirm-btn">确定</button>
+                                    <button class="yc-date-picker__footer-btn yc-date-picker__footer-btn--link" data-action="cancel">取消</button>
+                                    <button class="yc-date-picker__footer-btn yc-date-picker__footer-btn--primary" data-action="confirm">确定</button>
                                 </div>
                             </div>
                         </div>
@@ -432,89 +280,79 @@
         </div>
 
         <div class="demo-section">
-            <h3>日期时间范围选择</h3>
-            <div class="demo-row">
-                <div class="demo-item">
-                    <label>范围选择</label>
-                    <div class="yc-date-picker yc-date-picker--range yc-date-picker--datetime-range" id="datetime-range" data-format="YYYY-MM-DD HH:mm" data-mode="datetime-range">
+            <h3>日期范围选择</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">日期时间范围选择器</div>
+                <div class="demo-row">
+                    <div class="yc-date-picker yc-date-picker--range yc-date-picker--datetime" id="datetimeRange">
                         <div class="yc-date-picker__trigger">
-                            <div class="yc-date-picker__trigger-content">
-                                <span class="yc-datetime-range-start">开始日期</span>
-                                <span class="yc-date-picker__trigger-separator">至</span>
-                                <span class="yc-datetime-range-end">结束日期</span>
-                            </div>
-                            <span class="yc-date-picker__icon"><i class="fas fa-calendar"></i></span>
+                            <span class="yc-date-picker__trigger-content" id="datetimeRangeValue">2024-03-15 14:30 至 2024-03-20 18:00</span>
+                            <span class="yc-date-picker__icon"><i class="fas fa-chevron-down"></i></span>
                         </div>
                         <div class="yc-date-picker__panel">
                             <div class="yc-date-picker__range-panels">
                                 <div class="yc-date-picker__range-panel">
-                                    <div class="yc-date-picker__range-header">
-                                        <input type="text" class="yc-date-picker__range-header-input js-range-start-date" placeholder="开始日期">
-                                        <input type="text" class="yc-date-picker__range-header-input js-range-start-time" placeholder="时间">
-                                    </div>
                                     <div class="yc-date-picker__header">
                                         <div class="yc-date-picker__header-nav">
-                                            <button class="yc-date-picker__header-prev"><i class="fas fa-chevron-left"></i></button>
-                                            <button class="yc-date-picker__header-next"><i class="fas fa-chevron-right"></i></button>
+                                            <button class="yc-date-picker__header-prev-year" data-panel="start"><i class="fas fa-angle-double-left"></i></button>
+                                            <button class="yc-date-picker__header-prev" data-panel="start"><i class="fas fa-chevron-left"></i></button>
                                         </div>
                                         <div class="yc-date-picker__header-label">
-                                            <span class="yc-date-picker__header-month"></span>
+                                            <span class="yc-date-picker__header-month" data-panel="start">2024年3月</span>
                                         </div>
                                         <div class="yc-date-picker__header-nav">
-                                            <button class="yc-date-picker__header-prev-year"><i class="fas fa-angle-double-left"></i></button>
-                                            <button class="yc-date-picker__header-next-year"><i class="fas fa-angle-double-right"></i></button>
+                                            <button class="yc-date-picker__header-next" data-panel="start"><i class="fas fa-chevron-right"></i></button>
+                                            <button class="yc-date-picker__header-next-year" data-panel="start"><i class="fas fa-angle-double-right"></i></button>
                                         </div>
                                     </div>
-                                    <div class="yc-date-picker__content-wrapper">
-                                        <div class="yc-date-picker__weekdays">
-                                            <div class="yc-date-picker__weekday">日</div>
-                                            <div class="yc-date-picker__weekday">一</div>
-                                            <div class="yc-date-picker__weekday">二</div>
-                                            <div class="yc-date-picker__weekday">三</div>
-                                            <div class="yc-date-picker__weekday">四</div>
-                                            <div class="yc-date-picker__weekday">五</div>
-                                            <div class="yc-date-picker__weekday">六</div>
-                                        </div>
-                                        <div class="yc-date-picker__dates"></div>
+                                    <div class="yc-date-picker__weekdays">
+                                        <div class="yc-date-picker__weekday">日</div>
+                                        <div class="yc-date-picker__weekday">一</div>
+                                        <div class="yc-date-picker__weekday">二</div>
+                                        <div class="yc-date-picker__weekday">三</div>
+                                        <div class="yc-date-picker__weekday">四</div>
+                                        <div class="yc-date-picker__weekday">五</div>
+                                        <div class="yc-date-picker__weekday">六</div>
                                     </div>
+                                    <div class="yc-date-picker__dates" id="dateGridRangeStart"></div>
                                 </div>
                                 <div class="yc-date-picker__range-panel">
-                                    <div class="yc-date-picker__range-header">
-                                        <input type="text" class="yc-date-picker__range-header-input js-range-end-date" placeholder="结束日期">
-                                        <input type="text" class="yc-date-picker__range-header-input js-range-end-time" placeholder="时间">
-                                    </div>
                                     <div class="yc-date-picker__header">
                                         <div class="yc-date-picker__header-nav">
-                                            <button class="yc-date-picker__header-prev"><i class="fas fa-chevron-left"></i></button>
-                                            <button class="yc-date-picker__header-next"><i class="fas fa-chevron-right"></i></button>
+                                            <button class="yc-date-picker__header-prev-year" data-panel="end"><i class="fas fa-angle-double-left"></i></button>
+                                            <button class="yc-date-picker__header-prev" data-panel="end"><i class="fas fa-chevron-left"></i></button>
                                         </div>
                                         <div class="yc-date-picker__header-label">
-                                            <span class="yc-date-picker__header-month"></span>
+                                            <span class="yc-date-picker__header-month" data-panel="end">2024年4月</span>
                                         </div>
                                         <div class="yc-date-picker__header-nav">
-                                            <button class="yc-date-picker__header-prev-year"><i class="fas fa-angle-double-left"></i></button>
-                                            <button class="yc-date-picker__header-next-year"><i class="fas fa-angle-double-right"></i></button>
+                                            <button class="yc-date-picker__header-next" data-panel="end"><i class="fas fa-chevron-right"></i></button>
+                                            <button class="yc-date-picker__header-next-year" data-panel="end"><i class="fas fa-angle-double-right"></i></button>
                                         </div>
                                     </div>
-                                    <div class="yc-date-picker__content-wrapper">
-                                        <div class="yc-date-picker__weekdays">
-                                            <div class="yc-date-picker__weekday">日</div>
-                                            <div class="yc-date-picker__weekday">一</div>
-                                            <div class="yc-date-picker__weekday">二</div>
-                                            <div class="yc-date-picker__weekday">三</div>
-                                            <div class="yc-date-picker__weekday">四</div>
-                                            <div class="yc-date-picker__weekday">五</div>
-                                            <div class="yc-date-picker__weekday">六</div>
-                                        </div>
-                                        <div class="yc-date-picker__dates"></div>
+                                    <div class="yc-date-picker__weekdays">
+                                        <div class="yc-date-picker__weekday">日</div>
+                                        <div class="yc-date-picker__weekday">一</div>
+                                        <div class="yc-date-picker__weekday">二</div>
+                                        <div class="yc-date-picker__weekday">三</div>
+                                        <div class="yc-date-picker__weekday">四</div>
+                                        <div class="yc-date-picker__weekday">五</div>
+                                        <div class="yc-date-picker__weekday">六</div>
                                     </div>
+                                    <div class="yc-date-picker__dates" id="dateGridRangeEnd"></div>
                                 </div>
                             </div>
                             <div class="yc-date-picker__footer">
-                                <div class="yc-date-picker__footer--left"></div>
+                                <div class="yc-date-picker__footer--left">
+                                    <button class="yc-date-picker__footer-btn" data-range="today">今天</button>
+                                    <button class="yc-date-picker__footer-btn" data-range="thisWeek">本周</button>
+                                    <button class="yc-date-picker__footer-btn" data-range="thisMonth">本月</button>
+                                    <button class="yc-date-picker__footer-btn" data-range="last7days">近7天</button>
+                                    <button class="yc-date-picker__footer-btn" data-range="last30days">近30天</button>
+                                </div>
                                 <div class="yc-date-picker__footer--right">
-                                    <button class="yc-date-picker__footer-btn js-cancel-btn">取消</button>
-                                    <button class="yc-date-picker__footer-btn yc-date-picker__footer-btn--primary js-confirm-btn">确定</button>
+                                    <button class="yc-date-picker__footer-btn" data-action="cancel">取消</button>
+                                    <button class="yc-date-picker__footer-btn yc-date-picker__footer-btn--primary" data-action="confirm">确定</button>
                                 </div>
                             </div>
                         </div>
@@ -524,42 +362,36 @@
         </div>
 
         <div class="demo-section">
-            <h3>快捷操作</h3>
-            <div class="demo-row">
-                <div class="demo-item">
-                    <label>带快捷方式</label>
-                    <div class="yc-date-picker yc-date-picker--datetime" id="datetime-shortcuts" data-format="YYYY-MM-DD HH:mm">
+            <h3>快捷选项</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">今天、昨天、明天快捷选择</div>
+                <div class="demo-row">
+                    <div class="yc-date-picker yc-date-picker--datetime" id="datetimeShortcuts">
                         <div class="yc-date-picker__trigger">
-                            <div class="yc-date-picker__trigger-content">
-                                <span>请选择</span>
-                            </div>
-                            <span class="yc-date-picker__icon"><i class="fas fa-calendar"></i></span>
+                            <span class="yc-date-picker__trigger-content" id="datetimeShortcutsValue">请选择日期时间</span>
+                            <span class="yc-date-picker__icon"><i class="fas fa-chevron-down"></i></span>
                         </div>
                         <div class="yc-date-picker__panel">
                             <div class="yc-date-picker__datetime-inputs">
-                                <div class="yc-date-picker__datetime-input is-active">
-                                    <span class="yc-date-picker__datetime-label">日期</span>
-                                    <span class="yc-date-picker__datetime-value">-</span>
+                                <div class="yc-date-picker__datetime-input is-active" id="datetimeShortcutsDateInput" data-toggle="calendar">
+                                    <span class="yc-date-picker__datetime-label" id="datetimeShortcutsDateLabel">日期</span>
                                 </div>
-                                <div class="yc-date-picker__datetime-input">
-                                    <span class="yc-date-picker__datetime-label">时间</span>
-                                    <span class="yc-date-picker__datetime-value">-</span>
+                                <div class="yc-date-picker__datetime-input" id="datetimeShortcutsTimeInput" data-toggle="time">
+                                    <span class="yc-date-picker__datetime-label" id="datetimeShortcutsTimeLabel">时间</span>
                                 </div>
                             </div>
-                            <div class="yc-date-picker__header">
-                                <div class="yc-date-picker__header-nav">
-                                    <button class="yc-date-picker__header-prev"><i class="fas fa-chevron-left"></i></button>
-                                    <button class="yc-date-picker__header-next"><i class="fas fa-chevron-right"></i></button>
+                            <div class="yc-date-picker__calendar-panel" id="datetimeShortcutsCalendar">
+                                <div class="yc-date-picker__header">
+                                    <div class="yc-date-picker__header-nav">
+                                        <button class="yc-date-picker__header-prev-year"><i class="fas fa-angle-double-left"></i></button>
+                                        <button class="yc-date-picker__header-prev"><i class="fas fa-chevron-left"></i></button>
+                                    </div>
+                                    <div class="yc-date-picker__header-label"></div>
+                                    <div class="yc-date-picker__header-nav">
+                                        <button class="yc-date-picker__header-next"><i class="fas fa-chevron-right"></i></button>
+                                        <button class="yc-date-picker__header-next-year"><i class="fas fa-angle-double-right"></i></button>
+                                    </div>
                                 </div>
-                                <div class="yc-date-picker__header-label">
-                                    <span class="yc-date-picker__header-month"></span>
-                                </div>
-                                <div class="yc-date-picker__header-nav">
-                                    <button class="yc-date-picker__header-prev-year"><i class="fas fa-angle-double-left"></i></button>
-                                    <button class="yc-date-picker__header-next-year"><i class="fas fa-angle-double-right"></i></button>
-                                </div>
-                            </div>
-                            <div class="yc-date-picker__content-wrapper">
                                 <div class="yc-date-picker__weekdays">
                                     <div class="yc-date-picker__weekday">日</div>
                                     <div class="yc-date-picker__weekday">一</div>
@@ -569,65 +401,28 @@
                                     <div class="yc-date-picker__weekday">五</div>
                                     <div class="yc-date-picker__weekday">六</div>
                                 </div>
-                                <div class="yc-date-picker__dates"></div>
+                                <div class="yc-date-picker__dates" id="dateGridShortcuts"></div>
                             </div>
-                            <div class="yc-date-picker__time-wrapper">
-                                <div class="yc-time-picker__columns">
-                                    <div class="yc-time-picker__column">
-                                        <div class="yc-time-picker__highlight"></div>
-                                        <div class="yc-time-picker__item">00</div>
-                                        <div class="yc-time-picker__item">01</div>
-                                        <div class="yc-time-picker__item">02</div>
-                                        <div class="yc-time-picker__item">03</div>
-                                        <div class="yc-time-picker__item">04</div>
-                                        <div class="yc-time-picker__item">05</div>
-                                        <div class="yc-time-picker__item">06</div>
-                                        <div class="yc-time-picker__item">07</div>
-                                        <div class="yc-time-picker__item">08</div>
-                                        <div class="yc-time-picker__item">09</div>
-                                        <div class="yc-time-picker__item">10</div>
-                                        <div class="yc-time-picker__item">11</div>
-                                        <div class="yc-time-picker__item">12</div>
-                                        <div class="yc-time-picker__item">13</div>
-                                        <div class="yc-time-picker__item">14</div>
-                                        <div class="yc-time-picker__item">15</div>
-                                        <div class="yc-time-picker__item">16</div>
-                                        <div class="yc-time-picker__item">17</div>
-                                        <div class="yc-time-picker__item">18</div>
-                                        <div class="yc-time-picker__item">19</div>
-                                        <div class="yc-time-picker__item">20</div>
-                                        <div class="yc-time-picker__item">21</div>
-                                        <div class="yc-time-picker__item">22</div>
-                                        <div class="yc-time-picker__item">23</div>
+                            <div class="yc-date-picker__time-wrapper" id="datetimeShortcutsTimePanel" style="display:none;">
+                                <div class="yc-date-picker__time-columns">
+                                    <div class="yc-date-picker__time-column">
+                                        <div class="yc-date-picker__time-list" id="datetimeShortcutsHourColumn"></div>
                                     </div>
-                                    <div class="yc-time-picker__column">
-                                        <div class="yc-time-picker__highlight"></div>
-                                        <div class="yc-time-picker__item">00</div>
-                                        <div class="yc-time-picker__item">05</div>
-                                        <div class="yc-time-picker__item">10</div>
-                                        <div class="yc-time-picker__item">15</div>
-                                        <div class="yc-time-picker__item">20</div>
-                                        <div class="yc-time-picker__item">25</div>
-                                        <div class="yc-time-picker__item">30</div>
-                                        <div class="yc-time-picker__item">35</div>
-                                        <div class="yc-time-picker__item">40</div>
-                                        <div class="yc-time-picker__item">45</div>
-                                        <div class="yc-time-picker__item">50</div>
-                                        <div class="yc-time-picker__item">55</div>
+                                    <div class="yc-date-picker__time-column">
+                                        <div class="yc-date-picker__time-list" id="datetimeShortcutsMinuteColumn"></div>
+                                    </div>
+                                    <div class="yc-date-picker__time-column">
+                                        <div class="yc-date-picker__time-list" id="datetimeShortcutsSecondColumn"></div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="yc-date-picker__sidebar">
-                                <button class="yc-date-picker__shortcut" data-action="today">今天</button>
-                                <button class="yc-date-picker__shortcut" data-action="yesterday">昨天</button>
-                                <button class="yc-date-picker__shortcut" data-action="lastWeek">上周</button>
-                                <button class="yc-date-picker__shortcut" data-action="lastMonth">上月</button>
-                            </div>
                             <div class="yc-date-picker__footer">
-                                <div class="yc-date-picker__footer--left"></div>
+                                <div class="yc-date-picker__footer--left">
+                                    <button class="yc-date-picker__footer-btn yc-date-picker__footer-btn--text" data-action="now">此刻</button>
+                                </div>
                                 <div class="yc-date-picker__footer--right">
-                                    <button class="yc-date-picker__footer-btn js-cancel-btn">取消</button>
-                                    <button class="yc-date-picker__footer-btn yc-date-picker__footer-btn--primary js-confirm-btn">确定</button>
+                                    <button class="yc-date-picker__footer-btn yc-date-picker__footer-btn--link" data-action="cancel">取消</button>
+                                    <button class="yc-date-picker__footer-btn yc-date-picker__footer-btn--primary" data-action="confirm">确定</button>
                                 </div>
                             </div>
                         </div>
@@ -638,390 +433,637 @@
     </div>
 
     <script>
-        class DateTimePicker {
-            constructor(element) {
-                this.element = element;
-                this.format = element.dataset.format || 'YYYY-MM-DD HH:mm';
-                this.value = element.dataset.value || '';
-                this.mode = element.dataset.mode || 'datetime';
+        function formatDate(date) {
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
 
-                this.currentDate = new Date();
-                this.selectedDate = null;
-                this.viewMode = 'date';
+        function formatTime(date) {
+            const hours = String(date.getHours()).padStart(2, '0');
+            const minutes = String(date.getMinutes()).padStart(2, '0');
+            const seconds = String(date.getSeconds()).padStart(2, '0');
+            return `${hours}:${minutes}:${seconds}`;
+        }
 
-                this.init();
-            }
+        function generateDateGrid(containerId, year, month, selectedDate, rangeStart, rangeEnd) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            container.innerHTML = '';
+            const firstDay = new Date(year, month - 1, 1);
+            const lastDay = new Date(year, month, 0);
+            const startDate = new Date(firstDay);
+            startDate.setDate(startDate.getDate() - firstDay.getDay());
 
-            init() {
-                this.trigger = this.element.querySelector('.yc-date-picker__trigger');
-                this.panel = this.element.querySelector('.yc-date-picker__panel');
-                this.datesContainer = this.element.querySelector('.yc-date-picker__dates');
-                this.headerMonth = this.element.querySelector('.yc-date-picker__header-month');
-                this.datetimeInputs = this.element.querySelectorAll('.yc-date-picker__datetime-input');
-                this.timeColumns = this.element.querySelectorAll('.yc-time-picker__column');
+            for (let i = 0; i < 42; i++) {
+                const currentDate = new Date(startDate);
+                currentDate.setDate(startDate.getDate() + i);
+                const dateElement = document.createElement('div');
+                dateElement.className = 'yc-date-picker__date';
+                dateElement.textContent = currentDate.getDate();
+                dateElement.dataset.date = formatDate(currentDate);
 
-                this.bindEvents();
-                this.renderCalendar();
-
-                if (this.value) {
-                    this.setValue(this.value);
-                }
-            }
-
-            bindEvents() {
-                this.trigger.addEventListener('click', () => this.toggle());
-
-                document.addEventListener('click', (e) => {
-                    if (!this.element.contains(e.target)) {
-                        this.close();
-                    }
-                });
-
-                const prevBtn = this.element.querySelector('.yc-date-picker__header-prev');
-                const nextBtn = this.element.querySelector('.yc-date-picker__header-next');
-                const prevYearBtn = this.element.querySelector('.yc-date-picker__header-prev-year');
-                const nextYearBtn = this.element.querySelector('.yc-date-picker__header-next-year');
-
-                prevBtn?.addEventListener('click', () => this.prevMonth());
-                nextBtn?.addEventListener('click', () => this.nextMonth());
-                prevYearBtn?.addEventListener('click', () => this.prevYear());
-                nextYearBtn?.addEventListener('click', () => this.nextYear());
-
-                this.headerMonth?.addEventListener('click', () => this.toggleViewMode());
-
-                this.datetimeInputs.forEach((input, index) => {
-                    input.addEventListener('click', () => {
-                        this.datetimeInputs.forEach(i => i.classList.remove('is-active'));
-                        input.classList.add('is-active');
-                    });
-                });
-
-                this.timeColumns.forEach(column => {
-                    const items = column.querySelectorAll('.yc-time-picker__item');
-                    items.forEach(item => {
-                        item.addEventListener('click', () => {
-                            items.forEach(i => i.classList.remove('is-selected'));
-                            item.classList.add('is-selected');
-                            this.updateDatetimeDisplay();
-                        });
-                    });
-                });
-
-                const cancelBtn = this.element.querySelector('.js-cancel-btn');
-                const confirmBtn = this.element.querySelector('.js-confirm-btn');
-
-                cancelBtn?.addEventListener('click', () => this.close());
-                confirmBtn?.addEventListener('click', () => this.confirm());
-
-                const shortcuts = this.element.querySelectorAll('.yc-date-picker__shortcut');
-                shortcuts.forEach(shortcut => {
-                    shortcut.addEventListener('click', () => {
-                        const action = shortcut.dataset.action;
-                        this.handleShortcut(action);
-                    });
-                });
-            }
-
-            toggle() {
-                if (this.panel.classList.contains('is-open')) {
-                    this.close();
-                } else {
-                    this.open();
-                }
-            }
-
-            open() {
-                this.panel.classList.add('is-open');
-                this.element.classList.add('is-focus');
-            }
-
-            close() {
-                this.panel.classList.remove('is-open');
-                this.element.classList.remove('is-focus');
-            }
-
-            confirm() {
-                if (this.selectedDate) {
-                    this.setValue(this.formatDate(this.selectedDate));
-                }
-                this.close();
-            }
-
-            handleShortcut(action) {
-                const now = new Date();
-                let targetDate;
-
-                switch (action) {
-                    case 'today':
-                        targetDate = now;
-                        break;
-                    case 'yesterday':
-                        targetDate = new Date(now.getTime() - 86400000);
-                        break;
-                    case 'lastWeek':
-                        targetDate = new Date(now.getTime() - 7 * 86400000);
-                        break;
-                    case 'lastMonth':
-                        targetDate = new Date(now.getFullYear(), now.getMonth() - 1, now.getDate());
-                        break;
+                if (currentDate.getMonth() !== month - 1) {
+                    dateElement.classList.add('is-other-month');
                 }
 
-                if (targetDate) {
-                    this.currentDate = new Date(targetDate);
-                    this.selectedDate = new Date(targetDate);
-                    this.renderCalendar();
-                    this.updateDatetimeDisplay();
-                }
-            }
-
-            toggleViewMode() {
-                if (this.viewMode === 'date') {
-                    this.viewMode = 'month';
-                } else if (this.viewMode === 'month') {
-                    this.viewMode = 'year';
-                } else {
-                    this.viewMode = 'date';
-                }
-                this.renderCalendar();
-            }
-
-            prevMonth() {
-                if (this.viewMode === 'date') {
-                    this.currentDate.setMonth(this.currentDate.getMonth() - 1);
-                } else if (this.viewMode === 'month') {
-                    this.currentDate.setFullYear(this.currentDate.getFullYear() - 1);
-                } else {
-                    this.currentDate.setFullYear(this.currentDate.getFullYear() - 10);
-                }
-                this.renderCalendar();
-            }
-
-            nextMonth() {
-                if (this.viewMode === 'date') {
-                    this.currentDate.setMonth(this.currentDate.getMonth() + 1);
-                } else if (this.viewMode === 'month') {
-                    this.currentDate.setFullYear(this.currentDate.getFullYear() + 1);
-                } else {
-                    this.currentDate.setFullYear(this.currentDate.getFullYear() + 10);
-                }
-                this.renderCalendar();
-            }
-
-            prevYear() {
-                this.currentDate.setFullYear(this.currentDate.getFullYear() - 1);
-                this.renderCalendar();
-            }
-
-            nextYear() {
-                this.currentDate.setFullYear(this.currentDate.getFullYear() + 1);
-                this.renderCalendar();
-            }
-
-            renderCalendar() {
-                const year = this.currentDate.getFullYear();
-                const month = this.currentDate.getMonth();
-
-                if (this.viewMode === 'date') {
-                    this.headerMonth.textContent = `${year}年 ${month + 1}月`;
-                    this.renderDates();
-                } else if (this.viewMode === 'month') {
-                    this.headerMonth.textContent = `${year}年`;
-                    this.renderMonths();
-                } else {
-                    this.headerMonth.textContent = `${Math.floor(year / 10) * 10}-${Math.floor(year / 10) * 10 + 9}`;
-                    this.renderYears();
-                }
-            }
-
-            renderDates() {
-                const year = this.currentDate.getFullYear();
-                const month = this.currentDate.getMonth();
                 const today = new Date();
+                if (currentDate.getFullYear() === today.getFullYear() &&
+                    currentDate.getMonth() === today.getMonth() &&
+                    currentDate.getDate() === today.getDate()) {
+                    dateElement.classList.add('is-today');
+                }
 
-                const firstDay = new Date(year, month, 1);
-                const lastDay = new Date(year, month + 1, 0);
-                const startDayOfWeek = firstDay.getDay();
-                const daysInMonth = lastDay.getDate();
-
-                const prevMonthLastDay = new Date(year, month, 0).getDate();
-
-                let html = '';
-                const weekdays = ['日', '一', '二', '三', '四', '五', '六'];
-
-                let dayCount = 1;
-                let nextMonthDay = 1;
-
-                for (let week = 0; week < 6; week++) {
-                    for (let day = 0; day < 7; day++) {
-                        if (week === 0 && day < startDayOfWeek) {
-                            const prevDay = prevMonthLastDay - startDayOfWeek + day + 1;
-                            html += `<button class="yc-date-picker__date is-other-month" data-date="${year}-${month}-${prevDay}">${prevDay}</button>`;
-                        } else if (dayCount > daysInMonth) {
-                            html += `<button class="yc-date-picker__date is-other-month" data-date="${year}-${month + 2}-${nextMonthDay}">${nextMonthDay}</button>`;
-                            nextMonthDay++;
-                        } else {
-                            const isToday = dayCount === today.getDate() && month === today.getMonth() && year === today.getFullYear();
-                            const dateStr = `${year}-${month + 1}-${dayCount}`;
-                            const isSelected = this.selectedDate &&
-                                dayCount === this.selectedDate.getDate() &&
-                                month === this.selectedDate.getMonth() &&
-                                year === this.selectedDate.getFullYear();
-
-                            let classes = 'yc-date-picker__date';
-                            if (isToday) classes += ' is-today';
-                            if (isSelected) classes += ' is-selected';
-
-                            html += `<button class="${classes}" data-date="${dateStr}">${dayCount}</button>`;
-                            dayCount++;
-                        }
+                if (rangeStart && rangeEnd) {
+                    const currentTimestamp = currentDate.getTime();
+                    const startTimestamp = rangeStart.getTime();
+                    const endTimestamp = rangeEnd.getTime();
+                    if (currentTimestamp === startTimestamp) {
+                        dateElement.classList.add('is-range-start');
+                    } else if (currentTimestamp === endTimestamp) {
+                        dateElement.classList.add('is-range-end');
+                    } else if (currentTimestamp > startTimestamp && currentTimestamp < endTimestamp) {
+                        dateElement.classList.add('is-in-range');
                     }
                 }
 
-                this.datesContainer.innerHTML = html;
-
-                const dateButtons = this.datesContainer.querySelectorAll('.yc-date-picker__date');
-                dateButtons.forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                        const dateStr = btn.dataset.date;
-                        if (btn.classList.contains('is-other-month')) {
-                            const [y, m] = dateStr.split('-').map(Number);
-                            this.currentDate = new Date(y, m - 1, 1);
-                            this.renderCalendar();
-                        } else {
-                            this.selectDate(dateStr);
-                        }
-                    });
-                });
-            }
-
-            renderMonths() {
-                const months = ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'];
-                let html = '';
-
-                months.forEach((month, index) => {
-                    const isCurrentMonth = index === new Date().getMonth();
-                    let classes = 'yc-date-picker__month-item';
-                    if (isCurrentMonth) classes += ' is-today';
-
-                    html += `<button class="${classes}" data-month="${index}">${month}</button>`;
-                });
-
-                this.datesContainer.innerHTML = html;
-
-                const monthButtons = this.datesContainer.querySelectorAll('.yc-date-picker__month-item');
-                monthButtons.forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        const monthIndex = parseInt(btn.dataset.month);
-                        this.currentDate.setMonth(monthIndex);
-                        this.viewMode = 'date';
-                        this.renderCalendar();
-                    });
-                });
-            }
-
-            renderYears() {
-                const currentYear = this.currentDate.getFullYear();
-                const startYear = Math.floor(currentYear / 10) * 10 - 1;
-                let html = '';
-
-                for (let i = 0; i < 12; i++) {
-                    const year = startYear + i;
-                    const isCurrentYear = year === new Date().getFullYear();
-                    let classes = 'yc-date-picker__year-item';
-                    if (isCurrentYear) classes += ' is-today';
-
-                    html += `<button class="${classes}" data-year="${year}">${year}</button>`;
+                if (selectedDate && currentDate.getFullYear() === selectedDate.getFullYear() &&
+                    currentDate.getMonth() === selectedDate.getMonth() &&
+                    currentDate.getDate() === selectedDate.getDate()) {
+                    dateElement.classList.add('is-selected');
                 }
 
-                this.datesContainer.innerHTML = html;
-
-                const yearButtons = this.datesContainer.querySelectorAll('.yc-date-picker__year-item');
-                yearButtons.forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        const year = parseInt(btn.dataset.year);
-                        this.currentDate.setFullYear(year);
-                        this.viewMode = 'month';
-                        this.renderCalendar();
-                    });
-                });
-            }
-
-            selectDate(dateStr) {
-                const [year, month, day] = dateStr.split('-').map(Number);
-                this.selectedDate = new Date(year, month - 1, day);
-                this.renderCalendar();
-                this.updateDatetimeDisplay();
-
-                const timeColumn = this.element.querySelector('.yc-time-picker__column');
-                if (timeColumn) {
-                    const selectedItem = timeColumn.querySelector('.yc-time-picker__item.is-selected');
-                    if (!selectedItem) {
-                        const firstItem = timeColumn.querySelector('.yc-time-picker__item');
-                        if (firstItem) firstItem.classList.add('is-selected');
-                    }
-                }
-            }
-
-            updateDatetimeDisplay() {
-                const dateValue = this.selectedDate ? this.formatDate(this.selectedDate).split(' ')[0] : '-';
-                const timeColumn = this.element.querySelector('.yc-time-picker__column');
-                let timeValue = '00:00';
-
-                if (timeColumn) {
-                    const selectedItem = timeColumn.querySelector('.yc-time-picker__item.is-selected');
-                    if (selectedItem) {
-                        const minutes = timeColumn.querySelectorAll('.yc-time-picker__item');
-                        const hourIndex = Math.floor(Array.from(minutes).indexOf(selectedItem) / 12) % 24;
-                        timeValue = selectedItem.textContent.padStart(2, '0') + ':00';
-                    }
-                }
-
-                const datetimeInputs = this.element.querySelectorAll('.yc-date-picker__datetime-input');
-                if (datetimeInputs.length >= 2) {
-                    datetimeInputs[0].querySelector('.yc-date-picker__datetime-value').textContent = dateValue;
-                    datetimeInputs[1].querySelector('.yc-date-picker__datetime-value').textContent = timeValue;
-                }
-
-                const triggerContent = this.trigger.querySelector('.yc-date-picker__trigger-content span');
-                if (triggerContent) {
-                    triggerContent.textContent = `${dateValue} ${timeValue}`;
-                }
-            }
-
-            setValue(value) {
-                this.value = value;
-                this.element.dataset.value = value;
-
-                const [datePart, timePart] = value.split(' ');
-                const [year, month, day] = datePart.split('-').map(Number);
-
-                this.selectedDate = new Date(year, month - 1, day);
-                this.currentDate = new Date(year, month - 1, day);
-
-                this.renderCalendar();
-                this.updateDatetimeDisplay();
-
-                const datetimeInputs = this.element.querySelectorAll('.yc-date-picker__datetime-input');
-                if (datetimeInputs.length >= 2) {
-                    datetimeInputs[0].querySelector('.yc-date-picker__datetime-value').textContent = datePart;
-                    datetimeInputs[1].querySelector('.yc-date-picker__datetime-value').textContent = timePart || '00:00';
-                }
-            }
-
-            formatDate(date) {
-                const year = date.getFullYear();
-                const month = String(date.getMonth() + 1).padStart(2, '0');
-                const day = String(date.getDate()).padStart(2, '0');
-                return `${year}-${month}-${day}`;
-            }
-
-            getValue() {
-                return this.value;
+                container.appendChild(dateElement);
             }
         }
 
-        document.querySelectorAll('.yc-date-picker').forEach(el => {
-            new DateTimePicker(el);
+        function initTimeColumns(hourColumn, minuteColumn, secondColumn, initialHour, initialMinute, initialSecond) {
+            if (hourColumn) {
+                hourColumn.innerHTML = '';
+                for (let i = 0; i < 24; i++) {
+                    const item = document.createElement('div');
+                    item.className = 'yc-date-picker__time-item';
+                    item.dataset.hour = i;
+                    item.textContent = String(i).padStart(2, '0');
+                    if (i === initialHour) item.classList.add('is-selected');
+                    hourColumn.appendChild(item);
+                }
+            }
+
+            if (minuteColumn) {
+                minuteColumn.innerHTML = '';
+                for (let i = 0; i < 60; i++) {
+                    const item = document.createElement('div');
+                    item.className = 'yc-date-picker__time-item';
+                    item.dataset.minute = i;
+                    item.textContent = String(i).padStart(2, '0');
+                    if (i === initialMinute) item.classList.add('is-selected');
+                    minuteColumn.appendChild(item);
+                }
+            }
+
+            if (secondColumn) {
+                secondColumn.innerHTML = '';
+                for (let i = 0; i < 60; i++) {
+                    const item = document.createElement('div');
+                    item.className = 'yc-date-picker__time-item';
+                    item.dataset.second = i;
+                    item.textContent = String(i).padStart(2, '0');
+                    if (i === initialSecond) item.classList.add('is-selected');
+                    secondColumn.appendChild(item);
+                }
+            }
+        }
+
+        function setupTimeColumnScroll(column, type, tempTime, timeLabelId, picker) {
+            if (!column) return;
+
+            let scrollTimer = null;
+
+            column.addEventListener('scroll', function() {
+                if (scrollTimer) {
+                    clearTimeout(scrollTimer);
+                }
+
+                scrollTimer = setTimeout(function() {
+                    const scrollTop = column.scrollTop;
+                    const itemHeight = 32;
+                    const centerIndex = Math.round(scrollTop / itemHeight);
+
+                    const items = column.querySelectorAll('.yc-date-picker__time-item');
+                    if (items.length === 0) return;
+
+                    const targetItem = items[Math.min(centerIndex, items.length - 1)];
+
+                    const prevSelected = column.querySelector('.yc-date-picker__time-item.is-selected');
+                    if (prevSelected) {
+                        prevSelected.classList.remove('is-selected');
+                    }
+
+                    targetItem.classList.add('is-selected');
+
+                    if (type === 'hour') {
+                        tempTime.hours = parseInt(targetItem.dataset.hour);
+                    } else if (type === 'minute') {
+                        tempTime.minutes = parseInt(targetItem.dataset.minute);
+                    } else if (type === 'second') {
+                        tempTime.seconds = parseInt(targetItem.dataset.second);
+                    }
+
+                    const timeLabel = document.getElementById(timeLabelId);
+                    if (timeLabel) {
+                        const hours = String(tempTime.hours).padStart(2, '0');
+                        const minutes = String(tempTime.minutes).padStart(2, '0');
+                        const seconds = String(tempTime.seconds).padStart(2, '0');
+                        timeLabel.textContent = `${hours}:${minutes}:${seconds}`;
+                    }
+                }, 100);
+            });
+        }
+
+        function initDateTimePickers() {
+            const datePickers = document.querySelectorAll('.yc-date-picker');
+
+            datePickers.forEach(picker => {
+                if (picker.classList.contains('is-disabled')) return;
+
+                const trigger = picker.querySelector('.yc-date-picker__trigger');
+                const panel = picker.querySelector('.yc-date-picker__panel');
+                const dateValue = picker.querySelector('[id$="Value"]');
+                const isDatetimePicker = picker.classList.contains('yc-date-picker--datetime');
+                const isRangePicker = picker.classList.contains('yc-date-picker--range');
+
+                const today = new Date();
+                let currentYear = today.getFullYear();
+                let currentMonth = today.getMonth() + 1;
+                let selectedDate = today;
+                let tempTime = { hours: today.getHours(), minutes: today.getMinutes(), seconds: today.getSeconds() };
+                let isPanelOpen = false;
+                let timeListenersAdded = false;
+
+                if (isDatetimePicker) {
+                    const calendarPanel = picker.querySelector('.yc-date-picker__calendar-panel');
+                    const timePanel = picker.querySelector('.yc-date-picker__time-wrapper');
+                    const datetimeInputs = picker.querySelectorAll('.yc-date-picker__datetime-input');
+                    const dateGrid = picker.querySelector('.yc-date-picker__dates');
+                    const dateInput = datetimeInputs[0];
+                    const timeInput = datetimeInputs[1];
+
+                    if (dateValue) {
+                        const dateParts = dateValue.textContent.split(' ')[0].split('-');
+                        if (dateParts.length === 3) {
+                            selectedDate = new Date(parseInt(dateParts[0]), parseInt(dateParts[1]) - 1, parseInt(dateParts[2]));
+                            currentYear = selectedDate.getFullYear();
+                            currentMonth = selectedDate.getMonth() + 1;
+                            const timeParts = dateValue.textContent.split(' ')[1] || '12:30:00';
+                            const timeSplit = timeParts.split(':');
+                            if (timeSplit.length >= 3) {
+                                tempTime.hours = parseInt(timeSplit[0]);
+                                tempTime.minutes = parseInt(timeSplit[1]);
+                                tempTime.seconds = parseInt(timeSplit[2]);
+                            }
+                        }
+                    }
+
+                    const dateLabelId = dateInput ? dateInput.querySelector('.yc-date-picker__datetime-label').id : null;
+                    const timeLabelId = timeInput ? timeInput.querySelector('.yc-date-picker__datetime-label').id : null;
+
+                    const hourColumn = picker.querySelector('.yc-date-picker__time-list');
+                    const minuteColumn = picker.querySelectorAll('.yc-date-picker__time-list')[1];
+                    const secondColumn = picker.querySelectorAll('.yc-date-picker__time-list')[2];
+
+                    initTimeColumns(hourColumn, minuteColumn, secondColumn,
+                        tempTime.hours, tempTime.minutes, tempTime.seconds);
+
+                    setupTimeColumnScroll(hourColumn, 'hour', tempTime, timeLabelId, picker);
+                    setupTimeColumnScroll(minuteColumn, 'minute', tempTime, timeLabelId, picker);
+                    setupTimeColumnScroll(secondColumn, 'second', tempTime, timeLabelId, picker);
+
+                    if (dateGrid && dateGrid.id) {
+                        generateDateGrid(dateGrid.id, currentYear, currentMonth, selectedDate);
+                    }
+
+                    const headerLabel = picker.querySelector('.yc-date-picker__header-label');
+                    if (headerLabel) {
+                        headerLabel.textContent = `${currentYear}年${currentMonth}月`;
+                    }
+
+                    datetimeInputs.forEach(input => {
+                        input.addEventListener('click', function(e) {
+                            e.stopPropagation();
+                            const toggleType = this.dataset.toggle;
+
+                            datetimeInputs.forEach(i => i.classList.remove('is-active'));
+                            this.classList.add('is-active');
+
+                            if (toggleType === 'time') {
+                                if (calendarPanel) calendarPanel.style.display = 'none';
+                                if (timePanel) timePanel.style.display = 'block';
+
+                                timePanel.querySelectorAll('.yc-date-picker__time-item').forEach(item => {
+                                    const hour = parseInt(item.dataset.hour);
+                                    const minute = parseInt(item.dataset.minute);
+                                    const second = parseInt(item.dataset.second);
+                                    if (hour === tempTime.hours) item.classList.add('is-selected');
+                                    else if (!isNaN(hour)) item.classList.remove('is-selected');
+                                    if (minute === tempTime.minutes) item.classList.add('is-selected');
+                                    else if (!isNaN(minute)) item.classList.remove('is-selected');
+                                    if (second === tempTime.seconds) item.classList.add('is-selected');
+                                    else if (!isNaN(second)) item.classList.remove('is-selected');
+                                });
+
+                                const selectedHour = hourColumn?.querySelector('.yc-date-picker__time-item.is-selected');
+                                if (selectedHour) selectedHour.scrollIntoView({ block: 'center', behavior: 'instant' });
+                                const selectedMinute = minuteColumn?.querySelector('.yc-date-picker__time-item.is-selected');
+                                if (selectedMinute) selectedMinute.scrollIntoView({ block: 'center', behavior: 'instant' });
+                                const selectedSecond = secondColumn?.querySelector('.yc-date-picker__time-item.is-selected');
+                                if (selectedSecond) selectedSecond.scrollIntoView({ block: 'center', behavior: 'instant' });
+                            } else if (toggleType === 'calendar') {
+                                if (calendarPanel) calendarPanel.style.display = 'block';
+                                if (timePanel) timePanel.style.display = 'none';
+                            }
+                        });
+                    });
+
+                    if (dateGrid) {
+                        dateGrid.addEventListener('click', function(e) {
+                            const dateElement = e.target;
+                            if (!dateElement.classList.contains('yc-date-picker__date')) return;
+
+                            const selectedDateStr = dateElement.dataset.date;
+                            const parts = selectedDateStr.split('-');
+                            const clickedDate = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
+
+                            selectedDate = clickedDate;
+                            currentYear = clickedDate.getFullYear();
+                            currentMonth = clickedDate.getMonth() + 1;
+
+                            if (headerLabel) {
+                                headerLabel.textContent = `${currentYear}年${currentMonth}月`;
+                            }
+
+                            generateDateGrid(dateGrid.id, currentYear, currentMonth, selectedDate);
+
+                            const dateLabel = document.getElementById(dateLabelId);
+                            if (dateLabel) {
+                                dateLabel.textContent = formatDate(selectedDate);
+                            }
+                        });
+                    }
+
+                    const prevBtn = picker.querySelector('.yc-date-picker__header-prev');
+                    const nextBtn = picker.querySelector('.yc-date-picker__header-next');
+                    const prevYearBtn = picker.querySelector('.yc-date-picker__header-prev-year');
+                    const nextYearBtn = picker.querySelector('.yc-date-picker__header-next-year');
+
+                    if (prevBtn) {
+                        prevBtn.addEventListener('click', function(e) {
+                            e.stopPropagation();
+                            currentMonth--;
+                            if (currentMonth < 1) {
+                                currentMonth = 12;
+                                currentYear--;
+                            }
+                            if (headerLabel) {
+                                headerLabel.textContent = `${currentYear}年${currentMonth}月`;
+                            }
+                            generateDateGrid(dateGrid.id, currentYear, currentMonth, selectedDate);
+                        });
+                    }
+
+                    if (nextBtn) {
+                        nextBtn.addEventListener('click', function(e) {
+                            e.stopPropagation();
+                            currentMonth++;
+                            if (currentMonth > 12) {
+                                currentMonth = 1;
+                                currentYear++;
+                            }
+                            if (headerLabel) {
+                                headerLabel.textContent = `${currentYear}年${currentMonth}月`;
+                            }
+                            generateDateGrid(dateGrid.id, currentYear, currentMonth, selectedDate);
+                        });
+                    }
+
+                    if (prevYearBtn) {
+                        prevYearBtn.addEventListener('click', function(e) {
+                            e.stopPropagation();
+                            currentYear--;
+                            if (headerLabel) {
+                                headerLabel.textContent = `${currentYear}年${currentMonth}月`;
+                            }
+                            generateDateGrid(dateGrid.id, currentYear, currentMonth, selectedDate);
+                        });
+                    }
+
+                    if (nextYearBtn) {
+                        nextYearBtn.addEventListener('click', function(e) {
+                            e.stopPropagation();
+                            currentYear++;
+                            if (headerLabel) {
+                                headerLabel.textContent = `${currentYear}年${currentMonth}月`;
+                            }
+                            generateDateGrid(dateGrid.id, currentYear, currentMonth, selectedDate);
+                        });
+                    }
+                } else if (isRangePicker) {
+                    let rangeStartDate = null;
+                    let rangeEndDate = null;
+                    let rangeSelectingStart = true;
+                    let rangeStartYear = currentYear;
+                    let rangeStartMonth = currentMonth;
+                    let rangeEndYear = currentYear;
+                    let rangeEndMonth = currentMonth + 1;
+                    if (rangeEndMonth > 12) {
+                        rangeEndMonth = 1;
+                        rangeEndYear++;
+                    }
+
+                    const startGrid = picker.querySelector('[id$="RangeStart"]');
+                    const endGrid = picker.querySelector('[id$="RangeEnd"]');
+
+                    function updateRangeHeaders() {
+                        const startHeaderLabel = picker.querySelector('.yc-date-picker__header-label [data-panel="start"]');
+                        const endHeaderLabel = picker.querySelector('.yc-date-picker__header-label [data-panel="end"]');
+                        if (startHeaderLabel) startHeaderLabel.textContent = `${rangeStartYear}年${rangeStartMonth}月`;
+                        if (endHeaderLabel) endHeaderLabel.textContent = `${rangeEndYear}年${rangeEndMonth}月`;
+                    }
+
+                    function updateRangeView() {
+                        updateRangeHeaders();
+                        if (startGrid && startGrid.id) {
+                            generateDateGrid(startGrid.id, rangeStartYear, rangeStartMonth, rangeStartDate, rangeStartDate, rangeEndDate);
+                        }
+                        if (endGrid && endGrid.id) {
+                            generateDateGrid(endGrid.id, rangeEndYear, rangeEndMonth, rangeEndDate, rangeStartDate, rangeEndDate);
+                        }
+                    }
+
+                    function adjustEndPanel() {
+                        let endMonth = rangeStartMonth + 1;
+                        let endYear = rangeStartYear;
+                        if (endMonth > 12) {
+                            endMonth = 1;
+                            endYear++;
+                        }
+                        rangeEndMonth = endMonth;
+                        rangeEndYear = endYear;
+                    }
+
+                    updateRangeView();
+
+                    const startNavBtns = picker.querySelectorAll('[data-panel="start"]');
+                    startNavBtns.forEach(btn => {
+                        btn.addEventListener('click', function(e) {
+                            e.stopPropagation();
+                            const isPrev = this.classList.contains('yc-date-picker__header-prev');
+                            const isPrevYear = this.classList.contains('yc-date-picker__header-prev-year');
+
+                            if (isPrevYear) {
+                                rangeStartYear--;
+                            } else if (isPrev) {
+                                rangeStartMonth--;
+                                if (rangeStartMonth < 1) {
+                                    rangeStartMonth = 12;
+                                    rangeStartYear--;
+                                }
+                            } else {
+                                rangeStartMonth++;
+                                if (rangeStartMonth > 12) {
+                                    rangeStartMonth = 1;
+                                    rangeStartYear++;
+                                }
+                            }
+                            adjustEndPanel();
+                            updateRangeView();
+                        });
+                    });
+
+                    const endNavBtns = picker.querySelectorAll('[data-panel="end"]');
+                    endNavBtns.forEach(btn => {
+                        btn.addEventListener('click', function(e) {
+                            e.stopPropagation();
+                            const isPrev = this.classList.contains('yc-date-picker__header-prev');
+                            const isPrevYear = this.classList.contains('yc-date-picker__header-prev-year');
+
+                            if (isPrevYear) {
+                                rangeEndYear--;
+                            } else if (isPrev) {
+                                rangeEndMonth--;
+                                if (rangeEndMonth < 1) {
+                                    rangeEndMonth = 12;
+                                    rangeEndYear--;
+                                }
+                            } else {
+                                rangeEndMonth++;
+                                if (rangeEndMonth > 12) {
+                                    rangeEndMonth = 1;
+                                    rangeEndYear++;
+                                }
+                            }
+                            updateRangeView();
+                        });
+                    });
+
+                    function handleRangeClick(e, gridId) {
+                        const dateElement = e.target;
+                        if (!dateElement.classList.contains('yc-date-picker__date')) return;
+
+                        const selectedDateStr = dateElement.dataset.date;
+                        const parts = selectedDateStr.split('-');
+                        const clickedDate = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
+
+                        if (rangeSelectingStart) {
+                            rangeStartDate = clickedDate;
+                            rangeEndDate = null;
+                            rangeSelectingStart = false;
+                        } else {
+                            if (clickedDate.getTime() < rangeStartDate.getTime()) {
+                                rangeEndDate = rangeStartDate;
+                                rangeStartDate = clickedDate;
+                            } else {
+                                rangeEndDate = clickedDate;
+                            }
+                            rangeSelectingStart = true;
+                        }
+
+                        updateRangeView();
+
+                        if (dateValue) {
+                            if (rangeStartDate && rangeEndDate) {
+                                dateValue.textContent = `${formatDate(rangeStartDate)} 至 ${formatDate(rangeEndDate)}`;
+                            } else if (rangeStartDate) {
+                                dateValue.textContent = `${formatDate(rangeStartDate)} 至 `;
+                            }
+                        }
+                    }
+
+                    if (startGrid) {
+                        startGrid.addEventListener('click', (e) => handleRangeClick(e, startGrid.id));
+                    }
+                    if (endGrid) {
+                        endGrid.addEventListener('click', (e) => handleRangeClick(e, endGrid.id));
+                    }
+                } else {
+                    const dateGrid = picker.querySelector('.yc-date-picker__dates');
+                    if (dateGrid && dateGrid.id) {
+                        generateDateGrid(dateGrid.id, currentYear, currentMonth, selectedDate);
+                    }
+
+                    const headerLabel = picker.querySelector('.yc-date-picker__header-label');
+                    if (headerLabel) {
+                        headerLabel.textContent = `${currentYear}年${currentMonth}月`;
+                    }
+                }
+
+                trigger.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    isPanelOpen = !isPanelOpen;
+                    panel.classList.toggle('is-open', isPanelOpen);
+                    picker.classList.toggle('is-open', isPanelOpen);
+                });
+
+                document.addEventListener('click', function(e) {
+                    if (isPanelOpen && !picker.contains(e.target)) {
+                        isPanelOpen = false;
+                        panel.classList.remove('is-open');
+                        picker.classList.remove('is-open');
+                    }
+                });
+
+                if (panel) {
+                    panel.addEventListener('click', (e) => e.stopPropagation());
+                }
+
+                const footerBtns = picker.querySelectorAll('.yc-date-picker__footer-btn');
+                footerBtns.forEach(btn => {
+                    btn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const action = this.dataset.action;
+                        const rangeType = this.dataset.range;
+
+                        if (action === 'cancel') {
+                            isPanelOpen = false;
+                            panel.classList.remove('is-open');
+                            picker.classList.remove('is-open');
+                            return;
+                        }
+
+                        if (action === 'confirm') {
+                            if (isRangePicker) {
+                                const rangeStartGrid = picker.querySelector('[id$="RangeStart"]');
+                                const rangeEndGrid = picker.querySelector('[id$="RangeEnd"]');
+                                const startSelected = rangeStartGrid?.querySelector('.yc-date-picker__date.is-selected');
+                                const endSelected = rangeEndGrid?.querySelector('.yc-date-picker__date.is-selected');
+                                if (startSelected && endSelected && dateValue) {
+                                    dateValue.textContent = `${startSelected.dataset.date} 至 ${endSelected.dataset.date}`;
+                                }
+                            } else if (isDatetimePicker) {
+                                if (dateValue && selectedDate) {
+                                    const dateObj = new Date(selectedDate);
+                                    dateObj.setHours(tempTime.hours, tempTime.minutes, tempTime.seconds);
+                                    dateValue.textContent = `${formatDate(dateObj)} ${formatTime(dateObj)}`;
+                                }
+                            }
+                            isPanelOpen = false;
+                            panel.classList.remove('is-open');
+                            picker.classList.remove('is-open');
+                            return;
+                        }
+
+                        if (action === 'now') {
+                            const now = new Date();
+                            if (isDatetimePicker) {
+                                tempTime.hours = now.getHours();
+                                tempTime.minutes = now.getMinutes();
+                                tempTime.seconds = now.getSeconds();
+                                selectedDate = now;
+                                currentYear = now.getFullYear();
+                                currentMonth = now.getMonth() + 1;
+
+                                const headerLabel = picker.querySelector('.yc-date-picker__header-label');
+                                if (headerLabel) {
+                                    headerLabel.textContent = `${currentYear}年${currentMonth}月`;
+                                }
+
+                                const dateGrid = picker.querySelector('.yc-date-picker__dates');
+                                if (dateGrid && dateGrid.id) {
+                                    generateDateGrid(dateGrid.id, currentYear, currentMonth, selectedDate);
+                                }
+
+                                if (dateValue) {
+                                    now.setHours(tempTime.hours, tempTime.minutes, tempTime.seconds);
+                                    dateValue.textContent = `${formatDate(now)} ${formatTime(now)}`;
+                                }
+
+                                const dateInput = picker.querySelector('[data-toggle="calendar"]');
+                                const timeInput = picker.querySelector('[data-toggle="time"]');
+                                if (dateInput) {
+                                    const dateLabel = dateInput.querySelector('.yc-date-picker__datetime-label');
+                                    if (dateLabel) dateLabel.textContent = formatDate(now);
+                                }
+                                if (timeInput) {
+                                    const timeLabel = timeInput.querySelector('.yc-date-picker__datetime-label');
+                                    if (timeLabel) {
+                                        const hours = String(tempTime.hours).padStart(2, '0');
+                                        const minutes = String(tempTime.minutes).padStart(2, '0');
+                                        const seconds = String(tempTime.seconds).padStart(2, '0');
+                                        timeLabel.textContent = `${hours}:${minutes}:${seconds}`;
+                                    }
+                                }
+                            } else {
+                                if (dateValue) {
+                                    dateValue.textContent = formatDate(now);
+                                }
+                            }
+                            isPanelOpen = false;
+                            panel.classList.remove('is-open');
+                            picker.classList.remove('is-open');
+                            return;
+                        }
+
+                        if (isRangePicker && rangeType) {
+                            let startDate, endDate;
+                            const now = new Date();
+
+                            if (rangeType === 'today') {
+                                startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+                                endDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+                            } else if (rangeType === 'thisWeek') {
+                                const dayOfWeek = now.getDay();
+                                const diff = dayOfWeek === 0 ? 6 : dayOfWeek - 1;
+                                startDate = new Date(now);
+                                startDate.setDate(now.getDate() - diff);
+                                endDate = new Date(now);
+                            } else if (rangeType === 'thisMonth') {
+                                startDate = new Date(now.getFullYear(), now.getMonth(), 1);
+                                endDate = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+                            } else if (rangeType === 'last7days') {
+                                startDate = new Date(now);
+                                startDate.setDate(now.getDate() - 6);
+                                endDate = new Date(now);
+                            } else if (rangeType === 'last30days') {
+                                startDate = new Date(now);
+                                startDate.setDate(now.getDate() - 29);
+                                endDate = new Date(now);
+                            }
+
+                            if (startDate && endDate) {
+                                if (dateValue) {
+                                    dateValue.textContent = `${formatDate(startDate)} 至 ${formatDate(endDate)}`;
+                                }
+                            }
+                            return;
+                        }
+                    });
+                });
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', function() {
+            initDateTimePickers();
         });
     </script>
 </body>
