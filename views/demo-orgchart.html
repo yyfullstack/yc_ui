@@ -64,7 +64,7 @@
                         <div class="yc-orgchart__tree" id="orgchartTree">
                             <div class="yc-orgchart__node" data-dept="总裁办">
                                 <div class="yc-orgchart__node-wrapper">
-                                    <div class="yc-orgchart__node-card yc-orgchart__node-card--root is-selected">
+                                    <div class="yc-orgchart__node-card yc-orgchart__node-card--root is-selected" draggable="true">
                                         <div class="yc-orgchart__node-avatar yc-orgchart__node-avatar--primary">张</div>
                                         <div class="yc-orgchart__node-name">张总</div>
                                         <div class="yc-orgchart__node-title">首席执行官 CEO</div>
@@ -76,7 +76,7 @@
                                 <div class="yc-orgchart__children">
                                     <div class="yc-orgchart__node" data-dept="技术部">
                                         <div class="yc-orgchart__node-wrapper">
-                                            <div class="yc-orgchart__node-card yc-orgchart__node-card--root">
+                                            <div class="yc-orgchart__node-card yc-orgchart__node-card--root" draggable="true">
                                                 <div class="yc-orgchart__node-avatar yc-orgchart__node-avatar--success">李</div>
                                                 <div class="yc-orgchart__node-name">李经理</div>
                                                 <div class="yc-orgchart__node-title">技术总监 CTO</div>
@@ -265,6 +265,7 @@
 
         document.querySelectorAll('.yc-orgchart__node-card').forEach(card => {
             card.addEventListener('click', function(e) {
+                if (e.target.closest('.yc-orgchart__toggle')) return;
                 e.stopPropagation();
                 document.querySelectorAll('.yc-orgchart__node-card').forEach(c => c.classList.remove('is-selected'));
                 this.classList.add('is-selected');
@@ -331,6 +332,145 @@
                     node.classList.remove('yc-orgchart__highlight');
                 }
             });
+        });
+
+        let draggedNode = null;
+        let dragGhost = null;
+        let dragOffsetX = 0;
+        let dragOffsetY = 0;
+
+        function handleDragStart(e) {
+            const card = e.target.closest('.yc-orgchart__node-card');
+            if (!card) return;
+            if (e.target.closest('.yc-orgchart__toggle')) return;
+
+            draggedNode = card;
+            const rect = card.getBoundingClientRect();
+            dragOffsetX = e.clientX - rect.left;
+            dragOffsetY = e.clientY - rect.top;
+
+            card.classList.add('is-dragging');
+
+            dragGhost = card.cloneNode(true);
+            dragGhost.classList.add('yc-orgchart__drag-ghost');
+            dragGhost.style.width = rect.width + 'px';
+            dragGhost.style.left = (e.clientX - dragOffsetX) + 'px';
+            dragGhost.style.top = (e.clientY - dragOffsetY) + 'px';
+            document.body.appendChild(dragGhost);
+
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/plain', '');
+
+            card.addEventListener('drag', handleDrag);
+        }
+
+        function handleDrag(e) {
+            if (!dragGhost) return;
+            dragGhost.style.left = (e.clientX - dragOffsetX) + 'px';
+            dragGhost.style.top = (e.clientY - dragOffsetY) + 'px';
+        }
+
+        function handleDragOver(e) {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+
+            const targetCard = e.target.closest('.yc-orgchart__node-card');
+            if (targetCard && targetCard !== draggedNode) {
+                document.querySelectorAll('.yc-orgchart__node-card').forEach(c => c.classList.remove('is-drag-over'));
+                targetCard.classList.add('is-drag-over');
+            }
+        }
+
+        function handleDrop(e) {
+            e.preventDefault();
+
+            const targetCard = e.target.closest('.yc-orgchart__node-card');
+            if (targetCard && targetCard !== draggedNode) {
+                const draggedNodeWrapper = draggedNode.closest('.yc-orgchart__node-wrapper');
+                const targetNode = targetCard.closest('.yc-orgchart__node');
+                const targetChildren = targetNode.querySelector(':scope > .yc-orgchart__children');
+
+                if (targetChildren) {
+                    targetChildren.appendChild(draggedNodeWrapper.closest('.yc-orgchart__node'));
+                } else {
+                    const newChildren = document.createElement('div');
+                    newChildren.className = 'yc-orgchart__children';
+                    newChildren.appendChild(draggedNodeWrapper.closest('.yc-orgchart__node'));
+                    targetNode.appendChild(newChildren);
+
+                    const toggle = targetCard.querySelector('.yc-orgchart__toggle');
+                    if (!toggle) {
+                        const newToggle = document.createElement('div');
+                        newToggle.className = 'yc-orgchart__toggle';
+                        newToggle.innerHTML = '<i class="fas fa-minus"></i>';
+                        targetCard.appendChild(newToggle);
+
+                        newToggle.addEventListener('click', function(ev) {
+                            ev.stopPropagation();
+                            const children = targetNode.querySelector(':scope > .yc-orgchart__children');
+                            if (children) {
+                                const isCollapsed = this.classList.toggle('is-collapsed');
+                                if (isCollapsed) {
+                                    children.style.display = 'none';
+                                    this.innerHTML = '<i class="fas fa-plus"></i>';
+                                } else {
+                                    children.style.display = 'flex';
+                                    this.innerHTML = '<i class="fas fa-minus"></i>';
+                                }
+                            }
+                        });
+                    } else {
+                        toggle.classList.remove('is-collapsed');
+                        toggle.innerHTML = '<i class="fas fa-minus"></i>';
+                    }
+                }
+
+                updateBadges();
+            }
+
+            cleanupDrag();
+        }
+
+        function handleDragEnd(e) {
+            cleanupDrag();
+        }
+
+        function cleanupDrag() {
+            if (draggedNode) {
+                draggedNode.classList.remove('is-dragging');
+                draggedNode.removeEventListener('drag', handleDrag);
+            }
+            document.querySelectorAll('.yc-orgchart__node-card').forEach(c => c.classList.remove('is-drag-over'));
+            if (dragGhost) {
+                dragGhost.remove();
+                dragGhost = null;
+            }
+            draggedNode = null;
+        }
+
+        function updateBadges() {
+            document.querySelectorAll('.yc-orgchart__node-card').forEach(card => {
+                const badge = card.querySelector('.yc-orgchart__node-badge');
+                const node = card.closest('.yc-orgchart__node');
+                const children = node?.querySelector(':scope > .yc-orgchart__children');
+                if (children && badge) {
+                    const childCount = children.querySelectorAll(':scope > .yc-orgchart__node').length;
+                    badge.textContent = childCount;
+                    if (childCount === 0) {
+                        badge.style.display = 'none';
+                    } else {
+                        badge.style.display = 'flex';
+                    }
+                }
+            });
+        }
+
+        document.querySelectorAll('.yc-orgchart__node-card').forEach(card => {
+            card.setAttribute('draggable', 'true');
+            card.addEventListener('dragstart', handleDragStart);
+            card.addEventListener('dragover', handleDragOver);
+            card.addEventListener('drop', handleDrop);
+            card.addEventListener('dragend', handleDragEnd);
         });
     </script>
 </body>

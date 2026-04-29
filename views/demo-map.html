@@ -8,21 +8,209 @@
     <link rel="stylesheet" href="../styles/index.css">
     <link rel="stylesheet" href="../styles/demo.css">
     <style>
+        .demo-map-wrapper {
+            width: 100%;
+            height: calc(100vh - 120px);
+            display: flex;
+            gap: 16px;
+            padding: 16px;
+        }
+
+        .demo-map-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
         .demo-map-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 24px;
+            flex: 1;
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
         }
-        .demo-section {
-            margin-bottom: 32px;
+
+        #mapContainer {
+            width: 100%;
+            height: 100%;
         }
-        .demo-section__title {
-            font-size: 18px;
-            font-weight: 600;
-            color: var(--yc-color-text-primary);
-            margin-bottom: 16px;
-            padding-bottom: 8px;
+
+        .demo-map-sidebar {
+            width: 320px;
+            background: var(--yc-color-bg);
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+        }
+
+        .demo-map-sidebar__header {
+            padding: 16px;
             border-bottom: 1px solid var(--yc-color-border-light);
+        }
+
+        .demo-map-sidebar__header h3 {
+            margin: 0 0 8px;
+            font-size: 16px;
+        }
+
+        .demo-map-sidebar__content {
+            padding: 16px;
+        }
+
+        .demo-map-toolbar {
+            background: var(--yc-color-bg);
+            border-radius: 8px;
+            padding: 12px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .demo-map-toolbar__group {
+            display: flex;
+            gap: 4px;
+            padding-right: 12px;
+            border-right: 1px solid var(--yc-color-border-light);
+        }
+
+        .demo-map-toolbar__group:last-child {
+            border-right: none;
+        }
+
+        .demo-map-toolbar__btn {
+            padding: 8px 12px;
+            border: 1px solid var(--yc-color-border);
+            border-radius: 4px;
+            background: var(--yc-color-bg);
+            color: var(--yc-color-text-primary);
+            cursor: pointer;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .demo-map-toolbar__btn:hover {
+            background: var(--yc-color-fill-light);
+            border-color: var(--yc-color-primary);
+            color: var(--yc-color-primary);
+        }
+
+        .demo-map-toolbar__btn.is-active {
+            background: var(--yc-color-primary);
+            border-color: var(--yc-color-primary);
+            color: var(--yc-color-bg);
+        }
+
+        .demo-map-info-panel {
+            background: var(--yc-color-bg);
+            border-radius: 8px;
+            padding: 12px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .demo-map-info-panel__title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .demo-map-info-panel__content {
+            font-size: 13px;
+            color: var(--yc-color-text-secondary);
+            line-height: 1.6;
+        }
+
+        .demo-map-marker-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .demo-map-marker-item {
+            padding: 12px;
+            border-bottom: 1px solid var(--yc-color-border-light);
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .demo-map-marker-item:last-child {
+            border-bottom: none;
+        }
+
+        .demo-map-marker-item:hover {
+            background: var(--yc-color-fill-light);
+        }
+
+        .demo-map-marker-item__header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 4px;
+        }
+
+        .demo-map-marker-item__icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+        }
+
+        .demo-map-marker-item__name {
+            font-weight: 500;
+        }
+
+        .demo-map-marker-item__desc {
+            font-size: 12px;
+            color: var(--yc-color-text-placeholder);
+            margin-left: 32px;
+        }
+
+        .amap-info-content {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+            padding: 12px;
+            min-width: 200px;
+        }
+
+        .amap-info-sharp {
+            border-top-color: white !important;
+        }
+
+        .demo-map-draw-info {
+            position: absolute;
+            top: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 13px;
+            z-index: 1000;
+            display: none;
+        }
+
+        .demo-map-coords {
+            position: absolute;
+            bottom: 16px;
+            right: 16px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
@@ -41,206 +229,867 @@
             </nav>
         </header>
 
-        <div class="demo-map-container">
-            <section class="demo-section">
-                <h2 class="demo-section__title">基础地图</h2>
-                <div class="yc-map">
-                    <div class="yc-map__container">
-                        <div class="yc-map__viewport">
-                            <div class="yc-map__canvas">
-                                <svg class="yc-map__svg" viewBox="0 0 800 500">
-                                    <path class="yc-map__region" d="M 200,100 L 300,80 L 400,90 L 500,110 L 550,150 L 580,200 L 600,280 L 580,350 L 520,400 L 450,420 L 350,430 L 280,400 L 220,350 L 180,280 L 160,200 L 170,140 Z" />
-                                    <circle class="yc-map__heatmap-point" cx="400" cy="200" r="8" fill="#409eff" />
-                                    <circle class="yc-map__heatmap-point" cx="320" cy="180" r="6" fill="#67c23a" />
-                                    <circle class="yc-map__heatmap-point" cx="480" cy="250" r="10" fill="#e6a23c" />
-                                    <circle class="yc-map__heatmap-point" cx="350" cy="280" r="5" fill="#f56c6c" />
-                                    <circle class="yc-map__heatmap-point" cx="280" cy="220" r="7" fill="#409eff" />
-                                    <path class="yc-map__route" d="M 400,200 L 320,180 L 280,220" />
-                                    <path class="yc-map__route" d="M 400,200 L 480,250" />
-                                    <path class="yc-map__route" d="M 350,280 L 400,200" />
-                                </svg>
-                            </div>
-
-                            <div class="yc-map__marker" style="left: 50%; top: 40%;">
-                                <svg class="yc-map__marker-pin" viewBox="0 0 32 40">
-                                    <path class="yc-map__marker-pin--primary" d="M16 0C7.16 0 0 7.16 0 16c0 12 16 24 16 24s16-12 16-24c0-8.84-7.16-16-16-16zm0 22c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z" />
-                                </svg>
-                                <i class="fas fa-star yc-map__marker-icon"></i>
-                                <div class="yc-map__marker-label">北京市</div>
-                            </div>
-
-                            <div class="yc-map__marker" style="left: 40%; top: 36%;">
-                                <svg class="yc-map__marker-pin" viewBox="0 0 32 40">
-                                    <path class="yc-map__marker-pin--success" d="M16 0C7.16 0 0 7.16 0 16c0 12 16 24 16 24s16-12 16-24c0-8.84-7.16-16-16-16zm0 22c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z" />
-                                </svg>
-                                <i class="fas fa-building yc-map__marker-icon"></i>
-                                <div class="yc-map__marker-label">上海市</div>
-                            </div>
-
-                            <div class="yc-map__marker" style="left: 60%; top: 50%;">
-                                <svg class="yc-map__marker-pin" viewBox="0 0 32 40">
-                                    <path class="yc-map__marker-pin--warning" d="M16 0C7.16 0 0 7.16 0 16c0 12 16 24 16 24s16-12 16-24c0-8.84-7.16-16-16-16zm0 22c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z" />
-                                </svg>
-                                <i class="fas fa-map-marker-alt yc-map__marker-icon"></i>
-                                <div class="yc-map__marker-label yc-map__marker-label is-always-show">广州市</div>
-                            </div>
-
-                            <div class="yc-map__marker" style="left: 44%; top: 56%;">
-                                <svg class="yc-map__marker-pin" viewBox="0 0 32 40">
-                                    <path class="yc-map__marker-pin--danger" d="M16 0C7.16 0 0 7.16 0 16c0 12 16 24 16 24s16-12 16-24c0-8.84-7.16-16-16-16zm0 22c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z" />
-                                </svg>
-                                <i class="fas fa-exclamation-triangle yc-map__marker-icon"></i>
-                                <div class="yc-map__marker-label">成都市</div>
-                            </div>
-
-                            <div class="yc-map__marker" style="left: 35%; top: 44%;">
-                                <svg class="yc-map__marker-pin" viewBox="0 0 32 40">
-                                    <path class="yc-map__marker-pin--info" d="M16 0C7.16 0 0 7.16 0 16c0 12 16 24 16 24s16-12 16-24c0-8.84-7.16-16-16-16zm0 22c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z" />
-                                </svg>
-                                <i class="fas fa-home yc-map__marker-icon"></i>
-                                <div class="yc-map__marker-label">西安市</div>
-                            </div>
-                        </div>
-
-                        <div class="yc-map__search">
-                            <i class="fas fa-search yc-map__search-icon"></i>
-                            <input type="text" class="yc-map__search-input" placeholder="搜索地点...">
-                            <div class="yc-map__search-results" id="searchResults">
-                                <div class="yc-map__search-result-item">北京市</div>
-                                <div class="yc-map__search-result-item">上海市</div>
-                                <div class="yc-map__search-result-item">广州市</div>
-                                <div class="yc-map__search-result-item">深圳市</div>
-                            </div>
-                        </div>
-
-                        <div class="yc-map__controls">
-                            <div class="yc-map__control-group">
-                                <button class="yc-map__control-btn" title="放大"><i class="fas fa-plus"></i></button>
-                                <button class="yc-map__control-btn" title="缩小"><i class="fas fa-minus"></i></button>
-                                <button class="yc-map__control-btn" title="适应视图"><i class="fas fa-expand"></i></button>
-                            </div>
-                            <div class="yc-map__control-group">
-                                <button class="yc-map__control-btn" title="图层"><i class="fas fa-layer-group"></i></button>
-                                <button class="yc-map__control-btn" title="测量"><i class="fas fa-ruler"></i></button>
-                                <button class="yc-map__control-btn" title="截图"><i class="fas fa-camera"></i></button>
-                            </div>
-                        </div>
-
-                        <div class="yc-map__legend">
-                            <div class="yc-map__legend-title">图例</div>
-                            <div class="yc-map__legend-item">
-                                <div class="yc-map__legend-color" style="background-color: #409eff;"></div>
-                                <span>主要城市</span>
-                            </div>
-                            <div class="yc-map__legend-item">
-                                <div class="yc-map__legend-color" style="background-color: #67c23a;"></div>
-                                <span>分支机构</span>
-                            </div>
-                            <div class="yc-map__legend-item">
-                                <div class="yc-map__legend-color" style="background-color: #e6a23c;"></div>
-                                <span>重点区域</span>
-                            </div>
-                            <div class="yc-map__legend-item">
-                                <div class="yc-map__legend-color" style="background-color: #f56c6c;"></div>
-                                <span>告警区域</span>
-                            </div>
-                        </div>
-
-                        <div class="yc-map__zoom-info">缩放: 100%</div>
+        <div class="demo-map-wrapper">
+            <div class="demo-map-main">
+                <div class="demo-map-toolbar">
+                    <div class="demo-map-toolbar__group">
+                        <button class="demo-map-toolbar__btn" id="btnMapType" title="切换地图类型">
+                            <i class="fas fa-map"></i> 地图类型
+                        </button>
+                        <button class="demo-map-toolbar__btn" id="btnTraffic" title="路况图层">
+                            <i class="fas fa-traffic-light"></i> 路况
+                        </button>
+                        <button class="demo-map-toolbar__btn" id="btnSatellite" title="卫星图层">
+                            <i class="fas fa-satellite"></i> 卫星
+                        </button>
+                    </div>
+                    <div class="demo-map-toolbar__group">
+                        <button class="demo-map-toolbar__btn" id="btnDrawMarker" title="添加标记">
+                            <i class="fas fa-map-marker-alt"></i> 标记
+                        </button>
+                        <button class="demo-map-toolbar__btn" id="btnDrawCircle" title="绘制圆形">
+                            <i class="fas fa-circle"></i> 圆形
+                        </button>
+                        <button class="demo-map-toolbar__btn" id="btnDrawPolygon" title="绘制多边形">
+                            <i class="fas fa-draw-polygon"></i> 多边形
+                        </button>
+                        <button class="demo-map-toolbar__btn" id="btnDrawRectangle" title="绘制矩形">
+                            <i class="fas fa-square"></i> 矩形
+                        </button>
+                        <button class="demo-map-toolbar__btn" id="btnDrawLine" title="绘制线条">
+                            <i class="fas fa-minus"></i> 线条
+                        </button>
+                        <button class="demo-map-toolbar__btn" id="btnClearDraw" title="清除绘制">
+                            <i class="fas fa-trash"></i> 清除
+                        </button>
+                    </div>
+                    <div class="demo-map-toolbar__group">
+                        <button class="demo-map-toolbar__btn" id="btnDriving" title="驾车路线">
+                            <i class="fas fa-car"></i> 驾车
+                        </button>
+                        <button class="demo-map-toolbar__btn" id="btnWalking" title="步行路线">
+                            <i class="fas fa-walking"></i> 步行
+                        </button>
+                        <button class="demo-map-toolbar__btn" id="btnTransit" title="公交路线">
+                            <i class="fas fa-bus"></i> 公交
+                        </button>
+                        <button class="demo-map-toolbar__btn" id="btnClearRoute" title="清除路线">
+                            <i class="fas fa-times"></i> 清除路线
+                        </button>
+                    </div>
+                    <div class="demo-map-toolbar__group">
+                        <button class="demo-map-toolbar__btn" id="btnMeasureDistance" title="测距">
+                            <i class="fas fa-ruler"></i> 测距
+                        </button>
+                        <button class="demo-map-toolbar__btn" id="btnMeasureArea" title="测面积">
+                            <i class="fas fa-vector-square"></i> 测面积
+                        </button>
+                    </div>
+                    <div class="demo-map-toolbar__group">
+                        <button class="demo-map-toolbar__btn" id="btnLocate" title="定位">
+                            <i class="fas fa-crosshairs"></i> 定位
+                        </button>
+                        <button class="demo-map-toolbar__btn" id="btnResetView" title="重置视图">
+                            <i class="fas fa-expand-arrows-alt"></i> 重置
+                        </button>
                     </div>
                 </div>
-            </section>
 
-            <section class="demo-section">
-                <h2 class="demo-section__title">标记点信息</h2>
-                <div class="yc-space yc-space--vertical" style="gap: 16px;">
-                    <div style="display: flex; gap: 24px; flex-wrap: wrap;">
-                        <div class="yc-card" style="padding: 16px; flex: 1; min-width: 200px;">
-                            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
-                                <i class="fas fa-star" style="color: #409eff;"></i>
-                                <strong>北京市</strong>
-                            </div>
-                            <p style="font-size: 12px; color: var(--yc-color-text-secondary);">
-                                首都，政治、文化中心<br>
-                                人口: 2100万<br>
-                                GDP: 4.03万亿元
-                            </p>
+                <div class="demo-map-container">
+                    <div id="mapContainer"></div>
+                    <div class="demo-map-draw-info" id="drawInfo"></div>
+                    <div class="demo-map-coords" id="coordsDisplay">经度: 116.397428 | 纬度: 39.90923</div>
+                </div>
+            </div>
+
+            <div class="demo-map-sidebar">
+                <div class="demo-map-sidebar__header">
+                    <h3><i class="fas fa-map-marked-alt"></i> 地图功能</h3>
+                </div>
+                <div class="demo-map-sidebar__content">
+                    <div class="demo-map-info-panel">
+                        <div class="demo-map-info-panel__title">
+                            <i class="fas fa-info-circle"></i> 操作说明
                         </div>
-                        <div class="yc-card" style="padding: 16px; flex: 1; min-width: 200px;">
-                            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
-                                <i class="fas fa-building" style="color: #67c23a;"></i>
-                                <strong>上海市</strong>
-                            </div>
-                            <p style="font-size: 12px; color: var(--yc-color-text-secondary);">
-                                经济中心，金融中心<br>
-                                人口: 2400万<br>
-                                GDP: 4.32万亿元
-                            </p>
-                        </div>
-                        <div class="yc-card" style="padding: 16px; flex: 1; min-width: 200px;">
-                            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
-                                <i class="fas fa-map-marker-alt" style="color: #e6a23c;"></i>
-                                <strong>广州市</strong>
-                            </div>
-                            <p style="font-size: 12px; color: var(--yc-color-text-secondary);">
-                                南方门户，贸易中心<br>
-                                人口: 1500万<br>
-                                GDP: 2.82万亿元
-                            </p>
+                        <div class="demo-map-info-panel__content">
+                            <p>1. 点击工具栏按钮切换绘制模式</p>
+                            <p>2. 在地图上点击添加标记或绘制图形</p>
+                            <p>3. 使用路线规划查询两点间路线</p>
+                            <p>4. 使用测距/测面积工具进行测量</p>
+                            <p>5. 点击定位按钮获取当前位置</p>
                         </div>
                     </div>
+
+                    <div class="demo-map-info-panel" style="margin-top: 16px;">
+                        <div class="demo-map-info-panel__title">
+                            <i class="fas fa-map-pin"></i> 预设标记点
+                        </div>
+                        <ul class="demo-map-marker-list" id="markerList">
+                            <li class="demo-map-marker-item" data-lng="116.397428" data-lat="39.90923">
+                                <div class="demo-map-marker-item__header">
+                                    <div class="demo-map-marker-item__icon" style="background: #409eff;">
+                                        <i class="fas fa-landmark"></i>
+                                    </div>
+                                    <span class="demo-map-marker-item__name">北京市</span>
+                                </div>
+                                <div class="demo-map-marker-item__desc">首都，政治文化中心</div>
+                            </li>
+                            <li class="demo-map-marker-item" data-lng="121.473701" data-lat="31.230416">
+                                <div class="demo-map-marker-item__header">
+                                    <div class="demo-map-marker-item__icon" style="background: #67c23a;">
+                                        <i class="fas fa-building"></i>
+                                    </div>
+                                    <span class="demo-map-marker-item__name">上海市</span>
+                                </div>
+                                <div class="demo-map-marker-item__desc">经济中心，金融贸易中心</div>
+                            </li>
+                            <li class="demo-map-marker-item" data-lng="113.264434" data-lat="23.129162">
+                                <div class="demo-map-marker-item__header">
+                                    <div class="demo-map-marker-item__icon" style="background: #e6a23c;">
+                                        <i class="fas fa-ship"></i>
+                                    </div>
+                                    <span class="demo-map-marker-item__name">广州市</span>
+                                </div>
+                                <div class="demo-map-marker-item__desc">南方门户，贸易中心</div>
+                            </li>
+                            <li class="demo-map-marker-item" data-lng="114.057868" data-lat="22.543099">
+                                <div class="demo-map-marker-item__header">
+                                    <div class="demo-map-marker-item__icon" style="background: #f56c6c;">
+                                        <i class="fas fa-city"></i>
+                                    </div>
+                                    <span class="demo-map-marker-item__name">深圳市</span>
+                                </div>
+                                <div class="demo-map-marker-item__desc">科技创新中心</div>
+                            </li>
+                            <li class="demo-map-marker-item" data-lng="104.066541" data-lat="30.572269">
+                                <div class="demo-map-marker-item__header">
+                                    <div class="demo-map-marker-item__icon" style="background: #909399;">
+                                        <i class="fas fa-dragon"></i>
+                                    </div>
+                                    <span class="demo-map-marker-item__name">成都市</span>
+                                </div>
+                                <div class="demo-map-marker-item__desc">天府之国，休闲之都</div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </section>
+            </div>
         </div>
     </div>
 
+    <script src="https://webapi.amap.com/maps?v=2.0&key=YOUR_AMAP_KEY&plugin=AMap.Driving,AMap.Walking,AMap.Transit,AMap.Geolocation"></script>
     <script>
-        const searchInput = document.querySelector('.yc-map__search-input');
-        const searchResults = document.getElementById('searchResults');
+        let map = null;
+        let markers = [];
+        let overlays = [];
+        let routes = [];
+        let currentDrawMode = null;
+        let drawPoints = [];
+        let measurePoints = [];
+        let measurePolyline = null;
+        let measurePolygon = null;
+        let isMeasuring = false;
+        let isMeasuringArea = false;
+        let isSettingRouteStart = true;
+        let routeStart = null;
+        let routeEnd = null;
+        let trafficLayer = null;
+        let satelliteLayer = null;
+        let currentMapType = 'vector';
 
-        if (searchInput && searchResults) {
-            searchInput.addEventListener('focus', function() {
-                if (this.value.length > 0) {
-                    searchResults.classList.add('is-visible');
-                }
+        const presetMarkers = [
+            { lng: 116.397428, lat: 39.90923, name: '北京市', icon: 'fa-landmark', color: '#409eff' },
+            { lng: 121.473701, lat: 31.230416, name: '上海市', icon: 'fa-building', color: '#67c23a' },
+            { lng: 113.264434, lat: 23.129162, name: '广州市', icon: 'fa-ship', color: '#e6a23c' },
+            { lng: 114.057868, lat: 22.543099, name: '深圳市', icon: 'fa-city', color: '#f56c6c' },
+            { lng: 104.066541, lat: 30.572269, name: '成都市', icon: 'fa-dragon', color: '#909399' }
+        ];
+
+        window.addEventListener('DOMContentLoaded', function() {
+            if (typeof AMap === 'undefined') {
+                console.warn('高德地图 API 未加载，请替换为您自己的 API Key');
+                document.getElementById('mapContainer').innerHTML = `
+                    <div style="display: flex; align-items: center; justify-content: center; height: 100%; flex-direction: column; color: #909399;">
+                        <i class="fas fa-map-marked-alt" style="font-size: 48px; margin-bottom: 16px;"></i>
+                        <p>请配置高德地图 API Key</p>
+                        <p style="font-size: 12px; margin-top: 8px;">前往 <a href="https://console.amap.com/" target="_blank">高德开放平台</a> 申请 Key</p>
+                    </div>
+                `;
+                return;
+            }
+
+            map = new AMap.Map('mapContainer', {
+                zoom: 10,
+                center: [116.397428, 39.90923],
+                mapStyle: 'amap://styles/normal',
+                features: ['bg', 'road', 'building', 'point']
             });
 
-            searchInput.addEventListener('input', function() {
-                if (this.value.length > 0) {
-                    searchResults.classList.add('is-visible');
-                } else {
-                    searchResults.classList.remove('is-visible');
-                }
+            map.on('mousemove', function(e) {
+                document.getElementById('coordsDisplay').textContent = 
+                    `经度: ${e.lnglat.getLng().toFixed(6)} | 纬度: ${e.lnglat.getLat().toFixed(6)}`;
             });
 
-            document.addEventListener('click', function(e) {
-                if (!e.target.closest('.yc-map__search')) {
-                    searchResults.classList.remove('is-visible');
-                }
+            map.on('click', function(e) {
+                handleMapClick(e);
             });
 
-            searchResults.querySelectorAll('.yc-map__search-result-item').forEach(item => {
+            addPresetMarkers();
+            initToolbar();
+            initMarkerList();
+        });
+
+        function addPresetMarkers() {
+            presetMarkers.forEach(item => {
+                const markerContent = `
+                    <div style="
+                        background: ${item.color};
+                        color: white;
+                        width: 32px;
+                        height: 32px;
+                        border-radius: 50%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+                        cursor: pointer;
+                    ">
+                        <i class="fas ${item.icon}" style="font-size: 14px;"></i>
+                    </div>
+                `;
+
+                const marker = new AMap.Marker({
+                    position: [item.lng, item.lat],
+                    content: markerContent,
+                    offset: new AMap.Pixel(-16, -16)
+                });
+
+                marker.on('click', function() {
+                    showInfoWindow(item.name, item.lng, item.lat);
+                });
+
+                map.add(marker);
+                markers.push(marker);
+            });
+        }
+
+        function showInfoWindow(name, lng, lat) {
+            const infoWindow = new AMap.InfoWindow({
+                content: `
+                    <div style="padding: 8px;">
+                        <h4 style="margin: 0 0 8px; font-size: 14px;">${name}</h4>
+                        <p style="margin: 0; font-size: 12px; color: #666;">
+                            经度: ${lng.toFixed(6)}<br>
+                            纬度: ${lat.toFixed(6)}
+                        </p>
+                    </div>
+                `,
+                offset: new AMap.Pixel(0, -20)
+            });
+
+            infoWindow.open(map, [lng, lat]);
+        }
+
+        function initToolbar() {
+            document.getElementById('btnMapType').addEventListener('click', toggleMapType);
+            document.getElementById('btnTraffic').addEventListener('click', toggleTraffic);
+            document.getElementById('btnSatellite').addEventListener('click', toggleSatellite);
+            document.getElementById('btnDrawMarker').addEventListener('click', () => setDrawMode('marker'));
+            document.getElementById('btnDrawCircle').addEventListener('click', () => setDrawMode('circle'));
+            document.getElementById('btnDrawPolygon').addEventListener('click', () => setDrawMode('polygon'));
+            document.getElementById('btnDrawRectangle').addEventListener('click', () => setDrawMode('rectangle'));
+            document.getElementById('btnDrawLine').addEventListener('click', () => setDrawMode('line'));
+            document.getElementById('btnClearDraw').addEventListener('click', clearDrawings);
+            document.getElementById('btnDriving').addEventListener('click', () => setRouteMode('driving'));
+            document.getElementById('btnWalking').addEventListener('click', () => setRouteMode('walking'));
+            document.getElementById('btnTransit').addEventListener('click', () => setRouteMode('transit'));
+            document.getElementById('btnClearRoute').addEventListener('click', clearRoutes);
+            document.getElementById('btnMeasureDistance').addEventListener('click', startMeasureDistance);
+            document.getElementById('btnMeasureArea').addEventListener('click', startMeasureArea);
+            document.getElementById('btnLocate').addEventListener('click', locateMe);
+            document.getElementById('btnResetView').addEventListener('click', resetView);
+        }
+
+        function initMarkerList() {
+            document.querySelectorAll('.demo-map-marker-item').forEach(item => {
                 item.addEventListener('click', function() {
-                    searchInput.value = this.textContent;
-                    searchResults.classList.remove('is-visible');
+                    const lng = parseFloat(this.dataset.lng);
+                    const lat = parseFloat(this.dataset.lat);
+                    map.setCenter([lng, lat]);
+                    map.setZoom(12);
+                    showInfoWindow(this.querySelector('.demo-map-marker-item__name').textContent, lng, lat);
                 });
             });
         }
 
-        document.querySelectorAll('.yc-map__marker').forEach(marker => {
-            marker.addEventListener('click', function() {
-                document.querySelectorAll('.yc-map__marker').forEach(m => {
-                    m.style.zIndex = '10';
-                });
-                this.style.zIndex = '30';
-            });
-        });
+        function setDrawMode(mode) {
+            clearActiveButtons();
+            if (currentDrawMode === mode) {
+                currentDrawMode = null;
+                drawPoints = [];
+                hideDrawInfo();
+            } else {
+                currentDrawMode = mode;
+                drawPoints = [];
+                isMeasuring = false;
+                isMeasuringArea = false;
+                clearMeasureOverlay();
+                showDrawInfo(getDrawModeText(mode));
+                document.getElementById(`btnDraw${mode.charAt(0).toUpperCase() + mode.slice(1)}`)?.classList.add('is-active');
+            }
+        }
 
-        document.querySelectorAll('.yc-map__control-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                console.log('控制按钮点击:', this.title);
+        function setRouteMode(type) {
+            clearActiveButtons();
+            currentDrawMode = 'route';
+            isSettingRouteStart = true;
+            routeStart = null;
+            routeEnd = null;
+            clearRoutes();
+            const routeTypeText = type === 'driving' ? '驾车' : type === 'walking' ? '步行' : '公交';
+            showDrawInfo(`请点击地图设置${routeTypeText}路线起点`);
+            document.getElementById(`btn${type.charAt(0).toUpperCase() + type.slice(1)}`)?.classList.add('is-active');
+            window.currentRouteType = type;
+        }
+
+        function handleMapClick(e) {
+            if (!currentDrawMode) return;
+
+            const lnglat = e.lnglat;
+
+            switch (currentDrawMode) {
+                case 'marker':
+                    addMarker(lnglat);
+                    break;
+                case 'circle':
+                    if (drawPoints.length === 0) {
+                        drawPoints.push(lnglat);
+                        showDrawInfo('请点击设置圆形半径');
+                    } else {
+                        drawCircle(drawPoints[0], lnglat);
+                        clearDrawMode();
+                    }
+                    break;
+                case 'rectangle':
+                    if (drawPoints.length === 0) {
+                        drawPoints.push(lnglat);
+                        showDrawInfo('请点击设置矩形对角点');
+                    } else {
+                        drawRectangle(drawPoints[0], lnglat);
+                        clearDrawMode();
+                    }
+                    break;
+                case 'polygon':
+                    drawPoints.push(lnglat);
+                    if (drawPoints.length >= 3) {
+                        showDrawInfo('点击起点闭合多边形，或继续点击添加点');
+                    } else {
+                        showDrawInfo(`已点击 ${drawPoints.length} 个点，至少需要 3 个点`);
+                    }
+                    if (drawPoints.length >= 3 && isCloseToStart(lnglat)) {
+                        drawPolygon(drawPoints.slice(0, -1));
+                        clearDrawMode();
+                    }
+                    break;
+                case 'line':
+                    drawPoints.push(lnglat);
+                    if (drawPoints.length >= 2) {
+                        showDrawInfo('点击起点闭合线条，或继续点击添加点');
+                    }
+                    if (drawPoints.length >= 3 && isCloseToStart(lnglat)) {
+                        drawLine(drawPoints.slice(0, -1), true);
+                        clearDrawMode();
+                    }
+                    break;
+                case 'route':
+                    if (isSettingRouteStart) {
+                        routeStart = lnglat;
+                        isSettingRouteStart = false;
+                        showDrawInfo('请点击设置路线终点');
+                    } else {
+                        routeEnd = lnglat;
+                        calculateRoute(window.currentRouteType, routeStart, routeEnd);
+                        clearDrawMode();
+                    }
+                    break;
+                case 'measure':
+                    measurePoints.push(lnglat);
+                    updateMeasure();
+                    break;
+                case 'measureArea':
+                    measurePoints.push(lnglat);
+                    updateMeasureArea();
+                    break;
+            }
+        }
+
+        function addMarker(lnglat) {
+            const markerContent = `
+                <div style="
+                    background: #409eff;
+                    color: white;
+                    width: 28px;
+                    height: 28px;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+                    cursor: pointer;
+                ">
+                    <i class="fas fa-map-pin" style="font-size: 12px;"></i>
+                </div>
+            `;
+
+            const marker = new AMap.Marker({
+                position: [lnglat.getLng(), lnglat.getLat()],
+                content: markerContent,
+                offset: new AMap.Pixel(-14, -14)
             });
-        });
+
+            marker.on('click', function() {
+                showInfoWindow('自定义标记', lnglat.getLng(), lnglat.getLat());
+            });
+
+            map.add(marker);
+            markers.push(marker);
+            showDrawInfo('标记已添加');
+        }
+
+        function drawCircle(center, radiusPoint) {
+            const centerLngLat = [center.getLng(), center.getLat()];
+            const radius = AMap.GeometryUtil.distance(center, radiusPoint);
+            
+            const circle = new AMap.Circle({
+                center: centerLngLat,
+                radius: radius,
+                strokeColor: '#409eff',
+                strokeWeight: 2,
+                strokeOpacity: 0.8,
+                fillOpacity: 0.2,
+                fillColor: '#409eff',
+                zIndex: 50
+            });
+
+            map.add(circle);
+            overlays.push(circle);
+            showDrawInfo(`圆形已绘制，半径: ${(radius).toFixed(2)}米`);
+        }
+
+        function drawRectangle(start, end) {
+            const bounds = new AMap.Bounds(
+                [Math.min(start.getLng(), end.getLng()), Math.min(start.getLat(), end.getLat())],
+                [Math.max(start.getLng(), end.getLng()), Math.max(start.getLat(), end.getLat())]
+            );
+
+            const rectangle = new AMap.Rectangle({
+                bounds: bounds,
+                strokeColor: '#67c23a',
+                strokeWeight: 2,
+                strokeOpacity: 0.8,
+                fillOpacity: 0.2,
+                fillColor: '#67c23a',
+                zIndex: 50
+            });
+
+            map.add(rectangle);
+            overlays.push(rectangle);
+            showDrawInfo('矩形已绘制');
+        }
+
+        function drawPolygon(points) {
+            const path = points.map(p => [p.getLng(), p.getLat()]);
+            
+            const polygon = new AMap.Polygon({
+                path: path,
+                strokeColor: '#e6a23c',
+                strokeWeight: 2,
+                strokeOpacity: 0.8,
+                fillOpacity: 0.2,
+                fillColor: '#e6a23c',
+                zIndex: 50
+            });
+
+            map.add(polygon);
+            overlays.push(polygon);
+            showDrawInfo(`多边形已绘制，${points.length}个顶点`);
+        }
+
+        function drawLine(points, isClosed = false) {
+            const path = points.map(p => [p.getLng(), p.getLat()]);
+            
+            const polyline = new AMap.Polyline({
+                path: path,
+                strokeColor: '#f56c6c',
+                strokeWeight: 3,
+                strokeOpacity: 0.8,
+                lineJoin: 'round',
+                lineCap: 'round',
+                zIndex: 50,
+                isClosed: isClosed
+            });
+
+            map.add(polyline);
+            overlays.push(polyline);
+            showDrawInfo(`线条已绘制，${points.length}个点`);
+        }
+
+        function calculateRoute(type, start, end) {
+            if (typeof AMap.Driving === 'undefined') {
+                showDrawInfo('路线规划插件未加载');
+                return;
+            }
+
+            clearRoutes();
+
+            const routeConfig = {
+                map: map,
+                panel: null,
+                autoFitView: true
+            };
+
+            let routePlugin = null;
+            
+            if (type === 'driving') {
+                routePlugin = new AMap.Driving(routeConfig);
+            } else if (type === 'walking') {
+                routePlugin = new AMap.Walking(routeConfig);
+            } else if (type === 'transit') {
+                routePlugin = new AMap.Transit(routeConfig);
+            }
+
+            if (routePlugin) {
+                routePlugin.search(
+                    [start.getLng(), start.getLat()],
+                    [end.getLng(), end.getLat()],
+                    function(status, result) {
+                        if (status === 'complete') {
+                            if (result.routes && result.routes.length > 0) {
+                                const route = result.routes[0];
+                                const distance = (route.distance / 1000).toFixed(2);
+                                const duration = Math.round(route.duration / 60);
+                                showDrawInfo(`路线已规划: ${distance}公里，约${duration}分钟`);
+                            }
+                        } else {
+                            showDrawInfo('路线规划失败: ' + result.info);
+                        }
+                    }
+                );
+            }
+        }
+
+        function startMeasureDistance() {
+            clearActiveButtons();
+            currentDrawMode = 'measure';
+            isMeasuring = true;
+            isMeasuringArea = false;
+            measurePoints = [];
+            clearMeasureOverlay();
+            showDrawInfo('测距模式：点击地图添加测量点，双击结束测量');
+            document.getElementById('btnMeasureDistance')?.classList.add('is-active');
+
+            map.on('dblclick', endMeasureDistance);
+        }
+
+        function endMeasureDistance() {
+            map.off('dblclick', endMeasureDistance);
+            if (measurePoints.length >= 2) {
+                let totalDistance = 0;
+                for (let i = 1; i < measurePoints.length; i++) {
+                    totalDistance += AMap.GeometryUtil.distance(measurePoints[i - 1], measurePoints[i]);
+                }
+                showDrawInfo(`总距离: ${(totalDistance).toFixed(2)}米 (${(totalDistance / 1000).toFixed(2)}公里)`);
+            }
+            isMeasuring = false;
+            measurePoints = [];
+        }
+
+        function updateMeasure() {
+            clearMeasureOverlay();
+
+            if (measurePoints.length === 0) return;
+
+            const path = measurePoints.map(p => [p.getLng(), p.getLat()]);
+
+            measurePolyline = new AMap.Polyline({
+                path: path,
+                strokeColor: '#409eff',
+                strokeWeight: 3,
+                strokeStyle: 'dashed',
+                zIndex: 100
+            });
+
+            map.add(measurePolyline);
+            overlays.push(measurePolyline);
+
+            measurePoints.forEach((point, index) => {
+                const text = new AMap.Text({
+                    text: index + 1,
+                    position: [point.getLng(), point.getLat()],
+                    offset: new AMap.Pixel(10, -10),
+                    style: {
+                        'background-color': '#409eff',
+                        'border-color': '#409eff',
+                        'color': 'white',
+                        'font-size': '12px',
+                        'border-radius': '50%',
+                        'width': '20px',
+                        'height': '20px',
+                        'text-align': 'center',
+                        'line-height': '20px',
+                        'padding': '0'
+                    }
+                });
+
+                map.add(text);
+                overlays.push(text);
+            });
+
+            if (measurePoints.length >= 2) {
+                let totalDistance = 0;
+                for (let i = 1; i < measurePoints.length; i++) {
+                    totalDistance += AMap.GeometryUtil.distance(measurePoints[i - 1], measurePoints[i]);
+                }
+                showDrawInfo(`当前距离: ${totalDistance.toFixed(2)}米`);
+            }
+        }
+
+        function startMeasureArea() {
+            clearActiveButtons();
+            currentDrawMode = 'measureArea';
+            isMeasuring = false;
+            isMeasuringArea = true;
+            measurePoints = [];
+            clearMeasureOverlay();
+            showDrawInfo('测面积模式：点击地图添加顶点，至少需要3个点');
+            document.getElementById('btnMeasureArea')?.classList.add('is-active');
+        }
+
+        function updateMeasureArea() {
+            clearMeasureOverlay();
+
+            if (measurePoints.length === 0) return;
+
+            const path = measurePoints.map(p => [p.getLng(), p.getLat()]);
+
+            if (measurePoints.length >= 3) {
+                measurePolygon = new AMap.Polygon({
+                    path: path,
+                    strokeColor: '#67c23a',
+                    strokeWeight: 2,
+                    fillOpacity: 0.3,
+                    fillColor: '#67c23a',
+                    zIndex: 100
+                });
+
+                map.add(measurePolygon);
+                overlays.push(measurePolygon);
+
+                const area = calculatePolygonArea(measurePoints);
+                showDrawInfo(`当前面积: ${area.toFixed(2)}平方米 (${(area / 10000).toFixed(4)}平方公里)`);
+            } else {
+                measurePolyline = new AMap.Polyline({
+                    path: path,
+                    strokeColor: '#67c23a',
+                    strokeWeight: 2,
+                    strokeStyle: 'dashed',
+                    zIndex: 100
+                });
+
+                map.add(measurePolyline);
+                overlays.push(measurePolyline);
+                showDrawInfo(`已添加 ${measurePoints.length} 个点，至少需要 3 个点`);
+            }
+
+            measurePoints.forEach((point, index) => {
+                const text = new AMap.Text({
+                    text: index + 1,
+                    position: [point.getLng(), point.getLat()],
+                    offset: new AMap.Pixel(10, -10),
+                    style: {
+                        'background-color': '#67c23a',
+                        'border-color': '#67c23a',
+                        'color': 'white',
+                        'font-size': '12px',
+                        'border-radius': '50%',
+                        'width': '20px',
+                        'height': '20px',
+                        'text-align': 'center',
+                        'line-height': '20px',
+                        'padding': '0'
+                    }
+                });
+
+                map.add(text);
+                overlays.push(text);
+            });
+        }
+
+        function calculatePolygonArea(points) {
+            let area = 0;
+            const n = points.length;
+            
+            for (let i = 0; i < n; i++) {
+                const j = (i + 1) % n;
+                const xi = points[i].getLng();
+                const yi = points[i].getLat();
+                const xj = points[j].getLng();
+                const yj = points[j].getLat();
+                area += xi * yj;
+                area -= xj * yi;
+            }
+            
+            area = Math.abs(area) / 2;
+            return area * 111319.9 * 111319.9 * Math.cos(points[0].getLat() * Math.PI / 180);
+        }
+
+        function clearMeasureOverlay() {
+            if (measurePolyline) {
+                map.remove(measurePolyline);
+                measurePolyline = null;
+            }
+            if (measurePolygon) {
+                map.remove(measurePolygon);
+                measurePolygon = null;
+            }
+        }
+
+        function clearDrawings() {
+            overlays.forEach(overlay => map.remove(overlay));
+            overlays = [];
+            clearDrawMode();
+            showDrawInfo('已清除所有绘制内容');
+        }
+
+        function clearRoutes() {
+            if (map) {
+                map.clearMap();
+                markers = [];
+                overlays = [];
+                addPresetMarkers();
+            }
+            routes = [];
+        }
+
+        function clearDrawMode() {
+            currentDrawMode = null;
+            drawPoints = [];
+            clearActiveButtons();
+            hideDrawInfo();
+        }
+
+        function clearActiveButtons() {
+            document.querySelectorAll('.demo-map-toolbar__btn').forEach(btn => {
+                btn.classList.remove('is-active');
+            });
+        }
+
+        function getDrawModeText(mode) {
+            const modeMap = {
+                'marker': '标记模式：点击地图添加标记点',
+                'circle': '圆形模式：点击设置圆心，再次点击设置半径',
+                'polygon': '多边形模式：点击添加顶点，点击起点闭合',
+                'rectangle': '矩形模式：点击设置起点，再次点击设置终点',
+                'line': '线条模式：点击添加点，点击起点闭合'
+            };
+            return modeMap[mode] || '';
+        }
+
+        function showDrawInfo(text) {
+            const drawInfo = document.getElementById('drawInfo');
+            drawInfo.textContent = text;
+            drawInfo.style.display = 'block';
+        }
+
+        function hideDrawInfo() {
+            document.getElementById('drawInfo').style.display = 'none';
+        }
+
+        function isCloseToStart(currentPoint) {
+            if (drawPoints.length < 3) return false;
+            const start = drawPoints[0];
+            const distance = AMap.GeometryUtil.distance(start, currentPoint);
+            return distance < 20;
+        }
+
+        function toggleMapType() {
+            if (currentMapType === 'vector') {
+                map.setMapStyle('amap://styles/dark');
+                currentMapType = 'dark';
+            } else if (currentMapType === 'dark') {
+                map.setMapStyle('amap://styles/light');
+                currentMapType = 'light';
+            } else {
+                map.setMapStyle('amap://styles/normal');
+                currentMapType = 'vector';
+            }
+        }
+
+        function toggleTraffic() {
+            if (!trafficLayer) {
+                trafficLayer = new AMap.TileLayer.Traffic({
+                    zIndex: 10
+                });
+                map.add(trafficLayer);
+            } else {
+                map.remove(trafficLayer);
+                trafficLayer = null;
+            }
+        }
+
+        function toggleSatellite() {
+            if (!satelliteLayer) {
+                satelliteLayer = new AMap.TileLayer.Satellite({
+                    zIndex: 5
+                });
+                map.add(satelliteLayer);
+            } else {
+                map.remove(satelliteLayer);
+                satelliteLayer = null;
+            }
+        }
+
+        function locateMe() {
+            AMap.plugin('AMap.Geolocation', function() {
+                const geolocation = new AMap.Geolocation({
+                    enableHighAccuracy: true,
+                    timeout: 10000,
+                    buttonPosition: 'RB'
+                });
+
+                geolocation.getCurrentPosition(function(status, result) {
+                    if (status === 'complete') {
+                        const position = result.position;
+                        map.setCenter([position.lng, position.lat]);
+                        map.setZoom(15);
+                        showDrawInfo(`定位成功: 经度 ${position.lng.toFixed(6)}, 纬度 ${position.lat.toFixed(6)}`);
+                        
+                        const accuracyCircle = new AMap.Circle({
+                            center: [position.lng, position.lat],
+                            radius: result.accuracy,
+                            strokeColor: '#409eff',
+                            strokeWeight: 1,
+                            strokeOpacity: 0.5,
+                            fillOpacity: 0.1,
+                            fillColor: '#409eff',
+                            zIndex: 40
+                        });
+                        
+                        map.add(accuracyCircle);
+                        overlays.push(accuracyCircle);
+                    } else {
+                        showDrawInfo('定位失败: ' + result.message);
+                    }
+                });
+            });
+        }
+
+        function resetView() {
+            map.setCenter([116.397428, 39.90923]);
+            map.setZoom(10);
+            clearDrawMode();
+            showDrawInfo('视图已重置');
+        }
     </script>
 </body>
 </html>

@@ -50,6 +50,7 @@
     min-width: 160px;
     text-align: center;
     position: relative;
+    user-select: none;
 }
 
 .yc-orgchart__node-card:hover {
@@ -61,6 +62,42 @@
 .yc-orgchart__node-card.is-selected {
     border-color: var(--yc-color-primary, #409eff);
     box-shadow: 0 0 0 2px var(--yc-color-primary-light-7, #b3d8ff);
+}
+
+.yc-orgchart__node-card.is-dragging {
+    opacity: 0.8;
+    transform: scale(1.05) translateY(-4px);
+    box-shadow: 0 8px 24px rgba(64, 158, 255, 0.3);
+    border-color: var(--yc-color-primary, #409eff);
+    border-style: dashed;
+    z-index: 1000;
+    cursor: grabbing;
+}
+
+.yc-orgchart__node-card.is-drag-over {
+    border-color: var(--yc-color-success, #67c23a);
+    background-color: var(--yc-color-success-light-9, #f0f9eb);
+    box-shadow: 0 0 0 3px var(--yc-color-success-light-7, #c2e7b0);
+}
+
+.yc-orgchart__drag-ghost {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.9;
+    transform: rotate(2deg);
+}
+
+.yc-orgchart__drop-indicator {
+    position: absolute;
+    top: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 4px;
+    background-color: var(--yc-color-success, #67c23a);
+    border-radius: 2px;
+    z-index: 999;
 }
 
 .yc-orgchart__node-card--root {
