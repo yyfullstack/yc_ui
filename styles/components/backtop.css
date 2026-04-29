@@ -1,0 +1,59 @@
+@charset "UTF-8";
+
+/**
+ * YC UI Backtop Component
+ * Button to scroll back to top of page
+ */
+
+.yc-backtop {
+    --yc-backtop-bg: var(--yc-color-primary);
+    --yc-backtop-hover-bg: var(--yc-color-primary-hover);
+    --yc-backtop-color: var(--yc-color-white, #ffffff);
+    --yc-backtop-size: 40px;
+    --yc-backtop-border-radius: 50%;
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    z-index: var(--yc-z-index-fixed, 999);
+    width: var(--yc-backtop-size);
+    height: var(--yc-backtop-size);
+    background: var(--yc-backtop-bg);
+    color: var(--yc-backtop-color);
+    border-radius: var(--yc-backtop-border-radius);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--yc-transition-fast);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+    border: none;
+    outline: none;
+}
+
+.yc-backtop:hover {
+    background: var(--yc-backtop-hover-bg);
+    transform: scale(1.1);
+}
+
+.yc-backtop:active {
+    transform: scale(0.95);
+}
+
+.yc-backtop--hidden {
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.8);
+    pointer-events: none;
+}
+
+.yc-backtop--square {
+    --yc-backtop-border-radius: var(--yc-border-radius-md);
+}
+
+.yc-backtop--small {
+    --yc-backtop-size: 32px;
+}
+
+.yc-backtop--large {
+    --yc-backtop-size: 48px;
+}

@@ -1,0 +1,403 @@
+@charset "UTF-8";
+
+/* ==================== Progress ==================== */
+
+.yc-progress {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: var(--yc-font-size-small, 14px);
+    width: 100%;
+}
+
+.yc-progress--line {
+    flex-direction: row;
+}
+
+.yc-progress--circle {
+    flex-direction: column;
+    width: auto;
+}
+
+.yc-progress--dashboard {
+    flex-direction: column;
+    width: auto;
+}
+
+/* Track */
+.yc-progress__track {
+    flex: 1;
+    background-color: #f0f2f5;
+    border-radius: 100px;
+    overflow: hidden;
+    position: relative;
+    height: 6px;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.yc-progress__track--line {
+    height: 6px;
+}
+
+.yc-progress__track--large {
+    height: 12px;
+}
+
+.yc-progress__track--small {
+    height: 4px;
+}
+
+/* Bar */
+.yc-progress__bar {
+    height: 100%;
+    background: linear-gradient(90deg, #409eff 0%, #66b1ff 50%, #79bbff 100%);
+    border-radius: 100px;
+    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    box-shadow: 0 1px 3px rgba(64, 158, 255, 0.3);
+}
+
+.yc-progress__bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transform: translateX(-100%);
+}
+
+.yc-progress__bar:hover::after {
+    animation: yc-progress-shine 1.5s ease-in-out;
+}
+
+@keyframes yc-progress-shine {
+    to {
+        transform: translateX(100%);
+    }
+}
+
+.yc-progress__bar--striped {
+    background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent);
+    background-size: 40px 40px;
+}
+
+.yc-progress__bar--striped.is-animated {
+    animation: yc-progress-stripes 2s linear infinite;
+}
+
+@keyframes yc-progress-stripes {
+    from {
+        background-position: 40px 0;
+    }
+    to {
+        background-position: 0 0;
+    }
+}
+
+.yc-progress__bar--success {
+    background: linear-gradient(90deg, #67c23a 0%, #85ce61 50%, #95d475 100%);
+    box-shadow: 0 1px 3px rgba(103, 194, 58, 0.3);
+}
+
+.yc-progress__bar--warning {
+    background: linear-gradient(90deg, #e6a23c 0%, #ebb563 50%, #f0c78a 100%);
+    box-shadow: 0 1px 3px rgba(230, 162, 60, 0.3);
+}
+
+.yc-progress__bar--danger {
+    background: linear-gradient(90deg, #f56c6c 0%, #f78989 50%, #f9a6a6 100%);
+    box-shadow: 0 1px 3px rgba(245, 108, 108, 0.3);
+}
+
+/* Text */
+.yc-progress__text {
+    min-width: 50px;
+    text-align: right;
+    color: #606266;
+    font-weight: 500;
+    font-size: 14px;
+    flex-shrink: 0;
+    display: inline-block;
+    line-height: 1;
+}
+
+/* ==================== Circle ==================== */
+
+.yc-progress__circle {
+    position: relative;
+    display: inline-block;
+    width: 126px;
+    height: 126px;
+}
+
+.yc-progress__circle svg {
+    transform: rotate(-90deg);
+    transform-origin: center;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.08));
+}
+
+.yc-progress__circle-track {
+    fill: none;
+    stroke: #f0f2f5;
+    stroke-width: 6;
+}
+
+.yc-progress__circle-bar {
+    fill: none;
+    stroke-linecap: round;
+    stroke-width: 6;
+    transition: stroke-dashoffset 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    filter: drop-shadow(0 1px 2px rgba(64, 158, 255, 0.25));
+}
+
+.yc-progress__circle-bar--success {
+    stroke: #67c23a;
+    filter: drop-shadow(0 1px 2px rgba(103, 194, 58, 0.25));
+}
+
+.yc-progress__circle-bar--warning {
+    stroke: #e6a23c;
+    filter: drop-shadow(0 1px 2px rgba(230, 162, 60, 0.25));
+}
+
+.yc-progress__circle-bar--danger {
+    stroke: #f56c6c;
+    filter: drop-shadow(0 1px 2px rgba(245, 108, 108, 0.25));
+}
+
+.yc-progress__circle-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 18px;
+    font-weight: 600;
+    color: #303133;
+    white-space: nowrap;
+}
+
+/* ==================== Status ==================== */
+
+.yc-progress__status {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+}
+
+.yc-progress__status--success {
+    color: #67c23a;
+}
+
+.yc-progress__status--warning {
+    color: #e6a23c;
+}
+
+.yc-progress__status--danger {
+    color: #f56c6c;
+}
+
+.yc-progress__status i {
+    font-size: 16px;
+}
+
+/* ==================== Dashboard ==================== */
+
+.yc-progress__dashboard {
+    position: relative;
+    display: inline-block;
+    width: 126px;
+    height: 126px;
+}
+
+.yc-progress__dashboard svg {
+    transform: rotate(-125deg);
+}
+
+/* ==================== Indeterminate ==================== */
+
+.yc-progress__bar--indeterminate {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    animation: yc-progress-indeterminate 1.8s ease-in-out infinite;
+}
+
+@keyframes yc-progress-indeterminate {
+    0% {
+        width: 0%;
+        margin-left: 0;
+    }
+    50% {
+        width: 60%;
+        margin-left: 20%;
+    }
+    100% {
+        width: 0%;
+        margin-left: 100%;
+    }
+}
+
+/* ==================== Sizes ==================== */
+
+.yc-progress--large .yc-progress__track {
+    height: 12px;
+}
+
+.yc-progress--large .yc-progress__text {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.yc-progress--small .yc-progress__track {
+    height: 4px;
+}
+
+.yc-progress--small .yc-progress__text {
+    font-size: 12px;
+}
+
+/* ==================== Text Inside ==================== */
+
+.yc-progress__bar-text {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 12px;
+    color: #ffffff;
+    font-weight: 600;
+    pointer-events: none;
+    white-space: nowrap;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    line-height: 1;
+}
+
+/* ==================== Additional Visual Enhancements ==================== */
+
+/* Glow effect for high progress values */
+.yc-progress__bar[style*="width: 9"],
+.yc-progress__bar[style*="width: 100"] {
+    box-shadow: 0 1px 4px rgba(64, 158, 255, 0.4);
+}
+
+/* Hover effect on progress container */
+.yc-progress:hover .yc-progress__bar::after {
+    animation: yc-progress-shine 1.5s ease-in-out;
+}
+
+/* Smooth transition for track */
+.yc-progress__track {
+    transition: height 0.3s ease;
+}
+
+/* Enhanced hover effect for bar */
+.yc-progress__bar:hover {
+    filter: brightness(1.05);
+}
+
+/* Circle progress hover effect */
+.yc-progress__circle:hover {
+    transform: scale(1.02);
+    transition: transform 0.3s ease;
+}
+
+.yc-progress__circle {
+    transition: transform 0.3s ease;
+}
+
+/* Status icon integration */
+.yc-progress__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 8px;
+    font-size: 16px;
+    animation: yc-progress-icon-enter 0.3s ease-out;
+}
+
+@keyframes yc-progress-icon-enter {
+    from {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Progress completion pulse effect */
+.yc-progress__bar--completed {
+    animation: yc-progress-pulse 2s ease-in-out;
+}
+
+@keyframes yc-progress-pulse {
+    0%, 100% {
+        box-shadow: 0 1px 3px rgba(64, 158, 255, 0.3);
+    }
+    50% {
+        box-shadow: 0 1px 8px rgba(64, 158, 255, 0.6);
+    }
+}
+
+/* Text inside bar for small sizes */
+.yc-progress--small .yc-progress__bar-text {
+    font-size: 10px;
+    right: 4px;
+}
+
+.yc-progress--large .yc-progress__bar-text {
+    font-size: 14px;
+    right: 12px;
+}
+
+/* Indeterminate progress improvements */
+.yc-progress--indeterminate .yc-progress__track {
+    overflow: hidden;
+}
+
+.yc-progress--indeterminate .yc-progress__bar {
+    position: absolute;
+    width: auto;
+}
+
+/* Dashboard specific styles */
+.yc-progress--dashboard .yc-progress__circle-text {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.yc-progress--dashboard .yc-progress__circle {
+    width: 150px;
+    height: 150px;
+}
+
+/* Accessibility improvements */
+.yc-progress[role="progressbar"] {
+    outline: none;
+}
+
+.yc-progress:focus-visible {
+    outline: 2px solid #409eff;
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* Print styles */
+@media print {
+    .yc-progress__bar {
+        animation: none !important;
+        box-shadow: none !important;
+    }
+    
+    .yc-progress__bar::after {
+        display: none;
+    }
+}

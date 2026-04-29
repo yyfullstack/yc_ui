@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spreadsheet 电子表格 - YC UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+    <style>
+        .spreadsheet-demo-section {
+            margin-bottom: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">Spreadsheet 电子表格</h1>
+            <p class="demo-page-subtitle">功能强大的在线电子表格组件，支持编辑、公式、排序等</p>
+        </div>
+
+        <div class="spreadsheet-demo-section">
+            <h3>基础表格</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">基础的电子表格，支持单元格编辑</div>
+                <div class="yc-spreadsheet">
+                    <div class="yc-spreadsheet__toolbar">
+                        <div class="yc-spreadsheet__toolbar-group">
+                            <button class="yc-spreadsheet__toolbar-btn" title="撤销"><i class="fa fa-undo"></i></button>
+                            <button class="yc-spreadsheet__toolbar-btn" title="重做"><i class="fa fa-redo"></i></button>
+                        </div>
+                        <div class="yc-spreadsheet__toolbar-group">
+                            <button class="yc-spreadsheet__toolbar-btn" title="加粗"><i class="fa fa-bold"></i></button>
+                            <button class="yc-spreadsheet__toolbar-btn" title="斜体"><i class="fa fa-italic"></i></button>
+                            <button class="yc-spreadsheet__toolbar-btn" title="下划线"><i class="fa fa-underline"></i></button>
+                        </div>
+                        <div class="yc-spreadsheet__toolbar-group">
+                            <button class="yc-spreadsheet__toolbar-btn" title="左对齐"><i class="fa fa-align-left"></i></button>
+                            <button class="yc-spreadsheet__toolbar-btn" title="居中对齐"><i class="fa fa-align-center"></i></button>
+                            <button class="yc-spreadsheet__toolbar-btn" title="右对齐"><i class="fa fa-align-right"></i></button>
+                        </div>
+                        <div class="yc-spreadsheet__toolbar-group">
+                            <button class="yc-spreadsheet__toolbar-btn" title="合并单元格"><i class="fa fa-object-group"></i></button>
+                            <button class="yc-spreadsheet__toolbar-btn" title="边框"><i class="fa fa-border-all"></i></button>
+                        </div>
+                        <div class="yc-spreadsheet__toolbar-group">
+                            <input type="color" class="yc-spreadsheet__toolbar-color" value="#000000" title="文字颜色">
+                            <input type="color" class="yc-spreadsheet__toolbar-color" value="#ffffff" title="背景颜色">
+                        </div>
+                        <div class="yc-spreadsheet__toolbar-group">
+                            <select class="yc-spreadsheet__toolbar-select">
+                                <option>10px</option>
+                                <option selected>12px</option>
+                                <option>14px</option>
+                                <option>16px</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="yc-spreadsheet__formula-bar">
+                        <input type="text" class="yc-spreadsheet__cell-reference" value="A1">
+                        <span class="yc-spreadsheet__formula-prefix">fx</span>
+                        <input type="text" class="yc-spreadsheet__formula-input" placeholder="输入公式或内容">
+                    </div>
+                    <div class="yc-spreadsheet__grid-wrapper" style="max-height: 400px;">
+                        <table class="yc-spreadsheet__grid" id="basic-spreadsheet">
+                            <thead>
+                                <tr class="yc-spreadsheet__header-row">
+                                    <th class="yc-spreadsheet__corner-cell"></th>
+                                    <th>A</th>
+                                    <th>B</th>
+                                    <th>C</th>
+                                    <th>D</th>
+                                    <th>E</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="yc-spreadsheet__row-header">1</td>
+                                    <td class="yc-spreadsheet__cell is-selected">项目名称</td>
+                                    <td class="yc-spreadsheet__cell">负责人</td>
+                                    <td class="yc-spreadsheet__cell">开始日期</td>
+                                    <td class="yc-spreadsheet__cell">状态</td>
+                                    <td class="yc-spreadsheet__cell">进度</td>
+                                </tr>
+                                <tr>
+                                    <td class="yc-spreadsheet__row-header">2</td>
+                                    <td class="yc-spreadsheet__cell">YC UI 组件库</td>
+                                    <td class="yc-spreadsheet__cell">张三</td>
+                                    <td class="yc-spreadsheet__cell yc-spreadsheet__cell--date">2024-01-01</td>
+                                    <td class="yc-spreadsheet__cell"><span class="yc-tag yc-tag--primary">进行中</span></td>
+                                    <td class="yc-spreadsheet__cell yc-spreadsheet__cell--number">60%</td>
+                                </tr>
+                                <tr>
+                                    <td class="yc-spreadsheet__row-header">3</td>
+                                    <td class="yc-spreadsheet__cell">移动端适配</td>
+                                    <td class="yc-spreadsheet__cell">李四</td>
+                                    <td class="yc-spreadsheet__cell yc-spreadsheet__cell--date">2024-02-01</td>
+                                    <td class="yc-spreadsheet__cell"><span class="yc-tag yc-tag--success">已完成</span></td>
+                                    <td class="yc-spreadsheet__cell yc-spreadsheet__cell--number">100%</td>
+                                </tr>
+                                <tr>
+                                    <td class="yc-spreadsheet__row-header">4</td>
+                                    <td class="yc-spreadsheet__cell">性能优化</td>
+                                    <td class="yc-spreadsheet__cell">王五</td>
+                                    <td class="yc-spreadsheet__cell yc-spreadsheet__cell--date">2024-03-01</td>
+                                    <td class="yc-spreadsheet__cell"><span class="yc-tag yc-tag--warning">待开始</span></td>
+                                    <td class="yc-spreadsheet__cell yc-spreadsheet__cell--number">0%</td>
+                                </tr>
+                                <tr>
+                                    <td class="yc-spreadsheet__row-header">5</td>
+                                    <td class="yc-spreadsheet__cell">文档编写</td>
+                                    <td class="yc-spreadsheet__cell">赵六</td>
+                                    <td class="yc-spreadsheet__cell yc-spreadsheet__cell--date">2024-03-15</td>
+                                    <td class="yc-spreadsheet__cell"><span class="yc-tag yc-tag--info">计划中</span></td>
+                                    <td class="yc-spreadsheet__cell yc-spreadsheet__cell--number">10%</td>
+                                </tr>
+                                <tr>
+                                    <td class="yc-spreadsheet__row-header">6</td>
+                                    <td class="yc-spreadsheet__cell yc-spreadsheet__cell--readonly">总计</td>
+                                    <td class="yc-spreadsheet__cell yc-spreadsheet__cell--readonly">-</td>
+                                    <td class="yc-spreadsheet__cell yc-spreadsheet__cell--readonly">-</td>
+                                    <td class="yc-spreadsheet__cell yc-spreadsheet__cell--readonly">-</td>
+                                    <td class="yc-spreadsheet__cell yc-spreadsheet__cell--number yc-spreadsheet__cell--readonly" style="font-weight: bold;">42.5%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="yc-spreadsheet__sheet-tabs">
+                        <div class="yc-spreadsheet__sheet-tab is-active">
+                            <span>Sheet1</span>
+                            <span class="yc-spreadsheet__sheet-tab-close"><i class="fa fa-times"></i></span>
+                        </div>
+                        <div class="yc-spreadsheet__sheet-tab">
+                            <span>Sheet2</span>
+                            <span class="yc-spreadsheet__sheet-tab-close"><i class="fa fa-times"></i></span>
+                        </div>
+                        <span class="yc-spreadsheet__sheet-add"><i class="fa fa-plus"></i></span>
+                    </div>
+                    <div class="yc-spreadsheet__status-bar">
+                        <div class="yc-spreadsheet__status-info">
+                            <span>平均值: 42.5%</span>
+                            <span>计数: 4</span>
+                            <span>求和: 170%</span>
+                        </div>
+                        <div class="yc-spreadsheet__zoom-control">
+                            <button class="yc-spreadsheet__zoom-btn"><i class="fa fa-minus"></i></button>
+                            <span>100%</span>
+                            <button class="yc-spreadsheet__zoom-btn"><i class="fa fa-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="spreadsheet-demo-section">
+            <h3>带财务数据</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">支持货币格式和公式计算</div>
+                <div class="yc-spreadsheet">
+                    <div class="yc-spreadsheet__toolbar">
+                        <div class="yc-spreadsheet__toolbar-group">
+                            <button class="yc-spreadsheet__toolbar-btn" title="撤销"><i class="fa fa-undo"></i></button>
+                            <button class="yc-spreadsheet__toolbar-btn" title="重做"><i class="fa fa-redo"></i></button>
+                        </div>
+                        <div class="yc-spreadsheet__toolbar-group">
+                            <button class="yc-spreadsheet__toolbar-btn" title="加粗"><i class="fa fa-bold"></i></button>
+                            <button class="yc-spreadsheet__toolbar-btn" title="斜体"><i class="fa fa-italic"></i></button>
+                        </div>
+                        <div class="yc-spreadsheet__toolbar-group">
+                            <button class="yc-spreadsheet__toolbar-btn" title="货币格式">¥</button>
+                            <button class="yc-spreadsheet__toolbar-btn" title="百分比格式">%</button>
+                        </div>
+                    </div>
+                    <div class="yc-spreadsheet__grid-wrapper" style="max-height: 300px;">
+                        <table class="yc-spreadsheet__grid">
+                            <thead>
+                                <tr class="yc-spreadsheet__header-row">
+                                    <th class="yc-spreadsheet__corner-cell"></th>
+                                    <th>A</th>
+                                    <th>B</th>
+                                    <th>C</th>
+                                    <th>D</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="yc-spreadsheet__row-header">1</td>
+                                    <td class="yc-spreadsheet__cell" style="font-weight: bold;">产品</td>
+                                    <td class="yc-spreadsheet__cell" style="font-weight: bold;">Q1 收入</td>
+                                    <td class="yc-spreadsheet__cell" style="font-weight: bold;">Q2 收入</td>
+                                    <td class="yc-spreadsheet__cell" style="font-weight: bold;">合计</td>
+                                </tr>
+                                <tr>
+                                    <td class="yc-spreadsheet__row-header">2</td>
+                                    <td class="yc-spreadsheet__cell">产品A</td>
+                                    <td class="yc-spreadsheet__cell yc-spreadsheet__cell--currency yc-spreadsheet__cell--number">¥12,500</td>
+                                    <td class="yc-spreadsheet__cell yc-spreadsheet__cell--currency yc-spreadsheet__cell--number">¥15,800</td>
+                                    <td class="yc-spreadsheet__cell yc-spreadsheet__cell--currency yc-spreadsheet__cell--number" style="font-weight: bold;">¥28,300</td>
+                                </tr>
+                                <tr>
+                                    <td class="yc-spreadsheet__row-header">3</td>
+                                    <td class="yc-spreadsheet__cell">产品B</td>
+                                    <td class="yc-spreadsheet__cell yc-spreadsheet__cell--currency yc-spreadsheet__cell--number">¥8,200</td>
+                                    <td class="yc-spreadsheet__cell yc-spreadsheet__cell--currency yc-spreadsheet__cell--number">¥9,600</td>
+                                    <td class="yc-spreadsheet__cell yc-spreadsheet__cell--currency yc-spreadsheet__cell--number" style="font-weight: bold;">¥17,800</td>
+                                </tr>
+                                <tr>
+                                    <td class="yc-spreadsheet__row-header">4</td>
+                                    <td class="yc-spreadsheet__cell">产品C</td>
+                                    <td class="yc-spreadsheet__cell yc-spreadsheet__cell--currency yc-spreadsheet__cell--number">¥21,000</td>
+                                    <td class="yc-spreadsheet__cell yc-spreadsheet__cell--currency yc-spreadsheet__cell--number">¥18,500</td>
+                                    <td class="yc-spreadsheet__cell yc-spreadsheet__cell--currency yc-spreadsheet__cell--number" style="font-weight: bold;">¥39,500</td>
+                                </tr>
+                                <tr>
+                                    <td class="yc-spreadsheet__row-header">5</td>
+                                    <td class="yc-spreadsheet__cell yc-spreadsheet__cell--readonly" style="font-weight: bold; background-color: #f5f7fa;">总计</td>
+                                    <td class="yc-spreadsheet__cell yc-spreadsheet__cell--currency yc-spreadsheet__cell--number yc-spreadsheet__cell--readonly" style="font-weight: bold; background-color: #f5f7fa;">¥41,700</td>
+                                    <td class="yc-spreadsheet__cell yc-spreadsheet__cell--currency yc-spreadsheet__cell--number yc-spreadsheet__cell--readonly" style="font-weight: bold; background-color: #f5f7fa;">¥43,900</td>
+                                    <td class="yc-spreadsheet__cell yc-spreadsheet__cell--currency yc-spreadsheet__cell--number yc-spreadsheet__cell--readonly" style="font-weight: bold; background-color: #ecf5ff;">¥85,600</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="yc-spreadsheet__sheet-tabs">
+                        <div class="yc-spreadsheet__sheet-tab is-active">
+                            <span>财务报表</span>
+                        </div>
+                    </div>
+                    <div class="yc-spreadsheet__status-bar">
+                        <div class="yc-spreadsheet__status-info">
+                            <span>已选择 1 个单元格</span>
+                        </div>
+                        <div class="yc-spreadsheet__zoom-control">
+                            <button class="yc-spreadsheet__zoom-btn"><i class="fa fa-minus"></i></button>
+                            <span>100%</span>
+                            <button class="yc-spreadsheet__zoom-btn"><i class="fa fa-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="spreadsheet-demo-section">
+            <h3>只读模式</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">只读展示模式，不可编辑</div>
+                <div class="yc-spreadsheet">
+                    <div class="yc-spreadsheet__grid-wrapper" style="max-height: 200px;">
+                        <table class="yc-spreadsheet__grid">
+                            <thead>
+                                <tr class="yc-spreadsheet__header-row">
+                                    <th class="yc-spreadsheet__corner-cell"></th>
+                                    <th>指标</th>
+                                    <th>目标</th>
+                                    <th>实际</th>
+                                    <th>达成率</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="yc-spreadsheet__row-header">1</td>
+                                    <td class="yc-spreadsheet__cell yc-spreadsheet__cell--readonly">销售额</td>
+                                    <td class="yc-spreadsheet__cell yc-spreadsheet__cell--readonly yc-spreadsheet__cell--currency yc-spreadsheet__cell--number">¥100,000</td>
+                                    <td class="yc-spreadsheet__cell yc-spreadsheet__cell--readonly yc-spreadsheet__cell--currency yc-spreadsheet__cell--number">¥85,600</td>
+                                    <td class="yc-spreadsheet__cell yc-spreadsheet__cell--readonly yc-spreadsheet__cell--percentage yc-spreadsheet__cell--number" style="color: #e6a23c;">85.6%</td>
+                                </tr>
+                                <tr>
+                                    <td class="yc-spreadsheet__row-header">2</td>
+                                    <td class="yc-spreadsheet__cell yc-spreadsheet__cell--readonly">新增用户</td>
+                                    <td class="yc-spreadsheet__cell yc-spreadsheet__cell--readonly yc-spreadsheet__cell--number">5,000</td>
+                                    <td class="yc-spreadsheet__cell yc-spreadsheet__cell--readonly yc-spreadsheet__cell--number">6,200</td>
+                                    <td class="yc-spreadsheet__cell yc-spreadsheet__cell--readonly yc-spreadsheet__cell--percentage yc-spreadsheet__cell--number" style="color: #67c23a;">124%</td>
+                                </tr>
+                                <tr>
+                                    <td class="yc-spreadsheet__row-header">3</td>
+                                    <td class="yc-spreadsheet__cell yc-spreadsheet__cell--readonly">转化率</td>
+                                    <td class="yc-spreadsheet__cell yc-spreadsheet__cell--readonly yc-spreadsheet__cell--percentage yc-spreadsheet__cell--number">3.0%</td>
+                                    <td class="yc-spreadsheet__cell yc-spreadsheet__cell--readonly yc-spreadsheet__cell--percentage yc-spreadsheet__cell--number">3.5%</td>
+                                    <td class="yc-spreadsheet__cell yc-spreadsheet__cell--readonly yc-spreadsheet__cell--percentage yc-spreadsheet__cell--number" style="color: #67c23a;">116.7%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="spreadsheet-demo-section">
+            <h3>单元格编辑交互</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">点击单元格进行编辑</div>
+                <div class="yc-spreadsheet">
+                    <div class="yc-spreadsheet__formula-bar">
+                        <input type="text" class="yc-spreadsheet__cell-reference" id="active-cell-ref" value="B2">
+                        <span class="yc-spreadsheet__formula-prefix">fx</span>
+                        <input type="text" class="yc-spreadsheet__formula-input" id="active-cell-value" value="张三">
+                    </div>
+                    <div class="yc-spreadsheet__grid-wrapper" style="max-height: 250px;">
+                        <table class="yc-spreadsheet__grid" id="editable-spreadsheet">
+                            <thead>
+                                <tr class="yc-spreadsheet__header-row">
+                                    <th class="yc-spreadsheet__corner-cell"></th>
+                                    <th>A</th>
+                                    <th>B</th>
+                                    <th>C</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="yc-spreadsheet__row-header">1</td>
+                                    <td class="yc-spreadsheet__cell">姓名</td>
+                                    <td class="yc-spreadsheet__cell">年龄</td>
+                                    <td class="yc-spreadsheet__cell">城市</td>
+                                </tr>
+                                <tr>
+                                    <td class="yc-spreadsheet__row-header">2</td>
+                                    <td class="yc-spreadsheet__cell is-active">张三</td>
+                                    <td class="yc-spreadsheet__cell">28</td>
+                                    <td class="yc-spreadsheet__cell">北京</td>
+                                </tr>
+                                <tr>
+                                    <td class="yc-spreadsheet__row-header">3</td>
+                                    <td class="yc-spreadsheet__cell">李四</td>
+                                    <td class="yc-spreadsheet__cell">32</td>
+                                    <td class="yc-spreadsheet__cell">上海</td>
+                                </tr>
+                                <tr>
+                                    <td class="yc-spreadsheet__row-header">4</td>
+                                    <td class="yc-spreadsheet__cell">王五</td>
+                                    <td class="yc-spreadsheet__cell">25</td>
+                                    <td class="yc-spreadsheet__cell">广州</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Cell click selection
+        document.querySelectorAll('.yc-spreadsheet__cell:not(.yc-spreadsheet__cell--readonly)').forEach(function(cell) {
+            cell.addEventListener('click', function() {
+                document.querySelectorAll('.yc-spreadsheet__cell.is-active').forEach(function(c) {
+                    c.classList.remove('is-active');
+                });
+                this.classList.add('is-active');
+                
+                // Update formula bar
+                var cellRef = document.getElementById('active-cell-ref');
+                var cellValue = document.getElementById('active-cell-value');
+                if (cellRef && cellValue) {
+                    cellValue.value = this.textContent.trim();
+                }
+            });
+
+            cell.addEventListener('dblclick', function() {
+                var currentValue = this.textContent.trim();
+                var input = document.createElement('input');
+                input.type = 'text';
+                input.className = 'yc-spreadsheet__cell-input';
+                input.value = currentValue;
+                
+                this.textContent = '';
+                this.classList.add('is-editing');
+                this.appendChild(input);
+                input.focus();
+                input.select();
+
+                function finishEdit() {
+                    this.classList.remove('is-editing');
+                    var newValue = input.value.trim();
+                    this.textContent = newValue || currentValue;
+                    
+                    if (document.getElementById('active-cell-value')) {
+                        document.getElementById('active-cell-value').value = newValue || currentValue;
+                    }
+                }
+
+                input.addEventListener('blur', finishEdit.bind(this));
+                input.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter') {
+                        input.blur();
+                    } else if (e.key === 'Escape') {
+                        input.value = currentValue;
+                        input.blur();
+                    }
+                });
+            });
+        });
+
+        // Sheet tab switching
+        document.querySelectorAll('.yc-spreadsheet__sheet-tab').forEach(function(tab) {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.yc-spreadsheet__sheet-tab').forEach(function(t) {
+                    t.classList.remove('is-active');
+                });
+                this.classList.add('is-active');
+            });
+        });
+    </script>
+</body>
+</html>

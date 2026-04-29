@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breadcrumb 面包屑组件示例</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../index.css">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: var(--yc-font-family); background: var(--yc-color-bg-page); color: var(--yc-color-text-primary); line-height: var(--yc-line-height-base); padding: 24px; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .demo-section { background: var(--yc-color-bg); border: 1px solid var(--yc-color-border); border-radius: var(--yc-border-radius-lg); padding: 24px; margin-bottom: 16px; }
+        .demo-section h3 { font-size: var(--yc-font-size-medium); font-weight: var(--yc-font-weight-semibold); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--yc-color-border-light); position: relative; }
+        .demo-section h3::before { content: ''; position: absolute; left: -24px; top: 50%; transform: translateY(-50%); width: 4px; height: 16px; background: var(--yc-color-primary); border-radius: 2px; }
+        .demo-block { margin-bottom: 24px; }
+        .demo-block:last-child { margin-bottom: 0; }
+        .demo-block-title { font-size: var(--yc-font-size-small); color: var(--yc-color-text-secondary); margin-bottom: 12px; }
+
+        .yc-breadcrumb {
+            --yc-breadcrumb-separator-color: var(--yc-color-text-placeholder);
+            --yc-breadcrumb-text-color: var(--yc-color-text-secondary);
+            --yc-breadcrumb-link-color: var(--yc-color-text-regular);
+            --yc-breadcrumb-link-hover-color: var(--yc-color-primary);
+            --yc-breadcrumb-font-size: var(--yc-font-size-small);
+        }
+        .yc-breadcrumb { display: flex; align-items: center; flex-wrap: wrap; font-size: var(--yc-breadcrumb-font-size); }
+        .yc-breadcrumb__list { display: flex; align-items: center; list-style: none; padding: 0; margin: 0; }
+        .yc-breadcrumb__item { display: flex; align-items: center; }
+        .yc-breadcrumb__item:last-child .yc-breadcrumb__link { color: var(--yc-breadcrumb-text-color); cursor: default; }
+        .yc-breadcrumb__item:last-child .yc-breadcrumb__link:hover { color: var(--yc-breadcrumb-text-color); }
+        .yc-breadcrumb__link { color: var(--yc-breadcrumb-link-color); text-decoration: none; transition: color var(--yc-transition-duration-fast); }
+        .yc-breadcrumb__link:hover { color: var(--yc-breadcrumb-link-hover-color); }
+        .yc-breadcrumb__separator { margin: 0 8px; color: var(--yc-breadcrumb-separator-color); font-size: 10px; }
+        .yc-breadcrumb--large { --yc-breadcrumb-font-size: var(--yc-font-size-medium); }
+        .yc-breadcrumb--small { --yc-breadcrumb-font-size: var(--yc-font-size-extra-small); }
+
+        .breadcrumb-icon { margin-right: 6px; }
+        .breadcrumb-content { padding: 16px; background: var(--yc-color-bg-page); border-radius: var(--yc-border-radius-md); }
+
+        [yc-theme="dark"] .demo-section { background: rgba(255, 255, 255, 0.02); border-color: rgba(255, 255, 255, 0.08); }
+        [yc-theme="dark"] .breadcrumb-content { background: rgba(255, 255, 255, 0.03); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 style="font-size: 24px; font-weight: 600; margin-bottom: 24px;">Breadcrumb 面包屑组件</h1>
+
+        <div class="demo-section">
+            <h3>基础用法</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">基本的面包屑导航</div>
+                <div class="breadcrumb-content">
+                    <nav class="yc-breadcrumb">
+                        <ol class="yc-breadcrumb__list">
+                            <li class="yc-breadcrumb__item">
+                                <a href="#" class="yc-breadcrumb__link">首页</a>
+                                <span class="yc-breadcrumb__separator">/</span>
+                            </li>
+                            <li class="yc-breadcrumb__item">
+                                <a href="#" class="yc-breadcrumb__link">产品中心</a>
+                                <span class="yc-breadcrumb__separator">/</span>
+                            </li>
+                            <li class="yc-breadcrumb__item">
+                                <a href="#" class="yc-breadcrumb__link">软件产品</a>
+                                <span class="yc-breadcrumb__separator">/</span>
+                            </li>
+                            <li class="yc-breadcrumb__item">
+                                <span class="yc-breadcrumb__link">YC Design</span>
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>带图标的分隔符</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">使用图标作为分隔符</div>
+                <div class="breadcrumb-content">
+                    <nav class="yc-breadcrumb">
+                        <ol class="yc-breadcrumb__list">
+                            <li class="yc-breadcrumb__item">
+                                <a href="#" class="yc-breadcrumb__link"><i class="fas fa-home breadcrumb-icon"></i>首页</a>
+                                <span class="yc-breadcrumb__separator"><i class="fas fa-chevron-right" style="font-size: 8px;"></i></span>
+                            </li>
+                            <li class="yc-breadcrumb__item">
+                                <a href="#" class="yc-breadcrumb__link"><i class="fas fa-box breadcrumb-icon"></i>产品</a>
+                                <span class="yc-breadcrumb__separator"><i class="fas fa-chevron-right" style="font-size: 8px;"></i></span>
+                            </li>
+                            <li class="yc-breadcrumb__item">
+                                <a href="#" class="yc-breadcrumb__link"><i class="fas fa-gem breadcrumb-icon"></i>组件</a>
+                                <span class="yc-breadcrumb__separator"><i class="fas fa-chevron-right" style="font-size: 8px;"></i></span>
+                            </li>
+                            <li class="yc-breadcrumb__item">
+                                <span class="yc-breadcrumb__link">当前页面</span>
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>尺寸变体</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">大、中、小三种尺寸</div>
+                <div class="breadcrumb-content" style="margin-bottom: 16px;">
+                    <nav class="yc-breadcrumb yc-breadcrumb--large">
+                        <ol class="yc-breadcrumb__list">
+                            <li class="yc-breadcrumb__item"><a href="#" class="yc-breadcrumb__link">大字号</a><span class="yc-breadcrumb__separator">/</span></li>
+                            <li class="yc-breadcrumb__item"><a href="#" class="yc-breadcrumb__link">产品中心</a><span class="yc-breadcrumb__separator">/</span></li>
+                            <li class="yc-breadcrumb__item"><span class="yc-breadcrumb__link">详情</span></li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="breadcrumb-content" style="margin-bottom: 16px;">
+                    <nav class="yc-breadcrumb">
+                        <ol class="yc-breadcrumb__list">
+                            <li class="yc-breadcrumb__item"><a href="#" class="yc-breadcrumb__link">默认</a><span class="yc-breadcrumb__separator">/</span></li>
+                            <li class="yc-breadcrumb__item"><a href="#" class="yc-breadcrumb__link">产品中心</a><span class="yc-breadcrumb__separator">/</span></li>
+                            <li class="yc-breadcrumb__item"><span class="yc-breadcrumb__link">详情</span></li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="breadcrumb-content">
+                    <nav class="yc-breadcrumb yc-breadcrumb--small">
+                        <ol class="yc-breadcrumb__list">
+                            <li class="yc-breadcrumb__item"><a href="#" class="yc-breadcrumb__link">小字号</a><span class="yc-breadcrumb__separator">/</span></li>
+                            <li class="yc-breadcrumb__item"><a href="#" class="yc-breadcrumb__link">产品中心</a><span class="yc-breadcrumb__separator">/</span></li>
+                            <li class="yc-breadcrumb__item"><span class="yc-breadcrumb__link">详情</span></li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>使用场景</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">电商商品页</div>
+                <div class="breadcrumb-content">
+                    <nav class="yc-breadcrumb">
+                        <ol class="yc-breadcrumb__list">
+                            <li class="yc-breadcrumb__item"><a href="#" class="yc-breadcrumb__link">首页</a><span class="yc-breadcrumb__separator">/</span></li>
+                            <li class="yc-breadcrumb__item"><a href="#" class="yc-breadcrumb__link">手机数码</a><span class="yc-breadcrumb__separator">/</span></li>
+                            <li class="yc-breadcrumb__item"><a href="#" class="yc-breadcrumb__link">智能手机</a><span class="yc-breadcrumb__separator">/</span></li>
+                            <li class="yc-breadcrumb__item"><a href="#" class="yc-breadcrumb__link">苹果</a><span class="yc-breadcrumb__separator">/</span></li>
+                            <li class="yc-breadcrumb__item"><span class="yc-breadcrumb__link">iPhone 15 Pro</span></li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+            <div class="demo-block">
+                <div class="demo-block-title">后台管理页</div>
+                <div class="breadcrumb-content">
+                    <nav class="yc-breadcrumb">
+                        <ol class="yc-breadcrumb__list">
+                            <li class="yc-breadcrumb__item"><a href="#" class="yc-breadcrumb__link"><i class="fas fa-cog breadcrumb-icon"></i>系统管理</a><span class="yc-breadcrumb__separator">/</span></li>
+                            <li class="yc-breadcrumb__item"><a href="#" class="yc-breadcrumb__link">用户管理</a><span class="yc-breadcrumb__separator">/</span></li>
+                            <li class="yc-breadcrumb__item"><span class="yc-breadcrumb__link">编辑用户</span></li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+            <div class="demo-block">
+                <div class="demo-block-title">文档页</div>
+                <div class="breadcrumb-content">
+                    <nav class="yc-breadcrumb">
+                        <ol class="yc-breadcrumb__list">
+                            <li class="yc-breadcrumb__item"><a href="#" class="yc-breadcrumb__link">文档</a><span class="yc-breadcrumb__separator">/</span></li>
+                            <li class="yc-breadcrumb__item"><a href="#" class="yc-breadcrumb__link">组件</a><span class="yc-breadcrumb__separator">/</span></li>
+                            <li class="yc-breadcrumb__item"><a href="#" class="yc-breadcrumb__link">导航</a><span class="yc-breadcrumb__separator">/</span></li>
+                            <li class="yc-breadcrumb__item"><span class="yc-breadcrumb__link">面包屑</span></li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

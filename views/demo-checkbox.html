@@ -305,6 +305,7 @@
             refresh() {
                 this.checkboxes.forEach(item => item.updateState());
                 this.updateResult();
+                this.notifyChange();
             }
         }
 
@@ -361,34 +362,29 @@
         }
 
         class SelectAllController {
-            constructor() {
+            constructor(group) {
                 this.selectAllEl = document.getElementById('selectAll');
                 this.selectAllInput = document.getElementById('selectAllInput');
-                this.group = new CheckboxGroup(
-                    document.getElementById('selectAllGroup'),
-                    { resultEl: document.getElementById('selectAllResult') }
-                );
+            
+                this.group = group;
 
                 if (this.selectAllEl && this.selectAllInput) {
                     this.bindEvents();
+                    this.updateSelectAllState({
+                        isAllChecked: this.group.isAllChecked(),
+                        isNoneChecked: this.group.isNoneChecked()
+                    });
                 }
             }
 
             bindEvents() {
-                let isProgrammaticToggle = false;
-
                 this.selectAllEl.addEventListener('click', (e) => {
                     if (e.target.tagName === 'INPUT') return;
                     e.preventDefault();
-                    isProgrammaticToggle = true;
                     this.toggleAll();
-                    setTimeout(() => {
-                        isProgrammaticToggle = false;
-                    }, 0);
                 });
 
                 this.selectAllInput.addEventListener('change', () => {
-                    if (isProgrammaticToggle) return;
                     this.handleSelectAllChange();
                 });
 
@@ -407,6 +403,7 @@
             }
 
             handleSelectAllChange() {
+                console.log(this.selectAllInput.checked);
                 if (this.selectAllInput.checked) {
                     this.group.checkAll();
                 } else {
@@ -420,7 +417,6 @@
 
                 this.selectAllEl.classList.toggle('is-checked', data.isAllChecked);
                 this.selectAllEl.classList.toggle('is-indeterminate', !data.isAllChecked && !data.isNoneChecked);
-                this.selectAllEl.classList.toggle('yc-checkbox--indeterminate', !data.isAllChecked && !data.isNoneChecked);
             }
         }
 
@@ -446,6 +442,7 @@
         }
 
         function initCheckboxGroups() {
+            let selectAllGroup = null;
             document.querySelectorAll('.yc-checkbox-group').forEach(groupEl => {
                 const resultEl = groupEl.nextElementSibling?.classList.contains('demo-result')
                     ? groupEl.nextElementSibling
@@ -455,8 +452,10 @@
 
                 if (groupEl.id === 'selectAllGroup') {
                     groupEl.checkboxGroup = group;
+                    selectAllGroup = group;
                 }
             });
+            return selectAllGroup;
         }
 
         function initBasicCheckboxes() {
@@ -480,8 +479,10 @@
 
         function initAll() {
             initBasicCheckboxes();
-            initCheckboxGroups();
-            new SelectAllController();
+            const selectAllGroup = initCheckboxGroups();
+            if (selectAllGroup) {
+                new SelectAllController(selectAllGroup);
+            }
         }
 
         window.addEventListener('DOMContentLoaded', initAll);

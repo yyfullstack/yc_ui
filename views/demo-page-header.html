@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PageHeader 页头 - YC UI</title>
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-header__title">PageHeader 页头</h1>
+            <p class="demo-page-header__desc">页面头部，包含返回按钮、标题、副标题和操作区。</p>
+        </div>
+
+        <div class="demo-section">
+            <h2 class="demo-section__title">基础用法</h2>
+            <p class="demo-section__desc">最简单的页头，包含返回按钮和标题。</p>
+            <div class="demo-block">
+                <div class="yc-page-header">
+                    <div class="yc-page-header__back">
+                        <i class="fas fa-arrow-left yc-page-header__back-icon"></i>
+                        返回
+                    </div>
+                    <div class="yc-page-header__content">
+                        <div class="yc-page-header__main">
+                            <h2 class="yc-page-header__title">详情页标题</h2>
+                            <p class="yc-page-header__sub-title">这里是页面的副标题描述</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2 class="demo-section__title">带操作区</h2>
+            <p class="demo-section__desc">页头可以包含操作按钮。</p>
+            <div class="demo-block">
+                <div class="yc-page-header">
+                    <div class="yc-page-header__back">
+                        <i class="fas fa-arrow-left yc-page-header__back-icon"></i>
+                        返回
+                    </div>
+                    <div class="yc-page-header__content">
+                        <div class="yc-page-header__main">
+                            <h2 class="yc-page-header__title">订单详情</h2>
+                            <p class="yc-page-header__sub-title">订单号：202401010001 | 创建时间：2024-01-01</p>
+                        </div>
+                        <div class="yc-page-header__actions">
+                            <button class="yc-button yc-button--default">编辑</button>
+                            <button class="yc-button yc-button--primary">保存</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2 class="demo-section__title">无返回按钮</h2>
+            <p class="demo-section__desc">某些场景下可能不需要返回按钮。</p>
+            <div class="demo-block">
+                <div class="yc-page-header">
+                    <div class="yc-page-header__content">
+                        <div class="yc-page-header__main">
+                            <h2 class="yc-page-header__title">仪表盘</h2>
+                            <p class="yc-page-header__sub-title">欢迎使用 YC UI 管理系统</p>
+                        </div>
+                        <div class="yc-page-header__actions">
+                            <button class="yc-button yc-button--primary">
+                                <i class="fas fa-plus"></i> 新建
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

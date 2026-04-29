@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timeline 时间线 - YC UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">Timeline 时间线</h1>
+            <p class="demo-page-subtitle">可视化展示时间流程</p>
+        </div>
+
+        <div class="demo-section">
+            <h3>基本用法</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">基础的时间线展示</div>
+                <ul class="yc-timeline">
+                    <li class="yc-timeline-item">
+                        <div class="yc-timeline-item__node-wrapper">
+                            <div class="yc-timeline-item__node"></div>
+                            <div class="yc-timeline-item__tail"></div>
+                        </div>
+                        <div class="yc-timeline-item__content">
+                            <div class="yc-timeline-item__timestamp yc-timeline-item__timestamp--top">2024-01-01 09:00:00</div>
+                            <p>项目启动，确定产品方向和需求</p>
+                        </div>
+                    </li>
+                    <li class="yc-timeline-item">
+                        <div class="yc-timeline-item__node-wrapper">
+                            <div class="yc-timeline-item__node"></div>
+                            <div class="yc-timeline-item__tail"></div>
+                        </div>
+                        <div class="yc-timeline-item__content">
+                            <div class="yc-timeline-item__timestamp yc-timeline-item__timestamp--top">2024-01-15 14:30:00</div>
+                            <p>完成产品设计稿和原型制作</p>
+                        </div>
+                    </li>
+                    <li class="yc-timeline-item">
+                        <div class="yc-timeline-item__node-wrapper">
+                            <div class="yc-timeline-item__node"></div>
+                            <div class="yc-timeline-item__tail"></div>
+                        </div>
+                        <div class="yc-timeline-item__content">
+                            <div class="yc-timeline-item__timestamp yc-timeline-item__timestamp--top">2024-02-01 10:00:00</div>
+                            <p>前端开发阶段，完成核心功能模块</p>
+                        </div>
+                    </li>
+                    <li class="yc-timeline-item">
+                        <div class="yc-timeline-item__node-wrapper">
+                            <div class="yc-timeline-item__node"></div>
+                        </div>
+                        <div class="yc-timeline-item__content">
+                            <div class="yc-timeline-item__timestamp yc-timeline-item__timestamp--top">2024-03-01 16:00:00</div>
+                            <p>项目上线，发布第一个版本</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>不同颜色</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">使用时间线节点的不同颜色</div>
+                <ul class="yc-timeline">
+                    <li class="yc-timeline-item">
+                        <div class="yc-timeline-item__node-wrapper">
+                            <div class="yc-timeline-item__node yc-timeline-item__node--success"></div>
+                            <div class="yc-timeline-item__tail"></div>
+                        </div>
+                        <div class="yc-timeline-item__content">
+                            <div class="yc-timeline-item__timestamp yc-timeline-item__timestamp--top">成功</div>
+                            <p>任务完成，系统运行正常</p>
+                        </div>
+                    </li>
+                    <li class="yc-timeline-item">
+                        <div class="yc-timeline-item__node-wrapper">
+                            <div class="yc-timeline-item__node yc-timeline-item__node--primary"></div>
+                            <div class="yc-timeline-item__tail"></div>
+                        </div>
+                        <div class="yc-timeline-item__content">
+                            <div class="yc-timeline-item__timestamp yc-timeline-item__timestamp--top">进行中</div>
+                            <p>正在处理任务，进度50%</p>
+                        </div>
+                    </li>
+                    <li class="yc-timeline-item">
+                        <div class="yc-timeline-item__node-wrapper">
+                            <div class="yc-timeline-item__node yc-timeline-item__node--warning"></div>
+                            <div class="yc-timeline-item__tail"></div>
+                        </div>
+                        <div class="yc-timeline-item__content">
+                            <div class="yc-timeline-item__timestamp yc-timeline-item__timestamp--top">警告</div>
+                            <p>发现潜在问题，需要关注</p>
+                        </div>
+                    </li>
+                    <li class="yc-timeline-item">
+                        <div class="yc-timeline-item__node-wrapper">
+                            <div class="yc-timeline-item__node yc-timeline-item__node--danger"></div>
+                        </div>
+                        <div class="yc-timeline-item__content">
+                            <div class="yc-timeline-item__timestamp yc-timeline-item__timestamp--top">错误</div>
+                            <p>任务失败，需要重新执行</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>不同尺寸</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">提供大、默认、小三种尺寸</div>
+                <ul class="yc-timeline">
+                    <li class="yc-timeline-item">
+                        <div class="yc-timeline-item__node-wrapper">
+                            <div class="yc-timeline-item__node yc-timeline-item__node--large yc-timeline-item__node--primary"></div>
+                            <div class="yc-timeline-item__tail"></div>
+                        </div>
+                        <div class="yc-timeline-item__content">
+                            <p>大尺寸节点</p>
+                        </div>
+                    </li>
+                    <li class="yc-timeline-item">
+                        <div class="yc-timeline-item__node-wrapper">
+                            <div class="yc-timeline-item__node yc-timeline-item__node--primary"></div>
+                            <div class="yc-timeline-item__tail"></div>
+                        </div>
+                        <div class="yc-timeline-item__content">
+                            <p>默认尺寸节点</p>
+                        </div>
+                    </li>
+                    <li class="yc-timeline-item">
+                        <div class="yc-timeline-item__node-wrapper">
+                            <div class="yc-timeline-item__node yc-timeline-item__node--small yc-timeline-item__node--primary"></div>
+                        </div>
+                        <div class="yc-timeline-item__content">
+                            <p>小尺寸节点</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>自定义节点</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">使用自定义图标作为时间线节点</div>
+                <ul class="yc-timeline">
+                    <li class="yc-timeline-item">
+                        <div class="yc-timeline-item__node-wrapper">
+                            <div class="yc-timeline-item__node yc-timeline-item__node--success">
+                                <i class="fa fa-check yc-timeline-item__icon"></i>
+                            </div>
+                            <div class="yc-timeline-item__tail"></div>
+                        </div>
+                        <div class="yc-timeline-item__content">
+                            <div class="yc-timeline-item__timestamp yc-timeline-item__timestamp--top">2024-01-01</div>
+                            <p>已完成的任务</p>
+                        </div>
+                    </li>
+                    <li class="yc-timeline-item">
+                        <div class="yc-timeline-item__node-wrapper">
+                            <div class="yc-timeline-item__node yc-timeline-item__node--primary">
+                                <i class="fa fa-cog yc-timeline-item__icon"></i>
+                            </div>
+                            <div class="yc-timeline-item__tail"></div>
+                        </div>
+                        <div class="yc-timeline-item__content">
+                            <div class="yc-timeline-item__timestamp yc-timeline-item__timestamp--top">2024-01-15</div>
+                            <p>正在处理的任务</p>
+                        </div>
+                    </li>
+                    <li class="yc-timeline-item">
+                        <div class="yc-timeline-item__node-wrapper">
+                            <div class="yc-timeline-item__node yc-timeline-item__node--primary yc-timeline-item__node--pulse">
+                            </div>
+                            <div class="yc-timeline-item__tail"></div>
+                        </div>
+                        <div class="yc-timeline-item__content">
+                            <div class="yc-timeline-item__timestamp yc-timeline-item__timestamp--top">2024-02-01</div>
+                            <p>进行中的任务（带脉冲动画）</p>
+                        </div>
+                    </li>
+                    <li class="yc-timeline-item">
+                        <div class="yc-timeline-item__node-wrapper">
+                            <div class="yc-timeline-item__node yc-timeline-item__node--warning">
+                                <i class="fa fa-exclamation yc-timeline-item__icon"></i>
+                            </div>
+                        </div>
+                        <div class="yc-timeline-item__content">
+                            <div class="yc-timeline-item__timestamp yc-timeline-item__timestamp--top">2024-02-15</div>
+                            <p>需要关注的任务</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>空心节点</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">使用空心样式的节点</div>
+                <ul class="yc-timeline">
+                    <li class="yc-timeline-item">
+                        <div class="yc-timeline-item__node-wrapper">
+                            <div class="yc-timeline-item__node yc-timeline-item__node--hollow yc-timeline-item__node--primary"></div>
+                            <div class="yc-timeline-item__tail"></div>
+                        </div>
+                        <div class="yc-timeline-item__content">
+                            <p>空心节点 - 主要</p>
+                        </div>
+                    </li>
+                    <li class="yc-timeline-item">
+                        <div class="yc-timeline-item__node-wrapper">
+                            <div class="yc-timeline-item__node yc-timeline-item__node--hollow yc-timeline-item__node--success"></div>
+                            <div class="yc-timeline-item__tail"></div>
+                        </div>
+                        <div class="yc-timeline-item__content">
+                            <p>空心节点 - 成功</p>
+                        </div>
+                    </li>
+                    <li class="yc-timeline-item">
+                        <div class="yc-timeline-item__node-wrapper">
+                            <div class="yc-timeline-item__node yc-timeline-item__node--hollow yc-timeline-item__node--warning"></div>
+                        </div>
+                        <div class="yc-timeline-item__content">
+                            <p>空心节点 - 警告</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>自定义颜色</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">设置节点的颜色</div>
+                <ul class="yc-timeline">
+                    <li class="yc-timeline-item">
+                        <div class="yc-timeline-item__node-wrapper">
+                            <div class="yc-timeline-item__node" style="background-color: #000;"></div>
+                            <div class="yc-timeline-item__tail"></div>
+                        </div>
+                        <div class="yc-timeline-item__content">
+                            <p>自定义颜色节点</p>
+                        </div>
+                    </li>
+                    <li class="yc-timeline-item">
+                        <div class="yc-timeline-item__node-wrapper">
+                            <div class="yc-timeline-item__node" style="background-color: #673ab7;"></div>
+                            <div class="yc-timeline-item__tail"></div>
+                        </div>
+                        <div class="yc-timeline-item__content">
+                            <p>紫色节点</p>
+                        </div>
+                    </li>
+                    <li class="yc-timeline-item">
+                        <div class="yc-timeline-item__node-wrapper">
+                            <div class="yc-timeline-item__node" style="background-color: #ff5722;"></div>
+                        </div>
+                        <div class="yc-timeline-item__content">
+                            <p>橙色节点</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

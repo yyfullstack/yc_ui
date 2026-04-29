@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tag 标签 - YC UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">Tag 标签</h1>
+            <p class="demo-page-subtitle">用于标记和分类的标签组件</p>
+        </div>
+
+        <div class="demo-section">
+            <h3>基本用法</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">基础的标签用法</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div class="yc-space">
+                        <span class="yc-tag">标签一</span>
+                        <span class="yc-tag">标签二</span>
+                        <span class="yc-tag">标签三</span>
+                        <span class="yc-tag">标签四</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>不同颜色</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">提供了五种颜色的标签</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div class="yc-space">
+                        <span class="yc-tag yc-tag--primary">主要</span>
+                        <span class="yc-tag yc-tag--success">成功</span>
+                        <span class="yc-tag yc-tag--warning">警告</span>
+                        <span class="yc-tag yc-tag--danger">危险</span>
+                        <span class="yc-tag yc-tag--info">信息</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>不同尺寸</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">标签提供了大、默认、小三种尺寸</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div class="yc-space">
+                        <span class="yc-tag yc-tag--large yc-tag--primary">大标签</span>
+                        <span class="yc-tag yc-tag--default yc-tag--primary">默认标签</span>
+                        <span class="yc-tag yc-tag--small yc-tag--primary">小标签</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>主题样式</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">提供了深色、朴素两种主题</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div style="display: flex; flex-direction: column; gap: 12px;">
+                        <div class="yc-space">
+                            <span class="yc-tag yc-tag--dark yc-tag--primary">深色主要</span>
+                            <span class="yc-tag yc-tag--dark yc-tag--success">深色成功</span>
+                            <span class="yc-tag yc-tag--dark yc-tag--warning">深色警告</span>
+                            <span class="yc-tag yc-tag--dark yc-tag--danger">深色危险</span>
+                        </div>
+                        <div class="yc-space">
+                            <span class="yc-tag yc-tag--plain yc-tag--primary">朴素主要</span>
+                            <span class="yc-tag yc-tag--plain yc-tag--success">朴素成功</span>
+                            <span class="yc-tag yc-tag--plain yc-tag--warning">朴素警告</span>
+                            <span class="yc-tag yc-tag--plain yc-tag--danger">朴素危险</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>可关闭标签</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">可以关闭的标签，点击关闭按钮后触发事件</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div class="yc-space" id="closableTags">
+                        <span class="yc-tag yc-tag--primary">标签一 <i class="fas fa-times yc-tag__close"></i></span>
+                        <span class="yc-tag yc-tag--success">标签二 <i class="fas fa-times yc-tag__close"></i></span>
+                        <span class="yc-tag yc-tag--warning">标签三 <i class="fas fa-times yc-tag__close"></i></span>
+                        <span class="yc-tag yc-tag--danger">标签四 <i class="fas fa-times yc-tag__close"></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>可点击标签</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">可以点击的标签，点击后切换选中状态</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div class="yc-space" id="checkableTags">
+                        <span class="yc-tag yc-tag--checkable is-checked">可选一</span>
+                        <span class="yc-tag yc-tag--checkable">可选二</span>
+                        <span class="yc-tag yc-tag--checkable is-checked">可选三</span>
+                        <span class="yc-tag yc-tag--checkable">可选四</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>带图标标签</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">可以带图标的标签</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div class="yc-space">
+                        <span class="yc-tag yc-tag--primary"><i class="fas fa-check yc-tag__icon"></i>成功</span>
+                        <span class="yc-tag yc-tag--warning"><i class="fas fa-exclamation-triangle yc-tag__icon"></i>警告</span>
+                        <span class="yc-tag yc-tag--danger"><i class="fas fa-times yc-tag__icon"></i>错误</span>
+                        <span class="yc-tag yc-tag--info"><i class="fas fa-info yc-tag__icon"></i>信息</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>圆角标签</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">圆角样式的标签</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div class="yc-space">
+                        <span class="yc-tag yc-tag--round yc-tag--primary">圆角标签</span>
+                        <span class="yc-tag yc-tag--round yc-tag--success">圆角成功</span>
+                        <span class="yc-tag yc-tag--round yc-tag--warning">圆角警告</span>
+                        <span class="yc-tag yc-tag--round yc-tag--danger">圆角危险</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const closableTags = document.getElementById('closableTags');
+            if (closableTags) {
+                closableTags.addEventListener('click', (e) => {
+                    const closeBtn = e.target.closest('.yc-tag__close');
+                    if (closeBtn) {
+                        const tag = closeBtn.closest('.yc-tag');
+                        if (tag) {
+                            tag.style.transform = 'scale(0.8)';
+                            tag.style.opacity = '0';
+                            setTimeout(() => tag.remove(), 200);
+                        }
+                    }
+                });
+            }
+
+            const checkableTags = document.getElementById('checkableTags');
+            if (checkableTags) {
+                checkableTags.addEventListener('click', (e) => {
+                    const tag = e.target.closest('.yc-tag--checkable');
+                    if (tag) {
+                        tag.classList.toggle('is-checked');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

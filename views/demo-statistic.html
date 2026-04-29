@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistic 统计数值 - YC UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">Statistic 统计数值</h1>
+            <p class="demo-page-subtitle">展示统计数值，如带趋势的销量数据</p>
+        </div>
+
+        <div class="demo-section">
+            <h3>基本用法</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">基础的统计数值展示</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div style="display: flex; gap: 24px; flex-wrap: wrap;">
+                        <div class="yc-statistic">
+                            <div class="yc-statistic__title">活跃用户</div>
+                            <div class="yc-statistic__content">
+                                <span class="yc-statistic__value">112,893</span>
+                            </div>
+                            <div class="yc-statistic__description">较昨日增长 12%</div>
+                        </div>
+                        <div class="yc-statistic">
+                            <div class="yc-statistic__title">销售额</div>
+                            <div class="yc-statistic__content">
+                                <span class="yc-statistic__prefix">¥</span>
+                                <span class="yc-statistic__value">93,580</span>
+                            </div>
+                            <div class="yc-statistic__description">本月累计</div>
+                        </div>
+                        <div class="yc-statistic">
+                            <div class="yc-statistic__title">在线时长</div>
+                            <div class="yc-statistic__content">
+                                <span class="yc-statistic__value">6</span>
+                                <span class="yc-statistic__suffix">小时</span>
+                            </div>
+                            <div class="yc-statistic__description">今日平均</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>数值颜色</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">数值可以有不同的颜色</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div style="display: flex; gap: 24px; flex-wrap: wrap;">
+                        <div class="yc-statistic">
+                            <div class="yc-statistic__title">成功订单</div>
+                            <div class="yc-statistic__content">
+                                <span class="yc-statistic__value yc-statistic__value--success">12,456</span>
+                            </div>
+                        </div>
+                        <div class="yc-statistic">
+                            <div class="yc-statistic__title">警告项</div>
+                            <div class="yc-statistic__content">
+                                <span class="yc-statistic__value yc-statistic__value--warning">342</span>
+                            </div>
+                        </div>
+                        <div class="yc-statistic">
+                            <div class="yc-statistic__title">失败项</div>
+                            <div class="yc-statistic__content">
+                                <span class="yc-statistic__value yc-statistic__value--danger">18</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>卡片统计</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">使用卡片包装的统计数据</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                        <div class="yc-statistic__card" style="flex: 1; min-width: 200px;">
+                            <div class="yc-statistic">
+                                <div class="yc-statistic__title">总访问量</div>
+                                <div class="yc-statistic__content">
+                                    <i class="fas fa-eye" style="margin-right: 8px; color: #909399;"></i>
+                                    <span class="yc-statistic__value">1,234,567</span>
+                                </div>
+                                <div class="yc-statistic__description">今日新增 2,345</div>
+                            </div>
+                        </div>
+                        <div class="yc-statistic__card yc-statistic__card--primary" style="flex: 1; min-width: 200px;">
+                            <div class="yc-statistic">
+                                <div class="yc-statistic__title">总收入</div>
+                                <div class="yc-statistic__content">
+                                    <i class="fas fa-dollar-sign" style="margin-right: 8px;"></i>
+                                    <span class="yc-statistic__value">¥89,230</span>
+                                </div>
+                                <div class="yc-statistic__description">较上月增长 23%</div>
+                            </div>
+                        </div>
+                        <div class="yc-statistic__card yc-statistic__card--success" style="flex: 1; min-width: 200px;">
+                            <div class="yc-statistic">
+                                <div class="yc-statistic__title">订单完成</div>
+                                <div class="yc-statistic__content">
+                                    <i class="fas fa-check" style="margin-right: 8px;"></i>
+                                    <span class="yc-statistic__value">8,934</span>
+                                </div>
+                                <div class="yc-statistic__description">完成率 98.5%</div>
+                            </div>
+                        </div>
+                        <div class="yc-statistic__card yc-statistic__card--warning" style="flex: 1; min-width: 200px;">
+                            <div class="yc-statistic">
+                                <div class="yc-statistic__title">待处理</div>
+                                <div class="yc-statistic__content">
+                                    <i class="fas fa-clock" style="margin-right: 8px;"></i>
+                                    <span class="yc-statistic__value">142</span>
+                                </div>
+                                <div class="yc-statistic__description">请尽快处理</div>
+                            </div>
+                        </div>
+                        <div class="yc-statistic__card yc-statistic__card--danger" style="flex: 1; min-width: 200px;">
+                            <div class="yc-statistic">
+                                <div class="yc-statistic__title">异常订单</div>
+                                <div class="yc-statistic__content">
+                                    <i class="fas fa-exclamation" style="margin-right: 8px;"></i>
+                                    <span class="yc-statistic__value">23</span>
+                                </div>
+                                <div class="yc-statistic__description">需要立即处理</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>不同尺寸</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">统计提供大、默认、小三种尺寸</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div style="display: flex; gap: 24px; flex-wrap: wrap; align-items: flex-end;">
+                        <div class="yc-statistic yc-statistic--large">
+                            <div class="yc-statistic__title">大尺寸</div>
+                            <div class="yc-statistic__content">
+                                <span class="yc-statistic__value">12,345</span>
+                            </div>
+                        </div>
+                        <div class="yc-statistic">
+                            <div class="yc-statistic__title">默认尺寸</div>
+                            <div class="yc-statistic__content">
+                                <span class="yc-statistic__value">6,789</span>
+                            </div>
+                        </div>
+                        <div class="yc-statistic yc-statistic--small">
+                            <div class="yc-statistic__title">小尺寸</div>
+                            <div class="yc-statistic__content">
+                                <span class="yc-statistic__value">123</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

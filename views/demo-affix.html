@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Affix 固钉 - YC UI</title>
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-header__title">Affix 固钉</h1>
+            <p class="demo-page-header__desc">将页面元素固定在特定可视区域位置，滚动时保持可见。</p>
+        </div>
+
+        <div class="demo-section">
+            <h2 class="demo-section__title">基础用法</h2>
+            <p class="demo-section__desc">最简单的固钉用法，固定在顶部。</p>
+            <div class="demo-block">
+                <div id="affix-top" class="yc-affix yc-affix--top">
+                    <div class="yc-affix__content">
+                        <button class="yc-button yc-button--primary" style="margin: 12px;">固定在顶部</button>
+                    </div>
+                </div>
+                <div style="height: 300px; background: var(--yc-color-bg-page); margin: 20px 0; display: flex; align-items: center; justify-content: center;">
+                    <p class="yc-text-regular yc-text-secondary">向上滚动查看效果</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2 class="demo-section__title">固定到底部</h2>
+            <p class="demo-section__desc">固定在页面底部。</p>
+            <div class="demo-block">
+                <div style="height: 300px; background: var(--yc-color-bg-page); margin: 20px 0; display: flex; align-items: center; justify-content: center;">
+                    <p class="yc-text-regular yc-text-secondary">向下滚动查看效果</p>
+                </div>
+                <div id="affix-bottom" class="yc-affix yc-affix--bottom">
+                    <div class="yc-affix__content">
+                        <button class="yc-button yc-button--primary" style="margin: 12px;">固定在底部</button>
+                    </div>
+                </div>
+                <div style="height: 500px;"></div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2 class="demo-section__title">设置偏移量</h2>
+            <p class="demo-section__desc">通过设置距离顶部或底部的偏移量来调整固定位置。</p>
+            <div class="demo-block">
+                <div id="affix-offset" class="yc-affix yc-affix--top" style="top: 80px;">
+                    <div class="yc-affix__content">
+                        <button class="yc-button yc-button--primary" style="margin: 12px;">偏移 80px</button>
+                    </div>
+                </div>
+                <div style="height: 500px; background: var(--yc-color-bg-page); margin: 20px 0; display: flex; align-items: center; justify-content: center;">
+                    <p class="yc-text-regular yc-text-secondary">向上滚动查看偏移效果</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2 class="demo-section__title">指定容器</h2>
+            <p class="demo-section__desc">固钉可以指定在特定容器内固定。</p>
+            <div class="demo-block">
+                <div id="affix-container" style="height: 300px; overflow-y: auto; position: relative; background: var(--yc-color-bg); padding: 20px; border: 1px solid var(--yc-color-border-light); border-radius: var(--yc-border-radius-md);">
+                    <div style="height: 200px;"></div>
+                    <div id="affix-inner" class="yc-affix yc-affix--top">
+                        <div class="yc-affix__content">
+                            <div style="padding: 8px 16px; background: var(--yc-color-primary-light-9); border-radius: var(--yc-border-radius-sm); color: var(--yc-color-primary);">
+                                在容器内固定
+                            </div>
+                        </div>
+                    </div>
+                    <div style="height: 800px;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2 class="demo-section__title">角落固定</h2>
+            <p class="demo-section__desc">固定在页面的四个角落。</p>
+            <div class="demo-block">
+                <div class="demo-row" style="gap: 16px; flex-wrap: wrap;">
+                    <div id="affix-tl" class="yc-affix yc-affix--corner-top-left" style="position: relative; margin-bottom: 16px;">
+                        <div class="yc-affix__content">
+                            <button class="yc-button yc-button--primary yc-button--small">左上角</button>
+                        </div>
+                    </div>
+                    <div id="affix-tr" class="yc-affix yc-affix--corner-top-right" style="position: relative; margin-bottom: 16px;">
+                        <div class="yc-affix__content">
+                            <button class="yc-button yc-button--success yc-button--small">右上角</button>
+                        </div>
+                    </div>
+                    <div id="affix-bl" class="yc-affix yc-affix--corner-bottom-left" style="position: relative; margin-bottom: 16px;">
+                        <div class="yc-affix__content">
+                            <button class="yc-button yc-button--warning yc-button--small">左下角</button>
+                        </div>
+                    </div>
+                    <div id="affix-br" class="yc-affix yc-affix--corner-bottom-right" style="position: relative; margin-bottom: 16px;">
+                        <div class="yc-affix__content">
+                            <button class="yc-button yc-button--danger yc-button--small">右下角</button>
+                        </div>
+                    </div>
+                </div>
+                <div style="height: 300px; background: var(--yc-color-bg-page); margin: 20px 0; display: flex; align-items: center; justify-content: center;">
+                    <p class="yc-text-regular yc-text-secondary">滚动查看角落固定效果</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 简单的 Affix 功能演示
+            const container = document.getElementById('affix-container');
+            const affixInner = document.getElementById('affix-inner');
+            
+            if (container && affixInner) {
+                container.addEventListener('scroll', function() {
+                    const scrollTop = container.scrollTop;
+                    if (scrollTop > 100) {
+                        affixInner.classList.add('is-fixed');
+                    } else {
+                        affixInner.classList.remove('is-fixed');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

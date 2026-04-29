@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anchor 锚点组件示例</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../index.css">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: var(--yc-font-family); background: var(--yc-color-bg-page); color: var(--yc-color-text-primary); line-height: var(--yc-line-height-base); padding: 24px; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .demo-section { background: var(--yc-color-bg); border: 1px solid var(--yc-color-border); border-radius: var(--yc-border-radius-lg); padding: 24px; margin-bottom: 16px; }
+        .demo-section h3 { font-size: var(--yc-font-size-medium); font-weight: var(--yc-font-weight-semibold); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--yc-color-border-light); position: relative; }
+        .demo-section h3::before { content: ''; position: absolute; left: -24px; top: 50%; transform: translateY(-50%); width: 4px; height: 16px; background: var(--yc-color-primary); border-radius: 2px; }
+        .demo-block { margin-bottom: 24px; }
+        .demo-block-title { font-size: var(--yc-font-size-small); color: var(--yc-color-text-secondary); margin-bottom: 12px; }
+
+        .yc-anchor {
+            --yc-anchor-link-active-color: var(--yc-color-primary);
+            --yc-anchor-link-text-color: var(--yc-color-text-secondary);
+            --yc-anchor-link-hover-color: var(--yc-color-primary);
+            --yc-anchor-border-color: var(--yc-color-border-light);
+        }
+        .yc-anchor { position: relative; }
+        .yc-anchor__list { list-style: none; padding: 0; margin: 0; }
+        .yc-anchor__item { margin-bottom: 4px; }
+        .yc-anchor__link {
+            display: block; padding: 8px 12px; font-size: var(--yc-font-size-small);
+            color: var(--yc-anchor-link-text-color); text-decoration: none;
+            border-left: 2px solid transparent; transition: all var(--yc-transition-duration-fast);
+            border-radius: 0 var(--yc-border-radius-sm) var(--yc-border-radius-sm) 0;
+        }
+        .yc-anchor__link:hover { color: var(--yc-anchor-link-hover-color); }
+        .yc-anchor__link--active { color: var(--yc-anchor-link-active-color); border-left-color: var(--yc-anchor-link-active-color); font-weight: var(--yc-font-weight-medium); background: var(--yc-color-primary-light-9); }
+        .yc-anchor__link--level-1 { padding-left: 24px; }
+        .yc-anchor__link--level-2 { padding-left: 36px; }
+        .yc-anchor__line { position: absolute; left: 0; top: 0; width: 2px; background: var(--yc-color-primary); transition: top 0.3s ease, height 0.3s ease; z-index: 1; }
+
+        .anchor-wrapper { display: flex; gap: 24px; }
+        .anchor-content { flex: 1; min-width: 0; }
+        .anchor-sidebar { width: 200px; flex-shrink: 0; }
+        .anchor-section { margin-bottom: 60px; padding-top: 20px; }
+        .anchor-section__title { font-size: var(--yc-font-size-large); font-weight: var(--yc-font-weight-semibold); color: var(--yc-color-text-primary); margin-bottom: 16px; padding-bottom: 8px; border-bottom: 1px solid var(--yc-color-border-light); }
+        .anchor-section__content { font-size: var(--yc-font-size-small); color: var(--yc-color-text-regular); line-height: 1.8; }
+        .anchor-section__content p { margin-bottom: 12px; }
+
+        [yc-theme="dark"] .demo-section { background: rgba(255, 255, 255, 0.02); border-color: rgba(255, 255, 255, 0.08); }
+        [yc-theme="dark"] .anchor-section__title { border-bottom-color: rgba(255, 255, 255, 0.08); }
+        [yc-theme="dark"] .yc-anchor__link--active { background: rgba(64, 158, 255, 0.15); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 style="font-size: 24px; font-weight: 600; margin-bottom: 24px;">Anchor 锚点组件</h1>
+        <div class="demo-section">
+            <h3>基础用法</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">文章目录导航</div>
+                <div class="anchor-wrapper">
+                    <div class="anchor-content">
+                        <div class="anchor-section" id="section1">
+                            <div class="anchor-section__title">第一章：组件库简介</div>
+                            <div class="anchor-section__content">
+                                <p>YC Design 是一套企业级 UI 设计语言，提供了丰富的组件库，帮助开发者快速构建高质量的 Web 应用。</p>
+                                <p>组件库遵循一致性原则，确保所有组件在外观和行为上保持统一，为用户提供一致的使用体验。</p>
+                                <p>本组件库包含按钮、表单、布局、导航、数据展示等多个类别的组件，满足各种业务场景需求。</p>
+                            </div>
+                        </div>
+                        <div class="anchor-section" id="section2">
+                            <div class="anchor-section__title">第二章：设计原则</div>
+                            <div class="anchor-section__content">
+                                <p>设计原则是组件库的基础，指导着每个组件的设计与实现。</p>
+                                <p><strong>一致性</strong>：组件在相似场景下表现一致，用户无需重新学习。</p>
+                                <p><strong>可复用性</strong>：组件设计为通用形式，可在不同项目中复用。</p>
+                                <p><strong>可访问性</strong>：组件支持键盘导航和屏幕阅读器，方便残障人士使用。</p>
+                            </div>
+                        </div>
+                        <div class="anchor-section" id="section3">
+                            <div class="anchor-section__title">第三章：按钮组件</div>
+                            <div class="anchor-section__content">
+                                <p>按钮是界面中最常用的交互元素之一，用于触发操作或提交表单。</p>
+                                <p>按钮组件支持多种类型：主要按钮、次要按钮、文本按钮、链接按钮等。</p>
+                                <p>同时支持不同的尺寸和状态：正常、悬停、激活、禁用等。</p>
+                            </div>
+                        </div>
+                        <div class="anchor-section" id="section4">
+                            <div class="anchor-section__title">第四章：表单组件</div>
+                            <div class="anchor-section__content">
+                                <p>表单组件用于用户输入和提交数据，是应用中不可或缺的组成部分。</p>
+                                <p>包括输入框、选择器、开关、日期选择器等多种类型。</p>
+                                <p>每个表单组件都支持验证、禁用、只读等状态，并提供清晰的错误提示。</p>
+                            </div>
+                        </div>
+                        <div class="anchor-section" id="section5">
+                            <div class="anchor-section__title">第五章：布局组件</div>
+                            <div class="anchor-section__content">
+                                <p>布局组件用于组织页面的整体结构，提供响应式的页面排版方案。</p>
+                                <p>包括容器、栅格、间距、对齐等工具类。</p>
+                                <p>支持移动端、平板端、桌面端等多种屏幕尺寸的适配。</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="anchor-sidebar">
+                        <ul class="yc-anchor__list">
+                            <li class="yc-anchor__item"><a href="#section1" class="yc-anchor__link yc-anchor__link--active">第一章：组件库简介</a></li>
+                            <li class="yc-anchor__item"><a href="#section2" class="yc-anchor__link">第二章：设计原则</a></li>
+                            <li class="yc-anchor__item"><a href="#section3" class="yc-anchor__link">第三章：按钮组件</a></li>
+                            <li class="yc-anchor__item"><a href="#section4" class="yc-anchor__link">第四章：表单组件</a></li>
+                            <li class="yc-anchor__item"><a href="#section5" class="yc-anchor__link">第五章：布局组件</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="demo-section">
+            <h3>带层级的锚点</h3>
+            <div class="demo-block">
+                <div class="anchor-wrapper">
+                    <div class="anchor-content">
+                        <div class="anchor-section" id="guide1">
+                            <div class="anchor-section__title">快速开始</div>
+                            <div class="anchor-section__content"><p>了解如何快速接入 YC Design 组件库。</p></div>
+                        </div>
+                        <div class="anchor-section" id="guide2">
+                            <div class="anchor-section__title">基础组件</div>
+                            <div class="anchor-section__content"><p>按钮、图标、链接等基础组件的使用方法。</p></div>
+                        </div>
+                        <div class="anchor-section" id="guide3">
+                            <div class="anchor-section__title">表单组件</div>
+                            <div class="anchor-section__content"><p>输入框、选择器、日期选择器等表单组件。</p></div>
+                        </div>
+                    </div>
+                    <div class="anchor-sidebar">
+                        <ul class="yc-anchor__list">
+                            <li class="yc-anchor__item"><a href="#guide1" class="yc-anchor__link">快速开始</a></li>
+                            <li class="yc-anchor__item"><a href="#guide2" class="yc-anchor__link yc-anchor__link--level-1">安装</a></li>
+                            <li class="yc-anchor__item"><a href="#guide2" class="yc-anchor__link yc-anchor__link--level-1">引入</a></li>
+                            <li class="yc-anchor__item"><a href="#guide2" class="yc-anchor__link yc-anchor__link--level-1">基础用法</a></li>
+                            <li class="yc-anchor__item"><a href="#guide3" class="yc-anchor__link">表单组件</a></li>
+                            <li class="yc-anchor__item"><a href="#guide3" class="yc-anchor__link yc-anchor__link--level-1">输入框</a></li>
+                            <li class="yc-anchor__item"><a href="#guide3" class="yc-anchor__link yc-anchor__link--level-1">选择器</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.querySelectorAll('.yc-anchor__link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const target = document.getElementById(targetId);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    document.querySelectorAll('.yc-anchor__link').forEach(l => l.classList.remove('yc-anchor__link--active'));
+                    this.classList.add('yc-anchor__link--active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

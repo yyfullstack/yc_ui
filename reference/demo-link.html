@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Link 链接组件示例</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../index.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--yc-font-family);
+            background-color: var(--yc-color-bg-page);
+            color: var(--yc-color-text-primary);
+            line-height: var(--yc-line-height-base);
+            padding: 24px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .demo-section {
+            background: var(--yc-color-bg);
+            border: 1px solid var(--yc-color-border);
+            border-radius: var(--yc-border-radius-lg);
+            padding: 24px;
+            margin-bottom: 16px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+        }
+
+        .demo-section h3 {
+            font-size: var(--yc-font-size-medium);
+            font-weight: var(--yc-font-weight-semibold);
+            color: var(--yc-color-text-primary);
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--yc-color-border-light);
+            position: relative;
+        }
+
+        .demo-section h3::before {
+            content: '';
+            position: absolute;
+            left: -24px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 16px;
+            background: var(--yc-color-primary);
+            border-radius: 2px;
+        }
+
+        .demo-block {
+            margin-bottom: 24px;
+        }
+
+        .demo-block:last-child {
+            margin-bottom: 0;
+        }
+
+        .demo-block-title {
+            font-size: var(--yc-font-size-small);
+            color: var(--yc-color-text-secondary);
+            margin-bottom: 12px;
+        }
+
+        .link-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .link-wrapper--vertical {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .link-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .link-group--vertical {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .yc-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: var(--yc-font-size-small);
+            color: var(--yc-color-link);
+            text-decoration: var(--yc-link-decoration);
+            cursor: pointer;
+            transition: all var(--yc-transition-duration-fast);
+            position: relative;
+        }
+
+        .yc-link:hover {
+            color: var(--yc-color-link-hover);
+            text-decoration: var(--yc-link-hover-decoration);
+        }
+
+        .yc-link:active {
+            color: var(--yc-color-link-active);
+        }
+
+        .yc-link:visited {
+            color: var(--yc-color-link-visited);
+        }
+
+        .yc-link--primary {
+            color: var(--yc-color-primary);
+        }
+
+        .yc-link--primary:hover {
+            color: var(--yc-color-primary-hover);
+        }
+
+        .yc-link--success {
+            color: var(--yc-color-success);
+        }
+
+        .yc-link--success:hover {
+            color: var(--yc-color-success-hover);
+        }
+
+        .yc-link--warning {
+            color: var(--yc-color-warning);
+        }
+
+        .yc-link--warning:hover {
+            color: var(--yc-color-warning-hover);
+        }
+
+        .yc-link--danger {
+            color: var(--yc-color-danger);
+        }
+
+        .yc-link--danger:hover {
+            color: var(--yc-color-danger-hover);
+        }
+
+        .yc-link--info {
+            color: var(--yc-color-info);
+        }
+
+        .yc-link--info:hover {
+            color: var(--yc-color-info-hover);
+        }
+
+        .yc-link--default {
+            color: var(--yc-color-text-primary);
+        }
+
+        .yc-link--default:hover {
+            color: var(--yc-color-primary);
+        }
+
+        .yc-link--small {
+            font-size: var(--yc-font-size-extra-small);
+        }
+
+        .yc-link--small .yc-link__icon {
+            font-size: 10px;
+        }
+
+        .yc-link--medium {
+            font-size: var(--yc-font-size-small);
+        }
+
+        .yc-link--large {
+            font-size: var(--yc-font-size-medium);
+        }
+
+        .yc-link--large .yc-link__icon {
+            font-size: 14px;
+        }
+
+        .yc-link--underline-none:hover {
+            text-decoration: none;
+        }
+
+        .yc-link--underline-always {
+            text-decoration: underline;
+        }
+
+        .yc-link--underline-always:hover {
+            text-decoration: underline;
+        }
+
+        .yc-link--underline-hover {
+            text-decoration: none;
+        }
+
+        .yc-link--underline-hover:hover {
+            text-decoration: underline;
+        }
+
+        .yc-link--disabled {
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+
+        .yc-link--disabled:hover {
+            color: inherit;
+            text-decoration: inherit;
+        }
+
+        .yc-link__icon {
+            font-size: 12px;
+            transition: transform var(--yc-transition-duration-fast);
+        }
+
+        .yc-link:hover .yc-link__icon--arrow-left {
+            transform: translateX(-3px);
+        }
+
+        .yc-link:hover .yc-link__icon--arrow-right {
+            transform: translateX(3px);
+        }
+
+        .yc-link:hover .yc-link__icon--arrow-up {
+            transform: translateY(-3px);
+        }
+
+        .link-with-bg {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: var(--yc-border-radius-md);
+            background: var(--yc-color-bg-page);
+            transition: all var(--yc-transition-duration-fast);
+        }
+
+        .link-with-bg:hover {
+            background: var(--yc-color-bg-overlay);
+        }
+
+        .link-card {
+            display: block;
+            padding: 16px 20px;
+            background: var(--yc-color-bg);
+            border: 1px solid var(--yc-color-border-light);
+            border-radius: var(--yc-border-radius-md);
+            transition: all var(--yc-transition-duration-fast);
+            cursor: pointer;
+        }
+
+        .link-card:hover {
+            border-color: var(--yc-color-primary);
+            box-shadow: 0 2px 8px rgba(64, 158, 255, 0.15);
+            transform: translateY(-1px);
+        }
+
+        .link-card__title {
+            font-size: var(--yc-font-size-small);
+            font-weight: var(--yc-font-weight-semibold);
+            color: var(--yc-color-text-primary);
+            margin-bottom: 4px;
+        }
+
+        .link-card__desc {
+            font-size: var(--yc-font-size-extra-small);
+            color: var(--yc-color-text-secondary);
+        }
+
+        .link-card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 16px;
+        }
+
+        .link-divider {
+            height: 1px;
+            background: var(--yc-color-border-light);
+            margin: 24px 0;
+        }
+
+        .link-demo-row {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            padding: 12px 16px;
+            background: var(--yc-color-bg-page);
+            border-radius: var(--yc-border-radius-md);
+            margin-bottom: 8px;
+        }
+
+        .link-demo-row__label {
+            min-width: 100px;
+            font-size: var(--yc-font-size-small);
+            color: var(--yc-color-text-secondary);
+        }
+
+        .link-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .link-nav__item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border-radius: var(--yc-border-radius-md);
+            font-size: var(--yc-font-size-small);
+            color: var(--yc-color-text-regular);
+            transition: all var(--yc-transition-duration-fast);
+        }
+
+        .link-nav__item:hover {
+            background: var(--yc-color-primary-light-9);
+            color: var(--yc-color-primary);
+        }
+
+        .link-nav__item--active {
+            background: var(--yc-color-primary-light-9);
+            color: var(--yc-color-primary);
+            font-weight: var(--yc-font-weight-semibold);
+        }
+
+        .link-breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: var(--yc-font-size-small);
+        }
+
+        .link-breadcrumb__item {
+            color: var(--yc-color-text-secondary);
+            transition: color var(--yc-transition-duration-fast);
+        }
+
+        .link-breadcrumb__item:hover {
+            color: var(--yc-color-primary);
+            cursor: pointer;
+        }
+
+        .link-breadcrumb__separator {
+            color: var(--yc-color-text-placeholder);
+            font-size: 10px;
+        }
+
+        .copy-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 12px 20px;
+            background: var(--yc-color-success);
+            color: white;
+            border-radius: var(--yc-border-radius-md);
+            font-size: var(--yc-font-size-small);
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 9999;
+            pointer-events: none;
+        }
+
+        .copy-indicator.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .link-wrapper {
+                gap: 12px;
+            }
+
+            .link-card-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        [yc-theme="dark"] .demo-section {
+            background: rgba(255, 255, 255, 0.02);
+            border-color: rgba(255, 255, 255, 0.08);
+        }
+
+        [yc-theme="dark"] .link-with-bg {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        [yc-theme="dark"] .link-with-bg:hover {
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        [yc-theme="dark"] .link-demo-row {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        [yc-theme="dark"] .link-nav__item:hover {
+            background: rgba(64, 158, 255, 0.15);
+        }
+
+        [yc-theme="dark"] .link-nav__item--active {
+            background: rgba(64, 158, 255, 0.15);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 style="font-size: 24px; font-weight: 600; margin-bottom: 24px; color: var(--yc-color-text-primary);">Link 链接组件</h1>
+
+        <div class="demo-section">
+            <h3>基础用法</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">文字链接基础用法</div>
+                <div class="link-wrapper">
+                    <a href="#" class="yc-link">默认链接</a>
+                    <a href="#" class="yc-link yc-link--primary">主要链接</a>
+                    <a href="#" class="yc-link yc-link--success">成功链接</a>
+                    <a href="#" class="yc-link yc-link--warning">警告链接</a>
+                    <a href="#" class="yc-link yc-link--danger">危险链接</a>
+                    <a href="#" class="yc-link yc-link--info">信息链接</a>
+                </div>
+            </div>
+            <div class="link-divider"></div>
+            <div class="demo-block">
+                <div class="demo-block-title">带图标的链接</div>
+                <div class="link-wrapper">
+                    <a href="#" class="yc-link">
+                        <i class="yc-link__icon yc-link__icon--arrow-right">→</i>
+                        跳转到首页
+                    </a>
+                    <a href="#" class="yc-link">
+                        <i class="yc-link__icon">📧</i>
+                        发送邮件
+                    </a>
+                    <a href="#" class="yc-link">
+                        <i class="yc-link__icon">🔗</i>
+                        复制链接
+                    </a>
+                    <a href="#" class="yc-link yc-link--primary">
+                        了解更多
+                        <i class="yc-link__icon yc-link__icon--arrow-right">→</i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>下划线样式</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">不同下划线状态</div>
+                <div class="link-wrapper">
+                    <a href="#" class="yc-link yc-link--underline-hover">悬停下划线（默认）</a>
+                    <a href="#" class="yc-link yc-link--underline-always">始终下划线</a>
+                    <a href="#" class="yc-link yc-link--underline-none">无下划线</a>
+                </div>
+            </div>
+            <div class="link-divider"></div>
+            <div class="demo-block">
+                <div class="demo-block-title">下划线应用场景</div>
+                <div class="link-demo-row">
+                    <span class="link-demo-row__label">悬停下划线</span>
+                    <a href="#" class="yc-link yc-link--underline-hover yc-link--primary">文章标题链接</a>
+                </div>
+                <div class="link-demo-row">
+                    <span class="link-demo-row__label">始终下划线</span>
+                    <a href="#" class="yc-link yc-link--underline-always yc-link--primary">外部链接 URL</a>
+                </div>
+                <div class="link-demo-row">
+                    <span class="link-demo-row__label">无下划线</span>
+                    <a href="#" class="yc-link yc-link--underline-none yc-link--primary">功能操作链接</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>尺寸变体</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">三种尺寸链接</div>
+                <div class="link-wrapper">
+                    <a href="#" class="yc-link yc-link--small yc-link--primary">小字号链接</a>
+                    <a href="#" class="yc-link yc-link--medium yc-link--primary">中等字号链接</a>
+                    <a href="#" class="yc-link yc-link--large yc-link--primary">大字号链接</a>
+                </div>
+            </div>
+            <div class="link-divider"></div>
+            <div class="demo-block">
+                <div class="demo-block-title">尺寸对比</div>
+                <div class="link-wrapper link-wrapper--vertical" style="gap: 24px;">
+                    <div>
+                        <span style="font-size: 12px; color: var(--yc-color-text-secondary); display: block; margin-bottom: 8px;">小字号 (12px)</span>
+                        <a href="#" class="yc-link yc-link--small">查看详情</a>
+                    </div>
+                    <div>
+                        <span style="font-size: 14px; color: var(--yc-color-text-secondary); display: block; margin-bottom: 8px;">中等字号 (14px)</span>
+                        <a href="#" class="yc-link yc-link--medium">查看详情</a>
+                    </div>
+                    <div>
+                        <span style="font-size: 16px; color: var(--yc-color-text-secondary); display: block; margin-bottom: 8px;">大字号 (16px)</span>
+                        <a href="#" class="yc-link yc-link--large">查看详情</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>禁用状态</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">禁用链接</div>
+                <div class="link-wrapper">
+                    <a href="#" class="yc-link yc-link--disabled">默认禁用</a>
+                    <a href="#" class="yc-link yc-link--primary yc-link--disabled">主要禁用</a>
+                    <a href="#" class="yc-link yc-link--success yc-link--disabled">成功禁用</a>
+                    <a href="#" class="yc-link yc-link--warning yc-link--disabled">警告禁用</a>
+                    <a href="#" class="yc-link yc-link--danger yc-link--disabled">危险禁用</a>
+                    <a href="#" class="yc-link yc-link--info yc-link--disabled">信息禁用</a>
+                </div>
+            </div>
+            <div class="link-divider"></div>
+            <div class="demo-block">
+                <div class="demo-block-title">禁用与正常状态对比</div>
+                <div class="link-wrapper">
+                    <a href="#" class="yc-link yc-link--primary">正常链接</a>
+                    <span style="color: var(--yc-color-text-placeholder);">|</span>
+                    <a href="#" class="yc-link yc-link--primary yc-link--disabled">禁用链接</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>图标链接</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">常用图标链接</div>
+                <div class="link-wrapper">
+                    <a href="#" class="yc-link">
+                        <i class="yc-link__icon">🏠</i>
+                        首页
+                    </a>
+                    <a href="#" class="yc-link">
+                        <i class="yc-link__icon">👤</i>
+                        个人中心
+                    </a>
+                    <a href="#" class="yc-link">
+                        <i class="yc-link__icon">⚙️</i>
+                        设置
+                    </a>
+                    <a href="#" class="yc-link">
+                        <i class="yc-link__icon">❓</i>
+                        帮助
+                    </a>
+                    <a href="#" class="yc-link">
+                        <i class="yc-link__icon">📝</i>
+                        文档
+                    </a>
+                </div>
+            </div>
+            <div class="link-divider"></div>
+            <div class="demo-block">
+                <div class="demo-block-title">箭头方向链接</div>
+                <div class="link-wrapper">
+                    <a href="#" class="yc-link yc-link--primary">
+                        返回上一页
+                        <i class="yc-link__icon yc-link__icon--arrow-left">←</i>
+                    </a>
+                    <a href="#" class="yc-link yc-link--primary">
+                        继续阅读
+                        <i class="yc-link__icon yc-link__icon--arrow-right">→</i>
+                    </a>
+                    <a href="#" class="yc-link yc-link--primary">
+                        <i class="yc-link__icon yc-link__icon--arrow-up">↑</i>
+                        回到顶部
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>链接组</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">垂直链接组</div>
+                <div class="link-group link-group--vertical">
+                    <a href="#" class="yc-link yc-link--primary">
+                        <i class="yc-link__icon">📦</i>
+                        产品介绍
+                    </a>
+                    <a href="#" class="yc-link yc-link--primary">
+                        <i class="yc-link__icon">💰</i>
+                        价格详情
+                    </a>
+                    <a href="#" class="yc-link yc-link--primary">
+                        <i class="yc-link__icon">📖</i>
+                        使用文档
+                    </a>
+                    <a href="#" class="yc-link yc-link--primary">
+                        <i class="yc-link__icon">🎮</i>
+                        在线体验
+                    </a>
+                </div>
+            </div>
+            <div class="link-divider"></div>
+            <div class="demo-block">
+                <div class="demo-block-title">水平链接组</div>
+                <div class="link-group">
+                    <a href="#" class="yc-link yc-link--default">
+                        <i class="yc-link__icon">📋</i>
+                        服务条款
+                    </a>
+                    <a href="#" class="yc-link yc-link--default">
+                        <i class="yc-link__icon">🔒</i>
+                        隐私政策
+                    </a>
+                    <a href="#" class="yc-link yc-link--default">
+                        <i class="yc-link__icon">📧</i>
+                        联系我们
+                    </a>
+                    <a href="#" class="yc-link yc-link--default">
+                        <i class="yc-link__icon">🌐</i>
+                        网站地图
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>卡片链接</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">卡片式链接</div>
+                <div class="link-card-grid">
+                    <a href="#" class="link-card">
+                        <div class="link-card__title">
+                            <i style="margin-right: 6px;">🚀</i>
+                            快速开始
+                        </div>
+                        <div class="link-card__desc">了解如何快速接入和使用我们的产品服务</div>
+                    </a>
+                    <a href="#" class="link-card">
+                        <div class="link-card__title">
+                            <i style="margin-right: 6px;">📚</i>
+                            完整文档
+                        </div>
+                        <div class="link-card__desc">浏览完整的 API 文档和开发指南</div>
+                    </a>
+                    <a href="#" class="link-card">
+                        <div class="link-card__title">
+                            <i style="margin-right: 6px;">💡</i>
+                            示例中心
+                        </div>
+                        <div class="link-card__desc">查看丰富的功能演示和代码示例</div>
+                    </a>
+                    <a href="#" class="link-card">
+                        <div class="link-card__title">
+                            <i style="margin-right: 6px;">🛠️</i>
+                            开发工具
+                        </div>
+                        <div class="link-card__desc">下载 SDK、CLI 工具和辅助插件</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>导航链接</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">侧边栏导航链接</div>
+                <div class="link-nav" style="max-width: 200px;">
+                    <a href="#" class="link-nav__item link-nav__item--active">
+                        <i style="width: 16px;">📊</i>
+                        数据概览
+                    </a>
+                    <a href="#" class="link-nav__item">
+                        <i style="width: 16px;">👥</i>
+                        用户管理
+                    </a>
+                    <a href="#" class="link-nav__item">
+                        <i style="width: 16px;">📦</i>
+                        商品管理
+                    </a>
+                    <a href="#" class="link-nav__item">
+                        <i style="width: 16px;">📝</i>
+                        订单列表
+                    </a>
+                    <a href="#" class="link-nav__item">
+                        <i style="width: 16px;">⚙️</i>
+                        系统设置
+                    </a>
+                </div>
+            </div>
+            <div class="link-divider"></div>
+            <div class="demo-block">
+                <div class="demo-block-title">面包屑导航链接</div>
+                <div class="link-breadcrumb">
+                    <a href="#" class="link-breadcrumb__item">首页</a>
+                    <span class="link-breadcrumb__separator">/</span>
+                    <a href="#" class="link-breadcrumb__item">产品中心</a>
+                    <span class="link-breadcrumb__separator">/</span>
+                    <a href="#" class="link-breadcrumb__item">软件产品</a>
+                    <span class="link-breadcrumb__separator">/</span>
+                    <span style="color: var(--yc-color-text-primary); font-size: var(--yc-font-size-small);">YC Design</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>功能色链接</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">不同功能色链接</div>
+                <div class="link-wrapper link-wrapper--vertical" style="gap: 12px;">
+                    <div class="link-with-bg">
+                        <a href="#" class="yc-link yc-link--primary">
+                            <i class="yc-link__icon">✓</i>
+                            主要操作链接
+                        </a>
+                        <span style="color: var(--yc-color-text-secondary); font-size: var(--yc-font-size-extra-small);">用于主要操作和重点信息</span>
+                    </div>
+                    <div class="link-with-bg">
+                        <a href="#" class="yc-link yc-link--success">
+                            <i class="yc-link__icon">✓</i>
+                            成功信息链接
+                        </a>
+                        <span style="color: var(--yc-color-text-secondary); font-size: var(--yc-font-size-extra-small);">用于成功状态和正向操作</span>
+                    </div>
+                    <div class="link-with-bg">
+                        <a href="#" class="yc-link yc-link--warning">
+                            <i class="yc-link__icon">⚠</i>
+                            警告提示链接
+                        </a>
+                        <span style="color: var(--yc-color-text-secondary); font-size: var(--yc-font-size-extra-small);">用于警告提示和风险操作</span>
+                    </div>
+                    <div class="link-with-bg">
+                        <a href="#" class="yc-link yc-link--danger">
+                            <i class="yc-link__icon">✕</i>
+                            危险操作链接
+                        </a>
+                        <span style="color: var(--yc-color-text-secondary); font-size: var(--yc-font-size-extra-small);">用于危险操作和删除操作</span>
+                    </div>
+                    <div class="link-with-bg">
+                        <a href="#" class="yc-link yc-link--info">
+                            <i class="yc-link__icon">ℹ</i>
+                            信息提示链接
+                        </a>
+                        <span style="color: var(--yc-color-text-secondary); font-size: var(--yc-font-size-extra-small);">用于信息提示和辅助说明</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>链接状态</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">超链接四态展示</div>
+                <div class="link-wrapper" style="gap: 24px;">
+                    <div style="text-align: center;">
+                        <a href="#" class="yc-link yc-link--primary yc-link--underline-hover">默认态</a>
+                        <div style="font-size: 10px; color: var(--yc-color-text-placeholder); margin-top: 4px;">Normal</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <a href="#" class="yc-link yc-link--primary yc-link--underline-hover" style="color: var(--yc-color-link-hover);">悬停态</a>
+                        <div style="font-size: 10px; color: var(--yc-color-text-placeholder); margin-top: 4px;">Hover</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <a href="#" class="yc-link yc-link--primary yc-link--underline-hover" style="color: var(--yc-color-link-active);">激活态</a>
+                        <div style="font-size: 10px; color: var(--yc-color-text-placeholder); margin-top: 4px;">Active</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <a href="#" class="yc-link yc-link--primary yc-link--disabled">禁用态</a>
+                        <div style="font-size: 10px; color: var(--yc-color-text-placeholder); margin-top: 4px;">Disabled</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

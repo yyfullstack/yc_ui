@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar 日历 - YC UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">Calendar 日历</h1>
+            <p class="demo-page-subtitle">显示日期选择日历组件</p>
+        </div>
+
+        <div class="demo-section">
+            <h3>基本用法</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">设置 date 来指定显示当前月份</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div class="yc-calendar" id="calendar1">
+                        <div class="yc-calendar__header">
+                            <button class="yc-calendar__header-btn" id="prevMonth1"><i class="fas fa-chevron-left"></i></button>
+                            <h3 class="yc-calendar__title" id="calendarTitle1">2024年 3月</h3>
+                            <button class="yc-calendar__header-btn" id="nextMonth1"><i class="fas fa-chevron-right"></i></button>
+                        </div>
+                        <div class="yc-calendar__weekdays">
+                            <div class="yc-calendar__weekday">日</div>
+                            <div class="yc-calendar__weekday">一</div>
+                            <div class="yc-calendar__weekday">二</div>
+                            <div class="yc-calendar__weekday">三</div>
+                            <div class="yc-calendar__weekday">四</div>
+                            <div class="yc-calendar__weekday">五</div>
+                            <div class="yc-calendar__weekday">六</div>
+                        </div>
+                        <div class="yc-calendar__body">
+                            <div class="yc-calendar__dates" id="calendarDates1"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>自定义范围</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">可以设置日历的可选范围</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div class="yc-calendar">
+                        <div class="yc-calendar__header">
+                            <button class="yc-calendar__header-btn"><i class="fas fa-chevron-left"></i></button>
+                            <h3 class="yc-calendar__title">2024年 3月</h3>
+                            <button class="yc-calendar__header-btn"><i class="fas fa-chevron-right"></i></button>
+                        </div>
+                        <div class="yc-calendar__weekdays">
+                            <div class="yc-calendar__weekday">日</div><div class="yc-calendar__weekday">一</div><div class="yc-calendar__weekday">二</div><div class="yc-calendar__weekday">三</div><div class="yc-calendar__weekday">四</div><div class="yc-calendar__weekday">五</div><div class="yc-calendar__weekday">六</div>
+                        </div>
+                        <div class="yc-calendar__body">
+                            <div class="yc-calendar__dates">
+                                <div class="yc-calendar__date is-other-month">26</div><div class="yc-calendar__date is-other-month">27</div><div class="yc-calendar__date is-other-month">28</div><div class="yc-calendar__date is-other-month">29</div>
+                                <div class="yc-calendar__date">1</div><div class="yc-calendar__date">2</div><div class="yc-calendar__date is-range-start">3</div>
+                                <div class="yc-calendar__date">4</div><div class="yc-calendar__date">5</div><div class="yc-calendar__date">6</div><div class="yc-calendar__date">7</div><div class="yc-calendar__date">8</div><div class="yc-calendar__date">9</div><div class="yc-calendar__date">10</div>
+                                <div class="yc-calendar__date is-in-range">11</div><div class="yc-calendar__date is-in-range">12</div><div class="yc-calendar__date is-in-range">13</div><div class="yc-calendar__date is-in-range">14</div><div class="yc-calendar__date is-in-range">15</div><div class="yc-calendar__date is-in-range">16</div><div class="yc-calendar__date is-in-range">17</div>
+                                <div class="yc-calendar__date is-in-range">18</div><div class="yc-calendar__date is-in-range">19</div><div class="yc-calendar__date is-in-range">20</div><div class="yc-calendar__date">21</div><div class="yc-calendar__date">22</div><div class="yc-calendar__date">23</div><div class="yc-calendar__date is-range-end">24</div>
+                                <div class="yc-calendar__date">25</div><div class="yc-calendar__date">26</div><div class="yc-calendar__date">27</div><div class="yc-calendar__date">28</div><div class="yc-calendar__date">29</div><div class="yc-calendar__date">30</div><div class="yc-calendar__date">31</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function initCalendar(container, year, month) {
+            const title = container.querySelector('.yc-calendar__title');
+            const datesContainer = container.querySelector('.yc-calendar__dates');
+            const today = new Date();
+            
+            function renderCalendar(y, m) {
+                const firstDay = new Date(y, m - 1, 1);
+                const lastDay = new Date(y, m, 0);
+                const startDay = firstDay.getDay();
+                const daysInMonth = lastDay.getDate();
+                const prevMonthLastDay = new Date(y, m - 1, 0).getDate();
+                
+                title.textContent = `${y}年 ${m}月`;
+                datesContainer.innerHTML = '';
+                
+                for (let i = startDay - 1; i >= 0; i--) {
+                    const div = document.createElement('div');
+                    div.className = 'yc-calendar__date is-other-month';
+                    div.textContent = prevMonthLastDay - i;
+                    datesContainer.appendChild(div);
+                }
+                
+                for (let i = 1; i <= daysInMonth; i++) {
+                    const div = document.createElement('div');
+                    div.className = 'yc-calendar__date';
+                    if (i === today.getDate() && y === today.getFullYear() && m === today.getMonth() + 1) {
+                        div.classList.add('is-today');
+                    }
+                    div.textContent = i;
+                    datesContainer.appendChild(div);
+                }
+            }
+            
+            renderCalendar(year, month);
+            return renderCalendar;
+        }
+
+        const calendar1 = document.getElementById('calendar1');
+        let currentYear = 2024, currentMonth = 3;
+        const render = initCalendar(calendar1, currentYear, currentMonth);
+
+        document.getElementById('prevMonth1')?.addEventListener('click', () => {
+            currentMonth--;
+            if (currentMonth < 1) { currentMonth = 12; currentYear--; }
+            render(currentYear, currentMonth);
+        });
+
+        document.getElementById('nextMonth1')?.addEventListener('click', () => {
+            currentMonth++;
+            if (currentMonth > 12) { currentMonth = 1; currentYear++; }
+            render(currentYear, currentMonth);
+        });
+    </script>
+</body>
+</html>

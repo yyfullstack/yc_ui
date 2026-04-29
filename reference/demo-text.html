@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text 文本组件示例</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../index.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--yc-font-family);
+            background-color: var(--yc-color-bg-page);
+            color: var(--yc-color-text-primary);
+            line-height: var(--yc-line-height-base);
+            padding: 24px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .demo-section {
+            background: var(--yc-color-bg);
+            border: 1px solid var(--yc-color-border);
+            border-radius: var(--yc-border-radius-lg);
+            padding: 24px;
+            margin-bottom: 16px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+        }
+
+        .demo-section h3 {
+            font-size: var(--yc-font-size-medium);
+            font-weight: var(--yc-font-weight-semibold);
+            color: var(--yc-color-text-primary);
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--yc-color-border-light);
+            position: relative;
+        }
+
+        .demo-section h3::before {
+            content: '';
+            position: absolute;
+            left: -24px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 16px;
+            background: var(--yc-color-primary);
+            border-radius: 2px;
+        }
+
+        .demo-block {
+            margin-bottom: 20px;
+        }
+
+        .demo-block:last-child {
+            margin-bottom: 0;
+        }
+
+        .demo-block-title {
+            font-size: var(--yc-font-size-small);
+            color: var(--yc-color-text-secondary);
+            margin-bottom: 12px;
+        }
+
+        .demo-row {
+            display: flex;
+            align-items: baseline;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+
+        .demo-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .demo-divider {
+            height: 1px;
+            background: var(--yc-color-border-light);
+            margin: 20px 0;
+        }
+
+        .demo-color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 12px;
+        }
+
+        .demo-color-item {
+            display: flex;
+            flex-direction: column;
+            padding: 12px;
+            border-radius: var(--yc-border-radius-md);
+            border: 1px solid var(--yc-color-border-light);
+        }
+
+        .demo-color-preview {
+            font-size: var(--yc-font-size-extra-small);
+            margin-bottom: 8px;
+            padding: 8px;
+            background: var(--yc-color-bg);
+            border-radius: var(--yc-border-radius-sm);
+            text-align: center;
+        }
+
+        .demo-color-name {
+            font-size: var(--yc-font-size-extra-small);
+            color: var(--yc-color-text-secondary);
+        }
+
+        /* ==================== 文本组件样式 ==================== */
+
+        /* 标题组件 */
+        .yc-text-h1 {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--yc-color-text-primary);
+            line-height: 1.3;
+            margin-bottom: 16px;
+        }
+
+        .yc-text-h2 {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--yc-color-text-primary);
+            line-height: 1.3;
+            margin-bottom: 14px;
+        }
+
+        .yc-text-h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--yc-color-text-primary);
+            line-height: 1.4;
+            margin-bottom: 12px;
+        }
+
+        .yc-text-h4 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--yc-color-text-primary);
+            line-height: 1.4;
+            margin-bottom: 10px;
+        }
+
+        .yc-text-h5 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--yc-color-text-primary);
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+
+        .yc-text-h6 {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--yc-color-text-primary);
+            line-height: 1.5;
+            margin-bottom: 6px;
+        }
+
+        /* 段落组件 */
+        .yc-text-paragraph {
+            font-size: var(--yc-font-size-base);
+            color: var(--yc-color-text-regular);
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+
+        .yc-text-paragraph:last-child {
+            margin-bottom: 0;
+        }
+
+        /* 文本尺寸 */
+        .yc-text-xs {
+            font-size: var(--yc-font-size-extra-small);
+        }
+
+        .yc-text-sm {
+            font-size: var(--yc-font-size-small);
+        }
+
+        .yc-text-base {
+            font-size: var(--yc-font-size-base);
+        }
+
+        .yc-text-md {
+            font-size: var(--yc-font-size-medium);
+        }
+
+        .yc-text-lg {
+            font-size: var(--yc-font-size-large);
+        }
+
+        .yc-text-xl {
+            font-size: var(--yc-font-size-extra-large);
+        }
+
+        .yc-text-xxl {
+            font-size: 24px;
+        }
+
+        /* 文本颜色 */
+        .yc-text-primary {
+            color: var(--yc-color-text-primary);
+        }
+
+        .yc-text-regular {
+            color: var(--yc-color-text-regular);
+        }
+
+        .yc-text-secondary {
+            color: var(--yc-color-text-secondary);
+        }
+
+        .yc-text-placeholder {
+            color: var(--yc-color-text-placeholder);
+        }
+
+        .yc-text-success {
+            color: var(--yc-color-success);
+        }
+
+        .yc-text-warning {
+            color: var(--yc-color-warning);
+        }
+
+        .yc-text-danger {
+            color: var(--yc-color-danger);
+        }
+
+        .yc-text-info {
+            color: var(--yc-color-info);
+        }
+
+        /* 文本状态 */
+        .yc-text-success {
+            color: var(--yc-color-success);
+        }
+
+        .yc-text-warning {
+            color: var(--yc-color-warning);
+        }
+
+        .yc-text-danger {
+            color: var(--yc-color-danger);
+        }
+
+        .yc-text-info {
+            color: var(--yc-color-info);
+        }
+
+        .yc-text-success {
+            color: var(--yc-color-success);
+        }
+
+        .yc-text-warning {
+            color: var(--yc-color-warning);
+        }
+
+        .yc-text-danger {
+            color: var(--yc-color-danger);
+        }
+
+        .yc-text-info {
+            color: var(--yc-color-info);
+        }
+
+        .yc-text-primary {
+            color: var(--yc-color-primary);
+        }
+
+        .yc-text-hover:hover {
+            color: var(--yc-color-primary-hover);
+        }
+
+        .yc-text-active:active {
+            color: var(--yc-color-primary-active);
+        }
+
+        /* 文本截断 */
+        .yc-text-ellipsis {
+            display: inline-block;
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .yc-text-clip {
+            display: inline-block;
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: clip;
+            white-space: nowrap;
+        }
+
+        .yc-text-break {
+            word-break: break-word;
+            overflow-wrap: break-word;
+        }
+
+        /* 文本对齐 */
+        .yc-text-left {
+            text-align: left;
+        }
+
+        .yc-text-center {
+            text-align: center;
+        }
+
+        .yc-text-right {
+            text-align: right;
+        }
+
+        /* 文本装饰 */
+        .yc-text-decoration-none {
+            text-decoration: none;
+        }
+
+        .yc-text-underline {
+            text-decoration: underline;
+        }
+
+        .yc-text-line-through {
+            text-decoration: line-through;
+            text-decoration-color: var(--yc-color-danger);
+        }
+
+        .yc-text-overline {
+            text-decoration: overline;
+        }
+
+        /* 文本变换 */
+        .yc-text-lowercase {
+            text-transform: lowercase;
+        }
+
+        .yc-text-uppercase {
+            text-transform: uppercase;
+        }
+
+        .yc-text-capitalize {
+            text-transform: capitalize;
+        }
+
+        /* 文本粗细 */
+        .yc-text-thin {
+            font-weight: 100;
+        }
+
+        .yc-text-light {
+            font-weight: 300;
+        }
+
+        .yc-text-normal {
+            font-weight: 400;
+        }
+
+        .yc-text-medium {
+            font-weight: 500;
+        }
+
+        .yc-text-semibold {
+            font-weight: 600;
+        }
+
+        .yc-text-bold {
+            font-weight: 700;
+        }
+
+        /* 文本行高 */
+        .yc-text-leading-none {
+            line-height: 1;
+        }
+
+        .yc-text-leading-tight {
+            line-height: 1.3;
+        }
+
+        .yc-text-leading-normal {
+            line-height: 1.5;
+        }
+
+        .yc-text-leading-loose {
+            line-height: 1.7;
+        }
+
+        /* 文本缩进 */
+        .yc-text-indent {
+            text-indent: 2em;
+        }
+
+        /* 链接样式 */
+        .yc-text-link {
+            color: var(--yc-color-primary);
+            text-decoration: none;
+            cursor: pointer;
+            transition: color var(--yc-transition-duration-fast);
+        }
+
+        .yc-text-link:hover {
+            color: var(--yc-color-primary-hover);
+            text-decoration: underline;
+        }
+
+        .yc-text-link:active {
+            color: var(--yc-color-primary-active);
+        }
+
+        .yc-text-link--success {
+            color: var(--yc-color-success);
+        }
+
+        .yc-text-link--success:hover {
+            color: var(--yc-color-success-hover);
+        }
+
+        .yc-text-link--warning {
+            color: var(--yc-color-warning);
+        }
+
+        .yc-text-link--warning:hover {
+            color: var(--yc-color-warning-hover);
+        }
+
+        .yc-text-link--danger {
+            color: var(--yc-color-danger);
+        }
+
+        .yc-text-link--danger:hover {
+            color: var(--yc-color-danger-hover);
+        }
+
+        .yc-text-link--info {
+            color: var(--yc-color-info);
+        }
+
+        .yc-text-link--info:hover {
+            color: var(--yc-color-info-hover);
+        }
+
+        /* 标记样式 */
+        .yc-text-mark {
+            background-color: #fef3cd;
+            padding: 0 4px;
+            border-radius: 2px;
+        }
+
+        .yc-text-code {
+            font-family: var(--yc-font-family-mono);
+            font-size: 0.9em;
+            background-color: var(--yc-color-code-bg);
+            color: var(--yc-color-code);
+            padding: 2px 6px;
+            border-radius: var(--yc-border-radius-small);
+        }
+
+        .yc-text-tag {
+            display: inline-block;
+            font-size: var(--yc-font-size-extra-small);
+            padding: 2px 8px;
+            background-color: var(--yc-color-primary-light-3);
+            color: var(--yc-color-primary);
+            border-radius: var(--yc-border-radius-sm);
+        }
+
+        .yc-text-tag--success {
+            background-color: rgba(103, 194, 58, 0.1);
+            color: var(--yc-color-success);
+        }
+
+        .yc-text-tag--warning {
+            background-color: rgba(230, 162, 60, 0.1);
+            color: var(--yc-color-warning);
+        }
+
+        .yc-text-tag--danger {
+            background-color: rgba(245, 108, 108, 0.1);
+            color: var(--yc-color-danger);
+        }
+
+        .yc-text-tag--info {
+            background-color: rgba(144, 147, 153, 0.1);
+            color: var(--yc-color-info);
+        }
+
+        /* 徽章样式 */
+        .yc-text-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 18px;
+            height: 18px;
+            padding: 0 6px;
+            font-size: 10px;
+            font-weight: 500;
+            color: var(--yc-color-white);
+            background-color: var(--yc-color-danger);
+            border-radius: 9px;
+        }
+
+        .yc-text-badge--dot {
+            min-width: 8px;
+            width: 8px;
+            height: 8px;
+            padding: 0;
+            border-radius: 50%;
+        }
+
+        /* 列表样式 */
+        .yc-text-list {
+            padding-left: 20px;
+            margin-bottom: 12px;
+        }
+
+        .yc-text-list li {
+            margin-bottom: 6px;
+            line-height: 1.6;
+        }
+
+        .yc-text-list--disc {
+            list-style-type: disc;
+        }
+
+        .yc-text-list--circle {
+            list-style-type: circle;
+        }
+
+        .yc-text-list--square {
+            list-style-type: square;
+        }
+
+        .yc-text-list--decimal {
+            list-style-type: decimal;
+        }
+
+        .yc-text-list--lower-alpha {
+            list-style-type: lower-alpha;
+        }
+
+        .yc-text-list--upper-alpha {
+            list-style-type: upper-alpha;
+        }
+
+        .yc-text-list--lower-roman {
+            list-style-type: lower-roman;
+        }
+
+        .yc-text-list--upper-roman {
+            list-style-type: upper-roman;
+        }
+
+        /* 分隔线 */
+        .yc-divider {
+            height: 1px;
+            background: var(--yc-color-border);
+            margin: 16px 0;
+        }
+
+        .yc-divider--dashed {
+            background: none;
+            border-top: 1px dashed var(--yc-color-border);
+        }
+
+        .yc-divider--dotted {
+            background: none;
+            border-top: 1px dotted var(--yc-color-border);
+        }
+
+        .yc-divider--vertical {
+            display: inline-block;
+            width: 1px;
+            height: 1em;
+            background: var(--yc-color-border);
+            vertical-align: middle;
+            margin: 0 12px;
+        }
+
+        /* 引用块 */
+        .yc-blockquote {
+            padding: 12px 16px;
+            background: var(--yc-color-bg-page);
+            border-left: 4px solid var(--yc-color-primary);
+            margin: 16px 0;
+            border-radius: 0 var(--yc-border-radius-md) var(--yc-border-radius-md) 0;
+        }
+
+        .yc-blockquote__author {
+            font-size: var(--yc-font-size-small);
+            color: var(--yc-color-text-secondary);
+            margin-top: 8px;
+        }
+
+        /* 示例展示区 */
+        .demo-showcase {
+            padding: 16px;
+            background: var(--yc-color-bg-page);
+            border-radius: var(--yc-border-radius-md);
+            margin-bottom: 12px;
+        }
+
+        .demo-showcase:last-child {
+            margin-bottom: 0;
+        }
+
+        .demo-showcase-title {
+            font-size: var(--yc-font-size-extra-small);
+            color: var(--yc-color-text-secondary);
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px dashed var(--yc-color-border-light);
+        }
+
+        @media (max-width: 768px) {
+            .demo-row {
+                flex-direction: column;
+                gap: 8px;
+            }
+        }
+
+        [yc-theme="dark"] .demo-section {
+            background: rgba(255, 255, 255, 0.02);
+            border-color: rgba(255, 255, 255, 0.08);
+        }
+
+        [yc-theme="dark"] .yc-text-mark {
+            background-color: rgba(255, 193, 7, 0.2);
+        }
+
+        [yc-theme="dark"] .yc-blockquote {
+            background: rgba(255, 255, 255, 0.04);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 style="font-size: 24px; font-weight: 600; margin-bottom: 24px; color: var(--yc-color-text-primary);">Text 文本组件</h1>
+
+        <div class="demo-section">
+            <h3>标题组件</h3>
+            <div class="demo-showcase">
+                <div class="demo-showcase-title">H1 - 一级标题</div>
+                <div class="yc-text-h1">这是 H1 标题</div>
+            </div>
+            <div class="demo-showcase">
+                <div class="demo-showcase-title">H2 - 二级标题</div>
+                <div class="yc-text-h2">这是 H2 标题</div>
+            </div>
+            <div class="demo-showcase">
+                <div class="demo-showcase-title">H3 - 三级标题</div>
+                <div class="yc-text-h3">这是 H3 标题</div>
+            </div>
+            <div class="demo-showcase">
+                <div class="demo-showcase-title">H4 - 四级标题</div>
+                <div class="yc-text-h4">这是 H4 标题</div>
+            </div>
+            <div class="demo-showcase">
+                <div class="demo-showcase-title">H5 - 五级标题</div>
+                <div class="yc-text-h5">这是 H5 标题</div>
+            </div>
+            <div class="demo-showcase">
+                <div class="demo-showcase-title">H6 - 六级标题</div>
+                <div class="yc-text-h6">这是 H6 标题</div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>文本尺寸</h3>
+            <div class="demo-row">
+                <span class="yc-text-xxl yc-text-primary">XXL 24px</span>
+                <span class="yc-text-xl yc-text-primary">XL 20px</span>
+                <span class="yc-text-lg yc-text-primary">LG 18px</span>
+                <span class="yc-text-md yc-text-primary">MD 16px</span>
+                <span class="yc-text-base yc-text-primary">Base 14px</span>
+                <span class="yc-text-sm yc-text-primary">SM 13px</span>
+                <span class="yc-text-xs yc-text-primary">XS 12px</span>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>文本颜色</h3>
+            <div class="demo-row">
+                <span class="yc-text-primary">主要文本 Primary</span>
+                <span class="yc-text-regular">常规文本 Regular</span>
+                <span class="yc-text-secondary">次要文本 Secondary</span>
+                <span class="yc-text-placeholder">占位文本 Placeholder</span>
+            </div>
+            <div class="demo-divider"></div>
+            <div class="demo-row">
+                <span class="yc-text-success">成功文本 Success</span>
+                <span class="yc-text-warning">警告文本 Warning</span>
+                <span class="yc-text-danger">危险文本 Danger</span>
+                <span class="yc-text-info">信息文本 Info</span>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>文本状态</h3>
+            <div class="demo-row">
+                <span class="yc-text-hover">悬停变色（hover me）</span>
+                <span class="yc-text-active">点击变色（click me）</span>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>文本装饰</h3>
+            <div class="demo-row">
+                <span class="yc-text-decoration-none">无装饰 None</span>
+                <span class="yc-text-underline">下划线 Underline</span>
+                <span class="yc-text-line-through">删除线 Line Through</span>
+                <span class="yc-text-overline">上划线 Overline</span>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>文本变换</h3>
+            <div class="demo-row">
+                <span class="yc-text-lowercase">ABC DEF GHI (lowercase)</span>
+            </div>
+            <div class="demo-row">
+                <span class="yc-text-uppercase">abc def ghi (UPPERCASE)</span>
+            </div>
+            <div class="demo-row">
+                <span class="yc-text-capitalize">hello world (Capitalize Each Word)</span>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>文本粗细</h3>
+            <div class="demo-row">
+                <span class="yc-text-thin">Thin 100</span>
+                <span class="yc-text-light">Light 300</span>
+                <span class="yc-text-normal">Normal 400</span>
+                <span class="yc-text-medium">Medium 500</span>
+                <span class="yc-text-semibold">Semibold 600</span>
+                <span class="yc-text-bold">Bold 700</span>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>文本行高</h3>
+            <div class="demo-row" style="flex-direction: column; gap: 16px;">
+                <div>
+                    <span class="yc-text-sm yc-text-secondary">line-height: 1 (紧凑)</span>
+                    <div class="yc-text-leading-none yc-text-regular" style="margin-top: 4px;">
+                        这是第一行文本<br>
+                        这是第二行文本<br>
+                        这是第三行文本
+                    </div>
+                </div>
+                <div>
+                    <span class="yc-text-sm yc-text-secondary">line-height: 1.3 (紧凑)</span>
+                    <div class="yc-text-leading-tight yc-text-regular" style="margin-top: 4px;">
+                        这是第一行文本<br>
+                        这是第二行文本<br>
+                        这是第三行文本
+                    </div>
+                </div>
+                <div>
+                    <span class="yc-text-sm yc-text-secondary">line-height: 1.5 (正常)</span>
+                    <div class="yc-text-leading-normal yc-text-regular" style="margin-top: 4px;">
+                        这是第一行文本<br>
+                        这是第二行文本<br>
+                        这是第三行文本
+                    </div>
+                </div>
+                <div>
+                    <span class="yc-text-sm yc-text-secondary">line-height: 1.7 (宽松)</span>
+                    <div class="yc-text-leading-loose yc-text-regular" style="margin-top: 4px;">
+                        这是第一行文本<br>
+                        这是第二行文本<br>
+                        这是第三行文本
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>文本截断</h3>
+            <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                <div>
+                    <span class="yc-text-sm yc-text-secondary">单行截断 (ellipsis)：</span>
+                    <div class="yc-text-ellipsis yc-text-regular" style="margin-top: 4px; max-width: 300px; background: var(--yc-color-bg-page); padding: 8px;">
+                        这是一段很长的文本，它超过了容器的宽度，需要进行截断处理以显示省略号。这是一段很长的文本。
+                    </div>
+                </div>
+                <div>
+                    <span class="yc-text-sm yc-text-secondary">允许换行 (break)：</span>
+                    <div class="yc-text-break yc-text-regular" style="margin-top: 4px; max-width: 300px; background: var(--yc-color-bg-page); padding: 8px;">
+                        这是一段很长的文本，它超过了容器的宽度，但是允许换行显示。
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>文本对齐</h3>
+            <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                <div class="yc-text-left" style="padding: 8px; background: var(--yc-color-bg-page);">
+                    <span class="yc-text-sm yc-text-secondary">左对齐 (left)：</span>
+                    <div class="yc-text-regular">文本内容左对齐显示</div>
+                </div>
+                <div class="yc-text-center" style="padding: 8px; background: var(--yc-color-bg-page);">
+                    <span class="yc-text-sm yc-text-secondary">居中对齐 (center)：</span>
+                    <div class="yc-text-regular">文本内容居中显示</div>
+                </div>
+                <div class="yc-text-right" style="padding: 8px; background: var(--yc-color-bg-page);">
+                    <span class="yc-text-sm yc-text-secondary">右对齐 (right)：</span>
+                    <div class="yc-text-regular">文本内容右对齐显示</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>段落文本</h3>
+            <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                <div class="yc-text-paragraph">
+                    这是一个段落文本示例。段落文本用于显示较长的内容，通常包含多句话。它具有标准的行高设置，适合阅读。
+                </div>
+                <div class="yc-text-paragraph">
+                    这是第二个段落。每个段落之间有适当的间距，使内容更加清晰易读。段落组件会自动处理文本的排版和间距。
+                </div>
+                <div class="yc-text-indent yc-text-paragraph">
+                    这是一个首行缩进的段落示例。中文排版中通常需要在段落开头空出两个字符的位置，使用 text-indent: 2em 可以轻松实现这个效果。
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>链接文本</h3>
+            <div class="demo-row">
+                <a href="#" class="yc-text-link">主要链接 Primary</a>
+                <a href="#" class="yc-text-link yc-text-link--success">成功链接 Success</a>
+                <a href="#" class="yc-text-link yc-text-link--warning">警告链接 Warning</a>
+                <a href="#" class="yc-text-link yc-text-link--danger">危险链接 Danger</a>
+                <a href="#" class="yc-text-link yc-text-link--info">信息链接 Info</a>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>文本标记</h3>
+            <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                <div class="yc-text-regular">
+                    这是一段包含 <span class="yc-text-mark">高亮标记</span> 的文本，用于 <span class="yc-text-mark">重点强调</span> 某些词语。
+                </div>
+                <div class="yc-text-regular">
+                    可以使用 <span class="yc-text-code">code</span> 样式来显示代码或技术术语。
+                </div>
+                <div class="demo-divider"></div>
+                <div class="demo-row">
+                    <span class="yc-text-tag">默认标签</span>
+                    <span class="yc-text-tag yc-text-tag--success">成功标签</span>
+                    <span class="yc-text-tag yc-text-tag--warning">警告标签</span>
+                    <span class="yc-text-tag yc-text-tag--danger">危险标签</span>
+                    <span class="yc-text-tag yc-text-tag--info">信息标签</span>
+                </div>
+                <div class="demo-row">
+                    <span class="yc-text-badge">5</span>
+                    <span class="yc-text-badge">99+</span>
+                    <span class="yc-text-badge yc-text-badge--dot"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>列表</h3>
+            <div class="demo-row" style="flex-direction: column; gap: 16px;">
+                <div>
+                    <span class="yc-text-sm yc-text-secondary">圆点列表 (disc)：</span>
+                    <ul class="yc-text-list yc-text-list--disc yc-text-regular">
+                        <li>列表项第一项</li>
+                        <li>列表项第二项</li>
+                        <li>列表项第三项</li>
+                    </ul>
+                </div>
+                <div>
+                    <span class="yc-text-sm yc-text-secondary">数字列表 (decimal)：</span>
+                    <ol class="yc-text-list yc-text-list--decimal yc-text-regular">
+                        <li>第一步：准备工作</li>
+                        <li>第二步：实施计划</li>
+                        <li>第三步：验证结果</li>
+                    </ol>
+                </div>
+                <div>
+                    <span class="yc-text-sm yc-text-secondary">字母列表 (lower-alpha)：</span>
+                    <ol class="yc-text-list yc-text-list--lower-alpha yc-text-regular">
+                        <li>选项 A</li>
+                        <li>选项 B</li>
+                        <li>选项 C</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>引用块</h3>
+            <div class="demo-row" style="flex-direction: column; gap: 16px;">
+                <blockquote class="yc-blockquote yc-text-regular">
+                    这是一个引用块的示例。引用块通常用于引用他人的言论、观点或重要的信息内容。它具有左侧边框和背景色来区分普通文本。
+                </blockquote>
+                <blockquote class="yc-blockquote yc-text-regular">
+                    另一个引用块的示例。
+                    <div class="yc-blockquote__author">— 引用来源</div>
+                </blockquote>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>分隔线</h3>
+            <div class="demo-row" style="flex-direction: column; gap: 16px;">
+                <div>
+                    <span class="yc-text-sm yc-text-secondary">实线分隔线：</span>
+                    <div class="demo-showcase" style="margin-top: 8px;">
+                        <div class="yc-text-regular">上方内容</div>
+                        <div class="yc-divider"></div>
+                        <div class="yc-text-regular">下方内容</div>
+                    </div>
+                </div>
+                <div>
+                    <span class="yc-text-sm yc-text-secondary">虚线分隔线：</span>
+                    <div class="demo-showcase" style="margin-top: 8px;">
+                        <div class="yc-text-regular">上方内容</div>
+                        <div class="yc-divider yc-divider--dashed"></div>
+                        <div class="yc-text-regular">下方内容</div>
+                    </div>
+                </div>
+                <div>
+                    <span class="yc-text-sm yc-text-secondary">点线分隔线：</span>
+                    <div class="demo-showcase" style="margin-top: 8px;">
+                        <div class="yc-text-regular">上方内容</div>
+                        <div class="yc-divider yc-divider--dotted"></div>
+                        <div class="yc-text-regular">下方内容</div>
+                    </div>
+                </div>
+                <div>
+                    <span class="yc-text-sm yc-text-secondary">垂直分隔线：</span>
+                    <div class="demo-showcase" style="margin-top: 8px; display: flex; align-items: center; gap: 0;">
+                        <div class="yc-text-regular">左侧文本</div>
+                        <span class="yc-divider--vertical"></span>
+                        <div class="yc-text-regular">中间文本</div>
+                        <span class="yc-divider--vertical"></span>
+                        <div class="yc-text-regular">右侧文本</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

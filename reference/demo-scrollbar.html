@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scrollbar 滚动条组件示例</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../index.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--yc-font-family);
+            background-color: var(--yc-color-bg-page);
+            color: var(--yc-color-text-primary);
+            line-height: var(--yc-line-height-base);
+            padding: 24px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .demo-section {
+            background: var(--yc-color-bg);
+            border: 1px solid var(--yc-color-border);
+            border-radius: var(--yc-border-radius-lg);
+            padding: 24px;
+            margin-bottom: 16px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+        }
+
+        .demo-section h3 {
+            font-size: var(--yc-font-size-medium);
+            font-weight: var(--yc-font-weight-semibold);
+            color: var(--yc-color-text-primary);
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--yc-color-border-light);
+            position: relative;
+        }
+
+        .demo-section h3::before {
+            content: '';
+            position: absolute;
+            left: -24px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 16px;
+            background: var(--yc-color-primary);
+            border-radius: 2px;
+        }
+
+        .demo-block {
+            margin-bottom: 24px;
+        }
+
+        .demo-block:last-child {
+            margin-bottom: 0;
+        }
+
+        .demo-block-title {
+            font-size: var(--yc-font-size-small);
+            color: var(--yc-color-text-secondary);
+            margin-bottom: 12px;
+        }
+
+        .scrollbar-wrapper {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scrollbar-wrapper__bar {
+            position: absolute;
+            background: var(--yc-scrollbar-color, var(--yc-color-border));
+            border-radius: var(--yc-scrollbar-width, 6px);
+            transition: background var(--yc-transition-duration-fast);
+        }
+
+        .scrollbar-wrapper__bar--horizontal {
+            height: var(--yc-scrollbar-width, 6px);
+            bottom: 0;
+            left: 0;
+            width: 100%;
+        }
+
+        .scrollbar-wrapper__bar--vertical {
+            width: var(--yc-scrollbar-width, 6px);
+            right: 0;
+            top: 0;
+            height: 100%;
+        }
+
+        .scrollbar-wrapper__thumb {
+            position: absolute;
+            background: var(--yc-scrollbar-thumb-color, var(--yc-color-border-dark));
+            border-radius: var(--yc-scrollbar-width, 6px);
+            cursor: pointer;
+            transition: background var(--yc-transition-duration-fast);
+        }
+
+        .scrollbar-wrapper__thumb:hover {
+            background: var(--yc-scrollbar-thumb-hover-color, var(--yc-color-text-placeholder));
+        }
+
+        .scrollbar-wrapper__thumb--horizontal {
+            height: 100%;
+            top: 0;
+        }
+
+        .scrollbar-wrapper__thumb--vertical {
+            width: 100%;
+            left: 0;
+        }
+
+        .yc-scrollbar {
+            --yc-scrollbar-width: 6px;
+            --yc-scrollbar-thumb-width: 6px;
+            --yc-scrollbar-color: var(--yc-color-border-light);
+            --yc-scrollbar-thumb-color: var(--yc-color-border-dark);
+            --yc-scrollbar-thumb-hover-color: var(--yc-color-text-placeholder);
+            --yc-scrollbar-track-color: transparent;
+            overflow: hidden;
+            position: relative;
+            height: 100%;
+        }
+
+        .yc-scrollbar__wrap {
+            height: 100%;
+            overflow: scroll;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .yc-scrollbar__wrap::-webkit-scrollbar {
+            display: none;
+        }
+
+        .yc-scrollbar__bar {
+            position: absolute;
+            background: var(--yc-scrollbar-color);
+            border-radius: var(--yc-scrollbar-width);
+            transition: opacity var(--yc-transition-duration-fast);
+            opacity: 0;
+        }
+
+        .yc-scrollbar:hover .yc-scrollbar__bar,
+        .yc-scrollbar--always .yc-scrollbar__bar {
+            opacity: 1;
+        }
+
+        .yc-scrollbar__bar--horizontal {
+            height: var(--yc-scrollbar-width);
+            left: 2px;
+            bottom: 2px;
+            width: calc(100% - 4px);
+        }
+
+        .yc-scrollbar__bar--vertical {
+            width: var(--yc-scrollbar-width);
+            right: 2px;
+            top: 2px;
+            height: calc(100% - 4px);
+        }
+
+        .yc-scrollbar__thumb {
+            position: absolute;
+            background: var(--yc-scrollbar-thumb-color);
+            border-radius: var(--yc-scrollbar-width);
+            cursor: pointer;
+            transition: background var(--yc-transition-duration-fast);
+        }
+
+        .yc-scrollbar__thumb:hover {
+            background: var(--yc-scrollbar-thumb-hover-color);
+        }
+
+        .yc-scrollbar__thumb--horizontal {
+            height: var(--yc-scrollbar-thumb-width);
+            top: 0;
+        }
+
+        .yc-scrollbar__thumb--vertical {
+            width: var(--yc-scrollbar-thumb-width);
+            left: 0;
+        }
+
+        .yc-scrollbar--small {
+            --yc-scrollbar-width: 4px;
+            --yc-scrollbar-thumb-width: 4px;
+        }
+
+        .yc-scrollbar--large {
+            --yc-scrollbar-width: 8px;
+            --yc-scrollbar-thumb-width: 8px;
+        }
+
+        .scroll-content {
+            padding: 16px;
+            font-size: var(--yc-font-size-small);
+            color: var(--yc-color-text-regular);
+            line-height: 1.8;
+        }
+
+        .scroll-content p {
+            margin-bottom: 12px;
+        }
+
+        .scroll-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .scroll-box {
+            width: 100%;
+            height: 200px;
+            border: 1px solid var(--yc-color-border);
+            border-radius: var(--yc-border-radius-md);
+            background: var(--yc-color-bg);
+        }
+
+        .scroll-box--small {
+            height: 150px;
+        }
+
+        .scroll-box--large {
+            height: 300px;
+        }
+
+        .scroll-horizontal-box {
+            width: 100%;
+            height: 120px;
+            border: 1px solid var(--yc-color-border);
+            border-radius: var(--yc-border-radius-md);
+            background: var(--yc-color-bg);
+        }
+
+        .scroll-horizontal-content {
+            display: flex;
+            width: max-content;
+            padding: 16px;
+            gap: 12px;
+        }
+
+        .scroll-horizontal-item {
+            flex-shrink: 0;
+            width: 100px;
+            height: 80px;
+            background: var(--yc-color-bg-page);
+            border-radius: var(--yc-border-radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--yc-font-size-small);
+            color: var(--yc-color-text-secondary);
+        }
+
+        .scroll-list-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--yc-color-border-light);
+            transition: background var(--yc-transition-duration-fast);
+        }
+
+        .scroll-list-item:last-child {
+            border-bottom: none;
+        }
+
+        .scroll-list-item:hover {
+            background: var(--yc-color-bg-page);
+        }
+
+        .scroll-list-item__avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--yc-color-primary-light-5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--yc-color-primary);
+            font-weight: var(--yc-font-weight-semibold);
+        }
+
+        .scroll-list-item__content {
+            flex: 1;
+        }
+
+        .scroll-list-item__title {
+            font-size: var(--yc-font-size-small);
+            color: var(--yc-color-text-primary);
+            font-weight: var(--yc-font-weight-medium);
+            margin-bottom: 4px;
+        }
+
+        .scroll-list-item__desc {
+            font-size: var(--yc-font-size-extra-small);
+            color: var(--yc-color-text-secondary);
+        }
+
+        .scroll-divider {
+            height: 1px;
+            background: var(--yc-color-border-light);
+            margin: 24px 0;
+        }
+
+        .scroll-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 12px 16px;
+            background: var(--yc-color-bg-page);
+            border-radius: var(--yc-border-radius-md);
+            margin-bottom: 8px;
+        }
+
+        .scroll-row__label {
+            min-width: 100px;
+            font-size: var(--yc-font-size-small);
+            color: var(--yc-color-text-secondary);
+        }
+
+        .scroll-row__value {
+            flex: 1;
+            font-size: var(--yc-font-size-small);
+            color: var(--yc-color-text-primary);
+        }
+
+        .scroll-progress {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .scroll-progress__bar {
+            flex: 1;
+            height: 8px;
+            background: var(--yc-color-border-light);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .scroll-progress__fill {
+            height: 100%;
+            background: var(--yc-color-primary);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .scroll-progress__text {
+            min-width: 40px;
+            text-align: right;
+            font-size: var(--yc-font-size-extra-small);
+            color: var(--yc-color-text-secondary);
+        }
+
+        .dark-scrollbar {
+            --yc-scrollbar-color: rgba(255, 255, 255, 0.12);
+            --yc-scrollbar-thumb-color: rgba(255, 255, 255, 0.3);
+            --yc-scrollbar-thumb-hover-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .custom-scrollbar {
+            --yc-scrollbar-width: 10px;
+            --yc-scrollbar-thumb-width: 10px;
+            --yc-scrollbar-color: var(--yc-color-primary-light-5);
+            --yc-scrollbar-thumb-color: var(--yc-color-primary);
+            --yc-scrollbar-thumb-hover-color: var(--yc-color-primary-hover);
+        }
+
+        .native-scroll-demo {
+            height: 200px;
+            overflow: auto;
+            border: 1px solid var(--yc-color-border);
+            border-radius: var(--yc-border-radius-md);
+            background: var(--yc-color-bg);
+        }
+
+        .native-scroll-demo::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        .native-scroll-demo::-webkit-scrollbar-track {
+            background: var(--yc-color-border-light);
+            border-radius: 4px;
+        }
+
+        .native-scroll-demo::-webkit-scrollbar-thumb {
+            background: var(--yc-color-border-dark);
+            border-radius: 4px;
+        }
+
+        .native-scroll-demo::-webkit-scrollbar-thumb:hover {
+            background: var(--yc-color-text-placeholder);
+        }
+
+        .chat-message-list {
+            height: 300px;
+        }
+
+        .chat-message {
+            display: flex;
+            gap: 12px;
+            padding: 12px 16px;
+            margin-bottom: 8px;
+        }
+
+        .chat-message--left {
+            flex-direction: row;
+        }
+
+        .chat-message--right {
+            flex-direction: row-reverse;
+        }
+
+        .chat-message__avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--yc-color-primary-light-5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--yc-color-primary);
+            font-size: 12px;
+            flex-shrink: 0;
+        }
+
+        .chat-message__content {
+            max-width: 70%;
+            padding: 10px 14px;
+            border-radius: var(--yc-border-radius-md);
+            font-size: var(--yc-font-size-small);
+            line-height: 1.6;
+        }
+
+        .chat-message--left .chat-message__content {
+            background: var(--yc-color-bg-page);
+            color: var(--yc-color-text-primary);
+        }
+
+        .chat-message--right .chat-message__content {
+            background: var(--yc-color-primary);
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .scroll-box {
+                height: 180px;
+            }
+        }
+
+        [yc-theme="dark"] .demo-section {
+            background: rgba(255, 255, 255, 0.02);
+            border-color: rgba(255, 255, 255, 0.08);
+        }
+
+        [yc-theme="dark"] .scroll-list-item:hover {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        [yc-theme="dark"] .scroll-content {
+            color: var(--yc-color-text-regular);
+        }
+
+        [yc-theme="dark"] .scroll-horizontal-item {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        [yc-theme="dark"] .scroll-row {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        [yc-theme="dark"] .chat-message--left .chat-message__content {
+            background: rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 style="font-size: 24px; font-weight: 600; margin-bottom: 24px; color: var(--yc-color-text-primary);">Scrollbar 滚动条组件</h1>
+
+        <div class="demo-section">
+            <h3>基础用法</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">默认滚动条</div>
+                <div class="scroll-box">
+                    <div class="yc-scrollbar" id="scrollbar1">
+                        <div class="yc-scrollbar__wrap">
+                            <div class="scroll-content">
+                                <p><strong>YC Design 滚动条组件</strong></p>
+                                <p>这是一个基础滚动条组件的演示。滚动条会在鼠标悬停时显示，方便用户滚动查看超出容器的内容。</p>
+                                <p>滚动条组件提供了平滑的滚动体验，支持自定义样式和尺寸。组件遵循 YC Design 设计规范，与整体风格保持一致。</p>
+                                <p>组件支持以下特性：</p>
+                                <p>• 垂直滚动和水平滚动</p>
+                                <p>• 多种尺寸变体（小、中、大）</p>
+                                <p>• 自定义滚动条颜色</p>
+                                <p>• 悬停和拖拽状态</p>
+                                <p>• 平滑的过渡动画</p>
+                                <p>• 主题适配（亮色/暗色）</p>
+                                <p>滚动条组件适用于各种需要滚动内容的场景，如列表、表格、文本区域等。</p>
+                            </div>
+                        </div>
+                        <div class="yc-scrollbar__bar yc-scrollbar__bar--horizontal">
+                            <div class="yc-scrollbar__thumb yc-scrollbar__thumb--horizontal"></div>
+                        </div>
+                        <div class="yc-scrollbar__bar yc-scrollbar__bar--vertical">
+                            <div class="yc-scrollbar__thumb yc-scrollbar__thumb--vertical"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>尺寸变体</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">小尺寸滚动条</div>
+                <div class="scroll-box scroll-box--small">
+                    <div class="yc-scrollbar yc-scrollbar--small">
+                        <div class="yc-scrollbar__wrap">
+                            <div class="scroll-content">
+                                <p><strong>小尺寸滚动条</strong></p>
+                                <p>适用于紧凑型布局或小容器。</p>
+                                <p>小尺寸滚动条宽度为 4px，更加精致。</p>
+                                <p>适用于侧边栏、小型面板等场景。</p>
+                                <p>内容区域较小，需要频繁滚动时使用。</p>
+                            </div>
+                        </div>
+                        <div class="yc-scrollbar__bar yc-scrollbar__bar--vertical">
+                            <div class="yc-scrollbar__thumb yc-scrollbar__thumb--vertical"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="scroll-divider"></div>
+            <div class="demo-block">
+                <div class="demo-block-title">大尺寸滚动条</div>
+                <div class="scroll-box scroll-box--large">
+                    <div class="yc-scrollbar yc-scrollbar--large">
+                        <div class="yc-scrollbar__wrap">
+                            <div class="scroll-content">
+                                <p><strong>大尺寸滚动条</strong></p>
+                                <p>适用于大型内容区域或触摸设备。</p>
+                                <p>大尺寸滚动条宽度为 8px，更易于点击和拖拽。</p>
+                                <p>适用于宽屏显示器、触摸屏幕等场景。</p>
+                                <p>提供了更大的滚动条滑块，便于用户操作。</p>
+                            </div>
+                        </div>
+                        <div class="yc-scrollbar__bar yc-scrollbar__bar--vertical">
+                            <div class="yc-scrollbar__thumb yc-scrollbar__thumb--vertical"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>水平滚动</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">水平滚动条</div>
+                <div class="scroll-horizontal-box">
+                    <div class="yc-scrollbar" id="horizontalScrollbar">
+                        <div class="yc-scrollbar__wrap" style="overflow-x: auto; overflow-y: hidden;">
+                            <div class="scroll-horizontal-content">
+                                <div class="scroll-horizontal-item">卡片 1</div>
+                                <div class="scroll-horizontal-item">卡片 2</div>
+                                <div class="scroll-horizontal-item">卡片 3</div>
+                                <div class="scroll-horizontal-item">卡片 4</div>
+                                <div class="scroll-horizontal-item">卡片 5</div>
+                                <div class="scroll-horizontal-item">卡片 6</div>
+                                <div class="scroll-horizontal-item">卡片 7</div>
+                                <div class="scroll-horizontal-item">卡片 8</div>
+                                <div class="scroll-horizontal-item">卡片 9</div>
+                                <div class="scroll-horizontal-item">卡片 10</div>
+                            </div>
+                        </div>
+                        <div class="yc-scrollbar__bar yc-scrollbar__bar--horizontal">
+                            <div class="yc-scrollbar__thumb yc-scrollbar__thumb--horizontal"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>列表滚动</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">用户列表滚动</div>
+                <div class="scroll-box">
+                    <div class="yc-scrollbar">
+                        <div class="yc-scrollbar__wrap">
+                            <div class="scroll-list-item">
+                                <div class="scroll-list-item__avatar">张</div>
+                                <div class="scroll-list-item__content">
+                                    <div class="scroll-list-item__title">张三</div>
+                                    <div class="scroll-list-item__desc">产品设计师 @ 北京</div>
+                                </div>
+                            </div>
+                            <div class="scroll-list-item">
+                                <div class="scroll-list-item__avatar" style="background: var(--yc-color-success-light-5); color: var(--yc-color-success);">李</div>
+                                <div class="scroll-list-item__content">
+                                    <div class="scroll-list-item__title">李四</div>
+                                    <div class="scroll-list-item__desc">前端开发工程师 @ 上海</div>
+                                </div>
+                            </div>
+                            <div class="scroll-list-item">
+                                <div class="scroll-list-item__avatar" style="background: var(--yc-color-warning-light-5); color: var(--yc-color-warning);">王</div>
+                                <div class="scroll-list-item__content">
+                                    <div class="scroll-list-item__title">王五</div>
+                                    <div class="scroll-list-item__desc">后端架构师 @ 深圳</div>
+                                </div>
+                            </div>
+                            <div class="scroll-list-item">
+                                <div class="scroll-list-item__avatar" style="background: var(--yc-color-danger-light-5); color: var(--yc-color-danger);">赵</div>
+                                <div class="scroll-list-item__content">
+                                    <div class="scroll-list-item__title">赵六</div>
+                                    <div class="scroll-list-item__desc">全栈开发工程师 @ 广州</div>
+                                </div>
+                            </div>
+                            <div class="scroll-list-item">
+                                <div class="scroll-list-item__avatar">陈</div>
+                                <div class="scroll-list-item__content">
+                                    <div class="scroll-list-item__title">陈七</div>
+                                    <div class="scroll-list-item__desc">UI/UX 设计师 @ 杭州</div>
+                                </div>
+                            </div>
+                            <div class="scroll-list-item">
+                                <div class="scroll-list-item__avatar" style="background: var(--yc-color-info-light-5); color: var(--yc-color-info);">周</div>
+                                <div class="scroll-list-item__content">
+                                    <div class="scroll-list-item__title">周八</div>
+                                    <div class="scroll-list-item__desc">产品经理 @ 成都</div>
+                                </div>
+                            </div>
+                            <div class="scroll-list-item">
+                                <div class="scroll-list-item__avatar">吴</div>
+                                <div class="scroll-list-item__content">
+                                    <div class="scroll-list-item__title">吴九</div>
+                                    <div class="scroll-list-item__desc">测试工程师 @ 武汉</div>
+                                </div>
+                            </div>
+                            <div class="scroll-list-item">
+                                <div class="scroll-list-item__avatar" style="background: var(--yc-color-success-light-5); color: var(--yc-color-success);">郑</div>
+                                <div class="scroll-list-item__content">
+                                    <div class="scroll-list-item__title">郑十</div>
+                                    <div class="scroll-list-item__desc">运维工程师 @ 西安</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="yc-scrollbar__bar yc-scrollbar__bar--vertical">
+                            <div class="yc-scrollbar__thumb yc-scrollbar__thumb--vertical"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>聊天消息滚动</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">消息列表滚动（自动定位到底部）</div>
+                <div class="scroll-box chat-message-list">
+                    <div class="yc-scrollbar" id="chatScrollbar">
+                        <div class="yc-scrollbar__wrap">
+                            <div class="chat-message chat-message--left">
+                                <div class="chat-message__avatar">🤖</div>
+                                <div class="chat-message__content">你好！有什么可以帮助你的吗？</div>
+                            </div>
+                            <div class="chat-message chat-message--right">
+                                <div class="chat-message__avatar">👤</div>
+                                <div class="chat-message__content">我想了解一下滚动条组件的使用方法。</div>
+                            </div>
+                            <div class="chat-message chat-message--left">
+                                <div class="chat-message__avatar">🤖</div>
+                                <div class="chat-message__content">滚动条组件用于显示超出容器范围的内容。它支持垂直和水平滚动，可以自定义滚动条的宽度、颜色等样式。</div>
+                            </div>
+                            <div class="chat-message chat-message--right">
+                                <div class="chat-message__avatar">👤</div>
+                                <div class="chat-message__content">好的，那它有哪些尺寸变体呢？</div>
+                            </div>
+                            <div class="chat-message chat-message--left">
+                                <div class="chat-message__avatar">🤖</div>
+                                <div class="chat-message__content">滚动条组件提供三种尺寸：小尺寸（4px）、默认尺寸（6px）和大尺寸（8px）。可以根据不同的使用场景选择合适的尺寸。</div>
+                            </div>
+                            <div class="chat-message chat-message--right">
+                                <div class="chat-message__avatar">👤</div>
+                                <div class="chat-message__content">明白了，还有其他特性吗？</div>
+                            </div>
+                            <div class="chat-message chat-message--left">
+                                <div class="chat-message__avatar">🤖</div>
+                                <div class="chat-message__content">当然！它还支持暗色主题、自定义滚动条颜色、平滑滚动效果等功能。</div>
+                            </div>
+                        </div>
+                        <div class="yc-scrollbar__bar yc-scrollbar__bar--vertical">
+                            <div class="yc-scrollbar__thumb yc-scrollbar__thumb--vertical"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>原生滚动条</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">使用 CSS 实现原生滚动条样式</div>
+                <div class="native-scroll-demo">
+                    <div class="scroll-content">
+                        <p><strong>原生滚动条样式</strong></p>
+                        <p>通过 CSS::-webkit-scrollbar 可以自定义滚动条的样式，无需 JavaScript 库。</p>
+                        <p>这种方式的优点是：</p>
+                        <p>• 零依赖，纯 CSS 实现</p>
+                        <p>• 性能更好</p>
+                        <p>• 可以精确控制滚动条的每个部分</p>
+                        <p>支持的伪元素：</p>
+                        <p>• ::-webkit-scrollbar — 整个滚动条</p>
+                        <p>• ::-webkit-scrollbar-track — 滚动条轨道</p>
+                        <p>• ::-webkit-scrollbar-thumb — 滚动条滑块</p>
+                        <p>• ::-webkit-scrollbar-button — 滚动条按钮（上下箭头）</p>
+                        <p>• ::-webkit-scrollbar-corner — 滚动条角落</p>
+                        <p>兼容性：Chrome、Safari、Edge 等 Chromium 内核浏览器。</p>
+                    </div>
+                </div>
+            </div>
+            <div class="scroll-divider"></div>
+            <div class="demo-block">
+                <div class="demo-block-title">滚动条各部分说明</div>
+                <div class="scroll-row">
+                    <span class="scroll-row__label">webkit-scrollbar</span>
+                    <span class="scroll-row__value">整个滚动条容器</span>
+                </div>
+                <div class="scroll-row">
+                    <span class="scroll-row__label">webkit-scrollbar-track</span>
+                    <span class="scroll-row__value">滚动条轨道（背景）</span>
+                </div>
+                <div class="scroll-row">
+                    <span class="scroll-row__label">webkit-scrollbar-thumb</span>
+                    <span class="scroll-row__value">滚动条滑块（可拖动部分）</span>
+                </div>
+                <div class="scroll-row">
+                    <span class="scroll-row__label">webkit-scrollbar-button</span>
+                    <span class="scroll-row__value">滚动条两端的按钮</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>暗色主题滚动条</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">暗色背景滚动条</div>
+                <div style="background: #1a1a2e; padding: 20px; border-radius: var(--yc-border-radius-md);">
+                    <div class="scroll-box dark-scrollbar">
+                        <div class="yc-scrollbar">
+                            <div class="yc-scrollbar__wrap">
+                                <div class="scroll-content" style="color: var(--yc-color-text-regular);">
+                                    <p><strong style="color: white;">暗色主题滚动条</strong></p>
+                                    <p>在暗色背景下，滚动条使用半透明白色，更加协调。</p>
+                                    <p>滑块颜色从 30% 透明度过渡到 50% 透明度。</p>
+                                    <p>提供了良好的视觉对比度。</p>
+                                    <p>适用于深色主题的应用场景。</p>
+                                </div>
+                            </div>
+                            <div class="yc-scrollbar__bar yc-scrollbar__bar--vertical">
+                                <div class="yc-scrollbar__thumb yc-scrollbar__thumb--vertical"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>自定义颜色滚动条</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">主题色滚动条</div>
+                <div class="scroll-box custom-scrollbar">
+                    <div class="yc-scrollbar">
+                        <div class="yc-scrollbar__wrap">
+                            <div class="scroll-content">
+                                <p><strong>自定义主题色滚动条</strong></p>
+                                <p>使用项目的主题色作为滚动条颜色。</p>
+                                <p>轨道颜色使用主色的 20% 透明度。</p>
+                                <p>滑块颜色使用主色。</p>
+                                <p>悬停时使用主色的悬停色。</p>
+                                <p>宽度设置为 10px，更加明显。</p>
+                            </div>
+                        </div>
+                        <div class="yc-scrollbar__bar yc-scrollbar__bar--vertical">
+                            <div class="yc-scrollbar__thumb yc-scrollbar__thumb--vertical"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="scroll-divider"></div>
+            <div class="demo-block">
+                <div class="demo-block-title">自定义颜色 CSS 变量</div>
+                <div class="scroll-row">
+                    <span class="scroll-row__label">--yc-scrollbar-width</span>
+                    <span class="scroll-row__value">滚动条宽度（默认 6px）</span>
+                </div>
+                <div class="scroll-row">
+                    <span class="scroll-row__label">--yc-scrollbar-thumb-width</span>
+                    <span class="scroll-row__value">滑块宽度</span>
+                </div>
+                <div class="scroll-row">
+                    <span class="scroll-row__label">--yc-scrollbar-color</span>
+                    <span class="scroll-row__value">滚动条轨道颜色</span>
+                </div>
+                <div class="scroll-row">
+                    <span class="scroll-row__label">--yc-scrollbar-thumb-color</span>
+                    <span class="scroll-row__value">滚动条滑块颜色</span>
+                </div>
+                <div class="scroll-row">
+                    <span class="scroll-row__label">--yc-scrollbar-thumb-hover-color</span>
+                    <span class="scroll-row__value">滑块悬停颜色</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>滚动条状态</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">滚动条交互状态</div>
+                <div class="scroll-row">
+                    <span class="scroll-row__label">默认状态</span>
+                    <span class="scroll-row__value">滚动条半透明或隐藏</span>
+                </div>
+                <div class="scroll-row">
+                    <span class="scroll-row__label">悬停状态</span>
+                    <span class="scroll-row__value">滚动条滑块颜色变深</span>
+                </div>
+                <div class="scroll-row">
+                    <span class="scroll-row__label">拖拽状态</span>
+                    <span class="scroll-row__value">按住滑块拖拽滚动内容</span>
+                </div>
+                <div class="scroll-row">
+                    <span class="scroll-row__label">滚动中</span>
+                    <span class="scroll-row__value">内容滚动时滚动条保持可见</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function initScrollbar(scrollbarId) {
+            const scrollbar = document.getElementById(scrollbarId);
+            if (!scrollbar) return;
+
+            const wrap = scrollbar.querySelector('.yc-scrollbar__wrap');
+            const barH = scrollbar.querySelector('.yc-scrollbar__bar--horizontal .yc-scrollbar__thumb');
+            const barV = scrollbar.querySelector('.yc-scrollbar__bar--vertical .yc-scrollbar__thumb');
+
+            if (wrap && barV) {
+                wrap.addEventListener('scroll', function() {
+                    const scrollTop = wrap.scrollTop;
+                    const scrollHeight = wrap.scrollHeight - wrap.clientHeight;
+                    const thumbHeight = barV.offsetHeight;
+                    const thumbTop = (scrollTop / scrollHeight) * (wrap.clientHeight - thumbHeight) || 0;
+                    barV.style.top = thumbTop + 'px';
+                    barV.style.height = thumbHeight + 'px';
+                });
+            }
+
+            if (wrap && barH) {
+                wrap.addEventListener('scroll', function() {
+                    const scrollLeft = wrap.scrollLeft;
+                    const scrollWidth = wrap.scrollWidth - wrap.clientWidth;
+                    const thumbWidth = barH.offsetWidth;
+                    const thumbLeft = (scrollLeft / scrollWidth) * (wrap.clientWidth - thumbWidth) || 0;
+                    barH.style.left = thumbLeft + 'px';
+                    barH.style.width = thumbWidth + 'px';
+                });
+            }
+        }
+
+        document.querySelectorAll('.yc-scrollbar').forEach(scrollbar => {
+            const wrap = scrollbar.querySelector('.yc-scrollbar__wrap');
+            const barH = scrollbar.querySelector('.yc-scrollbar__bar--horizontal .yc-scrollbar__thumb');
+            const barV = scrollbar.querySelector('.yc-scrollbar__bar--vertical .yc-scrollbar__thumb');
+
+            if (wrap && barV) {
+                const updateV = () => {
+                    const scrollTop = wrap.scrollTop;
+                    const scrollHeight = wrap.scrollHeight - wrap.clientHeight;
+                    if (scrollHeight <= 0) {
+                        barV.style.height = '0';
+                        return;
+                    }
+                    const thumbHeight = Math.max(30, (wrap.clientHeight / wrap.scrollHeight) * wrap.clientHeight);
+                    const maxTop = wrap.clientHeight - thumbHeight;
+                    const thumbTop = (scrollTop / scrollHeight) * maxTop;
+                    barV.style.height = thumbHeight + 'px';
+                    barV.style.top = thumbTop + 'px';
+                };
+
+                wrap.addEventListener('scroll', updateV);
+                updateV();
+            }
+
+            if (wrap && barH) {
+                const updateH = () => {
+                    const scrollLeft = wrap.scrollLeft;
+                    const scrollWidth = wrap.scrollWidth - wrap.clientWidth;
+                    if (scrollWidth <= 0) {
+                        barH.style.width = '0';
+                        return;
+                    }
+                    const thumbWidth = Math.max(30, (wrap.clientWidth / wrap.scrollWidth) * wrap.clientWidth);
+                    const maxLeft = wrap.clientWidth - thumbWidth;
+                    const thumbLeft = (scrollLeft / scrollWidth) * maxLeft;
+                    barH.style.width = thumbWidth + 'px';
+                    barH.style.left = thumbLeft + 'px';
+                };
+
+                wrap.addEventListener('scroll', updateH);
+                updateH();
+            }
+        });
+
+        initScrollbar('scrollbar1');
+        initScrollbar('horizontalScrollbar');
+        initScrollbar('chatScrollbar');
+    </script>
+</body>
+</html>

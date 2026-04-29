@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dropdown 下拉菜单 - YC UI</title>
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-header__title">Dropdown 下拉菜单</h1>
+            <p class="demo-page-header__desc">将动作或菜单集合放置于浮层中，通过点击或悬停触发。</p>
+        </div>
+
+        <div class="demo-section">
+            <h2 class="demo-section__title">基础用法</h2>
+            <p class="demo-section__desc">悬停或点击触发下拉菜单。</p>
+            <div class="demo-block">
+                <div class="yc-dropdown" id="dropdown-basic">
+                    <div class="yc-dropdown__trigger">
+                        <button class="yc-button yc-button--primary">
+                            下拉菜单 <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <ul class="yc-dropdown__menu">
+                        <li class="yc-dropdown__item">操作 1</li>
+                        <li class="yc-dropdown__item">操作 2</li>
+                        <li class="yc-dropdown__item">操作 3</li>
+                        <li class="yc-dropdown__item yc-dropdown__item--disabled">禁用操作</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2 class="demo-section__title">触发方式</h2>
+            <p class="demo-section__desc">可以配置 hover、click 等触发方式。</p>
+            <div class="demo-block">
+                <div class="yc-space" style="gap: 24px;">
+                    <div class="yc-dropdown" id="dropdown-hover">
+                        <div class="yc-dropdown__trigger">
+                            <button class="yc-button">Hover 触发</button>
+                        </div>
+                        <ul class="yc-dropdown__menu">
+                            <li class="yc-dropdown__item">选项 1</li>
+                            <li class="yc-dropdown__item">选项 2</li>
+                            <li class="yc-dropdown__item">选项 3</li>
+                        </ul>
+                    </div>
+
+                    <div class="yc-dropdown" id="dropdown-click">
+                        <div class="yc-dropdown__trigger">
+                            <button class="yc-button">Click 触发</button>
+                        </div>
+                        <ul class="yc-dropdown__menu">
+                            <li class="yc-dropdown__item">选项 A</li>
+                            <li class="yc-dropdown__item">选项 B</li>
+                            <li class="yc-dropdown__item">选项 C</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2 class="demo-section__title">带分割线</h2>
+            <p class="demo-section__desc">菜单项之间可以使用分割线分组。</p>
+            <div class="demo-block">
+                <div class="yc-dropdown" id="dropdown-divider">
+                    <div class="yc-dropdown__trigger">
+                        <button class="yc-button">
+                            分组菜单 <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <ul class="yc-dropdown__menu">
+                        <li class="yc-dropdown__item">
+                            <i class="fas fa-edit yc-dropdown__item__icon"></i>
+                            编辑
+                        </li>
+                        <li class="yc-dropdown__item">
+                            <i class="fas fa-copy yc-dropdown__item__icon"></i>
+                            复制
+                        </li>
+                        <li class="yc-dropdown__divider"></li>
+                        <li class="yc-dropdown__item">
+                            <i class="fas fa-trash yc-dropdown__item__icon"></i>
+                            删除
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2 class="demo-section__title">菜单对齐</h2>
+            <p class="demo-section__desc">菜单可以左对齐或右对齐。</p>
+            <div class="demo-block">
+                <div class="yc-space" style="justify-content: space-between;">
+                    <div class="yc-dropdown" id="dropdown-left">
+                        <div class="yc-dropdown__trigger">
+                            <button class="yc-button">左对齐</button>
+                        </div>
+                        <ul class="yc-dropdown__menu">
+                            <li class="yc-dropdown__item">选项 1</li>
+                            <li class="yc-dropdown__item">选项 2</li>
+                        </ul>
+                    </div>
+
+                    <div class="yc-dropdown" id="dropdown-right">
+                        <div class="yc-dropdown__trigger">
+                            <button class="yc-button">右对齐</button>
+                        </div>
+                        <ul class="yc-dropdown__menu yc-dropdown__menu--right">
+                            <li class="yc-dropdown__item">选项 A</li>
+                            <li class="yc-dropdown__item">选项 B</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Hover trigger
+            const hoverDropdown = document.getElementById('dropdown-hover');
+            if (hoverDropdown) {
+                hoverDropdown.addEventListener('mouseenter', () => hoverDropdown.classList.add('yc-dropdown--opened'));
+                hoverDropdown.addEventListener('mouseleave', () => hoverDropdown.classList.remove('yc-dropdown--opened'));
+            }
+
+            // Click trigger
+            const clickDropdown = document.getElementById('dropdown-click');
+            if (clickDropdown) {
+                clickDropdown.querySelector('.yc-dropdown__trigger').addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    clickDropdown.classList.toggle('yc-dropdown--opened');
+                });
+                document.addEventListener('click', () => clickDropdown.classList.remove('yc-dropdown--opened'));
+            }
+
+            // Basic dropdown
+            const basicDropdown = document.getElementById('dropdown-basic');
+            if (basicDropdown) {
+                basicDropdown.addEventListener('mouseenter', () => basicDropdown.classList.add('yc-dropdown--opened'));
+                basicDropdown.addEventListener('mouseleave', () => basicDropdown.classList.remove('yc-dropdown--opened'));
+            }
+
+            // Divider dropdown
+            const dividerDropdown = document.getElementById('dropdown-divider');
+            if (dividerDropdown) {
+                dividerDropdown.addEventListener('mouseenter', () => dividerDropdown.classList.add('yc-dropdown--opened'));
+                dividerDropdown.addEventListener('mouseleave', () => dividerDropdown.classList.remove('yc-dropdown--opened'));
+            }
+        });
+    </script>
+</body>
+</html>

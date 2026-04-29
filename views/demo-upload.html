@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload 上传组件示例 - YC UI</title>
+    <title>Upload 上传组件示例</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../styles/index.css">
     <link rel="stylesheet" href="../styles/demo.css">
@@ -12,174 +12,198 @@
     <div class="demo-container">
         <div class="demo-page-header">
             <h1 class="demo-page-title">Upload 上传组件</h1>
-            <p class="demo-page-subtitle">支持点击上传、拖拽上传、图片上传、照片墙等多种上传模式</p>
+            <p class="demo-page-subtitle">用于文件上传的组件，支持点击上传、拖拽上传、图片上传等多种模式</p>
         </div>
 
         <div class="demo-section">
             <h3>基础用法 - 点击上传</h3>
-            <div class="demo-row">
-                <div class="demo-item">
-                    <label>上传文件</label>
-                    <div class="yc-upload" id="uploadBasic" data-multiple="false">
-                        <input type="file" class="yc-upload__input" id="uploadBasicInput">
-                        <div class="yc-upload__trigger" onclick="document.getElementById('uploadBasicInput').click()">
-                            <i class="fas fa-cloud-upload-alt yc-upload__trigger-icon"></i>
-                            <span class="yc-upload__trigger-text">点击上传文件</span>
-                            <span class="yc-upload__trigger-hint">支持任意文件</span>
+            <div class="demo-block">
+                <div class="demo-block-title">上传文件</div>
+                <div class="demo-row">
+                    <div class="demo-item">
+                        <label>上传文件</label>
+                        <div class="yc-upload" id="uploadBasic" data-multiple="false">
+                            <input type="file" class="yc-upload__input" id="uploadBasicInput">
+                            <div class="yc-upload__trigger" onclick="document.getElementById('uploadBasicInput').click()">
+                                <i class="fas fa-cloud-upload-alt yc-upload__trigger-icon"></i>
+                                <span class="yc-upload__trigger-text">点击上传文件</span>
+                                <span class="yc-upload__trigger-hint">支持任意文件</span>
+                            </div>
                         </div>
+                        <div class="yc-upload__file-list" id="uploadBasicList"></div>
                     </div>
-                    <div class="yc-upload__file-list" id="uploadBasicList"></div>
                 </div>
+                <div class="result-box" id="uploadBasicResult">状态：等待上传</div>
             </div>
-            <div class="demo-result" id="uploadBasicResult">状态：等待上传</div>
         </div>
 
         <div class="demo-section">
             <h3>拖拽上传</h3>
-            <div class="demo-row">
-                <div class="demo-item">
-                    <label>拖拽区域</label>
-                    <div class="yc-upload" id="uploadDrag" data-multiple="true">
-                        <input type="file" class="yc-upload__input" id="uploadDragInput" multiple>
-                        <div class="yc-upload__trigger yc-upload__trigger--drag" id="uploadDragTrigger">
-                            <i class="fas fa-cloud-upload-alt yc-upload__trigger-icon"></i>
-                            <span class="yc-upload__trigger-text">将文件拖到此处，或<em style="color: var(--yc-color-primary); font-style: normal;">点击上传</em></span>
-                            <span class="yc-upload__trigger-hint">支持多个文件同时上传</span>
+            <div class="demo-block">
+                <div class="demo-block-title">拖拽区域</div>
+                <div class="demo-row">
+                    <div class="demo-item">
+                        <label>拖拽上传</label>
+                        <div class="yc-upload yc-upload--drag" id="uploadDrag" data-multiple="true">
+                            <input type="file" class="yc-upload__input" id="uploadDragInput" multiple>
+                            <div class="yc-upload__trigger yc-upload__trigger--drag" id="uploadDragTrigger">
+                                <i class="fas fa-cloud-upload-alt yc-upload__trigger-icon"></i>
+                                <span class="yc-upload__trigger-text">将文件拖到此处，或<em style="color: var(--yc-color-primary); font-style: normal;">点击上传</em></span>
+                                <span class="yc-upload__trigger-hint">支持多个文件同时上传</span>
+                            </div>
                         </div>
+                        <div class="yc-upload__file-list" id="uploadDragList"></div>
                     </div>
-                    <div class="yc-upload__file-list" id="uploadDragList"></div>
                 </div>
+                <div class="result-box" id="uploadDragResult">状态：等待上传</div>
             </div>
-            <div class="demo-result" id="uploadDragResult">状态：等待上传</div>
         </div>
 
         <div class="demo-section">
             <h3>图片上传</h3>
-            <div class="demo-row">
-                <div class="demo-item">
-                    <label>上传图片</label>
-                    <div class="yc-upload" id="uploadImage" data-multiple="true" data-accept="image/*">
-                        <input type="file" class="yc-upload__input" id="uploadImageInput" accept="image/*" multiple>
-                        <div class="yc-upload__trigger" onclick="document.getElementById('uploadImageInput').click()">
-                            <i class="fas fa-image yc-upload__trigger-icon"></i>
-                            <span class="yc-upload__trigger-text">上传图片</span>
-                            <span class="yc-upload__trigger-hint">支持 jpg、png、gif 等</span>
+            <div class="demo-block">
+                <div class="demo-block-title">上传图片</div>
+                <div class="demo-row">
+                    <div class="demo-item">
+                        <label>图片上传</label>
+                        <div class="yc-upload" id="uploadImage" data-multiple="true" data-accept="image/*">
+                            <input type="file" class="yc-upload__input" id="uploadImageInput" accept="image/*" multiple>
+                            <div class="yc-upload__trigger" onclick="document.getElementById('uploadImageInput').click()">
+                                <i class="fas fa-image yc-upload__trigger-icon"></i>
+                                <span class="yc-upload__trigger-text">上传图片</span>
+                                <span class="yc-upload__trigger-hint">支持 jpg、png、gif 等</span>
+                            </div>
                         </div>
+                        <div class="yc-upload__picture-list" id="uploadImageList"></div>
                     </div>
-                    <div class="yc-upload__picture-list" id="uploadImageList"></div>
                 </div>
+                <div class="result-box" id="uploadImageResult">状态：等待上传</div>
             </div>
-            <div class="demo-result" id="uploadImageResult">状态：等待上传</div>
         </div>
 
         <div class="demo-section">
             <h3>照片墙</h3>
-            <div class="demo-row">
-                <div class="demo-item">
-                    <label>照片墙模式</label>
-                    <div class="yc-upload" id="uploadPictureWall" data-multiple="true" data-accept="image/*">
-                        <input type="file" class="yc-upload__input" id="uploadPictureWallInput" accept="image/*" multiple>
-                        <div class="yc-upload__trigger yc-upload__trigger--picture-card" onclick="document.getElementById('uploadPictureWallInput').click()">
-                            <i class="fas fa-plus yc-upload__trigger-icon"></i>
-                            <span class="yc-upload__trigger-text">点击上传</span>
+            <div class="demo-block">
+                <div class="demo-block-title">照片墙模式</div>
+                <div class="demo-row">
+                    <div class="demo-item">
+                        <label>照片墙</label>
+                        <div class="yc-upload" id="uploadPictureWall" data-multiple="true" data-accept="image/*">
+                            <input type="file" class="yc-upload__input" id="uploadPictureWallInput" accept="image/*" multiple>
+                            <div class="yc-upload__trigger yc-upload__trigger--picture-card" onclick="document.getElementById('uploadPictureWallInput').click()">
+                                <i class="fas fa-plus yc-upload__trigger-icon"></i>
+                                <span class="yc-upload__trigger-text">点击上传</span>
+                            </div>
                         </div>
+                        <div class="yc-upload__picture-list" id="uploadPictureWallList"></div>
                     </div>
-                    <div class="yc-upload__picture-list" id="uploadPictureWallList"></div>
                 </div>
+                <div class="result-box" id="uploadPictureWallResult">状态：等待上传</div>
             </div>
-            <div class="demo-result" id="uploadPictureWallResult">状态：等待上传</div>
         </div>
 
         <div class="demo-section">
             <h3>文档上传</h3>
-            <div class="demo-row">
-                <div class="demo-item">
-                    <label>上传文档</label>
-                    <div class="yc-upload" id="uploadDocument" data-multiple="true" data-accept=".doc,.docx,.pdf,.xls,.xlsx,.ppt,.pptx,.txt">
-                        <input type="file" class="yc-upload__input" id="uploadDocumentInput" accept=".doc,.docx,.pdf,.xls,.xlsx,.ppt,.pptx,.txt" multiple>
-                        <div class="yc-upload__trigger" onclick="document.getElementById('uploadDocumentInput').click()">
-                            <i class="fas fa-file-alt yc-upload__trigger-icon"></i>
-                            <span class="yc-upload__trigger-text">上传文档</span>
-                            <span class="yc-upload__trigger-hint">支持 doc、pdf、xls 等</span>
+            <div class="demo-block">
+                <div class="demo-block-title">上传文档</div>
+                <div class="demo-row">
+                    <div class="demo-item">
+                        <label>文档上传</label>
+                        <div class="yc-upload" id="uploadDocument" data-multiple="true" data-accept=".doc,.docx,.pdf,.xls,.xlsx,.ppt,.pptx,.txt">
+                            <input type="file" class="yc-upload__input" id="uploadDocumentInput" accept=".doc,.docx,.pdf,.xls,.xlsx,.ppt,.pptx,.txt" multiple>
+                            <div class="yc-upload__trigger" onclick="document.getElementById('uploadDocumentInput').click()">
+                                <i class="fas fa-file-alt yc-upload__trigger-icon"></i>
+                                <span class="yc-upload__trigger-text">上传文档</span>
+                                <span class="yc-upload__trigger-hint">支持 doc、pdf、xls 等</span>
+                            </div>
                         </div>
+                        <div class="yc-upload__file-list" id="uploadDocumentList"></div>
                     </div>
-                    <div class="yc-upload__file-list" id="uploadDocumentList"></div>
                 </div>
+                <div class="result-box" id="uploadDocumentResult">状态：等待上传</div>
             </div>
-            <div class="demo-result" id="uploadDocumentResult">状态：等待上传</div>
         </div>
 
         <div class="demo-section">
             <h3>视频上传</h3>
-            <div class="demo-row">
-                <div class="demo-item">
-                    <label>上传视频</label>
-                    <div class="yc-upload" id="uploadVideo" data-multiple="false" data-accept="video/*">
-                        <input type="file" class="yc-upload__input" id="uploadVideoInput" accept="video/*">
-                        <div class="yc-upload__trigger" onclick="document.getElementById('uploadVideoInput').click()">
-                            <i class="fas fa-video yc-upload__trigger-icon"></i>
-                            <span class="yc-upload__trigger-text">上传视频</span>
-                            <span class="yc-upload__trigger-hint">支持 mp4、avi、mov 等</span>
+            <div class="demo-block">
+                <div class="demo-block-title">上传视频</div>
+                <div class="demo-row">
+                    <div class="demo-item">
+                        <label>视频上传</label>
+                        <div class="yc-upload" id="uploadVideo" data-multiple="false" data-accept="video/*">
+                            <input type="file" class="yc-upload__input" id="uploadVideoInput" accept="video/*">
+                            <div class="yc-upload__trigger" onclick="document.getElementById('uploadVideoInput').click()">
+                                <i class="fas fa-video yc-upload__trigger-icon"></i>
+                                <span class="yc-upload__trigger-text">上传视频</span>
+                                <span class="yc-upload__trigger-hint">支持 mp4、avi、mov 等</span>
+                            </div>
                         </div>
+                        <div class="yc-upload__file-list" id="uploadVideoList"></div>
                     </div>
-                    <div class="yc-upload__file-list" id="uploadVideoList"></div>
                 </div>
+                <div class="result-box" id="uploadVideoResult">状态：等待上传</div>
             </div>
-            <div class="demo-result" id="uploadVideoResult">状态：等待上传</div>
         </div>
 
         <div class="demo-section">
             <h3>带限制条件</h3>
-            <div class="demo-row">
-                <div class="demo-item">
-                    <label>限制条件</label>
-                    <div class="yc-upload" id="uploadLimit" data-multiple="true" data-max-size="2" data-max-count="3">
-                        <input type="file" class="yc-upload__input" id="uploadLimitInput" multiple>
-                        <div class="yc-upload__trigger" onclick="document.getElementById('uploadLimitInput').click()">
-                            <i class="fas fa-shield-alt yc-upload__trigger-icon"></i>
-                            <span class="yc-upload__trigger-text">上传文件</span>
-                            <span class="yc-upload__trigger-hint">最多3个文件，每个不超过2MB</span>
+            <div class="demo-block">
+                <div class="demo-block-title">限制条件</div>
+                <div class="demo-row">
+                    <div class="demo-item">
+                        <label>限制上传</label>
+                        <div class="yc-upload" id="uploadLimit" data-multiple="true" data-max-size="2" data-max-count="3">
+                            <input type="file" class="yc-upload__input" id="uploadLimitInput" multiple>
+                            <div class="yc-upload__trigger" onclick="document.getElementById('uploadLimitInput').click()">
+                                <i class="fas fa-shield-alt yc-upload__trigger-icon"></i>
+                                <span class="yc-upload__trigger-text">上传文件</span>
+                                <span class="yc-upload__trigger-hint">最多3个文件，每个不超过2MB</span>
+                            </div>
                         </div>
+                        <div class="yc-upload__file-list" id="uploadLimitList"></div>
+                        <p class="yc-upload__tip yc-upload__tip--warning">提示：单个文件最大 2MB，最多上传 3 个文件</p>
                     </div>
-                    <div class="yc-upload__file-list" id="uploadLimitList"></div>
-                    <p class="yc-upload__tip yc-upload__tip--warning">提示：单个文件最大 2MB，最多上传 3 个文件</p>
                 </div>
+                <div class="result-box" id="uploadLimitResult">状态：等待上传</div>
             </div>
-            <div class="demo-result" id="uploadLimitResult">状态：等待上传</div>
         </div>
 
         <div class="demo-section">
             <h3>不同尺寸</h3>
-            <div class="demo-row">
-                <div class="demo-item">
-                    <label>小尺寸</label>
-                    <div class="yc-upload" id="uploadSmall" data-size="small">
-                        <input type="file" class="yc-upload__input" id="uploadSmallInput">
-                        <div class="yc-upload__trigger yc-upload__trigger--small" onclick="document.getElementById('uploadSmallInput').click()">
-                            <i class="fas fa-upload yc-upload__trigger-icon"></i>
-                            <span class="yc-upload__trigger-text">上传</span>
+            <div class="demo-block">
+                <div class="demo-block-title">尺寸选项</div>
+                <div class="demo-row">
+                    <div class="demo-item">
+                        <label>小尺寸</label>
+                        <div class="yc-upload" id="uploadSmall" data-size="small">
+                            <input type="file" class="yc-upload__input" id="uploadSmallInput">
+                            <div class="yc-upload__trigger yc-upload__trigger--small" onclick="document.getElementById('uploadSmallInput').click()">
+                                <i class="fas fa-upload yc-upload__trigger-icon"></i>
+                                <span class="yc-upload__trigger-text">上传</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="demo-item">
-                    <label>中尺寸</label>
-                    <div class="yc-upload" id="uploadMedium" data-size="medium">
-                        <input type="file" class="yc-upload__input" id="uploadMediumInput">
-                        <div class="yc-upload__trigger" onclick="document.getElementById('uploadMediumInput').click()">
-                            <i class="fas fa-cloud-upload-alt yc-upload__trigger-icon"></i>
-                            <span class="yc-upload__trigger-text">点击上传文件</span>
-                            <span class="yc-upload__trigger-hint">支持任意文件</span>
+                    <div class="demo-item">
+                        <label>中尺寸</label>
+                        <div class="yc-upload" id="uploadMedium" data-size="medium">
+                            <input type="file" class="yc-upload__input" id="uploadMediumInput">
+                            <div class="yc-upload__trigger" onclick="document.getElementById('uploadMediumInput').click()">
+                                <i class="fas fa-cloud-upload-alt yc-upload__trigger-icon"></i>
+                                <span class="yc-upload__trigger-text">点击上传文件</span>
+                                <span class="yc-upload__trigger-hint">支持任意文件</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="demo-item">
-                    <label>大尺寸</label>
-                    <div class="yc-upload" id="uploadLarge" data-size="large">
-                        <input type="file" class="yc-upload__input" id="uploadLargeInput">
-                        <div class="yc-upload__trigger yc-upload__trigger--large" onclick="document.getElementById('uploadLargeInput').click()">
-                            <i class="fas fa-cloud-upload-alt yc-upload__trigger-icon"></i>
-                            <span class="yc-upload__trigger-text">点击上传文件</span>
-                            <span class="yc-upload__trigger-hint">支持任意文件</span>
+                    <div class="demo-item">
+                        <label>大尺寸</label>
+                        <div class="yc-upload" id="uploadLarge" data-size="large">
+                            <input type="file" class="yc-upload__input" id="uploadLargeInput">
+                            <div class="yc-upload__trigger yc-upload__trigger--large" onclick="document.getElementById('uploadLargeInput').click()">
+                                <i class="fas fa-cloud-upload-alt yc-upload__trigger-icon"></i>
+                                <span class="yc-upload__trigger-text">点击上传文件</span>
+                                <span class="yc-upload__trigger-hint">支持任意文件</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -188,47 +212,53 @@
 
         <div class="demo-section">
             <h3>禁用状态</h3>
-            <div class="demo-row">
-                <div class="demo-item">
-                    <label>禁用</label>
-                    <div class="yc-upload is-disabled" id="uploadDisabled">
-                        <input type="file" class="yc-upload__input" disabled>
-                        <div class="yc-upload__trigger is-disabled">
-                            <i class="fas fa-cloud-upload-alt yc-upload__trigger-icon"></i>
-                            <span class="yc-upload__trigger-text">点击上传文件</span>
-                            <span class="yc-upload__trigger-hint">上传已禁用</span>
+            <div class="demo-block">
+                <div class="demo-block-title">禁用上传</div>
+                <div class="demo-row">
+                    <div class="demo-item">
+                        <label>禁用</label>
+                        <div class="yc-upload is-disabled" id="uploadDisabled">
+                            <input type="file" class="yc-upload__input" disabled>
+                            <div class="yc-upload__trigger is-disabled">
+                                <i class="fas fa-cloud-upload-alt yc-upload__trigger-icon"></i>
+                                <span class="yc-upload__trigger-text">点击上传文件</span>
+                                <span class="yc-upload__trigger-hint">上传已禁用</span>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <div class="result-box">状态：上传已禁用</div>
             </div>
-            <div class="demo-result">状态：上传已禁用</div>
         </div>
 
         <div class="demo-section">
             <h3>手动上传模式</h3>
-            <div class="demo-row">
-                <div class="demo-item">
-                    <label>手动上传</label>
-                    <div class="yc-upload" id="uploadManual" data-multiple="true" data-auto-upload="false">
-                        <input type="file" class="yc-upload__input" id="uploadManualInput" multiple>
-                        <div class="yc-upload__trigger" onclick="document.getElementById('uploadManualInput').click()">
-                            <i class="fas fa-hand-pointer yc-upload__trigger-icon"></i>
-                            <span class="yc-upload__trigger-text">选择文件</span>
-                            <span class="yc-upload__trigger-hint">选择后需手动点击上传</span>
+            <div class="demo-block">
+                <div class="demo-block-title">手动上传</div>
+                <div class="demo-row">
+                    <div class="demo-item">
+                        <label>手动上传</label>
+                        <div class="yc-upload" id="uploadManual" data-multiple="true" data-auto-upload="false">
+                            <input type="file" class="yc-upload__input" id="uploadManualInput" multiple>
+                            <div class="yc-upload__trigger" onclick="document.getElementById('uploadManualInput').click()">
+                                <i class="fas fa-hand-pointer yc-upload__trigger-icon"></i>
+                                <span class="yc-upload__trigger-text">选择文件</span>
+                                <span class="yc-upload__trigger-hint">选择后需手动点击上传</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="yc-upload__file-list" id="uploadManualList"></div>
-                    <div class="demo-btn-row" style="margin-top: 12px;">
-                        <button class="yc-button yc-button--primary yc-button--small" onclick="handleManualUpload()">
-                            <i class="fas fa-upload"></i> 开始上传
-                        </button>
-                        <button class="yc-button yc-button--small" onclick="handleClearFiles()">
-                            <i class="fas fa-trash-alt"></i> 清空列表
-                        </button>
+                        <div class="yc-upload__file-list" id="uploadManualList"></div>
                     </div>
                 </div>
+                <div class="demo-btn-row">
+                    <button class="yc-button yc-button--primary yc-button--small" onclick="handleManualUpload()">
+                        <i class="fas fa-upload"></i> 开始上传
+                    </button>
+                    <button class="yc-button yc-button--small" onclick="handleClearFiles()">
+                        <i class="fas fa-trash-alt"></i> 清空列表
+                    </button>
+                </div>
+                <div class="result-box" id="uploadManualResult">状态：等待选择文件</div>
             </div>
-            <div class="demo-result" id="uploadManualResult">状态：等待选择文件</div>
         </div>
     </div>
 
@@ -328,13 +358,13 @@
                         <div class="yc-upload__file-meta">
                             <span class="yc-upload__file-size">${formatFileSize(file.size)}</span>
                         </div>
-                    </div>
-                    <div class="yc-upload__progress" style="display: none;">
-                        <div class="yc-upload__progress-bar">
-                            <div class="yc-upload__progress-fill" style="width: 0%;"></div>
+                        <div class="yc-upload__progress" style="display: none;">
+                            <div class="yc-upload__progress-bar">
+                                <div class="yc-upload__progress-fill" style="width: 0%;"></div>
+                            </div>
                         </div>
-                        <div class="yc-upload__progress-text">0%</div>
                     </div>
+                    <span class="yc-upload__progress-text" style="display: none;">0%</span>
                     <div class="yc-upload__file-status" style="display: none;"></div>
                     <div class="yc-upload__file-actions">
                         <button class="yc-upload__file-btn yc-upload__file-btn--retry" style="display: none;" onclick="retryUpload('${fileId}')">
@@ -395,20 +425,27 @@
                 const retryBtn = fileItem.querySelector('.yc-upload__file-btn--retry');
 
                 progressEl.style.display = 'block';
-                progressFill.style.width = `${percent}%`;
-                progressFill.className = `yc-upload__progress-fill ${status === 'success' ? 'is-success' : ''} ${status === 'error' ? 'is-error' : ''}`;
+                progressText.style.display = 'block';
+                
+                if (progressFill) {
+                    progressFill.style.width = `${percent}%`;
+                }
+                
                 progressText.textContent = `${percent}%`;
-
+                
                 if (status === 'success') {
                     statusEl.style.display = 'flex';
                     statusEl.className = 'yc-upload__file-status yc-upload__file-status--success';
                     statusEl.innerHTML = '<i class="fas fa-check"></i>';
                     progressEl.style.display = 'none';
+                    progressText.style.display = 'none';
                 } else if (status === 'error') {
+                    progressEl.classList.add('yc-upload__progress-bar--error');
                     statusEl.style.display = 'flex';
                     statusEl.className = 'yc-upload__file-status yc-upload__file-status--error';
                     statusEl.innerHTML = '<i class="fas fa-times"></i>';
                     progressEl.style.display = 'none';
+                    progressText.style.display = 'none';
                     retryBtn.style.display = 'flex';
                 }
             }

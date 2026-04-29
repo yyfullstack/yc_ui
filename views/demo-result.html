@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result 结果 - YC UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">Result 结果</h1>
+            <p class="demo-page-subtitle">用于反馈一系列操作任务的处理结果</p>
+        </div>
+
+        <div class="demo-section">
+            <h3>成功</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">操作成功结果</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div class="yc-result">
+                        <div class="yc-result__icon yc-result__icon--success"><i class="fas fa-check-circle"></i></div>
+                        <h2 class="yc-result__title">操作成功</h2>
+                        <p class="yc-result__subtitle">您的操作已成功完成，感谢您的耐心等待</p>
+                        <div class="yc-result__actions">
+                            <button class="yc-button yc-button--primary">返回主页</button>
+                            <button class="yc-button">查看详情</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>警告</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">操作警告结果</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div class="yc-result">
+                        <div class="yc-result__icon yc-result__icon--warning"><i class="fas fa-exclamation-triangle"></i></div>
+                        <h2 class="yc-result__title">操作警告</h2>
+                        <p class="yc-result__subtitle">操作过程中出现警告信息，请检查后重试</p>
+                        <div class="yc-result__actions">
+                            <button class="yc-button yc-button--primary">重试</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>错误</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">操作失败结果</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div class="yc-result">
+                        <div class="yc-result__icon yc-result__icon--danger"><i class="fas fa-times-circle"></i></div>
+                        <h2 class="yc-result__title">操作失败</h2>
+                        <p class="yc-result__subtitle">很抱歉，操作执行失败，请稍后重试</p>
+                        <div class="yc-result__actions">
+                            <button class="yc-button yc-button--primary">返回重试</button>
+                            <button class="yc-button">联系客服</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>信息</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">提示信息结果</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div class="yc-result">
+                        <div class="yc-result__icon yc-result__icon--info"><i class="fas fa-info-circle"></i></div>
+                        <h2 class="yc-result__title">提示信息</h2>
+                        <p class="yc-result__subtitle">系统正在维护中，预计 30 分钟后恢复服务</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>404</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">404 页面不存在</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div class="yc-result">
+                        <div class="yc-result__icon yc-result__icon--404">
+                            <span>4</span>
+                            <i class="fas fa-question-circle"></i>
+                            <span>4</span>
+                        </div>
+                        <h2 class="yc-result__title">页面未找到</h2>
+                        <p class="yc-result__subtitle">抱歉，您访问的页面不存在或已被移除</p>
+                        <div class="yc-result__actions">
+                            <button class="yc-button yc-button--primary">返回首页</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>不同尺寸</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">结果提供大、默认、小三种尺寸</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div class="yc-result yc-result--large">
+                        <div class="yc-result__icon yc-result__icon--success"><i class="fas fa-check-circle"></i></div>
+                        <h2 class="yc-result__title">大尺寸结果</h2>
+                        <p class="yc-result__subtitle">这是大尺寸的结果展示</p>
+                    </div>
+                    <hr class="yc-divider">
+                    <div class="yc-result">
+                        <div class="yc-result__icon yc-result__icon--success"><i class="fas fa-check-circle"></i></div>
+                        <h2 class="yc-result__title">默认尺寸结果</h2>
+                        <p class="yc-result__subtitle">这是默认尺寸的结果展示</p>
+                    </div>
+                    <hr class="yc-divider">
+                    <div class="yc-result yc-result--small">
+                        <div class="yc-result__icon yc-result__icon--success"><i class="fas fa-check-circle"></i></div>
+                        <h2 class="yc-result__title">小尺寸结果</h2>
+                        <p class="yc-result__subtitle">这是小尺寸的结果展示</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

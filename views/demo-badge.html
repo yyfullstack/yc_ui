@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Badge 徽章 - YC UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">Badge 徽章</h1>
+            <p class="demo-page-subtitle">出现在按钮、头像周围的数字或状态标记</p>
+        </div>
+
+        <div class="demo-section">
+            <h3>基本用法</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">设置了 value 属性的 badge 会显示内容</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div style="display: flex; align-items: center; gap: 24px;">
+                        <div class="yc-badge">
+                            <button class="yc-button">消息</button>
+                            <span class="yc-badge__content">5</span>
+                        </div>
+                        <div class="yc-badge">
+                            <button class="yc-button yc-button--primary">订单</button>
+                            <span class="yc-badge__content">10</span>
+                        </div>
+                        <div class="yc-badge">
+                            <button class="yc-button yc-button--success">评论</button>
+                            <span class="yc-badge__content">99</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>最大值</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">可自定义最大值</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div style="display: flex; align-items: center; gap: 24px;">
+                        <div class="yc-badge">
+                            <button class="yc-button">消息</button>
+                            <span class="yc-badge__content">10</span>
+                        </div>
+                        <div class="yc-badge">
+                            <button class="yc-button yc-button--primary">订单</button>
+                            <span class="yc-badge__content">50</span>
+                        </div>
+                        <div class="yc-badge yc-badge--max">
+                            <button class="yc-button yc-button--success">评论</button>
+                            <span class="yc-badge__content">99</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>小圆点</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">以红点的形式标注文字或图标</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div style="display: flex; align-items: center; gap: 24px;">
+                        <div class="yc-badge">
+                            <span class="yc-link yc-link--primary">链接</span>
+                            <span class="yc-badge__content yc-badge__content--dot"></span>
+                        </div>
+                        <div class="yc-badge">
+                            <i class="fas fa-bell" style="font-size: 24px; color: #909399;"></i>
+                            <span class="yc-badge__content yc-badge__content--dot"></span>
+                        </div>
+                        <div class="yc-badge">
+                            <i class="fas fa-envelope" style="font-size: 24px; color: #909399;"></i>
+                            <span class="yc-badge__content yc-badge__content--dot yc-badge__content--success"></span>
+                        </div>
+                        <div class="yc-avatar yc-avatar--badge yc-avatar--circle yc-avatar--large">
+                            <img src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" class="yc-avatar__image" alt="avatar">
+                            <span class="yc-badge__content yc-badge__content--dot"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>不同颜色</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">提供了多种颜色的 badge 样式</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div style="display: flex; align-items: center; gap: 24px;">
+                        <div class="yc-badge">
+                            <button class="yc-button">默认</button>
+                            <span class="yc-badge__content yc-badge__content--danger">12</span>
+                        </div>
+                        <div class="yc-badge">
+                            <button class="yc-button yc-button--primary">主要</button>
+                            <span class="yc-badge__content yc-badge__content--primary">8</span>
+                        </div>
+                        <div class="yc-badge">
+                            <button class="yc-button yc-button--success">成功</button>
+                            <span class="yc-badge__content yc-badge__content--success">5</span>
+                        </div>
+                        <div class="yc-badge">
+                            <button class="yc-button yc-button--warning">警告</button>
+                            <span class="yc-badge__content yc-badge__content--warning">3</span>
+                        </div>
+                        <div class="yc-badge">
+                            <button class="yc-button">信息</button>
+                            <span class="yc-badge__content yc-badge__content--info">1</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>状态点</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">用于表示状态的小圆点</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div style="display: flex; align-items: center; gap: 24px;">
+                        <div>
+                            <span class="yc-badge__status yc-badge__status--success"></span>
+                            <span class="yc-badge__status-text">成功</span>
+                        </div>
+                        <div>
+                            <span class="yc-badge__status yc-badge__status--warning"></span>
+                            <span class="yc-badge__status-text">警告</span>
+                        </div>
+                        <div>
+                            <span class="yc-badge__status yc-badge__status--info"></span>
+                            <span class="yc-badge__status-text">信息</span>
+                        </div>
+                        <div>
+                            <span class="yc-badge__status yc-badge__status--danger"></span>
+                            <span class="yc-badge__status-text">危险</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

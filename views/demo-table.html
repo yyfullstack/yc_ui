@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table 表格 - YC UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+    <style>
+        .table-demo-container {
+            padding: 20px;
+        }
+        .table-actions {
+            margin-bottom: 16px;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+        .table-search {
+            width: 240px;
+            padding: 8px 12px;
+            border: 1px solid #dcdfe6;
+            border-radius: 4px;
+            outline: none;
+            font-size: 14px;
+        }
+        .table-search:focus {
+            border-color: #409eff;
+        }
+        .pagination-demo {
+            margin-top: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">Table 表格</h1>
+            <p class="demo-page-subtitle">用于展示多条结构类似的数据，可对数据进行排序、筛选、对比或其他自定义操作</p>
+        </div>
+
+        <div class="demo-section">
+            <h3>基础表格</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">基础表格展示</div>
+                <div class="yc-table">
+                    <div class="yc-table__header-wrapper">
+                        <table class="yc-table__header">
+                            <thead>
+                                <tr>
+                                    <th style="width: 150px;">日期</th>
+                                    <th style="width: 120px;">姓名</th>
+                                    <th style="width: 150px;">地址</th>
+                                    <th style="width: 100px;">年龄</th>
+                                    <th>标签</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <div class="yc-table__body-wrapper">
+                        <table class="yc-table__body">
+                            <tbody>
+                                <tr>
+                                    <td style="width: 150px;">2024-01-01</td>
+                                    <td style="width: 120px;">张三</td>
+                                    <td style="width: 150px;">北京市朝阳区</td>
+                                    <td style="width: 100px;">25</td>
+                                    <td><span class="yc-tag yc-tag--primary">成功</span></td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 150px;">2024-01-02</td>
+                                    <td style="width: 120px;">李四</td>
+                                    <td style="width: 150px;">上海市浦东新区</td>
+                                    <td style="width: 100px;">30</td>
+                                    <td><span class="yc-tag yc-tag--success">完成</span></td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 150px;">2024-01-03</td>
+                                    <td style="width: 120px;">王五</td>
+                                    <td style="width: 150px;">广州市天河区</td>
+                                    <td style="width: 100px;">28</td>
+                                    <td><span class="yc-tag yc-tag--warning">进行中</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>带斑马纹表格</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">使用 yc-table--striped 实现斑马纹效果</div>
+                <div class="yc-table yc-table--striped">
+                    <div class="yc-table__header-wrapper">
+                        <table class="yc-table__header">
+                            <thead>
+                                <tr>
+                                    <th style="width: 50px;" class="yc-table__selection-cell">
+                                        <input type="checkbox" id="check-all" style="cursor: pointer;">
+                                    </th>
+                                    <th>姓名</th>
+                                    <th>部门</th>
+                                    <th>职位</th>
+                                    <th>邮箱</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <div class="yc-table__body-wrapper">
+                        <table class="yc-table__body">
+                            <tbody>
+                                <tr>
+                                    <td style="width: 50px;" class="yc-table__selection-cell">
+                                        <input type="checkbox" class="row-checkbox" style="cursor: pointer;">
+                                    </td>
+                                    <td>张三</td>
+                                    <td>技术部</td>
+                                    <td>高级工程师</td>
+                                    <td>zhangsan@example.com</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 50px;" class="yc-table__selection-cell">
+                                        <input type="checkbox" class="row-checkbox" style="cursor: pointer;">
+                                    </td>
+                                    <td>李四</td>
+                                    <td>产品部</td>
+                                    <td>产品经理</td>
+                                    <td>lisi@example.com</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 50px;" class="yc-table__selection-cell">
+                                        <input type="checkbox" class="row-checkbox" style="cursor: pointer;">
+                                    </td>
+                                    <td>王五</td>
+                                    <td>设计部</td>
+                                    <td>UI设计师</td>
+                                    <td>wangwu@example.com</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 50px;" class="yc-table__selection-cell">
+                                        <input type="checkbox" class="row-checkbox" style="cursor: pointer;">
+                                    </td>
+                                    <td>赵六</td>
+                                    <td>市场部</td>
+                                    <td>市场总监</td>
+                                    <td>zhaoliu@example.com</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>树形数据表格</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">展示树形结构数据，支持展开/收起</div>
+                <div class="yc-table">
+                    <div class="yc-table__header-wrapper">
+                        <table class="yc-table__header">
+                            <thead>
+                                <tr>
+                                    <th style="width: 300px;">名称</th>
+                                    <th>类型</th>
+                                    <th>大小</th>
+                                    <th>修改日期</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <div class="yc-table__body-wrapper" style="max-height: 400px;">
+                        <table class="yc-table__body">
+                            <tbody id="tree-table-body">
+                                <tr class="yc-tree-table-row" data-id="1" data-parent="">
+                                    <td style="width: 300px;">
+                                        <div class="yc-table__tree-cell">
+                                            <span class="yc-tree-table-expander yc-tree-table-expander--expanded" data-id="1">
+                                                <i class="fa fa-chevron-right"></i>
+                                            </span>
+                                            <i class="fa fa-folder" style="color: #e6a23c; margin-right: 8px;"></i>
+                                            <span>Documents</span>
+                                        </div>
+                                    </td>
+                                    <td>文件夹</td>
+                                    <td>-</td>
+                                    <td>2024-01-15</td>
+                                </tr>
+                                <tr class="yc-tree-table-row" data-id="2" data-parent="1">
+                                    <td style="width: 300px;">
+                                        <div class="yc-table__tree-cell" style="padding-left: 16px;">
+                                            <span class="yc-tree-table-placeholder"></span>
+                                            <i class="fa fa-file-text" style="color: #909399; margin-right: 8px;"></i>
+                                            <span>report.pdf</span>
+                                        </div>
+                                    </td>
+                                    <td>PDF</td>
+                                    <td>2.5 MB</td>
+                                    <td>2024-01-14</td>
+                                </tr>
+                                <tr class="yc-tree-table-row" data-id="3" data-parent="1">
+                                    <td style="width: 300px;">
+                                        <div class="yc-table__tree-cell" style="padding-left: 16px;">
+                                            <span class="yc-tree-table-expander" data-id="3">
+                                                <i class="fa fa-chevron-right"></i>
+                                            </span>
+                                            <i class="fa fa-folder" style="color: #e6a23c; margin-right: 8px;"></i>
+                                            <span>Projects</span>
+                                        </div>
+                                    </td>
+                                    <td>文件夹</td>
+                                    <td>-</td>
+                                    <td>2024-01-13</td>
+                                </tr>
+                                <tr class="yc-tree-table-row" data-id="4" data-parent="3" style="display: none;">
+                                    <td style="width: 300px;">
+                                        <div class="yc-table__tree-cell" style="padding-left: 32px;">
+                                            <span class="yc-tree-table-placeholder"></span>
+                                            <i class="fa fa-file-code" style="color: #67c23a; margin-right: 8px;"></i>
+                                            <span>app.js</span>
+                                        </div>
+                                    </td>
+                                    <td>JavaScript</td>
+                                    <td>15 KB</td>
+                                    <td>2024-01-12</td>
+                                </tr>
+                                <tr class="yc-tree-table-row" data-id="5" data-parent="3" style="display: none;">
+                                    <td style="width: 300px;">
+                                        <div class="yc-table__tree-cell" style="padding-left: 32px;">
+                                            <span class="yc-tree-table-placeholder"></span>
+                                            <i class="fa fa-file-image" style="color: #409eff; margin-right: 8px;"></i>
+                                            <span>logo.png</span>
+                                        </div>
+                                    </td>
+                                    <td>Image</td>
+                                    <td>256 KB</td>
+                                    <td>2024-01-11</td>
+                                </tr>
+                                <tr class="yc-tree-table-row" data-id="6" data-parent="">
+                                    <td style="width: 300px;">
+                                        <div class="yc-table__tree-cell">
+                                            <span class="yc-tree-table-expander" data-id="6">
+                                                <i class="fa fa-chevron-right"></i>
+                                            </span>
+                                            <i class="fa fa-folder" style="color: #e6a23c; margin-right: 8px;"></i>
+                                            <span>Downloads</span>
+                                        </div>
+                                    </td>
+                                    <td>文件夹</td>
+                                    <td>-</td>
+                                    <td>2024-01-10</td>
+                                </tr>
+                                <tr class="yc-tree-table-row" data-id="7" data-parent="6" style="display: none;">
+                                    <td style="width: 300px;">
+                                        <div class="yc-table__tree-cell" style="padding-left: 16px;">
+                                            <span class="yc-tree-table-placeholder"></span>
+                                            <i class="fa fa-file-archive" style="color: #e6a23c; margin-right: 8px;"></i>
+                                            <span>backup.zip</span>
+                                        </div>
+                                    </td>
+                                    <td>Archive</td>
+                                    <td>120 MB</td>
+                                    <td>2024-01-09</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>可拖拽排序表格</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">拖拽行进行排序</div>
+                <div class="yc-table">
+                    <div class="yc-table__header-wrapper">
+                        <table class="yc-table__header">
+                            <thead>
+                                <tr>
+                                    <th style="width: 40px;"></th>
+                                    <th>名称</th>
+                                    <th>价格</th>
+                                    <th>库存</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <div class="yc-table__body-wrapper" id="draggable-table-body">
+                        <table class="yc-table__body">
+                            <tbody id="draggable-tbody">
+                                <tr draggable="true">
+                                    <td style="width: 40px;"><i class="fa fa-grip-vertical" style="cursor: move; color: #909399;"></i></td>
+                                    <td>MacBook Pro 14"</td>
+                                    <td>¥14,999</td>
+                                    <td>50</td>
+                                </tr>
+                                <tr draggable="true">
+                                    <td style="width: 40px;"><i class="fa fa-grip-vertical" style="cursor: move; color: #909399;"></i></td>
+                                    <td>iPhone 15 Pro</td>
+                                    <td>¥7,999</td>
+                                    <td>200</td>
+                                </tr>
+                                <tr draggable="true">
+                                    <td style="width: 40px;"><i class="fa fa-grip-vertical" style="cursor: move; color: #909399;"></i></td>
+                                    <td>iPad Pro 12.9"</td>
+                                    <td>¥9,499</td>
+                                    <td>80</td>
+                                </tr>
+                                <tr draggable="true">
+                                    <td style="width: 40px;"><i class="fa fa-grip-vertical" style="cursor: move; color: #909399;"></i></td>
+                                    <td>AirPods Pro 2</td>
+                                    <td>¥1,799</td>
+                                    <td>500</td>
+                                </tr>
+                                <tr draggable="true">
+                                    <td style="width: 40px;"><i class="fa fa-grip-vertical" style="cursor: move; color: #909399;"></i></td>
+                                    <td>Apple Watch Ultra 2</td>
+                                    <td>¥6,299</td>
+                                    <td>100</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>固定列</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">左右固定列，支持横向滚动</div>
+                <div class="yc-table" style="overflow-x: auto;">
+                    <div class="yc-table__header-wrapper" style="overflow-x: auto;">
+                        <table class="yc-table__header" style="min-width: 1200px;">
+                            <thead>
+                                <tr>
+                                    <th style="width: 120px; position: sticky; left: 0; background: #fafafa; z-index: 1; box-shadow: 2px 0 8px rgba(0,0,0,0.05);">姓名</th>
+                                    <th style="width: 150px;">部门</th>
+                                    <th style="width: 150px;">职位</th>
+                                    <th style="width: 200px;">邮箱</th>
+                                    <th style="width: 150px;">电话</th>
+                                    <th style="width: 150px;">入职日期</th>
+                                    <th style="width: 150px;">薪资</th>
+                                    <th style="width: 120px; position: sticky; right: 0; background: #fafafa; z-index: 1; box-shadow: -2px 0 8px rgba(0,0,0,0.05);">操作</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <div class="yc-table__body-wrapper" style="max-height: 300px;">
+                        <table class="yc-table__body" style="min-width: 1200px;">
+                            <tbody>
+                                <tr>
+                                    <td style="width: 120px; position: sticky; left: 0; background: #fff; z-index: 1; box-shadow: 2px 0 8px rgba(0,0,0,0.05);">张三</td>
+                                    <td style="width: 150px;">技术部</td>
+                                    <td style="width: 150px;">高级工程师</td>
+                                    <td style="width: 200px;">zhangsan@example.com</td>
+                                    <td style="width: 150px;">13800138001</td>
+                                    <td style="width: 150px;">2020-03-15</td>
+                                    <td style="width: 150px;">¥25,000</td>
+                                    <td style="width: 120px; position: sticky; right: 0; background: #fff; z-index: 1; box-shadow: -2px 0 8px rgba(0,0,0,0.05);">
+                                        <button class="yc-button yc-button--primary yc-button--small">编辑</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 120px; position: sticky; left: 0; background: #fff; z-index: 1; box-shadow: 2px 0 8px rgba(0,0,0,0.05);">李四</td>
+                                    <td style="width: 150px;">产品部</td>
+                                    <td style="width: 150px;">产品经理</td>
+                                    <td style="width: 200px;">lisi@example.com</td>
+                                    <td style="width: 150px;">13800138002</td>
+                                    <td style="width: 150px;">2019-07-20</td>
+                                    <td style="width: 150px;">¥28,000</td>
+                                    <td style="width: 120px; position: sticky; right: 0; background: #fff; z-index: 1; box-shadow: -2px 0 8px rgba(0,0,0,0.05);">
+                                        <button class="yc-button yc-button--primary yc-button--small">编辑</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 120px; position: sticky; left: 0; background: #fff; z-index: 1; box-shadow: 2px 0 8px rgba(0,0,0,0.05);">王五</td>
+                                    <td style="width: 150px;">设计部</td>
+                                    <td style="width: 150px;">UI设计师</td>
+                                    <td style="width: 200px;">wangwu@example.com</td>
+                                    <td style="width: 150px;">13800138003</td>
+                                    <td style="width: 150px;">2021-01-10</td>
+                                    <td style="width: 150px;">¥22,000</td>
+                                    <td style="width: 120px; position: sticky; right: 0; background: #fff; z-index: 1; box-shadow: -2px 0 8px rgba(0,0,0,0.05);">
+                                        <button class="yc-button yc-button--primary yc-button--small">编辑</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>不同尺寸</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">提供大、默认、小三种尺寸</div>
+                <div style="display: flex; flex-direction: column; gap: 24px;">
+                    <div>
+                        <h4>Large</h4>
+                        <div class="yc-table yc-table--large">
+                            <div class="yc-table__header-wrapper">
+                                <table class="yc-table__header">
+                                    <thead>
+                                        <tr>
+                                            <th>姓名</th>
+                                            <th>部门</th>
+                                            <th>职位</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                            <div class="yc-table__body-wrapper" style="max-height: 150px;">
+                                <table class="yc-table__body">
+                                    <tbody>
+                                        <tr><td>张三</td><td>技术部</td><td>高级工程师</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h4>Default</h4>
+                        <div class="yc-table">
+                            <div class="yc-table__header-wrapper">
+                                <table class="yc-table__header">
+                                    <thead>
+                                        <tr>
+                                            <th>姓名</th>
+                                            <th>部门</th>
+                                            <th>职位</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                            <div class="yc-table__body-wrapper" style="max-height: 150px;">
+                                <table class="yc-table__body">
+                                    <tbody>
+                                        <tr><td>张三</td><td>技术部</td><td>高级工程师</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h4>Small</h4>
+                        <div class="yc-table yc-table--small">
+                            <div class="yc-table__header-wrapper">
+                                <table class="yc-table__header">
+                                    <thead>
+                                        <tr>
+                                            <th>姓名</th>
+                                            <th>部门</th>
+                                            <th>职位</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                            <div class="yc-table__body-wrapper" style="max-height: 150px;">
+                                <table class="yc-table__body">
+                                    <tbody>
+                                        <tr><td>张三</td><td>技术部</td><td>高级工程师</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tree table expand/collapse
+        document.querySelectorAll('.yc-tree-table-expander').forEach(function(expander) {
+            expander.addEventListener('click', function() {
+                var id = this.getAttribute('data-id');
+                var isExpanded = this.classList.contains('yc-tree-table-expander--expanded');
+                var rows = document.querySelectorAll('.yc-tree-table-row[data-parent="' + id + '"]');
+                
+                if (isExpanded) {
+                    this.classList.remove('yc-tree-table-expander--expanded');
+                    rows.forEach(function(row) {
+                        row.style.display = 'none';
+                        var childRows = document.querySelectorAll('.yc-tree-table-row[data-parent="' + row.getAttribute('data-id') + '"]');
+                        childRows.forEach(function(childRow) {
+                            childRow.style.display = 'none';
+                        });
+                    });
+                } else {
+                    this.classList.add('yc-tree-table-expander--expanded');
+                    rows.forEach(function(row) {
+                        row.style.display = '';
+                    });
+                }
+            });
+        });
+
+        // Checkbox select all
+        var checkAll = document.getElementById('check-all');
+        var rowCheckboxes = document.querySelectorAll('.row-checkbox');
+        
+        if (checkAll) {
+            checkAll.addEventListener('change', function() {
+                rowCheckboxes.forEach(function(cb) {
+                    cb.checked = checkAll.checked;
+                });
+            });
+        }
+
+        // Draggable table rows
+        var tbody = document.getElementById('draggable-tbody');
+        if (tbody) {
+            var dragSrcEl = null;
+
+            function handleDragStart(e) {
+                dragSrcEl = this;
+                e.dataTransfer.effectAllowed = 'move';
+                e.dataTransfer.setData('text/html', this.innerHTML);
+                this.classList.add('yc-table__row--dragging');
+            }
+
+            function handleDragOver(e) {
+                if (e.preventDefault) {
+                    e.preventDefault();
+                }
+                e.dataTransfer.dropEffect = 'move';
+                
+                if (this !== dragSrcEl) {
+                    this.classList.add('yc-table__row--drag-over');
+                }
+                return false;
+            }
+
+            function handleDragEnter(e) {
+                this.classList.add('yc-table__row--drag-over');
+            }
+
+            function handleDragLeave(e) {
+                this.classList.remove('yc-table__row--drag-over');
+            }
+
+            function handleDrop(e) {
+                if (e.stopPropagation) {
+                    e.stopPropagation();
+                }
+                
+                if (dragSrcEl !== this) {
+                    dragSrcEl.parentNode.removeChild(dragSrcEl);
+                    var targetRow = this;
+                    targetRow.parentNode.insertBefore(dragSrcEl, targetRow);
+                }
+                
+                return false;
+            }
+
+            function handleDragEnd(e) {
+                this.classList.remove('yc-table__row--dragging');
+                document.querySelectorAll('.yc-table__row--drag-over').forEach(function(row) {
+                    row.classList.remove('yc-table__row--drag-over');
+                });
+            }
+
+            tbody.querySelectorAll('tr').forEach(function(row) {
+                row.addEventListener('dragstart', handleDragStart);
+                row.addEventListener('dragenter', handleDragEnter);
+                row.addEventListener('dragover', handleDragOver);
+                row.addEventListener('dragleave', handleDragLeave);
+                row.addEventListener('drop', handleDrop);
+                row.addEventListener('dragend', handleDragEnd);
+            });
+        }
+
+        // Row click selection
+        document.querySelectorAll('.yc-table__body tr').forEach(function(row) {
+            row.addEventListener('click', function() {
+                document.querySelectorAll('.yc-table__body tr.yc-table__row--selected').forEach(function(r) {
+                    r.classList.remove('yc-table__row--selected');
+                });
+                this.classList.add('yc-table__row--selected');
+            });
+        });
+    </script>
+</body>
+</html>

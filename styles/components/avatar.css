@@ -1,0 +1,246 @@
+@charset "UTF-8";
+
+/* ==================== Avatar ==================== */
+
+.yc-avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    vertical-align: middle;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    background-color: var(--yc-color-fill, #e5e7eb);
+    color: var(--yc-color-text-regular, #606266);
+    border-radius: var(--yc-border-radius-base, 4px);
+}
+
+/* ==================== Shape ==================== */
+
+.yc-avatar--circle {
+    border-radius: 50%;
+}
+
+.yc-avatar--square {
+    border-radius: var(--yc-border-radius-base, 4px);
+}
+
+.yc-avatar--round {
+    border-radius: var(--yc-border-radius-lg, 8px);
+}
+
+/* ==================== Size ==================== */
+
+.yc-avatar--large {
+    width: 48px;
+    height: 48px;
+    line-height: 48px;
+    font-size: 20px;
+}
+
+.yc-avatar--default {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 18px;
+}
+
+.yc-avatar--small {
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    font-size: 14px;
+}
+
+.yc-avatar--mini {
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    font-size: 12px;
+}
+
+/* ==================== Image ==================== */
+
+.yc-avatar__image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ==================== Icon ==================== */
+
+.yc-avatar__icon {
+    font-size: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ==================== Text ==================== */
+
+.yc-avatar__text {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 500;
+    user-select: none;
+}
+
+/* ==================== Fit Content ==================== */
+
+.yc-avatar__img--fill {
+    object-fit: fill;
+}
+
+.yc-avatar__img--contain {
+    object-fit: contain;
+}
+
+.yc-avatar__img--cover {
+    object-fit: cover;
+}
+
+.yc-avatar__img--scale-down {
+    object-fit: scale-down;
+}
+
+.yc-avatar__img--none {
+    object-fit: none;
+}
+
+/* ==================== Color Variants ==================== */
+
+.yc-avatar--primary {
+    background-color: var(--yc-color-primary, #409eff);
+    color: #ffffff;
+}
+
+.yc-avatar--success {
+    background-color: var(--yc-color-success, #67c23a);
+    color: #ffffff;
+}
+
+.yc-avatar--warning {
+    background-color: var(--yc-color-warning, #e6a23c);
+    color: #ffffff;
+}
+
+.yc-avatar--danger {
+    background-color: var(--yc-color-danger, #f56c6c);
+    color: #ffffff;
+}
+
+.yc-avatar--info {
+    background-color: var(--yc-color-info, #909399);
+    color: #ffffff;
+}
+
+/* ==================== Border ==================== */
+
+.yc-avatar--bordered {
+    border: 2px solid var(--yc-color-border, #dcdfe6);
+}
+
+.yc-avatar--bordered-primary {
+    border: 2px solid var(--yc-color-primary, #409eff);
+}
+
+.yc-avatar--shadow {
+    box-shadow: var(--yc-box-shadow-base, 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 0 6px 0 rgba(0, 0, 0, 0.04));
+}
+
+/* ==================== Badge ==================== */
+
+.yc-avatar--badge {
+    position: relative;
+}
+
+.yc-avatar__badge {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 4px;
+    line-height: 18px;
+    text-align: center;
+    font-size: 12px;
+    color: #ffffff;
+    background-color: var(--yc-color-danger, #f56c6c);
+    border-radius: 9px;
+    border: 1px solid #ffffff;
+    z-index: 1;
+    white-space: nowrap;
+}
+
+.yc-avatar__badge--dot {
+    min-width: 10px;
+    width: 10px;
+    height: 10px;
+    padding: 0;
+    border-radius: 50%;
+}
+
+.yc-avatar__badge--text {
+    font-size: 12px;
+    height: 20px;
+    line-height: 20px;
+}
+
+/* ==================== Fallback ==================== */
+
+.yc-avatar__fallback {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: var(--yc-color-fill, #e5e7eb);
+    color: var(--yc-color-text-placeholder, #c0c4cc);
+}
+
+/* ==================== Group ==================== */
+
+.yc-avatar-group {
+    display: inline-flex;
+    align-items: center;
+}
+
+.yc-avatar-group .yc-avatar {
+    border: 2px solid #ffffff;
+    margin-left: -10px;
+}
+
+.yc-avatar-group .yc-avatar:first-child {
+    margin-left: 0;
+}
+
+/* ==================== Status ==================== */
+
+.yc-avatar--disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* ==================== Hover Effects ==================== */
+
+.yc-avatar--clickable {
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.yc-avatar--clickable:hover {
+    transform: scale(1.1);
+    box-shadow: var(--yc-box-shadow-base, 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 0 6px 0 rgba(0, 0, 0, 0.04));
+}
+
+/* ==================== Responsive ==================== */
+
+@media (max-width: 576px) {
+    .yc-avatar-group .yc-avatar {
+        margin-left: -6px;
+    }
+}

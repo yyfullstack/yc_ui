@@ -101,13 +101,44 @@
     height: 6px;
 }
 
-.yc-checkbox--indeterminate .yc-checkbox__wrapper::after {
+.yc-checkbox.yc-checkbox--indeterminate .yc-checkbox__wrapper::after {
     content: '';
     width: 8px;
     height: 2px;
     background-color: white;
     border: none;
     transform: rotate(0deg);
+}
+
+/* 半选状态样式 */
+.yc-checkbox.is-indeterminate .yc-checkbox__wrapper {
+    border-color: var(--yc-color-primary);
+    background-color: var(--yc-color-primary-light-3);
+}
+
+.yc-checkbox.is-indeterminate .yc-checkbox__wrapper::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px;
+    height: 2px;
+    background-color: white;
+    border-radius: 1px;
+}
+
+.yc-checkbox.is-indeterminate.is-checked .yc-checkbox__wrapper::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px;
+    height: 2px;
+    background-color: white;
+    border-radius: 1px;
+    border: none;
 }
 
 .yc-checkbox-group {

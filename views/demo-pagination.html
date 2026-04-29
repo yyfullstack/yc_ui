@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagination 分页 - YC UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">Pagination 分页</h1>
+            <p class="demo-page-subtitle">当数据量过多时，使用分页分解数据</p>
+        </div>
+
+        <div class="demo-section">
+            <h3>基本用法</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">基础的页码导航</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div class="yc-pagination">
+                        <button class="yc-pagination__btn yc-pagination__prev is-disabled"><i class="fas fa-chevron-left"></i></button>
+                        <button class="yc-pagination__btn is-active">1</button>
+                        <button class="yc-pagination__btn">2</button>
+                        <button class="yc-pagination__btn">3</button>
+                        <button class="yc-pagination__btn">4</button>
+                        <button class="yc-pagination__btn">5</button>
+                        <button class="yc-pagination__btn yc-pagination__more">···</button>
+                        <button class="yc-pagination__btn">100</button>
+                        <button class="yc-pagination__btn yc-pagination__next"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>带背景的分页</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">带背景的页码按钮</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div class="yc-pagination yc-pagination--background">
+                        <button class="yc-pagination__btn yc-pagination__prev"><i class="fas fa-chevron-left"></i></button>
+                        <button class="yc-pagination__btn">1</button>
+                        <button class="yc-pagination__btn is-active">2</button>
+                        <button class="yc-pagination__btn">3</button>
+                        <button class="yc-pagination__btn">4</button>
+                        <button class="yc-pagination__btn">5</button>
+                        <button class="yc-pagination__btn yc-pagination__next"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>完整功能</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">完整的分页功能，包含总数、页码选择器、跳转器</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div class="yc-pagination">
+                        <span class="yc-pagination__total">共 100 条</span>
+                        <button class="yc-pagination__btn yc-pagination__prev is-disabled"><i class="fas fa-chevron-left"></i></button>
+                        <button class="yc-pagination__btn is-active">1</button>
+                        <button class="yc-pagination__btn">2</button>
+                        <button class="yc-pagination__btn">3</button>
+                        <button class="yc-pagination__btn">4</button>
+                        <button class="yc-pagination__btn">5</button>
+                        <button class="yc-pagination__btn yc-pagination__next"><i class="fas fa-chevron-right"></i></button>
+                        <div class="yc-pagination__size">
+                            <select>
+                                <option>10 条/页</option>
+                                <option>20 条/页</option>
+                                <option>50 条/页</option>
+                                <option>100 条/页</option>
+                            </select>
+                        </div>
+                        <div class="yc-pagination__jumper">
+                            前往 <input type="text" value="1"> 页
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>不同尺寸</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">分页提供大、默认、小三种尺寸</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div class="yc-pagination yc-pagination--large">
+                        <button class="yc-pagination__btn yc-pagination__prev"><i class="fas fa-chevron-left"></i></button>
+                        <button class="yc-pagination__btn is-active">1</button>
+                        <button class="yc-pagination__btn">2</button>
+                        <button class="yc-pagination__btn">3</button>
+                        <button class="yc-pagination__btn yc-pagination__next"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                    <div class="yc-pagination">
+                        <button class="yc-pagination__btn yc-pagination__prev"><i class="fas fa-chevron-left"></i></button>
+                        <button class="yc-pagination__btn is-active">1</button>
+                        <button class="yc-pagination__btn">2</button>
+                        <button class="yc-pagination__btn">3</button>
+                        <button class="yc-pagination__btn yc-pagination__next"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                    <div class="yc-pagination yc-pagination--small">
+                        <button class="yc-pagination__btn yc-pagination__prev"><i class="fas fa-chevron-left"></i></button>
+                        <button class="yc-pagination__btn is-active">1</button>
+                        <button class="yc-pagination__btn">2</button>
+                        <button class="yc-pagination__btn">3</button>
+                        <button class="yc-pagination__btn yc-pagination__next"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>简洁分页</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">简洁的分页样式，只有上一页和下一页</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div class="yc-pagination yc-pagination--simple">
+                        <button class="yc-pagination__btn yc-pagination__prev is-disabled"><i class="fas fa-chevron-left"></i></button>
+                        <span class="yc-pagination__text">2 / 10</span>
+                        <button class="yc-pagination__btn yc-pagination__next"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

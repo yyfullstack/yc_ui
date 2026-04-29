@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avatar 头像 - YC UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">Avatar 头像</h1>
+            <p class="demo-page-subtitle">用图标、图片或者字符的形式展示用户或事物信息</p>
+        </div>
+
+        <div class="demo-section">
+            <h3>基本用法</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">通过 shape 和 size 设置头像的形状和大小</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div style="display: flex; align-items: center; gap: 16px;">
+                        <div class="yc-avatar">
+                            <i class="fas fa-user yc-avatar__icon"></i>
+                        </div>
+                        <div class="yc-avatar">
+                            <span class="yc-avatar__text">U</span>
+                        </div>
+                        <div class="yc-avatar yc-avatar--circle">
+                            <i class="fas fa-user yc-avatar__icon"></i>
+                        </div>
+                        <div class="yc-avatar yc-avatar--circle">
+                            <span class="yc-avatar__text">U</span>
+                        </div>
+                        <div class="yc-avatar yc-avatar--round">
+                            <i class="fas fa-user yc-avatar__icon"></i>
+                        </div>
+                        <div class="yc-avatar yc-avatar--round">
+                            <span class="yc-avatar__text">U</span>
+                        </div>
+                        <div class="yc-avatar yc-avatar--square">
+                            <i class="fas fa-user yc-avatar__icon"></i>
+                        </div>
+                        <div class="yc-avatar yc-avatar--square">
+                            <span class="yc-avatar__text">U</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>图片类型</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">支持展示图片类型</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div style="display: flex; align-items: center; gap: 16px;">
+                        <div class="yc-avatar yc-avatar--large">
+                            <img src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" class="yc-avatar__image" alt="avatar">
+                        </div>
+                        <div class="yc-avatar">
+                            <img src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" class="yc-avatar__image" alt="avatar">
+                        </div>
+                        <div class="yc-avatar yc-avatar--small">
+                            <img src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" class="yc-avatar__image" alt="avatar">
+                        </div>
+                        <div class="yc-avatar yc-avatar--mini">
+                            <img src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" class="yc-avatar__image" alt="avatar">
+                        </div>
+                        <div class="yc-avatar yc-avatar--circle yc-avatar--large">
+                            <img src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" class="yc-avatar__image" alt="avatar">
+                        </div>
+                        <div class="yc-avatar yc-avatar--circle">
+                            <img src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" class="yc-avatar__image" alt="avatar">
+                        </div>
+                        <div class="yc-avatar yc-avatar--circle yc-avatar--small">
+                            <img src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" class="yc-avatar__image" alt="avatar">
+                        </div>
+                        <div class="yc-avatar yc-avatar--circle yc-avatar--mini">
+                            <img src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" class="yc-avatar__image" alt="avatar">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>不同尺寸</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">头像提供了大、默认、小、迷你四种尺寸</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div style="display: flex; align-items: center; gap: 16px;">
+                        <div class="yc-avatar yc-avatar--large">
+                            <span class="yc-avatar__text">User</span>
+                        </div>
+                        <div class="yc-avatar">
+                            <span class="yc-avatar__text">User</span>
+                        </div>
+                        <div class="yc-avatar yc-avatar--small">
+                            <span class="yc-avatar__text">User</span>
+                        </div>
+                        <div class="yc-avatar yc-avatar--mini">
+                            <span class="yc-avatar__text">U</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>头像类型</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">支持图标、图片、文字三种类型</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div style="display: flex; align-items: center; gap: 16px;">
+                        <div class="yc-avatar yc-avatar--large yc-avatar--primary">
+                            <i class="fas fa-user yc-avatar__icon"></i>
+                        </div>
+                        <div class="yc-avatar yc-avatar--large yc-avatar--success">
+                            <i class="fas fa-check yc-avatar__icon"></i>
+                        </div>
+                        <div class="yc-avatar yc-avatar--large yc-avatar--warning">
+                            <i class="fas fa-star yc-avatar__icon"></i>
+                        </div>
+                        <div class="yc-avatar yc-avatar--large yc-avatar--danger">
+                            <i class="fas fa-heart yc-avatar__icon"></i>
+                        </div>
+                        <div class="yc-avatar yc-avatar--large yc-avatar--info">
+                            <i class="fas fa-envelope yc-avatar__icon"></i>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 16px;">
+                        <div class="yc-avatar yc-avatar--large yc-avatar--circle yc-avatar--primary">
+                            <span class="yc-avatar__text">张</span>
+                        </div>
+                        <div class="yc-avatar yc-avatar--large yc-avatar--circle yc-avatar--success">
+                            <span class="yc-avatar__text">李</span>
+                        </div>
+                        <div class="yc-avatar yc-avatar--large yc-avatar--circle yc-avatar--warning">
+                            <span class="yc-avatar__text">王</span>
+                        </div>
+                        <div class="yc-avatar yc-avatar--large yc-avatar--circle yc-avatar--danger">
+                            <span class="yc-avatar__text">赵</span>
+                        </div>
+                        <div class="yc-avatar yc-avatar--large yc-avatar--circle yc-avatar--info">
+                            <span class="yc-avatar__text">陈</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>头像组</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">使用 Avatar Group 可以组合多个头像</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div class="yc-avatar-group">
+                        <div class="yc-avatar yc-avatar--circle yc-avatar--large">
+                            <img src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" class="yc-avatar__image" alt="avatar">
+                        </div>
+                        <div class="yc-avatar yc-avatar--circle yc-avatar--large yc-avatar--primary">
+                            <span class="yc-avatar__text">张</span>
+                        </div>
+                        <div class="yc-avatar yc-avatar--circle yc-avatar--large yc-avatar--success">
+                            <span class="yc-avatar__text">李</span>
+                        </div>
+                        <div class="yc-avatar yc-avatar--circle yc-avatar--large yc-avatar--warning">
+                            <span class="yc-avatar__text">王</span>
+                        </div>
+                        <div class="yc-avatar yc-avatar--circle yc-avatar--large yc-avatar--info">
+                            <span class="yc-avatar__text">+3</span>
+                        </div>
+                    </div>
+                    <div class="yc-avatar-group">
+                        <div class="yc-avatar yc-avatar--circle">
+                            <img src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" class="yc-avatar__image" alt="avatar">
+                        </div>
+                        <div class="yc-avatar yc-avatar--circle yc-avatar--primary">
+                            <span class="yc-avatar__text">张</span>
+                        </div>
+                        <div class="yc-avatar yc-avatar--circle yc-avatar--success">
+                            <span class="yc-avatar__text">李</span>
+                        </div>
+                        <div class="yc-avatar yc-avatar--circle yc-avatar--warning">
+                            <i class="fas fa-user yc-avatar__icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>带徽标</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">头像右上角可以显示徽标信息</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div style="display: flex; align-items: center; gap: 24px;">
+                        <div class="yc-avatar yc-avatar--badge">
+                            <img src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" class="yc-avatar__image" alt="avatar">
+                            <span class="yc-avatar__badge">5</span>
+                        </div>
+                        <div class="yc-avatar yc-avatar--circle yc-avatar--badge">
+                            <img src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" class="yc-avatar__image" alt="avatar">
+                            <span class="yc-avatar__badge yc-avatar__badge--dot"></span>
+                        </div>
+                        <div class="yc-avatar yc-avatar--circle yc-avatar--badge">
+                            <img src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" class="yc-avatar__image" alt="avatar">
+                            <span class="yc-avatar__badge yc-avatar__badge--text">99+</span>
+                        </div>
+                        <div class="yc-avatar yc-avatar--badge">
+                            <i class="fas fa-user yc-avatar__icon"></i>
+                            <span class="yc-avatar__badge">3</span>
+                        </div>
+                        <div class="yc-avatar yc-avatar--circle yc-avatar--badge yc-avatar--primary">
+                            <span class="yc-avatar__text">U</span>
+                            <span class="yc-avatar__badge yc-avatar__badge--dot"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>边框样式</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">头像可以添加边框</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div style="display: flex; align-items: center; gap: 16px;">
+                        <div class="yc-avatar yc-avatar--circle yc-avatar--bordered yc-avatar--large">
+                            <img src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" class="yc-avatar__image" alt="avatar">
+                        </div>
+                        <div class="yc-avatar yc-avatar--circle yc-avatar--bordered-primary yc-avatar--large">
+                            <img src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" class="yc-avatar__image" alt="avatar">
+                        </div>
+                        <div class="yc-avatar yc-avatar--bordered yc-avatar--large yc-avatar--shadow">
+                            <img src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" class="yc-avatar__image" alt="avatar">
+                        </div>
+                        <div class="yc-avatar yc-avatar--circle yc-avatar--shadow yc-avatar--large">
+                            <img src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" class="yc-avatar__image" alt="avatar">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>可点击头像</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">添加 yc-avatar--clickable 类使头像可点击，hover 时有放大效果</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div style="display: flex; align-items: center; gap: 16px;">
+                        <div class="yc-avatar yc-avatar--circle yc-avatar--large yc-avatar--clickable" onclick="alert('头像被点击了')">
+                            <img src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" class="yc-avatar__image" alt="avatar">
+                        </div>
+                        <div class="yc-avatar yc-avatar--large yc-avatar--clickable yc-avatar--shadow" onclick="alert('头像被点击了')">
+                            <span class="yc-avatar__text">张</span>
+                        </div>
+                        <div class="yc-avatar yc-avatar--circle yc-avatar--large yc-avatar--clickable yc-avatar--primary" onclick="alert('头像被点击了')">
+                            <i class="fas fa-user yc-avatar__icon"></i>
+                        </div>
+                        <div class="yc-avatar yc-avatar--large yc-avatar--clickable yc-avatar--success yc-avatar--shadow" onclick="alert('头像被点击了')">
+                            <i class="fas fa-check yc-avatar__icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>图片加载失败</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">当图片加载失败时显示备选方案</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div style="display: flex; align-items: center; gap: 16px;">
+                        <div class="yc-avatar yc-avatar--large">
+                            <img src="https://error.url/fake.jpg" class="yc-avatar__image" alt="avatar" onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\'fas fa-user yc-avatar__icon\'></i>';">
+                        </div>
+                        <div class="yc-avatar yc-avatar--circle yc-avatar--large">
+                            <img src="https://error.url/fake.jpg" class="yc-avatar__image" alt="avatar" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\'yc-avatar__text\'>U</span>';">
+                        </div>
+                        <div class="yc-avatar yc-avatar--large yc-avatar--primary">
+                            <img src="https://error.url/fake.jpg" class="yc-avatar__image" alt="avatar" onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\'fas fa-image yc-avatar__icon\'></i>';">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>自定义尺寸</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">通过 style 自定义头像大小</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div style="display: flex; align-items: center; gap: 16px;">
+                        <div class="yc-avatar yc-avatar--circle" style="width: 64px; height: 64px; line-height: 64px; font-size: 24px;">
+                            <span class="yc-avatar__text">64</span>
+                        </div>
+                        <div class="yc-avatar yc-avatar--circle" style="width: 80px; height: 80px; line-height: 80px; font-size: 28px;">
+                            <span class="yc-avatar__text">80</span>
+                        </div>
+                        <div class="yc-avatar yc-avatar--circle" style="width: 100px; height: 100px; line-height: 100px; font-size: 32px;">
+                            <span class="yc-avatar__text">100</span>
+                        </div>
+                        <div class="yc-avatar yc-avatar--circle" style="width: 120px; height: 120px; line-height: 120px; font-size: 36px;">
+                            <span class="yc-avatar__text">120</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

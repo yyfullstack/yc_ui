@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Divider 分割线 - YC UI</title>
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-header__title">Divider 分割线</h1>
+            <p class="demo-page-header__desc">用于区分内容的分割线，支持多种样式和位置。</p>
+        </div>
+
+        <div class="demo-section">
+            <h2 class="demo-section__title">基础分割线</h2>
+            <p class="demo-section__desc">最基础的分割线用法。</p>
+            <div class="demo-block">
+                <p class="yc-text-paragraph">YC UI 是一个基于 CSS 变量的组件库。</p>
+                <hr class="yc-divider">
+                <p class="yc-text-paragraph">提供了丰富的组件和工具，帮助您快速构建现代化的 Web 界面。</p>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2 class="demo-section__title">带文字分割线</h2>
+            <p class="demo-section__desc">在分割线上添加文字说明。</p>
+            <div class="demo-block">
+                <p class="yc-text-paragraph">YC UI 提供了一系列高质量的组件。</p>
+                <hr class="yc-divider yc-divider--with-text">
+                    <span class="yc-divider__text">文本</span>
+                </hr>
+                <p class="yc-text-paragraph">这些组件都遵循统一的设计规范。</p>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2 class="demo-section__title">自定义位置</h2>
+            <p class="demo-section__desc">文字可以设置在左边或右边。</p>
+            <div class="demo-block">
+                <hr class="yc-divider yc-divider--with-text yc-divider--with-text-left">
+                    <span class="yc-divider__text">左侧文本</span>
+                </hr>
+                <p class="yc-text-paragraph">文字显示在左侧。</p>
+                
+                <hr class="yc-divider yc-divider--with-text yc-divider--with-text-right">
+                    <span class="yc-divider__text">右侧文本</span>
+                </hr>
+                <p class="yc-text-paragraph">文字显示在右侧。</p>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2 class="demo-section__title">垂直分割线</h2>
+            <p class="demo-section__desc">用于行内内容的分割。</p>
+            <div class="demo-block">
+                <span>YC UI</span>
+                <hr class="yc-divider yc-divider--vertical">
+                <span>组件库</span>
+                <hr class="yc-divider yc-divider--vertical">
+                <span>文档</span>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2 class="demo-section__title">虚线分割线</h2>
+            <p class="demo-section__desc">虚线样式的分割线。</p>
+            <div class="demo-block">
+                <hr class="yc-divider yc-divider--dashed">
+                <p class="yc-text-paragraph" style="margin-top: 16px;">这是一条虚线分割线。</p>
+                <hr class="yc-divider yc-divider--dotted">
+                <p class="yc-text-paragraph" style="margin-top: 16px;">这是一条点线分割线。</p>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2 class="demo-section__title">颜色变体</h2>
+            <p class="demo-section__desc">分割线支持不同的主题颜色。</p>
+            <div class="demo-block">
+                <hr class="yc-divider yc-divider--primary">
+                <hr class="yc-divider yc-divider--success">
+                <hr class="yc-divider yc-divider--warning">
+                <hr class="yc-divider yc-divider--danger">
+                <hr class="yc-divider yc-divider--info">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Descriptions 描述列表 - YC UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">Descriptions 描述列表</h1>
+            <p class="demo-page-subtitle">成组展示多个只读字段</p>
+        </div>
+
+        <div class="demo-section">
+            <h3>基本用法</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">简单的描述列表</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div class="yc-descriptions">
+                        <h3 class="yc-descriptions__title">基本信息</h3>
+                        <table class="yc-descriptions__table">
+                            <tr>
+                                <th class="yc-descriptions__label">用户名</th>
+                                <td class="yc-descriptions__content">张三</td>
+                                <th class="yc-descriptions__label">手机号</th>
+                                <td class="yc-descriptions__content">138****1234</td>
+                            </tr>
+                            <tr>
+                                <th class="yc-descriptions__label">邮箱</th>
+                                <td class="yc-descriptions__content">zhangsan@example.com</td>
+                                <th class="yc-descriptions__label">地址</th>
+                                <td class="yc-descriptions__content">北京市朝阳区</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>带边框</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">带边框的描述列表</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div class="yc-descriptions yc-descriptions--border">
+                        <h3 class="yc-descriptions__title">订单信息</h3>
+                        <table class="yc-descriptions__table">
+                            <tr>
+                                <th class="yc-descriptions__label">订单号</th>
+                                <td class="yc-descriptions__content">ORD202401010001</td>
+                                <th class="yc-descriptions__label">状态</th>
+                                <td class="yc-descriptions__content"><span class="yc-tag yc-tag--success">已完成</span></td>
+                            </tr>
+                            <tr>
+                                <th class="yc-descriptions__label">金额</th>
+                                <td class="yc-descriptions__content">¥199.00</td>
+                                <th class="yc-descriptions__label">下单时间</th>
+                                <td class="yc-descriptions__content">2024-01-01 12:00:00</td>
+                            </tr>
+                            <tr>
+                                <th class="yc-descriptions__label">收货地址</th>
+                                <td class="yc-descriptions__content" colspan="3">北京市朝阳区XX街道XX号</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>不同尺寸</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">提供大、默认、小三种尺寸</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div class="yc-descriptions yc-descriptions--large">
+                        <h3 class="yc-descriptions__title">大尺寸</h3>
+                        <table class="yc-descriptions__table">
+                            <tr><th class="yc-descriptions__label">名称</th><td class="yc-descriptions__content">商品A</td><th class="yc-descriptions__label">价格</th><td class="yc-descriptions__content">¥99.00</td></tr>
+                        </table>
+                    </div>
+                    <div class="yc-descriptions">
+                        <h3 class="yc-descriptions__title">默认尺寸</h3>
+                        <table class="yc-descriptions__table">
+                            <tr><th class="yc-descriptions__label">名称</th><td class="yc-descriptions__content">商品B</td><th class="yc-descriptions__label">价格</th><td class="yc-descriptions__content">¥199.00</td></tr>
+                        </table>
+                    </div>
+                    <div class="yc-descriptions yc-descriptions--small">
+                        <h3 class="yc-descriptions__title">小尺寸</h3>
+                        <table class="yc-descriptions__table">
+                            <tr><th class="yc-descriptions__label">名称</th><td class="yc-descriptions__content">商品C</td><th class="yc-descriptions__label">价格</th><td class="yc-descriptions__content">¥299.00</td></tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

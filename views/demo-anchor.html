@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anchor 锚点 - YC UI</title>
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-header__title">Anchor 锚点</h1>
+            <p class="demo-page-header__desc">用于跳转到页面指定位置，常用于长页面的侧边导航。</p>
+        </div>
+
+        <div class="demo-row" style="gap: 24px; align-items: flex-start;">
+            <div class="demo-block" style="flex: 1;">
+                <div class="yc-anchor" id="demo-anchor">
+                    <ul class="yc-anchor__list">
+                        <li class="yc-anchor__item">
+                            <a href="#section-1" class="yc-anchor__link yc-anchor__link--active" data-target="section-1">基础用法</a>
+                        </li>
+                        <li class="yc-anchor__item">
+                            <a href="#section-2" class="yc-anchor__link" data-target="section-2">水平模式</a>
+                        </li>
+                        <li class="yc-anchor__item">
+                            <a href="#section-3" class="yc-anchor__link" data-target="section-3">多级锚点</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="demo-block" style="flex: 2; min-height: 600px;">
+                <div id="section-1" class="yc-card" style="margin-bottom: 48px;">
+                    <h3 class="yc-card__title">基础用法</h3>
+                    <p class="yc-text-paragraph">最简单的锚点用法，通过点击锚点链接跳转到对应区域。适用于文档、帮助页面等长内容页面。</p>
+                    <div style="height: 200px; background: var(--yc-color-bg-page); display: flex; align-items: center; justify-content: center;">
+                        <span class="yc-text-secondary">内容区域 1</span>
+                    </div>
+                </div>
+
+                <div id="section-2" class="yc-card" style="margin-bottom: 48px;">
+                    <h3 class="yc-card__title">水平模式</h3>
+                    <p class="yc-text-paragraph">水平排列的锚点链接，适合放在页面顶部作为快速导航。</p>
+                    <div style="height: 200px; background: var(--yc-color-bg-page); display: flex; align-items: center; justify-content: center;">
+                        <span class="yc-text-secondary">内容区域 2</span>
+                    </div>
+                </div>
+
+                <div id="section-3" class="yc-card" style="margin-bottom: 48px;">
+                    <h3 class="yc-card__title">多级锚点</h3>
+                    <p class="yc-text-paragraph">支持多级嵌套的锚点结构，方便组织复杂的页面内容层级。</p>
+                    <div style="height: 200px; background: var(--yc-color-bg-page); display: flex; align-items: center; justify-content: center;">
+                        <span class="yc-text-secondary">内容区域 3</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const anchorLinks = document.querySelectorAll('#demo-anchor .yc-anchor__link');
+            
+            anchorLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('data-target');
+                    const target = document.getElementById(targetId);
+                    
+                    anchorLinks.forEach(l => l.classList.remove('yc-anchor__link--active'));
+                    this.classList.add('yc-anchor__link--active');
+                    
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

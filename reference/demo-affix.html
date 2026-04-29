@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Affix 固钉组件示例</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../index.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--yc-font-family);
+            background-color: var(--yc-color-bg-page);
+            color: var(--yc-color-text-primary);
+            line-height: var(--yc-line-height-base);
+            padding: 24px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .demo-section {
+            background: var(--yc-color-bg);
+            border: 1px solid var(--yc-color-border);
+            border-radius: var(--yc-border-radius-lg);
+            padding: 24px;
+            margin-bottom: 16px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+        }
+
+        .demo-section h3 {
+            font-size: var(--yc-font-size-medium);
+            font-weight: var(--yc-font-weight-semibold);
+            color: var(--yc-color-text-primary);
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--yc-color-border-light);
+            position: relative;
+        }
+
+        .demo-section h3::before {
+            content: '';
+            position: absolute;
+            left: -24px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 16px;
+            background: var(--yc-color-primary);
+            border-radius: 2px;
+        }
+
+        .demo-block {
+            margin-bottom: 24px;
+        }
+
+        .demo-block:last-child {
+            margin-bottom: 0;
+        }
+
+        .demo-block-title {
+            font-size: var(--yc-font-size-small);
+            color: var(--yc-color-text-secondary);
+            margin-bottom: 12px;
+        }
+
+        .yc-affix {
+            position: fixed;
+            z-index: 1000;
+        }
+
+        .yc-affix--top {
+            top: 0;
+            left: 0;
+            right: 0;
+        }
+
+        .yc-affix--bottom {
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+
+        .yc-affix--left {
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .yc-affix--right {
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .yc-affix--corner-top-left {
+            top: 0;
+            left: 0;
+        }
+
+        .yc-affix--corner-top-right {
+            top: 0;
+            right: 0;
+        }
+
+        .yc-affix--corner-bottom-left {
+            bottom: 0;
+            left: 0;
+        }
+
+        .yc-affix--corner-bottom-right {
+            bottom: 0;
+            right: 0;
+        }
+
+        .yc-affix__placeholder {
+            visibility: hidden;
+        }
+
+        .yc-affix__placeholder--top {
+            height: 0;
+        }
+
+        .yc-affix__placeholder--bottom {
+            height: 0;
+        }
+
+        .yc-affix__content {
+            background: var(--yc-color-bg);
+            box-shadow: var(--yc-box-shadow-base);
+        }
+
+        .affix-nav {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            padding: 0 24px;
+            height: 56px;
+            background: var(--yc-color-bg);
+            border-bottom: 1px solid var(--yc-color-border-light);
+        }
+
+        .affix-nav__logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: var(--yc-font-size-medium);
+            font-weight: var(--yc-font-weight-bold);
+            color: var(--yc-color-primary);
+        }
+
+        .affix-nav__menu {
+            display: flex;
+            gap: 24px;
+            flex: 1;
+        }
+
+        .affix-nav__item {
+            font-size: var(--yc-font-size-small);
+            color: var(--yc-color-text-regular);
+            cursor: pointer;
+            transition: color var(--yc-transition-duration-fast);
+            padding: 8px 0;
+            border-bottom: 2px solid transparent;
+        }
+
+        .affix-nav__item:hover {
+            color: var(--yc-color-primary);
+        }
+
+        .affix-nav__item--active {
+            color: var(--yc-color-primary);
+            border-bottom-color: var(--yc-color-primary);
+            font-weight: var(--yc-font-weight-medium);
+        }
+
+        .affix-toolbar {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding: 12px;
+            background: var(--yc-color-bg);
+            border-radius: var(--yc-border-radius-md);
+            box-shadow: var(--yc-box-shadow-base);
+        }
+
+        .affix-toolbar__item {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--yc-border-radius-md);
+            color: var(--yc-color-text-secondary);
+            cursor: pointer;
+            transition: all var(--yc-transition-duration-fast);
+        }
+
+        .affix-toolbar__item:hover {
+            background: var(--yc-color-primary-light-9);
+            color: var(--yc-color-primary);
+        }
+
+        .affix-back-top {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--yc-color-primary);
+            color: white;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all var(--yc-transition-duration-fast);
+            box-shadow: 0 2px 8px rgba(64, 158, 255, 0.4);
+        }
+
+        .affix-back-top:hover {
+            background: var(--yc-color-primary-hover);
+            transform: scale(1.1);
+        }
+
+        .affix-back-top--hidden {
+            opacity: 0;
+            visibility: hidden;
+            transform: scale(0.8);
+        }
+
+        .affix-sidebar {
+            padding: 16px;
+            background: var(--yc-color-bg);
+            border-radius: var(--yc-border-radius-md);
+            box-shadow: var(--yc-box-shadow-base);
+        }
+
+        .affix-sidebar__title {
+            font-size: var(--yc-font-size-small);
+            font-weight: var(--yc-font-weight-semibold);
+            color: var(--yc-color-text-primary);
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--yc-color-border-light);
+        }
+
+        .affix-sidebar__item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 0;
+            font-size: var(--yc-font-size-small);
+            color: var(--yc-color-text-regular);
+            cursor: pointer;
+            transition: all var(--yc-transition-duration-fast);
+        }
+
+        .affix-sidebar__item:hover {
+            color: var(--yc-color-primary);
+        }
+
+        .affix-sidebar__item--active {
+            color: var(--yc-color-primary);
+            font-weight: var(--yc-font-weight-medium);
+        }
+
+        .affix-status {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            padding: 12px 16px;
+            background: var(--yc-color-bg);
+            border: 1px solid var(--yc-color-border);
+            border-radius: var(--yc-border-radius-md);
+            font-size: var(--yc-font-size-small);
+            z-index: 1001;
+            box-shadow: var(--yc-box-shadow-base);
+        }
+
+        .affix-status__label {
+            color: var(--yc-color-text-secondary);
+            margin-right: 8px;
+        }
+
+        .affix-status__value {
+            color: var(--yc-color-primary);
+            font-weight: var(--yc-font-weight-medium);
+        }
+
+        .scroll-container {
+            height: 400px;
+            overflow: auto;
+            border: 1px solid var(--yc-color-border);
+            border-radius: var(--yc-border-radius-md);
+            background: var(--yc-color-bg);
+        }
+
+        .scroll-content {
+            padding: 20px;
+            font-size: var(--yc-font-size-small);
+            color: var(--yc-color-text-regular);
+            line-height: 1.8;
+        }
+
+        .scroll-content h4 {
+            font-size: var(--yc-font-size-medium);
+            font-weight: var(--yc-font-weight-semibold);
+            color: var(--yc-color-text-primary);
+            margin-bottom: 16px;
+        }
+
+        .scroll-content p {
+            margin-bottom: 12px;
+        }
+
+        .affix-demo-wrapper {
+            position: relative;
+            min-height: 200px;
+            border: 1px dashed var(--yc-color-border);
+            border-radius: var(--yc-border-radius-md);
+            padding: 20px;
+        }
+
+        .affix-demo-box {
+            padding: 16px 20px;
+            background: var(--yc-color-primary);
+            color: white;
+            border-radius: var(--yc-border-radius-md);
+            font-size: var(--yc-font-size-small);
+            text-align: center;
+        }
+
+        .affix-demo-info {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 10px;
+            color: var(--yc-color-text-placeholder);
+            white-space: nowrap;
+        }
+
+        .affix-footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 12px 24px;
+            background: var(--yc-color-bg);
+            border-top: 1px solid var(--yc-color-border-light);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: var(--yc-font-size-small);
+            color: var(--yc-color-text-secondary);
+            z-index: 1000;
+        }
+
+        .affix-indicator {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .affix-indicator__dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--yc-color-success);
+        }
+
+        .affix-indicator__dot--inactive {
+            background: var(--yc-color-text-placeholder);
+        }
+
+        .scroll-top-indicator {
+            position: fixed;
+            top: 120px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 8px 16px;
+            background: var(--yc-color-bg);
+            border: 1px solid var(--yc-color-border);
+            border-radius: var(--yc-border-radius-md);
+            font-size: var(--yc-font-size-extra-small);
+            color: var(--yc-color-text-secondary);
+            z-index: 1001;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .scroll-top-indicator.is-visible {
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .affix-nav__menu {
+                display: none;
+            }
+
+            .affix-status {
+                top: 70px;
+                right: 10px;
+                padding: 8px 12px;
+            }
+        }
+
+        [yc-theme="dark"] .demo-section {
+            background: rgba(255, 255, 255, 0.02);
+            border-color: rgba(255, 255, 255, 0.08);
+        }
+
+        [yc-theme="dark"] .affix-nav {
+            background: rgba(255, 255, 255, 0.02);
+            border-bottom-color: rgba(255, 255, 255, 0.08);
+        }
+
+        [yc-theme="dark"] .affix-toolbar,
+        [yc-theme="dark"] .affix-sidebar,
+        [yc-theme="dark"] .affix-footer {
+            background: rgba(30, 30, 30, 0.95);
+        }
+
+        [yc-theme="dark"] .affix-sidebar__title {
+            border-bottom-color: rgba(255, 255, 255, 0.08);
+        }
+
+        [yc-theme="dark"] .affix-footer {
+            border-top-color: rgba(255, 255, 255, 0.08);
+        }
+
+        [yc-theme="dark"] .affix-status {
+            background: rgba(30, 30, 30, 0.95);
+            border-color: rgba(255, 255, 255, 0.08);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 style="font-size: 24px; font-weight: 600; margin-bottom: 24px; color: var(--yc-color-text-primary);">Affix 固钉组件</h1>
+
+        <div class="demo-section">
+            <h3>基础用法</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">固钉在顶部</div>
+                <p style="font-size: var(--yc-font-size-small); color: var(--yc-color-text-secondary); margin-bottom: 16px;">
+                    滚动页面查看效果。导航栏会固定在顶部。
+                </p>
+                <div class="affix-demo-wrapper">
+                    <div class="yc-affix yc-affix--top" id="affixTopDemo">
+                        <div class="yc-affix__content">
+                            <div class="affix-nav">
+                                <div class="affix-nav__logo">
+                                    <i class="fas fa-gem"></i>
+                                    YC Design
+                                </div>
+                                <div class="affix-nav__menu">
+                                    <span class="affix-nav__item affix-nav__item--active">首页</span>
+                                    <span class="affix-nav__item">组件</span>
+                                    <span class="affix-nav__item">文档</span>
+                                    <span class="affix-nav__item">资源</span>
+                                    <span class="affix-nav__item">博客</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="padding-top: 80px;">
+                        <h4 style="margin-bottom: 12px; color: var(--yc-color-text-primary);">向下滚动查看固钉效果</h4>
+                        <p style="font-size: var(--yc-font-size-small); color: var(--yc-color-text-regular); line-height: 1.8;">
+                            固钉组件可以将内容固定在视口的某个位置。当页面滚动时，固钉会保持在固定位置，不会随着页面滚动而消失。
+                        </p>
+                        <p style="font-size: var(--yc-font-size-small); color: var(--yc-color-text-regular); line-height: 1.8; margin-top: 12px;">
+                            这在实现导航栏、工具栏、返回顶部等功能时非常有用。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>固钉位置</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">四角固钉</div>
+                <div class="affix-demo-wrapper" style="min-height: 300px;">
+                    <div class="yc-affix yc-affix--corner-top-left">
+                        <div class="affix-demo-box">左上角</div>
+                    </div>
+                    <div class="yc-affix yc-affix--corner-top-right">
+                        <div class="affix-demo-box">右上角</div>
+                    </div>
+                    <div class="yc-affix yc-affix--corner-bottom-left">
+                        <div class="affix-demo-box">左下角</div>
+                    </div>
+                    <div class="yc-affix yc-affix--corner-bottom-right">
+                        <div class="affix-demo-box">右下角</div>
+                    </div>
+                    <div class="affix-demo-info">四角固钉示例 - 滚动页面查看效果</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>侧边固钉</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">左右两侧固钉</div>
+                <div class="affix-demo-wrapper" style="min-height: 400px;">
+                    <div class="yc-affix yc-affix--left">
+                        <div class="affix-toolbar">
+                            <div class="affix-toolbar__item" title="首页">
+                                <i class="fas fa-home"></i>
+                            </div>
+                            <div class="affix-toolbar__item" title="收藏">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="affix-toolbar__item" title="分享">
+                                <i class="fas fa-share-alt"></i>
+                            </div>
+                            <div class="affix-toolbar__item" title="下载">
+                                <i class="fas fa-download"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="yc-affix yc-affix--right">
+                        <div class="affix-sidebar">
+                            <div class="affix-sidebar__title">目录导航</div>
+                            <div class="affix-sidebar__item affix-sidebar__item--active">基础用法</div>
+                            <div class="affix-sidebar__item">固钉位置</div>
+                            <div class="affix-sidebar__item">侧边固钉</div>
+                            <div class="affix-sidebar__item">返回顶部</div>
+                            <div class="affix-sidebar__item">偏移设置</div>
+                            <div class="affix-sidebar__item">状态监听</div>
+                        </div>
+                    </div>
+                    <div style="margin: 0 200px;">
+                        <h4 style="margin-bottom: 12px; color: var(--yc-color-text-primary);">侧边栏内容</h4>
+                        <p style="font-size: var(--yc-font-size-small); color: var(--yc-color-text-regular); line-height: 1.8; margin-bottom: 16px;">
+                            左侧是一个悬浮工具栏，右侧是一个悬浮目录导航。它们都会固定在页面两侧，不会随滚动消失。
+                        </p>
+                        <p style="font-size: var(--yc-font-size-small); color: var(--yc-color-text-regular); line-height: 1.8; margin-bottom: 16px;">
+                            固钉组件支持多种定位方式：顶部、底部、左侧、右侧，以及四个角落。
+                        </p>
+                        <p style="font-size: var(--yc-font-size-small); color: var(--yc-color-text-regular); line-height: 1.8; margin-bottom: 16px;">
+                            通过设置不同的位置，可以实现工具栏、导航栏、目录、返回顶部等各种常用功能。
+                        </p>
+                        <p style="font-size: var(--yc-font-size-small); color: var(--yc-color-text-regular); line-height: 1.8;">
+                            继续向下滚动查看更多内容...
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>返回顶部</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">返回顶部按钮</div>
+                <p style="font-size: var(--yc-font-size-small); color: var(--yc-color-text-secondary); margin-bottom: 16px;">
+                    点击返回顶部按钮快速回到页面顶部。
+                </p>
+                <div class="scroll-container" id="scrollContainer">
+                    <div class="scroll-content">
+                        <h4>YC Design 固钉组件</h4>
+                        <p>固钉组件是一种可以将元素固定在页面特定位置的 UI 组件。当页面滚动时，固钉元素会保持在固定位置，为用户提供持续的导航或操作入口。</p>
+                        <p>主要应用场景包括：</p>
+                        <p>• 固定导航栏 - 使导航始终可见</p>
+                        <p>• 侧边工具栏 - 提供常用操作入口</p>
+                        <p>• 目录导航 - 方便在长页面中跳转</p>
+                        <p>• 返回顶部 - 快速回到页面顶部</p>
+                        <p style="margin-top: 20px;">组件特性：</p>
+                        <p>• 支持多种固定位置（上下左右四角）</p>
+                        <p>• 可设置偏移量</p>
+                        <p>• 支持状态变化回调</p>
+                        <p>• 平滑的显示/隐藏动画</p>
+                        <p>• 支持暗色主题</p>
+                        <p style="margin-top: 20px;">YC Design 还提供了丰富的 UI 组件，帮助开发者快速构建高质量的用户界面。每个组件都经过精心设计，支持主题定制，并提供一致的使用体验。</p>
+                        <p>继续向下滚动...</p>
+                        <p style="margin-top: 40px;">这是一段较长的内容，需要滚动才能看到全部。</p>
+                        <p>继续...</p>
+                        <p>继续...</p>
+                        <p>继续...</p>
+                        <p style="margin-top: 40px;">终于到底了！点击返回顶部按钮回到页面顶部。</p>
+                    </div>
+                </div>
+                <div class="yc-affix yc-affix--corner-bottom-right" style="bottom: 40px; right: 40px;" id="backTopBtn">
+                    <div class="affix-back-top">
+                        <i class="fas fa-arrow-up"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>偏移设置</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">距离边缘的偏移量</div>
+                <div class="affix-demo-wrapper" style="min-height: 200px;">
+                    <div class="yc-affix" style="top: 20px; left: 20px;">
+                        <div class="affix-demo-box" style="background: var(--yc-color-success);">偏移 20px</div>
+                    </div>
+                    <div class="yc-affix" style="top: 20px; right: 20px;">
+                        <div class="affix-demo-box" style="background: var(--yc-color-warning);">偏移 20px</div>
+                    </div>
+                    <div class="affix-demo-info">距离边缘 20px 的固钉</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>状态监听</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">固钉状态变化</div>
+                <div class="affix-status" id="affixStatus">
+                    <span class="affix-status__label">固钉状态：</span>
+                    <span class="affix-status__value" id="affixStatusValue">未固定</span>
+                </div>
+                <div class="affix-demo-wrapper" style="min-height: 250px; padding-top: 60px;">
+                    <div class="yc-affix" style="top: 60px; left: 50%; transform: translateX(-50%);" id="affixDemo">
+                        <div class="affix-demo-box">滚动查看状态变化</div>
+                    </div>
+                    <div class="affix-demo-info" style="bottom: 20px;">状态会显示在右上角</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>应用场景</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">导航栏固钉</div>
+                <div class="scroll-container" style="height: 300px;">
+                    <div class="scroll-content">
+                        <h4>固定导航栏</h4>
+                        <p>这是页面内容区域，导航栏会固定在顶部不会消失。</p>
+                        <p>适用于后台管理系统、文档网站等需要持续导航的场景。</p>
+                        <p>继续滚动...</p>
+                        <p>...</p>
+                        <p>...</p>
+                        <p>...</p>
+                        <p>...</p>
+                        <p>内容区域足够长以产生滚动条。</p>
+                    </div>
+                </div>
+            </div>
+            <div class="demo-block">
+                <div class="demo-block-title">目录导航固钉</div>
+                <p style="font-size: var(--yc-font-size-small); color: var(--yc-color-text-secondary); margin-bottom: 16px;">
+                    右侧的目录导航会在滚动时固定，方便快速跳转章节。
+                </p>
+                <div class="scroll-container" style="height: 350px;">
+                    <div class="scroll-content">
+                        <h4>第一章：入门指南</h4>
+                        <p>这是第一章的内容，介绍了组件库的基本使用方法。</p>
+                        <p>包含安装、引入、基础用法等内容。</p>
+                        <h4 style="margin-top: 24px;">第二章：组件文档</h4>
+                        <p>这是第二章的内容，详细介绍了各个组件的 API 和用法。</p>
+                        <p>包含按钮、输入框、表格、弹窗等组件。</p>
+                        <h4 style="margin-top: 24px;">第三章：进阶主题</h4>
+                        <p>这是第三章的内容，涵盖主题定制、性能优化等进阶话题。</p>
+                        <p>包含自定义主题、懒加载、虚拟滚动等高级特性。</p>
+                        <h4 style="margin-top: 24px;">第四章：最佳实践</h4>
+                        <p>这是第四章的内容，分享了一些使用组件库的最佳实践。</p>
+                        <p>包含代码组织、样式规范、可访问性等内容。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>CSS 变量</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">可自定义的样式变量</div>
+                <div style="padding: 12px 16px; background: var(--yc-color-bg-page); border-radius: var(--yc-border-radius-md);">
+                    <div style="display: grid; grid-template-columns: auto 1fr; gap: 8px 24px; font-size: var(--yc-font-size-small);">
+                        <code style="color: var(--yc-color-code);">--yc-affix-z-index</code>
+                        <span style="color: var(--yc-color-text-regular);">固钉层级（默认 1000）</span>
+                        <code style="color: var(--yc-color-code);">--yc-affix-box-shadow</code>
+                        <span style="color: var(--yc-color-text-regular);">固钉阴影</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="scroll-top-indicator" id="scrollIndicator">
+        <i class="fas fa-arrow-up" style="margin-right: 6px;"></i>
+        已滚动 <span id="scrollDistance">0</span> px
+    </div>
+
+    <script>
+        function handleScroll() {
+            const scrollTop = window.scrollY || document.documentElement.scrollTop;
+            const scrollIndicator = document.getElementById('scrollIndicator');
+            const scrollDistance = document.getElementById('scrollDistance');
+            const backTopBtn = document.getElementById('backTopBtn');
+
+            if (scrollIndicator) {
+                scrollDistance.textContent = scrollTop;
+                if (scrollTop > 200) {
+                    scrollIndicator.classList.add('is-visible');
+                } else {
+                    scrollIndicator.classList.remove('is-visible');
+                }
+            }
+
+            const affixDemo = document.getElementById('affixDemo');
+            const affixStatusValue = document.getElementById('affixStatusValue');
+            if (affixDemo && affixStatusValue) {
+                const rect = affixDemo.getBoundingClientRect();
+                const isFixed = rect.top <= 60;
+                affixStatusValue.textContent = isFixed ? '已固定' : '未固定';
+            }
+
+            if (backTopBtn) {
+                if (scrollTop > 300) {
+                    backTopBtn.querySelector('.affix-back-top').classList.remove('affix-back-top--hidden');
+                } else {
+                    backTopBtn.querySelector('.affix-back-top').classList.add('affix-back-top--hidden');
+                }
+            }
+        }
+
+        window.addEventListener('scroll', handleScroll);
+        handleScroll();
+
+        const backTopBtn = document.getElementById('backTopBtn');
+        if (backTopBtn) {
+            backTopBtn.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        }
+
+        const scrollContainer = document.getElementById('scrollContainer');
+        if (scrollContainer) {
+            const containerBackTop = scrollContainer.parentElement.querySelector('.yc-affix');
+            if (containerBackTop) {
+                scrollContainer.addEventListener('scroll', function() {
+                    if (this.scrollTop > 200) {
+                        containerBackTop.style.opacity = '1';
+                        containerBackTop.style.visibility = 'visible';
+                    } else {
+                        containerBackTop.style.opacity = '0';
+                        containerBackTop.style.visibility = 'hidden';
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html>

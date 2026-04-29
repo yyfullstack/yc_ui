@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carousel 走马灯 - YC UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">Carousel 走马灯</h1>
+            <p class="demo-page-subtitle">在有限空间内，循环播放同一类型的图片、内容等</p>
+        </div>
+
+        <div class="demo-section">
+            <h3>基本用法</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">基础的走马灯轮播</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div class="yc-carousel" id="carousel1">
+                        <div class="yc-carousel__container">
+                            <div class="yc-carousel__slides">
+                                <div class="yc-carousel__item" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                                    <span style="color: white; font-size: 48px; font-weight: 600;">1</span>
+                                </div>
+                                <div class="yc-carousel__item" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                                    <span style="color: white; font-size: 48px; font-weight: 600;">2</span>
+                                </div>
+                                <div class="yc-carousel__item" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                                    <span style="color: white; font-size: 48px; font-weight: 600;">3</span>
+                                </div>
+                                <div class="yc-carousel__item" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                                    <span style="color: white; font-size: 48px; font-weight: 600;">4</span>
+                                </div>
+                            </div>
+                            <button class="yc-carousel__arrow yc-carousel__arrow--prev" id="prev1"><i class="fas fa-chevron-left"></i></button>
+                            <button class="yc-carousel__arrow yc-carousel__arrow--next" id="next1"><i class="fas fa-chevron-right"></i></button>
+                            <div class="yc-carousel__indicators" id="indicators1">
+                                <button class="yc-carousel__indicator is-active" data-index="0"></button>
+                                <button class="yc-carousel__indicator" data-index="1"></button>
+                                <button class="yc-carousel__indicator" data-index="2"></button>
+                                <button class="yc-carousel__indicator" data-index="3"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>指示器位置</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">指示器可以显示在外部</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div class="yc-carousel">
+                        <div class="yc-carousel__container">
+                            <div class="yc-carousel__slides">
+                                <div class="yc-carousel__item" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                                    <span style="color: white; font-size: 48px; font-weight: 600;">1</span>
+                                </div>
+                                <div class="yc-carousel__item" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);">
+                                    <span style="color: white; font-size: 48px; font-weight: 600;">2</span>
+                                </div>
+                                <div class="yc-carousel__item" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                                    <span style="color: white; font-size: 48px; font-weight: 600;">3</span>
+                                </div>
+                            </div>
+                            <button class="yc-carousel__arrow yc-carousel__arrow--prev"><i class="fas fa-chevron-left"></i></button>
+                            <button class="yc-carousel__arrow yc-carousel__arrow--next"><i class="fas fa-chevron-right"></i></button>
+                        </div>
+                        <div class="yc-carousel__indicators yc-carousel__indicators--outside">
+                            <button class="yc-carousel__indicator is-active"></button>
+                            <button class="yc-carousel__indicator"></button>
+                            <button class="yc-carousel__indicator"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>卡片化样式</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">卡片样式的走马灯</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div class="yc-carousel" style="max-width: 600px; margin: 0 auto;">
+                        <div class="yc-carousel__container yc-carousel__container--16-9" style="border-radius: 8px; overflow: hidden;">
+                            <div class="yc-carousel__slides">
+                                <div class="yc-carousel__item" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                                    <div style="color: white; text-align: center;">
+                                        <div style="font-size: 32px; font-weight: 600; margin-bottom: 8px;">卡片 1</div>
+                                        <div style="font-size: 14px; opacity: 0.9;">卡片内容描述</div>
+                                    </div>
+                                </div>
+                                <div class="yc-carousel__item" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                                    <div style="color: white; text-align: center;">
+                                        <div style="font-size: 32px; font-weight: 600; margin-bottom: 8px;">卡片 2</div>
+                                        <div style="font-size: 14px; opacity: 0.9;">卡片内容描述</div>
+                                    </div>
+                                </div>
+                                <div class="yc-carousel__item" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                                    <div style="color: white; text-align: center;">
+                                        <div style="font-size: 32px; font-weight: 600; margin-bottom: 8px;">卡片 3</div>
+                                        <div style="font-size: 14px; opacity: 0.9;">卡片内容描述</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="yc-carousel__arrow yc-carousel__arrow--prev"><i class="fas fa-chevron-left"></i></button>
+                            <button class="yc-carousel__arrow yc-carousel__arrow--next"><i class="fas fa-chevron-right"></i></button>
+                            <div class="yc-carousel__indicators">
+                                <button class="yc-carousel__indicator is-active"></button>
+                                <button class="yc-carousel__indicator"></button>
+                                <button class="yc-carousel__indicator"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function initCarousel(container) {
+            let currentIndex = 0;
+            const slides = container.querySelector('.yc-carousel__slides');
+            const indicators = container.querySelectorAll('.yc-carousel__indicator');
+            const prevBtn = container.querySelector('.yc-carousel__arrow--prev');
+            const nextBtn = container.querySelector('.yc-carousel__arrow--next');
+            const totalSlides = indicators.length;
+
+            function goToSlide(index) {
+                if (index < 0) index = totalSlides - 1;
+                if (index >= totalSlides) index = 0;
+                currentIndex = index;
+                slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+                indicators.forEach((indicator, i) => {
+                    indicator.classList.toggle('is-active', i === currentIndex);
+                });
+            }
+
+            prevBtn?.addEventListener('click', () => goToSlide(currentIndex - 1));
+            nextBtn?.addEventListener('click', () => goToSlide(currentIndex + 1));
+            indicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', () => goToSlide(index));
+            });
+        }
+
+        document.querySelectorAll('.yc-carousel').forEach(initCarousel);
+    </script>
+</body>
+</html>

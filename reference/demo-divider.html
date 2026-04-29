@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Divider 分割线组件示例</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../index.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--yc-font-family);
+            background-color: var(--yc-color-bg-page);
+            color: var(--yc-color-text-primary);
+            line-height: var(--yc-line-height-base);
+            padding: 24px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .demo-section {
+            background: var(--yc-color-bg);
+            border: 1px solid var(--yc-color-border);
+            border-radius: var(--yc-border-radius-lg);
+            padding: 24px;
+            margin-bottom: 16px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+        }
+
+        .demo-section h3 {
+            font-size: var(--yc-font-size-medium);
+            font-weight: var(--yc-font-weight-semibold);
+            color: var(--yc-color-text-primary);
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--yc-color-border-light);
+            position: relative;
+        }
+
+        .demo-section h3::before {
+            content: '';
+            position: absolute;
+            left: -24px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 16px;
+            background: var(--yc-color-primary);
+            border-radius: 2px;
+        }
+
+        .demo-block {
+            margin-bottom: 24px;
+        }
+
+        .demo-block:last-child {
+            margin-bottom: 0;
+        }
+
+        .demo-block-title {
+            font-size: var(--yc-font-size-small);
+            color: var(--yc-color-text-secondary);
+            margin-bottom: 12px;
+        }
+
+        .yc-divider {
+            --yc-divider-border-color: var(--yc-color-border-light);
+            --yc-divider-text-color: var(--yc-color-text-secondary);
+            --yc-divider-font-size: var(--yc-font-size-small);
+            position: relative;
+            border: none;
+            height: 1px;
+            background: var(--yc-divider-border-color);
+            margin: 16px 0;
+        }
+
+        .yc-divider--horizontal {
+            width: 100%;
+        }
+
+        .yc-divider--vertical {
+            width: 1px;
+            height: 100%;
+            min-height: 24px;
+            margin: 0 16px;
+        }
+
+        .yc-divider--with-text {
+            display: flex;
+            align-items: center;
+            height: auto;
+            background: transparent;
+        }
+
+        .yc-divider--with-text::before,
+        .yc-divider--with-text::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--yc-divider-border-color);
+        }
+
+        .yc-divider--with-text-left::before {
+            flex: 0 0 20%;
+        }
+
+        .yc-divider--with-text-right::after {
+            flex: 0 0 20%;
+        }
+
+        .yc-divider__text {
+            padding: 0 16px;
+            font-size: var(--yc-divider-font-size);
+            color: var(--yc-divider-text-color);
+            white-space: nowrap;
+        }
+
+        .yc-divider--dashed {
+            background: transparent;
+            border-top: 1px dashed var(--yc-divider-border-color);
+            height: 0;
+        }
+
+        .yc-divider--dotted {
+            background: transparent;
+            border-top: 1px dotted var(--yc-divider-border-color);
+            height: 0;
+        }
+
+        .yc-divider--primary {
+            --yc-divider-border-color: var(--yc-color-primary);
+            --yc-divider-text-color: var(--yc-color-primary);
+        }
+
+        .yc-divider--success {
+            --yc-divider-border-color: var(--yc-color-success);
+            --yc-divider-text-color: var(--yc-color-success);
+        }
+
+        .yc-divider--warning {
+            --yc-divider-border-color: var(--yc-color-warning);
+            --yc-divider-text-color: var(--yc-color-warning);
+        }
+
+        .yc-divider--danger {
+            --yc-divider-border-color: var(--yc-color-danger);
+            --yc-divider-text-color: var(--yc-color-danger);
+        }
+
+        .yc-divider--info {
+            --yc-divider-border-color: var(--yc-color-info);
+            --yc-divider-text-color: var(--yc-color-info);
+        }
+
+        .divider-content {
+            padding: 16px 0;
+            font-size: var(--yc-font-size-small);
+            color: var(--yc-color-text-regular);
+        }
+
+        .divider-inline {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .divider-inline__item {
+            font-size: var(--yc-font-size-small);
+            color: var(--yc-color-text-regular);
+        }
+
+        .divider-vertical-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .divider-card {
+            flex: 1;
+            padding: 16px;
+            background: var(--yc-color-bg-page);
+            border-radius: var(--yc-border-radius-md);
+            font-size: var(--yc-font-size-small);
+            color: var(--yc-color-text-regular);
+        }
+
+        .divider-card__title {
+            font-weight: var(--yc-font-weight-semibold);
+            color: var(--yc-color-text-primary);
+            margin-bottom: 8px;
+        }
+
+        .divider-layout {
+            display: flex;
+        }
+
+        .divider-layout__sidebar {
+            width: 160px;
+            padding: 16px;
+            font-size: var(--yc-font-size-small);
+            color: var(--yc-color-text-secondary);
+        }
+
+        .divider-layout__main {
+            flex: 1;
+            padding: 16px;
+        }
+
+        .divider-layout__main-title {
+            font-size: var(--yc-font-size-medium);
+            font-weight: var(--yc-font-weight-semibold);
+            color: var(--yc-color-text-primary);
+            margin-bottom: 12px;
+        }
+
+        .divider-layout__main-content {
+            font-size: var(--yc-font-size-small);
+            color: var(--yc-color-text-regular);
+            line-height: 1.8;
+        }
+
+        .divider-demo-section {
+            margin-bottom: 16px;
+        }
+
+        .divider-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            background: var(--yc-color-bg-page);
+            border-radius: var(--yc-border-radius-md);
+            margin-bottom: 8px;
+        }
+
+        .divider-row__label {
+            min-width: 80px;
+            font-size: var(--yc-font-size-small);
+            color: var(--yc-color-text-secondary);
+        }
+
+        .divider-row__value {
+            flex: 1;
+            font-size: var(--yc-font-size-small);
+            color: var(--yc-color-text-primary);
+        }
+
+        @media (max-width: 768px) {
+            .divider-vertical-wrapper {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .divider-layout {
+                flex-direction: column;
+            }
+
+            .divider-layout__sidebar {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid var(--yc-color-border-light);
+            }
+        }
+
+        [yc-theme="dark"] .demo-section {
+            background: rgba(255, 255, 255, 0.02);
+            border-color: rgba(255, 255, 255, 0.08);
+        }
+
+        [yc-theme="dark"] .divider-card {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        [yc-theme="dark"] .divider-row {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        [yc-theme="dark"] .divider-layout__sidebar {
+            border-right-color: rgba(255, 255, 255, 0.08);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 style="font-size: 24px; font-weight: 600; margin-bottom: 24px; color: var(--yc-color-text-primary);">Divider 分割线组件</h1>
+
+        <div class="demo-section">
+            <h3>基础用法</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">水平分割线</div>
+                <div class="divider-content">
+                    这里是第一段内容，包含了重要的信息描述。
+                </div>
+                <div class="yc-divider yc-divider--horizontal"></div>
+                <div class="divider-content">
+                    这里是第二段内容，与上面的内容通过分割线隔开。
+                </div>
+                <div class="yc-divider yc-divider--horizontal"></div>
+                <div class="divider-content">
+                    这里是第三段内容，分割线帮助区分不同的内容区域。
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>带文字的分割线</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">居中文字分割线</div>
+                <div class="divider-content">
+                    这里是第一段内容，包含重要的初始信息。
+                </div>
+                <div class="yc-divider yc-divider--with-text">
+                    <span class="yc-divider__text">中心文字</span>
+                </div>
+                <div class="divider-content">
+                    这里是第二段内容，文字分割线用于强调或分隔内容。
+                </div>
+                <div class="yc-divider yc-divider--with-text">
+                    <span class="yc-divider__text">章节一</span>
+                </div>
+                <div class="divider-content">
+                    这里是第三段内容，适用于文章章节分隔。
+                </div>
+                <div class="yc-divider yc-divider--with-text">
+                    <span class="yc-divider__text">章节二</span>
+                </div>
+                <div class="divider-content">
+                    这里是第四段内容。
+                </div>
+            </div>
+            <div class="divider-demo-section">
+                <div class="demo-block-title">左侧文字分割线</div>
+                <div class="divider-content">
+                    这里是第一段内容。
+                </div>
+                <div class="yc-divider yc-divider--with-text yc-divider--with-text-left">
+                    <span class="yc-divider__text">左侧对齐</span>
+                </div>
+                <div class="divider-content">
+                    这里是第二段内容。
+                </div>
+            </div>
+            <div class="divider-demo-section">
+                <div class="demo-block-title">右侧文字分割线</div>
+                <div class="divider-content">
+                    这里是第一段内容。
+                </div>
+                <div class="yc-divider yc-divider--with-text yc-divider--with-text-right">
+                    <span class="yc-divider__text">右侧对齐</span>
+                </div>
+                <div class="divider-content">
+                    这里是第二段内容。
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>垂直分割线</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">垂直分割线</div>
+                <div class="divider-vertical-wrapper">
+                    <div class="divider-card">
+                        <div class="divider-card__title">设计原则</div>
+                        <p>简洁、一致性、层次分明、用户友好</p>
+                    </div>
+                    <div class="yc-divider yc-divider--vertical"></div>
+                    <div class="divider-card">
+                        <div class="divider-card__title">核心功能</div>
+                        <p>组件库、设计系统、样式规范、主题定制</p>
+                    </div>
+                    <div class="yc-divider yc-divider--vertical"></div>
+                    <div class="divider-card">
+                        <div class="divider-card__title">技术栈</div>
+                        <p>HTML5、CSS3、JavaScript、Vue.js</p>
+                    </div>
+                </div>
+            </div>
+            <div class="divider-demo-section">
+                <div class="demo-block-title">内联元素垂直分割线</div>
+                <div class="divider-inline">
+                    <span class="divider-inline__item">首页</span>
+                    <span class="yc-divider yc-divider--vertical" style="display: inline-block; vertical-align: middle;"></span>
+                    <span class="divider-inline__item">产品中心</span>
+                    <span class="yc-divider yc-divider--vertical" style="display: inline-block; vertical-align: middle;"></span>
+                    <span class="divider-inline__item">软件产品</span>
+                    <span class="yc-divider yc-divider--vertical" style="display: inline-block; vertical-align: middle;"></span>
+                    <span class="divider-inline__item" style="color: var(--yc-color-primary);">当前页面</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>线条样式</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">实线、虚线、点线</div>
+                <div class="divider-row">
+                    <span class="divider-row__label">实线</span>
+                    <span class="divider-row__value">
+                        <span class="yc-divider yc-divider--horizontal" style="display: inline-block; vertical-align: middle; width: 100px;"></span>
+                    </span>
+                </div>
+                <div class="divider-row">
+                    <span class="divider-row__label">虚线</span>
+                    <span class="divider-row__value">
+                        <span class="yc-divider yc-divider--horizontal yc-divider--dashed" style="display: inline-block; vertical-align: middle; width: 100px;"></span>
+                    </span>
+                </div>
+                <div class="divider-row">
+                    <span class="divider-row__label">点线</span>
+                    <span class="divider-row__value">
+                        <span class="yc-divider yc-divider--horizontal yc-divider--dotted" style="display: inline-block; vertical-align: middle; width: 100px;"></span>
+                    </span>
+                </div>
+            </div>
+            <div class="divider-demo-section">
+                <div class="demo-block-title">带文字的虚线</div>
+                <div class="divider-content">
+                    第一部分内容。
+                </div>
+                <div class="yc-divider yc-divider--with-text yc-divider--dashed">
+                    <span class="yc-divider__text">分割线</span>
+                </div>
+                <div class="divider-content">
+                    第二部分内容。
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>功能色分割线</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">不同颜色的分割线</div>
+                <div class="divider-content">
+                    主要内容区域
+                </div>
+                <div class="yc-divider yc-divider--horizontal yc-divider--primary"></div>
+                <div class="divider-content">
+                    主要内容区域
+                </div>
+                <div class="yc-divider yc-divider--horizontal yc-divider--success"></div>
+                <div class="divider-content">
+                    主要内容区域
+                </div>
+                <div class="yc-divider yc-divider--horizontal yc-divider--warning"></div>
+                <div class="divider-content">
+                    主要内容区域
+                </div>
+                <div class="yc-divider yc-divider--horizontal yc-divider--danger"></div>
+                <div class="divider-content">
+                    主要内容区域
+                </div>
+                <div class="yc-divider yc-divider--horizontal yc-divider--info"></div>
+                <div class="divider-content">
+                    主要内容区域
+                </div>
+            </div>
+            <div class="divider-demo-section">
+                <div class="demo-block-title">带文字的功能色分割线</div>
+                <div class="divider-content">
+                    第一组内容
+                </div>
+                <div class="yc-divider yc-divider--with-text yc-divider--success">
+                    <span class="yc-divider__text">成功</span>
+                </div>
+                <div class="divider-content">
+                    第二组内容
+                </div>
+                <div class="yc-divider yc-divider--with-text yc-divider--warning">
+                    <span class="yc-divider__text">警告</span>
+                </div>
+                <div class="divider-content">
+                    第三组内容
+                </div>
+                <div class="yc-divider yc-divider--with-text yc-divider--danger">
+                    <span class="yc-divider__text">危险</span>
+                </div>
+                <div class="divider-content">
+                    第四组内容
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>布局分隔</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">页面布局分隔</div>
+                <div class="divider-layout">
+                    <div class="divider-layout__sidebar">
+                        <p><strong>侧边栏</strong></p>
+                        <p style="margin-top: 8px;">导航菜单</p>
+                        <p>设置选项</p>
+                        <p>用户信息</p>
+                    </div>
+                    <div class="yc-divider yc-divider--vertical" style="display: inline-block; vertical-align: top; height: auto; min-height: 100%;"></div>
+                    <div class="divider-layout__main">
+                        <div class="divider-layout__main-title">主内容区</div>
+                        <div class="divider-layout__main-content">
+                            <p>这是页面的主要内容区域，通过垂直分割线与侧边栏分隔。</p>
+                            <p style="margin-top: 12px;">分割线清晰地界定了不同的内容区域，提升了页面的可读性和结构感。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>卡片分隔</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">卡片内的分割线</div>
+                <div class="divider-card" style="background: var(--yc-color-bg); border: 1px solid var(--yc-color-border);">
+                    <div class="divider-card__title" style="margin-bottom: 12px;">卡片标题</div>
+                    <p>这是卡片内的第一段内容，包含了基础信息描述。</p>
+                    <div class="yc-divider yc-divider--horizontal" style="margin: 16px 0;"></div>
+                    <p>这是卡片内的第二段内容，与第一段通过分割线分隔。</p>
+                    <div class="yc-divider yc-divider--horizontal" style="margin: 16px 0;"></div>
+                    <p>这是卡片内的第三段内容。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>分割线属性</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">CSS 变量说明</div>
+                <div class="divider-row">
+                    <span class="divider-row__label">--yc-divider-border-color</span>
+                    <span class="divider-row__value">分割线颜色</span>
+                </div>
+                <div class="divider-row">
+                    <span class="divider-row__label">--yc-divider-text-color</span>
+                    <span class="divider-row__value">文字颜色</span>
+                </div>
+                <div class="divider-row">
+                    <span class="divider-row__label">--yc-divider-font-size</span>
+                    <span class="divider-row__value">文字大小</span>
+                </div>
+            </div>
+            <div class="divider-demo-section">
+                <div class="demo-block-title">Modifier 类</div>
+                <div class="divider-row">
+                    <span class="divider-row__label">.yc-divider--horizontal</span>
+                    <span class="divider-row__value">水平分割线</span>
+                </div>
+                <div class="divider-row">
+                    <span class="divider-row__label">.yc-divider--vertical</span>
+                    <span class="divider-row__value">垂直分割线</span>
+                </div>
+                <div class="divider-row">
+                    <span class="divider-row__label">.yc-divider--with-text</span>
+                    <span class="divider-row__value">带文字分割线</span>
+                </div>
+                <div class="divider-row">
+                    <span class="divider-row__label">.yc-divider--dashed</span>
+                    <span class="divider-row__value">虚线样式</span>
+                </div>
+                <div class="divider-row">
+                    <span class="divider-row__label">.yc-divider--dotted</span>
+                    <span class="divider-row__value">点线样式</span>
+                </div>
+                <div class="divider-row">
+                    <span class="divider-row__label">.yc-divider--primary/success/warning/danger/info</span>
+                    <span class="divider-row__value">功能色变体</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

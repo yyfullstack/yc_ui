@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space 间距 - YC UI</title>
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-header__title">Space 间距</h1>
+            <p class="demo-page-header__desc">控制组件之间的间距，提供统一的间距管理。</p>
+        </div>
+
+        <div class="demo-section">
+            <h2 class="demo-section__title">基础用法</h2>
+            <p class="demo-section__desc">最基础的间距用法。</p>
+            <div class="demo-block">
+                <div class="yc-space yc-space--horizontal">
+                    <button class="yc-button">按钮 1</button>
+                    <button class="yc-button">按钮 2</button>
+                    <button class="yc-button">按钮 3</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2 class="demo-section__title">垂直间距</h2>
+            <p class="demo-section__desc">垂直方向的间距。</p>
+            <div class="demo-block">
+                <div class="yc-space yc-space--vertical">
+                    <button class="yc-button">按钮 1</button>
+                    <button class="yc-button">按钮 2</button>
+                    <button class="yc-button">按钮 3</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2 class="demo-section__title">间距尺寸</h2>
+            <p class="demo-section__desc">提供多种预设间距尺寸。</p>
+            <div class="demo-block">
+                <h5 class="yc-text-h5">XS (4px)</h5>
+                <div class="yc-space yc-space--horizontal yc-space--size-xs">
+                    <span class="yc-tag">Tag 1</span>
+                    <span class="yc-tag">Tag 2</span>
+                    <span class="yc-tag">Tag 3</span>
+                </div>
+
+                <h5 class="yc-text-h5" style="margin-top: 16px;">SM (8px)</h5>
+                <div class="yc-space yc-space--horizontal yc-space--size-sm">
+                    <span class="yc-tag">Tag 1</span>
+                    <span class="yc-tag">Tag 2</span>
+                    <span class="yc-tag">Tag 3</span>
+                </div>
+
+                <h5 class="yc-text-h5" style="margin-top: 16px;">Default (12px)</h5>
+                <div class="yc-space yc-space--horizontal">
+                    <span class="yc-tag">Tag 1</span>
+                    <span class="yc-tag">Tag 2</span>
+                    <span class="yc-tag">Tag 3</span>
+                </div>
+
+                <h5 class="yc-text-h5" style="margin-top: 16px;">MD (16px)</h5>
+                <div class="yc-space yc-space--horizontal yc-space--size-md">
+                    <span class="yc-tag">Tag 1</span>
+                    <span class="yc-tag">Tag 2</span>
+                    <span class="yc-tag">Tag 3</span>
+                </div>
+
+                <h5 class="yc-text-h5" style="margin-top: 16px;">LG (24px)</h5>
+                <div class="yc-space yc-space--horizontal yc-space--size-lg">
+                    <span class="yc-tag">Tag 1</span>
+                    <span class="yc-tag">Tag 2</span>
+                    <span class="yc-tag">Tag 3</span>
+                </div>
+
+                <h5 class="yc-text-h5" style="margin-top: 16px;">XL (32px)</h5>
+                <div class="yc-space yc-space--horizontal yc-space--size-xl">
+                    <span class="yc-tag">Tag 1</span>
+                    <span class="yc-tag">Tag 2</span>
+                    <span class="yc-tag">Tag 3</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2 class="demo-section__title">对齐方式</h2>
+            <p class="demo-section__desc">支持不同的对齐方式。</p>
+            <div class="demo-block">
+                <div class="yc-space yc-space--horizontal yc-space--align-center" style="height: 60px; border: 1px dashed var(--yc-color-border-light); padding: 0 16px;">
+                    <button class="yc-button yc-button--small">小按钮</button>
+                    <button class="yc-button">默认按钮</button>
+                    <button class="yc-button yc-button--large">大按钮</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2 class="demo-section__title">自动填充</h2>
+            <p class="demo-section__desc">使用 spacer 自动填充剩余空间。</p>
+            <div class="demo-block">
+                <div class="yc-space yc-space--horizontal yc-space--fill" style="padding: 12px; background: var(--yc-color-bg-page); border-radius: var(--yc-border-radius-md);">
+                    <span class="yc-text-regular">左侧内容</span>
+                    <div class="yc-space-spacer"></div>
+                    <span class="yc-text-secondary">右侧内容</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

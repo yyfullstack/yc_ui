@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PropertyGrid 属性表格 - YC UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+    <style>
+        .property-grid-demo-container {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+        .property-grid-panel {
+            flex: 1;
+            min-width: 350px;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">PropertyGrid 属性表格</h1>
+            <p class="demo-page-subtitle">用于编辑和展示对象属性的结构化表格</p>
+        </div>
+
+        <div class="property-grid-demo-container">
+            <div class="property-grid-panel">
+                <h3>基础用法</h3>
+                <div class="demo-block">
+                    <div class="demo-block-title">展示对象的基本属性</div>
+                    <div class="yc-property-grid">
+                        <div class="yc-property-grid__header">
+                            <span class="yc-property-grid__title">用户信息</span>
+                            <div class="yc-property-grid__actions">
+                                <button class="yc-button yc-button--small"><i class="fa fa-save"></i> 保存</button>
+                            </div>
+                        </div>
+                        <div class="yc-property-grid__body">
+                            <!-- Basic Info Category -->
+                            <div class="yc-property-grid__category is-expanded">
+                                <div class="yc-property-grid__category-header" onclick="toggleCategory(this)">
+                                    <span class="yc-property-grid__category-icon"><i class="fa fa-caret-right"></i></span>
+                                    <span class="yc-property-grid__category-title">基本信息</span>
+                                </div>
+                                <div class="yc-property-grid__category-body">
+                                    <div class="yc-property-grid__row">
+                                        <div class="yc-property-grid__name yc-property-grid__name-required">
+                                            用户名
+                                            <span class="yc-property-grid__name-tooltip" title="登录用户名"><i class="fa fa-info-circle"></i></span>
+                                        </div>
+                                        <div class="yc-property-grid__value">
+                                            <input type="text" class="yc-property-grid__value-input" value="zhangsan">
+                                        </div>
+                                    </div>
+                                    <div class="yc-property-grid__row">
+                                        <div class="yc-property-grid__name yc-property-grid__name-required">
+                                            昵称
+                                        </div>
+                                        <div class="yc-property-grid__value">
+                                            <input type="text" class="yc-property-grid__value-input" value="张三">
+                                        </div>
+                                    </div>
+                                    <div class="yc-property-grid__row">
+                                        <div class="yc-property-grid__name">
+                                            邮箱
+                                        </div>
+                                        <div class="yc-property-grid__value">
+                                            <input type="email" class="yc-property-grid__value-input" value="zhangsan@example.com">
+                                        </div>
+                                    </div>
+                                    <div class="yc-property-grid__row">
+                                        <div class="yc-property-grid__name">
+                                            手机
+                                        </div>
+                                        <div class="yc-property-grid__value">
+                                            <input type="tel" class="yc-property-grid__value-input" value="138****8000">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Profile Category -->
+                            <div class="yc-property-grid__category">
+                                <div class="yc-property-grid__category-header" onclick="toggleCategory(this)">
+                                    <span class="yc-property-grid__category-icon"><i class="fa fa-caret-right"></i></span>
+                                    <span class="yc-property-grid__category-title">个人资料</span>
+                                </div>
+                                <div class="yc-property-grid__category-body">
+                                    <div class="yc-property-grid__row">
+                                        <div class="yc-property-grid__name">性别</div>
+                                        <div class="yc-property-grid__value">
+                                            <select class="yc-property-grid__value-select">
+                                                <option value="male" selected>男</option>
+                                                <option value="female">女</option>
+                                                <option value="other">保密</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="yc-property-grid__row">
+                                        <div class="yc-property-grid__name">年龄</div>
+                                        <div class="yc-property-grid__value">
+                                            <span class="yc-property-grid__value-text yc-property-grid__value-number">28</span>
+                                        </div>
+                                    </div>
+                                    <div class="yc-property-grid__row">
+                                        <div class="yc-property-grid__name">启用</div>
+                                        <div class="yc-property-grid__value">
+                                            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                                                <input type="checkbox" checked> 启用账号
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="yc-property-grid__row">
+                                        <div class="yc-property-grid__name">个人简介</div>
+                                        <div class="yc-property-grid__value">
+                                            <textarea class="yc-property-grid__editor-textarea" rows="3">热爱编程，喜欢开源</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Appearance Category -->
+                            <div class="yc-property-grid__category">
+                                <div class="yc-property-grid__category-header" onclick="toggleCategory(this)">
+                                    <span class="yc-property-grid__category-icon"><i class="fa fa-caret-right"></i></span>
+                                    <span class="yc-property-grid__category-title">外观设置</span>
+                                </div>
+                                <div class="yc-property-grid__category-body">
+                                    <div class="yc-property-grid__row">
+                                        <div class="yc-property-grid__name">主题颜色</div>
+                                        <div class="yc-property-grid__value">
+                                            <div class="yc-property-grid__value-color">
+                                                <span class="yc-property-grid__color-preview" style="background-color: #409eff;"></span>
+                                                <span class="yc-property-grid__value-text">#409EFF</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="yc-property-grid__row">
+                                        <div class="yc-property-grid__name">字体大小</div>
+                                        <div class="yc-property-grid__value">
+                                            <div class="yc-property-grid__editor-slider">
+                                                <input type="range" min="12" max="20" value="14">
+                                                <span class="yc-property-grid__editor-slider-value">14px</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="yc-property-grid__row">
+                                        <div class="yc-property-grid__name">透明度</div>
+                                        <div class="yc-property-grid__value">
+                                            <div class="yc-property-grid__editor-slider">
+                                                <input type="range" min="0" max="100" value="100">
+                                                <span class="yc-property-grid__editor-slider-value">100%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="property-grid-panel">
+                <h3>带标签页的属性表格</h3>
+                <div class="demo-block">
+                    <div class="demo-block-title">使用标签页组织不同类别的属性</div>
+                    <div class="yc-property-grid">
+                        <div class="yc-property-grid__header">
+                            <span class="yc-property-grid__title">产品设置</span>
+                        </div>
+                        <div class="yc-property-grid__tabs">
+                            <div class="yc-property-grid__tab is-active" onclick="switchTab(this, 'tab-basic')">基础信息</div>
+                            <div class="yc-property-grid__tab" onclick="switchTab(this, 'tab-advanced')">高级设置</div>
+                            <div class="yc-property-grid__tab" onclick="switchTab(this, 'tab-meta')">元数据</div>
+                        </div>
+                        <div class="yc-property-grid__body">
+                            <!-- Tab: Basic -->
+                            <div id="tab-basic" class="tab-content">
+                                <div class="yc-property-grid__category is-expanded">
+                                    <div class="yc-property-grid__category-body">
+                                        <div class="yc-property-grid__row">
+                                            <div class="yc-property-grid__name yc-property-grid__name-required">产品名称</div>
+                                            <div class="yc-property-grid__value">
+                                                <input type="text" class="yc-property-grid__value-input" value="YC UI 组件库">
+                                            </div>
+                                        </div>
+                                        <div class="yc-property-grid__row">
+                                            <div class="yc-property-grid__name">版本号</div>
+                                            <div class="yc-property-grid__value">
+                                                <span class="yc-property-grid__value-text yc-property-grid__value-number">2.0.0</span>
+                                            </div>
+                                        </div>
+                                        <div class="yc-property-grid__row">
+                                            <div class="yc-property-grid__name">状态</div>
+                                            <div class="yc-property-grid__value">
+                                                <select class="yc-property-grid__value-select">
+                                                    <option value="dev">开发中</option>
+                                                    <option value="beta" selected>测试中</option>
+                                                    <option value="stable">稳定版</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="yc-property-grid__row">
+                                            <div class="yc-property-grid__name">官网链接</div>
+                                            <div class="yc-property-grid__value">
+                                                <a href="#" class="yc-property-grid__value-link">https://ycui.example.com</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Tab: Advanced -->
+                            <div id="tab-advanced" class="tab-content" style="display: none;">
+                                <div class="yc-property-grid__category is-expanded">
+                                    <div class="yc-property-grid__category-body">
+                                        <div class="yc-property-grid__row">
+                                            <div class="yc-property-grid__name">缓存时间</div>
+                                            <div class="yc-property-grid__value">
+                                                <div class="yc-property-grid__editor-slider">
+                                                    <input type="range" min="0" max="3600" value="300">
+                                                    <span class="yc-property-grid__editor-slider-value">300s</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="yc-property-grid__row">
+                                            <div class="yc-property-grid__name">启用压缩</div>
+                                            <div class="yc-property-grid__value">
+                                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                                                    <input type="checkbox" checked> Gzip 压缩
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="yc-property-grid__row">
+                                            <div class="yc-property-grid__name">最大连接数</div>
+                                            <div class="yc-property-grid__value">
+                                                <input type="number" class="yc-property-grid__value-input" value="100">
+                                            </div>
+                                        </div>
+                                        <div class="yc-property-grid__row">
+                                            <div class="yc-property-grid__name">超时时间</div>
+                                            <div class="yc-property-grid__value">
+                                                <input type="number" class="yc-property-grid__value-input" value="30">
+                                                <span style="margin-left: 8px; color: #909399;">秒</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Tab: Meta -->
+                            <div id="tab-meta" class="tab-content" style="display: none;">
+                                <div class="yc-property-grid__category is-expanded">
+                                    <div class="yc-property-grid__category-body">
+                                        <div class="yc-property-grid__row">
+                                            <div class="yc-property-grid__name">创建时间</div>
+                                            <div class="yc-property-grid__value">
+                                                <span class="yc-property-grid__value-text yc-property-grid__value-text--readonly">2023-06-15 10:30:00</span>
+                                            </div>
+                                        </div>
+                                        <div class="yc-property-grid__row">
+                                            <div class="yc-property-grid__name">更新时间</div>
+                                            <div class="yc-property-grid__value">
+                                                <span class="yc-property-grid__value-text yc-property-grid__value-text--readonly">2024-01-20 15:45:00</span>
+                                            </div>
+                                        </div>
+                                        <div class="yc-property-grid__row">
+                                            <div class="yc-property-grid__name">创建人</div>
+                                            <div class="yc-property-grid__value">
+                                                <span class="yc-property-grid__value-text">admin</span>
+                                            </div>
+                                        </div>
+                                        <div class="yc-property-grid__row">
+                                            <div class="yc-property-grid__name">备注</div>
+                                            <div class="yc-property-grid__value">
+                                                <textarea class="yc-property-grid__editor-textarea" rows="2">核心产品，需定期维护</textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section" style="margin-top: 24px;">
+            <h3>嵌套属性</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">支持嵌套的属性编辑</div>
+                <div class="yc-property-grid">
+                    <div class="yc-property-grid__body">
+                        <div class="yc-property-grid__category is-expanded">
+                            <div class="yc-property-grid__category-body">
+                                <div class="yc-property-grid__row">
+                                    <div class="yc-property-grid__name">项目名称</div>
+                                    <div class="yc-property-grid__value">
+                                        <input type="text" class="yc-property-grid__value-input" value="我的项目">
+                                    </div>
+                                </div>
+                                <div class="yc-property-grid__row yc-property-grid__row--nested">
+                                    <div class="yc-property-grid__name">数据库配置</div>
+                                    <div class="yc-property-grid__value">
+                                        <div class="yc-property-grid__nested-toggle" onclick="toggleNested(this)">
+                                            <i class="fa fa-caret-right"></i>
+                                            <span>点击展开配置</span>
+                                        </div>
+                                        <div class="yc-property-grid__nested-body">
+                                            <div class="yc-property-grid__row">
+                                                <div class="yc-property-grid__name">主机地址</div>
+                                                <div class="yc-property-grid__value">
+                                                    <input type="text" class="yc-property-grid__value-input" value="localhost">
+                                                </div>
+                                            </div>
+                                            <div class="yc-property-grid__row">
+                                                <div class="yc-property-grid__name">端口</div>
+                                                <div class="yc-property-grid__value">
+                                                    <input type="number" class="yc-property-grid__value-input" value="3306">
+                                                </div>
+                                            </div>
+                                            <div class="yc-property-grid__row">
+                                                <div class="yc-property-grid__name">数据库名</div>
+                                                <div class="yc-property-grid__value">
+                                                    <input type="text" class="yc-property-grid__value-input" value="my_project">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="yc-property-grid__row yc-property-grid__row--nested">
+                                    <div class="yc-property-grid__name">Redis 配置</div>
+                                    <div class="yc-property-grid__value">
+                                        <div class="yc-property-grid__nested-toggle" onclick="toggleNested(this)">
+                                            <i class="fa fa-caret-right"></i>
+                                            <span>点击展开配置</span>
+                                        </div>
+                                        <div class="yc-property-grid__nested-body">
+                                            <div class="yc-property-grid__row">
+                                                <div class="yc-property-grid__name">主机地址</div>
+                                                <div class="yc-property-grid__value">
+                                                    <input type="text" class="yc-property-grid__value-input" value="127.0.0.1">
+                                                </div>
+                                            </div>
+                                            <div class="yc-property-grid__row">
+                                                <div class="yc-property-grid__name">端口</div>
+                                                <div class="yc-property-grid__value">
+                                                    <input type="number" class="yc-property-grid__value-input" value="6379">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section" style="margin-top: 24px;">
+            <h3>验证状态</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">显示验证错误和警告状态</div>
+                <div class="yc-property-grid">
+                    <div class="yc-property-grid__body">
+                        <div class="yc-property-grid__category is-expanded">
+                            <div class="yc-property-grid__category-body">
+                                <div class="yc-property-grid__row is-error">
+                                    <div class="yc-property-grid__name yc-property-grid__name-required">邮箱</div>
+                                    <div class="yc-property-grid__value">
+                                        <input type="email" class="yc-property-grid__value-input" value="invalid-email">
+                                    </div>
+                                </div>
+                                <div class="yc-property-grid__row is-warning">
+                                    <div class="yc-property-grid__name">密码强度</div>
+                                    <div class="yc-property-grid__value">
+                                        <span class="yc-property-grid__value-text" style="color: #e6a23c;">弱 - 建议包含大小写字母和数字</span>
+                                    </div>
+                                </div>
+                                <div class="yc-property-grid__row">
+                                    <div class="yc-property-grid__name yc-property-grid__name-required">用户名</div>
+                                    <div class="yc-property-grid__value">
+                                        <input type="text" class="yc-property-grid__value-input" value="valid_user">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleCategory(header) {
+            var category = header.closest('.yc-property-grid__category');
+            category.classList.toggle('is-expanded');
+        }
+
+        function switchTab(tab, tabId) {
+            document.querySelectorAll('.yc-property-grid__tab').forEach(function(t) {
+                t.classList.remove('is-active');
+            });
+            tab.classList.add('is-active');
+            
+            document.querySelectorAll('.tab-content').forEach(function(c) {
+                c.style.display = 'none';
+            });
+            document.getElementById(tabId).style.display = 'block';
+        }
+
+        function toggleNested(toggle) {
+            var row = toggle.closest('.yc-property-grid__row--nested');
+            row.classList.toggle('is-expanded');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scrollbar 滚动条 - YC UI</title>
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-header__title">Scrollbar 滚动条</h1>
+            <p class="demo-page-header__desc">自定义滚动条样式，提供统一的滚动体验。</p>
+        </div>
+
+        <div class="demo-section">
+            <h2 class="demo-section__title">基础用法</h2>
+            <p class="demo-section__desc">最简单的自定义滚动条。</p>
+            <div class="demo-block">
+                <div class="yc-scrollbar" style="height: 200px; border: 1px solid var(--yc-color-border-light); border-radius: var(--yc-border-radius-md);">
+                    <div class="yc-scrollbar__wrap">
+                        <div style="padding: 16px;">
+                            <p class="yc-text-paragraph">YC UI 滚动条组件提供了美观的自定义滚动条样式。</p>
+                            <p class="yc-text-paragraph">支持水平和垂直两种方向的滚动条。</p>
+                            <p class="yc-text-paragraph">可以通过 CSS 变量自定义滚动条的颜色、宽度等属性。</p>
+                            <p class="yc-text-paragraph" style="margin-bottom: 200px;">滚动查看更多内容...</p>
+                        </div>
+                    </div>
+                    <div class="yc-scrollbar__bar yc-scrollbar__bar--vertical">
+                        <div class="yc-scrollbar__thumb yc-scrollbar__thumb--vertical"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2 class="demo-section__title">不同尺寸</h2>
+            <p class="demo-section__desc">滚动条支持多种尺寸设置。</p>
+            <div class="demo-block">
+                <div class="demo-row" style="gap: 24px;">
+                    <div>
+                        <h5 class="yc-text-h5">小号滚动条</h5>
+                        <div class="yc-scrollbar yc-scrollbar--small" style="height: 150px; border: 1px solid var(--yc-color-border-light); border-radius: var(--yc-border-radius-md);">
+                            <div class="yc-scrollbar__wrap">
+                                <div style="padding: 16px;">
+                                    <p class="yc-text-paragraph">小号滚动条样式。</p>
+                                    <p class="yc-text-paragraph" style="margin-bottom: 200px;">向下滚动查看效果...</p>
+                                </div>
+                            </div>
+                            <div class="yc-scrollbar__bar yc-scrollbar__bar--vertical">
+                                <div class="yc-scrollbar__thumb yc-scrollbar__thumb--vertical"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h5 class="yc-text-h5">大号滚动条</h5>
+                        <div class="yc-scrollbar yc-scrollbar--large" style="height: 150px; border: 1px solid var(--yc-color-border-light); border-radius: var(--yc-border-radius-md);">
+                            <div class="yc-scrollbar__wrap">
+                                <div style="padding: 16px;">
+                                    <p class="yc-text-paragraph">大号滚动条样式。</p>
+                                    <p class="yc-text-paragraph" style="margin-bottom: 200px;">向下滚动查看效果...</p>
+                                </div>
+                            </div>
+                            <div class="yc-scrollbar__bar yc-scrollbar__bar--vertical">
+                                <div class="yc-scrollbar__thumb yc-scrollbar__thumb--vertical"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 简单的滚动条功能演示
+            document.querySelectorAll('.yc-scrollbar').forEach(scrollbar => {
+                const wrap = scrollbar.querySelector('.yc-scrollbar__wrap');
+                const vBar = scrollbar.querySelector('.yc-scrollbar__bar--vertical');
+                const vThumb = vBar?.querySelector('.yc-scrollbar__thumb--vertical');
+
+                if (wrap && vBar && vThumb) {
+                    wrap.addEventListener('scroll', function() {
+                        const scrollHeight = wrap.scrollHeight - wrap.clientHeight;
+                        const barHeight = vBar.clientHeight;
+                        const thumbHeight = (wrap.clientHeight / wrap.scrollHeight) * barHeight;
+                        
+                        vThumb.style.height = Math.max(20, thumbHeight) + 'px';
+                        vThumb.style.top = (wrap.scrollTop / scrollHeight) * (barHeight - thumbHeight) + 'px';
+                    });
+
+                    // 初始化
+                    wrap.dispatchEvent(new Event('scroll'));
+                }
+            });
+        });
+    </script>
+</body>
+</html>

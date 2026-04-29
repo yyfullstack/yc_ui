@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skeleton 骨架屏 - YC UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">Skeleton 骨架屏</h1>
+            <p class="demo-page-subtitle">在需要等待加载内容的位置显示一个骨架屏</p>
+        </div>
+
+        <div class="demo-section">
+            <h3>基本用法</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">基础的骨架效果</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div style="padding: 16px; background: #fff; border-radius: 8px;">
+                        <div class="yc-skeleton yc-skeleton--avatar yc-skeleton--animated-gradient" style="margin-bottom: 16px;"></div>
+                        <div class="yc-skeleton yc-skeleton--text yc-skeleton--w-75 yc-skeleton--animated-gradient"></div>
+                        <div class="yc-skeleton yc-skeleton--text yc-skeleton--w-50 yc-skeleton--animated-gradient"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>配置属性</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">可以配置骨架屏的属性</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div style="display: flex; flex-direction: column; gap: 16px;">
+                        <div style="padding: 16px; background: #fff; border-radius: 8px;">
+                            <div style="margin-bottom: 8px; font-size: 14px; color: #909399;">头像</div>
+                            <div style="display: flex; align-items: center; gap: 16px;">
+                                <div class="yc-skeleton yc-skeleton--avatar yc-skeleton--animated-gradient"></div>
+                                <div class="yc-skeleton yc-skeleton--text yc-skeleton--w-300 yc-skeleton--animated-gradient"></div>
+                            </div>
+                        </div>
+                        <div style="padding: 16px; background: #fff; border-radius: 8px;">
+                            <div style="margin-bottom: 8px; font-size: 14px; color: #909399;">图片</div>
+                            <div class="yc-skeleton yc-skeleton--image yc-skeleton--animated-gradient"></div>
+                        </div>
+                        <div style="padding: 16px; background: #fff; border-radius: 8px;">
+                            <div style="margin-bottom: 8px; font-size: 14px; color: #909399;">段落</div>
+                            <div class="yc-skeleton yc-skeleton--text yc-skeleton--w-full yc-skeleton--animated-gradient"></div>
+                            <div class="yc-skeleton yc-skeleton--text yc-skeleton--w-full yc-skeleton--animated-gradient"></div>
+                            <div class="yc-skeleton yc-skeleton--text yc-skeleton--w-75 yc-skeleton--animated-gradient"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>卡片骨架屏</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">完整的卡片骨架效果</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                        <div class="yc-skeleton__card" style="width: 250px;">
+                            <div class="yc-skeleton__card-header">
+                                <div class="yc-skeleton yc-skeleton--avatar yc-skeleton--animated-gradient"></div>
+                                <div class="yc-skeleton yc-skeleton--text yc-skeleton--w-100 yc-skeleton--animated-gradient"></div>
+                            </div>
+                            <div class="yc-skeleton__card-body">
+                                <div class="yc-skeleton yc-skeleton--image yc-skeleton--animated-gradient" style="height: 120px;"></div>
+                                <div class="yc-skeleton yc-skeleton--text yc-skeleton--w-full yc-skeleton--animated-gradient"></div>
+                                <div class="yc-skeleton yc-skeleton--text yc-skeleton--w-75 yc-skeleton--animated-gradient"></div>
+                            </div>
+                        </div>
+                        <div class="yc-skeleton__card" style="width: 250px;">
+                            <div class="yc-skeleton__card-header">
+                                <div class="yc-skeleton yc-skeleton--avatar yc-skeleton--animated-gradient"></div>
+                                <div class="yc-skeleton yc-skeleton--text yc-skeleton--w-100 yc-skeleton--animated-gradient"></div>
+                            </div>
+                            <div class="yc-skeleton__card-body">
+                                <div class="yc-skeleton yc-skeleton--text yc-skeleton--w-full yc-skeleton--animated-gradient"></div>
+                                <div class="yc-skeleton yc-skeleton--text yc-skeleton--w-full yc-skeleton--animated-gradient"></div>
+                                <div class="yc-skeleton yc-skeleton--text yc-skeleton--w-50 yc-skeleton--animated-gradient"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>表格骨架屏</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">表格数据的骨架效果</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div style="padding: 16px; background: #fff; border-radius: 8px;">
+                        <div class="yc-skeleton yc-skeleton--text yc-skeleton--w-200 yc-skeleton--animated-gradient" style="margin-bottom: 16px;"></div>
+                        <div class="yc-skeleton__table">
+                            <div class="yc-skeleton__table-row">
+                                <div class="yc-skeleton yc-skeleton--text yc-skeleton--w-100 yc-skeleton--animated-gradient"></div>
+                                <div class="yc-skeleton yc-skeleton--text yc-skeleton--w-100 yc-skeleton--animated-gradient"></div>
+                                <div class="yc-skeleton yc-skeleton--text yc-skeleton--w-100 yc-skeleton--animated-gradient"></div>
+                            </div>
+                            <div class="yc-skeleton__table-row">
+                                <div class="yc-skeleton yc-skeleton--text yc-skeleton--w-100 yc-skeleton--animated-gradient"></div>
+                                <div class="yc-skeleton yc-skeleton--text yc-skeleton--w-100 yc-skeleton--animated-gradient"></div>
+                                <div class="yc-skeleton yc-skeleton--text yc-skeleton--w-100 yc-skeleton--animated-gradient"></div>
+                            </div>
+                            <div class="yc-skeleton__table-row">
+                                <div class="yc-skeleton yc-skeleton--text yc-skeleton--w-100 yc-skeleton--animated-gradient"></div>
+                                <div class="yc-skeleton yc-skeleton--text yc-skeleton--w-100 yc-skeleton--animated-gradient"></div>
+                                <div class="yc-skeleton yc-skeleton--text yc-skeleton--w-100 yc-skeleton--animated-gradient"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

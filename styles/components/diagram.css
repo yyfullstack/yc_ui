@@ -1,0 +1,354 @@
+/**
+ * YC UI Diagram Component
+ * Diagram/Flowchart component for visualizing processes and workflows
+ */
+
+.yc-diagram {
+    position: relative;
+    border: 1px solid var(--yc-color-border, #e4e7ed);
+    border-radius: var(--yc-border-radius-base, 4px);
+    background-color: #ffffff;
+    overflow: hidden;
+    font-size: var(--yc-font-size-base, 14px);
+}
+
+.yc-diagram__toolbar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    background-color: #fafafa;
+    border-bottom: 1px solid var(--yc-color-border, #e4e7ed);
+}
+
+.yc-diagram__toolbar-group {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding-right: 12px;
+    margin-right: 12px;
+    border-right: 1px solid var(--yc-color-border-light, #ebeef5);
+}
+
+.yc-diagram__toolbar-group:last-child {
+    border-right: none;
+    margin-right: 0;
+    padding-right: 0;
+}
+
+.yc-diagram__toolbar-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: 1px solid transparent;
+    border-radius: var(--yc-border-radius-sm, 2px);
+    background-color: transparent;
+    color: var(--yc-color-text-regular, #606266);
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: var(--yc-font-size-base, 14px);
+}
+
+.yc-diagram__toolbar-btn:hover {
+    background-color: var(--yc-color-bg-page, #f5f7fa);
+    color: var(--yc-color-primary, #409eff);
+}
+
+.yc-diagram__toolbar-btn.is-active {
+    background-color: var(--yc-color-primary-light-9, #ecf5ff);
+    color: var(--yc-color-primary, #409eff);
+    border-color: var(--yc-color-primary-light-7, #b3d8ff);
+}
+
+.yc-diagram__canvas {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    overflow: auto;
+    background-color: #fafafa;
+    background-image:
+        radial-gradient(circle, #dcdfe6 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+
+.yc-diagram__canvas svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.yc-diagram__canvas svg line,
+.yc-diagram__canvas svg path {
+    pointer-events: stroke;
+}
+
+.yc-diagram__node {
+    position: absolute;
+    min-width: 160px;
+    padding: 12px 16px;
+    background-color: #ffffff;
+    border: 2px solid var(--yc-color-border, #e4e7ed);
+    border-radius: var(--yc-border-radius-base, 4px);
+    cursor: move;
+    user-select: none;
+    transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.yc-diagram__node:hover {
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    border-color: var(--yc-color-primary-light-5, #a0cfff);
+}
+
+.yc-diagram__node.is-selected {
+    border-color: var(--yc-color-primary, #409eff);
+    box-shadow: 0 0 0 2px var(--yc-color-primary-light-7, #b3d8ff);
+}
+
+.yc-diagram__node--start,
+.yc-diagram__node--end {
+    border-radius: 20px;
+    min-width: 120px;
+    text-align: center;
+}
+
+.yc-diagram__node--start {
+    background-color: var(--yc-color-success-light-9, #f0f9eb);
+    border-color: var(--yc-color-success, #67c23a);
+}
+
+.yc-diagram__node--end {
+    background-color: var(--yc-color-danger-light-9, #fef0f0);
+    border-color: var(--yc-color-danger, #f56c6c);
+}
+
+.yc-diagram__node--process {
+    background-color: var(--yc-color-primary-light-9, #ecf5ff);
+    border-color: var(--yc-color-primary, #409eff);
+}
+
+.yc-diagram__node--decision {
+    background-color: var(--yc-color-warning-light-9, #fdf6ec);
+    border-color: var(--yc-color-warning, #e6a23c);
+    transform: rotate(45deg);
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.yc-diagram__node--decision .yc-diagram__node-content {
+    transform: rotate(-45deg);
+}
+
+.yc-diagram__node-title {
+    font-size: var(--yc-font-size-base, 14px);
+    font-weight: var(--yc-font-weight-medium, 500);
+    color: var(--yc-color-text-primary, #303133);
+    margin-bottom: 4px;
+}
+
+.yc-diagram__node-content {
+    font-size: var(--yc-font-size-small, 12px);
+    color: var(--yc-color-text-regular, #606266);
+}
+
+.yc-diagram__node-ports {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.yc-diagram__node-port {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background-color: #ffffff;
+    border: 2px solid var(--yc-color-primary, #409eff);
+    border-radius: 50%;
+    cursor: crosshair;
+    pointer-events: auto;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.yc-diagram__node-port:hover {
+    transform: scale(1.3);
+    background-color: var(--yc-color-primary, #409eff);
+}
+
+.yc-diagram__node-port--top {
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.yc-diagram__node-port--bottom {
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.yc-diagram__node-port--left {
+    top: 50%;
+    left: -6px;
+    transform: translateY(-50%);
+}
+
+.yc-diagram__node-port--right {
+    top: 50%;
+    right: -6px;
+    transform: translateY(-50%);
+}
+
+.yc-diagram__connection {
+    stroke: var(--yc-color-primary, #409eff);
+    stroke-width: 2;
+    fill: none;
+    pointer-events: stroke;
+    cursor: pointer;
+}
+
+.yc-diagram__connection:hover {
+    stroke-width: 3;
+}
+
+.yc-diagram__connection--success {
+    stroke: var(--yc-color-success, #67c23a);
+}
+
+.yc-diagram__connection--warning {
+    stroke: var(--yc-color-warning, #e6a23c);
+}
+
+.yc-diagram__connection--danger {
+    stroke: var(--yc-color-danger, #f56c6c);
+}
+
+.yc-diagram__connection-arrow {
+    fill: var(--yc-color-primary, #409eff);
+}
+
+.yc-diagram__connection-label {
+    fill: var(--yc-color-text-regular, #606266);
+    font-size: var(--yc-font-size-small, 12px);
+    text-anchor: middle;
+    dominant-baseline: middle;
+}
+
+.yc-diagram__connection-label-bg {
+    fill: #ffffff;
+    rx: 2;
+    ry: 2;
+}
+
+.yc-diagram__palette {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 100%;
+    background-color: #ffffff;
+    border-right: 1px solid var(--yc-color-border, #e4e7ed);
+    overflow-y: auto;
+    padding: 16px;
+}
+
+.yc-diagram__palette-title {
+    font-size: var(--yc-font-size-base, 14px);
+    font-weight: var(--yc-font-weight-medium, 500);
+    color: var(--yc-color-text-primary, #303133);
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--yc-color-border-light, #ebeef5);
+}
+
+.yc-diagram__palette-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    margin-bottom: 8px;
+    background-color: #ffffff;
+    border: 1px solid var(--yc-color-border, #e4e7ed);
+    border-radius: var(--yc-border-radius-sm, 2px);
+    cursor: grab;
+    transition: all 0.2s;
+    font-size: var(--yc-font-size-small, 12px);
+    color: var(--yc-color-text-regular, #606266);
+}
+
+.yc-diagram__palette-item:hover {
+    border-color: var(--yc-color-primary, #409eff);
+    color: var(--yc-color-primary, #409eff);
+    background-color: var(--yc-color-primary-light-9, #ecf5ff);
+}
+
+.yc-diagram__palette-item:active {
+    cursor: grabbing;
+}
+
+.yc-diagram__minimap {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    width: 200px;
+    height: 150px;
+    background-color: #ffffff;
+    border: 1px solid var(--yc-color-border, #e4e7ed);
+    border-radius: var(--yc-border-radius-base, 4px);
+    box-shadow: var(--yc-box-shadow-base);
+    overflow: hidden;
+}
+
+.yc-diagram__minimap-content {
+    width: 100%;
+    height: 100%;
+}
+
+.yc-diagram__zoom-controls {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    background-color: #ffffff;
+    border: 1px solid var(--yc-color-border, #e4e7ed);
+    border-radius: var(--yc-border-radius-base, 4px);
+    box-shadow: var(--yc-box-shadow-base);
+    padding: 8px;
+}
+
+.yc-diagram__zoom-btn {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background-color: transparent;
+    color: var(--yc-color-text-regular, #606266);
+    cursor: pointer;
+    border-radius: var(--yc-border-radius-sm, 2px);
+    transition: all 0.2s;
+}
+
+.yc-diagram__zoom-btn:hover {
+    background-color: var(--yc-color-bg-page, #f5f7fa);
+    color: var(--yc-color-primary, #409eff);
+}
+
+.yc-diagram__zoom-level {
+    text-align: center;
+    font-size: var(--yc-font-size-small, 12px);
+    color: var(--yc-color-text-secondary, #909399);
+    padding: 4px 0;
+}

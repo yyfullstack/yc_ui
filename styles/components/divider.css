@@ -1,0 +1,97 @@
+@charset "UTF-8";
+
+/**
+ * YC UI Divider Component
+ * Horizontal or vertical dividing lines
+ */
+
+.yc-divider {
+    --yc-divider-border-color: var(--yc-color-border-light);
+    --yc-divider-text-color: var(--yc-color-text-secondary);
+    --yc-divider-font-size: var(--yc-font-size-small);
+    position: relative;
+    border: none;
+    height: 1px;
+    background: var(--yc-divider-border-color);
+    margin: 16px 0;
+}
+
+.yc-divider--horizontal {
+    width: 100%;
+}
+
+.yc-divider--vertical {
+    width: 1px;
+    height: 100%;
+    min-height: 24px;
+    margin: 0 16px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.yc-divider--with-text {
+    display: flex;
+    align-items: center;
+    height: auto;
+    background: transparent;
+}
+
+.yc-divider--with-text::before,
+.yc-divider--with-text::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--yc-divider-border-color);
+}
+
+.yc-divider--with-text-left::before {
+    flex: 0 0 20%;
+}
+
+.yc-divider--with-text-right::after {
+    flex: 0 0 20%;
+}
+
+.yc-divider__text {
+    padding: 0 16px;
+    font-size: var(--yc-divider-font-size);
+    color: var(--yc-divider-text-color);
+    white-space: nowrap;
+}
+
+.yc-divider--dashed {
+    background: transparent;
+    border-top: 1px dashed var(--yc-divider-border-color);
+    height: 0;
+}
+
+.yc-divider--dotted {
+    background: transparent;
+    border-top: 1px dotted var(--yc-divider-border-color);
+    height: 0;
+}
+
+.yc-divider--primary {
+    --yc-divider-border-color: var(--yc-color-primary);
+    --yc-divider-text-color: var(--yc-color-primary);
+}
+
+.yc-divider--success {
+    --yc-divider-border-color: var(--yc-color-success);
+    --yc-divider-text-color: var(--yc-color-success);
+}
+
+.yc-divider--warning {
+    --yc-divider-border-color: var(--yc-color-warning);
+    --yc-divider-text-color: var(--yc-color-warning);
+}
+
+.yc-divider--danger {
+    --yc-divider-border-color: var(--yc-color-danger);
+    --yc-divider-text-color: var(--yc-color-danger);
+}
+
+.yc-divider--info {
+    --yc-divider-border-color: var(--yc-color-info);
+    --yc-divider-text-color: var(--yc-color-info);
+}

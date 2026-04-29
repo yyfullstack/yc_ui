@@ -1,0 +1,178 @@
+@charset "UTF-8";
+
+/* ==================== Pagination ==================== */
+
+.yc-pagination {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: var(--yc-font-size-small, 14px);
+}
+
+.yc-pagination__btn {
+    min-width: 32px;
+    height: 32px;
+    padding: 0 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--yc-color-border, #dcdfe6);
+    border-radius: var(--yc-border-radius-base, 4px);
+    background-color: var(--yc-color-bg, #ffffff);
+    color: var(--yc-color-text-regular, #606266);
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: var(--yc-font-size-small, 14px);
+    user-select: none;
+    font-family: inherit;
+}
+
+.yc-pagination__btn:hover:not(.is-active):not(.is-disabled) {
+    color: var(--yc-color-primary, #409eff);
+    border-color: var(--yc-color-primary, #409eff);
+}
+
+.yc-pagination__btn.is-active {
+    background-color: var(--yc-color-primary, #409eff);
+    border-color: var(--yc-color-primary, #409eff);
+    color: #ffffff;
+    font-weight: var(--yc-font-weight-semibold, 600);
+}
+
+.yc-pagination__btn.is-disabled {
+    color: var(--yc-color-text-placeholder, #c0c4cc);
+    cursor: not-allowed;
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.yc-pagination__prev,
+.yc-pagination__next {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+.yc-pagination__more {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 32px;
+    height: 32px;
+    color: var(--yc-color-text-secondary, #909399);
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.yc-pagination__more:hover {
+    color: var(--yc-color-primary, #409eff);
+}
+
+/* ==================== Total ==================== */
+
+.yc-pagination__total {
+    color: var(--yc-color-text-regular, #606266);
+    margin-right: 16px;
+}
+
+/* ==================== Jumper ==================== */
+
+.yc-pagination__jumper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: 16px;
+    color: var(--yc-color-text-regular, #606266);
+}
+
+.yc-pagination__jumper input {
+    width: 48px;
+    height: 32px;
+    padding: 0 8px;
+    border: 1px solid var(--yc-color-border, #dcdfe6);
+    border-radius: var(--yc-border-radius-base, 4px);
+    background-color: var(--yc-color-bg, #ffffff);
+    color: var(--yc-color-text-regular, #606266);
+    font-size: var(--yc-font-size-small, 14px);
+    text-align: center;
+    outline: none;
+    transition: border-color 0.2s;
+    font-family: inherit;
+}
+
+.yc-pagination__jumper input:focus {
+    border-color: var(--yc-color-primary, #409eff);
+}
+
+/* ==================== Size ==================== */
+
+.yc-pagination__size {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: 16px;
+    color: var(--yc-color-text-regular, #606266);
+}
+
+.yc-pagination__size select {
+    height: 32px;
+    padding: 0 24px 0 8px;
+    border: 1px solid var(--yc-color-border, #dcdfe6);
+    border-radius: var(--yc-border-radius-base, 4px);
+    background-color: var(--yc-color-bg, #ffffff);
+    color: var(--yc-color-text-regular, #606266);
+    font-size: var(--yc-font-size-small, 14px);
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.2s;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23909399' d='M2.5 4.5l3.5 3 3.5-3'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+}
+
+.yc-pagination__size select:focus {
+    border-color: var(--yc-color-primary, #409eff);
+}
+
+/* ==================== Simple ==================== */
+
+.yc-pagination--simple {
+    gap: 4px;
+}
+
+.yc-pagination--simple .yc-pagination__btn {
+    min-width: 28px;
+    height: 28px;
+}
+
+/* ==================== Background ==================== */
+
+.yc-pagination--background .yc-pagination__btn {
+    background-color: var(--yc-color-bg-page, #f5f7fa);
+    border: none;
+}
+
+.yc-pagination--background .yc-pagination__btn.is-active {
+    background-color: var(--yc-color-primary, #409eff);
+    color: #ffffff;
+}
+
+/* ==================== Sizes ==================== */
+
+.yc-pagination--large .yc-pagination__btn,
+.yc-pagination--large .yc-pagination__size select,
+.yc-pagination--large .yc-pagination__jumper input {
+    min-width: 36px;
+    height: 36px;
+    font-size: var(--yc-font-size-base, 16px);
+}
+
+.yc-pagination--small .yc-pagination__btn,
+.yc-pagination--small .yc-pagination__size select,
+.yc-pagination--small .yc-pagination__jumper input {
+    min-width: 28px;
+    height: 28px;
+    font-size: var(--yc-font-size-extra-small, 12px);
+}

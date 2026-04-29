@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu 菜单组件示例</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --el-color-primary: #409eff;
+            --el-color-primary-light-9: #ecf5ff;
+            --el-color-success: #67c23a;
+            --el-color-success-light-3: #d4edda;
+            --el-color-warning: #e6a23c;
+            --el-color-warning-light-3: #fef9c3;
+            --el-color-info: #909399;
+            --el-color-info-light-3: #e9ecef;
+            --el-text-color-primary: #303133;
+            --el-text-color-regular: #606266;
+            --el-text-color-secondary: #909399;
+            --el-text-color-placeholder: #c0c4cc;
+            --el-border-color: #dcdfe6;
+            --el-border-color-light: #e4e7ed;
+            --el-bg-color: #ffffff;
+            --el-bg-color-page: #f5f7fa;
+            --el-font-size-extra-small: 12px;
+            --el-font-size-small: 13px;
+            --el-font-size-base: 14px;
+            --el-font-size-medium: 16px;
+            --el-font-weight-medium: 500;
+            --el-font-weight-bold: 600;
+            --el-border-radius-base: 4px;
+            --el-border-radius-md: 6px;
+            --el-border-radius-lg: 8px;
+            --el-border-radius-round: 20px;
+            --el-transition-duration-fast: 0.2s;
+            --el-line-height-base: 1.5;
+            --el-box-shadow-base: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', Arial, sans-serif; background: var(--el-bg-color-page); color: var(--el-text-color-primary); line-height: var(--el-line-height-base); padding: 24px; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .demo-section { background: var(--el-bg-color); border: 1px solid var(--el-border-color-light); border-radius: var(--el-border-radius-lg); padding: 24px; margin-bottom: 16px; }
+        .demo-section h3 { font-size: var(--el-font-size-medium); font-weight: var(--el-font-weight-bold); color: var(--el-text-color-primary); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--el-border-color-light); position: relative; padding-left: 16px; }
+        .demo-section h3::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 4px; height: 16px; background: var(--el-color-primary); border-radius: 2px; }
+        .demo-block { margin-bottom: 24px; }
+        .demo-block:last-child { margin-bottom: 0; }
+        .demo-block-title { font-size: var(--el-font-size-small); color: var(--el-text-color-secondary); margin-bottom: 12px; }
+
+        .menu-layout { display: flex; gap: 24px; }
+        .menu-layout__aside { flex-shrink: 0; width: 220px; background: var(--el-bg-color); border-radius: var(--el-border-radius-md); overflow: hidden; border: 1px solid var(--el-border-color-light); }
+        .menu-layout__aside--wide { width: 260px; }
+        .menu-layout__main { flex: 1; min-width: 0; }
+        .menu-layout__header { display: flex; align-items: center; gap: 16px; padding: 16px 20px; border-bottom: 1px solid var(--el-border-color-light); }
+        .menu-layout__header--logo { font-size: var(--el-font-size-medium); font-weight: var(--el-font-weight-bold); color: var(--el-color-primary); }
+        .menu-layout__header--user { margin-left: auto; display: flex; align-items: center; gap: 8px; font-size: var(--el-font-size-small); color: var(--el-text-color-secondary); }
+
+        /* ==================== Menu 组件样式 ==================== */
+        .el-menu {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            background: transparent;
+        }
+
+        /* 水平菜单 */
+        .el-menu--horizontal { display: flex; align-items: center; height: 56px; border-bottom: 1px solid var(--el-border-color-light); }
+        .el-menu--horizontal .el-menu-item,
+        .el-menu--horizontal .el-sub-menu { display: inline-flex; align-items: center; height: 100%; padding: 0 20px; cursor: pointer; font-size: var(--el-font-size-small); color: var(--el-text-color-regular); transition: all var(--el-transition-duration-fast); position: relative; }
+        .el-menu--horizontal .el-menu-item:hover,
+        .el-menu--horizontal .el-sub-menu:hover { background: var(--el-color-primary-light-9); color: var(--el-color-primary); }
+        .el-menu--horizontal .el-menu-item.is-active,
+        .el-menu--horizontal .el-sub-menu.is-active { color: var(--el-color-primary); font-weight: var(--el-font-weight-medium); }
+        .el-menu--horizontal .el-menu-item.is-active::after,
+        .el-menu--horizontal .el-sub-menu.is-active::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60%; height: 3px; background: var(--el-color-primary); border-radius: 2px 2px 0 0; }
+
+        /* 垂直菜单 */
+        .el-menu--vertical { }
+        .el-menu--vertical .el-menu-item,
+        .el-menu--vertical .el-sub-menu { display: flex; align-items: center; height: 44px; padding: 0 20px; cursor: pointer; font-size: var(--el-font-size-small); color: var(--el-text-color-regular); transition: all var(--el-transition-duration-fast); position: relative; }
+        .el-menu--vertical .el-menu-item:hover,
+        .el-menu--vertical .el-sub-menu:hover { background: var(--el-color-primary-light-9); color: var(--el-color-primary); }
+        .el-menu--vertical .el-menu-item.is-active,
+        .el-menu--vertical .el-sub-menu.is-active { background: var(--el-color-primary-light-9); color: var(--el-color-primary); font-weight: var(--el-font-weight-medium); }
+        .el-menu--vertical .el-menu-item.is-active::before,
+        .el-menu--vertical .el-sub-menu.is-active::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 4px; height: 16px; background: var(--el-color-primary); border-radius: 0 2px 2px 0; }
+
+        /* 图标 */
+        .el-menu-item__icon,
+        .el-sub-menu__icon { margin-right: 10px; font-size: 16px; width: 16px; text-align: center; flex-shrink: 0; }
+        .el-sub-menu__arrow { margin-left: auto; margin-right: 0; font-size: 12px; transition: transform var(--el-transition-duration-fast); }
+        .el-sub-menu.is-opened .el-sub-menu__arrow { transform: rotate(90deg); }
+
+        /* 子菜单标题 */
+        .el-sub-menu__title { display: flex; align-items: center; height: 44px; padding: 0 20px; cursor: pointer; font-size: var(--el-font-size-small); color: var(--el-text-color-regular); transition: all var(--el-transition-duration-fast); }
+        .el-sub-menu__title:hover { background: var(--el-color-primary-light-9); color: var(--el-color-primary); }
+
+        /* 子菜单内容 */
+        .el-sub-menu__content { display: none; list-style: none; padding: 4px 0; margin: 0; background: transparent; }
+        .el-sub-menu.is-opened > .el-sub-menu__content { display: block; }
+
+        /* 二级菜单项 */
+        .el-sub-menu__content > .el-menu-item { padding-left: 52px; height: 38px; font-size: 13px; color: var(--el-text-color-regular); background: transparent; }
+        .el-sub-menu__content > .el-menu-item:hover { color: var(--el-color-primary); background: var(--el-color-primary-light-9); }
+        .el-sub-menu__content > .el-menu-item.is-active { color: var(--el-color-primary); background: var(--el-color-primary-light-9); font-weight: var(--el-font-weight-medium); }
+
+        /* 二级子菜单标题 */
+        .el-sub-menu__content > .el-sub-menu > .el-sub-menu__title { padding-left: 52px; height: 38px; font-size: 13px; color: var(--el-text-color-regular); background: transparent; }
+        .el-sub-menu__content > .el-sub-menu > .el-sub-menu__title:hover { background: var(--el-color-primary-light-9); color: var(--el-color-primary); }
+
+        /* 三级菜单内容 */
+        .el-sub-menu__content > .el-sub-menu > .el-sub-menu__content { background: transparent; }
+        .el-sub-menu__content > .el-sub-menu > .el-sub-menu__content > .el-menu-item { padding-left: 72px; height: 36px; font-size: 13px; color: var(--el-text-color-secondary); }
+        .el-sub-menu__content > .el-sub-menu > .el-sub-menu__content > .el-menu-item:hover { color: var(--el-color-primary); background: var(--el-color-primary-light-9); }
+        .el-sub-menu__content > .el-sub-menu > .el-sub-menu__content > .el-menu-item.is-active { color: var(--el-color-primary); background: var(--el-color-primary-light-9); }
+
+        /* 四级及更深菜单 */
+        .el-sub-menu__content > .el-sub-menu > .el-sub-menu__content > .el-sub-menu > .el-sub-menu__content { background: transparent; }
+        .el-sub-menu__content > .el-sub-menu > .el-sub-menu__content > .el-sub-menu > .el-sub-menu__content > .el-menu-item { padding-left: 92px; height: 34px; font-size: 12px; color: var(--el-text-color-secondary); }
+        .el-sub-menu__content > .el-sub-menu > .el-sub-menu__content > .el-sub-menu > .el-sub-menu__content > .el-menu-item:hover { color: var(--el-color-primary); background: var(--el-color-primary-light-9); }
+
+        /* 禁用状态 */
+        .el-menu-item.is-disabled,
+        .el-sub-menu.is-disabled { cursor: not-allowed; opacity: 0.5; }
+        .el-menu-item.is-disabled:hover,
+        .el-sub-menu.is-disabled:hover { background: transparent; color: var(--el-text-color-placeholder); }
+
+        /* 折叠状态 */
+        .el-menu--collapse { width: 64px; }
+        .el-menu--collapse .el-menu-item,
+        .el-menu--collapse .el-sub-menu__title { padding: 0; justify-content: center; }
+        .el-menu--collapse .el-menu-item__icon,
+        .el-menu--collapse .el-sub-menu__icon { margin: 0; }
+        .el-menu--collapse .el-sub-menu__arrow { display: none; }
+        .el-menu--collapse .el-sub-menu__content { display: none !important; }
+
+        /* 弹出菜单 */
+        .el-menu--popup { position: absolute; top: 100%; left: 0; min-width: 180px; padding: 6px 0; background: var(--el-bg-color); border: 1px solid var(--el-border-color-light); border-radius: var(--el-border-radius-md); box-shadow: var(--el-box-shadow-base); z-index: 1000; }
+        .el-menu--popup .el-menu-item { height: 38px; padding: 0 16px; }
+        .el-menu--popup .el-menu-item:hover { background: var(--el-color-primary-light-9); }
+
+        /* 菜单 Logo */
+        .menu-logo { display: flex; align-items: center; gap: 8px; padding: 0 20px; height: 56px; font-size: var(--el-font-size-medium); font-weight: var(--el-font-weight-bold); color: var(--el-color-primary); border-bottom: 1px solid var(--el-border-color-light); }
+        .menu-logo--aside { justify-content: center; height: 60px; }
+
+        /* 分隔线和分组 */
+        .menu-divider { height: 1px; background: var(--el-border-color-light); margin: 8px 20px; }
+        .menu-group__title { font-size: 11px; color: var(--el-text-color-placeholder); padding: 12px 20px 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+        /* 内容区域 */
+        .menu-content { padding: 20px; font-size: var(--el-font-size-small); color: var(--el-text-color-secondary); background: var(--el-bg-color-page); border-radius: var(--el-border-radius-md); }
+        .menu-content--bordered { border: 1px solid var(--el-border-color-light); border-top: none; border-radius: 0 0 var(--el-border-radius-md) var(--el-border-radius-md); }
+
+        /* 面包屑 */
+        .menu-breadcrumb { display: flex; align-items: center; gap: 8px; font-size: var(--el-font-size-small); color: var(--el-text-color-secondary); margin-bottom: 16px; }
+        .menu-breadcrumb__item { cursor: pointer; transition: color var(--el-transition-duration-fast); }
+        .menu-breadcrumb__item:hover { color: var(--el-color-primary); }
+        .menu-breadcrumb__separator { font-size: 10px; color: var(--el-text-color-placeholder); }
+
+        /* 标签页 */
+        .menu-tabs { display: flex; gap: 4px; padding: 0 4px; border-bottom: 1px solid var(--el-border-color-light); margin-bottom: 16px; }
+        .menu-tab { padding: 10px 16px; font-size: var(--el-font-size-small); color: var(--el-text-color-secondary); cursor: pointer; border-bottom: 2px solid transparent; transition: all var(--el-transition-duration-fast); margin-bottom: -1px; }
+        .menu-tab:hover { color: var(--el-color-primary); }
+        .menu-tab.is-active { color: var(--el-color-primary); border-bottom-color: var(--el-color-primary); font-weight: var(--el-font-weight-medium); }
+
+        /* 页脚 */
+        .menu-footer { padding: 16px 20px; border-top: 1px solid var(--el-border-color-light); font-size: var(--el-font-size-extra-small); color: var(--el-text-color-secondary); }
+
+        /* 状态徽章 */
+        .menu-status { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; background: var(--el-color-success-light-3); color: var(--el-color-success); border-radius: var(--el-border-radius-round); font-size: var(--el-font-size-extra-small); font-weight: var(--el-font-weight-medium); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 style="font-size: 24px; font-weight: 600; margin-bottom: 24px;">Menu 菜单组件</h1>
+
+        <div class="demo-section">
+            <h3>顶部导航</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">网站顶部水平导航菜单</div>
+                <div style="background: var(--el-bg-color); border-radius: var(--el-border-radius-md); overflow: hidden; border: 1px solid var(--el-border-color-light);">
+                    <div style="display: flex; align-items: center; justify-content: space-between;">
+                        <div class="menu-logo">
+                            <i class="fas fa-gem"></i>
+                            YC Design
+                        </div>
+                        <ul class="el-menu el-menu--horizontal">
+                            <li class="el-menu-item is-active">
+                                <i class="el-menu-item__icon fas fa-home"></i>
+                                首页
+                            </li>
+                            <li class="el-sub-menu is-active">
+                                <div class="el-sub-menu__title">
+                                    <i class="el-sub-menu__icon fas fa-box"></i>
+                                    产品中心
+                                    <i class="fas fa-chevron-down el-sub-menu__arrow"></i>
+                                </div>
+                                <ul class="el-sub-menu__content">
+                                    <li class="el-menu-item">软件产品</li>
+                                    <li class="el-menu-item">硬件产品</li>
+                                    <li class="el-menu-item">云服务</li>
+                                </ul>
+                            </li>
+                            <li class="el-sub-menu">
+                                <div class="el-sub-menu__title">
+                                    <i class="el-sub-menu__icon fas fa-lightbulb"></i>
+                                    解决方案
+                                    <i class="fas fa-chevron-down el-sub-menu__arrow"></i>
+                                </div>
+                                <ul class="el-sub-menu__content">
+                                    <li class="el-menu-item">企业级方案</li>
+                                    <li class="el-menu-item">个人方案</li>
+                                    <li class="el-menu-item">教育方案</li>
+                                </ul>
+                            </li>
+                            <li class="el-menu-item">
+                                <i class="el-menu-item__icon fas fa-newspaper"></i>
+                                新闻动态
+                            </li>
+                            <li class="el-menu-item">
+                                <i class="el-menu-item__icon fas fa-user"></i>
+                                关于我们
+                            </li>
+                        </ul>
+                        <div style="padding: 0 20px; display: flex; align-items: center; gap: 16px;">
+                            <span class="menu-status"><i class="fas fa-circle" style="font-size: 6px;"></i>在线</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>侧边栏菜单</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">后台管理系统侧边栏导航</div>
+                <div class="menu-layout">
+                    <div class="menu-layout__aside">
+                        <div class="menu-logo--aside">
+                            <i class="fas fa-gem" style="margin-right: 8px;"></i>
+                            YC Admin
+                        </div>
+                        <ul class="el-menu el-menu--vertical">
+                            <li class="el-menu-item is-active">
+                                <i class="el-menu-item__icon fas fa-home"></i>
+                                首页概览
+                            </li>
+                            <li class="el-sub-menu is-opened">
+                                <div class="el-sub-menu__title">
+                                    <i class="el-sub-menu__icon fas fa-box"></i>
+                                    产品管理
+                                    <i class="fas fa-chevron-right el-sub-menu__arrow"></i>
+                                </div>
+                                <ul class="el-sub-menu__content">
+                                    <li class="el-menu-item">产品列表</li>
+                                    <li class="el-menu-item is-active">添加产品</li>
+                                    <li class="el-menu-item">产品分类</li>
+                                    <li class="el-menu-item">库存管理</li>
+                                </ul>
+                            </li>
+                            <li class="el-sub-menu">
+                                <div class="el-sub-menu__title">
+                                    <i class="el-sub-menu__icon fas fa-users"></i>
+                                    用户管理
+                                    <i class="fas fa-chevron-right el-sub-menu__arrow"></i>
+                                </div>
+                                <ul class="el-sub-menu__content">
+                                    <li class="el-menu-item">用户列表</li>
+                                    <li class="el-menu-item">角色管理</li>
+                                    <li class="el-menu-item">权限配置</li>
+                                </ul>
+                            </li>
+                            <li class="el-sub-menu">
+                                <div class="el-sub-menu__title">
+                                    <i class="el-sub-menu__icon fas fa-chart-bar"></i>
+                                    数据分析
+                                    <i class="fas fa-chevron-right el-sub-menu__arrow"></i>
+                                </div>
+                                <ul class="el-sub-menu__content">
+                                    <li class="el-menu-item">数据概览</li>
+                                    <li class="el-menu-item">报表导出</li>
+                                    <li class="el-menu-item">趋势分析</li>
+                                </ul>
+                            </li>
+                            <li class="el-menu-item">
+                                <i class="el-menu-item__icon fas fa-shopping-cart"></i>
+                                订单管理
+                            </li>
+                            <li class="el-menu-item">
+                                <i class="el-menu-item__icon fas fa-cog"></i>
+                                系统设置
+                            </li>
+                        </ul>
+                        <div class="menu-footer">
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <i class="fas fa-server" style="color: var(--el-color-primary);"></i>
+                                <span>v2.0.1</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-layout__main">
+                        <div class="menu-breadcrumb">
+                            <span class="menu-breadcrumb__item">首页</span>
+                            <i class="menu-breadcrumb__separator fas fa-chevron-right"></i>
+                            <span class="menu-breadcrumb__item">产品管理</span>
+                            <i class="menu-breadcrumb__separator fas fa-chevron-right"></i>
+                            <span style="color: var(--el-text-color-primary);">添加产品</span>
+                        </div>
+                        <div class="menu-tabs">
+                            <div class="menu-tab is-active">基本信息</div>
+                            <div class="menu-tab">详细描述</div>
+                            <div class="menu-tab">规格参数</div>
+                            <div class="menu-tab">媒体文件</div>
+                        </div>
+                        <div class="menu-content">
+                            <h4 style="margin-bottom: 16px; color: var(--el-text-color-primary); font-size: var(--el-font-size-medium);">添加产品</h4>
+                            <p style="margin-bottom: 12px;">这是产品管理模块的产品添加页面。左侧菜单展示了典型的后台管理系统导航结构。</p>
+                            <p style="margin-bottom: 12px;">支持多级菜单嵌套，当前"产品管理"菜单已展开显示子菜单项。</p>
+                            <p style="color: var(--el-text-color-placeholder);">表单内容区域...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>菜单分组</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">带分组标题和分隔线的菜单</div>
+                <div class="menu-layout">
+                    <div class="menu-layout__aside menu-layout__aside--wide">
+                        <ul class="el-menu el-menu--vertical">
+                            <div class="menu-group__title">常用</div>
+                            <li class="el-menu-item">
+                                <i class="el-menu-item__icon fas fa-home"></i>
+                                首页
+                            </li>
+                            <li class="el-menu-item">
+                                <i class="el-menu-item__icon fas fa-search"></i>
+                                搜索
+                            </li>
+                            <li class="el-menu-item">
+                                <i class="el-menu-item__icon fas fa-bell"></i>
+                                通知
+                            </li>
+                            <div class="menu-divider"></div>
+                            <div class="menu-group__title">内容</div>
+                            <li class="el-menu-item is-active">
+                                <i class="el-menu-item__icon fas fa-file-alt"></i>
+                                文章列表
+                            </li>
+                            <li class="el-menu-item">
+                                <i class="el-menu-item__icon fas fa-images"></i>
+                                媒体库
+                            </li>
+                            <li class="el-menu-item">
+                                <i class="el-menu-item__icon fas fa-comment"></i>
+                                评论管理
+                            </li>
+                            <div class="menu-divider"></div>
+                            <div class="menu-group__title">系统</div>
+                            <li class="el-menu-item">
+                                <i class="el-menu-item__icon fas fa-cog"></i>
+                                设置
+                            </li>
+                            <li class="el-menu-item">
+                                <i class="el-menu-item__icon fas fa-question-circle"></i>
+                                帮助中心
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="menu-layout__main">
+                        <div class="menu-content">
+                            <h4 style="margin-bottom: 16px; color: var(--el-text-color-primary); font-size: var(--el-font-size-medium);">菜单分组功能</h4>
+                            <p style="margin-bottom: 12px;"><code style="color: #409eff; background: #ecf5ff; padding: 2px 6px; border-radius: 4px;">.menu-group__title</code> 创建分组标题</p>
+                            <p style="margin-bottom: 12px;"><code style="color: #409eff; background: #ecf5ff; padding: 2px 6px; border-radius: 4px;">.menu-divider</code> 添加分隔线</p>
+                            <p style="margin-bottom: 12px;"><code style="color: #409eff; background: #ecf5ff; padding: 2px 6px; border-radius: 4px;">.el-menu-item.is-disabled</code> 禁用菜单项</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>折叠状态</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">侧边栏折叠为仅显示图标</div>
+                <div class="menu-layout">
+                    <div class="menu-layout__aside" style="width: 72px;">
+                        <ul class="el-menu el-menu--vertical el-menu--collapse">
+                            <li class="el-menu-item is-active" title="首页">
+                                <i class="el-menu-item__icon fas fa-home"></i>
+                            </li>
+                            <li class="el-menu-item" title="产品">
+                                <i class="el-menu-item__icon fas fa-box"></i>
+                            </li>
+                            <li class="el-menu-item" title="用户">
+                                <i class="el-menu-item__icon fas fa-users"></i>
+                            </li>
+                            <li class="el-menu-item" title="订单">
+                                <i class="el-menu-item__icon fas fa-shopping-cart"></i>
+                            </li>
+                            <li class="el-menu-item" title="设置">
+                                <i class="el-menu-item__icon fas fa-cog"></i>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="menu-layout__main">
+                        <div class="menu-content">
+                            <h4 style="margin-bottom: 16px; color: var(--el-text-color-primary); font-size: var(--el-font-size-medium);">折叠模式</h4>
+                            <p style="margin-bottom: 12px;"><code style="color: #409eff; background: #ecf5ff; padding: 2px 6px; border-radius: 4px;">.el-menu--collapse</code> 创建折叠菜单</p>
+                            <p style="margin-bottom: 12px;">折叠状态下只显示图标，适用于空间有限的后台系统侧边栏。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>菜单状态</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">菜单项的各种交互状态</div>
+                <div class="menu-layout">
+                    <div class="menu-layout__aside" style="width: 240px;">
+                        <ul class="el-menu el-menu--vertical">
+                            <li class="el-menu-item is-active">
+                                <i class="el-menu-item__icon fas fa-check-circle"></i>
+                                默认/选中状态
+                            </li>
+                            <li class="el-menu-item" style="background: var(--el-color-primary-light-9); color: var(--el-color-primary);">
+                                <i class="el-menu-item__icon fas fa-circle"></i>
+                                悬停状态（示例）
+                            </li>
+                            <li class="el-menu-item is-disabled">
+                                <i class="el-menu-item__icon fas fa-ban"></i>
+                                禁用状态
+                            </li>
+                            <li class="el-sub-menu is-opened">
+                                <div class="el-sub-menu__title">
+                                    <i class="el-sub-menu__icon fas fa-folder"></i>
+                                    展开的子菜单
+                                    <i class="fas fa-chevron-right el-sub-menu__arrow"></i>
+                                </div>
+                                <ul class="el-sub-menu__content">
+                                    <li class="el-menu-item">子菜单项 1</li>
+                                    <li class="el-menu-item">子菜单项 2</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="menu-layout__main">
+                        <div class="menu-content">
+                            <h4 style="margin-bottom: 16px; color: var(--el-text-color-primary); font-size: var(--el-font-size-medium);">状态说明</h4>
+                            <p style="margin-bottom: 8px;"><strong>默认状态：</strong>正常显示，可点击</p>
+                            <p style="margin-bottom: 8px;"><strong>选中状态：</strong>左侧显示主题色边框，背景变浅</p>
+                            <p style="margin-bottom: 8px;"><strong>悬停状态：</strong>背景变浅，文字变为主题色</p>
+                            <p style="margin-bottom: 8px;"><strong>禁用状态：</strong>文字变灰，透明度降低，不可点击</p>
+                            <p style="margin-bottom: 8px;"><strong>子菜单：</strong>支持展开/折叠，箭头指示状态</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>对齐方式</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">水平菜单的不同对齐方式</div>
+                <div style="background: var(--el-bg-color); border: 1px solid var(--el-border-color-light); border-radius: var(--el-border-radius-md); margin-bottom: 16px;">
+                    <ul class="el-menu el-menu--horizontal">
+                        <li class="el-menu-item is-active">左对齐</li>
+                        <li class="el-menu-item">菜单一</li>
+                        <li class="el-menu-item">菜单二</li>
+                    </ul>
+                </div>
+                <div style="background: var(--el-bg-color); border: 1px solid var(--el-border-color-light); border-radius: var(--el-border-radius-md);">
+                    <ul class="el-menu el-menu--horizontal" style="justify-content: center;">
+                        <li class="el-menu-item">菜单一</li>
+                        <li class="el-menu-item is-active">居中对齐</li>
+                        <li class="el-menu-item">菜单二</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>应用示例</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">电商后台管理导航</div>
+                <div class="menu-layout">
+                    <div class="menu-layout__aside" style="width: 200px;">
+                        <div style="padding: 16px; border-bottom: 1px solid var(--el-border-color-light); text-align: center;">
+                            <div style="font-weight: var(--el-font-weight-bold); color: var(--el-text-color-primary);">电商管理系统</div>
+                            <div style="font-size: var(--el-font-size-extra-small); color: var(--el-text-color-secondary); margin-top: 4px;">v2.0.0 Enterprise</div>
+                        </div>
+                        <ul class="el-menu el-menu--vertical">
+                            <li class="el-menu-item">
+                                <i class="el-menu-item__icon fas fa-chart-line"></i>
+                                销售概览
+                            </li>
+                            <li class="el-sub-menu is-opened">
+                                <div class="el-sub-menu__title">
+                                    <i class="el-sub-menu__icon fas fa-shopping-bag"></i>
+                                    商品管理
+                                    <i class="fas fa-chevron-right el-sub-menu__arrow"></i>
+                                </div>
+                                <ul class="el-sub-menu__content">
+                                    <li class="el-menu-item">商品列表</li>
+                                    <li class="el-menu-item">添加商品</li>
+                                    <li class="el-menu-item">商品分类</li>
+                                </ul>
+                            </li>
+                            <li class="el-sub-menu">
+                                <div class="el-sub-menu__title">
+                                    <i class="el-sub-menu__icon fas fa-receipt"></i>
+                                    订单管理
+                                    <i class="fas fa-chevron-right el-sub-menu__arrow"></i>
+                                </div>
+                                <ul class="el-sub-menu__content">
+                                    <li class="el-menu-item">全部订单</li>
+                                    <li class="el-menu-item">待发货</li>
+                                    <li class="el-menu-item">已完成</li>
+                                </ul>
+                            </li>
+                            <li class="el-menu-item">
+                                <i class="el-menu-item__icon fas fa-users"></i>
+                                客户管理
+                            </li>
+                            <li class="el-menu-item">
+                                <i class="el-menu-item__icon fas fa-chart-bar"></i>
+                                数据统计
+                            </li>
+                            <div class="menu-divider"></div>
+                            <li class="el-menu-item">
+                                <i class="el-menu-item__icon fas fa-cog"></i>
+                                系统设置
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="menu-layout__main">
+                        <div class="menu-layout__header">
+                            <div class="menu-layout__header--logo">销售概览</div>
+                            <div class="menu-layout__header--user">
+                                <i class="fas fa-user-circle"></i>
+                                管理员
+                            </div>
+                        </div>
+                        <div class="menu-content menu-content--bordered">
+                            <h4 style="margin-bottom: 16px; color: var(--el-text-color-primary);">今日数据概览</h4>
+                            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px;">
+                                <div style="padding: 16px; background: var(--el-color-primary-light-9); border-radius: var(--el-border-radius-md); text-align: center;">
+                                    <div style="font-size: 24px; font-weight: var(--el-font-weight-bold); color: var(--el-color-primary);">¥12,580</div>
+                                    <div style="font-size: var(--el-font-size-extra-small); color: var(--el-text-color-secondary);">今日销售额</div>
+                                </div>
+                                <div style="padding: 16px; background: var(--el-color-success-light-3); border-radius: var(--el-border-radius-md); text-align: center;">
+                                    <div style="font-size: 24px; font-weight: var(--el-font-weight-bold); color: var(--el-color-success);">128</div>
+                                    <div style="font-size: var(--el-font-size-extra-small); color: var(--el-text-color-secondary);">今日订单</div>
+                                </div>
+                                <div style="padding: 16px; background: var(--el-color-warning-light-3); border-radius: var(--el-border-radius-md); text-align: center;">
+                                    <div style="font-size: 24px; font-weight: var(--el-font-weight-bold); color: var(--el-color-warning);">86</div>
+                                    <div style="font-size: var(--el-font-size-extra-small); color: var(--el-text-color-secondary);">待发货</div>
+                                </div>
+                                <div style="padding: 16px; background: var(--el-color-info-light-3); border-radius: var(--el-border-radius-md); text-align: center;">
+                                    <div style="font-size: 24px; font-weight: var(--el-font-weight-bold); color: var(--el-color-info);">2,580</div>
+                                    <div style="font-size: var(--el-font-size-extra-small); color: var(--el-text-color-secondary);">访客数</div>
+                                </div>
+                            </div>
+                            <p style="color: var(--el-text-color-placeholder);">数据图表区域...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.el-menu-item:not(.is-disabled), .el-sub-menu__title').forEach(item => {
+            item.addEventListener('click', function(e) {
+                const menu = this.closest('.el-menu');
+                const isSubMenuTitle = this.classList.contains('el-sub-menu__title');
+
+                if (isSubMenuTitle) {
+                    const subMenu = this.parentElement;
+                    const wasOpened = subMenu.classList.contains('is-opened');
+                    subMenu.parentElement.querySelectorAll('.el-sub-menu.is-opened').forEach(el => {
+                        el.classList.remove('is-opened');
+                    });
+                    if (!wasOpened) {
+                        subMenu.classList.add('is-opened');
+                    }
+                } else if (!this.classList.contains('is-disabled')) {
+                    menu.querySelectorAll('.el-menu-item.is-active').forEach(el => {
+                        el.classList.remove('is-active');
+                    });
+                    this.classList.add('is-active');
+                }
+            });
+        });
+
+        document.querySelectorAll('.menu-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                this.parentElement.querySelectorAll('.menu-tab.is-active').forEach(el => el.classList.remove('is-active'));
+                this.classList.add('is-active');
+            });
+        });
+    </script>
+</body>
+</html>

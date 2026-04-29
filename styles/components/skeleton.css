@@ -1,0 +1,212 @@
+@charset "UTF-8";
+
+/* ==================== Skeleton ==================== */
+
+.yc-skeleton {
+    display: inline-block;
+    background-color: var(--yc-color-fill, #e5e7eb);
+    border-radius: var(--yc-border-radius-base, 4px);
+    animation: yc-skeleton-loading 1.5s ease-in-out infinite;
+}
+
+@keyframes yc-skeleton-loading {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* ==================== Shapes ==================== */
+
+.yc-skeleton--text {
+    height: 16px;
+    border-radius: var(--yc-border-radius-small, 2px);
+    margin-bottom: 8px;
+}
+
+.yc-skeleton--text:last-child {
+    margin-bottom: 0;
+}
+
+.yc-skeleton--circle {
+    border-radius: 50%;
+}
+
+.yc-skeleton--rect {
+    border-radius: var(--yc-border-radius-base, 4px);
+}
+
+.yc-skeleton--round {
+    border-radius: var(--yc-border-radius-lg, 8px);
+}
+
+/* ==================== Width ==================== */
+
+.yc-skeleton--w-full {
+    width: 100%;
+}
+
+.yc-skeleton--w-75 {
+    width: 75%;
+}
+
+.yc-skeleton--w-50 {
+    width: 50%;
+}
+
+.yc-skeleton--w-25 {
+    width: 25%;
+}
+
+.yc-skeleton--w-100 {
+    width: 100px;
+}
+
+.yc-skeleton--w-200 {
+    width: 200px;
+}
+
+.yc-skeleton--w-300 {
+    width: 300px;
+}
+
+/* ==================== Height ==================== */
+
+.yc-skeleton--h-xs {
+    height: 12px;
+}
+
+.yc-skeleton--h-small {
+    height: 16px;
+}
+
+.yc-skeleton--h-base {
+    height: 20px;
+}
+
+.yc-skeleton--h-medium {
+    height: 32px;
+}
+
+.yc-skeleton--h-large {
+    height: 40px;
+}
+
+.yc-skeleton--h-xl {
+    height: 48px;
+}
+
+/* ==================== Avatar ==================== */
+
+.yc-skeleton--avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.yc-skeleton--avatar--circle {
+    border-radius: 50%;
+}
+
+.yc-skeleton--avatar--square {
+    border-radius: var(--yc-border-radius-base, 4px);
+}
+
+.yc-skeleton--avatar--round {
+    border-radius: var(--yc-border-radius-lg, 8px);
+}
+
+.yc-skeleton--avatar--large {
+    width: 48px;
+    height: 48px;
+}
+
+.yc-skeleton--avatar--small {
+    width: 32px;
+    height: 32px;
+}
+
+/* ==================== Image ==================== */
+
+.yc-skeleton--image {
+    width: 100%;
+    height: 200px;
+    border-radius: var(--yc-border-radius-base, 4px);
+}
+
+.yc-skeleton--image--square {
+    border-radius: 0;
+}
+
+.yc-skeleton--image--round {
+    border-radius: var(--yc-border-radius-base, 4px);
+}
+
+/* ==================== Card ==================== */
+
+.yc-skeleton__card {
+    background-color: var(--yc-color-bg, #ffffff);
+    border-radius: var(--yc-border-radius-base, 4px);
+    padding: 16px;
+    box-shadow: var(--yc-box-shadow-sm, 0 1px 3px 0 rgba(0, 0, 0, 0.1));
+}
+
+.yc-skeleton__card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.yc-skeleton__card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* ==================== Table ==================== */
+
+.yc-skeleton__table {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.yc-skeleton__table-row {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+/* ==================== Animation ==================== */
+
+.yc-skeleton--animated-gradient {
+    background: linear-gradient(90deg, var(--yc-color-fill, #e5e7eb) 25%, var(--yc-color-fill-lighter, #f5f7fa) 50%, var(--yc-color-fill, #e5e7eb) 75%);
+    background-size: 200% 100%;
+    animation: yc-skeleton-gradient 1.5s ease-in-out infinite;
+}
+
+@keyframes yc-skeleton-gradient {
+    0% {
+        background-position: 100% 0;
+    }
+    100% {
+        background-position: -100% 0;
+    }
+}
+
+/* ==================== Sizes ==================== */
+
+.yc-skeleton--large .yc-skeleton--avatar {
+    width: 48px;
+    height: 48px;
+}
+
+.yc-skeleton--small .yc-skeleton--text {
+    height: 14px;
+}

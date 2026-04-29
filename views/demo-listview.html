@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ListView 列表 - YC UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+    <style>
+        .listview-demo-container {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+        .listview-panel {
+            flex: 1;
+            min-width: 300px;
+            border: 1px solid #e4e7ed;
+            border-radius: 4px;
+            background: #fff;
+            overflow: hidden;
+        }
+        .listview-panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            border-bottom: 1px solid #ebeef5;
+            background: #fafafa;
+        }
+        .listview-panel-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #303133;
+        }
+        .listview-actions {
+            display: flex;
+            gap: 4px;
+        }
+        .listview-search {
+            padding: 8px 12px;
+            border: none;
+            border-bottom: 1px solid #ebeef5;
+            outline: none;
+            font-size: 14px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .listview-search:focus {
+            border-bottom-color: #409eff;
+        }
+        .selected-info {
+            padding: 8px 16px;
+            background: #f5f7fa;
+            font-size: 12px;
+            color: #909399;
+            border-top: 1px solid #ebeef5;
+        }
+        .contact-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">ListView 列表</h1>
+            <p class="demo-page-subtitle">用于展示列表结构数据，支持单选、多选、拖拽排序</p>
+        </div>
+
+        <div class="listview-demo-container">
+            <div class="listview-panel">
+                <div class="listview-panel-header">
+                    <span class="listview-panel-title">联系人列表</span>
+                    <div class="listview-actions">
+                        <button class="yc-button yc-button--small" onclick="toggleListViewMode('list')"><i class="fa fa-list"></i></button>
+                        <button class="yc-button yc-button--small" onclick="toggleListViewMode('grid')"><i class="fa fa-th"></i></button>
+                    </div>
+                </div>
+                <input type="text" class="listview-search" placeholder="搜索联系人..." id="contact-search">
+                <ul class="yc-listview yc-listview--scrollable yc-listview--single-select" id="contact-list" style="max-height: 400px;">
+                    <li class="yc-listview__item" data-id="1">
+                        <div class="contact-avatar" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">张</div>
+                        <div class="yc-listview__item-content">
+                            <div class="yc-listview__item-title">张三</div>
+                            <div class="yc-listview__item-description">技术部 · 高级工程师</div>
+                            <div class="yc-listview__item-meta"><i class="fa fa-phone"></i> 138-0013-8001</div>
+                        </div>
+                        <div class="yc-listview__item-extra">
+                            <span class="yc-tag yc-tag--success">在线</span>
+                        </div>
+                    </li>
+                    <li class="yc-listview__item" data-id="2">
+                        <div class="contact-avatar" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">李</div>
+                        <div class="yc-listview__item-content">
+                            <div class="yc-listview__item-title">李四</div>
+                            <div class="yc-listview__item-description">产品部 · 产品经理</div>
+                            <div class="yc-listview__item-meta"><i class="fa fa-phone"></i> 138-0013-8002</div>
+                        </div>
+                        <div class="yc-listview__item-extra">
+                            <span class="yc-tag yc-tag--success">在线</span>
+                        </div>
+                    </li>
+                    <li class="yc-listview__item" data-id="3">
+                        <div class="contact-avatar" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">王</div>
+                        <div class="yc-listview__item-content">
+                            <div class="yc-listview__item-title">王五</div>
+                            <div class="yc-listview__item-description">设计部 · UI设计师</div>
+                            <div class="yc-listview__item-meta"><i class="fa fa-phone"></i> 138-0013-8003</div>
+                        </div>
+                        <div class="yc-listview__item-extra">
+                            <span class="yc-tag yc-tag--info">离开</span>
+                        </div>
+                    </li>
+                    <li class="yc-listview__item" data-id="4">
+                        <div class="contact-avatar" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">赵</div>
+                        <div class="yc-listview__item-content">
+                            <div class="yc-listview__item-title">赵六</div>
+                            <div class="yc-listview__item-description">市场部 · 市场总监</div>
+                            <div class="yc-listview__item-meta"><i class="fa fa-phone"></i> 138-0013-8004</div>
+                        </div>
+                        <div class="yc-listview__item-extra">
+                            <span class="yc-tag yc-tag--danger">离线</span>
+                        </div>
+                    </li>
+                    <li class="yc-listview__item" data-id="5">
+                        <div class="contact-avatar" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">孙</div>
+                        <div class="yc-listview__item-content">
+                            <div class="yc-listview__item-title">孙七</div>
+                            <div class="yc-listview__item-description">运营部 · 运营专员</div>
+                            <div class="yc-listview__item-meta"><i class="fa fa-phone"></i> 138-0013-8005</div>
+                        </div>
+                        <div class="yc-listview__item-extra">
+                            <span class="yc-tag yc-tag--success">在线</span>
+                        </div>
+                    </li>
+                </ul>
+                <div class="selected-info">已选择: <span id="contact-selected-count">0</span> 人</div>
+            </div>
+
+            <div class="listview-panel">
+                <div class="listview-panel-header">
+                    <span class="listview-panel-title">任务列表（可拖拽排序）</span>
+                    <button class="yc-button yc-button--small yc-button--primary" onclick="getTaskOrder()">获取顺序</button>
+                </div>
+                <ul class="yc-listview yc-listview--draggable yc-listview--scrollable" id="task-list" style="max-height: 400px;">
+                    <li class="yc-listview__item" data-id="1" draggable="true">
+                        <div class="yc-listview__item-drag-handle"><i class="fa fa-grip-vertical"></i></div>
+                        <input type="checkbox" class="yc-listview__item-checkbox">
+                        <div class="yc-listview__item-content">
+                            <div class="yc-listview__item-title">完成首页UI设计</div>
+                            <div class="yc-listview__item-description">优先级: 高 · 截止日期: 2024-02-01</div>
+                        </div>
+                        <div class="yc-listview__item-extra">
+                            <span class="yc-tag yc-tag--danger">紧急</span>
+                        </div>
+                    </li>
+                    <li class="yc-listview__item" data-id="2" draggable="true">
+                        <div class="yc-listview__item-drag-handle"><i class="fa fa-grip-vertical"></i></div>
+                        <input type="checkbox" class="yc-listview__item-checkbox">
+                        <div class="yc-listview__item-content">
+                            <div class="yc-listview__item-title">开发用户登录模块</div>
+                            <div class="yc-listview__item-description">优先级: 中 · 截止日期: 2024-02-05</div>
+                        </div>
+                        <div class="yc-listview__item-extra">
+                            <span class="yc-tag yc-tag--warning">进行中</span>
+                        </div>
+                    </li>
+                    <li class="yc-listview__item" data-id="3" draggable="true">
+                        <div class="yc-listview__item-drag-handle"><i class="fa fa-grip-vertical"></i></div>
+                        <input type="checkbox" class="yc-listview__item-checkbox">
+                        <div class="yc-listview__item-content">
+                            <div class="yc-listview__item-title">编写API接口文档</div>
+                            <div class="yc-listview__item-description">优先级: 中 · 截止日期: 2024-02-08</div>
+                        </div>
+                        <div class="yc-listview__item-extra">
+                            <span class="yc-tag yc-tag--primary">待开始</span>
+                        </div>
+                    </li>
+                    <li class="yc-listview__item" data-id="4" draggable="true">
+                        <div class="yc-listview__item-drag-handle"><i class="fa fa-grip-vertical"></i></div>
+                        <input type="checkbox" class="yc-listview__item-checkbox">
+                        <div class="yc-listview__item-content">
+                            <div class="yc-listview__item-title">数据库优化方案</div>
+                            <div class="yc-listview__item-description">优先级: 低 · 截止日期: 2024-02-15</div>
+                        </div>
+                        <div class="yc-listview__item-extra">
+                            <span class="yc-tag yc-tag--info">计划中</span>
+                        </div>
+                    </li>
+                    <li class="yc-listview__item" data-id="5" draggable="true">
+                        <div class="yc-listview__item-drag-handle"><i class="fa fa-grip-vertical"></i></div>
+                        <input type="checkbox" class="yc-listview__item-checkbox">
+                        <div class="yc-listview__item-content">
+                            <div class="yc-listview__item-title">单元测试覆盖率达到90%</div>
+                            <div class="yc-listview__item-description">优先级: 中 · 截止日期: 2024-02-20</div>
+                        </div>
+                        <div class="yc-listview__item-extra">
+                            <span class="yc-tag yc-tag--success">已完成</span>
+                        </div>
+                    </li>
+                </ul>
+                <div class="selected-info">已选择: <span id="task-selected-count">0</span> 项</div>
+            </div>
+
+            <div class="listview-panel">
+                <div class="listview-panel-header">
+                    <span class="listview-panel-title">文件列表（多选）</span>
+                    <div class="listview-actions">
+                        <button class="yc-button yc-button--small" onclick="selectAllFiles()">全选</button>
+                        <button class="yc-button yc-button--small" onclick="deleteSelected()">删除</button>
+                    </div>
+                </div>
+                <ul class="yc-listview yc-listview--multi-select yc-listview--scrollable" id="file-list" style="max-height: 400px;">
+                    <li class="yc-listview__item" data-id="1">
+                        <input type="checkbox" class="yc-listview__item-checkbox">
+                        <i class="fa fa-folder" style="color: #e6a23c; font-size: 20px; margin-right: 12px;"></i>
+                        <div class="yc-listview__item-content">
+                            <div class="yc-listview__item-title">Documents</div>
+                            <div class="yc-listview__item-meta">12 个文件 · 修改于 2024-01-15</div>
+                        </div>
+                        <div class="yc-listview__item-extra">
+                            <button class="yc-button yc-button--text yc-button--small"><i class="fa fa-ellipsis-v"></i></button>
+                        </div>
+                    </li>
+                    <li class="yc-listview__item" data-id="2">
+                        <input type="checkbox" class="yc-listview__item-checkbox">
+                        <i class="fa fa-folder" style="color: #e6a23c; font-size: 20px; margin-right: 12px;"></i>
+                        <div class="yc-listview__item-content">
+                            <div class="yc-listview__item-title">Images</div>
+                            <div class="yc-listview__item-meta">28 个文件 · 修改于 2024-01-14</div>
+                        </div>
+                        <div class="yc-listview__item-extra">
+                            <button class="yc-button yc-button--text yc-button--small"><i class="fa fa-ellipsis-v"></i></button>
+                        </div>
+                    </li>
+                    <li class="yc-listview__item" data-id="3">
+                        <input type="checkbox" class="yc-listview__item-checkbox">
+                        <i class="fa fa-file-pdf" style="color: #f56c6c; font-size: 20px; margin-right: 12px;"></i>
+                        <div class="yc-listview__item-content">
+                            <div class="yc-listview__item-title">年度报告.pdf</div>
+                            <div class="yc-listview__item-meta">2.5 MB · 修改于 2024-01-13</div>
+                        </div>
+                        <div class="yc-listview__item-extra">
+                            <button class="yc-button yc-button--text yc-button--small"><i class="fa fa-ellipsis-v"></i></button>
+                        </div>
+                    </li>
+                    <li class="yc-listview__item" data-id="4">
+                        <input type="checkbox" class="yc-listview__item-checkbox">
+                        <i class="fa fa-file-excel" style="color: #67c23a; font-size: 20px; margin-right: 12px;"></i>
+                        <div class="yc-listview__item-content">
+                            <div class="yc-listview__item-title">财务报表.xlsx</div>
+                            <div class="yc-listview__item-meta">1.8 MB · 修改于 2024-01-12</div>
+                        </div>
+                        <div class="yc-listview__item-extra">
+                            <button class="yc-button yc-button--text yc-button--small"><i class="fa fa-ellipsis-v"></i></button>
+                        </div>
+                    </li>
+                    <li class="yc-listview__item" data-id="5">
+                        <input type="checkbox" class="yc-listview__item-checkbox">
+                        <i class="fa fa-file-word" style="color: #409eff; font-size: 20px; margin-right: 12px;"></i>
+                        <div class="yc-listview__item-content">
+                            <div class="yc-listview__item-title">项目计划书.docx</div>
+                            <div class="yc-listview__item-meta">856 KB · 修改于 2024-01-11</div>
+                        </div>
+                        <div class="yc-listview__item-extra">
+                            <button class="yc-button yc-button--text yc-button--small"><i class="fa fa-ellipsis-v"></i></button>
+                        </div>
+                    </li>
+                    <li class="yc-listview__item" data-id="6">
+                        <input type="checkbox" class="yc-listview__item-checkbox">
+                        <i class="fa fa-file-archive" style="color: #e6a23c; font-size: 20px; margin-right: 12px;"></i>
+                        <div class="yc-listview__item-content">
+                            <div class="yc-listview__item-title">项目备份.zip</div>
+                            <div class="yc-listview__item-meta">120 MB · 修改于 2024-01-10</div>
+                        </div>
+                        <div class="yc-listview__item-extra">
+                            <button class="yc-button yc-button--text yc-button--small"><i class="fa fa-ellipsis-v"></i></button>
+                        </div>
+                    </li>
+                </ul>
+                <div class="selected-info">已选择: <span id="file-selected-count">0</span> 个文件</div>
+            </div>
+        </div>
+
+        <div class="demo-section" style="margin-top: 24px;">
+            <h3>不同尺寸</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">提供大、默认、小三种尺寸</div>
+                <div style="display: flex; flex-direction: column; gap: 24px;">
+                    <div>
+                        <h4>Large</h4>
+                        <ul class="yc-listview yc-listview--large">
+                            <li class="yc-listview__item">
+                                <i class="fa fa-file" style="color: #909399; font-size: 24px; margin-right: 16px;"></i>
+                                <div class="yc-listview__item-content">
+                                    <div class="yc-listview__item-title">大尺寸列表项</div>
+                                    <div class="yc-listview__item-description">这是大尺寸的列表项描述信息</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>Default</h4>
+                        <ul class="yc-listview">
+                            <li class="yc-listview__item">
+                                <i class="fa fa-file" style="color: #909399; font-size: 20px; margin-right: 12px;"></i>
+                                <div class="yc-listview__item-content">
+                                    <div class="yc-listview__item-title">默认尺寸列表项</div>
+                                    <div class="yc-listview__item-description">这是默认尺寸的列表项描述信息</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>Small</h4>
+                        <ul class="yc-listview yc-listview--small">
+                            <li class="yc-listview__item">
+                                <i class="fa fa-file" style="color: #909399; font-size: 16px; margin-right: 8px;"></i>
+                                <div class="yc-listview__item-content">
+                                    <div class="yc-listview__item-title">小尺寸列表项</div>
+                                    <div class="yc-listview__item-description">这是小尺寸的列表项描述信息</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Single select contact list
+        var contactItems = document.querySelectorAll('#contact-list .yc-listview__item');
+        contactItems.forEach(function(item) {
+            item.addEventListener('click', function(e) {
+                if (e.target.tagName === 'INPUT') return;
+                contactItems.forEach(function(i) {
+                    i.classList.remove('is-selected', 'is-current');
+                });
+                this.classList.add('is-selected', 'is-current');
+                document.getElementById('contact-selected-count').textContent = '1';
+            });
+        });
+
+        // Contact search filter
+        var contactSearch = document.getElementById('contact-search');
+        if (contactSearch) {
+            contactSearch.addEventListener('input', function() {
+                var keyword = this.value.toLowerCase();
+                contactItems.forEach(function(item) {
+                    var title = item.querySelector('.yc-listview__item-title');
+                    var desc = item.querySelector('.yc-listview__item-description');
+                    var text = (title ? title.textContent : '') + ' ' + (desc ? desc.textContent : '');
+                    if (keyword === '' || text.toLowerCase().indexOf(keyword) !== -1) {
+                        item.style.display = '';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        }
+
+        // Task list checkboxes
+        var taskCheckboxes = document.querySelectorAll('#task-list .yc-listview__item-checkbox');
+        taskCheckboxes.forEach(function(cb) {
+            cb.addEventListener('change', function() {
+                var item = this.closest('.yc-listview__item');
+                if (this.checked) {
+                    item.classList.add('is-selected');
+                } else {
+                    item.classList.remove('is-selected');
+                }
+                updateTaskCount();
+            });
+        });
+
+        function updateTaskCount() {
+            var checked = document.querySelectorAll('#task-list .yc-listview__item-checkbox:checked').length;
+            document.getElementById('task-selected-count').textContent = checked;
+        }
+
+        // File list checkboxes
+        var fileCheckboxes = document.querySelectorAll('#file-list .yc-listview__item-checkbox');
+        fileCheckboxes.forEach(function(cb) {
+            cb.addEventListener('change', function() {
+                var item = this.closest('.yc-listview__item');
+                if (this.checked) {
+                    item.classList.add('is-selected');
+                } else {
+                    item.classList.remove('is-selected');
+                }
+                updateFileCount();
+            });
+        });
+
+        function updateFileCount() {
+            var checked = document.querySelectorAll('#file-list .yc-listview__item-checkbox:checked').length;
+            document.getElementById('file-selected-count').textContent = checked;
+        }
+
+        function selectAllFiles() {
+            fileCheckboxes.forEach(function(cb) {
+                cb.checked = true;
+                cb.closest('.yc-listview__item').classList.add('is-selected');
+            });
+            updateFileCount();
+        }
+
+        function deleteSelected() {
+            var checked = document.querySelectorAll('#file-list .yc-listview__item-checkbox:checked');
+            if (checked.length === 0) {
+                alert('请先选择要删除的文件');
+                return;
+            }
+            if (confirm('确定要删除选中的 ' + checked.length + ' 个文件吗？')) {
+                checked.forEach(function(cb) {
+                    cb.closest('.yc-listview__item').remove();
+                });
+                updateFileCount();
+            }
+        }
+
+        // Draggable task list
+        var taskList = document.getElementById('task-list');
+        var dragSrcEl = null;
+
+        if (taskList) {
+            taskList.querySelectorAll('li[draggable="true"]').forEach(function(item) {
+                item.addEventListener('dragstart', handleDragStart);
+                item.addEventListener('dragover', handleDragOver);
+                item.addEventListener('dragenter', handleDragEnter);
+                item.addEventListener('dragleave', handleDragLeave);
+                item.addEventListener('drop', handleDrop);
+                item.addEventListener('dragend', handleDragEnd);
+            });
+
+            function handleDragStart(e) {
+                dragSrcEl = this;
+                e.dataTransfer.effectAllowed = 'move';
+                e.dataTransfer.setData('text/plain', this.dataset.id);
+                this.classList.add('is-dragging');
+            }
+
+            function handleDragOver(e) {
+                if (e.preventDefault) e.preventDefault();
+                e.dataTransfer.dropEffect = 'move';
+                return false;
+            }
+
+            function handleDragEnter(e) {
+                if (this !== dragSrcEl) {
+                    this.classList.add('is-drag-over', 'is-drag-before');
+                }
+            }
+
+            function handleDragLeave(e) {
+                this.classList.remove('is-drag-over', 'is-drag-before');
+            }
+
+            function handleDrop(e) {
+                if (e.stopPropagation) e.stopPropagation();
+                if (dragSrcEl !== this) {
+                    var parent = this.parentNode;
+                    parent.insertBefore(dragSrcEl, this);
+                }
+                return false;
+            }
+
+            function handleDragEnd(e) {
+                this.classList.remove('is-dragging');
+                document.querySelectorAll('.yc-listview__item.is-drag-over').forEach(function(item) {
+                    item.classList.remove('is-drag-over', 'is-drag-before');
+                });
+            }
+        }
+
+        function getTaskOrder() {
+            var items = [];
+            taskList.querySelectorAll('li[draggable="true"]').forEach(function(item) {
+                var title = item.querySelector('.yc-listview__item-title');
+                if (title) items.push(title.textContent);
+            });
+            alert('当前任务顺序:\n' + items.map(function(t, i) { return (i + 1) + '. ' + t; }).join('\n'));
+        }
+
+        // View mode toggle
+        function toggleListViewMode(mode) {
+            var list = document.getElementById('contact-list');
+            if (mode === 'grid') {
+                list.classList.add('yc-listview--grid');
+                list.classList.remove('yc-listview--single-select');
+            } else {
+                list.classList.remove('yc-listview--grid');
+                list.classList.add('yc-listview--single-select');
+            }
+        }
+    </script>
+</body>
+</html>

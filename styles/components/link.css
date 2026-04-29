@@ -1,0 +1,138 @@
+@charset "UTF-8";
+
+/**
+ * YC UI Link Component
+ * Text links with various styles and states
+ */
+
+.yc-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: var(--yc-font-size-small);
+    color: var(--yc-color-primary);
+    text-decoration: none;
+    cursor: pointer;
+    transition: all var(--yc-transition-fast);
+    position: relative;
+}
+
+.yc-link:hover {
+    color: var(--yc-color-primary-hover);
+    text-decoration: underline;
+}
+
+.yc-link:active {
+    color: var(--yc-color-primary-active);
+}
+
+.yc-link:visited {
+    color: var(--yc-color-primary);
+}
+
+.yc-link--primary {
+    color: var(--yc-color-primary);
+}
+
+.yc-link--primary:hover {
+    color: var(--yc-color-primary-hover);
+}
+
+.yc-link--success {
+    color: var(--yc-color-success);
+}
+
+.yc-link--success:hover {
+    color: var(--yc-color-success-hover);
+}
+
+.yc-link--warning {
+    color: var(--yc-color-warning);
+}
+
+.yc-link--warning:hover {
+    color: var(--yc-color-warning-hover);
+}
+
+.yc-link--danger {
+    color: var(--yc-color-danger);
+}
+
+.yc-link--danger:hover {
+    color: var(--yc-color-danger-hover);
+}
+
+.yc-link--info {
+    color: var(--yc-color-info);
+}
+
+.yc-link--info:hover {
+    color: var(--yc-color-info-hover);
+}
+
+.yc-link--default {
+    color: var(--yc-color-text-regular);
+}
+
+.yc-link--default:hover {
+    color: var(--yc-color-primary);
+}
+
+.yc-link--small {
+    font-size: var(--yc-font-size-extra-small);
+}
+
+.yc-link--medium {
+    font-size: var(--yc-font-size-small);
+}
+
+.yc-link--large {
+    font-size: var(--yc-font-size-medium);
+}
+
+.yc-link--underline-none:hover {
+    text-decoration: none;
+}
+
+.yc-link--underline-always {
+    text-decoration: underline;
+}
+
+.yc-link--underline-always:hover {
+    text-decoration: underline;
+}
+
+.yc-link--underline-hover {
+    text-decoration: none;
+}
+
+.yc-link--underline-hover:hover {
+    text-decoration: underline;
+}
+
+.yc-link--disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.yc-link--disabled:hover {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+.yc-link__icon {
+    font-size: 12px;
+    transition: transform var(--yc-transition-fast);
+}
+
+.yc-link:hover .yc-link__icon--arrow-left {
+    transform: translateX(-3px);
+}
+
+.yc-link:hover .yc-link__icon--arrow-right {
+    transform: translateX(3px);
+}
+
+.yc-link:hover .yc-link__icon--arrow-up {
+    transform: translateY(-3px);
+}

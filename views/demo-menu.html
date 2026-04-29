@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu 导航菜单 - YC UI</title>
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-header__title">Menu 导航菜单</h1>
+            <p class="demo-page-header__desc">为网站提供导航功能的菜单，支持水平和垂直两种布局。</p>
+        </div>
+
+        <div class="demo-section">
+            <h2 class="demo-section__title">水平菜单</h2>
+            <p class="demo-section__desc">水平排列的导航菜单。</p>
+            <div class="demo-block">
+                <ul class="yc-menu yc-menu--horizontal">
+                    <li class="yc-menu-item is-active">
+                        <i class="fas fa-home yc-menu-item__icon"></i>
+                        首页
+                    </li>
+                    <li class="yc-menu-item">文档</li>
+                    <li class="yc-menu-item">组件</li>
+                    <li class="yc-menu-item">资源</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2 class="demo-section__title">垂直菜单</h2>
+            <p class="demo-section__desc">垂直排列的导航菜单。</p>
+            <div class="demo-block">
+                <div class="demo-row" style="gap: 24px;">
+                    <div style="width: 240px; border: 1px solid var(--yc-color-border-light); border-radius: var(--yc-border-radius-md);">
+                        <ul class="yc-menu yc-menu--vertical">
+                            <li class="yc-menu-item is-active">
+                                <i class="fas fa-home yc-menu-item__icon"></i>
+                                首页
+                            </li>
+                            <li class="yc-menu-item">
+                                <i class="fas fa-file-alt yc-menu-item__icon"></i>
+                                文档
+                            </li>
+                            <li class="yc-menu-item">
+                                <i class="fas fa-cog yc-menu-item__icon"></i>
+                                设置
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div style="flex: 1; padding: 16px; background: var(--yc-color-bg-page); border-radius: var(--yc-border-radius-md);">
+                        <h4 class="yc-text-h4">菜单内容区</h4>
+                        <p class="yc-text-paragraph yc-text-secondary">点击左侧菜单项查看效果。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2 class="demo-section__title">带子菜单</h2>
+            <p class="demo-section__desc">支持多级嵌套的子菜单结构。</p>
+            <div class="demo-block">
+                <div class="demo-row" style="gap: 24px;">
+                    <div style="width: 240px; border: 1px solid var(--yc-color-border-light); border-radius: var(--yc-border-radius-md);">
+                        <ul class="yc-menu yc-menu--vertical">
+                            <li class="yc-menu-item is-active">
+                                <i class="fas fa-home yc-menu-item__icon"></i>
+                                首页
+                            </li>
+                            <li class="yc-sub-menu is-opened">
+                                <div class="yc-sub-menu__title">
+                                    <i class="fas fa-folder yc-sub-menu__icon"></i>
+                                    组件
+                                    <i class="fas fa-chevron-right yc-sub-menu__arrow"></i>
+                                </div>
+                                <ul class="yc-sub-menu__content">
+                                    <li class="yc-menu-item is-active">按钮</li>
+                                    <li class="yc-menu-item">输入框</li>
+                                    <li class="yc-menu-item">选择器</li>
+                                </ul>
+                            </li>
+                            <li class="yc-sub-menu">
+                                <div class="yc-sub-menu__title">
+                                    <i class="fas fa-puzzle-piece yc-sub-menu__icon"></i>
+                                    资源
+                                    <i class="fas fa-chevron-right yc-sub-menu__arrow"></i>
+                                </div>
+                                <ul class="yc-sub-menu__content">
+                                    <li class="yc-menu-item">图标库</li>
+                                    <li class="yc-menu-item">模板</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div style="flex: 1; padding: 16px; background: var(--yc-color-bg-page); border-radius: var(--yc-border-radius-md);">
+                        <h4 class="yc-text-h4">子菜单内容区</h4>
+                        <p class="yc-text-paragraph yc-text-secondary">点击左侧子菜单标题展开或收起内容。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2 class="demo-section__title">折叠菜单</h2>
+            <p class="demo-section__desc">菜单可以折叠为图标模式，节省空间。</p>
+            <div class="demo-block">
+                <div style="width: 64px; border: 1px solid var(--yc-color-border-light); border-radius: var(--yc-border-radius-md);">
+                    <ul class="yc-menu yc-menu--vertical yc-menu--collapse">
+                        <li class="yc-menu-item is-active" title="首页">
+                            <i class="fas fa-home yc-menu-item__icon"></i>
+                        </li>
+                        <li class="yc-menu-item" title="文档">
+                            <i class="fas fa-file-alt yc-menu-item__icon"></i>
+                        </li>
+                        <li class="yc-menu-item" title="设置">
+                            <i class="fas fa-cog yc-menu-item__icon"></i>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 子菜单展开/收起
+            document.querySelectorAll('.yc-sub-menu__title').forEach(title => {
+                title.addEventListener('click', function() {
+                    const subMenu = this.parentElement;
+                    subMenu.classList.toggle('is-opened');
+                });
+            });
+
+            // 菜单项选中状态
+            document.querySelectorAll('.yc-menu-item').forEach(item => {
+                if (!item.closest('.yc-sub-menu__content')) {
+                    item.addEventListener('click', function() {
+                        const menu = this.closest('.yc-menu');
+                        if (menu) {
+                            menu.querySelectorAll('.yc-menu-item').forEach(i => i.classList.remove('is-active'));
+                            this.classList.add('is-active');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-CN" yc-theme="light">
+<html lang="zh-CN" yc-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Window 窗口组件示例 - YC UI</title>
+    <title>YC Window 对话框组件示例</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../styles/index.css">
     <link rel="stylesheet" href="../styles/demo.css">
@@ -11,54 +11,67 @@
 <body>
     <div class="demo-container">
         <div class="demo-page-header">
-            <h1 class="demo-page-title">Window 窗口组件</h1>
-            <p class="demo-page-subtitle">支持拖拽、调整大小、最小化、最大化等功能的高级窗口组件</p>
+            <h1 class="demo-page-title">YC Window 对话框组件</h1>
+            <p class="demo-page-subtitle">参考 kendo-ui 的 windows 构建的对话框组件，支持拖拽、大小调整、最小化、最大化和关闭功能</p>
         </div>
 
         <div class="demo-section">
-            <h3>基础用法</h3>
+            <h3>基本对话框</h3>
             <div class="demo-block">
-                <div class="demo-block-title">基本窗口</div>
-                <div class="demo-row">
+                <div class="demo-block-title">基础用法</div>
+                <div class="demo-block-description">点击下方按钮打开一个基本的对话框，包含标题、内容和底部按钮。</div>
+                <div class="demo-btn-row">
                     <button class="yc-button yc-button--primary" onclick="openBasicDialog()">
-                        <i class="fas fa-window-maximize"></i> 打开窗口
+                        <i class="fas fa-window-maximize"></i> 打开基本对话框
                     </button>
                 </div>
             </div>
         </div>
 
         <div class="demo-section">
-            <h3>功能测试</h3>
+            <h3>对话框功能测试</h3>
             <div class="demo-block">
-                <div class="demo-block-title">测试拖拽、调整大小、最小化、最大化</div>
-                <div class="demo-row">
+                <div class="demo-block-title">功能测试</div>
+                <div class="demo-block-description">测试对话框的各种功能：</div>
+                <ul style="line-height: 2; margin: 12px 0; padding-left: 20px; color: var(--yc-color-text-secondary);">
+                    <li><i class="fas fa-arrows-alt" style="width: 20px;"></i> 拖拽：通过标题栏拖动对话框</li>
+                    <li><i class="fas fa-expand-arrows-alt" style="width: 20px;"></i> 大小调整：通过右下角调整对话框大小</li>
+                    <li><i class="fas fa-minus" style="width: 20px;"></i> 最小化：点击最小化按钮</li>
+                    <li><i class="far fa-square" style="width: 20px;"></i> 最大化：点击最大化按钮</li>
+                    <li><i class="fas fa-times" style="width: 20px;"></i> 关闭：点击关闭按钮</li>
+                    <li><i class="fas fa-keyboard" style="width: 20px;"></i> 按钮组：点击底部按钮</li>
+                </ul>
+                <div class="demo-btn-row">
                     <button class="yc-button yc-button--primary" onclick="openFeatureDialog()">
-                        <i class="fas fa-cogs"></i> 打开功能窗口
+                        <i class="fas fa-bug"></i> 打开功能测试对话框
                     </button>
                 </div>
             </div>
         </div>
 
         <div class="demo-section">
-            <h3>自定义内容</h3>
+            <h3>自定义对话框</h3>
             <div class="demo-block">
-                <div class="demo-block-title">自定义窗口内容</div>
-                <div class="demo-row">
+                <div class="demo-block-title">自定义内容</div>
+                <div class="demo-block-description">自定义对话框的标题、内容和按钮文本。</div>
+                <div class="demo-btn-row">
                     <button class="yc-button yc-button--primary" onclick="openCustomDialog()">
-                        <i class="fas fa-edit"></i> 打开自定义窗口
+                        <i class="fas fa-cog"></i> 打开自定义对话框
                     </button>
                 </div>
             </div>
         </div>
 
         <div class="demo-section">
-            <h3>居中定位</h3>
+            <h3>对话框测试区域</h3>
             <div class="demo-block">
-                <div class="demo-block-title">窗口自动居中显示</div>
-                <div class="demo-row">
-                    <button class="yc-button yc-button--primary" onclick="openCenteredDialog()">
-                        <i class="fas fa-arrows-alt"></i> 打开居中窗口
-                    </button>
+                <div class="demo-block-title">交互测试</div>
+                <div class="demo-block-description">在此区域测试对话框的交互功能。打开对话框后可以拖拽、调整大小等操作。</div>
+                <div style="margin-top: 20px; padding: 40px; background: var(--yc-color-bg-overlay); border-radius: var(--yc-border-radius-base); min-height: 200px; display: flex; align-items: center; justify-content: center; border: 2px dashed var(--yc-color-border);">
+                    <div style="text-align: center; color: var(--yc-color-text-placeholder);">
+                        <i class="fas fa-object-group" style="font-size: 48px; margin-bottom: 16px; display: block;"></i>
+                        <span>对话框将在此区域打开</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -234,7 +247,7 @@
 
             initDrag(e) {
                 if (e.target.closest('.yc-window-header-buttons')) return;
-                if (this.element.classList.contains('maximized')) return;
+                if (this.element.classList.contains('is-maximized')) return;
 
                 if (this.element.style.position !== 'absolute') {
                     const rect = this.element.getBoundingClientRect();
@@ -269,8 +282,18 @@
                 const windowWidth = this.element.offsetWidth;
                 const windowHeight = this.element.offsetHeight;
 
-                const boundedLeft = Math.max(0, Math.min(newLeft, viewportWidth - windowWidth));
-                const boundedTop = Math.max(0, Math.min(newTop, viewportHeight - windowHeight));
+                const snapThreshold = 20;
+                let boundedLeft = newLeft;
+                let boundedTop = newTop;
+
+                if (Math.abs(boundedLeft) < snapThreshold) boundedLeft = 0;
+                else if (Math.abs(boundedLeft + windowWidth - viewportWidth) < snapThreshold) boundedLeft = viewportWidth - windowWidth;
+                
+                if (Math.abs(boundedTop) < snapThreshold) boundedTop = 0;
+                else if (Math.abs(boundedTop + windowHeight - viewportHeight) < snapThreshold) boundedTop = viewportHeight - windowHeight;
+
+                boundedLeft = Math.max(-windowWidth / 2, Math.min(boundedLeft, viewportWidth - windowWidth / 2));
+                boundedTop = Math.max(-windowHeight / 2, Math.min(boundedTop, viewportHeight - windowHeight / 2));
 
                 this.element.style.transform = `translate(${boundedLeft - this.windowStart.left}px, ${boundedTop - this.windowStart.top}px)`;
             }
@@ -377,6 +400,7 @@
                     top: rect.top
                 };
 
+                this.element.classList.add('is-resizing');
                 document.addEventListener('mousemove', this.boundHandleResize);
                 document.addEventListener('mouseup', this.boundStopResize);
                 e.preventDefault();
@@ -396,40 +420,43 @@
                         let newLeft = this.resizeStart.left;
                         let newTop = this.resizeStart.top;
 
+                        const viewportWidth = window.innerWidth;
+                        const viewportHeight = window.innerHeight;
+
                         switch (this.resizeDirection) {
                             case 'nw':
-                                newWidth = Math.max(minWidth, this.resizeStart.width - dx);
-                                newHeight = Math.max(minHeight, this.resizeStart.height - dy);
-                                newLeft = this.resizeStart.left + dx;
-                                newTop = this.resizeStart.top + dy;
+                                newWidth = Math.max(minWidth, Math.min(viewportWidth - newLeft, this.resizeStart.width - dx));
+                                newHeight = Math.max(minHeight, Math.min(viewportHeight - newTop, this.resizeStart.height - dy));
+                                newLeft = Math.max(0, this.resizeStart.left + dx);
+                                newTop = Math.max(0, this.resizeStart.top + dy);
                                 break;
                             case 'ne':
-                                newWidth = Math.max(minWidth, this.resizeStart.width + dx);
-                                newHeight = Math.max(minHeight, this.resizeStart.height - dy);
-                                newTop = this.resizeStart.top + dy;
+                                newWidth = Math.max(minWidth, Math.min(viewportWidth - this.resizeStart.left, this.resizeStart.width + dx));
+                                newHeight = Math.max(minHeight, Math.min(viewportHeight - newTop, this.resizeStart.height - dy));
+                                newTop = Math.max(0, this.resizeStart.top + dy);
                                 break;
                             case 'sw':
-                                newWidth = Math.max(minWidth, this.resizeStart.width - dx);
-                                newHeight = Math.max(minHeight, this.resizeStart.height + dy);
-                                newLeft = this.resizeStart.left + dx;
+                                newWidth = Math.max(minWidth, Math.min(viewportWidth - newLeft, this.resizeStart.width - dx));
+                                newHeight = Math.max(minHeight, Math.min(viewportHeight - this.resizeStart.top, this.resizeStart.height + dy));
+                                newLeft = Math.max(0, this.resizeStart.left + dx);
                                 break;
                             case 'se':
-                                newWidth = Math.max(minWidth, this.resizeStart.width + dx);
-                                newHeight = Math.max(minHeight, this.resizeStart.height + dy);
+                                newWidth = Math.max(minWidth, Math.min(viewportWidth - this.resizeStart.left, this.resizeStart.width + dx));
+                                newHeight = Math.max(minHeight, Math.min(viewportHeight - this.resizeStart.top, this.resizeStart.height + dy));
                                 break;
                             case 'w':
-                                newWidth = Math.max(minWidth, this.resizeStart.width - dx);
-                                newLeft = this.resizeStart.left + dx;
+                                newWidth = Math.max(minWidth, Math.min(viewportWidth - newLeft, this.resizeStart.width - dx));
+                                newLeft = Math.max(0, this.resizeStart.left + dx);
                                 break;
                             case 'e':
-                                newWidth = Math.max(minWidth, this.resizeStart.width + dx);
+                                newWidth = Math.max(minWidth, Math.min(viewportWidth - this.resizeStart.left, this.resizeStart.width + dx));
                                 break;
                             case 'n':
-                                newHeight = Math.max(minHeight, this.resizeStart.height - dy);
-                                newTop = this.resizeStart.top + dy;
+                                newHeight = Math.max(minHeight, Math.min(viewportHeight - newTop, this.resizeStart.height - dy));
+                                newTop = Math.max(0, this.resizeStart.top + dy);
                                 break;
                             case 's':
-                                newHeight = Math.max(minHeight, this.resizeStart.height + dy);
+                                newHeight = Math.max(minHeight, Math.min(viewportHeight - this.resizeStart.top, this.resizeStart.height + dy));
                                 break;
                         }
 
@@ -438,6 +465,16 @@
                         this.element.style.left = `${newLeft}px`;
                         this.element.style.top = `${newTop}px`;
                         this.element.style.transform = 'none';
+
+                        // Update body height during resize
+                        const header = this.element.querySelector('.yc-window-header');
+                        const footer = this.element.querySelector('.yc-window-footer');
+                        const body = this.element.querySelector('.yc-window-body');
+                        if (header && footer && body && !this.element.classList.contains('is-minimized')) {
+                            const headerHeight = header.offsetHeight;
+                            const footerHeight = footer.offsetHeight;
+                            body.style.height = `calc(100% - ${headerHeight}px - ${footerHeight}px)`;
+                        }
 
                         this.resizeFrameId = null;
                     });
@@ -453,6 +490,8 @@
                     this.resizeFrameId = null;
                 }
 
+                this.element.classList.remove('is-resizing');
+
                 document.removeEventListener('mousemove', this.boundHandleResize);
                 document.removeEventListener('mouseup', this.boundStopResize);
             }
@@ -465,14 +504,29 @@
                 const headerHeight = header ? header.offsetHeight : 40;
 
                 if (this.element.classList.contains('is-minimized')) {
+                    // Restore window
                     this.element.classList.remove('is-minimized');
-                    if (body) body.style.display = '';
-                    if (footer) footer.style.display = '';
 
+                    // Show body and footer with animation
+                    if (body) {
+                        body.style.display = 'block';
+                        body.style.transition = 'opacity 0.3s ease';
+                        body.style.opacity = '0';
+                        setTimeout(() => { body.style.opacity = '1'; }, 10);
+                    }
+
+                    if (footer) {
+                        footer.style.display = 'flex';
+                        footer.style.transition = 'opacity 0.3s ease';
+                        footer.style.opacity = '0';
+                        setTimeout(() => { footer.style.opacity = '1'; }, 10);
+                    }
+
+                    // Restore window height with animation
                     const originalHeight = this.element.dataset && this.element.dataset.originalStyle ?
                         JSON.parse(this.element.dataset.originalStyle).height : '400px';
 
-                    this.element.style.transition = 'height 0.2s ease';
+                    this.element.style.transition = 'height 0.3s ease';
                     setTimeout(() => {
                         this.element.style.height = originalHeight;
                     }, 10);
@@ -481,13 +535,31 @@
                         minimizeBtn.className = 'fas fa-minus';
                     }
                 } else {
+                    // Minimize window with animation
                     this.element.classList.add('is-minimized');
 
-                    if (body) body.style.display = 'none';
-                    if (footer) footer.style.display = 'none';
+                    // Hide body and footer with animation
+                    if (body) {
+                        body.style.transition = 'opacity 0.3s ease';
+                        body.style.opacity = '0';
+                    }
 
-                    this.element.style.transition = 'height 0.2s ease';
-                    this.element.style.height = `${headerHeight}px`;
+                    if (footer) {
+                        footer.style.transition = 'opacity 0.3s ease';
+                        footer.style.opacity = '0';
+                    }
+
+                    // Shrink window height with animation
+                    this.element.style.transition = 'height 0.3s ease';
+                    setTimeout(() => {
+                        this.element.style.height = `${headerHeight}px`;
+                    }, 50);
+
+                    // After animation, hide body and footer completely
+                    setTimeout(() => {
+                        if (body) { body.style.display = 'none'; body.style.opacity = ''; }
+                        if (footer) { footer.style.display = 'none'; footer.style.opacity = ''; }
+                    }, 300);
 
                     if (minimizeBtn) {
                         minimizeBtn.className = 'fas fa-expand-alt';
@@ -499,6 +571,7 @@
                 const maximizeBtn = this.element.querySelector('.yc-window-maximize i');
 
                 if (this.element.classList.contains('is-maximized')) {
+                    // Restore original state
                     this.element.classList.remove('is-maximized');
                     if (this.element.dataset && this.element.dataset.originalStyle) {
                         try {
@@ -513,14 +586,22 @@
                         }
                     }
 
+                    // Restore body and footer
+                    const body = this.element.querySelector('.yc-window-body');
+                    const footer = this.element.querySelector('.yc-window-footer');
+                    if (body) { body.style.display = ''; }
+                    if (footer) { footer.style.display = ''; }
+
                     if (maximizeBtn) {
                         maximizeBtn.className = 'far fa-square';
                     }
                 } else {
+                    // If minimized, restore first
                     if (this.element.classList.contains('is-minimized')) {
                         this.toggleMinimize();
                     }
 
+                    // Save current style
                     if (this.element.dataset) {
                         this.element.dataset.originalStyle = JSON.stringify({
                             width: this.element.style.width || '600px',
@@ -531,6 +612,7 @@
                         });
                     }
 
+                    // Set fullscreen
                     this.element.style.position = 'absolute';
                     this.element.style.top = '0';
                     this.element.style.left = '0';
@@ -553,7 +635,7 @@
         function openBasicDialog() {
             createWindow({
                 title: '基本窗口',
-                content: '<p>这是一个基础的窗口组件，可以拖拽、调整大小、最小化和最大化。</p>'
+                content: '<p style="padding: 20px; text-align: center; color: var(--yc-color-text-secondary);">这是一个基础的窗口组件，可以拖拽、调整大小、最小化和最大化。</p>'
             });
         }
 
@@ -561,14 +643,14 @@
             createWindow({
                 title: '功能测试窗口',
                 content: `
-                    <div style="padding: 10px;">
-                        <h4>窗口功能测试</h4>
-                        <ul style="line-height: 2;">
-                            <li><i class="fas fa-arrows-alt"></i> 拖拽：通过标题栏拖动窗口</li>
-                            <li><i class="fas fa-expand-arrows-alt"></i> 调整大小：通过边缘或角落调整</li>
-                            <li><i class="fas fa-minus"></i> 最小化：点击最小化按钮</li>
-                            <li><i class="far fa-square"></i> 最大化：点击最大化按钮</li>
-                            <li><i class="fas fa-times"></i> 关闭：点击关闭按钮</li>
+                    <div style="padding: 20px;">
+                        <h4 style="margin-bottom: 16px; color: var(--yc-color-text-primary);">窗口功能测试</h4>
+                        <ul style="line-height: 2; color: var(--yc-color-text-secondary);">
+                            <li><i class="fas fa-arrows-alt" style="width: 24px; color: var(--yc-color-primary);"></i> 拖拽：通过标题栏拖动窗口</li>
+                            <li><i class="fas fa-expand-arrows-alt" style="width: 24px; color: var(--yc-color-primary);"></i> 调整大小：通过边缘或角落调整</li>
+                            <li><i class="fas fa-minus" style="width: 24px; color: var(--yc-color-primary);"></i> 最小化：点击最小化按钮</li>
+                            <li><i class="far fa-square" style="width: 24px; color: var(--yc-color-primary);"></i> 最大化：点击最大化按钮</li>
+                            <li><i class="fas fa-times" style="width: 24px; color: var(--yc-color-primary);"></i> 关闭：点击关闭按钮</li>
                         </ul>
                     </div>
                 `,
@@ -580,7 +662,7 @@
         function openCustomDialog() {
             createWindow({
                 title: '自定义窗口',
-                content: '<p>这是一个自定义内容的窗口，可以根据需要修改标题、内容和按钮文本。</p>',
+                content: '<p style="padding: 20px; text-align: center; color: var(--yc-color-text-secondary);">这是一个自定义内容的窗口，可以根据需要修改标题、内容和按钮文本。</p>',
                 width: 450,
                 height: 280,
                 cancelText: '取消',
@@ -591,7 +673,7 @@
         function openCenteredDialog() {
             createWindow({
                 title: '居中窗口',
-                content: '<p>这个窗口会在屏幕中央显示。</p>',
+                content: '<p style="padding: 20px; text-align: center; color: var(--yc-color-text-secondary);">这个窗口会在屏幕中央显示。</p>',
                 width: 400,
                 height: 250,
                 alignCenter: true

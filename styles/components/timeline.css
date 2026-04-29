@@ -1,0 +1,217 @@
+@charset "UTF-8";
+
+/* ==================== Timeline ==================== */
+
+.yc-timeline {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.yc-timeline--center {
+    text-align: center;
+}
+
+/* Timeline Item */
+.yc-timeline-item {
+    position: relative;
+    padding-bottom: 24px;
+    margin: 0;
+    display: flex;
+    gap: 16px;
+}
+
+.yc-timeline-item:last-child {
+    padding-bottom: 0;
+}
+
+.yc-timeline-item:last-child .yc-timeline-item__tail {
+    display: none;
+}
+
+.yc-timeline-item--center {
+    justify-content: center;
+}
+
+/* Timeline Node Wrapper */
+.yc-timeline-item__node-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    width: 12px;
+    padding-top: 4px;
+}
+
+/* Timeline Node */
+.yc-timeline-item__node {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #409eff;
+    z-index: 1;
+    flex-shrink: 0;
+}
+
+.yc-timeline-item__node--primary {
+    background-color: #409eff;
+}
+
+.yc-timeline-item__node--success {
+    background-color: #67c23a;
+}
+
+.yc-timeline-item__node--warning {
+    background-color: #e6a23c;
+}
+
+.yc-timeline-item__node--danger {
+    background-color: #f56c6c;
+}
+
+.yc-timeline-item__node--info {
+    background-color: #909399;
+}
+
+/* Node Sizes */
+.yc-timeline-item__node--large {
+    width: 16px;
+    height: 16px;
+}
+
+.yc-timeline-item__node--small {
+    width: 8px;
+    height: 8px;
+}
+
+/* Custom Icon */
+.yc-timeline-item__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 12px;
+}
+
+/* Timeline Tail (Line) */
+.yc-timeline-item__tail {
+    position: absolute;
+    top: 15px;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    border-left: 2px solid #e4e7ed;
+    z-index: 0;
+}
+
+/* Timeline Content */
+.yc-timeline-item__content {
+    flex: 1;
+    padding-top: 0;
+    min-width: 0;
+    font-size: var(--yc-font-size-base, 14px);
+    line-height: 1.6;
+    color: var(--yc-text-primary, #303133);
+}
+
+.yc-timeline-item__content.is-center {
+    text-align: center;
+}
+
+.yc-timeline-item__content p {
+    margin: 0;
+}
+
+/* Timeline Timestamp */
+.yc-timeline-item__timestamp {
+    font-size: var(--yc-font-size-small, 12px);
+    line-height: 1.5;
+    color: var(--yc-text-secondary, #909399);
+    margin-bottom: 4px;
+}
+
+.yc-timeline-item__timestamp--top {
+    margin-bottom: 4px;
+}
+
+.yc-timeline-item__timestamp--bottom {
+    margin-top: 8px;
+    margin-bottom: 0;
+}
+
+/* Timeline Placement */
+.yc-timeline-item--left .yc-timeline-item__timestamp {
+    position: absolute;
+    left: calc(-100% - 8px);
+    top: 0;
+    white-space: nowrap;
+}
+
+.yc-timeline-item--right .yc-timeline-item__timestamp {
+    position: absolute;
+    right: 0;
+    top: 0;
+    white-space: nowrap;
+}
+
+/* Timeline with Hollow Node */
+.yc-timeline-item__node--hollow {
+    background-color: transparent;
+    border: 2px solid #409eff;
+}
+
+.yc-timeline-item__node--hollow.yc-timeline-item__node--primary {
+    border-color: #409eff;
+}
+
+.yc-timeline-item__node--hollow.yc-timeline-item__node--success {
+    border-color: #67c23a;
+}
+
+.yc-timeline-item__node--hollow.yc-timeline-item__node--warning {
+    border-color: #e6a23c;
+}
+
+.yc-timeline-item__node--hollow.yc-timeline-item__node--danger {
+    border-color: #f56c6c;
+}
+
+.yc-timeline-item__node--hollow.yc-timeline-item__node--info {
+    border-color: #909399;
+}
+
+/* Pulse Animation for Active Node */
+.yc-timeline-item__node--pulse {
+    animation: yc-timeline-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes yc-timeline-pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.3);
+        opacity: 0.7;
+    }
+}
+
+/* Timeline with Custom Color */
+.yc-timeline-item__node[style*="background-color"] {
+    box-shadow: 0 0 0 4px rgba(64, 158, 255, 0.1);
+}
+
+/* Responsive Timeline */
+@media (max-width: 768px) {
+    .yc-timeline-item--left .yc-timeline-item__timestamp,
+    .yc-timeline-item--right .yc-timeline-item__timestamp {
+        position: static;
+        white-space: normal;
+    }
+}

@@ -409,6 +409,67 @@
     font-weight: var(--yc-font-weight-semibold);
 }
 
+.yc-date-picker__month-select {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    padding: 16px;
+    min-height: 240px;
+}
+
+.yc-date-picker__month-item {
+    padding: 10px 8px;
+    border-radius: var(--yc-border-radius-small);
+    text-align: center;
+    cursor: pointer;
+    transition: all var(--yc-transition-fast);
+    font-size: var(--yc-font-size-small);
+    color: var(--yc-color-text-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.yc-date-picker__month-item:hover {
+    background-color: var(--yc-color-fill);
+}
+
+.yc-date-picker__month-item.is-selected {
+    background-color: var(--yc-color-primary);
+    color: var(--yc-color-white);
+}
+
+.yc-date-picker__year-select {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    padding: 16px;
+    min-height: 240px;
+}
+
+.yc-date-picker__year-select .yc-date-picker__year-item {
+    padding: 10px 8px;
+    border-radius: var(--yc-border-radius-small);
+    text-align: center;
+    cursor: pointer;
+    transition: all var(--yc-transition-fast);
+    font-size: var(--yc-font-size-small);
+    color: var(--yc-color-text-primary);
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.yc-date-picker__year-select .yc-date-picker__year-item:hover {
+    background-color: var(--yc-color-fill);
+}
+
+.yc-date-picker__year-select .yc-date-picker__year-item.is-selected {
+    background-color: var(--yc-color-primary);
+    color: var(--yc-color-white);
+}
+
 .yc-date-picker__datetime-inputs {
     display: flex;
     gap: 8px;

@@ -1,0 +1,98 @@
+@charset "UTF-8";
+
+/**
+ * YC UI Dropdown Component
+ * Dropdown menu triggered by hover or click
+ */
+
+.yc-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.yc-dropdown__trigger {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.yc-dropdown__menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 160px;
+    padding: 6px 0;
+    background: var(--yc-color-bg);
+    border: 1px solid var(--yc-color-border);
+    border-radius: var(--yc-border-radius-md);
+    box-shadow: var(--yc-box-shadow-base);
+    z-index: var(--yc-z-index-dropdown, 1000);
+    display: none;
+    margin-top: 8px;
+}
+
+.yc-dropdown--opened > .yc-dropdown__menu {
+    display: block;
+    animation: yc-dropdown-fade-in 0.2s ease;
+}
+
+.yc-dropdown__menu--right {
+    left: auto;
+    right: 0;
+}
+
+.yc-dropdown__item {
+    display: flex;
+    align-items: center;
+    padding: 10px 16px;
+    font-size: var(--yc-font-size-small);
+    color: var(--yc-color-text-regular);
+    cursor: pointer;
+    transition: background var(--yc-transition-fast), color var(--yc-transition-fast);
+    white-space: nowrap;
+}
+
+.yc-dropdown__item:hover {
+    background: var(--yc-color-primary-light-9);
+    color: var(--yc-color-primary);
+}
+
+.yc-dropdown__item--disabled {
+    color: var(--yc-color-text-placeholder);
+    cursor: not-allowed;
+}
+
+.yc-dropdown__item--disabled:hover {
+    background: transparent;
+    color: var(--yc-color-text-placeholder);
+}
+
+.yc-dropdown__item--divided {
+    border-top: 1px solid var(--yc-color-border-light);
+    margin-top: 6px;
+    padding-top: 10px;
+}
+
+.yc-dropdown__item__icon {
+    margin-right: 8px;
+    width: 14px;
+    text-align: center;
+}
+
+.yc-dropdown__divider {
+    height: 1px;
+    background: var(--yc-color-border-light);
+    margin: 6px 0;
+}
+
+@keyframes yc-dropdown-fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

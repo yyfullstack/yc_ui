@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Header 页头组件示例</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../index.css">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: var(--yc-font-family); background: var(--yc-color-bg-page); color: var(--yc-color-text-primary); line-height: var(--yc-line-height-base); padding: 24px; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .demo-section { background: var(--yc-color-bg); border: 1px solid var(--yc-color-border); border-radius: var(--yc-border-radius-lg); padding: 24px; margin-bottom: 16px; }
+        .demo-section h3 { font-size: var(--yc-font-size-medium); font-weight: var(--yc-font-weight-semibold); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--yc-color-border-light); position: relative; }
+        .demo-section h3::before { content: ''; position: absolute; left: -24px; top: 50%; transform: translateY(-50%); width: 4px; height: 16px; background: var(--yc-color-primary); border-radius: 2px; }
+        .demo-block { margin-bottom: 24px; }
+        .demo-block:last-child { margin-bottom: 0; }
+        .demo-block-title { font-size: var(--yc-font-size-small); color: var(--yc-color-text-secondary); margin-bottom: 12px; }
+
+        .yc-page-header {
+            --yc-page-header-bg: var(--yc-color-bg);
+            --yc-page-header-border: var(--yc-color-border-light);
+            --yc-page-header-title-color: var(--yc-color-text-primary);
+            --yc-page-header-subtitle-color: var(--yc-color-text-secondary);
+            --yc-page-header-link-color: var(--yc-color-primary);
+            background: var(--yc-page-header-bg);
+            padding: 24px;
+            border-bottom: 1px solid var(--yc-page-header-border);
+        }
+        .yc-page-header__back { display: inline-flex; align-items: center; gap: 6px; color: var(--yc-page-header-link-color); font-size: var(--yc-font-size-small); cursor: pointer; margin-bottom: 16px; transition: opacity var(--yc-transition-duration-fast); }
+        .yc-page-header__back:hover { opacity: 0.8; }
+        .yc-page-header__back-icon { font-size: 12px; }
+        .yc-page-header__content { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; }
+        .yc-page-header__main { flex: 1; min-width: 0; }
+        .yc-page-header__title { font-size: var(--yc-font-size-large); font-weight: var(--yc-font-weight-bold); color: var(--yc-page-header-title-color); margin-bottom: 8px; }
+        .yc-page-header__sub-title { font-size: var(--yc-font-size-small); color: var(--yc-page-header-subtitle-color); }
+        .yc-page-header__actions { display: flex; gap: 12px; flex-shrink: 0; }
+
+        .page-header-btn { padding: 8px 16px; border-radius: var(--yc-border-radius-md); font-size: var(--yc-font-size-small); cursor: pointer; transition: all var(--yc-transition-duration-fast); border: 1px solid var(--yc-color-border); background: var(--yc-color-bg); color: var(--yc-color-text-regular); }
+        .page-header-btn:hover { border-color: var(--yc-color-primary); color: var(--yc-color-primary); }
+        .page-header-btn--primary { background: var(--yc-color-primary); border-color: var(--yc-color-primary); color: white; }
+        .page-header-btn--primary:hover { background: var(--yc-color-primary-hover); border-color: var(--yc-color-primary-hover); }
+
+        .page-header-content-box { padding: 20px; background: var(--yc-color-bg-page); border-radius: var(--yc-border-radius-md); font-size: var(--yc-font-size-small); color: var(--yc-color-text-regular); }
+
+        [yc-theme="dark"] .demo-section { background: rgba(255, 255, 255, 0.02); border-color: rgba(255, 255, 255, 0.08); }
+        [yc-theme="dark"] .yc-page-header { background: rgba(255, 255, 255, 0.02); border-bottom-color: rgba(255, 255, 255, 0.08); }
+        [yc-theme="dark"] .page-header-content-box { background: rgba(255, 255, 255, 0.03); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 style="font-size: 24px; font-weight: 600; margin-bottom: 24px;">Page Header 页头组件</h1>
+
+        <div class="demo-section">
+            <h3>基础用法</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">基本页面头部</div>
+                <div class="yc-page-header">
+                    <div class="yc-page-header__back">
+                        <i class="yc-page-header__back-icon fas fa-arrow-left"></i>
+                        返回
+                    </div>
+                    <div class="yc-page-header__content">
+                        <div class="yc-page-header__main">
+                            <div class="yc-page-header__title">页面标题</div>
+                            <div class="yc-page-header__sub-title">这是页面的描述信息，简短说明当前页面的功能</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>带操作按钮</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">页面头部带操作按钮</div>
+                <div class="yc-page-header">
+                    <div class="yc-page-header__back">
+                        <i class="yc-page-header__back-icon fas fa-arrow-left"></i>
+                        返回列表
+                    </div>
+                    <div class="yc-page-header__content">
+                        <div class="yc-page-header__main">
+                            <div class="yc-page-header__title">编辑用户</div>
+                            <div class="yc-page-header__sub-title">修改用户信息，包括基本信息、角色权限等</div>
+                        </div>
+                        <div class="yc-page-header__actions">
+                            <button class="page-header-btn">取消</button>
+                            <button class="page-header-btn page-header-btn--primary">保存</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>无返回按钮</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">不带返回按钮的页面头部</div>
+                <div class="yc-page-header">
+                    <div class="yc-page-header__content">
+                        <div class="yc-page-header__main">
+                            <div class="yc-page-header__title">用户管理</div>
+                            <div class="yc-page-header__sub-title">管理系统中的用户账号和权限</div>
+                        </div>
+                        <div class="yc-page-header__actions">
+                            <button class="page-header-btn page-header-btn--primary"><i class="fas fa-plus" style="margin-right: 6px;"></i>新增用户</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>带图标</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">页面头部带图标</div>
+                <div class="yc-page-header">
+                    <div class="yc-page-header__back">
+                        <i class="yc-page-header__back-icon fas fa-arrow-left"></i>
+                        返回
+                    </div>
+                    <div class="yc-page-header__content">
+                        <div class="yc-page-header__main">
+                            <div class="yc-page-header__title">
+                                <i class="fas fa-user" style="margin-right: 8px; color: var(--yc-color-primary);"></i>
+                                个人中心
+                            </div>
+                            <div class="yc-page-header__sub-title">管理您的个人信息和偏好设置</div>
+                        </div>
+                        <div class="yc-page-header__actions">
+                            <button class="page-header-btn"><i class="fas fa-cog" style="margin-right: 6px;"></i>设置</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>应用场景</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">表单页</div>
+                <div class="yc-page-header">
+                    <div class="yc-page-header__back">
+                        <i class="yc-page-header__back-icon fas fa-arrow-left"></i>
+                        返回
+                    </div>
+                    <div class="yc-page-header__content">
+                        <div class="yc-page-header__main">
+                            <div class="yc-page-header__title">新建产品</div>
+                            <div class="yc-page-header__sub-title">创建一个新的产品条目，填写产品信息</div>
+                        </div>
+                        <div class="yc-page-header__actions">
+                            <button class="page-header-btn">取消</button>
+                            <button class="page-header-btn page-header-btn--primary">创建</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="page-header-content-box" style="margin-top: 0; border-radius: 0 0 var(--yc-border-radius-md) var(--yc-border-radius-md);">
+                    <p>表单内容区域</p>
+                    <p style="margin-top: 8px; color: var(--yc-color-text-secondary);">这里是表单的具体内容...</p>
+                </div>
+            </div>
+            <div class="demo-block">
+                <div class="demo-block-title">详情页</div>
+                <div class="yc-page-header">
+                    <div class="yc-page-header__back">
+                        <i class="yc-page-header__back-icon fas fa-arrow-left"></i>
+                        返回列表
+                    </div>
+                    <div class="yc-page-header__content">
+                        <div class="yc-page-header__main">
+                            <div class="yc-page-header__title">产品详情</div>
+                            <div class="yc-page-header__sub-title">YC Design 组件库 - 版本 2.0</div>
+                        </div>
+                        <div class="yc-page-header__actions">
+                            <button class="page-header-btn"><i class="fas fa-edit" style="margin-right: 6px;"></i>编辑</button>
+                            <button class="page-header-btn" style="color: var(--yc-color-danger);"><i class="fas fa-trash" style="margin-right: 6px;"></i>删除</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="page-header-content-box" style="margin-top: 0; border-radius: 0 0 var(--yc-border-radius-md) var(--yc-border-radius-md);">
+                    <p><strong>产品描述</strong></p>
+                    <p style="margin-top: 8px;">YC Design 是一套企业级 UI 设计语言，提供了丰富的组件库，帮助开发者快速构建高质量的 Web 应用。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>带面包屑</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">页面头部带面包屑导航</div>
+                <div class="yc-page-header">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px; font-size: var(--yc-font-size-small); color: var(--yc-color-text-secondary);">
+                        <span style="cursor: pointer;">首页</span>
+                        <i class="fas fa-chevron-right" style="font-size: 8px;"></i>
+                        <span style="cursor: pointer;">产品管理</span>
+                        <i class="fas fa-chevron-right" style="font-size: 8px;"></i>
+                        <span style="color: var(--yc-color-text-primary);">产品详情</span>
+                    </div>
+                    <div class="yc-page-header__content">
+                        <div class="yc-page-header__main">
+                            <div class="yc-page-header__title">YC Design 组件库</div>
+                            <div class="yc-page-header__sub-title">一套企业级 UI 设计语言</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

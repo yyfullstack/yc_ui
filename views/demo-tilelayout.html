@@ -1,191 +1,54 @@
 <!DOCTYPE html>
-<html lang="zh-CN" yc-theme="dark">
+<html lang="zh-CN" yc-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TileLayout 瓦片布局测试</title>
+    <title>TileLayout 瓦片布局组件示例 - YC UI</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-   <link rel="stylesheet" href="../styles/index.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            padding: 0;
-            background-color: #f5f5f5;
-        }
-        .container {
-            margin-bottom: 40px;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        h1 {
-            color: #333;
-            margin-bottom: 20px;
-        }
-        h2 {
-            color: #555;
-            margin-top: 30px;
-            margin-bottom: 15px;
-        }
-        .tilelayout-demo {
-            margin-bottom: 20px;
-        }
-        .code-block {
-            background-color: #f8f9fa;
-            border: 1px solid #e9ecef;
-            border-radius: 4px;
-            padding: 15px;
-            margin: 10px 0;
-            overflow-x: auto;
-            font-family: 'Courier New', monospace;
-            font-size: 14px;
-        }
-        .btn {
-            display: inline-block;
-            padding: 8px 16px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 14px;
-            margin-right: 10px;
-            margin-top: 10px;
-        }
-        .btn:hover {
-            background-color: #0069d9;
-        }
-    </style>
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
 </head>
 <body>
-    <div class="container">
-        <h1>TileLayout 瓦片布局测试</h1>
-
-        <h2>1. 基本用法</h2>
-        <div class="tilelayout-demo">
-            <div id="basic-tilelayout" class="yc-tilelayout"></div>
-        </div>
-        <div class="code-block">
-            <pre>// 基本用法示例代码
-var basicTileLayout = new TileLayout({
-    container: '#basic-tilelayout',
-    tiles: [
-        {
-            title: '瓦片1',
-            content: '瓦片1的内容',
-            size: '1x1'
-        },
-        {
-            title: '瓦片2',
-            content: '瓦片2的内容',
-            size: '2x1'
-        },
-        {
-            title: '瓦片3',
-            content: '瓦片3的内容',
-            size: '1x2'
-        },
-        {
-            title: '瓦片4',
-            content: '瓦片4的内容',
-            size: '2x2'
-        }
-    ]
-});</pre>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">TileLayout 瓦片布局</h1>
+            <p class="demo-page-subtitle">灵活的网格布局系统，支持不同尺寸的瓦片组合</p>
         </div>
 
-        <h2>2. 自定义瓦片</h2>
-        <div class="tilelayout-demo">
-            <div id="custom-tilelayout" class="yc-tilelayout"></div>
-        </div>
-        <div class="code-block">
-            <pre>// 自定义瓦片示例代码
-var customTileLayout = new TileLayout({
-    container: '#custom-tilelayout',
-    tiles: [
-        {
-            title: '自定义瓦片1',
-            content: function() {
-                var content = document.createElement('div');
-                content.innerHTML = '<p>这是一个自定义内容的瓦片</p><button class="btn">点击</button>';
-                return content;
-            },
-            size: '1x1',
-            backgroundColor: '#e3f2fd'
-        },
-        {
-            title: '自定义瓦片2',
-            content: '瓦片2的内容',
-            size: '2x1',
-            backgroundColor: '#e8f5e8'
-        },
-        {
-            title: '自定义瓦片3',
-            content: '瓦片3的内容',
-            size: '1x2',
-            backgroundColor: '#fff3e0'
-        },
-        {
-            title: '自定义瓦片4',
-            content: '瓦片4的内容',
-            size: '2x2',
-            backgroundColor: '#f3e5f5'
-        }
-    ]
-});</pre>
+        <div class="demo-section">
+            <h3>基本用法</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">不同尺寸的瓦片组合</div>
+                <div class="demo-row">
+                    <div id="basic-tilelayout" class="yc-tilelayout"></div>
+                </div>
+            </div>
         </div>
 
-        <h2>3. 响应式布局</h2>
-        <div class="tilelayout-demo">
-            <div id="responsive-tilelayout" class="yc-tilelayout yc-tilelayout-responsive"></div>
+        <div class="demo-section">
+            <h3>自定义瓦片</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">支持自定义背景颜色</div>
+                <div class="demo-row">
+                    <div id="custom-tilelayout" class="yc-tilelayout"></div>
+                </div>
+            </div>
         </div>
-        <div class="code-block">
-            <pre>// 响应式布局示例代码
-var responsiveTileLayout = new TileLayout({
-    container: '#responsive-tilelayout',
-    tiles: [
-        {
-            title: '瓦片1',
-            content: '瓦片1的内容',
-            size: '1x1'
-        },
-        {
-            title: '瓦片2',
-            content: '瓦片2的内容',
-            size: '1x1'
-        },
-        {
-            title: '瓦片3',
-            content: '瓦片3的内容',
-            size: '1x1'
-        },
-        {
-            title: '瓦片4',
-            content: '瓦片4的内容',
-            size: '1x1'
-        },
-        {
-            title: '瓦片5',
-            content: '瓦片5的内容',
-            size: '1x1'
-        },
-        {
-            title: '瓦片6',
-            content: '瓦片6的内容',
-            size: '1x1'
-        }
-    ]
-});</pre>
+
+        <div class="demo-section">
+            <h3>响应式布局</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">自适应不同屏幕尺寸</div>
+                <div class="demo-row">
+                    <div id="responsive-tilelayout" class="yc-tilelayout yc-tilelayout-responsive"></div>
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
-        // 独立的TileLayout组件实现
         class TileLayout {
             constructor(options) {
-                // 支持直接传入DOM元素或选择器字符串
                 if (options.container instanceof HTMLElement) {
                     this.container = options.container;
                 } else {
@@ -198,48 +61,42 @@ var responsiveTileLayout = new TileLayout({
             }
 
             init() {
-                // 清空容器
                 this.container.innerHTML = '';
-
-                // 添加类名
                 this.container.className = 'yc-tilelayout';
 
-                // 创建瓦片
-                for (let i = 0; i < this.tiles.length; i++) {
+                for (var i = 0; i < this.tiles.length; i++) {
                     this.createTile(i);
                 }
             }
 
             createTile(index) {
-                const tile = this.tiles[index];
-                const size = tile.size || '1x1';
-                const [width, height] = size.split('x').map(Number);
+                var tile = this.tiles[index];
+                var size = tile.size || '1x1';
+                var sizeParts = size.split('x').map(Number);
+                var width = sizeParts[0];
+                var height = sizeParts[1];
 
-                // 创建瓦片元素
-                const tileEl = document.createElement('div');
+                var tileEl = document.createElement('div');
                 tileEl.className = 'yc-tilelayout-tile';
-                tileEl.style.gridColumn = `span ${width}`;
-                tileEl.style.gridRow = `span ${height}`;
+                tileEl.style.gridColumn = 'span ' + width;
+                tileEl.style.gridRow = 'span ' + height;
 
-                // 设置背景颜色
                 if (tile.backgroundColor) {
                     tileEl.style.backgroundColor = tile.backgroundColor;
                 }
 
-                // 创建瓦片头部
                 if (tile.title) {
-                    const header = document.createElement('div');
+                    var header = document.createElement('div');
                     header.className = 'yc-tilelayout-tile-header';
                     header.textContent = tile.title;
                     tileEl.appendChild(header);
                 }
 
-                // 创建瓦片内容
-                const content = document.createElement('div');
+                var content = document.createElement('div');
                 content.className = 'yc-tilelayout-tile-content';
 
                 if (typeof tile.content === 'function') {
-                    const result = tile.content();
+                    var result = tile.content();
                     if (result instanceof HTMLElement) {
                         content.appendChild(result);
                     } else if (typeof result === 'string') {
@@ -269,12 +126,8 @@ var responsiveTileLayout = new TileLayout({
                 return this.tiles;
             }
         }
-    </script>
 
-    <script>
-        // 等待DOM加载完成
         document.addEventListener('DOMContentLoaded', function() {
-            // 1. 基本用法示例
             var basicTileLayout = new TileLayout({
                 container: '#basic-tilelayout',
                 tiles: [
@@ -301,7 +154,6 @@ var responsiveTileLayout = new TileLayout({
                 ]
             });
 
-            // 2. 自定义瓦片示例
             var customTileLayout = new TileLayout({
                 container: '#custom-tilelayout',
                 tiles: [
@@ -309,7 +161,7 @@ var responsiveTileLayout = new TileLayout({
                         title: '自定义瓦片1',
                         content: function() {
                             var content = document.createElement('div');
-                            content.innerHTML = '<p>这是一个自定义内容的瓦片</p><button class="btn">点击</button>';
+                            content.innerHTML = '<p>这是一个自定义内容的瓦片</p><button class="yc-button yc-button--small yc-button--primary">点击</button>';
                             return content;
                         },
                         size: '1x1',
@@ -336,7 +188,6 @@ var responsiveTileLayout = new TileLayout({
                 ]
             });
 
-            // 3. 响应式布局示例
             var responsiveTileLayout = new TileLayout({
                 container: '#responsive-tilelayout',
                 tiles: [

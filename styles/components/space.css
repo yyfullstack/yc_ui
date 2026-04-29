@@ -1,0 +1,95 @@
+@charset "UTF-8";
+
+/**
+ * YC UI Space Component
+ * Spacing and layout utility for consistent gaps
+ */
+
+.yc-space {
+    display: inline-flex;
+    flex-wrap: wrap;
+}
+
+.yc-space--horizontal {
+    flex-direction: row;
+}
+
+.yc-space--vertical {
+    flex-direction: column;
+}
+
+.yc-space--size-none {
+    gap: 0;
+}
+
+.yc-space--size-xs {
+    gap: 4px;
+}
+
+.yc-space--size-sm {
+    gap: 8px;
+}
+
+.yc-space--size-default {
+    gap: 12px;
+}
+
+.yc-space--size-md {
+    gap: 16px;
+}
+
+.yc-space--size-lg {
+    gap: 24px;
+}
+
+.yc-space--size-xl {
+    gap: 32px;
+}
+
+.yc-space--align-start {
+    align-items: flex-start;
+}
+
+.yc-space--align-center {
+    align-items: center;
+}
+
+.yc-space--align-end {
+    align-items: flex-end;
+}
+
+.yc-space--align-baseline {
+    align-items: baseline;
+}
+
+.yc-space--nowrap {
+    flex-wrap: nowrap;
+}
+
+.yc-space--wrap {
+    flex-wrap: wrap;
+}
+
+.yc-space--fill {
+    display: flex;
+    width: 100%;
+}
+
+.yc-space--fill .yc-space-item {
+    flex: 1;
+}
+
+.yc-space--fill-v {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.yc-space--fill-v .yc-space-item {
+    flex: 1;
+}
+
+.yc-space-spacer {
+    flex: 1;
+    min-width: 12px;
+}

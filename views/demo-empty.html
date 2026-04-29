@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Empty 空状态 - YC UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">Empty 空状态</h1>
+            <p class="demo-page-subtitle">数据为空时的占位提示</p>
+        </div>
+
+        <div class="demo-section">
+            <h3>基本用法</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">简单的空状态展示</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div class="yc-empty">
+                        <div class="yc-empty__image yc-empty__image--icon">
+                            <i class="fas fa-inbox"></i>
+                        </div>
+                        <div class="yc-empty__description">暂无数据</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>自定义图片</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">使用自定义图片的空状态</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div class="yc-empty">
+                        <div class="yc-empty__image">
+                            <svg viewBox="0 0 160 160" width="160" height="160">
+                                <path fill="#EBEEF5" d="M80 20c33.1 0 60 26.9 60 60s-26.9 60-60 60-60-26.9-60-60 26.9-60 60-60z"></path>
+                                <path fill="#F2F6FC" d="M80 30c27.6 0 50 22.4 50 50s-22.4 50-50 50-50-22.4-50-50 22.4-50 50-50z"></path>
+                                <path fill="#DCDFE6" d="M80 40c22.1 0 40 17.9 40 40s-17.9 40-40 40-40-17.9-40-40 17.9-40 40-40z"></path>
+                            </svg>
+                        </div>
+                        <div class="yc-empty__description">暂无订单</div>
+                        <div class="yc-empty__actions">
+                            <button class="yc-button yc-button--primary">创建订单</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>不同场景</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">不同场景的空状态提示</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div style="display: flex; gap: 24px; flex-wrap: wrap;">
+                        <div class="yc-empty yc-empty--small" style="flex: 1; min-width: 200px;">
+                            <div class="yc-empty__image yc-empty__image--error">
+                                <i class="fas fa-exclamation-circle"></i>
+                            </div>
+                            <div class="yc-empty__description">加载失败</div>
+                            <div class="yc-empty__actions">
+                                <button class="yc-button yc-button--small">重试</button>
+                            </div>
+                        </div>
+                        <div class="yc-empty yc-empty--small" style="flex: 1; min-width: 200px;">
+                            <div class="yc-empty__image yc-empty__image--success">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="yc-empty__description">操作成功</div>
+                        </div>
+                        <div class="yc-empty yc-empty--small" style="flex: 1; min-width: 200px;">
+                            <div class="yc-empty__image yc-empty__image--no-data">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <div class="yc-empty__description">无搜索结果</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>不同尺寸</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">提供大、默认、小三种尺寸</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div style="display: flex; gap: 24px; flex-wrap: wrap; align-items: center;">
+                        <div class="yc-empty yc-empty--large" style="width: 200px;">
+                            <div class="yc-empty__image yc-empty__image--icon">
+                                <i class="fas fa-folder-open"></i>
+                            </div>
+                            <div class="yc-empty__description">大尺寸空状态</div>
+                        </div>
+                        <div class="yc-empty" style="width: 200px;">
+                            <div class="yc-empty__image yc-empty__image--icon">
+                                <i class="fas fa-folder-open"></i>
+                            </div>
+                            <div class="yc-empty__description">默认尺寸空状态</div>
+                        </div>
+                        <div class="yc-empty yc-empty--small" style="width: 200px;">
+                            <div class="yc-empty__image yc-empty__image--icon">
+                                <i class="fas fa-folder-open"></i>
+                            </div>
+                            <div class="yc-empty__description">小尺寸空状态</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

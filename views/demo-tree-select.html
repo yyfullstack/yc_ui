@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TreeSelect 树形选择器组件示例 - YC UI</title>
+    <title>TreeSelect 树形选择器组件示例</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../styles/index.css">
     <link rel="stylesheet" href="../styles/demo.css">
@@ -12,122 +12,148 @@
     <div class="demo-container">
         <div class="demo-page-header">
             <h1 class="demo-page-title">TreeSelect 树形选择器</h1>
-            <p class="demo-page-subtitle">带图标、单选多选的树形数据选择器，支持搜索、禁用、清空等功能</p>
+            <p class="demo-page-subtitle">用于从树形数据结构中选择节点的组件，支持单选、多选、搜索等功能</p>
         </div>
 
         <div class="demo-section">
             <h3>基础用法</h3>
-            <div class="demo-row">
-                <div class="demo-item">
-                    <label>单选选择</label>
-                    <div class="yc-tree-select" id="treeSelectBasic" data-value="node12">
-                        <div class="yc-tree-select__input-wrapper">
-                            <input type="text" class="yc-tree-select__input" value="选项 1-2" readonly placeholder="请选择">
-                            <i class="fas fa-angle-down yc-tree-select__icon"></i>
-                        </div>
-                        <div class="yc-tree-select__popper">
-                            <div class="yc-tree" id="treeBasicData"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="demo-result" id="treeSelectBasicResult">当前值：node12 - 选项 1-2</div>
-        </div>
-
-        <div class="demo-section">
-            <h3>多选</h3>
-            <div class="demo-row">
-                <div class="demo-item">
-                    <label>多选选择</label>
-                    <div class="yc-tree-select yc-tree-select--multiple" id="treeSelectMultiple" data-value="node12,node31">
-                        <div class="yc-tree-select__input-wrapper">
-                            <div class="yc-tree-select__tags">
-                                <span class="yc-tree-select__tag">
-                                    <span class="yc-tree-select__tag-text">选项 1-2</span>
-                                    <span class="yc-tree-select__tag-close" data-id="node12"><i class="fas fa-times"></i></span>
-                                </span>
-                                <span class="yc-tree-select__tag">
-                                    <span class="yc-tree-select__tag-text">选项 3-1</span>
-                                    <span class="yc-tree-select__tag-close" data-id="node31"><i class="fas fa-times"></i></span>
-                                </span>
+            <div class="demo-block">
+                <div class="demo-block-title">单选选择</div>
+                <div class="demo-row">
+                    <div class="demo-item">
+                        <label>单选选择</label>
+                        <div class="yc-tree-select" id="treeSelectBasic" data-value="node12">
+                            <div class="yc-tree-select__input-wrapper">
+                                <input type="text" class="yc-tree-select__input" value="选项 1-2" readonly placeholder="请选择">
+                                <i class="fas fa-angle-down yc-tree-select__icon"></i>
                             </div>
-                            <i class="fas fa-angle-down yc-tree-select__icon"></i>
-                        </div>
-                        <div class="yc-tree-select__popper">
-                            <div class="yc-tree" id="treeMultipleData"></div>
-                            <div class="yc-tree-select__footer">
-                                <span class="yc-tree-select__footer-info">已选 2 项</span>
-                                <div class="yc-tree-select__footer-actions">
-                                    <button class="yc-tree-select__btn" data-action="clear">清空</button>
-                                    <button class="yc-tree-select__btn yc-tree-select__btn--primary" data-action="confirm">确定</button>
+                            <div class="yc-tree-select__popper">
+                                <div class="yc-tree-select__tree-wrapper">
+                                    <div class="yc-tree" id="treeBasicData"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="result-box" id="treeSelectBasicResult">当前值：node12 - 选项 1-2</div>
             </div>
-            <div class="demo-result" id="treeSelectMultipleResult">当前值：node12,node31</div>
+        </div>
+
+        <div class="demo-section">
+            <h3>多选</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">多选选择</div>
+                <div class="demo-row">
+                    <div class="demo-item">
+                        <label>多选选择</label>
+                        <div class="yc-tree-select yc-tree-select--multiple" id="treeSelectMultiple" data-value="node12,node31">
+                            <div class="yc-tree-select__input-wrapper">
+                                <div class="yc-tree-select__tags">
+                                    <span class="yc-tree-select__tag">
+                                        <span class="yc-tree-select__tag-text">选项 1-2</span>
+                                        <span class="yc-tree-select__tag-close" data-id="node12"><i class="fas fa-times"></i></span>
+                                    </span>
+                                    <span class="yc-tree-select__tag">
+                                        <span class="yc-tree-select__tag-text">选项 3-1</span>
+                                        <span class="yc-tree-select__tag-close" data-id="node31"><i class="fas fa-times"></i></span>
+                                    </span>
+                                </div>
+                                <i class="fas fa-angle-down yc-tree-select__icon"></i>
+                            </div>
+                            <div class="yc-tree-select__popper">
+                                <div class="yc-tree-select__tree-wrapper">
+                                    <div class="yc-tree" id="treeMultipleData"></div>
+                                </div>
+                                <div class="yc-tree-select__footer">
+                                    <span class="yc-tree-select__footer-info">已选 2 项</span>
+                                    <div class="yc-tree-select__footer-actions">
+                                        <button class="yc-tree-select__btn" data-action="clear">清空</button>
+                                        <button class="yc-tree-select__btn yc-tree-select__btn--primary" data-action="confirm">确定</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="result-box" id="treeSelectMultipleResult">当前值：node12,node31</div>
+            </div>
         </div>
 
         <div class="demo-section">
             <h3>带搜索</h3>
-            <div class="demo-row">
-                <div class="demo-item">
-                    <label>可搜索</label>
-                    <div class="yc-tree-select" id="treeSelectSearch" data-value="">
-                        <div class="yc-tree-select__input-wrapper">
-                            <input type="text" class="yc-tree-select__input" value="" readonly placeholder="请选择并搜索">
-                            <i class="fas fa-angle-down yc-tree-select__icon"></i>
-                        </div>
-                        <div class="yc-tree-select__popper">
-                            <div class="yc-tree-select__search">
-                                <i class="fas fa-search yc-tree-select__search-icon"></i>
-                                <input type="text" class="yc-tree-select__search-input" placeholder="搜索节点...">
+            <div class="demo-block">
+                <div class="demo-block-title">可搜索</div>
+                <div class="demo-row">
+                    <div class="demo-item">
+                        <label>搜索节点</label>
+                        <div class="yc-tree-select" id="treeSelectSearch" data-value="">
+                            <div class="yc-tree-select__input-wrapper">
+                                <input type="text" class="yc-tree-select__input" value="" readonly placeholder="请选择并搜索">
+                                <i class="fas fa-angle-down yc-tree-select__icon"></i>
                             </div>
-                            <div class="yc-tree" id="treeSearchData"></div>
+                            <div class="yc-tree-select__popper">
+                                <div class="yc-tree-select__search">
+                                    <div class="yc-tree-select__search-wrapper">
+                                        <input type="text" class="yc-tree-select__search-input" placeholder="搜索节点...">
+                                        <i class="fas fa-search yc-tree-select__search-icon"></i>
+                                    </div>
+                                </div>
+                                <div class="yc-tree-select__tree-wrapper">
+                                    <div class="yc-tree" id="treeSearchData"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <div class="result-box" id="treeSelectSearchResult">当前值：无</div>
             </div>
-            <div class="demo-result" id="treeSelectSearchResult">当前值：无</div>
         </div>
 
         <div class="demo-section">
             <h3>不同尺寸</h3>
-            <div class="demo-row">
-                <div class="demo-item">
-                    <label>大</label>
-                    <div class="yc-tree-select yc-tree-select--large" id="treeSelectLarge" data-value="">
-                        <div class="yc-tree-select__input-wrapper">
-                            <input type="text" class="yc-tree-select__input" value="" readonly placeholder="请选择">
-                            <i class="fas fa-angle-down yc-tree-select__icon"></i>
-                        </div>
-                        <div class="yc-tree-select__popper">
-                            <div class="yc-tree" id="treeLargeData"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="demo-item">
-                    <label>中（默认）</label>
-                    <div class="yc-tree-select" id="treeSelectMedium" data-value="">
-                        <div class="yc-tree-select__input-wrapper">
-                            <input type="text" class="yc-tree-select__input" value="" readonly placeholder="请选择">
-                            <i class="fas fa-angle-down yc-tree-select__icon"></i>
-                        </div>
-                        <div class="yc-tree-select__popper">
-                            <div class="yc-tree" id="treeMediumData"></div>
+            <div class="demo-block">
+                <div class="demo-block-title">尺寸选项</div>
+                <div class="demo-row">
+                    <div class="demo-item">
+                        <label>大</label>
+                        <div class="yc-tree-select yc-tree-select--large" id="treeSelectLarge" data-value="">
+                            <div class="yc-tree-select__input-wrapper">
+                                <input type="text" class="yc-tree-select__input" value="" readonly placeholder="请选择">
+                                <i class="fas fa-angle-down yc-tree-select__icon"></i>
+                            </div>
+                            <div class="yc-tree-select__popper">
+                                <div class="yc-tree-select__tree-wrapper">
+                                    <div class="yc-tree" id="treeLargeData"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="demo-item">
-                    <label>小</label>
-                    <div class="yc-tree-select yc-tree-select--small" id="treeSelectSmall" data-value="">
-                        <div class="yc-tree-select__input-wrapper">
-                            <input type="text" class="yc-tree-select__input" value="" readonly placeholder="请选择">
-                            <i class="fas fa-angle-down yc-tree-select__icon"></i>
+                    <div class="demo-item">
+                        <label>中（默认）</label>
+                        <div class="yc-tree-select" id="treeSelectMedium" data-value="">
+                            <div class="yc-tree-select__input-wrapper">
+                                <input type="text" class="yc-tree-select__input" value="" readonly placeholder="请选择">
+                                <i class="fas fa-angle-down yc-tree-select__icon"></i>
+                            </div>
+                            <div class="yc-tree-select__popper">
+                                <div class="yc-tree-select__tree-wrapper">
+                                    <div class="yc-tree" id="treeMediumData"></div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="yc-tree-select__popper">
-                            <div class="yc-tree" id="treeSmallData"></div>
+                    </div>
+                    <div class="demo-item">
+                        <label>小</label>
+                        <div class="yc-tree-select yc-tree-select--small" id="treeSelectSmall" data-value="">
+                            <div class="yc-tree-select__input-wrapper">
+                                <input type="text" class="yc-tree-select__input" value="" readonly placeholder="请选择">
+                                <i class="fas fa-angle-down yc-tree-select__icon"></i>
+                            </div>
+                            <div class="yc-tree-select__popper">
+                                <div class="yc-tree-select__tree-wrapper">
+                                    <div class="yc-tree" id="treeSmallData"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -136,83 +162,101 @@
 
         <div class="demo-section">
             <h3>可清空</h3>
-            <div class="demo-row">
-                <div class="demo-item">
-                    <label>可清空</label>
-                    <div class="yc-tree-select" id="treeSelectClearable" data-value="node12">
-                        <div class="yc-tree-select__input-wrapper">
-                            <input type="text" class="yc-tree-select__input" value="选项 1-2" readonly placeholder="请选择">
-                            <i class="fas fa-angle-down yc-tree-select__icon"></i>
-                            <span class="yc-tree-select__clear"><i class="fas fa-times"></i></span>
-                        </div>
-                        <div class="yc-tree-select__popper">
-                            <div class="yc-tree" id="treeClearableData"></div>
+            <div class="demo-block">
+                <div class="demo-block-title">可清空选择</div>
+                <div class="demo-row">
+                    <div class="demo-item">
+                        <label>可清空</label>
+                        <div class="yc-tree-select" id="treeSelectClearable" data-value="node12">
+                            <div class="yc-tree-select__input-wrapper">
+                                <input type="text" class="yc-tree-select__input" value="选项 1-2" readonly placeholder="请选择">
+                                <i class="fas fa-angle-down yc-tree-select__icon"></i>
+                                <span class="yc-tree-select__clear"><i class="fas fa-times"></i></span>
+                            </div>
+                            <div class="yc-tree-select__popper">
+                                <div class="yc-tree-select__tree-wrapper">
+                                    <div class="yc-tree" id="treeClearableData"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <div class="result-box" id="treeSelectClearableResult">当前值：node12 - 选项 1-2</div>
             </div>
-            <div class="demo-result" id="treeSelectClearableResult">当前值：node12 - 选项 1-2</div>
         </div>
 
         <div class="demo-section">
             <h3>禁用状态</h3>
-            <div class="demo-row">
-                <div class="demo-item">
-                    <label>禁用</label>
-                    <div class="yc-tree-select is-disabled" id="treeSelectDisabled" data-value="node11">
-                        <div class="yc-tree-select__input-wrapper">
-                            <input type="text" class="yc-tree-select__input" value="选项 1-1" disabled placeholder="请选择">
-                            <i class="fas fa-angle-down yc-tree-select__icon"></i>
+            <div class="demo-block">
+                <div class="demo-block-title">禁用选择器</div>
+                <div class="demo-row">
+                    <div class="demo-item">
+                        <label>禁用</label>
+                        <div class="yc-tree-select is-disabled" id="treeSelectDisabled" data-value="node11">
+                            <div class="yc-tree-select__input-wrapper">
+                                <input type="text" class="yc-tree-select__input" value="选项 1-1" disabled placeholder="请选择">
+                                <i class="fas fa-angle-down yc-tree-select__icon"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <div class="result-box">状态：已禁用</div>
             </div>
-            <div class="demo-result">状态：已禁用</div>
         </div>
 
         <div class="demo-section">
             <h3>禁用节点</h3>
-            <div class="demo-row">
-                <div class="demo-item">
-                    <label>禁用选项</label>
-                    <div class="yc-tree-select" id="treeSelectNodeDisabled" data-value="">
-                        <div class="yc-tree-select__input-wrapper">
-                            <input type="text" class="yc-tree-select__input" value="" readonly placeholder="请选择">
-                            <i class="fas fa-angle-down yc-tree-select__icon"></i>
-                        </div>
-                        <div class="yc-tree-select__popper">
-                            <div class="yc-tree" id="treeNodeDisabledData"></div>
+            <div class="demo-block">
+                <div class="demo-block-title">禁用特定节点</div>
+                <div class="demo-row">
+                    <div class="demo-item">
+                        <label>禁用选项</label>
+                        <div class="yc-tree-select" id="treeSelectNodeDisabled" data-value="">
+                            <div class="yc-tree-select__input-wrapper">
+                                <input type="text" class="yc-tree-select__input" value="" readonly placeholder="请选择">
+                                <i class="fas fa-angle-down yc-tree-select__icon"></i>
+                            </div>
+                            <div class="yc-tree-select__popper">
+                                <div class="yc-tree-select__tree-wrapper">
+                                    <div class="yc-tree" id="treeNodeDisabledData"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <div class="result-box" id="treeSelectNodeDisabledResult">当前值：无</div>
             </div>
-            <div class="demo-result" id="treeSelectNodeDisabledResult">当前值：无</div>
         </div>
 
         <div class="demo-section">
             <h3>动态控制</h3>
-            <div class="demo-row">
-                <div class="demo-item">
-                    <label>动态设置</label>
-                    <div class="yc-tree-select" id="treeSelectDynamic" data-value="node11">
-                        <div class="yc-tree-select__input-wrapper">
-                            <input type="text" class="yc-tree-select__input" value="选项 1-1" readonly placeholder="请选择">
-                            <i class="fas fa-angle-down yc-tree-select__icon"></i>
-                            <span class="yc-tree-select__clear"><i class="fas fa-times"></i></span>
-                        </div>
-                        <div class="yc-tree-select__popper">
-                            <div class="yc-tree" id="treeDynamicData"></div>
+            <div class="demo-block">
+                <div class="demo-block-title">编程方式设置值</div>
+                <div class="demo-row">
+                    <div class="demo-item">
+                        <label>动态设置</label>
+                        <div class="yc-tree-select" id="treeSelectDynamic" data-value="node11">
+                            <div class="yc-tree-select__input-wrapper">
+                                <input type="text" class="yc-tree-select__input" value="选项 1-1" readonly placeholder="请选择">
+                                <i class="fas fa-angle-down yc-tree-select__icon"></i>
+                                <span class="yc-tree-select__clear"><i class="fas fa-times"></i></span>
+                            </div>
+                            <div class="yc-tree-select__popper">
+                                <div class="yc-tree-select__tree-wrapper">
+                                    <div class="yc-tree" id="treeDynamicData"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <div class="demo-btn-row">
+                    <button class="yc-button yc-button--small" onclick="setTreeSelectValue('treeSelectDynamic', 'node11', '选项 1-1')">选项 1-1</button>
+                    <button class="yc-button yc-button--small" onclick="setTreeSelectValue('treeSelectDynamic', 'node21', '选项 2-1')">选项 2-1</button>
+                    <button class="yc-button yc-button--small" onclick="setTreeSelectValue('treeSelectDynamic', 'node32', '选项 3-2')">选项 3-2</button>
+                    <button class="yc-button yc-button--small" onclick="clearTreeSelect('treeSelectDynamic')">清空</button>
+                </div>
+                <div class="result-box" id="treeSelectDynamicResult">当前值：node11 - 选项 1-1</div>
             </div>
-            <div class="demo-btn-row">
-                <button class="yc-button yc-button--small" onclick="setTreeSelectValue('treeSelectDynamic', 'node11', '选项 1-1')">选项 1-1</button>
-                <button class="yc-button yc-button--small" onclick="setTreeSelectValue('treeSelectDynamic', 'node21', '选项 2-1')">选项 2-1</button>
-                <button class="yc-button yc-button--small" onclick="setTreeSelectValue('treeSelectDynamic', 'node32', '选项 3-2')">选项 3-2</button>
-                <button class="yc-button yc-button--small" onclick="clearTreeSelect('treeSelectDynamic')">清空</button>
-            </div>
-            <div class="demo-result" id="treeSelectDynamicResult">当前值：node11 - 选项 1-1</div>
         </div>
     </div>
 
@@ -267,30 +311,30 @@
             }
         ];
 
-        function renderTreeNode(node, level = 0) {
+        function renderTreeNode(node, level = 0, isMultiple = false) {
             const hasChildren = node.children && node.children.length > 0;
             const isDisabled = node.disabled;
-            const indent = level * 18;
+            const indent = level * 16;
+            const canSelect = !hasChildren && !isDisabled;
 
             let html = `
                 <div class="yc-tree-node ${hasChildren ? '' : 'is-leaf'} ${isDisabled ? 'is-disabled' : ''}"
                      data-id="${node.id}"
                      data-label="${node.label}"
                      data-level="${level}"
-                     data-disabled="${isDisabled || false}">
+                     data-disabled="${isDisabled || false}"
+                     data-has-children="${hasChildren}">
                     <div class="yc-tree-node__content">
                         <span class="yc-tree-node__indent" style="width: ${indent}px;"></span>
-                        ${hasChildren ? '<i class="fas fa-chevron-right yc-tree-node__expand-icon"></i>' : '<span class="yc-tree-node__indent"></span>'}
-                        <div class="yc-tree-node__label-wrapper">
-                            <span class="yc-tree-node__label">${node.label}</span>
-                        </div>
+                        ${hasChildren ? '<i class="fas fa-chevron-right yc-tree-node__expand-icon"></i>' : '<span class="yc-tree-node__expand-icon yc-tree-node__expand-icon--empty"></span>'}
+                        <span class="yc-tree-node__label">${node.label}</span>
                     </div>
             `;
 
             if (hasChildren) {
                 html += '<div class="yc-tree-node__children">';
                 node.children.forEach(child => {
-                    html += renderTreeNode(child, level + 1);
+                    html += renderTreeNode(child, level + 1, isMultiple);
                 });
                 html += '</div>';
             }
@@ -299,7 +343,7 @@
             return html;
         }
 
-        function renderTree(data, containerId) {
+        function renderTree(data, containerId, isMultiple = false) {
             const container = document.getElementById(containerId);
             if (!container) return;
 
@@ -315,7 +359,7 @@
 
             let html = '';
             data.forEach(node => {
-                html += renderTreeNode(node, 0);
+                html += renderTreeNode(node, 0, isMultiple);
             });
             container.innerHTML = html;
         }
@@ -330,6 +374,9 @@
 
         function selectNode(treeSelect, nodeEl) {
             if (nodeEl.classList.contains('is-disabled')) return;
+
+            const hasChildren = nodeEl.dataset.hasChildren === 'true';
+            if (hasChildren) return;
 
             const isMultiple = treeSelect.classList.contains('yc-tree-select--multiple');
 
@@ -357,6 +404,7 @@
                     resultEl.textContent = `当前值：${id} - ${label}`;
                 }
 
+                updateClearButtonVisibility(treeSelect);
                 closePopper(treeSelect);
             }
         }
@@ -392,6 +440,7 @@
             }
 
             tagCloseEvent(treeSelect);
+            updateClearButtonVisibility(treeSelect);
         }
 
         function updateMultipleFooterInfo(treeSelect) {
@@ -399,6 +448,28 @@
             const selectedNodes = treeSelect.querySelectorAll('.yc-tree-node.is-selected');
             if (footerInfo) {
                 footerInfo.textContent = `已选 ${selectedNodes.length} 项`;
+            }
+
+            const clearBtn = treeSelect.querySelector('.yc-tree-select__btn[data-action="clear"]');
+            if (clearBtn) {
+                clearBtn.style.display = selectedNodes.length > 0 ? 'inline-block' : 'none';
+            }
+        }
+
+        function updateClearButtonVisibility(treeSelect) {
+            const clearBtn = treeSelect.querySelector('.yc-tree-select__clear');
+            const isMultiple = treeSelect.classList.contains('yc-tree-select--multiple');
+
+            if (!clearBtn) return;
+
+            if (isMultiple) {
+                const tagsContainer = treeSelect.querySelector('.yc-tree-select__tags');
+                const hasTags = tagsContainer && tagsContainer.children.length > 0;
+                clearBtn.style.display = hasTags ? 'flex' : 'none';
+            } else {
+                const input = treeSelect.querySelector('.yc-tree-select__input');
+                const hasValue = input && input.value.trim() !== '';
+                clearBtn.style.display = hasValue ? 'flex' : 'none';
             }
         }
 
@@ -438,11 +509,15 @@
             const nodeEl = e.target.closest('.yc-tree-node');
             if (!nodeEl) return;
 
+            const hasChildren = nodeEl.dataset.hasChildren === 'true';
             const expandIcon = e.target.closest('.yc-tree-node__expand-icon');
-            if (expandIcon) {
-                e.stopPropagation();
-                toggleNode(nodeEl);
-                return;
+
+            if (hasChildren) {
+                if (expandIcon || e.target.closest('.yc-tree-node__label')) {
+                    e.stopPropagation();
+                    toggleNode(nodeEl);
+                    return;
+                }
             }
 
             const content = e.target.closest('.yc-tree-node__content');
@@ -525,6 +600,8 @@
                 if (resultEl) {
                     resultEl.textContent = '当前值：无';
                 }
+
+                updateClearButtonVisibility(treeSelect);
             });
 
             const tree = treeSelect.querySelector('.yc-tree');
@@ -549,6 +626,8 @@
                     }
                 });
             });
+
+            updateClearButtonVisibility(treeSelect);
         }
 
         function setTreeSelectValue(id, value, label) {
@@ -563,6 +642,7 @@
 
             treeSelect.querySelectorAll('.yc-tree-node.is-selected').forEach(node => {
                 node.classList.remove('is-selected');
+                const checkbox = node.querySelector('.yc-tree-node__radio');
             });
 
             const nodeEl = treeSelect.querySelector(`.yc-tree-node[data-id="${value}"]`);
@@ -619,7 +699,7 @@
         document.querySelectorAll('.yc-tree-select').forEach(initTreeSelect);
 
         renderTree(treeData, 'treeBasicData');
-        renderTree(treeData, 'treeMultipleData');
+        renderTree(treeData, 'treeMultipleData', true);
         renderTree(treeData, 'treeSearchData');
         renderTree(treeData, 'treeLargeData');
         renderTree(treeData, 'treeMediumData');
@@ -650,6 +730,8 @@
                     const nodeEl = ts.querySelector(`.yc-tree-node[data-id="${val}"]`);
                     if (nodeEl) {
                         nodeEl.classList.add('is-selected');
+                        const checkbox = nodeEl.querySelector('.yc-tree-node__checkbox-input');
+                        if (checkbox) checkbox.checked = true;
                     }
                 });
                 updateMultipleTags(ts);

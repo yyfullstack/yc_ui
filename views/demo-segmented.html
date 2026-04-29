@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Segmented 分段控制器 - YC UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">Segmented 分段控制器</h1>
+            <p class="demo-page-subtitle">多个选项以段式按钮的形式显示，用于控制视图在不同选项间切换</p>
+        </div>
+
+        <div class="demo-section">
+            <h3>基本用法</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">基础的分段控制器</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div class="yc-segmented" id="segmented1">
+                        <div class="yc-segmented__item is-selected">全部</div>
+                        <div class="yc-segmented__item">进行中</div>
+                        <div class="yc-segmented__item">已完成</div>
+                        <div class="yc-segmented__item">已取消</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>带图标</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">可以带图标的分段控制器</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div class="yc-segmented" id="segmented2">
+                        <div class="yc-segmented__item is-selected">
+                            <i class="fas fa-home yc-segmented__item--icon"></i>
+                            <span>首页</span>
+                        </div>
+                        <div class="yc-segmented__item">
+                            <i class="fas fa-user yc-segmented__item--icon"></i>
+                            <span>用户</span>
+                        </div>
+                        <div class="yc-segmented__item">
+                            <i class="fas fa-cog yc-segmented__item--icon"></i>
+                            <span>设置</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>不同尺寸</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">提供大、默认、小三种尺寸</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div class="yc-segmented yc-segmented--large" id="segmented3">
+                        <div class="yc-segmented__item is-selected">大尺寸</div>
+                        <div class="yc-segmented__item">选项二</div>
+                        <div class="yc-segmented__item">选项三</div>
+                    </div>
+                    <div class="yc-segmented" id="segmented4">
+                        <div class="yc-segmented__item is-selected">默认尺寸</div>
+                        <div class="yc-segmented__item">选项二</div>
+                        <div class="yc-segmented__item">选项三</div>
+                    </div>
+                    <div class="yc-segmented yc-segmented--small" id="segmented5">
+                        <div class="yc-segmented__item is-selected">小尺寸</div>
+                        <div class="yc-segmented__item">选项二</div>
+                        <div class="yc-segmented__item">选项三</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>块级显示</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">块级分段控制器，选项等宽分布</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div class="yc-segmented yc-segmented--block" id="segmented6">
+                        <div class="yc-segmented__item is-selected">周一</div>
+                        <div class="yc-segmented__item">周二</div>
+                        <div class="yc-segmented__item">周三</div>
+                        <div class="yc-segmented__item">周四</div>
+                        <div class="yc-segmented__item">周五</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>禁用状态</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">可以设置选项为禁用状态</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div class="yc-segmented" id="segmented7">
+                        <div class="yc-segmented__item is-selected">可用</div>
+                        <div class="yc-segmented__item is-disabled">禁用</div>
+                        <div class="yc-segmented__item">可用</div>
+                        <div class="yc-segmented__item is-disabled">禁用</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.yc-segmented').forEach(container => {
+            container.addEventListener('click', (e) => {
+                const item = e.target.closest('.yc-segmented__item');
+                if (item && !item.classList.contains('is-disabled')) {
+                    container.querySelectorAll('.yc-segmented__item').forEach(i => i.classList.remove('is-selected'));
+                    item.classList.add('is-selected');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

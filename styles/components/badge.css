@@ -1,108 +1,96 @@
 @charset "UTF-8";
 
+/* ==================== Badge ==================== */
+
 .yc-badge {
     position: relative;
-    display: inline-flex;
+    display: inline-block;
     vertical-align: middle;
 }
 
 .yc-badge__content {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 18px;
-    height: 18px;
-    padding: 0 var(--yc-spacing-xs);
-    font-size: var(--yc-font-size-extra-small);
-    font-weight: var(--yc-font-weight-medium);
-    color: var(--yc-color-white);
-    background-color: var(--yc-color-danger);
-    border-radius: var(--yc-border-radius-round);
-    line-height: 1;
-}
-
-.yc-badge__content--dot {
-    width: 8px;
-    height: 8px;
-    min-width: 8px;
-    padding: 0;
-    border-radius: 50%;
-}
-
-.yc-badge__content--large {
-    min-width: 22px;
-    height: 22px;
-    font-size: var(--yc-font-size-small);
-}
-
-.yc-badge__content--small {
-    min-width: 14px;
-    height: 14px;
-    font-size: 10px;
-}
-
-.yc-badge--primary .yc-badge__content {
-    background-color: var(--yc-color-primary);
-}
-
-.yc-badge--success .yc-badge__content {
-    background-color: var(--yc-color-success);
-}
-
-.yc-badge--warning .yc-badge__content {
-    background-color: var(--yc-color-warning);
-}
-
-.yc-badge--info .yc-badge__content {
-    background-color: var(--yc-color-info);
-}
-
-.yc-badge--danger .yc-badge__content {
-    background-color: var(--yc-color-danger);
-}
-
-.yc-badge.is-fixed {
     position: absolute;
     top: 0;
     right: 0;
+    height: 18px;
+    padding: 0 6px;
+    line-height: 18px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: var(--yc-font-weight-medium, 500);
+    color: #ffffff;
+    background-color: var(--yc-color-danger, #f56c6c);
+    border-radius: 9px;
+    border: 1px solid #ffffff;
+    white-space: nowrap;
     transform: translate(50%, -50%);
+    transform-origin: center;
+    box-shadow: 0 0 0 2px #ffffff;
+    min-width: 18px;
     z-index: 1;
 }
 
-.yc-badge.is-static {
-    position: static;
-    transform: none;
-    margin-left: var(--yc-spacing-xs);
+.yc-badge__content--dot {
+    min-width: 10px;
+    width: 10px;
+    height: 10px;
+    padding: 0;
+    border-radius: 50%;
+    box-shadow: none;
 }
 
-.yc-badge--bottom {
-    position: absolute;
-    top: auto;
-    bottom: 0;
-    transform: translate(50%, 50%);
+.yc-badge__content--success {
+    background-color: var(--yc-color-success, #67c23a);
 }
 
-.yc-badge--left {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: auto;
-    transform: translate(-50%, -50%);
+.yc-badge__content--warning {
+    background-color: var(--yc-color-warning, #e6a23c);
 }
 
-.yc-badge--corner {
-    position: absolute;
-    top: 0;
-    left: 0;
-    transform: translate(-50%, -50%);
+.yc-badge__content--info {
+    background-color: var(--yc-color-info, #909399);
 }
 
-.yc-badge-group {
-    display: inline-flex;
-    gap: var(--yc-spacing-xs);
+.yc-badge__content--danger {
+    background-color: var(--yc-color-danger, #f56c6c);
 }
 
-.yc-badge-count {
-    font-family: var(--yc-font-family);
-    font-weight: var(--yc-font-weight-medium);
+.yc-badge__content--primary {
+    background-color: var(--yc-color-primary, #409eff);
+}
+
+.yc-badge__status {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.yc-badge__status--success {
+    background-color: var(--yc-color-success, #67c23a);
+}
+
+.yc-badge__status--warning {
+    background-color: var(--yc-color-warning, #e6a23c);
+}
+
+.yc-badge__status--info {
+    background-color: var(--yc-color-info, #909399);
+}
+
+.yc-badge__status--danger {
+    background-color: var(--yc-color-danger, #f56c6c);
+}
+
+.yc-badge__status-text {
+    margin-left: 8px;
+    font-size: var(--yc-font-size-small, 14px);
+    color: var(--yc-color-text-regular, #606266);
+    vertical-align: middle;
+}
+
+.yc-badge--max .yc-badge__content::after {
+    content: '+';
+    margin-left: 1px;
 }

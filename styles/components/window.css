@@ -13,11 +13,9 @@
     box-shadow: var(--yc-box-shadow-lg);
     z-index: var(--yc-index-top);
     overflow: hidden;
-    resize: both;
     min-width: 300px;
     min-height: 200px;
     transition: box-shadow var(--yc-transition-duration-base),
-        transform var(--yc-transition-duration-base),
         border-color var(--yc-transition-duration-base);
 }
 

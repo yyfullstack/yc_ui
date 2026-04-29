@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color 色彩组件示例</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../index.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--yc-font-family);
+            background-color: var(--yc-color-bg-page);
+            color: var(--yc-color-text-primary);
+            line-height: var(--yc-line-height-base);
+            padding: 24px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .demo-section {
+            background: var(--yc-color-bg);
+            border: 1px solid var(--yc-color-border);
+            border-radius: var(--yc-border-radius-lg);
+            padding: 24px;
+            margin-bottom: 16px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+        }
+
+        .demo-section h3 {
+            font-size: var(--yc-font-size-medium);
+            font-weight: var(--yc-font-weight-semibold);
+            color: var(--yc-color-text-primary);
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--yc-color-border-light);
+            position: relative;
+        }
+
+        .demo-section h3::before {
+            content: '';
+            position: absolute;
+            left: -24px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 16px;
+            background: var(--yc-color-primary);
+            border-radius: 2px;
+        }
+
+        .demo-block {
+            margin-bottom: 24px;
+        }
+
+        .demo-block:last-child {
+            margin-bottom: 0;
+        }
+
+        .demo-block-title {
+            font-size: var(--yc-font-size-small);
+            color: var(--yc-color-text-secondary);
+            margin-bottom: 12px;
+        }
+
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 12px;
+        }
+
+        .color-grid--small {
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        }
+
+        .color-grid--large {
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        }
+
+        .color-swatch {
+            border-radius: var(--yc-border-radius-md);
+            overflow: hidden;
+            border: 1px solid var(--yc-color-border-light);
+            transition: all var(--yc-transition-duration-fast);
+        }
+
+        .color-swatch:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .color-swatch__preview {
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--yc-font-size-small);
+            color: white;
+            font-weight: 500;
+        }
+
+        .color-swatch__preview--text-dark {
+            color: var(--yc-color-text-primary);
+        }
+
+        .color-swatch__info {
+            padding: 8px 10px;
+            background: var(--yc-color-bg);
+        }
+
+        .color-swatch__name {
+            font-size: var(--yc-font-size-small);
+            color: var(--yc-color-text-primary);
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .color-swatch__value {
+            font-size: var(--yc-font-size-extra-small);
+            color: var(--yc-color-text-secondary);
+            font-family: var(--yc-font-family-mono);
+        }
+
+        .color-swatch__var {
+            font-size: 10px;
+            color: var(--yc-color-text-placeholder);
+            margin-top: 2px;
+            word-break: break-all;
+        }
+
+        .color-row {
+            display: flex;
+            align-items: stretch;
+            border-radius: var(--yc-border-radius-md);
+            overflow: hidden;
+            border: 1px solid var(--yc-color-border-light);
+        }
+
+        .color-row__item {
+            flex: 1;
+            padding: 12px;
+            text-align: center;
+            min-width: 80px;
+        }
+
+        .color-row__item:first-child {
+            font-weight: 500;
+            background: var(--yc-color-bg-page);
+            color: var(--yc-color-text-primary);
+            font-size: var(--yc-font-size-small);
+        }
+
+        .color-row__label {
+            font-size: var(--yc-font-size-extra-small);
+            color: var(--yc-color-text-secondary);
+            margin-bottom: 4px;
+        }
+
+        .color-row__value {
+            font-size: var(--yc-font-size-small);
+            color: var(--yc-color-text-primary);
+            font-family: var(--yc-font-family-mono);
+        }
+
+        .color-gradient {
+            height: 60px;
+            border-radius: var(--yc-border-radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 500;
+            font-size: var(--yc-font-size-small);
+            margin-bottom: 8px;
+        }
+
+        .color-palette {
+            display: flex;
+            border-radius: var(--yc-border-radius-md);
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+
+        .color-palette__item {
+            flex: 1;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: white;
+            font-weight: 500;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        }
+
+        .color-palette__item--dark {
+            color: var(--yc-color-text-primary);
+            text-shadow: none;
+        }
+
+        .palette-label {
+            font-size: var(--yc-font-size-extra-small);
+            color: var(--yc-color-text-secondary);
+            margin-bottom: 12px;
+        }
+
+        .text-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 12px 16px;
+            background: var(--yc-color-bg-page);
+            border-radius: var(--yc-border-radius-md);
+            margin-bottom: 8px;
+        }
+
+        .text-row__label {
+            min-width: 120px;
+            font-size: var(--yc-font-size-small);
+            color: var(--yc-color-text-secondary);
+        }
+
+        .text-row__value {
+            flex: 1;
+            font-size: var(--yc-font-size-small);
+        }
+
+        .bg-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px 20px;
+            border-radius: var(--yc-border-radius-md);
+            margin-bottom: 8px;
+        }
+
+        .bg-row__label {
+            min-width: 100px;
+            font-size: var(--yc-font-size-small);
+        }
+
+        .bg-row__text {
+            font-size: var(--yc-font-size-small);
+        }
+
+        .border-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px 20px;
+            border-width: 1px;
+            border-style: solid;
+            border-radius: var(--yc-border-radius-md);
+            margin-bottom: 8px;
+        }
+
+        .border-row__label {
+            min-width: 100px;
+            font-size: var(--yc-font-size-small);
+        }
+
+        .border-row__text {
+            font-size: var(--yc-font-size-small);
+        }
+
+        .demo-divider {
+            height: 1px;
+            background: var(--yc-color-border-light);
+            margin: 24px 0;
+        }
+
+        .function-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 60px;
+            padding: 4px 12px;
+            border-radius: var(--yc-border-radius-round);
+            font-size: var(--yc-font-size-small);
+            font-weight: 500;
+        }
+
+        .function-badge--primary {
+            background: var(--yc-color-primary);
+            color: white;
+        }
+
+        .function-badge--success {
+            background: var(--yc-color-success);
+            color: white;
+        }
+
+        .function-badge--warning {
+            background: var(--yc-color-warning);
+            color: white;
+        }
+
+        .function-badge--danger {
+            background: var(--yc-color-danger);
+            color: white;
+        }
+
+        .function-badge--info {
+            background: var(--yc-color-info);
+            color: white;
+        }
+
+        .copy-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 12px 20px;
+            background: var(--yc-color-success);
+            color: white;
+            border-radius: var(--yc-border-radius-md);
+            font-size: var(--yc-font-size-small);
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 9999;
+            pointer-events: none;
+        }
+
+        .copy-indicator.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .color-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            }
+        }
+
+        [yc-theme="dark"] .demo-section {
+            background: rgba(255, 255, 255, 0.02);
+            border-color: rgba(255, 255, 255, 0.08);
+        }
+
+        [yc-theme="dark"] .color-swatch__info {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        [yc-theme="dark"] .text-row {
+            background: rgba(255, 255, 255, 0.03);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 style="font-size: 24px; font-weight: 600; margin-bottom: 24px; color: var(--yc-color-text-primary);">Color 色彩系统</h1>
+
+        <div class="demo-section">
+            <h3>主色</h3>
+            <div class="color-grid">
+                <div class="color-swatch">
+                    <div class="color-swatch__preview" style="background: #409EFF;">Primary</div>
+                    <div class="color-swatch__info">
+                        <div class="color-swatch__name">Primary</div>
+                        <div class="color-swatch__value">#409EFF</div>
+                        <div class="color-swatch__var">--yc-color-primary</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch__preview" style="background: #66b1ff;">Primary Light</div>
+                    <div class="color-swatch__info">
+                        <div class="color-swatch__name">Primary Hover</div>
+                        <div class="color-swatch__value">#66b1ff</div>
+                        <div class="color-swatch__var">--yc-color-primary-hover</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch__preview" style="background: rgba(64, 158, 255, 0.1); color: #409EFF;">Primary Light-3</div>
+                    <div class="color-swatch__info">
+                        <div class="color-swatch__name">Primary Light-3</div>
+                        <div class="color-swatch__value">rgba(64,158,255,0.1)</div>
+                        <div class="color-swatch__var">--yc-color-primary-light-3</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch__preview" style="background: rgba(64, 158, 255, 0.2); color: #409EFF;">Primary Light-5</div>
+                    <div class="color-swatch__info">
+                        <div class="color-swatch__name">Primary Light-5</div>
+                        <div class="color-swatch__value">rgba(64,158,255,0.2)</div>
+                        <div class="color-swatch__var">--yc-color-primary-light-5</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch__preview" style="background: rgba(64, 158, 255, 0.5);">Primary Light-9</div>
+                    <div class="color-swatch__info">
+                        <div class="color-swatch__name">Primary Light-9</div>
+                        <div class="color-swatch__value">rgba(64,158,255,0.5)</div>
+                        <div class="color-swatch__var">--yc-color-primary-light-9</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>功能色</h3>
+            <div class="color-grid">
+                <div class="color-swatch">
+                    <div class="color-swatch__preview" style="background: #67C23A;">Success</div>
+                    <div class="color-swatch__info">
+                        <div class="color-swatch__name">Success</div>
+                        <div class="color-swatch__value">#67C23A</div>
+                        <div class="color-swatch__var">--yc-color-success</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch__preview" style="background: #85ce61;">Success Hover</div>
+                    <div class="color-swatch__info">
+                        <div class="color-swatch__name">Success Hover</div>
+                        <div class="color-swatch__value">#85ce61</div>
+                        <div class="color-swatch__var">--yc-color-success-hover</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch__preview" style="background: rgba(103, 194, 58, 0.1); color: #67C23A;">Success Light</div>
+                    <div class="color-swatch__info">
+                        <div class="color-swatch__name">Success Light</div>
+                        <div class="color-swatch__value">rgba(103,194,58,0.1)</div>
+                        <div class="color-swatch__var">--yc-color-success-light-3</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch__preview" style="background: #E6A23C;">Warning</div>
+                    <div class="color-swatch__info">
+                        <div class="color-swatch__name">Warning</div>
+                        <div class="color-swatch__value">#E6A23C</div>
+                        <div class="color-swatch__var">--yc-color-warning</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch__preview" style="background: #ebb563;">Warning Hover</div>
+                    <div class="color-swatch__info">
+                        <div class="color-swatch__name">Warning Hover</div>
+                        <div class="color-swatch__value">#ebb563</div>
+                        <div class="color-swatch__var">--yc-color-warning-hover</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch__preview" style="background: rgba(230, 162, 60, 0.1); color: #E6A23C;">Warning Light</div>
+                    <div class="color-swatch__info">
+                        <div class="color-swatch__name">Warning Light</div>
+                        <div class="color-swatch__value">rgba(230,162,60,0.1)</div>
+                        <div class="color-swatch__var">--yc-color-warning-light-3</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch__preview" style="background: #F56C6C;">Danger</div>
+                    <div class="color-swatch__info">
+                        <div class="color-swatch__name">Danger</div>
+                        <div class="color-swatch__value">#F56C6C</div>
+                        <div class="color-swatch__var">--yc-color-danger</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch__preview" style="background: #f78989;">Danger Hover</div>
+                    <div class="color-swatch__info">
+                        <div class="color-swatch__name">Danger Hover</div>
+                        <div class="color-swatch__value">#f78989</div>
+                        <div class="color-swatch__var">--yc-color-danger-hover</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch__preview" style="background: rgba(245, 108, 108, 0.1); color: #F56C6C;">Danger Light</div>
+                    <div class="color-swatch__info">
+                        <div class="color-swatch__name">Danger Light</div>
+                        <div class="color-swatch__value">rgba(245,108,108,0.1)</div>
+                        <div class="color-swatch__var">--yc-color-danger-light-3</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch__preview" style="background: #909399;">Info</div>
+                    <div class="color-swatch__info">
+                        <div class="color-swatch__name">Info</div>
+                        <div class="color-swatch__value">#909399</div>
+                        <div class="color-swatch__var">--yc-color-info</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch__preview" style="background: rgba(144, 147, 153, 0.1); color: #909399;">Info Light</div>
+                    <div class="color-swatch__info">
+                        <div class="color-swatch__name">Info Light</div>
+                        <div class="color-swatch__value">rgba(144,147,153,0.1)</div>
+                        <div class="color-swatch__var">--yc-color-info-light-3</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>基础色</h3>
+            <div class="color-grid color-grid--small">
+                <div class="color-swatch">
+                    <div class="color-swatch__preview" style="background: #ffffff; color: #303133; border: 1px solid #DCDFE6;">White</div>
+                    <div class="color-swatch__info">
+                        <div class="color-swatch__name">White</div>
+                        <div class="color-swatch__value">#ffffff</div>
+                        <div class="color-swatch__var">--yc-color-white</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch__preview" style="background: #000000;">Black</div>
+                    <div class="color-swatch__info">
+                        <div class="color-swatch__name">Black</div>
+                        <div class="color-swatch__value">#000000</div>
+                        <div class="color-swatch__var">--yc-color-black</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch__preview" style="background: #f4f4f5; color: #303133;">Page BG</div>
+                    <div class="color-swatch__info">
+                        <div class="color-swatch__name">Page BG</div>
+                        <div class="color-swatch__value">#f4f4f5</div>
+                        <div class="color-swatch__var">--yc-color-bg-page</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch__preview" style="background: rgba(255, 255, 255, 0.9); color: #303133; border: 1px solid #DCDFE6;">Overlay</div>
+                    <div class="color-swatch__info">
+                        <div class="color-swatch__name">Overlay</div>
+                        <div class="color-swatch__value">rgba(255,255,255,0.9)</div>
+                        <div class="color-swatch__var">--yc-color-bg-overlay</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch__preview" style="background: #F5F7FA; color: #303133;">Disabled BG</div>
+                    <div class="color-swatch__info">
+                        <div class="color-swatch__name">Disabled BG</div>
+                        <div class="color-swatch__value">#F5F7FA</div>
+                        <div class="color-swatch__var">--yc-color-bg-disabled</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>文本色</h3>
+            <div class="color-grid color-grid--small">
+                <div class="color-swatch">
+                    <div class="color-swatch__preview" style="background: #303133; color: white;">Primary Text</div>
+                    <div class="color-swatch__info">
+                        <div class="color-swatch__name">Primary Text</div>
+                        <div class="color-swatch__value">#303133</div>
+                        <div class="color-swatch__var">--yc-color-text-primary</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch__preview" style="background: #606266; color: white;">Regular Text</div>
+                    <div class="color-swatch__info">
+                        <div class="color-swatch__name">Regular Text</div>
+                        <div class="color-swatch__value">#606266</div>
+                        <div class="color-swatch__var">--yc-color-text-regular</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch__preview" style="background: #909399; color: white;">Secondary</div>
+                    <div class="color-swatch__info">
+                        <div class="color-swatch__name">Secondary Text</div>
+                        <div class="color-swatch__value">#909399</div>
+                        <div class="color-swatch__var">--yc-color-text-secondary</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch__preview" style="background: #C0C4CC; color: white;">Placeholder</div>
+                    <div class="color-swatch__info">
+                        <div class="color-swatch__name">Placeholder</div>
+                        <div class="color-swatch__value">#C0C4CC</div>
+                        <div class="color-swatch__var">--yc-color-text-placeholder</div>
+                    </div>
+                </div>
+            </div>
+            <div class="demo-divider"></div>
+            <div class="demo-block">
+                <div class="demo-block-title">文本色示例</div>
+                <div class="text-row">
+                    <span class="text-row__label">主要文本 Primary</span>
+                    <span class="text-row__value" style="color: #303133;">这是主要文本，用于标题和重要信息</span>
+                </div>
+                <div class="text-row">
+                    <span class="text-row__label">常规文本 Regular</span>
+                    <span class="text-row__value" style="color: #606266;">这是常规文本，用于正文内容</span>
+                </div>
+                <div class="text-row">
+                    <span class="text-row__label">次要文本 Secondary</span>
+                    <span class="text-row__value" style="color: #909399;">这是次要文本，用于辅助说明</span>
+                </div>
+                <div class="text-row">
+                    <span class="text-row__label">占位符 Placeholder</span>
+                    <span class="text-row__value" style="color: #C0C4CC;">这是占位符文本，用于输入框提示</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>边框色</h3>
+            <div class="color-grid color-grid--small">
+                <div class="color-swatch">
+                    <div class="color-swatch__preview" style="background: #DCDFE6; color: #303133;">Base Border</div>
+                    <div class="color-swatch__info">
+                        <div class="color-swatch__name">Base Border</div>
+                        <div class="color-swatch__value">#DCDFE6</div>
+                        <div class="color-swatch__var">--yc-color-border</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch__preview" style="background: #E4E7ED; color: #303133;">Light Border</div>
+                    <div class="color-swatch__info">
+                        <div class="color-swatch__name">Light Border</div>
+                        <div class="color-swatch__value">#E4E7ED</div>
+                        <div class="color-swatch__var">--yc-color-border-light</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch__preview" style="background: #EBEEF5; color: #303133;">Lighter Border</div>
+                    <div class="color-swatch__info">
+                        <div class="color-swatch__name">Lighter Border</div>
+                        <div class="color-swatch__value">#EBEEF5</div>
+                        <div class="color-swatch__var">--yc-color-border-lighter</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch__preview" style="background: #F2F6FC; color: #303133;">Extra Light</div>
+                    <div class="color-swatch__info">
+                        <div class="color-swatch__name">Extra Light</div>
+                        <div class="color-swatch__value">#F2F6FC</div>
+                        <div class="color-swatch__var">--yc-color-border-extra-light</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch__preview" style="background: #D4D7DE; color: #303133;">Dark Border</div>
+                    <div class="color-swatch__info">
+                        <div class="color-swatch__name">Dark Border</div>
+                        <div class="color-swatch__value">#D4D7DE</div>
+                        <div class="color-swatch__var">--yc-color-border-dark</div>
+                    </div>
+                </div>
+            </div>
+            <div class="demo-divider"></div>
+            <div class="demo-block">
+                <div class="demo-block-title">边框色示例</div>
+                <div class="border-row" style="border-color: #DCDFE6; background: white;">
+                    <span class="border-row__label">Base Border</span>
+                    <span class="border-row__text">用于主要边框和输入框边框</span>
+                </div>
+                <div class="border-row" style="border-color: #E4E7ED; background: white;">
+                    <span class="border-row__label">Light Border</span>
+                    <span class="border-row__text">用于卡片和容器边框</span>
+                </div>
+                <div class="border-row" style="border-color: #EBEEF5; background: white;">
+                    <span class="border-row__label">Lighter Border</span>
+                    <span class="border-row__text">用于表格和列表分隔线</span>
+                </div>
+                <div class="border-row" style="border-color: #F2F6FC; background: white;">
+                    <span class="border-row__label">Extra Light</span>
+                    <span class="border-row__text">用于悬停状态和背景</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>功能色渐变色阶</h3>
+            <div class="demo-block">
+                <div class="palette-label">Primary 渐变</div>
+                <div class="color-palette">
+                    <div class="color-palette__item" style="background: rgba(64, 158, 255, 0.1); color: #409EFF;">10%</div>
+                    <div class="color-palette__item" style="background: rgba(64, 158, 255, 0.2); color: #409EFF;">20%</div>
+                    <div class="color-palette__item" style="background: rgba(64, 158, 255, 0.3);">30%</div>
+                    <div class="color-palette__item" style="background: rgba(64, 158, 255, 0.4);">40%</div>
+                    <div class="color-palette__item" style="background: rgba(64, 158, 255, 0.5);">50%</div>
+                    <div class="color-palette__item" style="background: rgba(64, 158, 255, 0.6);">60%</div>
+                    <div class="color-palette__item" style="background: rgba(64, 158, 255, 0.7);">70%</div>
+                    <div class="color-palette__item" style="background: rgba(64, 158, 255, 0.8);">80%</div>
+                    <div class="color-palette__item" style="background: rgba(64, 158, 255, 0.9);">90%</div>
+                    <div class="color-palette__item" style="background: #409EFF;">100%</div>
+                </div>
+            </div>
+            <div class="demo-block">
+                <div class="palette-label">Success 渐变</div>
+                <div class="color-palette">
+                    <div class="color-palette__item" style="background: rgba(103, 194, 58, 0.1); color: #67C23A;">10%</div>
+                    <div class="color-palette__item" style="background: rgba(103, 194, 58, 0.2); color: #67C23A;">20%</div>
+                    <div class="color-palette__item" style="background: rgba(103, 194, 58, 0.3);">30%</div>
+                    <div class="color-palette__item" style="background: rgba(103, 194, 58, 0.4);">40%</div>
+                    <div class="color-palette__item" style="background: rgba(103, 194, 58, 0.5);">50%</div>
+                    <div class="color-palette__item" style="background: rgba(103, 194, 58, 0.6);">60%</div>
+                    <div class="color-palette__item" style="background: rgba(103, 194, 58, 0.7);">70%</div>
+                    <div class="color-palette__item" style="background: rgba(103, 194, 58, 0.8);">80%</div>
+                    <div class="color-palette__item" style="background: rgba(103, 194, 58, 0.9);">90%</div>
+                    <div class="color-palette__item" style="background: #67C23A;">100%</div>
+                </div>
+            </div>
+            <div class="demo-block">
+                <div class="palette-label">Warning 渐变</div>
+                <div class="color-palette">
+                    <div class="color-palette__item" style="background: rgba(230, 162, 60, 0.1); color: #E6A23C;">10%</div>
+                    <div class="color-palette__item" style="background: rgba(230, 162, 60, 0.2); color: #E6A23C;">20%</div>
+                    <div class="color-palette__item" style="background: rgba(230, 162, 60, 0.3);">30%</div>
+                    <div class="color-palette__item" style="background: rgba(230, 162, 60, 0.4);">40%</div>
+                    <div class="color-palette__item" style="background: rgba(230, 162, 60, 0.5);">50%</div>
+                    <div class="color-palette__item" style="background: rgba(230, 162, 60, 0.6);">60%</div>
+                    <div class="color-palette__item" style="background: rgba(230, 162, 60, 0.7);">70%</div>
+                    <div class="color-palette__item" style="background: rgba(230, 162, 60, 0.8);">80%</div>
+                    <div class="color-palette__item" style="background: rgba(230, 162, 60, 0.9);">90%</div>
+                    <div class="color-palette__item" style="background: #E6A23C;">100%</div>
+                </div>
+            </div>
+            <div class="demo-block">
+                <div class="palette-label">Danger 渐变</div>
+                <div class="color-palette">
+                    <div class="color-palette__item" style="background: rgba(245, 108, 108, 0.1); color: #F56C6C;">10%</div>
+                    <div class="color-palette__item" style="background: rgba(245, 108, 108, 0.2); color: #F56C6C;">20%</div>
+                    <div class="color-palette__item" style="background: rgba(245, 108, 108, 0.3);">30%</div>
+                    <div class="color-palette__item" style="background: rgba(245, 108, 108, 0.4);">40%</div>
+                    <div class="color-palette__item" style="background: rgba(245, 108, 108, 0.5);">50%</div>
+                    <div class="color-palette__item" style="background: rgba(245, 108, 108, 0.6);">60%</div>
+                    <div class="color-palette__item" style="background: rgba(245, 108, 108, 0.7);">70%</div>
+                    <div class="color-palette__item" style="background: rgba(245, 108, 108, 0.8);">80%</div>
+                    <div class="color-palette__item" style="background: rgba(245, 108, 108, 0.9);">90%</div>
+                    <div class="color-palette__item" style="background: #F56C6C;">100%</div>
+                </div>
+            </div>
+            <div class="demo-block">
+                <div class="palette-label">Info 渐变</div>
+                <div class="color-palette">
+                    <div class="color-palette__item" style="background: rgba(144, 147, 153, 0.1); color: #909399;">10%</div>
+                    <div class="color-palette__item" style="background: rgba(144, 147, 153, 0.2); color: #909399;">20%</div>
+                    <div class="color-palette__item" style="background: rgba(144, 147, 153, 0.3);">30%</div>
+                    <div class="color-palette__item" style="background: rgba(144, 147, 153, 0.4);">40%</div>
+                    <div class="color-palette__item" style="background: rgba(144, 147, 153, 0.5);">50%</div>
+                    <div class="color-palette__item" style="background: rgba(144, 147, 153, 0.6);">60%</div>
+                    <div class="color-palette__item" style="background: rgba(144, 147, 153, 0.7);">70%</div>
+                    <div class="color-palette__item" style="background: rgba(144, 147, 153, 0.8);">80%</div>
+                    <div class="color-palette__item" style="background: rgba(144, 147, 153, 0.9);">90%</div>
+                    <div class="color-palette__item" style="background: #909399;">100%</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>背景色</h3>
+            <div class="demo-block">
+                <div class="bg-row" style="background: white;">
+                    <span class="bg-row__label">White</span>
+                    <span class="bg-row__text" style="color: #303133;">主要背景色，用于卡片和内容区域</span>
+                </div>
+                <div class="bg-row" style="background: #f4f4f5;">
+                    <span class="bg-row__label">Page BG</span>
+                    <span class="bg-row__text" style="color: #303133;">页面背景色</span>
+                </div>
+                <div class="bg-row" style="background: rgba(255, 255, 255, 0.9);">
+                    <span class="bg-row__label">Overlay</span>
+                    <span class="bg-row__text" style="color: #303133;">遮罩背景色</span>
+                </div>
+                <div class="bg-row" style="background: #F5F7FA;">
+                    <span class="bg-row__label">Disabled BG</span>
+                    <span class="bg-row__text" style="color: #909399;">禁用状态背景色</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>代码与高亮</h3>
+            <div class="color-grid color-grid--small">
+                <div class="color-swatch">
+                    <div class="color-swatch__preview" style="background: #f5f7fa; color: #d63384;">Code BG</div>
+                    <div class="color-swatch__info">
+                        <div class="color-swatch__name">Code BG</div>
+                        <div class="color-swatch__value">#f5f7fa</div>
+                        <div class="color-swatch__var">--yc-color-code-bg</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch__preview" style="background: #d63384; color: white;">Code Color</div>
+                    <div class="color-swatch__info">
+                        <div class="color-swatch__name">Code Color</div>
+                        <div class="color-swatch__value">#d63384</div>
+                        <div class="color-swatch__var">--yc-color-code</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch__preview" style="background: #212529; color: white;">Highlight</div>
+                    <div class="color-swatch__info">
+                        <div class="color-swatch__name">Highlight</div>
+                        <div class="color-swatch__value">#212529</div>
+                        <div class="color-swatch__var">--yc-color-highlight</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch__preview" style="background: #fff3cd; color: #856404;">Highlight BG</div>
+                    <div class="color-swatch__info">
+                        <div class="color-swatch__name">Highlight BG</div>
+                        <div class="color-swatch__value">#fff3cd</div>
+                        <div class="color-swatch__var">--yc-color-highlight-bg</div>
+                    </div>
+                </div>
+            </div>
+            <div class="demo-divider"></div>
+            <div class="demo-block">
+                <div class="demo-block-title">代码与高亮示例</div>
+                <div style="padding: 16px; background: #f5f7fa; border-radius: var(--yc-border-radius-md); margin-bottom: 12px;">
+                    <code style="color: #d63384; font-family: var(--yc-font-family-mono);">const theme = 'YC Design System';</code>
+                </div>
+                <div style="padding: 16px; background: #fff3cd; border-radius: var(--yc-border-radius-md);">
+                    这是一段 <span style="background: #fff3cd; color: #856404; padding: 0 4px;">高亮显示</span> 的文本内容。
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>功能色应用</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">徽章与标签</div>
+                <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center;">
+                    <span class="function-badge function-badge--primary">主要</span>
+                    <span class="function-badge function-badge--success">成功</span>
+                    <span class="function-badge function-badge--warning">警告</span>
+                    <span class="function-badge function-badge--danger">危险</span>
+                    <span class="function-badge function-badge--info">信息</span>
+                </div>
+            </div>
+            <div class="demo-divider"></div>
+            <div class="demo-block">
+                <div class="demo-block-title">按钮应用</div>
+                <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center;">
+                    <button style="padding: 8px 16px; background: #409EFF; color: white; border: none; border-radius: 4px; cursor: pointer;">主要按钮</button>
+                    <button style="padding: 8px 16px; background: #67C23A; color: white; border: none; border-radius: 4px; cursor: pointer;">成功按钮</button>
+                    <button style="padding: 8px 16px; background: #E6A23C; color: white; border: none; border-radius: 4px; cursor: pointer;">警告按钮</button>
+                    <button style="padding: 8px 16px; background: #F56C6C; color: white; border: none; border-radius: 4px; cursor: pointer;">危险按钮</button>
+                    <button style="padding: 8px 16px; background: #909399; color: white; border: none; border-radius: 4px; cursor: pointer;">信息按钮</button>
+                </div>
+            </div>
+            <div class="demo-divider"></div>
+            <div class="demo-block">
+                <div class="demo-block-title">输入框应用</div>
+                <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center;">
+                    <input type="text" placeholder="默认输入框" style="padding: 8px 12px; border: 1px solid #DCDFE6; border-radius: 4px; outline: none;">
+                    <input type="text" placeholder="聚焦状态" style="padding: 8px 12px; border: 1px solid #409EFF; border-radius: 4px; outline: none; box-shadow: 0 0 0 2px rgba(64, 158, 255, 0.2);">
+                    <input type="text" placeholder="禁用状态" style="padding: 8px 12px; border: 1px solid #DCDFE6; border-radius: 4px; background: #F5F7FA; color: #C0C4CC;" disabled>
+                </div>
+            </div>
+            <div class="demo-divider"></div>
+            <div class="demo-block">
+                <div class="demo-block-title">提示状态</div>
+                <div style="display: flex; gap: 12px; flex-direction: column;">
+                    <div style="padding: 12px 16px; background: rgba(103, 194, 58, 0.1); border-left: 3px solid #67C23A; border-radius: 0 4px 4px 0;">
+                        <span style="color: #67C23A; font-weight: 500;">成功提示</span> - 操作已成功完成
+                    </div>
+                    <div style="padding: 12px 16px; background: rgba(230, 162, 60, 0.1); border-left: 3px solid #E6A23C; border-radius: 0 4px 4px 0;">
+                        <span style="color: #E6A23C; font-weight: 500;">警告提示</span> - 请注意此操作的风险
+                    </div>
+                    <div style="padding: 12px 16px; background: rgba(245, 108, 108, 0.1); border-left: 3px solid #F56C6C; border-radius: 0 4px 4px 0;">
+                        <span style="color: #F56C6C; font-weight: 500;">错误提示</span> - 操作执行失败
+                    </div>
+                    <div style="padding: 12px 16px; background: rgba(64, 158, 255, 0.1); border-left: 3px solid #409EFF; border-radius: 0 4px 4px 0;">
+                        <span style="color: #409EFF; font-weight: 500;">信息提示</span> - 这是一条信息提示
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backtop 回到顶部 - YC UI</title>
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-header__title">Backtop 回到顶部</h1>
+            <p class="demo-page-header__desc">返回页面顶部的按钮，适合较长页面。</p>
+        </div>
+
+        <div class="demo-section">
+            <h2 class="demo-section__title">基础用法</h2>
+            <p class="demo-section__desc">最简单的回到顶部按钮，滚动超过一定距离后显示。</p>
+            <div class="demo-block">
+                <div id="backtop-basic" class="yc-backtop yc-backtop--hidden" title="回到顶部">
+                    <i class="fas fa-arrow-up"></i>
+                </div>
+                <div style="height: 800px; background: var(--yc-color-bg-page); display: flex; align-items: center; justify-content: center;">
+                    <p class="yc-text-regular yc-text-secondary">向下滚动查看回到顶部按钮</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2 class="demo-section__title">自定义样式</h2>
+            <p class="demo-section__desc">可以通过 CSS 变量自定义回到顶部按钮的样式。</p>
+            <div class="demo-block">
+                <div class="demo-row" style="gap: 16px; flex-wrap: wrap;">
+                    <div id="backtop-square" class="yc-backtop yc-backtop--square yc-backtop--hidden" title="回到顶部" style="--yc-backtop-bg: var(--yc-color-success);">
+                        <i class="fas fa-arrow-up"></i>
+                    </div>
+                    <div id="backtop-small" class="yc-backtop yc-backtop--small yc-backtop--hidden" title="回到顶部" style="--yc-backtop-bg: var(--yc-color-warning);">
+                        <i class="fas fa-angle-up"></i>
+                    </div>
+                    <div id="backtop-large" class="yc-backtop yc-backtop--large yc-backtop--hidden" title="回到顶部" style="--yc-backtop-bg: var(--yc-color-danger);">
+                        <i class="fas fa-chevron-up"></i>
+                    </div>
+                </div>
+                <div style="height: 800px; background: var(--yc-color-bg-page); display: flex; align-items: center; justify-content: center;">
+                    <p class="yc-text-regular yc-text-secondary">向下滚动查看不同样式的回到顶部按钮</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2 class="demo-section__title">带文字</h2>
+            <p class="demo-section__desc">可以添加文字说明，更清晰地表达功能。</p>
+            <div class="demo-block">
+                <div id="backtop-with-text" class="yc-backtop yc-backtop--hidden" title="回到顶部" style="--yc-backtop-size: auto; --yc-backtop-border-radius: var(--yc-border-radius-md); padding: 12px 16px; gap: 8px;">
+                    <i class="fas fa-arrow-up"></i>
+                    <span class="yc-text-sm">回到顶部</span>
+                </div>
+                <div style="height: 800px; background: var(--yc-color-bg-page); display: flex; align-items: center; justify-content: center;">
+                    <p class="yc-text-regular yc-text-secondary">向下滚动查看带文字的回到顶部按钮</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const backtops = document.querySelectorAll('.yc-backtop');
+            
+            window.addEventListener('scroll', function() {
+                const scrollTop = window.scrollY;
+                
+                backtops.forEach(backtop => {
+                    if (scrollTop > 200) {
+                        backtop.classList.remove('yc-backtop--hidden');
+                    } else {
+                        backtop.classList.add('yc-backtop--hidden');
+                    }
+                });
+            });
+            
+            backtops.forEach(backtop => {
+                backtop.addEventListener('click', function() {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

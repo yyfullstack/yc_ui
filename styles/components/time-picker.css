@@ -1,191 +1,463 @@
 @charset "UTF-8";
 
+/* ==================== TimePicker ==================== */
+
 .yc-time-picker {
     position: relative;
-    display: inline-block;
-    width: 200px;
+    display: inline-flex;
+    width: 180px;
+    font-size: var(--yc-font-size-small, 14px);
+    color: var(--yc-color-text-primary, #303133);
+    vertical-align: middle;
+    line-height: 1;
 }
 
-.yc-time-picker__trigger {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 8px 12px;
-    border: 1px solid var(--yc-color-border);
-    border-radius: var(--yc-border-radius-base);
-    background-color: var(--yc-color-bg);
-    cursor: pointer;
-    transition: var(--yc-transition-base);
-    gap: 8px;
-}
-
-.yc-time-picker__trigger:hover {
-    border-color: var(--yc-color-primary);
-}
-
-.yc-time-picker__trigger i {
-    color: var(--yc-color-text-secondary);
-    font-size: 12px;
-}
-
-.yc-time-picker.is-disabled .yc-time-picker__trigger {
-    cursor: not-allowed;
-    opacity: 0.6;
-    background-color: var(--yc-color-bg-disabled);
-}
-
-.yc-time-picker__panel {
-    position: absolute;
-    top: calc(100% + 8px);
-    left: 0;
-    z-index: var(--yc-index-popper);
-    padding: 12px;
-    background-color: var(--yc-color-bg);
-    border: 1px solid var(--yc-color-border);
-    border-radius: var(--yc-border-radius-base);
-    box-shadow: var(--yc-box-shadow-lg);
-    display: none;
-    min-width: 180px;
-}
-
-.yc-time-picker__panel.is-open {
-    display: block;
-}
-
-.yc-time-picker__columns {
-    display: flex;
-    justify-content: center;
-    gap: 16px;
-}
-
-.yc-time-picker__column {
-    width: 60px;
-    height: 180px;
-    overflow-y: auto;
+.yc-time-picker__input-wrapper {
     position: relative;
-    scrollbar-width: thin;
-}
-
-.yc-time-picker__column::-webkit-scrollbar {
-    width: 4px;
-}
-
-.yc-time-picker__column::-webkit-scrollbar-track {
-    background: var(--yc-color-bg-page);
-}
-
-.yc-time-picker__column::-webkit-scrollbar-thumb {
-    background: var(--yc-color-border);
-    border-radius: 2px;
-}
-
-.yc-time-picker__item {
+    display: inline-flex;
+    align-items: center;
+    width: 100%;
     height: 32px;
-    display: flex;
+    padding: 0 30px 0 12px;
+    border: 1px solid var(--yc-color-border, #dcdfe6);
+    border-radius: var(--yc-border-radius-base, 4px);
+    background-color: var(--yc-color-bg, #ffffff);
+    cursor: pointer;
+    transition: border-color var(--yc-transition-fast, 0.2s);
+    box-sizing: border-box;
+}
+
+.yc-time-picker__input-wrapper:hover {
+    border-color: var(--yc-color-border-hover, #c0c4cc);
+}
+
+.yc-time-picker.is-active .yc-time-picker__input-wrapper {
+    border-color: var(--yc-color-primary, #409eff);
+}
+
+.yc-time-picker__input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: inherit;
+    color: inherit;
+    cursor: pointer;
+    min-width: 0;
+    padding: 0;
+    font-family: inherit;
+    width: 100%;
+}
+
+.yc-time-picker__input::placeholder {
+    color: var(--yc-color-text-placeholder, #c0c4cc);
+}
+
+.yc-time-picker__icon {
+    position: absolute;
+    right: 10px;
+    color: var(--yc-color-text-secondary, #909399);
+    font-size: 14px;
+    flex-shrink: 0;
+    transition: color var(--yc-transition-fast, 0.2s);
+}
+
+.yc-time-picker__clear {
+    position: absolute;
+    right: 8px;
+    display: none;
     align-items: center;
     justify-content: center;
-    font-size: var(--yc-font-size-small);
-    color: var(--yc-color-text-primary);
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    color: var(--yc-color-text-secondary, #909399);
     cursor: pointer;
-    transition: var(--yc-transition-fast);
-    border-radius: var(--yc-border-radius-small);
-    margin: 0 4px;
+    transition: all var(--yc-transition-fast, 0.2s);
+    flex-shrink: 0;
+    font-size: 12px;
+    background-color: var(--yc-color-bg, #ffffff);
 }
 
-.yc-time-picker__item:hover {
-    background-color: var(--yc-color-primary-light-3);
-    color: var(--yc-color-primary);
+.yc-time-picker--clearable:hover .yc-time-picker__clear {
+    display: flex;
 }
 
-.yc-time-picker__item.is-selected {
-    background-color: var(--yc-color-primary);
-    color: var(--yc-color-white);
-    font-weight: var(--yc-font-weight-semibold);
+.yc-time-picker.is-active .yc-time-picker__clear {
+    display: none;
 }
 
-.yc-time-picker__highlight {
+.yc-time-picker.is-active:hover .yc-time-picker__clear {
+    display: flex;
+}
+
+.yc-time-picker__clear:hover {
+    color: var(--yc-color-text-primary, #303133);
+}
+
+.yc-time-picker.is-disabled {
+    cursor: not-allowed;
+}
+
+.yc-time-picker.is-disabled .yc-time-picker__input-wrapper {
+    cursor: not-allowed;
+    background-color: var(--yc-color-bg-disabled, #f5f7fa);
+    border-color: var(--yc-color-border-lighter, #e4e7ed);
+    color: var(--yc-color-text-placeholder, #c0c4cc);
+}
+
+.yc-time-picker.is-disabled .yc-time-picker__input {
+    cursor: not-allowed;
+    color: inherit;
+}
+
+.yc-time-picker.is-disabled .yc-time-picker__icon {
+    color: var(--yc-color-text-placeholder, #c0c4cc);
+}
+
+/* ==================== Popper ==================== */
+
+.yc-time-picker__popper {
     position: absolute;
-    top: 50%;
+    top: calc(100% + 12px);
+    left: 0;
+    z-index: var(--yc-index-popper, 2000);
+    display: none;
+    background-color: var(--yc-color-bg, #ffffff);
+    border: 1px solid var(--yc-color-border-lighter, #e4e7ed);
+    border-radius: var(--yc-border-radius-base, 4px);
+    box-shadow: var(--yc-box-shadow-light, 0 2px 12px 0 rgba(0, 0, 0, 0.1));
+}
+
+/* ==================== Time Panel ==================== */
+
+.yc-time-panel {
+    min-width: 200px;
+    background-color: var(--yc-color-bg, #ffffff);
+    border-radius: var(--yc-border-radius-base, 4px);
+    overflow: hidden;
+    user-select: none;
+}
+
+.yc-time-panel--with-seconds {
+    min-width: 240px;
+}
+
+.yc-time-panel__content {
+    display: flex;
+    justify-content: center;
+    padding: 6px 0;
+    position: relative;
+}
+
+/* Column */
+.yc-time-panel__column {
+    position: relative;
+    width: 64px;
+    height: 208px;
+    overflow: hidden;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+}
+
+/* .yc-time-panel__column:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 1px;
+    background-color: var(--yc-color-border-light, #ebeef5);
+    pointer-events: none;
+} */
+
+/* Highlight indicator lines - fixed position in center */
+.yc-time-panel__column::before,
+.yc-time-panel__column::after {
+    content: '';
+    position: absolute;
     left: 0;
     right: 0;
-    height: 32px;
-    transform: translateY(-50%);
-    background-color: var(--yc-color-primary-light-3);
-    border-radius: var(--yc-border-radius-small);
+    height: 1px;
+    background-color: var(--yc-color-border-light, #ebeef5);
+    z-index: 2;
     pointer-events: none;
 }
 
-.yc-time-picker__footer {
-    padding-top: 12px;
-    margin-top: 12px;
-    border-top: 1px solid var(--yc-color-border-light);
+.yc-time-panel__column::before {
+    top: 88px;
+}
+
+.yc-time-panel__column::after {
+    bottom: 88px;
+}
+
+.yc-time-panel__list {
+    height: 100%;
+    overflow-y: auto;
+    padding: 0;
+    margin: 0;
+    scrollbar-width: thin;
+    position: relative;
+    z-index: 1;
+}
+
+.yc-time-panel__list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.yc-time-panel__list::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.yc-time-panel__list::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 3px;
+    transition: background 0.2s;
+}
+
+.yc-time-panel__list:hover::-webkit-scrollbar-thumb {
+    background: var(--yc-color-border, #dcdfe6);
+}
+
+.yc-time-panel__item {
+    height: 32px;
     display: flex;
-    justify-content: flex-end;
-    gap: 8px;
-}
-
-.yc-time-picker__btn {
-    padding: 6px 12px;
-    border: 1px solid var(--yc-color-border);
-    border-radius: var(--yc-border-radius-small);
-    background-color: var(--yc-color-bg);
-    color: var(--yc-color-text-secondary);
-    font-size: var(--yc-font-size-small);
+    align-items: center;
+    justify-content: center;
+    font-size: var(--yc-font-size-small, 14px);
+    color: var(--yc-color-text-regular, #606266);
     cursor: pointer;
-    transition: var(--yc-transition-fast);
+    transition: all var(--yc-transition-fast, 0.2s);
+    position: relative;
+    z-index: 1;
+    user-select: none;
 }
 
-.yc-time-picker__btn:hover {
-    border-color: var(--yc-color-primary);
-    color: var(--yc-color-primary);
+.yc-time-panel__item:hover:not(.is-disabled):not(.is-selected) {
+    background-color: var(--yc-color-fill-light, #f5f7fa);
 }
 
-.yc-time-picker__btn--primary {
-    background-color: var(--yc-color-primary);
-    border-color: var(--yc-color-primary);
-    color: var(--yc-color-white);
+.yc-time-panel__item.is-selected {
+    color: var(--yc-color-primary, #409eff);
+    font-weight: 500;
 }
 
-.yc-time-picker__btn--primary:hover {
-    background-color: var(--yc-color-primary-hover);
-    border-color: var(--yc-color-primary-hover);
-    color: var(--yc-color-white);
+.yc-time-panel__item.is-disabled {
+    color: var(--yc-color-text-placeholder, #c0c4cc);
+    cursor: not-allowed;
+    opacity: 0.6;
+    pointer-events: none;
 }
+
+/* Footer */
+.yc-time-panel__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    border-top: 1px solid var(--yc-color-border-light, #ebeef5);
+    background-color: var(--yc-color-bg, #ffffff);
+}
+
+.yc-time-panel__btn {
+    padding: 6px 15px;
+    border: 1px solid var(--yc-color-border, #dcdfe6);
+    border-radius: var(--yc-border-radius-base, 4px);
+    background-color: var(--yc-color-bg, #ffffff);
+    color: var(--yc-color-text-regular, #606266);
+    font-size: var(--yc-font-size-small, 14px);
+    cursor: pointer;
+    transition: all var(--yc-transition-fast, 0.2s);
+    font-family: inherit;
+    line-height: 1;
+}
+
+.yc-time-panel__btn:hover {
+    border-color: var(--yc-color-primary, #409eff);
+    color: var(--yc-color-primary, #409eff);
+}
+
+.yc-time-panel__btn--text {
+    background: transparent;
+    border-color: transparent;
+    color: var(--yc-color-primary, #409eff);
+}
+
+.yc-time-panel__btn--text:hover {
+    background: transparent;
+    border-color: transparent;
+    color: var(--yc-color-primary-hover, #66b1ff);
+}
+
+.yc-time-panel__btn--primary {
+    background-color: var(--yc-color-primary, #409eff);
+    border-color: var(--yc-color-primary, #409eff);
+    color: var(--yc-color-white, #ffffff);
+}
+
+.yc-time-panel__btn--primary:hover {
+    background-color: var(--yc-color-primary-hover, #66b1ff);
+    border-color: var(--yc-color-primary-hover, #66b1ff);
+    color: var(--yc-color-white, #ffffff);
+}
+
+/* ==================== Range ==================== */
+
+.yc-time-picker--range {
+    width: auto;
+    min-width: 240px;
+}
+
+.yc-time-picker--range .yc-time-picker__input-wrapper {
+    width: 100%;
+    justify-content: space-between;
+    padding: 0 30px 0 12px;
+    gap: 0;
+}
+
+.yc-time-picker--range .yc-time-picker__input {
+    text-align: center;
+    min-width: 60px;
+}
+
+.yc-time-range__separator {
+    padding: 0 8px;
+    color: var(--yc-color-text-placeholder, #c0c4cc);
+    font-size: var(--yc-font-size-small, 14px);
+    user-select: none;
+    flex-shrink: 0;
+}
+
+.yc-time-panel--range {
+    min-width: 520px;
+}
+
+.yc-time-panel--range .yc-time-panel__content {
+    gap: 12px;
+    padding: 12px 16px 6px;
+}
+
+.yc-time-panel__range-side {
+    flex: 1;
+    min-width: 0;
+}
+
+.yc-time-panel__columns {
+    display: flex;
+    justify-content: center;
+}
+
+.yc-time-panel__range-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    flex-shrink: 0;
+    font-size: 14px;
+    color: var(--yc-color-text-placeholder, #c0c4cc);
+}
+
+/* ==================== Sizes ==================== */
 
 .yc-time-picker--large {
-    width: 240px;
+    width: 200px;
 }
 
-.yc-time-picker--large .yc-time-picker__trigger {
-    padding: 12px 16px;
+.yc-time-picker--large .yc-time-picker__input-wrapper {
+    height: var(--yc-component-size-large, 40px);
+    padding: 0 35px 0 15px;
+}
+
+.yc-time-picker--large .yc-time-picker__input {
+    font-size: var(--yc-font-size-base, 16px);
+}
+
+.yc-time-picker--large .yc-time-picker__icon {
+    font-size: 16px;
+}
+
+.yc-time-picker--large .yc-time-panel__column {
+    width: 80px;
+    height: 252px;
+}
+
+.yc-time-picker--large .yc-time-panel__column::before {
+    top: 108px;
+}
+
+.yc-time-picker--large .yc-time-panel__column::after {
+    bottom: 108px;
+}
+
+.yc-time-picker--large .yc-time-panel__item {
+    height: 36px;
+    font-size: var(--yc-font-size-base, 16px);
 }
 
 .yc-time-picker--small {
     width: 160px;
 }
 
-.yc-time-picker--small .yc-time-picker__trigger {
-    padding: 6px 10px;
+.yc-time-picker--small .yc-time-picker__input-wrapper {
+    height: var(--yc-component-size-small, 24px);
+    padding: 0 25px 0 8px;
 }
 
-.yc-time-picker--small .yc-time-picker__column {
-    height: 150px;
+.yc-time-picker--small .yc-time-picker__input {
+    font-size: var(--yc-font-size-extra-small, 12px);
 }
 
-.yc-time-picker--small .yc-time-picker__item {
+.yc-time-picker--small .yc-time-picker__icon {
+    font-size: 12px;
+}
+
+.yc-time-picker--small .yc-time-panel__column {
+    width: 56px;
+    height: 168px;
+}
+
+.yc-time-picker--small .yc-time-panel__column::before {
+    top: 68px;
+}
+
+.yc-time-picker--small .yc-time-panel__column::after {
+    bottom: 68px;
+}
+
+.yc-time-picker--small .yc-time-panel__item {
     height: 28px;
+    font-size: var(--yc-font-size-extra-small, 12px);
 }
 
-@media (max-width: 576px) {
+/* ==================== Responsive ==================== */
+
+@media (max-width: 767px) {
     .yc-time-picker {
         width: 100%;
     }
 
-    .yc-time-picker__panel {
+    .yc-time-picker__popper {
         position: fixed;
-        top: 50%;
-        left: 50%;
+        top: 50% !important;
+        left: 50% !important;
         transform: translate(-50%, -50%);
         min-width: calc(100vw - 32px);
+        max-width: 320px;
+    }
+
+    .yc-time-panel--range {
+        min-width: calc(100vw - 32px);
+    }
+
+    .yc-time-panel--range .yc-time-panel__content {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .yc-time-panel__range-divider {
+        width: 100%;
+        padding: 4px 0;
     }
 }

@@ -1,0 +1,210 @@
+@charset "UTF-8";
+
+/* ==================== Image ==================== */
+
+.yc-image {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.yc-image__inner {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+}
+
+.yc-image:hover .yc-image__inner {
+    transform: scale(1.05);
+}
+
+/* ==================== Placeholder ==================== */
+
+.yc-image__placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--yc-color-bg-page, #f5f7fa);
+    color: var(--yc-color-text-placeholder, #c0c4cc);
+    font-size: var(--yc-font-size-large, 20px);
+}
+
+/* ==================== Error ==================== */
+
+.yc-image__error {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--yc-color-bg-page, #f5f7fa);
+    color: var(--yc-color-text-placeholder, #c0c4cc);
+    font-size: var(--yc-font-size-small, 14px);
+    gap: 8px;
+}
+
+.yc-image__error i {
+    font-size: 32px;
+}
+
+/* ==================== Preview ==================== */
+
+.yc-image--preview {
+    cursor: pointer;
+}
+
+.yc-image__preview-mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+    color: #ffffff;
+    font-size: 24px;
+}
+
+.yc-image:hover .yc-image__preview-mask {
+    opacity: 1;
+}
+
+/* ==================== Fit ==================== */
+
+.yc-image__inner--fill {
+    object-fit: fill;
+}
+
+.yc-image__inner--contain {
+    object-fit: contain;
+}
+
+.yc-image__inner--cover {
+    object-fit: cover;
+}
+
+.yc-image__inner--scale-down {
+    object-fit: scale-down;
+}
+
+.yc-image__inner--none {
+    object-fit: none;
+}
+
+/* ==================== Lazy Loading ==================== */
+
+.yc-image__loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--yc-color-bg-page, #f5f7fa);
+    color: var(--yc-color-primary, #409eff);
+    font-size: 32px;
+}
+
+/* ==================== Sizes ==================== */
+
+.yc-image--large {
+    width: 200px;
+    height: 200px;
+}
+
+.yc-image--default {
+    width: 150px;
+    height: 150px;
+}
+
+.yc-image--small {
+    width: 100px;
+    height: 100px;
+}
+
+/* ==================== Viewer ==================== */
+
+.yc-image-viewer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 3000;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.yc-image-viewer__close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+    font-size: 20px;
+}
+
+.yc-image-viewer__close:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.yc-image-viewer__toolbar {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 8px 16px;
+    border-radius: 24px;
+}
+
+.yc-image-viewer__btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: transparent;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+    font-size: 16px;
+}
+
+.yc-image-viewer__btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}

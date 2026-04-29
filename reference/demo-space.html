@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space 间距组件示例</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../index.css">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: var(--yc-font-family); background: var(--yc-color-bg-page); color: var(--yc-color-text-primary); line-height: var(--yc-line-height-base); padding: 24px; }
+        .container { max-width: 1000px; margin: 0 auto; }
+        .demo-section { background: var(--yc-color-bg); border: 1px solid var(--yc-color-border); border-radius: var(--yc-border-radius-lg); padding: 24px; margin-bottom: 16px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04); }
+        .demo-section h3 { font-size: var(--yc-font-size-medium); font-weight: var(--yc-font-weight-semibold); color: var(--yc-color-text-primary); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--yc-color-border-light); position: relative; padding-left: 16px; }
+        .demo-section h3::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 4px; height: 16px; background: var(--yc-color-primary); border-radius: 2px; }
+        .demo-block { margin-bottom: 20px; }
+        .demo-block:last-child { margin-bottom: 0; }
+        .demo-block-title { font-size: var(--yc-font-size-small); color: var(--yc-color-text-secondary); margin-bottom: 12px; }
+        .demo-showcase { padding: 16px; background: var(--yc-color-bg-page); border-radius: var(--yc-border-radius-md); margin-bottom: 12px; }
+        .demo-showcase:last-child { margin-bottom: 0; }
+        .demo-divider { height: 1px; background: var(--yc-color-border-light); margin: 20px 0; }
+
+        /* ==================== Space 组件样式 ==================== */
+        .yc-space {
+            display: inline-flex;
+            flex-wrap: wrap;
+        }
+
+        /* 方向变体 */
+        .yc-space--horizontal {
+            flex-direction: row;
+        }
+
+        .yc-space--vertical {
+            flex-direction: column;
+        }
+
+        /* 间距尺寸 - 使用 gap 定义 */
+        .yc-space--size-none { gap: 0; }
+        .yc-space--size-xs { gap: 4px; }
+        .yc-space--size-sm { gap: 8px; }
+        .yc-space--size-default { gap: 12px; }
+        .yc-space--size-md { gap: 16px; }
+        .yc-space--size-lg { gap: 24px; }
+        .yc-space--size-xl { gap: 32px; }
+
+        /* 对齐方式 */
+        .yc-space--align-start { align-items: flex-start; }
+        .yc-space--align-center { align-items: center; }
+        .yc-space--align-end { align-items: flex-end; }
+        .yc-space--align-baseline { align-items: baseline; }
+
+        /* 换行控制 */
+        .yc-space--nowrap { flex-wrap: nowrap; }
+        .yc-space--wrap { flex-wrap: wrap; }
+
+        /* 填充模式 */
+        .yc-space--fill {
+            display: flex;
+            width: 100%;
+        }
+        .yc-space--fill .yc-space-item { flex: 1; }
+
+        /* 垂直填充 */
+        .yc-space--fill-v {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+        .yc-space--fill-v .yc-space-item { flex: 1; }
+
+        /* Spacer 空白间隔 */
+        .yc-space-spacer {
+            flex: 1;
+            min-width: 12px;
+        }
+
+        /* 图标样式 */
+        .yc-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: var(--yc-border-radius-base);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-size: 14px;
+        }
+
+        .yc-icon--primary { background: linear-gradient(135deg, var(--yc-color-primary) 0%, var(--yc-color-primary-hover) 100%); }
+        .yc-icon--success { background: linear-gradient(135deg, var(--yc-color-success) 0%, #85ce61 100%); }
+        .yc-icon--warning { background: linear-gradient(135deg, var(--yc-color-warning) 0%, #ebb563 100%); }
+        .yc-icon--danger { background: linear-gradient(135deg, var(--yc-color-danger) 0%, #f78989 100%); }
+        .yc-icon--info { background: linear-gradient(135deg, var(--yc-color-info) 0%, #a6a9ad 100%); }
+
+        /* 卡片样式 */
+        .yc-card {
+            padding: 16px 20px;
+            background: var(--yc-color-bg);
+            border: 1px solid var(--yc-color-border);
+            border-radius: var(--yc-border-radius-md);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+            transition: all var(--yc-transition-duration-fast);
+        }
+        .yc-card:hover { border-color: var(--yc-color-primary-light-5); box-shadow: 0 2px 8px rgba(64, 158, 255, 0.1); }
+
+        /* 按钮样式 */
+        .yc-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: var(--yc-component-size-base);
+            min-width: 80px;
+            padding: 0 16px;
+            border: 1px solid var(--yc-color-border);
+            border-radius: var(--yc-border-radius-base);
+            font-size: var(--yc-font-size-base);
+            font-family: var(--yc-font-family);
+            color: var(--yc-color-text-regular);
+            background: var(--yc-color-bg);
+            cursor: pointer;
+            transition: all var(--yc-transition-duration-base);
+            outline: none;
+        }
+        .yc-button:hover { border-color: var(--yc-color-primary); color: var(--yc-color-primary); transform: translateY(-1px); }
+        .yc-button--primary { border-color: var(--yc-color-primary); color: white; background: var(--yc-color-primary); }
+        .yc-button--primary:hover { background: var(--yc-color-primary-hover); border-color: var(--yc-color-primary-hover); }
+        .yc-button--success { border-color: var(--yc-color-success); color: white; background: var(--yc-color-success); }
+        .yc-button--warning { border-color: var(--yc-color-warning); color: white; background: var(--yc-color-warning); }
+        .yc-button--danger { border-color: var(--yc-color-danger); color: white; background: var(--yc-color-danger); }
+
+        /* 输入框样式 */
+        .yc-input {
+            height: var(--yc-component-size-base);
+            padding: 0 12px;
+            border: 1px solid var(--yc-color-border);
+            border-radius: var(--yc-border-radius-base);
+            font-size: var(--yc-font-size-base);
+            font-family: var(--yc-font-family);
+            color: var(--yc-color-text-primary);
+            background: var(--yc-color-bg);
+            outline: none;
+            transition: all var(--yc-transition-duration-fast);
+        }
+        .yc-input:focus { border-color: var(--yc-color-primary); box-shadow: 0 0 0 2px rgba(64, 158, 255, 0.1); }
+
+        /* 标签样式 */
+        .yc-tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 10px;
+            border-radius: var(--yc-border-radius-sm);
+            font-size: var(--yc-font-size-small);
+            background: var(--yc-color-primary-light-3);
+            color: var(--yc-color-primary);
+        }
+        .yc-tag--success { background: rgba(103, 194, 58, 0.1); color: var(--yc-color-success); }
+        .yc-tag--warning { background: rgba(230, 162, 60, 0.1); color: var(--yc-color-warning); }
+        .yc-tag--danger { background: rgba(245, 108, 108, 0.1); color: var(--yc-color-danger); }
+
+        /* 颜色块 */
+        .color-box {
+            width: 60px;
+            height: 32px;
+            border-radius: var(--yc-border-radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: var(--yc-font-size-extra-small);
+        }
+        .color-box--primary { background: var(--yc-color-primary); }
+        .color-box--success { background: var(--yc-color-success); }
+        .color-box--warning { background: var(--yc-color-warning); }
+        .color-box--danger { background: var(--yc-color-danger); }
+        .color-box--info { background: var(--yc-color-info); }
+
+        /* Divider */
+        .yc-divider { height: 1px; background: var(--yc-color-border); margin: 20px 0; }
+
+        [yc-theme="dark"] .demo-section { background: rgba(255, 255, 255, 0.02); border-color: rgba(255, 255, 255, 0.08); }
+        [yc-theme="dark"] .yc-card { background: rgba(255, 255, 255, 0.02); border-color: rgba(255, 255, 255, 0.08); }
+        [yc-theme="dark"] .demo-showcase { background: rgba(255, 255, 255, 0.03); }
+        [yc-theme="dark"] .yc-divider { background: rgba(255, 255, 255, 0.08); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 style="font-size: 24px; font-weight: 600; margin-bottom: 24px;">Space 间距组件</h1>
+
+        <div class="demo-section">
+            <h3>基础用法</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">水平间距</div>
+                <div class="demo-showcase">
+                    <div class="yc-space yc-space--horizontal yc-space--size-default">
+                        <span class="yc-button">按钮一</span>
+                        <span class="yc-button yc-button--primary">按钮二</span>
+                        <span class="yc-button yc-button--success">按钮三</span>
+                        <span class="yc-button yc-button--warning">按钮四</span>
+                    </div>
+                </div>
+            </div>
+            <div class="demo-divider"></div>
+            <div class="demo-block">
+                <div class="demo-block-title">垂直间距</div>
+                <div class="demo-showcase">
+                    <div class="yc-space yc-space--vertical yc-space--size-default">
+                        <span class="yc-button">按钮一</span>
+                        <span class="yc-button yc-button--primary">按钮二</span>
+                        <span class="yc-button yc-button--success">按钮三</span>
+                        <span class="yc-button yc-button--warning">按钮四</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>间距尺寸</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">gap: 4px (size-xs)</div>
+                <div class="demo-showcase">
+                    <div class="yc-space yc-space--size-xs">
+                        <div class="color-box color-box--primary">主色</div>
+                        <div class="color-box color-box--success">成功</div>
+                        <div class="color-box color-box--warning">警告</div>
+                        <div class="color-box color-box--danger">危险</div>
+                    </div>
+                </div>
+            </div>
+            <div class="demo-divider"></div>
+            <div class="demo-block">
+                <div class="demo-block-title">gap: 8px (size-sm)</div>
+                <div class="demo-showcase">
+                    <div class="yc-space yc-space--size-sm">
+                        <div class="color-box color-box--primary">主色</div>
+                        <div class="color-box color-box--success">成功</div>
+                        <div class="color-box color-box--warning">警告</div>
+                        <div class="color-box color-box--danger">危险</div>
+                    </div>
+                </div>
+            </div>
+            <div class="demo-divider"></div>
+            <div class="demo-block">
+                <div class="demo-block-title">gap: 12px (size-default)</div>
+                <div class="demo-showcase">
+                    <div class="yc-space yc-space--size-default">
+                        <div class="color-box color-box--primary">主色</div>
+                        <div class="color-box color-box--success">成功</div>
+                        <div class="color-box color-box--warning">警告</div>
+                        <div class="color-box color-box--danger">危险</div>
+                    </div>
+                </div>
+            </div>
+            <div class="demo-divider"></div>
+            <div class="demo-block">
+                <div class="demo-block-title">gap: 16px (size-md)</div>
+                <div class="demo-showcase">
+                    <div class="yc-space yc-space--size-md">
+                        <div class="color-box color-box--primary">主色</div>
+                        <div class="color-box color-box--success">成功</div>
+                        <div class="color-box color-box--warning">警告</div>
+                        <div class="color-box color-box--danger">危险</div>
+                    </div>
+                </div>
+            </div>
+            <div class="demo-divider"></div>
+            <div class="demo-block">
+                <div class="demo-block-title">gap: 24px (size-lg)</div>
+                <div class="demo-showcase">
+                    <div class="yc-space yc-space--size-lg">
+                        <div class="color-box color-box--primary">主色</div>
+                        <div class="color-box color-box--success">成功</div>
+                        <div class="color-box color-box--warning">警告</div>
+                        <div class="color-box color-box--danger">危险</div>
+                    </div>
+                </div>
+            </div>
+            <div class="demo-divider"></div>
+            <div class="demo-block">
+                <div class="demo-block-title">gap: 32px (size-xl)</div>
+                <div class="demo-showcase">
+                    <div class="yc-space yc-space--size-xl">
+                        <div class="color-box color-box--primary">主色</div>
+                        <div class="color-box color-box--success">成功</div>
+                        <div class="color-box color-box--warning">警告</div>
+                        <div class="color-box color-box--danger">危险</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>对齐方式</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">顶部对齐 (align-start)</div>
+                <div class="demo-showcase">
+                    <div class="yc-space yc-space--align-start">
+                        <span class="yc-button">小按钮</span>
+                        <span class="yc-button yc-button--primary" style="height: 48px;">中等按钮</span>
+                        <span class="yc-button yc-button--success" style="height: 36px;">大按钮</span>
+                    </div>
+                </div>
+            </div>
+            <div class="demo-divider"></div>
+            <div class="demo-block">
+                <div class="demo-block-title">居中对齐 (align-center)</div>
+                <div class="demo-showcase">
+                    <div class="yc-space yc-space--align-center">
+                        <span class="yc-button">小按钮</span>
+                        <span class="yc-button yc-button--primary" style="height: 48px;">中等按钮</span>
+                        <span class="yc-button yc-button--success" style="height: 36px;">大按钮</span>
+                    </div>
+                </div>
+            </div>
+            <div class="demo-divider"></div>
+            <div class="demo-block">
+                <div class="demo-block-title">底部对齐 (align-end)</div>
+                <div class="demo-showcase">
+                    <div class="yc-space yc-space--align-end">
+                        <span class="yc-button">小按钮</span>
+                        <span class="yc-button yc-button--primary" style="height: 48px;">中等按钮</span>
+                        <span class="yc-button yc-button--success" style="height: 36px;">大按钮</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>自动换行</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">不换行 (nowrap) - 超出容器</div>
+                <div class="demo-showcase">
+                    <div class="yc-space yc-space--nowrap" style="max-width: 300px; border: 1px dashed var(--yc-color-border); padding: 12px;">
+                        <div class="color-box color-box--primary">1</div>
+                        <div class="color-box color-box--success">2</div>
+                        <div class="color-box color-box--warning">3</div>
+                        <div class="color-box color-box--danger">4</div>
+                        <div class="color-box color-box--info">5</div>
+                        <div class="color-box color-box--primary">6</div>
+                    </div>
+                </div>
+            </div>
+            <div class="demo-divider"></div>
+            <div class="demo-block">
+                <div class="demo-block-title">自动换行 (wrap)</div>
+                <div class="demo-showcase">
+                    <div class="yc-space yc-space--wrap" style="max-width: 300px; border: 1px dashed var(--yc-color-border); padding: 12px;">
+                        <div class="color-box color-box--primary">1</div>
+                        <div class="color-box color-box--success">2</div>
+                        <div class="color-box color-box--warning">3</div>
+                        <div class="color-box color-box--danger">4</div>
+                        <div class="color-box color-box--info">5</div>
+                        <div class="color-box color-box--primary">6</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>填充模式</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">水平填充 (fill)</div>
+                <div class="demo-showcase">
+                    <div class="yc-space yc-space--fill">
+                        <button class="yc-button yc-button--primary">主要按钮</button>
+                        <button class="yc-button yc-button--success">成功按钮</button>
+                        <button class="yc-button yc-button--warning">警告按钮</button>
+                    </div>
+                </div>
+            </div>
+            <div class="demo-divider"></div>
+            <div class="demo-block">
+                <div class="demo-block-title">垂直填充 (fill-v)</div>
+                <div class="demo-showcase">
+                    <div class="yc-space yc-space--vertical yc-space--fill-v" style="max-width: 200px; height: 200px; border: 1px solid var(--yc-color-border); padding: 12px;">
+                        <button class="yc-button yc-button--primary">主要按钮</button>
+                        <button class="yc-button yc-button--success">成功按钮</button>
+                        <button class="yc-button yc-button--warning">警告按钮</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>Spacer 空白间隔</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">文字 + Spacer + 按钮组合</div>
+                <div class="demo-showcase">
+                    <div class="yc-space yc-space--size-default" style="width: 100%;">
+                        <span>页面标题</span>
+                        <div class="yc-space-spacer"></div>
+                        <button class="yc-button">取消</button>
+                        <button class="yc-button yc-button--primary">确认</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>综合示例</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">表单布局</div>
+                <div class="demo-showcase">
+                    <div class="yc-card" style="max-width: 500px;">
+                        <div class="yc-space yc-space--vertical" style="width: 100%; gap: 16px;">
+                            <div style="font-size: var(--yc-font-size-medium); font-weight: 600;">用户注册</div>
+                            <div class="yc-divider" style="margin: 0;"></div>
+                            <div class="yc-space yc-space--vertical" style="width: 100%; gap: 12px;">
+                                <div class="yc-space" style="width: 100%; gap: 12px;">
+                                    <span style="min-width: 60px;">用户名</span>
+                                    <input type="text" class="yc-input" placeholder="请输入用户名" style="flex: 1;">
+                                </div>
+                                <div class="yc-space" style="width: 100%; gap: 12px;">
+                                    <span style="min-width: 60px;">邮箱</span>
+                                    <input type="email" class="yc-input" placeholder="请输入邮箱" style="flex: 1;">
+                                </div>
+                                <div class="yc-space" style="width: 100%; gap: 12px;">
+                                    <span style="min-width: 60px;">密码</span>
+                                    <input type="password" class="yc-input" placeholder="请输入密码" style="flex: 1;">
+                                </div>
+                            </div>
+                            <div class="yc-divider" style="margin: 0;"></div>
+                            <div class="yc-space" style="justify-content: flex-end; gap: 8px;">
+                                <button class="yc-button">重置</button>
+                                <button class="yc-button yc-button--primary">注册</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="demo-divider"></div>
+            <div class="demo-block">
+                <div class="demo-block-title">工具栏布局</div>
+                <div class="demo-showcase">
+                    <div class="yc-card">
+                        <div class="yc-space" style="justify-content: space-between; width: 100%;">
+                            <div class="yc-space">
+                                <button class="yc-button yc-button--primary"><i class="fas fa-plus"></i> 新建</button>
+                                <button class="yc-button"><i class="fas fa-edit"></i> 编辑</button>
+                                <button class="yc-button yc-button--danger"><i class="fas fa-trash-alt"></i> 删除</button>
+                            </div>
+                            <div class="yc-space">
+                                <input type="text" class="yc-input" placeholder="搜索...">
+                                <button class="yc-button yc-button--primary"><i class="fas fa-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="demo-divider"></div>
+            <div class="demo-block">
+                <div class="demo-block-title">标签页头部</div>
+                <div class="demo-showcase">
+                    <div class="yc-card">
+                        <div class="yc-space" style="justify-content: space-between; align-items: center; width: 100%;">
+                            <div class="yc-space">
+                                <span class="yc-tag">全部 <span style="margin-left: 4px;">12</span></span>
+                                <span class="yc-tag yc-tag--success">已发布 <span style="margin-left: 4px;">8</span></span>
+                                <span class="yc-tag yc-tag--warning">草稿 <span style="margin-left: 4px;">3</span></span>
+                                <span class="yc-tag yc-tag--danger">已删除 <span style="margin-left: 4px;">1</span></span>
+                            </div>
+                            <button class="yc-button yc-button--primary"><i class="fas fa-plus"></i> 新建文章</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>不同组件混用</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">按钮 + 输入框 + 标签</div>
+                <div class="demo-showcase">
+                    <div class="yc-space yc-space--size-default">
+                        <button class="yc-button yc-button--primary"><i class="fas fa-save"></i> 保存</button>
+                        <input type="text" class="yc-input" placeholder="请输入名称">
+                        <span class="yc-tag">标签一</span>
+                        <span class="yc-tag yc-tag--success">标签二</span>
+                        <button class="yc-button"><i class="fas fa-cog"></i> 设置</button>
+                    </div>
+                </div>
+            </div>
+            <div class="demo-divider"></div>
+            <div class="demo-block">
+                <div class="demo-block-title">图标组合</div>
+                <div class="demo-showcase">
+                    <div class="yc-space">
+                        <span class="yc-icon yc-icon--primary"><i class="fas fa-home"></i></span>
+                        <span class="yc-icon yc-icon--success"><i class="fas fa-check"></i></span>
+                        <span class="yc-icon yc-icon--warning"><i class="fas fa-exclamation"></i></span>
+                        <span class="yc-icon yc-icon--danger"><i class="fas fa-times"></i></span>
+                        <span class="yc-icon"><i class="fas fa-user"></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

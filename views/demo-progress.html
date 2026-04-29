@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progress 进度条 - YC UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">Progress 进度条</h1>
+            <p class="demo-page-subtitle">展示操作的当前进度</p>
+        </div>
+
+        <div class="demo-section">
+            <h3>基本用法</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">基础进度条，显示百分比</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div class="yc-progress">
+                        <div class="yc-progress__track">
+                            <div class="yc-progress__bar" style="width: 0%;"></div>
+                        </div>
+                        <span class="yc-progress__text">0%</span>
+                    </div>
+                    <div class="yc-progress">
+                        <div class="yc-progress__track">
+                            <div class="yc-progress__bar" style="width: 30%;"></div>
+                        </div>
+                        <span class="yc-progress__text">30%</span>
+                    </div>
+                    <div class="yc-progress">
+                        <div class="yc-progress__track">
+                            <div class="yc-progress__bar" style="width: 70%;"></div>
+                        </div>
+                        <span class="yc-progress__text">70%</span>
+                    </div>
+                    <div class="yc-progress">
+                        <div class="yc-progress__track">
+                            <div class="yc-progress__bar" style="width: 100%;"></div>
+                        </div>
+                        <span class="yc-progress__text">100%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>不同颜色</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">提供了多种颜色的进度条</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div class="yc-progress">
+                        <div class="yc-progress__track">
+                            <div class="yc-progress__bar yc-progress__bar--success" style="width: 80%;"></div>
+                        </div>
+                        <span class="yc-progress__text">80%</span>
+                    </div>
+                    <div class="yc-progress">
+                        <div class="yc-progress__track">
+                            <div class="yc-progress__bar yc-progress__bar--warning" style="width: 60%;"></div>
+                        </div>
+                        <span class="yc-progress__text">60%</span>
+                    </div>
+                    <div class="yc-progress">
+                        <div class="yc-progress__track">
+                            <div class="yc-progress__bar yc-progress__bar--danger" style="width: 40%;"></div>
+                        </div>
+                        <span class="yc-progress__text">40%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>内部百分比文字</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">百分比文字显示在进度条内部</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div class="yc-progress">
+                        <div class="yc-progress__track">
+                            <div class="yc-progress__bar" style="width: 30%;">
+                                <span class="yc-progress__bar-text">30%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="yc-progress">
+                        <div class="yc-progress__track">
+                            <div class="yc-progress__bar" style="width: 70%;">
+                                <span class="yc-progress__bar-text">70%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="yc-progress">
+                        <div class="yc-progress__track">
+                            <div class="yc-progress__bar yc-progress__bar--success" style="width: 100%;">
+                                <span class="yc-progress__bar-text">完成</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>不同尺寸</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">进度条提供大、默认、小三种尺寸</div>
+                <div class="demo-row" style="flex-direction: column; gap: 16px;">
+                    <div class="yc-progress yc-progress--large">
+                        <div class="yc-progress__track">
+                            <div class="yc-progress__bar" style="width: 60%;"></div>
+                        </div>
+                        <span class="yc-progress__text">60%</span>
+                    </div>
+                    <div class="yc-progress">
+                        <div class="yc-progress__track">
+                            <div class="yc-progress__bar" style="width: 60%;"></div>
+                        </div>
+                        <span class="yc-progress__text">60%</span>
+                    </div>
+                    <div class="yc-progress yc-progress--small">
+                        <div class="yc-progress__track">
+                            <div class="yc-progress__bar" style="width: 60%;"></div>
+                        </div>
+                        <span class="yc-progress__text">60%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>不确定进度条</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">用于后台运行时，不知道具体进度的场景</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div class="yc-progress yc-progress--indeterminate">
+                        <div class="yc-progress__track">
+                            <div class="yc-progress__bar yc-progress__bar--indeterminate"></div>
+                        </div>
+                    </div>
+                    <div class="yc-progress yc-progress--indeterminate">
+                        <div class="yc-progress__track">
+                            <div class="yc-progress__bar yc-progress__bar--success yc-progress__bar--indeterminate"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>状态图标</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">在进度条右侧显示完成、警告等状态图标</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div class="yc-progress">
+                        <div class="yc-progress__track">
+                            <div class="yc-progress__bar yc-progress__bar--success" style="width: 100%;"></div>
+                        </div>
+                        <span class="yc-progress__text">100%</span>
+                        <span class="yc-progress__icon yc-progress__status--success">
+                            <i class="fa fa-check-circle"></i>
+                        </span>
+                    </div>
+                    <div class="yc-progress">
+                        <div class="yc-progress__track">
+                            <div class="yc-progress__bar yc-progress__bar--warning" style="width: 60%;"></div>
+                        </div>
+                        <span class="yc-progress__text">60%</span>
+                        <span class="yc-progress__icon yc-progress__status--warning">
+                            <i class="fa fa-exclamation-circle"></i>
+                        </span>
+                    </div>
+                    <div class="yc-progress">
+                        <div class="yc-progress__track">
+                            <div class="yc-progress__bar yc-progress__bar--danger" style="width: 40%;"></div>
+                        </div>
+                        <span class="yc-progress__text">40%</span>
+                        <span class="yc-progress__icon yc-progress__status--danger">
+                            <i class="fa fa-times-circle"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>动态进度条</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">点击按钮增加进度，演示动画效果</div>
+                <div class="demo-row" style="flex-direction: column; gap: 16px;">
+                    <div class="yc-progress" id="dynamic-progress">
+                        <div class="yc-progress__track">
+                            <div class="yc-progress__bar" style="width: 0%;"></div>
+                        </div>
+                        <span class="yc-progress__text">0%</span>
+                    </div>
+                    <div class="demo-row" style="gap: 8px;">
+                        <button class="yc-button" onclick="increaseProgress(10)">+10%</button>
+                        <button class="yc-button" onclick="increaseProgress(25)">+25%</button>
+                        <button class="yc-button yc-button--danger" onclick="resetProgress()">重置</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>条纹进度条</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">使用条纹样式的进度条</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div class="yc-progress">
+                        <div class="yc-progress__track">
+                            <div class="yc-progress__bar yc-progress__bar--striped" style="width: 50%;"></div>
+                        </div>
+                        <span class="yc-progress__text">50%</span>
+                    </div>
+                    <div class="yc-progress">
+                        <div class="yc-progress__track">
+                            <div class="yc-progress__bar yc-progress__bar--striped is-animated" style="width: 70%;"></div>
+                        </div>
+                        <span class="yc-progress__text">70%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>环形进度条</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">使用 SVG 绘制的环形进度条</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div style="display: flex; gap: 24px; align-items: center; flex-wrap: wrap;">
+                        <div class="yc-progress yc-progress--circle">
+                            <div class="yc-progress__circle">
+                                <svg viewBox="0 0 126 126" width="126" height="126">
+                                    <circle class="yc-progress__circle-track" cx="63" cy="63" r="56" stroke-width="6"></circle>
+                                    <circle class="yc-progress__circle-bar" cx="63" cy="63" r="56" stroke-width="6" stroke-dasharray="351.86" stroke-dashoffset="140.74"></circle>
+                                </svg>
+                                <span class="yc-progress__circle-text">60%</span>
+                            </div>
+                        </div>
+                        <div class="yc-progress yc-progress--circle">
+                            <div class="yc-progress__circle">
+                                <svg viewBox="0 0 126 126" width="126" height="126">
+                                    <circle class="yc-progress__circle-track" cx="63" cy="63" r="56" stroke-width="6"></circle>
+                                    <circle class="yc-progress__circle-bar yc-progress__circle-bar--success" cx="63" cy="63" r="56" stroke-width="6" stroke-dasharray="351.86" stroke-dashoffset="0"></circle>
+                                </svg>
+                                <span class="yc-progress__circle-text">100%</span>
+                            </div>
+                        </div>
+                        <div class="yc-progress yc-progress--circle">
+                            <div class="yc-progress__circle">
+                                <svg viewBox="0 0 126 126" width="126" height="126">
+                                    <circle class="yc-progress__circle-track" cx="63" cy="63" r="56" stroke-width="6"></circle>
+                                    <circle class="yc-progress__circle-bar yc-progress__circle-bar--warning" cx="63" cy="63" r="56" stroke-width="6" stroke-dasharray="351.86" stroke-dashoffset="211.12"></circle>
+                                </svg>
+                                <span class="yc-progress__circle-text">40%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        let currentProgress = 0;
+        function increaseProgress(amount) {
+            currentProgress = Math.min(currentProgress + amount, 100);
+            updateDynamicProgress(currentProgress);
+        }
+        function resetProgress() {
+            currentProgress = 0;
+            updateDynamicProgress(0);
+        }
+        function updateDynamicProgress(value) {
+            const container = document.getElementById('dynamic-progress');
+            if (!container) return;
+            const bar = container.querySelector('.yc-progress__bar');
+            const text = container.querySelector('.yc-progress__text');
+            if (bar) bar.style.width = value + '%';
+            if (text) text.textContent = value + '%';
+        }
+    </script>
+</body>
+</html>

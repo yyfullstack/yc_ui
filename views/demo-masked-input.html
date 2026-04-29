@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masked Input 格式化输入框 - YC UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">Masked Input 格式化输入框</h1>
+            <p class="demo-page-subtitle">适用于手机号、身份证等固定格式的输入组件</p>
+        </div>
+
+        <div class="demo-section">
+            <h3>手机号格式</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">中国大陆手机号格式：XXX-XXXX-XXXX</div>
+                <div class="demo-row" style="flex-direction: column; gap: 16px;">
+                    <div class="yc-masked-input-wrapper" data-mask-type="phone">
+                        <input class="yc-masked-input" type="text" placeholder="请输入手机号" maxlength="13" data-mask="phone" inputmode="tel">
+                    </div>
+                    <div class="yc-masked-input-wrapper" data-mask-type="phone">
+                        <input class="yc-masked-input yc-masked-input--large" type="text" placeholder="请输入手机号" maxlength="13" data-mask="phone" inputmode="tel">
+                    </div>
+                    <div class="yc-masked-input-wrapper" data-mask-type="phone">
+                        <input class="yc-masked-input yc-masked-input--small" type="text" placeholder="请输入手机号" maxlength="13" data-mask="phone" inputmode="tel">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>身份证格式</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">中国大陆身份证号码格式：XXXXXXXXXXXXXXXXXX</div>
+                <div class="demo-row" style="flex-direction: column; gap: 16px;">
+                    <div class="yc-masked-input-wrapper">
+                        <input class="yc-masked-input" type="text" placeholder="请输入身份证号码" maxlength="18" data-mask="idcard" inputmode="text">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>银行卡格式</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">银行卡号格式：XXXX XXXX XXXX XXXX</div>
+                <div class="demo-row" style="flex-direction: column; gap: 16px;">
+                    <div class="yc-masked-input-wrapper">
+                        <input class="yc-masked-input" type="text" placeholder="请输入银行卡号" maxlength="23" data-mask="bankcard" inputmode="numeric">
+                        <span class="yc-masked-input__prefix"><i class="fa fa-credit-card"></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>日期格式</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">日期格式：YYYY-MM-DD</div>
+                <div class="demo-row" style="flex-direction: column; gap: 16px;">
+                    <div class="yc-masked-input-wrapper">
+                        <input class="yc-masked-input" type="text" placeholder="YYYY-MM-DD" maxlength="10" data-mask="date" inputmode="tel">
+                        <span class="yc-masked-input__prefix"><i class="fa fa-calendar"></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>时间格式</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">时间格式：HH:MM:SS</div>
+                <div class="demo-row" style="flex-direction: column; gap: 16px;">
+                    <div class="yc-masked-input-wrapper">
+                        <input class="yc-masked-input" type="text" placeholder="HH:MM:SS" maxlength="8" data-mask="time" inputmode="tel">
+                        <span class="yc-masked-input__prefix"><i class="fa fa-clock"></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>邮政编码</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">邮政编码格式：XXXXXX</div>
+                <div class="demo-row" style="flex-direction: column; gap: 16px;">
+                    <div class="yc-masked-input-wrapper">
+                        <input class="yc-masked-input" type="text" placeholder="请输入邮政编码" maxlength="6" data-mask="zipcode" inputmode="numeric">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>自定义格式 - IP地址</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">IP地址格式：XXX.XXX.XXX.XXX</div>
+                <div class="demo-row" style="flex-direction: column; gap: 16px;">
+                    <div class="yc-masked-input-wrapper">
+                        <input class="yc-masked-input" type="text" placeholder="XXX.XXX.XXX.XXX" maxlength="15" data-mask="ip" inputmode="tel">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>带清除按钮</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">点击清除按钮清空输入内容</div>
+                <div class="demo-row" style="flex-direction: column; gap: 16px;">
+                    <div class="yc-masked-input-wrapper yc-masked-input--clearable-wrapper">
+                        <input class="yc-masked-input yc-masked-input--clearable" type="text" placeholder="请输入手机号" maxlength="13" data-mask="phone" inputmode="tel">
+                        <button class="yc-masked-input__clear" tabindex="-1">
+                            <i class="fa fa-times-circle"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>验证状态</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">成功、警告、错误状态展示</div>
+                <div class="demo-row" style="flex-direction: column; gap: 16px;">
+                    <div class="yc-masked-input-wrapper yc-masked-input-wrapper--success">
+                        <input class="yc-masked-input yc-masked-input--complete" type="text" value="138-0013-8000" maxlength="13" data-mask="phone" inputmode="tel" readonly>
+                        <span class="yc-masked-input__suffix" style="color: #67c23a;">
+                            <i class="fa fa-check-circle"></i>
+                        </span>
+                    </div>
+                    <div class="yc-masked-input-wrapper yc-masked-input-wrapper--warning">
+                        <input class="yc-masked-input yc-masked-input--incomplete" type="text" value="138-0013" maxlength="13" data-mask="phone" inputmode="tel" readonly>
+                        <span class="yc-masked-input__suffix" style="color: #e6a23c;">
+                            <i class="fa fa-exclamation-circle"></i>
+                        </span>
+                    </div>
+                    <div class="yc-masked-input-wrapper yc-masked-input-wrapper--error">
+                        <input class="yc-masked-input" type="text" value="123-4567-8901" maxlength="13" data-mask="phone" inputmode="tel" readonly>
+                        <span class="yc-masked-input__suffix" style="color: #f56c6c;">
+                            <i class="fa fa-times-circle"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>格式化展示</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">输入内容自动格式化展示</div>
+                <div class="demo-row" style="flex-direction: column; gap: 16px;">
+                    <div class="yc-masked-input-wrapper">
+                        <input class="yc-masked-input" id="phone-demo" type="text" placeholder="请输入手机号" maxlength="13" data-mask="phone" inputmode="tel">
+                        <div class="yc-masked-input__format-label">格式：XXX-XXXX-XXXX</div>
+                    </div>
+                    <div class="yc-masked-input-wrapper">
+                        <input class="yc-masked-input" id="idcard-demo" type="text" placeholder="请输入身份证号" maxlength="18" data-mask="idcard" inputmode="text">
+                        <div class="yc-masked-input__format-label">格式：18位身份证号码</div>
+                    </div>
+                    <div class="demo-row" style="gap: 16px; flex-wrap: wrap;">
+                        <div class="yc-masked-input-wrapper" style="flex: 1; min-width: 250px;">
+                            <input class="yc-masked-input" id="bankcard-demo" type="text" placeholder="请输入银行卡号" maxlength="23" data-mask="bankcard" inputmode="numeric">
+                            <span class="yc-masked-input__prefix"><i class="fa fa-credit-card"></i></span>
+                        </div>
+                        <div class="yc-masked-input-wrapper" style="flex: 1; min-width: 250px;">
+                            <input class="yc-masked-input" id="date-demo" type="text" placeholder="YYYY-MM-DD" maxlength="10" data-mask="date" inputmode="tel">
+                            <span class="yc-masked-input__prefix"><i class="fa fa-calendar"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            const masks = {
+                phone: {
+                    pattern: /(\d{3})(\d{4})(\d{4})/,
+                    replacement: '$1-$2-$3',
+                    maxlength: 13,
+                    validate: function(value) {
+                        return /^1[3-9]\d{9}$/.test(value.replace(/-/g, ''));
+                    }
+                },
+                idcard: {
+                    pattern: /(\d{6})(\d{4})(\d{2})(\d{2})(\d{3})([\dxX])/,
+                    replacement: '$1 $2-$3-$4 $5 $6',
+                    maxlength: 18,
+                    validate: function(value) {
+                        return /^\d{17}[\dxX]$/.test(value.replace(/\s/g, '').replace(/-/g, ''));
+                    }
+                },
+                bankcard: {
+                    pattern: /(\d{4})(\d{4})(\d{4})(\d{4})/,
+                    replacement: '$1 $2 $3 $4',
+                    maxlength: 23,
+                    validate: function(value) {
+                        return /^\d{16,19}$/.test(value.replace(/\s/g, ''));
+                    }
+                },
+                date: {
+                    pattern: /(\d{4})(\d{2})(\d{2})/,
+                    replacement: '$1-$2-$3',
+                    maxlength: 10,
+                    validate: function(value) {
+                        return /^\d{4}-\d{2}-\d{2}$/.test(value);
+                    }
+                },
+                time: {
+                    pattern: /(\d{2})(\d{2})(\d{2})/,
+                    replacement: '$1:$2:$3',
+                    maxlength: 8,
+                    validate: function(value) {
+                        return /^\d{2}:\d{2}:\d{2}$/.test(value);
+                    }
+                },
+                zipcode: {
+                    pattern: /(\d{3})(\d{3})/,
+                    replacement: '$1-$2',
+                    maxlength: 6,
+                    validate: function(value) {
+                        return /^\d{6}$/.test(value.replace(/-/g, ''));
+                    }
+                },
+                ip: {
+                    pattern: /(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})/,
+                    replacement: '$1.$2.$3.$4',
+                    maxlength: 15,
+                    validate: function(value) {
+                        const parts = value.split('.');
+                        return parts.length === 4 && parts.every(p => {
+                            const num = parseInt(p);
+                            return !isNaN(num) && num >= 0 && num <= 255;
+                        });
+                    }
+                }
+            };
+
+            function applyMask(value, maskType) {
+                const mask = masks[maskType];
+                if (!mask) return value;
+
+                const cleanValue = value.replace(/[^\d]/g, '');
+                if (cleanValue.length === 0) return '';
+
+                if (maskType === 'phone' && cleanValue.length <= 3) {
+                    return cleanValue;
+                } else if (maskType === 'phone' && cleanValue.length <= 7) {
+                    return cleanValue.slice(0, 3) + '-' + cleanValue.slice(3);
+                } else if (maskType === 'phone') {
+                    return cleanValue.slice(0, 3) + '-' + cleanValue.slice(3, 7) + '-' + cleanValue.slice(7, 11);
+                } else if (maskType === 'idcard') {
+                    let result = cleanValue;
+                    if (result.length > 14) {
+                        result = result.slice(0, 6) + ' ' + result.slice(6, 10) + '-' + result.slice(10, 12) + '-' + result.slice(12, 14) + ' ' + result.slice(14);
+                    } else if (result.length > 12) {
+                        result = result.slice(0, 6) + ' ' + result.slice(6, 10) + '-' + result.slice(10, 12) + '-' + result.slice(12);
+                    } else if (result.length > 10) {
+                        result = result.slice(0, 6) + ' ' + result.slice(6, 10) + '-' + result.slice(10);
+                    } else if (result.length > 6) {
+                        result = result.slice(0, 6) + ' ' + result.slice(6);
+                    }
+                    return result;
+                } else if (maskType === 'bankcard') {
+                    let result = cleanValue;
+                    const groups = Math.min(4, Math.floor(result.length / 4));
+                    for (let i = 1; i < groups; i++) {
+                        result = result.slice(0, i * 4 + i - 1) + ' ' + result.slice(i * 4 + i - 1);
+                    }
+                    return result;
+                } else if (maskType === 'date') {
+                    let result = cleanValue;
+                    if (result.length > 4) {
+                        result = result.slice(0, 4) + '-' + result.slice(4);
+                    }
+                    if (result.length > 7) {
+                        result = result.slice(0, 7) + '-' + result.slice(7, 9);
+                    }
+                    return result;
+                } else if (maskType === 'time') {
+                    let result = cleanValue;
+                    if (result.length > 2) {
+                        result = result.slice(0, 2) + ':' + result.slice(2);
+                    }
+                    if (result.length > 5) {
+                        result = result.slice(0, 5) + ':' + result.slice(5, 7);
+                    }
+                    return result;
+                } else if (maskType === 'zipcode') {
+                    if (cleanValue.length <= 3) return cleanValue;
+                    return cleanValue.slice(0, 3) + '-' + cleanValue.slice(3, 6);
+                } else if (maskType === 'ip') {
+                    let result = cleanValue;
+                    let parts = [];
+                    let currentPart = '';
+                    for (let i = 0; i < result.length; i++) {
+                        currentPart += result[i];
+                        if (currentPart.length === 3 || (i === result.length - 1 && parts.length < 3)) {
+                            parts.push(currentPart);
+                            currentPart = '';
+                        }
+                    }
+                    if (currentPart) parts.push(currentPart);
+                    return parts.slice(0, 4).join('.');
+                }
+
+                return cleanValue;
+            }
+
+            function handleInput(event) {
+                const input = event.target;
+                const maskType = input.getAttribute('data-mask');
+                if (!maskType || !masks[maskType]) return;
+
+                const cursorPos = input.selectionStart;
+                const oldValue = input.value;
+                const newValue = applyMask(oldValue, maskType);
+
+                if (newValue !== oldValue) {
+                    input.value = newValue;
+                    const newCursorPos = cursorPos + (newValue.length - oldValue.length);
+                    input.setSelectionRange(Math.min(newCursorPos, newValue.length), Math.min(newCursorPos, newValue.length));
+                }
+
+                updateValidationState(input, maskType);
+            }
+
+            function updateValidationState(input, maskType) {
+                const wrapper = input.closest('.yc-masked-input-wrapper');
+                const mask = masks[maskType];
+                if (!mask) return;
+
+                const cleanValue = input.value.replace(/[^\d]/g, '');
+                wrapper.classList.remove('yc-masked-input-wrapper--success', 'yc-masked-input-wrapper--warning', 'yc-masked-input-wrapper--error');
+                input.classList.remove('yc-masked-input--complete', 'yc-masked-input--incomplete');
+
+                if (cleanValue.length === 0) return;
+
+                if (mask.validate(input.value)) {
+                    wrapper.classList.add('yc-masked-input-wrapper--success');
+                    input.classList.add('yc-masked-input--complete');
+                } else if (cleanValue.length >= mask.maxlength) {
+                    wrapper.classList.add('yc-masked-input-wrapper--error');
+                } else {
+                    wrapper.classList.add('yc-masked-input-wrapper--warning');
+                    input.classList.add('yc-masked-input--incomplete');
+                }
+            }
+
+            function handleClear(event) {
+                const button = event.currentTarget;
+                const wrapper = button.closest('.yc-masked-input-wrapper');
+                const input = wrapper.querySelector('.yc-masked-input');
+                if (input) {
+                    input.value = '';
+                    input.focus();
+                    updateValidationState(input, input.getAttribute('data-mask'));
+                }
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+                document.querySelectorAll('.yc-masked-input[data-mask]').forEach(function(input) {
+                    input.addEventListener('input', handleInput);
+
+                    input.addEventListener('focus', function() {
+                        const wrapper = this.closest('.yc-masked-input-wrapper');
+                        if (wrapper) {
+                            wrapper.classList.add('is-focused');
+                        }
+                    });
+
+                    input.addEventListener('blur', function() {
+                        const wrapper = this.closest('.yc-masked-input-wrapper');
+                        if (wrapper) {
+                            wrapper.classList.remove('is-focused');
+                        }
+                    });
+                });
+
+                document.querySelectorAll('.yc-masked-input__clear').forEach(function(button) {
+                    button.addEventListener('click', handleClear);
+                });
+
+                // Initialize demo inputs
+                const phoneInput = document.getElementById('phone-demo');
+                const idcardInput = document.getElementById('idcard-demo');
+                const bankcardInput = document.getElementById('bankcard-demo');
+                const dateInput = document.getElementById('date-demo');
+
+                if (phoneInput) phoneInput.addEventListener('input', handleInput);
+                if (idcardInput) idcardInput.addEventListener('input', handleInput);
+                if (bankcardInput) bankcardInput.addEventListener('input', handleInput);
+                if (dateInput) dateInput.addEventListener('input', handleInput);
+            });
+        })();
+    </script>
+</body>
+</html>

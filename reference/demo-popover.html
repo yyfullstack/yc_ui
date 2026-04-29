@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Popover 弹出框测试</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+   <link rel="stylesheet" href="./css/index.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        .container {
+            margin-bottom: 40px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        h2 {
+            color: #555;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .popover-demo {
+            margin-bottom: 20px;
+            padding: 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+        }
+        .code-block {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 10px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-right: 10px;
+            margin-top: 10px;
+        }
+        .btn:hover {
+            background-color: #0069d9;
+        }
+        .target-element {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        .target-element:hover {
+            background-color: #d0d0d0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Popover 弹出框测试</h1>
+
+        <h2>1. 基本用法</h2>
+        <div class="popover-demo">
+            <div id="basic-popover-target" class="target-element">悬停我</div>
+        </div>
+        <div class="code-block">
+            <pre>// 基本用法示例代码
+var basicPopover = new Popover({
+    target: '#basic-popover-target',
+    content: '这是一个基本的弹出框',
+    trigger: 'hover'
+});</pre>
+        </div>
+
+        <h2>2. 点击触发</h2>
+        <div class="popover-demo">
+            <div id="click-popover-target" class="target-element">点击我</div>
+        </div>
+        <div class="code-block">
+            <pre>// 点击触发示例代码
+var clickPopover = new Popover({
+    target: '#click-popover-target',
+    content: '这是一个点击触发的弹出框',
+    trigger: 'click'
+});</pre>
+        </div>
+
+        <h2>3. 自定义位置</h2>
+        <div class="popover-demo">
+            <div id="top-popover-target" class="target-element">上方</div>
+            <div id="bottom-popover-target" class="target-element">下方</div>
+            <div id="left-popover-target" class="target-element">左侧</div>
+            <div id="right-popover-target" class="target-element">右侧</div>
+        </div>
+        <div class="code-block">
+            <pre>// 自定义位置示例代码
+var topPopover = new Popover({
+    target: '#top-popover-target',
+    content: '上方弹出框',
+    placement: 'top'
+});
+
+var bottomPopover = new Popover({
+    target: '#bottom-popover-target',
+    content: '下方弹出框',
+    placement: 'bottom'
+});
+
+var leftPopover = new Popover({
+    target: '#left-popover-target',
+    content: '左侧弹出框',
+    placement: 'left'
+});
+
+var rightPopover = new Popover({
+    target: '#right-popover-target',
+    content: '右侧弹出框',
+    placement: 'right'
+});</pre>
+        </div>
+
+        <h2>4. 自定义内容</h2>
+        <div class="popover-demo">
+            <div id="custom-popover-target" class="target-element">自定义内容</div>
+        </div>
+        <div class="code-block">
+            <pre>// 自定义内容示例代码
+var customPopover = new Popover({
+    target: '#custom-popover-target',
+    content: function() {
+        var content = document.createElement('div');
+        content.innerHTML = '<h4>自定义内容</h4><p>这是一个包含自定义内容的弹出框</p><button class="btn" onclick="customPopover.close()">关闭</button>';
+        return content;
+    },
+    width: '200px'
+});</pre>
+        </div>
+
+        <h2>5. 手动控制</h2>
+        <div class="popover-demo">
+            <div id="manual-popover-target" class="target-element">手动控制</div>
+            <button class="btn" onclick="manualPopover.open()">打开</button>
+            <button class="btn" onclick="manualPopover.close()">关闭</button>
+        </div>
+        <div class="code-block">
+            <pre>// 手动控制示例代码
+var manualPopover = new Popover({
+    target: '#manual-popover-target',
+    content: '这是一个手动控制的弹出框',
+    trigger: 'manual'
+});</pre>
+        </div>
+    </div>
+
+    <script>
+        // 独立的Popover组件实现
+        class Popover {
+            constructor(options) {
+                // 支持直接传入DOM元素或选择器字符串
+                if (options.target instanceof HTMLElement) {
+                    this.target = options.target;
+                } else {
+                    this.target = document.querySelector(options.target);
+                }
+                this.content = options.content || '';
+                this.trigger = options.trigger || 'hover'; // hover, click, manual
+                this.placement = options.placement || 'bottom'; // top, bottom, left, right
+                this.width = options.width || 'auto';
+                this.visible = false;
+
+                this.init();
+            }
+
+            init() {
+                // 创建弹出框元素
+                this.popoverEl = document.createElement('div');
+                this.popoverEl.className = 'yc-popover';
+                this.popoverEl.style.display = 'none';
+                this.popoverEl.style.width = this.width;
+
+                // 创建箭头
+                this.arrowEl = document.createElement('div');
+                this.arrowEl.className = 'yc-popover-arrow';
+                this.popoverEl.appendChild(this.arrowEl);
+
+                // 创建内容
+                this.contentEl = document.createElement('div');
+                this.contentEl.className = 'yc-popover-content';
+
+                if (typeof this.content === 'function') {
+                    const result = this.content();
+                    if (result instanceof HTMLElement) {
+                        this.contentEl.appendChild(result);
+                    } else if (typeof result === 'string') {
+                        this.contentEl.innerHTML = result;
+                    }
+                } else {
+                    this.contentEl.innerHTML = this.content;
+                }
+
+                this.popoverEl.appendChild(this.contentEl);
+                document.body.appendChild(this.popoverEl);
+
+                // 绑定事件
+                if (this.trigger === 'hover') {
+                    this.target.addEventListener('mouseenter', () => {
+                        this.open();
+                    });
+                    this.target.addEventListener('mouseleave', () => {
+                        this.close();
+                    });
+                    this.popoverEl.addEventListener('mouseenter', () => {
+                        this.open();
+                    });
+                    this.popoverEl.addEventListener('mouseleave', () => {
+                        this.close();
+                    });
+                } else if (this.trigger === 'click') {
+                    this.target.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        this.toggle();
+                    });
+                    document.addEventListener('click', () => {
+                        this.close();
+                    });
+                }
+            }
+
+            open() {
+                if (this.visible) return;
+
+                this.visible = true;
+                this.popoverEl.style.display = 'block';
+                this.updatePosition();
+
+                // 添加可见类
+                setTimeout(() => {
+                    this.popoverEl.classList.add('yc-popover-visible');
+                }, 0);
+            }
+
+            close() {
+                if (!this.visible) return;
+
+                this.visible = false;
+                this.popoverEl.classList.remove('yc-popover-visible');
+
+                // 动画结束后隐藏
+                setTimeout(() => {
+                    this.popoverEl.style.display = 'none';
+                }, 300);
+            }
+
+            toggle() {
+                if (this.visible) {
+                    this.close();
+                } else {
+                    this.open();
+                }
+            }
+
+            updatePosition() {
+                const targetRect = this.target.getBoundingClientRect();
+                const popoverRect = this.popoverEl.getBoundingClientRect();
+
+                let top, left;
+
+                switch (this.placement) {
+                    case 'top':
+                        top = targetRect.top - popoverRect.height - 10;
+                        left = targetRect.left + targetRect.width / 2 - popoverRect.width / 2;
+                        break;
+                    case 'bottom':
+                        top = targetRect.bottom + 10;
+                        left = targetRect.left + targetRect.width / 2 - popoverRect.width / 2;
+                        break;
+                    case 'left':
+                        top = targetRect.top + targetRect.height / 2 - popoverRect.height / 2;
+                        left = targetRect.left - popoverRect.width - 10;
+                        break;
+                    case 'right':
+                        top = targetRect.top + targetRect.height / 2 - popoverRect.height / 2;
+                        left = targetRect.right + 10;
+                        break;
+                }
+
+                // 调整位置，确保弹出框在视口内
+                top = Math.max(10, top);
+                left = Math.max(10, left);
+
+                const viewportWidth = window.innerWidth;
+                const viewportHeight = window.innerHeight;
+
+                if (left + popoverRect.width > viewportWidth) {
+                    left = viewportWidth - popoverRect.width - 10;
+                }
+
+                if (top + popoverRect.height > viewportHeight) {
+                    top = viewportHeight - popoverRect.height - 10;
+                }
+
+                this.popoverEl.style.top = top + 'px';
+                this.popoverEl.style.left = left + 'px';
+
+                // 设置箭头位置
+                this.arrowEl.className = 'yc-popover-arrow yc-popover-arrow-' + this.placement;
+            }
+
+            setContent(content) {
+                this.content = content;
+                this.contentEl.innerHTML = '';
+
+                if (typeof content === 'function') {
+                    const result = content();
+                    if (result instanceof HTMLElement) {
+                        this.contentEl.appendChild(result);
+                    } else if (typeof result === 'string') {
+                        this.contentEl.innerHTML = result;
+                    }
+                } else {
+                    this.contentEl.innerHTML = content;
+                }
+
+                if (this.visible) {
+                    this.updatePosition();
+                }
+            }
+        }
+    </script>
+
+    <script>
+        // 等待DOM加载完成
+        document.addEventListener('DOMContentLoaded', function() {
+            // 1. 基本用法示例
+            var basicPopover = new Popover({
+                target: '#basic-popover-target',
+                content: '这是一个基本的弹出框',
+                trigger: 'hover'
+            });
+
+            // 2. 点击触发示例
+            var clickPopover = new Popover({
+                target: '#click-popover-target',
+                content: '这是一个点击触发的弹出框',
+                trigger: 'click'
+            });
+
+            // 3. 自定义位置示例
+            var topPopover = new Popover({
+                target: '#top-popover-target',
+                content: '上方弹出框',
+                placement: 'top'
+            });
+
+            var bottomPopover = new Popover({
+                target: '#bottom-popover-target',
+                content: '下方弹出框',
+                placement: 'bottom'
+            });
+
+            var leftPopover = new Popover({
+                target: '#left-popover-target',
+                content: '左侧弹出框',
+                placement: 'left'
+            });
+
+            var rightPopover = new Popover({
+                target: '#right-popover-target',
+                content: '右侧弹出框',
+                placement: 'right'
+            });
+
+            // 4. 自定义内容示例
+            window.customPopover = new Popover({
+                target: '#custom-popover-target',
+                content: function() {
+                    var content = document.createElement('div');
+                    content.innerHTML = '<h4>自定义内容</h4><p>这是一个包含自定义内容的弹出框</p><button class="btn" onclick="customPopover.close()">关闭</button>';
+                    return content;
+                },
+                width: '200px'
+            });
+
+            // 5. 手动控制示例
+            window.manualPopover = new Popover({
+                target: '#manual-popover-target',
+                content: '这是一个手动控制的弹出框',
+                trigger: 'manual'
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tour 漫游式引导 - YC UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">Tour 漫游式引导</h1>
+            <p class="demo-page-subtitle">分步引导用户了解产品功能</p>
+        </div>
+
+        <div class="demo-section">
+            <h3>基本用法</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">通过 steps 属性定义引导步骤</div>
+                <div class="demo-row" style="gap: 12px;">
+                    <button class="yc-button yc-button--primary" id="start-tour">开始漫游引导</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>目标区域</h3>
+            <div class="demo-block" style="display: flex; flex-wrap: wrap; gap: 16px;">
+                <div id="tour-target-1" class="demo-tour-target" style="flex: 1; min-width: 200px; padding: 24px; background-color: #f5f7fa; border-radius: 8px; border: 2px dashed #e4e7ed; text-align: center;">
+                    <i class="fa fa-home" style="font-size: 32px; color: #409eff; margin-bottom: 12px;"></i>
+                    <h4>首页</h4>
+                    <p>这是首页区域，展示整体概况</p>
+                </div>
+                <div id="tour-target-2" class="demo-tour-target" style="flex: 1; min-width: 200px; padding: 24px; background-color: #f0f9eb; border-radius: 8px; border: 2px dashed #b3e19d; text-align: center;">
+                    <i class="fa fa-chart-bar" style="font-size: 32px; color: #67c23a; margin-bottom: 12px;"></i>
+                    <h4>数据统计</h4>
+                    <p>展示各项数据统计信息</p>
+                </div>
+                <div id="tour-target-3" class="demo-tour-target" style="flex: 1; min-width: 200px; padding: 24px; background-color: #fdf6ec; border-radius: 8px; border: 2px dashed #e6d5a8; text-align: center;">
+                    <i class="fa fa-cog" style="font-size: 32px; color: #e6a23c; margin-bottom: 12px;"></i>
+                    <h4>系统设置</h4>
+                    <p>进行系统参数配置</p>
+                </div>
+                <div id="tour-target-4" class="demo-tour-target" style="flex: 1; min-width: 200px; padding: 24px; background-color: #fef0f0; border-radius: 8px; border: 2px dashed #fbc4c4; text-align: center;">
+                    <i class="fa fa-user" style="font-size: 32px; color: #f56c6c; margin-bottom: 12px;"></i>
+                    <h4>个人中心</h4>
+                    <p>管理用户信息和偏好设置</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tour Component -->
+    <div class="yc-tour-overlay" id="tour-overlay" style="display: none;">
+        <div class="yc-tour-overlay__spotlight" id="tour-spotlight"></div>
+        <div class="yc-tour-panel yc-tour-panel--show" id="tour-panel">
+            <div class="yc-tour-panel__header">
+                <div class="yc-tour-panel__header-content">
+                    <h3 class="yc-tour-panel__title" id="tour-title"></h3>
+                </div>
+                <button class="yc-tour-panel__close" id="tour-close">
+                    <i class="fa fa-times"></i>
+                </button>
+            </div>
+            <div class="yc-tour-panel__body">
+                <p class="yc-tour-panel__description" id="tour-description"></p>
+            </div>
+            <div class="yc-tour-panel__footer">
+                <div class="yc-tour-panel__indicators" id="tour-indicators"></div>
+                <div class="yc-tour-panel__actions">
+                    <button class="yc-tour-btn" id="tour-skip">跳过</button>
+                    <button class="yc-tour-btn" id="tour-prev" style="display: none;">上一步</button>
+                    <button class="yc-tour-btn yc-tour-btn--primary" id="tour-next">下一步</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const tourSteps = [
+            {
+                target: '#tour-target-1',
+                title: '欢迎来到 YC UI',
+                description: '这是一个功能丰富的组件库。首页提供了整体概况和快速导航入口。'
+            },
+            {
+                target: '#tour-target-2',
+                title: '数据统计',
+                description: '在这里您可以查看各项数据统计，包括访问量、活跃度、转化率等关键指标。'
+            },
+            {
+                target: '#tour-target-3',
+                title: '系统设置',
+                description: '您可以在这里进行系统参数配置，包括主题、语言、通知等设置。'
+            },
+            {
+                target: '#tour-target-4',
+                title: '个人中心',
+                description: '管理您的用户信息和偏好设置，包括头像、昵称、密码等。'
+            }
+        ];
+
+        let currentStep = 0;
+        let tourOverlay = null;
+        let tourPanel = null;
+        let tourSpotlight = null;
+        let tourTitle = null;
+        let tourDescription = null;
+        let tourIndicators = null;
+        let tourPrevBtn = null;
+        let tourNextBtn = null;
+
+        function initTour() {
+            tourOverlay = document.getElementById('tour-overlay');
+            tourPanel = document.getElementById('tour-panel');
+            tourSpotlight = document.getElementById('tour-spotlight');
+            tourTitle = document.getElementById('tour-title');
+            tourDescription = document.getElementById('tour-description');
+            tourIndicators = document.getElementById('tour-indicators');
+            tourPrevBtn = document.getElementById('tour-prev');
+            tourNextBtn = document.getElementById('tour-next');
+
+            document.getElementById('start-tour').addEventListener('click', startTour);
+            document.getElementById('tour-close').addEventListener('click', closeTour);
+            document.getElementById('tour-skip').addEventListener('click', closeTour);
+            tourPrevBtn.addEventListener('click', prevStep);
+            tourNextBtn.addEventListener('click', nextStep);
+        }
+
+        function startTour() {
+            currentStep = 0;
+            tourOverlay.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            showStep(currentStep);
+        }
+
+        function closeTour() {
+            tourOverlay.style.display = 'none';
+            document.body.style.overflow = '';
+        }
+
+        function showStep(index) {
+            if (index < 0 || index >= tourSteps.length) return;
+
+            currentStep = index;
+            const step = tourSteps[index];
+            const target = document.querySelector(step.target);
+            if (!target) return;
+
+            const targetRect = target.getBoundingClientRect();
+            const padding = 8;
+            const margin = 12;
+
+            // Update spotlight
+            tourSpotlight.style.left = (targetRect.left - padding) + 'px';
+            tourSpotlight.style.top = (targetRect.top - padding) + 'px';
+            tourSpotlight.style.width = (targetRect.width + padding * 2) + 'px';
+            tourSpotlight.style.height = (targetRect.height + padding * 2) + 'px';
+
+            // Update title and description
+            tourTitle.textContent = step.title;
+            tourDescription.textContent = step.description;
+
+            // Position panel
+            const panelWidth = 420;
+            const panelHeight = tourPanel.offsetHeight || 200;
+            let left, top, placement;
+
+            if (targetRect.bottom + margin + panelHeight < window.innerHeight) {
+                left = targetRect.left + targetRect.width / 2 - panelWidth / 2;
+                top = targetRect.bottom + margin;
+                placement = 'bottom';
+            } else if (targetRect.top - margin - panelHeight > 0) {
+                left = targetRect.left + targetRect.width / 2 - panelWidth / 2;
+                top = targetRect.top - panelHeight - margin;
+                placement = 'top';
+            } else {
+                left = window.innerWidth - panelWidth - 16;
+                top = (window.innerHeight - panelHeight) / 2;
+                placement = 'right';
+            }
+
+            // Keep panel in viewport
+            left = Math.max(16, Math.min(left, window.innerWidth - panelWidth - 16));
+            top = Math.max(16, Math.min(top, window.innerHeight - panelHeight - 16));
+
+            tourPanel.style.left = left + 'px';
+            tourPanel.style.top = top + 'px';
+            tourPanel.className = 'yc-tour-panel yc-tour-panel--show yc-tour-panel--' + placement;
+
+            // Update indicators
+            tourIndicators.innerHTML = '';
+            for (let i = 0; i < tourSteps.length; i++) {
+                const indicator = document.createElement('div');
+                indicator.className = 'yc-tour-panel__indicator' + (i === index ? ' yc-tour-panel__indicator--active' : '');
+                tourIndicators.appendChild(indicator);
+            }
+
+            // Update buttons
+            tourPrevBtn.style.display = index === 0 ? 'none' : 'inline-block';
+            tourNextBtn.textContent = index === tourSteps.length - 1 ? '完成' : '下一步';
+        }
+
+        function nextStep() {
+            if (currentStep === tourSteps.length - 1) {
+                closeTour();
+            } else {
+                showStep(currentStep + 1);
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 0) {
+                showStep(currentStep - 1);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', initTour);
+    </script>
+</body>
+</html>
