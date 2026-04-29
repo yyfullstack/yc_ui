@@ -606,7 +606,254 @@
                 let isPanelOpen = false;
                 let timeListenersAdded = false;
 
-                if (isDatetimePicker) {
+                if (isRangePicker) {
+                    let rangeStartDate = null;
+                    let rangeEndDate = null;
+                    let rangeSelectingStart = true;
+                    let rangeStartYear = currentYear;
+                    let rangeStartMonth = currentMonth;
+                    let rangeEndYear = currentYear;
+                    let rangeEndMonth = currentMonth + 1;
+                    
+                    let rangeStartTime = { hours: 0, minutes: 0, seconds: 0 };
+                    let rangeEndTime = { hours: 23, minutes: 59, seconds: 59 };
+                    
+                    if (rangeEndMonth > 12) {
+                        rangeEndMonth = 1;
+                        rangeEndYear++;
+                    }
+
+                    if (dateValue) {
+                        const valueText = dateValue.textContent.trim();
+                        const parts = valueText.split('至').map(s => s.trim());
+                        if (parts.length >= 2) {
+                            const startParts = parts[0].split(' ')[0].split('-');
+                            const endParts = parts[1].split(' ')[0].split('-');
+                            if (startParts.length === 3) {
+                                rangeStartDate = new Date(parseInt(startParts[0]), parseInt(startParts[1]) - 1, parseInt(startParts[2]));
+                                rangeStartYear = rangeStartDate.getFullYear();
+                                rangeStartMonth = rangeStartDate.getMonth() + 1;
+                            }
+                            if (endParts.length === 3) {
+                                rangeEndDate = new Date(parseInt(endParts[0]), parseInt(endParts[1]) - 1, parseInt(endParts[2]));
+                                rangeEndYear = rangeEndDate.getFullYear();
+                                rangeEndMonth = rangeEndDate.getMonth() + 1;
+                            }
+                            const startTimeStr = parts[0].split(' ')[1];
+                            if (startTimeStr) {
+                                const startSplit = startTimeStr.split(':');
+                                if (startSplit.length >= 2) {
+                                    rangeStartTime.hours = parseInt(startSplit[0]);
+                                    rangeStartTime.minutes = parseInt(startSplit[1]);
+                                    rangeStartTime.seconds = startSplit[2] ? parseInt(startSplit[2]) : 0;
+                                }
+                            }
+                            const endTimeStr = parts[1].split(' ')[1];
+                            if (endTimeStr) {
+                                const endSplit = endTimeStr.split(':');
+                                if (endSplit.length >= 2) {
+                                    rangeEndTime.hours = parseInt(endSplit[0]);
+                                    rangeEndTime.minutes = parseInt(endSplit[1]);
+                                    rangeEndTime.seconds = endSplit[2] ? parseInt(endSplit[2]) : 0;
+                                }
+                            }
+                        }
+                    }
+
+                    const startGrid = picker.querySelector('[id$="RangeStart"]');
+                    const endGrid = picker.querySelector('[id$="RangeEnd"]');
+
+                    function updateRangeView() {
+                        const startMonthSpan = picker.querySelector('.yc-date-picker__header-month[data-panel="start"]');
+                        const endMonthSpan = picker.querySelector('.yc-date-picker__header-month[data-panel="end"]');
+                        if (startMonthSpan) startMonthSpan.textContent = `${rangeStartYear}年${rangeStartMonth}月`;
+                        if (endMonthSpan) endMonthSpan.textContent = `${rangeEndYear}年${rangeEndMonth}月`;
+
+                        if (startGrid && startGrid.id) {
+                            generateDateGrid(startGrid.id, rangeStartYear, rangeStartMonth, rangeStartDate, rangeStartDate, rangeEndDate);
+                        }
+                        if (endGrid && endGrid.id) {
+                            generateDateGrid(endGrid.id, rangeEndYear, rangeEndMonth, rangeEndDate, rangeStartDate, rangeEndDate);
+                        }
+                    }
+
+                    updateRangeView();
+
+                    const startNavBtns = picker.querySelectorAll('.yc-date-picker__range-panel:first-child .yc-date-picker__header-nav button');
+                    startNavBtns.forEach(btn => {
+                        btn.addEventListener('click', function(e) {
+                            e.stopPropagation();
+                            const isPrev = this.classList.contains('yc-date-picker__header-prev');
+                            const isPrevYear = this.classList.contains('yc-date-picker__header-prev-year');
+                            const isNext = this.classList.contains('yc-date-picker__header-next');
+                            const isNextYear = this.classList.contains('yc-date-picker__header-next-year');
+
+                            if (isPrevYear) {
+                                rangeStartYear--;
+                            } else if (isPrev) {
+                                rangeStartMonth--;
+                                if (rangeStartMonth < 1) {
+                                    rangeStartMonth = 12;
+                                    rangeStartYear--;
+                                }
+                            } else if (isNextYear) {
+                                rangeStartYear++;
+                            } else if (isNext) {
+                                rangeStartMonth++;
+                                if (rangeStartMonth > 12) {
+                                    rangeStartMonth = 1;
+                                    rangeStartYear++;
+                                }
+                            }
+                            const endMonth = rangeStartMonth + 1;
+                            rangeEndYear = rangeStartYear;
+                            rangeEndMonth = endMonth > 12 ? 1 : endMonth;
+                            if (endMonth > 12) rangeEndYear++;
+                            updateRangeView();
+                        });
+                    });
+
+                    const endNavBtns = picker.querySelectorAll('.yc-date-picker__range-panel:last-child .yc-date-picker__header-nav button');
+                    endNavBtns.forEach(btn => {
+                        btn.addEventListener('click', function(e) {
+                            e.stopPropagation();
+                            const isPrev = this.classList.contains('yc-date-picker__header-prev');
+                            const isPrevYear = this.classList.contains('yc-date-picker__header-prev-year');
+                            const isNext = this.classList.contains('yc-date-picker__header-next');
+                            const isNextYear = this.classList.contains('yc-date-picker__header-next-year');
+
+                            if (isPrevYear) {
+                                rangeEndYear--;
+                            } else if (isPrev) {
+                                rangeEndMonth--;
+                                if (rangeEndMonth < 1) {
+                                    rangeEndMonth = 12;
+                                    rangeEndYear--;
+                                }
+                            } else if (isNextYear) {
+                                rangeEndYear++;
+                            } else if (isNext) {
+                                rangeEndMonth++;
+                                if (rangeEndMonth > 12) {
+                                    rangeEndMonth = 1;
+                                    rangeEndYear++;
+                                }
+                            }
+                            updateRangeView();
+                        });
+                    });
+
+                    function handleRangeClick(e) {
+                        const dateElement = e.target;
+                        if (!dateElement.classList.contains('yc-date-picker__date')) return;
+
+                        const selectedDateStr = dateElement.dataset.date;
+                        const parts = selectedDateStr.split('-');
+                        const clickedDate = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
+
+                        if (rangeSelectingStart) {
+                            rangeStartDate = clickedDate;
+                            rangeEndDate = null;
+                            rangeSelectingStart = false;
+                        } else {
+                            if (clickedDate.getTime() < rangeStartDate.getTime()) {
+                                rangeEndDate = rangeStartDate;
+                                rangeStartDate = clickedDate;
+                            } else {
+                                rangeEndDate = clickedDate;
+                            }
+                            rangeSelectingStart = true;
+                        }
+
+                        updateRangeView();
+
+                        if (dateValue) {
+                            if (rangeStartDate && rangeEndDate) {
+                                dateValue.textContent = `${formatDate(rangeStartDate)} 至 ${formatDate(rangeEndDate)}`;
+                            } else if (rangeStartDate) {
+                                dateValue.textContent = `${formatDate(rangeStartDate)} 至 `;
+                            }
+                        }
+                    }
+
+                    if (startGrid) {
+                        startGrid.addEventListener('click', handleRangeClick);
+                    }
+                    if (endGrid) {
+                        endGrid.addEventListener('click', handleRangeClick);
+                    }
+
+                    const footerBtns = picker.querySelectorAll('.yc-date-picker__footer-btn');
+                    footerBtns.forEach(btn => {
+                        btn.addEventListener('click', function(e) {
+                            e.stopPropagation();
+                            const action = this.dataset.action;
+                            const rangeType = this.dataset.range;
+
+                            if (action === 'cancel') {
+                                isPanelOpen = false;
+                                panel.classList.remove('is-open');
+                                picker.classList.remove('is-open');
+                                return;
+                            }
+
+                            if (action === 'confirm') {
+                                if (rangeStartDate && rangeEndDate && dateValue) {
+                                    dateValue.textContent = `${formatDate(rangeStartDate)} 至 ${formatDate(rangeEndDate)}`;
+                                }
+                                isPanelOpen = false;
+                                panel.classList.remove('is-open');
+                                picker.classList.remove('is-open');
+                                return;
+                            }
+
+                            if (rangeType) {
+                                let startDate, endDate;
+                                const now = new Date();
+
+                                if (rangeType === 'today') {
+                                    startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+                                    endDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+                                } else if (rangeType === 'thisWeek') {
+                                    const dayOfWeek = now.getDay();
+                                    const diff = dayOfWeek === 0 ? 6 : dayOfWeek - 1;
+                                    startDate = new Date(now);
+                                    startDate.setDate(now.getDate() - diff);
+                                    endDate = new Date(now);
+                                } else if (rangeType === 'thisMonth') {
+                                    startDate = new Date(now.getFullYear(), now.getMonth(), 1);
+                                    endDate = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+                                } else if (rangeType === 'last7days') {
+                                    startDate = new Date(now);
+                                    startDate.setDate(now.getDate() - 6);
+                                    endDate = new Date(now);
+                                } else if (rangeType === 'last30days') {
+                                    startDate = new Date(now);
+                                    startDate.setDate(now.getDate() - 29);
+                                    endDate = new Date(now);
+                                }
+
+                                if (startDate && endDate) {
+                                    rangeStartDate = startDate;
+                                    rangeEndDate = endDate;
+                                    rangeStartYear = startDate.getFullYear();
+                                    rangeStartMonth = startDate.getMonth() + 1;
+                                    rangeEndYear = startDate.getFullYear();
+                                    rangeEndMonth = startDate.getMonth() + 2;
+                                    if (rangeEndMonth > 12) {
+                                        rangeEndMonth = 1;
+                                        rangeEndYear++;
+                                    }
+                                    updateRangeView();
+                                    if (dateValue) {
+                                        dateValue.textContent = `${formatDate(startDate)} 至 ${formatDate(endDate)}`;
+                                    }
+                                }
+                                return;
+                            }
+                        });
+                    });
+                } else if (isDatetimePicker) {
                     const calendarPanel = picker.querySelector('.yc-date-picker__calendar-panel');
                     const timePanel = picker.querySelector('.yc-date-picker__time-wrapper');
                     const datetimeInputs = picker.querySelectorAll('.yc-date-picker__datetime-input');
@@ -772,144 +1019,6 @@
                             generateDateGrid(dateGrid.id, currentYear, currentMonth, selectedDate);
                         });
                     }
-                } else if (isRangePicker) {
-                    let rangeStartDate = null;
-                    let rangeEndDate = null;
-                    let rangeSelectingStart = true;
-                    let rangeStartYear = currentYear;
-                    let rangeStartMonth = currentMonth;
-                    let rangeEndYear = currentYear;
-                    let rangeEndMonth = currentMonth + 1;
-                    if (rangeEndMonth > 12) {
-                        rangeEndMonth = 1;
-                        rangeEndYear++;
-                    }
-
-                    const startGrid = picker.querySelector('[id$="RangeStart"]');
-                    const endGrid = picker.querySelector('[id$="RangeEnd"]');
-
-                    function updateRangeHeaders() {
-                        const startHeaderLabel = picker.querySelector('.yc-date-picker__header-label [data-panel="start"]');
-                        const endHeaderLabel = picker.querySelector('.yc-date-picker__header-label [data-panel="end"]');
-                        if (startHeaderLabel) startHeaderLabel.textContent = `${rangeStartYear}年${rangeStartMonth}月`;
-                        if (endHeaderLabel) endHeaderLabel.textContent = `${rangeEndYear}年${rangeEndMonth}月`;
-                    }
-
-                    function updateRangeView() {
-                        updateRangeHeaders();
-                        if (startGrid && startGrid.id) {
-                            generateDateGrid(startGrid.id, rangeStartYear, rangeStartMonth, rangeStartDate, rangeStartDate, rangeEndDate);
-                        }
-                        if (endGrid && endGrid.id) {
-                            generateDateGrid(endGrid.id, rangeEndYear, rangeEndMonth, rangeEndDate, rangeStartDate, rangeEndDate);
-                        }
-                    }
-
-                    function adjustEndPanel() {
-                        let endMonth = rangeStartMonth + 1;
-                        let endYear = rangeStartYear;
-                        if (endMonth > 12) {
-                            endMonth = 1;
-                            endYear++;
-                        }
-                        rangeEndMonth = endMonth;
-                        rangeEndYear = endYear;
-                    }
-
-                    updateRangeView();
-
-                    const startNavBtns = picker.querySelectorAll('[data-panel="start"]');
-                    startNavBtns.forEach(btn => {
-                        btn.addEventListener('click', function(e) {
-                            e.stopPropagation();
-                            const isPrev = this.classList.contains('yc-date-picker__header-prev');
-                            const isPrevYear = this.classList.contains('yc-date-picker__header-prev-year');
-
-                            if (isPrevYear) {
-                                rangeStartYear--;
-                            } else if (isPrev) {
-                                rangeStartMonth--;
-                                if (rangeStartMonth < 1) {
-                                    rangeStartMonth = 12;
-                                    rangeStartYear--;
-                                }
-                            } else {
-                                rangeStartMonth++;
-                                if (rangeStartMonth > 12) {
-                                    rangeStartMonth = 1;
-                                    rangeStartYear++;
-                                }
-                            }
-                            adjustEndPanel();
-                            updateRangeView();
-                        });
-                    });
-
-                    const endNavBtns = picker.querySelectorAll('[data-panel="end"]');
-                    endNavBtns.forEach(btn => {
-                        btn.addEventListener('click', function(e) {
-                            e.stopPropagation();
-                            const isPrev = this.classList.contains('yc-date-picker__header-prev');
-                            const isPrevYear = this.classList.contains('yc-date-picker__header-prev-year');
-
-                            if (isPrevYear) {
-                                rangeEndYear--;
-                            } else if (isPrev) {
-                                rangeEndMonth--;
-                                if (rangeEndMonth < 1) {
-                                    rangeEndMonth = 12;
-                                    rangeEndYear--;
-                                }
-                            } else {
-                                rangeEndMonth++;
-                                if (rangeEndMonth > 12) {
-                                    rangeEndMonth = 1;
-                                    rangeEndYear++;
-                                }
-                            }
-                            updateRangeView();
-                        });
-                    });
-
-                    function handleRangeClick(e, gridId) {
-                        const dateElement = e.target;
-                        if (!dateElement.classList.contains('yc-date-picker__date')) return;
-
-                        const selectedDateStr = dateElement.dataset.date;
-                        const parts = selectedDateStr.split('-');
-                        const clickedDate = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
-
-                        if (rangeSelectingStart) {
-                            rangeStartDate = clickedDate;
-                            rangeEndDate = null;
-                            rangeSelectingStart = false;
-                        } else {
-                            if (clickedDate.getTime() < rangeStartDate.getTime()) {
-                                rangeEndDate = rangeStartDate;
-                                rangeStartDate = clickedDate;
-                            } else {
-                                rangeEndDate = clickedDate;
-                            }
-                            rangeSelectingStart = true;
-                        }
-
-                        updateRangeView();
-
-                        if (dateValue) {
-                            if (rangeStartDate && rangeEndDate) {
-                                dateValue.textContent = `${formatDate(rangeStartDate)} 至 ${formatDate(rangeEndDate)}`;
-                            } else if (rangeStartDate) {
-                                dateValue.textContent = `${formatDate(rangeStartDate)} 至 `;
-                            }
-                        }
-                    }
-
-                    if (startGrid) {
-                        startGrid.addEventListener('click', (e) => handleRangeClick(e, startGrid.id));
-                    }
-                    if (endGrid) {
-                        endGrid.addEventListener('click', (e) => handleRangeClick(e, endGrid.id));
-                    }
                 } else {
                     const dateGrid = picker.querySelector('.yc-date-picker__dates');
                     if (dateGrid && dateGrid.id) {
@@ -919,6 +1028,94 @@
                     const headerLabel = picker.querySelector('.yc-date-picker__header-label');
                     if (headerLabel) {
                         headerLabel.textContent = `${currentYear}年${currentMonth}月`;
+                    }
+
+                    if (dateGrid) {
+                        dateGrid.addEventListener('click', function(e) {
+                            const dateElement = e.target;
+                            if (!dateElement.classList.contains('yc-date-picker__date')) return;
+
+                            const selectedDateStr = dateElement.dataset.date;
+                            const parts = selectedDateStr.split('-');
+                            selectedDate = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
+                            currentYear = selectedDate.getFullYear();
+                            currentMonth = selectedDate.getMonth() + 1;
+
+                            if (headerLabel) {
+                                headerLabel.textContent = `${currentYear}年${currentMonth}月`;
+                            }
+
+                            generateDateGrid(dateGrid.id, currentYear, currentMonth, selectedDate);
+
+                            if (dateValue) {
+                                dateValue.textContent = formatDate(selectedDate);
+                            }
+                        });
+                    }
+
+                    const prevBtn = picker.querySelector('.yc-date-picker__header-prev');
+                    const nextBtn = picker.querySelector('.yc-date-picker__header-next');
+                    const prevYearBtn = picker.querySelector('.yc-date-picker__header-prev-year');
+                    const nextYearBtn = picker.querySelector('.yc-date-picker__header-next-year');
+
+                    if (prevBtn) {
+                        prevBtn.addEventListener('click', function(e) {
+                            e.stopPropagation();
+                            currentMonth--;
+                            if (currentMonth < 1) {
+                                currentMonth = 12;
+                                currentYear--;
+                            }
+                            if (headerLabel) {
+                                headerLabel.textContent = `${currentYear}年${currentMonth}月`;
+                            }
+                            if (dateGrid && dateGrid.id) {
+                                generateDateGrid(dateGrid.id, currentYear, currentMonth, selectedDate);
+                            }
+                        });
+                    }
+
+                    if (nextBtn) {
+                        nextBtn.addEventListener('click', function(e) {
+                            e.stopPropagation();
+                            currentMonth++;
+                            if (currentMonth > 12) {
+                                currentMonth = 1;
+                                currentYear++;
+                            }
+                            if (headerLabel) {
+                                headerLabel.textContent = `${currentYear}年${currentMonth}月`;
+                            }
+                            if (dateGrid && dateGrid.id) {
+                                generateDateGrid(dateGrid.id, currentYear, currentMonth, selectedDate);
+                            }
+                        });
+                    }
+
+                    if (prevYearBtn) {
+                        prevYearBtn.addEventListener('click', function(e) {
+                            e.stopPropagation();
+                            currentYear--;
+                            if (headerLabel) {
+                                headerLabel.textContent = `${currentYear}年${currentMonth}月`;
+                            }
+                            if (dateGrid && dateGrid.id) {
+                                generateDateGrid(dateGrid.id, currentYear, currentMonth, selectedDate);
+                            }
+                        });
+                    }
+
+                    if (nextYearBtn) {
+                        nextYearBtn.addEventListener('click', function(e) {
+                            e.stopPropagation();
+                            currentYear++;
+                            if (headerLabel) {
+                                headerLabel.textContent = `${currentYear}年${currentMonth}月`;
+                            }
+                            if (dateGrid && dateGrid.id) {
+                                generateDateGrid(dateGrid.id, currentYear, currentMonth, selectedDate);
+                            }
+                        });
                     }
                 }
 
@@ -956,20 +1153,10 @@
                         }
 
                         if (action === 'confirm') {
-                            if (isRangePicker) {
-                                const rangeStartGrid = picker.querySelector('[id$="RangeStart"]');
-                                const rangeEndGrid = picker.querySelector('[id$="RangeEnd"]');
-                                const startSelected = rangeStartGrid?.querySelector('.yc-date-picker__date.is-selected');
-                                const endSelected = rangeEndGrid?.querySelector('.yc-date-picker__date.is-selected');
-                                if (startSelected && endSelected && dateValue) {
-                                    dateValue.textContent = `${startSelected.dataset.date} 至 ${endSelected.dataset.date}`;
-                                }
-                            } else if (isDatetimePicker) {
-                                if (dateValue && selectedDate) {
-                                    const dateObj = new Date(selectedDate);
-                                    dateObj.setHours(tempTime.hours, tempTime.minutes, tempTime.seconds);
-                                    dateValue.textContent = `${formatDate(dateObj)} ${formatTime(dateObj)}`;
-                                }
+                            if (isDatetimePicker && dateValue && selectedDate) {
+                                const dateObj = new Date(selectedDate);
+                                dateObj.setHours(tempTime.hours, tempTime.minutes, tempTime.seconds);
+                                dateValue.textContent = `${formatDate(dateObj)} ${formatTime(dateObj)}`;
                             }
                             isPanelOpen = false;
                             panel.classList.remove('is-open');
@@ -1025,40 +1212,6 @@
                             isPanelOpen = false;
                             panel.classList.remove('is-open');
                             picker.classList.remove('is-open');
-                            return;
-                        }
-
-                        if (isRangePicker && rangeType) {
-                            let startDate, endDate;
-                            const now = new Date();
-
-                            if (rangeType === 'today') {
-                                startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-                                endDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-                            } else if (rangeType === 'thisWeek') {
-                                const dayOfWeek = now.getDay();
-                                const diff = dayOfWeek === 0 ? 6 : dayOfWeek - 1;
-                                startDate = new Date(now);
-                                startDate.setDate(now.getDate() - diff);
-                                endDate = new Date(now);
-                            } else if (rangeType === 'thisMonth') {
-                                startDate = new Date(now.getFullYear(), now.getMonth(), 1);
-                                endDate = new Date(now.getFullYear(), now.getMonth() + 1, 0);
-                            } else if (rangeType === 'last7days') {
-                                startDate = new Date(now);
-                                startDate.setDate(now.getDate() - 6);
-                                endDate = new Date(now);
-                            } else if (rangeType === 'last30days') {
-                                startDate = new Date(now);
-                                startDate.setDate(now.getDate() - 29);
-                                endDate = new Date(now);
-                            }
-
-                            if (startDate && endDate) {
-                                if (dateValue) {
-                                    dateValue.textContent = `${formatDate(startDate)} 至 ${formatDate(endDate)}`;
-                                }
-                            }
                             return;
                         }
                     });

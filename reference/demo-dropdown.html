@@ -8,41 +8,265 @@
     <link rel="stylesheet" href="../index.css">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: var(--yc-font-family); background: var(--yc-color-bg-page); color: var(--yc-color-text-primary); line-height: var(--yc-line-height-base); padding: 24px; }
+        body { 
+            font-family: var(--yc-font-family); 
+            background: var(--yc-color-bg-page); 
+            color: var(--yc-color-text-primary); 
+            line-height: var(--yc-line-height-base); 
+            padding: 32px; 
+        }
         .container { max-width: 1200px; margin: 0 auto; }
-        .demo-section { background: var(--yc-color-bg); border: 1px solid var(--yc-color-border); border-radius: var(--yc-border-radius-lg); padding: 24px; margin-bottom: 16px; }
-        .demo-section h3 { font-size: var(--yc-font-size-medium); font-weight: var(--yc-font-weight-semibold); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--yc-color-border-light); position: relative; }
-        .demo-section h3::before { content: ''; position: absolute; left: -24px; top: 50%; transform: translateY(-50%); width: 4px; height: 16px; background: var(--yc-color-primary); border-radius: 2px; }
+        .page-header { margin-bottom: 32px; }
+        .page-header h1 { font-size: 28px; font-weight: 600; margin-bottom: 8px; }
+        .page-header p { font-size: var(--yc-font-size-base); color: var(--yc-color-text-secondary); }
+        
+        .demo-section { 
+            background: var(--yc-color-bg); 
+            border: 1px solid var(--yc-color-border-light); 
+            border-radius: var(--yc-border-radius-lg); 
+            padding: 28px; 
+            margin-bottom: 20px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+        }
+        .demo-section h3 { 
+            font-size: var(--yc-font-size-medium); 
+            font-weight: var(--yc-font-weight-semibold); 
+            margin-bottom: 20px; 
+            padding-bottom: 14px; 
+            border-bottom: 1px solid var(--yc-color-border-light); 
+            position: relative; 
+        }
+        .demo-section h3::before { 
+            content: ''; 
+            position: absolute; 
+            left: -28px; 
+            top: 50%; 
+            transform: translateY(-50%); 
+            width: 4px; 
+            height: 18px; 
+            background: var(--yc-color-primary); 
+            border-radius: 2px; 
+        }
         .demo-block { margin-bottom: 24px; }
         .demo-block:last-child { margin-bottom: 0; }
-        .demo-block-title { font-size: var(--yc-font-size-small); color: var(--yc-color-text-secondary); margin-bottom: 12px; }
+        .demo-block-title { 
+            font-size: var(--yc-font-size-small); 
+            color: var(--yc-color-text-secondary); 
+            margin-bottom: 14px; 
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .demo-block-title::before {
+            content: '';
+            width: 4px;
+            height: 12px;
+            background: var(--yc-color-border);
+            border-radius: 2px;
+        }
 
-        .yc-dropdown { position: relative; display: inline-block; }
-        .yc-dropdown__trigger { cursor: pointer; display: inline-flex; align-items: center; gap: 8px; }
-        .yc-dropdown__menu { position: absolute; top: 100%; left: 0; min-width: 160px; padding: 6px 0; background: var(--yc-color-bg); border: 1px solid var(--yc-color-border); border-radius: var(--yc-border-radius-md); box-shadow: var(--yc-box-shadow-base); z-index: 1000; display: none; }
-        .yc-dropdown--opened > .yc-dropdown__menu { display: block; }
-        .yc-dropdown__menu--right { left: auto; right: 0; }
-        .yc-dropdown__item { display: flex; align-items: center; padding: 10px 16px; font-size: var(--yc-font-size-small); color: var(--yc-color-text-regular); cursor: pointer; transition: background var(--yc-transition-duration-fast); white-space: nowrap; }
-        .yc-dropdown__item:hover { background: var(--yc-color-bg-page); color: var(--yc-color-primary); }
-        .yc-dropdown__item--disabled { color: var(--yc-color-text-placeholder); cursor: not-allowed; }
-        .yc-dropdown__item--disabled:hover { background: transparent; color: var(--yc-color-text-placeholder); }
-        .yc-dropdown__item--divided { border-top: 1px solid var(--yc-color-border-light); margin-top: 6px; padding-top: 10px; }
-        .yc-dropdown__item__icon { margin-right: 8px; width: 14px; text-align: center; }
-        .yc-dropdown__divider { height: 1px; background: var(--yc-color-border-light); margin: 6px 0; }
+        .yc-dropdown { 
+            position: relative; 
+            display: inline-block; 
+        }
+        
+        .yc-dropdown__trigger { 
+            cursor: pointer; 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 6px;
+            padding: 8px 14px;
+            border-radius: var(--yc-border-radius-base);
+            transition: all 0.2s ease;
+        }
+        
+        .yc-dropdown__trigger:hover {
+            background: var(--yc-color-fill-light);
+        }
 
-        .dropdown-group { display: flex; flex-wrap: wrap; gap: 16px; }
-        .dropdown-card { padding: 20px; background: var(--yc-color-bg-page); border-radius: var(--yc-border-radius-md); }
-        .dropdown-card__title { font-weight: var(--yc-font-weight-semibold); margin-bottom: 8px; font-size: var(--yc-font-size-small); }
-        .dropdown-card__desc { font-size: var(--yc-font-size-extra-small); color: var(--yc-color-text-secondary); }
+        .yc-dropdown__caret {
+            font-size: 10px;
+            color: var(--yc-color-text-secondary);
+            transition: transform 0.25s ease;
+        }
 
-        [yc-theme="dark"] .demo-section { background: rgba(255, 255, 255, 0.02); border-color: rgba(255, 255, 255, 0.08); }
-        [yc-theme="dark"] .dropdown-card { background: rgba(255, 255, 255, 0.03); }
-        [yc-theme="dark"] .yc-dropdown__menu { background: rgba(30, 30, 30, 0.98); }
+        .yc-dropdown--opened .yc-dropdown__caret {
+            transform: rotate(180deg);
+        }
+
+        .yc-dropdown__menu { 
+            position: absolute; 
+            top: calc(100% + 8px); 
+            left: 0; 
+            min-width: 180px; 
+            padding: 6px 0; 
+            background: var(--yc-color-bg); 
+            border: 1px solid var(--yc-color-border-light); 
+            border-radius: var(--yc-border-radius-md); 
+            box-shadow: var(--yc-box-shadow-lg); 
+            z-index: 1000; 
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-8px);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .yc-dropdown--opened > .yc-dropdown__menu { 
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .yc-dropdown__menu--right { 
+            left: auto; 
+            right: 0; 
+        }
+
+        .yc-dropdown__item { 
+            display: flex; 
+            align-items: center; 
+            padding: 10px 16px; 
+            font-size: var(--yc-font-size-small); 
+            color: var(--yc-color-text-regular); 
+            cursor: pointer; 
+            transition: all 0.15s ease; 
+            white-space: nowrap; 
+            position: relative;
+        }
+
+        .yc-dropdown__item:hover { 
+            background: var(--yc-color-fill-light); 
+            color: var(--yc-color-primary); 
+        }
+
+        .yc-dropdown__item--disabled { 
+            color: var(--yc-color-text-placeholder); 
+            cursor: not-allowed; 
+        }
+
+        .yc-dropdown__item--disabled:hover { 
+            background: transparent; 
+            color: var(--yc-color-text-placeholder); 
+        }
+
+        .yc-dropdown__item--divided { 
+            border-top: 1px solid var(--yc-color-border-light); 
+            margin-top: 6px; 
+            padding-top: 10px; 
+        }
+
+        .yc-dropdown__item--divided::before {
+            content: '';
+            display: block;
+            height: 6px;
+            margin-top: -6px;
+        }
+
+        .yc-dropdown__item--danger {
+            color: var(--yc-color-danger);
+        }
+
+        .yc-dropdown__item--danger:hover {
+            background: var(--yc-color-danger-light-9);
+            color: var(--yc-color-danger);
+        }
+
+        .yc-dropdown__item__icon { 
+            margin-right: 10px; 
+            width: 16px; 
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .yc-dropdown__divider { 
+            height: 1px; 
+            background: var(--yc-color-border-light); 
+            margin: 6px 0; 
+        }
+
+        .dropdown-group { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 20px; 
+            align-items: flex-start;
+        }
+
+        .dropdown-card { 
+            padding: 20px; 
+            background: var(--yc-color-bg-page); 
+            border-radius: var(--yc-border-radius-md); 
+            border: 1px solid var(--yc-color-border-light);
+            transition: all 0.2s ease;
+        }
+
+        .dropdown-card:hover {
+            border-color: var(--yc-color-primary-light-5);
+            box-shadow: 0 2px 8px rgba(64, 158, 255, 0.08);
+        }
+
+        .dropdown-card__title { 
+            font-weight: var(--yc-font-weight-semibold); 
+            margin-bottom: 8px; 
+            font-size: var(--yc-font-size-small); 
+        }
+
+        .dropdown-card__desc { 
+            font-size: var(--yc-font-size-extra-small); 
+            color: var(--yc-color-text-secondary); 
+        }
+
+        .dropdown-card--trigger {
+            cursor: pointer;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dropdown-card--trigger:hover {
+            background: var(--yc-color-fill-light);
+        }
+
+        .ellipsis-trigger {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--yc-border-radius-base);
+            transition: all 0.2s ease;
+        }
+
+        .ellipsis-trigger:hover {
+            background: var(--yc-color-fill-light);
+        }
+
+        [yc-theme="dark"] .demo-section { 
+            background: rgba(255, 255, 255, 0.02); 
+            border-color: rgba(255, 255, 255, 0.08); 
+        }
+
+        [yc-theme="dark"] .dropdown-card { 
+            background: rgba(255, 255, 255, 0.03); 
+            border-color: rgba(255, 255, 255, 0.06);
+        }
+
+        [yc-theme="dark"] .yc-dropdown__menu { 
+            background: rgba(30, 30, 30, 0.98); 
+            border-color: rgba(255, 255, 255, 0.08);
+        }
+
+        [yc-theme="dark"] .yc-dropdown__item:hover {
+            background: rgba(255, 255, 255, 0.04);
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1 style="font-size: 24px; font-weight: 600; margin-bottom: 24px;">Dropdown 下拉菜单组件</h1>
+        <div class="page-header">
+            <h1>Dropdown 下拉菜单组件</h1>
+            <p>将动作或菜单折叠到下拉菜单中，支持多种触发方式和状态</p>
+        </div>
 
         <div class="demo-section">
             <h3>基础用法</h3>
@@ -52,7 +276,7 @@
                     <div class="yc-dropdown">
                         <div class="yc-dropdown__trigger">
                             下拉菜单
-                            <i class="fas fa-chevron-down" style="font-size: 10px;"></i>
+                            <i class="yc-dropdown__caret fas fa-chevron-down"></i>
                         </div>
                         <div class="yc-dropdown__menu">
                             <div class="yc-dropdown__item"><i class="yc-dropdown__item__icon fas fa-user"></i>个人中心</div>
@@ -62,7 +286,7 @@
                         </div>
                     </div>
                     <div class="yc-dropdown">
-                        <div class="yc-dropdown__trigger">
+                        <div class="yc-dropdown__trigger ellipsis-trigger">
                             <i class="fas fa-ellipsis-v"></i>
                         </div>
                         <div class="yc-dropdown__menu yc-dropdown__menu--right">
@@ -70,7 +294,7 @@
                             <div class="yc-dropdown__item">粘贴</div>
                             <div class="yc-dropdown__item">重命名</div>
                             <div class="yc-dropdown__divider"></div>
-                            <div class="yc-dropdown__item" style="color: var(--yc-color-danger);"><i class="yc-dropdown__item__icon fas fa-trash"></i>删除</div>
+                            <div class="yc-dropdown__item yc-dropdown__item--danger"><i class="yc-dropdown__item__icon fas fa-trash"></i>删除</div>
                         </div>
                     </div>
                 </div>
@@ -85,7 +309,7 @@
                     <div class="yc-dropdown yc-dropdown--click" id="clickDropdown">
                         <div class="yc-dropdown__trigger" onclick="document.getElementById('clickDropdown').classList.toggle('yc-dropdown--opened')">
                             点击展开
-                            <i class="fas fa-chevron-down" style="font-size: 10px;"></i>
+                            <i class="yc-dropdown__caret fas fa-chevron-down"></i>
                         </div>
                         <div class="yc-dropdown__menu">
                             <div class="yc-dropdown__item">选项一</div>
@@ -105,7 +329,7 @@
                     <div class="yc-dropdown">
                         <div class="yc-dropdown__trigger">
                             左对齐
-                            <i class="fas fa-chevron-down" style="font-size: 10px;"></i>
+                            <i class="yc-dropdown__caret fas fa-chevron-down"></i>
                         </div>
                         <div class="yc-dropdown__menu">
                             <div class="yc-dropdown__item">左对齐菜单项</div>
@@ -115,7 +339,7 @@
                     <div class="yc-dropdown">
                         <div class="yc-dropdown__trigger">
                             右对齐
-                            <i class="fas fa-chevron-down" style="font-size: 10px;"></i>
+                            <i class="yc-dropdown__caret fas fa-chevron-down"></i>
                         </div>
                         <div class="yc-dropdown__menu yc-dropdown__menu--right">
                             <div class="yc-dropdown__item">右对齐菜单项</div>
@@ -133,7 +357,7 @@
                 <div class="yc-dropdown">
                     <div class="yc-dropdown__trigger">
                         文件操作
-                        <i class="fas fa-chevron-down" style="font-size: 10px;"></i>
+                        <i class="yc-dropdown__caret fas fa-chevron-down"></i>
                     </div>
                     <div class="yc-dropdown__menu">
                         <div class="yc-dropdown__item"><i class="yc-dropdown__item__icon fas fa-file-alt"></i>新建文件</div>
@@ -157,7 +381,7 @@
                     <div class="yc-dropdown">
                         <div class="yc-dropdown__trigger">
                             悬停查看
-                            <i class="fas fa-chevron-down" style="font-size: 10px;"></i>
+                            <i class="yc-dropdown__caret fas fa-chevron-down"></i>
                         </div>
                         <div class="yc-dropdown__menu">
                             <div class="yc-dropdown__item">可用选项</div>
@@ -177,14 +401,14 @@
                     <div class="yc-dropdown">
                         <div class="yc-dropdown__trigger">
                             用户菜单
-                            <i class="fas fa-chevron-down" style="font-size: 10px;"></i>
+                            <i class="yc-dropdown__caret fas fa-chevron-down"></i>
                         </div>
                         <div class="yc-dropdown__menu">
                             <div class="yc-dropdown__item"><i class="yc-dropdown__item__icon fas fa-user-circle"></i>个人主页</div>
                             <div class="yc-dropdown__item"><i class="yc-dropdown__item__icon fas fa-cog"></i>账号设置</div>
                             <div class="yc-dropdown__item"><i class="yc-dropdown__item__icon fas fa-bell"></i>消息通知</div>
                             <div class="yc-dropdown__divider"></div>
-                            <div class="yc-dropdown__item"><i class="yc-dropdown__item__icon fas fa-sign-out-alt"></i>退出登录</div>
+                            <div class="yc-dropdown__item yc-dropdown__item--danger"><i class="yc-dropdown__item__icon fas fa-sign-out-alt"></i>退出登录</div>
                         </div>
                     </div>
                 </div>
@@ -194,14 +418,15 @@
         <div class="demo-section">
             <h3>应用场景</h3>
             <div class="demo-block">
-                <div class="demo-block-title">卡片式展示</div>
+                <div class="demo-block-title">导航栏下拉菜单</div>
                 <div class="dropdown-card">
-                    <div class="dropdown-card__title">导航栏下拉菜单</div>
-                    <div class="dropdown-card__desc" style="margin-bottom: 16px;">常用于网站顶部导航</div>
+                    <div class="dropdown-card__title">网站导航</div>
+                    <div class="dropdown-card__desc" style="margin-bottom: 20px;">常用于网站顶部导航区域</div>
                     <div class="dropdown-group">
                         <div class="yc-dropdown">
-                            <div class="dropdown-card" style="cursor: pointer; padding: 12px 16px;">
-                                产品中心 <i class="fas fa-chevron-down" style="font-size: 10px; margin-left: 8px;"></i>
+                            <div class="yc-dropdown__trigger dropdown-card dropdown-card--trigger">
+                                产品中心 
+                                <i class="yc-dropdown__caret fas fa-chevron-down"></i>
                             </div>
                             <div class="yc-dropdown__menu">
                                 <div class="yc-dropdown__item">软件产品</div>
@@ -210,8 +435,9 @@
                             </div>
                         </div>
                         <div class="yc-dropdown">
-                            <div class="dropdown-card" style="cursor: pointer; padding: 12px 16px;">
-                                解决方案 <i class="fas fa-chevron-down" style="font-size: 10px; margin-left: 8px;"></i>
+                            <div class="yc-dropdown__trigger dropdown-card dropdown-card--trigger">
+                                解决方案 
+                                <i class="yc-dropdown__caret fas fa-chevron-down"></i>
                             </div>
                             <div class="yc-dropdown__menu">
                                 <div class="yc-dropdown__item">企业级方案</div>
@@ -220,8 +446,9 @@
                             </div>
                         </div>
                         <div class="yc-dropdown">
-                            <div class="dropdown-card" style="cursor: pointer; padding: 12px 16px;">
-                                支持 <i class="fas fa-chevron-down" style="font-size: 10px; margin-left: 8px;"></i>
+                            <div class="yc-dropdown__trigger dropdown-card dropdown-card--trigger">
+                                支持 
+                                <i class="yc-dropdown__caret fas fa-chevron-down"></i>
                             </div>
                             <div class="yc-dropdown__menu">
                                 <div class="yc-dropdown__item">帮助文档</div>
@@ -236,7 +463,7 @@
     </div>
 
     <script>
-        document.querySelectorAll('.yc-dropdown:not(.yc-dropdown--click):not(.yc-dropdown--opened)').forEach(dropdown => {
+        document.querySelectorAll('.yc-dropdown:not(.yc-dropdown--click)').forEach(dropdown => {
             dropdown.addEventListener('mouseenter', function() {
                 this.classList.add('yc-dropdown--opened');
             });
@@ -249,7 +476,20 @@
             item.addEventListener('click', function(e) {
                 if (this.classList.contains('yc-dropdown__item--disabled')) return;
                 console.log('选中了:', this.textContent.trim());
+                
+                const dropdown = this.closest('.yc-dropdown');
+                if (dropdown) {
+                    dropdown.classList.remove('yc-dropdown--opened');
+                }
             });
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.yc-dropdown')) {
+                document.querySelectorAll('.yc-dropdown').forEach(dropdown => {
+                    dropdown.classList.remove('yc-dropdown--opened');
+                });
+            }
         });
     </script>
 </body>
