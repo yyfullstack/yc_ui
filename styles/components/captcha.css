@@ -1,0 +1,368 @@
+/**
+ * YC UI Captcha Component
+ * Captcha/Verification code component
+ */
+
+.yc-captcha {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.yc-captcha__canvas {
+    border: 1px solid var(--yc-color-border, #e4e7ed);
+    border-radius: var(--yc-border-radius-sm, 2px);
+    cursor: pointer;
+    transition: border-color 0.2s;
+    background-color: #ffffff;
+}
+
+.yc-captcha__canvas:hover {
+    border-color: var(--yc-color-primary, #409eff);
+}
+
+.yc-captcha__input-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.yc-captcha__input {
+    width: 120px;
+    padding: 6px 12px;
+    border: 1px solid #dcdfe6;
+    border-radius: var(--yc-border-radius-sm, 2px);
+    outline: none;
+    font-size: var(--yc-font-size-base, 14px);
+    transition: border-color 0.2s;
+}
+
+.yc-captcha__input:focus {
+    border-color: var(--yc-color-primary, #409eff);
+}
+
+.yc-captcha__refresh {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: none;
+    background-color: transparent;
+    color: var(--yc-color-text-secondary, #909399);
+    cursor: pointer;
+    border-radius: var(--yc-border-radius-sm, 2px);
+    transition: all 0.2s;
+}
+
+.yc-captcha__refresh:hover {
+    background-color: var(--yc-color-bg-page, #f5f7fa);
+    color: var(--yc-color-primary, #409eff);
+}
+
+.yc-captcha__refresh.is-loading {
+    animation: yc-captcha-spin 0.8s linear infinite;
+}
+
+@keyframes yc-captcha-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.yc-captcha__tip {
+    font-size: var(--yc-font-size-small, 12px);
+    color: var(--yc-color-text-secondary, #909399);
+    margin-top: 4px;
+}
+
+.yc-captcha__tip--success {
+    color: var(--yc-color-success, #67c23a);
+}
+
+.yc-captcha__tip--error {
+    color: var(--yc-color-danger, #f56c6c);
+}
+
+/* 滑块验证码样式 */
+.yc-captcha-slider {
+    position: relative;
+    width: 340px;
+    user-select: none;
+    border: 1px solid var(--yc-color-border, #e4e7ed);
+    border-radius: var(--yc-border-radius-base, 4px);
+    overflow: hidden;
+    background-color: #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.yc-captcha-slider__image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.yc-captcha-slider__puzzle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    pointer-events: none;
+    z-index: 5;
+    transition: box-shadow 0.3s;
+}
+
+.yc-captcha-slider__hole {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.yc-captcha-slider__bar-track {
+    position: relative;
+    height: 44px;
+    background-color: #f5f7fa;
+    border-top: 1px solid var(--yc-color-border-light, #ebeef5);
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+}
+
+.yc-captcha-slider__bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-color: var(--yc-color-success-light-7, #b3e19d);
+    z-index: 2;
+    pointer-events: none;
+}
+
+.yc-captcha-slider__handle {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 40px;
+    height: 36px;
+    background-color: #ffffff;
+    border: 1px solid var(--yc-color-border, #dcdfe6);
+    border-radius: var(--yc-border-radius-sm, 2px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 3;
+    transition: background-color 0.2s, border-color 0.2s;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.yc-captcha-slider__handle:hover {
+    background-color: var(--yc-color-primary-light-9, #ecf5ff);
+    border-color: var(--yc-color-primary, #409eff);
+}
+
+.yc-captcha-slider__handle:active {
+    background-color: var(--yc-color-primary-light-7, #b3d8ff);
+}
+
+.yc-captcha-slider__handle-icon {
+    color: var(--yc-color-text-secondary, #909399);
+    font-size: var(--yc-font-size-base, 14px);
+}
+
+.yc-captcha-slider__text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--yc-font-size-small, 12px);
+    color: var(--yc-color-text-placeholder, #c0c4cc);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.yc-captcha-slider.is-success .yc-captcha-slider__bar {
+    background-color: var(--yc-color-success, #67c23a);
+}
+
+.yc-captcha-slider.is-success .yc-captcha-slider__handle {
+    background-color: var(--yc-color-success, #67c23a);
+    border-color: var(--yc-color-success, #67c23a);
+}
+
+.yc-captcha-slider.is-success .yc-captcha-slider__handle-icon {
+    color: #ffffff;
+}
+
+.yc-captcha-slider.is-fail .yc-captcha-slider__bar {
+    background-color: var(--yc-color-danger, #f56c6c);
+}
+
+.yc-captcha-slider.is-fail .yc-captcha-slider__handle {
+    background-color: var(--yc-color-danger, #f56c6c);
+    border-color: var(--yc-color-danger, #f56c6c);
+}
+
+.yc-captcha-slider.is-fail .yc-captcha-slider__handle-icon {
+    color: #ffffff;
+}
+
+/* 点选验证码样式 */
+.yc-captcha-click {
+    position: relative;
+    display: inline-block;
+    border: 1px solid var(--yc-color-border, #e4e7ed);
+    border-radius: var(--yc-border-radius-base, 4px);
+    overflow: hidden;
+    background-color: #f5f7fa;
+    user-select: none;
+}
+
+.yc-captcha-click--image {
+    width: 300px;
+    height: 200px;
+}
+
+.yc-captcha-click--text {
+    width: 300px;
+    height: 200px;
+}
+
+.yc-captcha-click__canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    cursor: pointer;
+}
+
+.yc-captcha-click__tip {
+    padding: 12px 16px;
+    font-size: var(--yc-font-size-base, 14px);
+    color: var(--yc-color-text-regular, #606266);
+    background-color: #ffffff;
+    border-top: 1px solid var(--yc-color-border-light, #ebeef5);
+}
+
+.yc-captcha-click__tip--success {
+    color: var(--yc-color-success, #67c23a);
+    background-color: var(--yc-color-success-light-9, #f0f9eb);
+}
+
+.yc-captcha-click__tip--error {
+    color: var(--yc-color-danger, #f56c6c);
+    background-color: var(--yc-color-danger-light-9, #fef0f0);
+}
+
+.yc-captcha-click__refresh {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 28px;
+    height: 28px;
+    border-radius: var(--yc-border-radius-sm, 2px);
+    background-color: rgba(255, 255, 255, 0.9);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--yc-color-text-secondary, #909399);
+    transition: all 0.2s;
+    z-index: 10;
+}
+
+.yc-captcha-click__refresh:hover {
+    background-color: #ffffff;
+    color: var(--yc-color-primary, #409eff);
+}
+
+.yc-captcha-click__mark {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: var(--yc-font-weight-medium, 500);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    pointer-events: none;
+    z-index: 5;
+}
+
+.yc-captcha-click__mark--success {
+    background-color: var(--yc-color-success, #67c23a);
+}
+
+.yc-captcha-click__mark--error {
+    background-color: var(--yc-color-danger, #f56c6c);
+}
+
+.yc-captcha-click__mark--pending {
+    background-color: var(--yc-color-primary, #409eff);
+}
+
+/* 短信验证码样式 */
+.yc-captcha-sms {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.yc-captcha-sms__input {
+    flex: 1;
+    padding: 6px 12px;
+    border: 1px solid #dcdfe6;
+    border-radius: var(--yc-border-radius-sm, 2px);
+    outline: none;
+    font-size: var(--yc-font-size-base, 14px);
+    transition: border-color 0.2s;
+}
+
+.yc-captcha-sms__input:focus {
+    border-color: var(--yc-color-primary, #409eff);
+}
+
+.yc-captcha-sms__button {
+    white-space: nowrap;
+    padding: 6px 12px;
+    border: 1px solid var(--yc-color-primary, #409eff);
+    border-radius: var(--yc-border-radius-sm, 2px);
+    background-color: #ffffff;
+    color: var(--yc-color-primary, #409eff);
+    cursor: pointer;
+    font-size: var(--yc-font-size-base, 14px);
+    transition: all 0.2s;
+    min-width: 100px;
+    text-align: center;
+}
+
+.yc-captcha-sms__button:hover:not(.is-disabled) {
+    background-color: var(--yc-color-primary-light-9, #ecf5ff);
+}
+
+.yc-captcha-sms__button.is-disabled {
+    border-color: var(--yc-color-border-light, #ebeef5);
+    color: var(--yc-color-text-placeholder, #c0c4cc);
+    cursor: not-allowed;
+}
+
+.yc-captcha-sms__button.is-disabled:hover {
+    background-color: #ffffff;
+}

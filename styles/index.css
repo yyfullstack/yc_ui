@@ -99,6 +99,7 @@
 
 /* Utility & Media */
 @import url('./components/qrcode.css');
+@import url('./components/captcha.css');
 
 
 /* Data Components */

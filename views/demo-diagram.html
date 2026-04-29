@@ -51,7 +51,7 @@
                             <button class="yc-diagram__toolbar-btn" title="重做"><i class="fas fa-redo"></i></button>
                         </div>
                         <div class="yc-diagram__toolbar-group">
-                            <button class="yc-diagram__toolbar-btn" title="选择"><i class="fas fa-mouse-pointer"></i></button>
+                            <button class="yc-diagram__toolbar-btn is-active" title="选择"><i class="fas fa-mouse-pointer"></i></button>
                             <button class="yc-diagram__toolbar-btn" title="连线"><i class="fas fa-link"></i></button>
                             <button class="yc-diagram__toolbar-btn" title="文本"><i class="fas fa-font"></i></button>
                         </div>
@@ -79,8 +79,8 @@
                             <span>结束节点</span>
                         </div>
                     </div>
-                    <div class="yc-diagram__canvas" style="margin-left: 200px;">
-                        <svg>
+                    <div class="yc-diagram__canvas" id="diagramCanvas" style="margin-left: 200px;">
+                        <svg id="diagramSvg">
                             <defs>
                                 <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
                                     <polygon points="0 0, 10 3.5, 0 7" fill="#409eff" />
@@ -147,10 +147,10 @@
                     </div>
 
                     <div class="yc-diagram__zoom-controls">
-                        <button class="yc-diagram__zoom-btn"><i class="fas fa-plus"></i></button>
-                        <div class="yc-diagram__zoom-level">100%</div>
-                        <button class="yc-diagram__zoom-btn"><i class="fas fa-minus"></i></button>
-                        <button class="yc-diagram__zoom-btn"><i class="fas fa-expand"></i></button>
+                        <button class="yc-diagram__zoom-btn" id="diagZoomIn"><i class="fas fa-plus"></i></button>
+                        <div class="yc-diagram__zoom-level" id="diagZoomLevel">100%</div>
+                        <button class="yc-diagram__zoom-btn" id="diagZoomOut"><i class="fas fa-minus"></i></button>
+                        <button class="yc-diagram__zoom-btn" id="diagZoomReset"><i class="fas fa-expand"></i></button>
                     </div>
                 </div>
             </section>
@@ -207,27 +207,64 @@
             });
         });
 
-        document.querySelector('.yc-diagram__canvas').addEventListener('click', function() {
+        document.getElementById('diagramCanvas').addEventListener('click', function() {
             document.querySelectorAll('.yc-diagram__node').forEach(n => n.classList.remove('is-selected'));
         });
 
-        const zoomControls = document.querySelector('.yc-diagram__zoom-controls');
-        if (zoomControls) {
-            let zoomLevel = 100;
-            zoomControls.querySelectorAll('.yc-diagram__zoom-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const icon = this.querySelector('i');
-                    if (icon.classList.contains('fa-plus')) {
-                        zoomLevel = Math.min(zoomLevel + 10, 200);
-                    } else if (icon.classList.contains('fa-minus')) {
-                        zoomLevel = Math.max(zoomLevel - 10, 50);
-                    } else if (icon.classList.contains('fa-expand')) {
-                        zoomLevel = 100;
-                    }
-                    this.parentElement.querySelector('.yc-diagram__zoom-level').textContent = zoomLevel + '%';
-                });
+        let diagZoomLevel = 100;
+        const diagZoomLevelEl = document.getElementById('diagZoomLevel');
+        const diagramCanvas = document.getElementById('diagramCanvas');
+
+        document.getElementById('diagZoomIn').addEventListener('click', function() {
+            diagZoomLevel = Math.min(diagZoomLevel + 10, 200);
+            diagZoomLevelEl.textContent = diagZoomLevel + '%';
+        });
+
+        document.getElementById('diagZoomOut').addEventListener('click', function() {
+            diagZoomLevel = Math.max(diagZoomLevel - 10, 50);
+            diagZoomLevelEl.textContent = diagZoomLevel + '%';
+        });
+
+        document.getElementById('diagZoomReset').addEventListener('click', function() {
+            diagZoomLevel = 100;
+            diagZoomLevelEl.textContent = diagZoomLevel + '%';
+        });
+
+        let isDragging = false;
+        let currentDragNode = null;
+        let dragOffsetX = 0;
+        let dragOffsetY = 0;
+
+        document.querySelectorAll('.yc-diagram__node').forEach(node => {
+            node.addEventListener('mousedown', function(e) {
+                if (e.target.classList.contains('yc-diagram__node-port')) return;
+                isDragging = true;
+                currentDragNode = this;
+                const rect = this.getBoundingClientRect();
+                const canvasRect = diagramCanvas.getBoundingClientRect();
+                dragOffsetX = e.clientX - rect.left;
+                dragOffsetY = e.clientY - rect.top;
+                this.style.cursor = 'grabbing';
+                e.preventDefault();
             });
-        }
+        });
+
+        document.addEventListener('mousemove', function(e) {
+            if (!isDragging || !currentDragNode) return;
+            const canvasRect = diagramCanvas.getBoundingClientRect();
+            const x = e.clientX - canvasRect.left - dragOffsetX;
+            const y = e.clientY - canvasRect.top - dragOffsetY;
+            currentDragNode.style.left = x + 'px';
+            currentDragNode.style.top = y + 'px';
+        });
+
+        document.addEventListener('mouseup', function() {
+            if (currentDragNode) {
+                currentDragNode.style.cursor = 'move';
+            }
+            isDragging = false;
+            currentDragNode = null;
+        });
     </script>
 </body>
 </html>

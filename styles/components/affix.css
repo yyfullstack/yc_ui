@@ -7,64 +7,18 @@
 
 .yc-affix {
     --yc-affix-z-index: var(--yc-z-index-fixed, 1000);
+    position: relative;
+    z-index: auto;
+}
+
+.yc-affix.is-fixed {
     position: fixed;
     z-index: var(--yc-affix-z-index);
 }
 
-.yc-affix--top {
-    top: 0;
-    left: 0;
-    right: 0;
-}
-
-.yc-affix--bottom {
-    bottom: 0;
-    left: 0;
-    right: 0;
-}
-
-.yc-affix--left {
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.yc-affix--right {
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.yc-affix--corner-top-left {
-    top: 0;
-    left: 0;
-}
-
-.yc-affix--corner-top-right {
-    top: 0;
-    right: 0;
-}
-
-.yc-affix--corner-bottom-left {
-    bottom: 0;
-    left: 0;
-}
-
-.yc-affix--corner-bottom-right {
-    bottom: 0;
-    right: 0;
-}
-
 .yc-affix__placeholder {
     visibility: hidden;
-}
-
-.yc-affix__placeholder--top {
-    height: 0;
-}
-
-.yc-affix__placeholder--bottom {
-    height: 0;
+    display: none;
 }
 
 .yc-affix__content {

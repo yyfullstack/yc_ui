@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Captcha 验证码 - YC UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+    <style>
+        .demo-captcha-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 32px 24px;
+        }
+
+        .demo-captcha-card {
+            background: #ffffff;
+            border: 1px solid var(--yc-color-border, #e4e7ed);
+            border-radius: var(--yc-border-radius-base, 4px);
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+            margin-bottom: 24px;
+            overflow: hidden;
+        }
+
+        .demo-captcha-card__header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 24px;
+            border-bottom: 1px solid var(--yc-color-border-light, #ebeef5);
+            background: #fafafa;
+        }
+
+        .demo-captcha-card__title {
+            font-size: var(--yc-font-size-base, 14px);
+            font-weight: var(--yc-font-weight-medium, 500);
+            color: var(--yc-color-text-primary, #303133);
+            margin: 0;
+        }
+
+        .demo-captcha-card__actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .demo-captcha-card__action-btn {
+            padding: 4px 12px;
+            font-size: var(--yc-font-size-small, 12px);
+            color: var(--yc-color-primary, #409eff);
+            border: 1px solid var(--yc-color-primary, #409eff);
+            border-radius: var(--yc-border-radius-sm, 2px);
+            background: #ffffff;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .demo-captcha-card__action-btn:hover {
+            background: var(--yc-color-primary-light-9, #ecf5ff);
+        }
+
+        .demo-captcha-card__body {
+            padding: 24px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .demo-captcha-card__footer {
+            padding: 12px 24px;
+            border-top: 1px solid var(--yc-color-border-light, #ebeef5);
+            background: #fafafa;
+        }
+
+        .demo-captcha-card__tip {
+            font-size: var(--yc-font-size-small, 12px);
+            color: var(--yc-color-text-secondary, #909399);
+            margin: 0;
+        }
+
+        .demo-captcha-card__tip--success {
+            color: var(--yc-color-success, #67c23a);
+        }
+
+        .demo-captcha-card__tip--error {
+            color: var(--yc-color-danger, #f56c6c);
+        }
+
+        .demo-captcha-preview {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .demo-captcha-row {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .yc-captcha-click__tip {
+            padding: 10px 16px;
+            font-size: var(--yc-font-size-small, 12px);
+            transition: all 0.3s;
+        }
+
+        .yc-captcha-slider {
+            width: 340px;
+        }
+
+        .yc-captcha-click {
+            width: 340px;
+        }
+    </style>
+</head>
+<body>
+    <div class="yc-demo-layout">
+        <header class="yc-demo-header">
+            <div class="yc-demo-header__logo">
+                <a href="../index.html">
+                    <i class="fas fa-palette"></i>
+                    <span>YC UI</span>
+                </a>
+            </div>
+            <nav class="yc-demo-header__nav">
+                <a href="../index.html" class="yc-demo-header__nav-item">首页</a>
+                <span class="yc-demo-header__nav-item is-active">Captcha 验证码</span>
+            </nav>
+        </header>
+
+        <div class="demo-captcha-container">
+            <div class="demo-captcha-card">
+                <div class="demo-captcha-card__header">
+                    <h3 class="demo-captcha-card__title">图形验证码</h3>
+                    <div class="demo-captcha-card__actions">
+                        <button class="demo-captcha-card__action-btn" onclick="refreshBasicCaptcha()">
+                            <i class="fas fa-sync-alt"></i> 刷新
+                        </button>
+                    </div>
+                </div>
+                <div class="demo-captcha-card__body">
+                    <div class="demo-captcha-preview">
+                        <div class="yc-captcha">
+                            <canvas class="yc-captcha__canvas" id="captcha-basic" width="120" height="40"></canvas>
+                        </div>
+                        <input type="text" class="yc-captcha__input" placeholder="请输入验证码" id="captcha-input">
+                        <button class="yc-button yc-button--primary yc-button--small" onclick="validateCaptcha()">
+                            <i class="fas fa-check"></i> 验证
+                        </button>
+                    </div>
+                </div>
+                <div class="demo-captcha-card__footer">
+                    <p class="demo-captcha-card__tip">点击验证码图片或刷新按钮可更换验证码，输入完成后点击验证</p>
+                </div>
+            </div>
+
+            <div class="demo-captcha-card">
+                <div class="demo-captcha-card__header">
+                    <h3 class="demo-captcha-card__title">滑块拼图验证码</h3>
+                    <div class="demo-captcha-card__actions">
+                        <button class="demo-captcha-card__action-btn" onclick="resetSliderCaptcha()">
+                            <i class="fas fa-redo"></i> 重置
+                        </button>
+                    </div>
+                </div>
+                <div class="demo-captcha-card__body">
+                    <div class="yc-captcha-slider" id="captcha-slider">
+                        <canvas class="yc-captcha-slider__image" id="slider-bg-canvas" width="340" height="200"></canvas>
+                        <canvas class="yc-captcha-slider__puzzle" id="slider-puzzle-canvas" width="340" height="200"></canvas>
+                        <canvas class="yc-captcha-slider__hole" id="slider-hole-canvas" width="340" height="200"></canvas>
+                        <div class="yc-captcha-slider__bar-track">
+                            <div class="yc-captcha-slider__bar" id="slider-bar"></div>
+                            <div class="yc-captcha-slider__handle" id="slider-handle">
+                                <i class="fas fa-bars yc-captcha-slider__handle-icon"></i>
+                            </div>
+                            <div class="yc-captcha-slider__text" id="slider-text">拖动下方滑块完成拼图</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="demo-captcha-card__footer">
+                    <p class="demo-captcha-card__tip" id="slider-status">拖动滑块将拼图块移至正确位置完成验证</p>
+                </div>
+            </div>
+
+            <div class="demo-captcha-card">
+                <div class="demo-captcha-card__header">
+                    <h3 class="demo-captcha-card__title">图形点选验证码</h3>
+                    <div class="demo-captcha-card__actions">
+                        <button class="demo-captcha-card__action-btn" onclick="refreshImageClickCaptcha()">
+                            <i class="fas fa-sync-alt"></i> 刷新
+                        </button>
+                    </div>
+                </div>
+                <div class="demo-captcha-card__body">
+                    <div class="yc-captcha-click yc-captcha-click--image" id="captcha-image-click">
+                        <div class="yc-captcha-click__header" id="captcha-image-targets" style="padding: 12px 16px; font-size: 14px; color: var(--yc-color-text-primary); border-bottom: 1px solid var(--yc-color-border-light);">
+                            <span>请依次点击: </span>
+                            <span id="captcha-image-target-text" style="font-weight: 600;"></span>
+                        </div>
+                        <canvas class="yc-captcha-click__canvas" id="captcha-image-canvas" width="340" height="200"></canvas>
+                        <div class="yc-captcha-click__tip" id="captcha-image-tip"></div>
+                    </div>
+                </div>
+                <div class="demo-captcha-card__footer">
+                    <p class="demo-captcha-card__tip" id="captcha-image-status">按顺序依次点击图中图形即可完成验证</p>
+                </div>
+            </div>
+
+            <div class="demo-captcha-card">
+                <div class="demo-captcha-card__header">
+                    <h3 class="demo-captcha-card__title">文字点选验证码</h3>
+                    <div class="demo-captcha-card__actions">
+                        <button class="demo-captcha-card__action-btn" onclick="refreshTextClickCaptcha()">
+                            <i class="fas fa-sync-alt"></i> 刷新
+                        </button>
+                    </div>
+                </div>
+                <div class="demo-captcha-card__body">
+                    <div class="yc-captcha-click yc-captcha-click--text" id="captcha-text-click">
+                        <div class="yc-captcha-click__header" id="captcha-text-targets" style="padding: 12px 16px; font-size: 14px; color: var(--yc-color-text-primary); border-bottom: 1px solid var(--yc-color-border-light);">
+                            <span>请依次点击: </span>
+                            <span id="captcha-text-target-text" style="font-weight: 600;"></span>
+                        </div>
+                        <canvas class="yc-captcha-click__canvas" id="captcha-text-canvas" width="340" height="200"></canvas>
+                        <div class="yc-captcha-click__tip" id="captcha-text-tip"></div>
+                    </div>
+                </div>
+                <div class="demo-captcha-card__footer">
+                    <p class="demo-captcha-card__tip" id="captcha-text-status">按顺序依次点击图中文字即可完成验证</p>
+                </div>
+            </div>
+
+            <div class="demo-captcha-card">
+                <div class="demo-captcha-card__header">
+                    <h3 class="demo-captcha-card__title">短信验证码</h3>
+                </div>
+                <div class="demo-captcha-card__body">
+                    <div class="yc-captcha-sms" style="max-width: 350px;">
+                        <input type="text" class="yc-captcha-sms__input" placeholder="请输入手机号" id="phone-input" style="flex: 1;">
+                        <button class="yc-captcha-sms__button" id="sms-btn" onclick="sendSmsCode()">获取验证码</button>
+                    </div>
+                </div>
+                <div class="demo-captcha-card__footer">
+                    <p class="demo-captcha-card__tip">点击按钮发送短信验证码到手机，60秒内不可重复发送</p>
+                </div>
+            </div>
+
+            <div class="demo-captcha-card">
+                <div class="demo-captcha-card__header">
+                    <h3 class="demo-captcha-card__title">组合使用</h3>
+                </div>
+                <div class="demo-captcha-card__body">
+                    <div class="demo-captcha-row">
+                        <div class="demo-captcha-preview">
+                            <div class="yc-captcha">
+                                <canvas class="yc-captcha__canvas" id="captcha-combo" width="120" height="40"></canvas>
+                            </div>
+                            <input type="text" class="yc-captcha__input" placeholder="请输入图形验证码" style="width: 180px;">
+                        </div>
+                        <div class="yc-captcha-sms">
+                            <input type="text" class="yc-captcha-sms__input" placeholder="请输入手机号" style="flex: 1;">
+                            <button class="yc-captcha-sms__button" id="sms-btn-combo" onclick="sendSmsCodeCombo()">获取验证码</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="demo-captcha-card__footer">
+                    <p class="demo-captcha-card__tip">先通过图形验证码验证，再发送短信验证码</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentCaptchaCode = '';
+
+        function generateCaptcha(canvasId) {
+            const canvas = document.getElementById(canvasId);
+            if (!canvas) return '';
+            const ctx = canvas.getContext('2d');
+            const width = canvas.width;
+            const height = canvas.height;
+
+            ctx.fillStyle = '#f5f7fa';
+            ctx.fillRect(0, 0, width, height);
+
+            const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+            let code = '';
+            for (let i = 0; i < 4; i++) {
+                code += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            currentCaptchaCode = code;
+
+            for (let i = 0; i < 5; i++) {
+                ctx.strokeStyle = `rgba(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255}, 0.3)`;
+                ctx.beginPath();
+                ctx.moveTo(Math.random() * width, Math.random() * height);
+                ctx.lineTo(Math.random() * width, Math.random() * height);
+                ctx.stroke();
+            }
+
+            for (let i = 0; i < 30; i++) {
+                ctx.fillStyle = `rgba(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255}, 0.5)`;
+                ctx.beginPath();
+                ctx.arc(Math.random() * width, Math.random() * height, 1, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            const colors = ['#409eff', '#67c23a', '#e6a23c', '#f56c6c', '#909399'];
+            for (let i = 0; i < code.length; i++) {
+                ctx.font = `${20 + Math.random() * 8}px Arial`;
+                ctx.fillStyle = colors[Math.floor(Math.random() * colors.length)];
+                ctx.save();
+                ctx.translate(20 + i * 25, 25 + Math.random() * 10);
+                ctx.rotate((Math.random() - 0.5) * 0.4);
+                ctx.fillText(code[i], 0, 0);
+                ctx.restore();
+            }
+
+            return code;
+        }
+
+        function refreshBasicCaptcha() {
+            generateCaptcha('captcha-basic');
+            document.getElementById('captcha-input').value = '';
+        }
+
+        function validateCaptcha() {
+            const input = document.getElementById('captcha-input');
+            const tipEl = document.querySelector('#captcha-basic').closest('.demo-captcha-card__footer').querySelector('.demo-captcha-card__tip');
+            
+            if (!input.value) {
+                tipEl.textContent = '请输入验证码';
+                tipEl.className = 'demo-captcha-card__tip demo-captcha-card__tip--error';
+                return;
+            }
+            
+            if (input.value.toUpperCase() === currentCaptchaCode) {
+                tipEl.textContent = '验证成功！';
+                tipEl.className = 'demo-captcha-card__tip demo-captcha-card__tip--success';
+            } else {
+                tipEl.textContent = '验证码错误，请重新输入';
+                tipEl.className = 'demo-captcha-card__tip demo-captcha-card__tip--error';
+                refreshBasicCaptcha();
+            }
+        }
+
+        function refreshComboCaptcha() {
+            generateCaptcha('captcha-combo');
+        }
+
+        let smsCountdown = null;
+        function sendSmsCode() {
+            const btn = document.getElementById('sms-btn');
+            if (btn.classList.contains('is-disabled')) return;
+
+            const phone = document.getElementById('phone-input').value;
+            if (!phone) {
+                alert('请输入手机号');
+                return;
+            }
+
+            btn.classList.add('is-disabled');
+            let count = 60;
+            btn.textContent = count + 's后重发';
+
+            smsCountdown = setInterval(() => {
+                count--;
+                if (count <= 0) {
+                    clearInterval(smsCountdown);
+                    btn.classList.remove('is-disabled');
+                    btn.textContent = '获取验证码';
+                } else {
+                    btn.textContent = count + 's后重发';
+                }
+            }, 1000);
+
+            alert('验证码已发送到: ' + phone);
+        }
+
+        function sendSmsCodeCombo() {
+            const btn = document.getElementById('sms-btn-combo');
+            if (btn.classList.contains('is-disabled')) return;
+
+            btn.classList.add('is-disabled');
+            let count = 60;
+            btn.textContent = count + 's后重发';
+
+            smsCountdown = setInterval(() => {
+                count--;
+                if (count <= 0) {
+                    clearInterval(smsCountdown);
+                    btn.classList.remove('is-disabled');
+                    btn.textContent = '获取验证码';
+                } else {
+                    btn.textContent = count + 's后重发';
+                }
+            }, 1000);
+
+            alert('验证码已发送');
+        }
+
+        let sliderVerified = false;
+        let sliderTargetX = 0;
+        function initSliderCaptcha() {
+            const slider = document.getElementById('captcha-slider');
+            const handle = document.getElementById('slider-handle');
+            const bar = document.getElementById('slider-bar');
+            const text = document.getElementById('slider-text');
+            const bgCanvas = document.getElementById('slider-bg-canvas');
+            const puzzleCanvas = document.getElementById('slider-puzzle-canvas');
+            const holeCanvas = document.getElementById('slider-hole-canvas');
+            const statusEl = document.getElementById('slider-status');
+
+            const bgCtx = bgCanvas.getContext('2d');
+            const puzzleCtx = puzzleCanvas.getContext('2d');
+            const holeCtx = holeCanvas.getContext('2d');
+            const width = 340;
+            const height = 200;
+
+            bgCtx.fillStyle = '#f0f4f8';
+            bgCtx.fillRect(0, 0, width, height);
+
+            const gradient = bgCtx.createLinearGradient(0, 0, width, height);
+            gradient.addColorStop(0, '#667eea');
+            gradient.addColorStop(1, '#764ba2');
+            bgCtx.fillStyle = gradient;
+            bgCtx.fillRect(0, 0, width, height);
+
+            for (let i = 0; i < 20; i++) {
+                bgCtx.fillStyle = `rgba(255, 255, 255, ${0.1 + Math.random() * 0.2})`;
+                bgCtx.beginPath();
+                bgCtx.arc(Math.random() * width, Math.random() * height, Math.random() * 30 + 10, 0, Math.PI * 2);
+                bgCtx.fill();
+            }
+
+            bgCtx.font = 'bold 36px Arial';
+            bgCtx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+            bgCtx.textAlign = 'center';
+            bgCtx.fillText('YC UI', width / 2, height / 2 + 10);
+
+            sliderTargetX = 60 + Math.random() * (width - 140);
+            const puzzleY = 50 + Math.random() * 80;
+            const puzzleSize = 40;
+
+            holeCtx.clearRect(0, 0, width, height);
+            holeCtx.fillStyle = 'rgba(0, 0, 0, 0.4)';
+            drawPuzzleShape(holeCtx, sliderTargetX, puzzleY, puzzleSize);
+            holeCtx.fill();
+
+            holeCtx.strokeStyle = 'rgba(255, 255, 255, 0.6)';
+            holeCtx.lineWidth = 2;
+            drawPuzzleShape(holeCtx, sliderTargetX, puzzleY, puzzleSize);
+            holeCtx.stroke();
+
+            puzzleCtx.clearRect(0, 0, width, height);
+            puzzleCtx.save();
+            drawPuzzleShape(puzzleCtx, 0, puzzleY, puzzleSize);
+            puzzleCtx.clip();
+
+            const puzzleGradient = puzzleCtx.createLinearGradient(0, 0, width, height);
+            puzzleGradient.addColorStop(0, '#4facfe');
+            puzzleGradient.addColorStop(1, '#00f2fe');
+            puzzleCtx.fillStyle = puzzleGradient;
+            puzzleCtx.fillRect(0, 0, width, height);
+
+            puzzleCtx.restore();
+            puzzleCtx.strokeStyle = '#ffffff';
+            puzzleCtx.lineWidth = 2;
+            drawPuzzleShape(puzzleCtx, 0, puzzleY, puzzleSize);
+            puzzleCtx.stroke();
+
+            puzzleCtx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+            puzzleCtx.font = 'bold 16px Arial';
+            puzzleCtx.textAlign = 'center';
+            puzzleCtx.fillText('YC', 20, puzzleY + puzzleSize / 2 + 5);
+
+            let isDragging = false;
+            let startX = 0;
+            let currentX = 0;
+            const maxMove = width - 50;
+
+            handle.addEventListener('mousedown', startDrag);
+            handle.addEventListener('touchstart', startDrag);
+
+            function startDrag(e) {
+                if (sliderVerified) return;
+                isDragging = true;
+                startX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
+                document.addEventListener('mousemove', onDrag);
+                document.addEventListener('mouseup', stopDrag);
+                document.addEventListener('touchmove', onDrag);
+                document.addEventListener('touchend', stopDrag);
+            }
+
+            function onDrag(e) {
+                if (!isDragging) return;
+                e.preventDefault();
+                currentX = (e.type === 'touchmove' ? e.touches[0].clientX : e.clientX) - startX;
+                currentX = Math.max(0, Math.min(currentX, maxMove));
+                handle.style.left = currentX + 'px';
+                bar.style.width = (currentX + 25) + 'px';
+                puzzleCanvas.style.left = currentX + 'px';
+            }
+
+            function stopDrag() {
+                isDragging = false;
+                document.removeEventListener('mousemove', onDrag);
+                document.removeEventListener('mouseup', stopDrag);
+                document.removeEventListener('touchmove', onDrag);
+                document.removeEventListener('touchend', stopDrag);
+
+                if (Math.abs(currentX - sliderTargetX) < 8) {
+                    slider.classList.add('is-success');
+                    slider.classList.remove('is-fail');
+                    text.textContent = '验证成功';
+                    handle.innerHTML = '<i class="fas fa-check yc-captcha-slider__handle-icon"></i>';
+                    handle.style.background = 'var(--yc-color-success, #67c23a)';
+                    sliderVerified = true;
+                    statusEl.textContent = '滑块拼图验证成功！';
+                    statusEl.className = 'demo-captcha-card__tip demo-captcha-card__tip--success';
+                } else {
+                    slider.classList.add('is-fail');
+                    slider.classList.remove('is-success');
+                    text.textContent = '验证失败，请重试';
+                    handle.innerHTML = '<i class="fas fa-times yc-captcha-slider__handle-icon"></i>';
+                    handle.style.background = 'var(--yc-color-danger, #f56c6c)';
+                    statusEl.textContent = '拼图位置不正确';
+                    statusEl.className = 'demo-captcha-card__tip demo-captcha-card__tip--error';
+
+                    setTimeout(() => {
+                        slider.classList.remove('is-fail');
+                        text.textContent = '拖动下方滑块完成拼图';
+                        handle.innerHTML = '<i class="fas fa-bars yc-captcha-slider__handle-icon"></i>';
+                        handle.style.background = '';
+                        handle.style.left = '0';
+                        bar.style.width = '0';
+                        puzzleCanvas.style.left = '0';
+                        statusEl.textContent = '拖动滑块将拼图块移至正确位置完成验证';
+                        statusEl.className = 'demo-captcha-card__tip';
+                    }, 1000);
+                }
+            }
+        }
+
+        function drawPuzzleShape(ctx, x, y, size) {
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+            ctx.lineTo(x + size * 0.3, y);
+            ctx.arc(x + size * 0.5, y, size * 0.15, Math.PI, 0, true);
+            ctx.lineTo(x + size, y);
+            ctx.lineTo(x + size, y + size * 0.3);
+            ctx.arc(x + size, y + size * 0.5, size * 0.15, -Math.PI / 2, Math.PI / 2, true);
+            ctx.lineTo(x + size, y + size);
+            ctx.lineTo(x + size * 0.7, y + size);
+            ctx.arc(x + size * 0.5, y + size, size * 0.15, 0, Math.PI, true);
+            ctx.lineTo(x, y + size);
+            ctx.lineTo(x, y + size * 0.7);
+            ctx.arc(x, y + size * 0.5, size * 0.15, Math.PI / 2, -Math.PI / 2, true);
+            ctx.lineTo(x, y);
+            ctx.closePath();
+        }
+
+        function resetSliderCaptcha() {
+            const slider = document.getElementById('captcha-slider');
+            const handle = document.getElementById('slider-handle');
+            const bar = document.getElementById('slider-bar');
+            const text = document.getElementById('slider-text');
+            const puzzleCanvas = document.getElementById('slider-puzzle-canvas');
+            const statusEl = document.getElementById('slider-status');
+            
+            slider.classList.remove('is-success', 'is-fail');
+            text.textContent = '拖动下方滑块完成拼图';
+            handle.innerHTML = '<i class="fas fa-bars yc-captcha-slider__handle-icon"></i>';
+            handle.style.background = '';
+            handle.style.left = '0';
+            bar.style.width = '0';
+            puzzleCanvas.style.left = '0';
+            sliderVerified = false;
+            statusEl.textContent = '拖动滑块将拼图块移至正确位置完成验证';
+            statusEl.className = 'demo-captcha-card__tip';
+            initSliderCaptcha();
+        }
+
+        let imageClickVerified = false;
+        function initImageClickCaptcha() {
+            const canvas = document.getElementById('captcha-image-canvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const width = 340;
+            const height = 200;
+
+            const objects = [
+                { name: '苹果', emoji: '🍎' },
+                { name: '香蕉', emoji: '🍌' },
+                { name: '橙子', emoji: '🍊' },
+                { name: '葡萄', emoji: '🍇' },
+                { name: '西瓜', emoji: '🍉' },
+                { name: '草莓', emoji: '🍓' }
+            ];
+
+            const targetObjects = objects.slice(0, 3);
+            const targetNames = targetObjects.map(obj => obj.name);
+            document.getElementById('captcha-image-target-text').textContent = targetNames.join('、');
+
+            canvas.width = width;
+            canvas.height = height;
+            ctx.clearRect(0, 0, width, height);
+
+            const bgGradient = ctx.createLinearGradient(0, 0, width, height);
+            bgGradient.addColorStop(0, '#4facfe');
+            bgGradient.addColorStop(0.5, '#00f2fe');
+            bgGradient.addColorStop(1, '#667eea');
+            ctx.fillStyle = bgGradient;
+            ctx.fillRect(0, 0, width, height);
+
+            for (let i = 0; i < 15; i++) {
+                ctx.fillStyle = `rgba(255, 255, 255, ${0.05 + Math.random() * 0.1})`;
+                ctx.beginPath();
+                ctx.arc(Math.random() * width, Math.random() * height, Math.random() * 40 + 15, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            const allObjects = [...targetObjects, ...objects.slice(3)];
+            const positions = [];
+
+            allObjects.forEach((obj) => {
+                let x, y, overlap;
+                let attempts = 0;
+                do {
+                    x = 40 + Math.random() * (width - 80);
+                    y = 30 + Math.random() * (height - 80);
+                    overlap = positions.some(p => Math.abs(p.x - x) < 55 && Math.abs(p.y - y) < 55);
+                    attempts++;
+                } while (overlap && attempts < 50);
+
+                positions.push({ x, y, emoji: obj.emoji });
+
+                ctx.font = '36px Arial';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(obj.emoji, x, y);
+            });
+
+            const tipEl = document.getElementById('captcha-image-tip');
+            const statusEl = document.getElementById('captcha-image-status');
+            tipEl.textContent = '';
+            statusEl.textContent = '按顺序依次点击图中图形即可完成验证';
+            statusEl.className = 'demo-captcha-card__tip';
+            imageClickVerified = false;
+            canvas.dataset.currentIndex = '0';
+            canvas.dataset.targets = JSON.stringify(targetObjects);
+
+            const marks = canvas.parentElement.querySelectorAll('.yc-captcha-click__mark');
+            marks.forEach(m => m.remove());
+
+            canvas.onclick = function (e) {
+                if (imageClickVerified) return;
+                const rect = canvas.getBoundingClientRect();
+                const clickX = e.clientX - rect.left;
+                const clickY = e.clientY - rect.top;
+
+                const targets = JSON.parse(canvas.dataset.targets);
+                const currentIndex = parseInt(canvas.dataset.currentIndex);
+                const currentTarget = targets[currentIndex];
+
+                if (!currentTarget) return;
+
+                let clickedCorrect = false;
+                let clickedPos = null;
+                positions.forEach((pos) => {
+                    const dist = Math.sqrt(Math.pow(clickX - pos.x, 2) + Math.pow(clickY - pos.y, 2));
+                    if (dist < 30 && pos.emoji === currentTarget.emoji) {
+                        clickedCorrect = true;
+                        clickedPos = pos;
+                    }
+                });
+
+                if (clickedCorrect) {
+                    canvas.dataset.currentIndex = (currentIndex + 1).toString();
+
+                    const mark = document.createElement('div');
+                    mark.className = 'yc-captcha-click__mark yc-captcha-click__mark--pending';
+                    mark.style.left = clickedPos.x + 'px';
+                    mark.style.top = clickedPos.y + 'px';
+                    mark.textContent = currentIndex + 1;
+                    canvas.parentElement.appendChild(mark);
+
+                    if (currentIndex + 1 >= targets.length) {
+                        tipEl.textContent = '验证成功！';
+                        tipEl.className = 'yc-captcha-click__tip yc-captcha-click__tip--success';
+                        statusEl.textContent = '图形验证成功！';
+                        statusEl.className = 'demo-captcha-card__tip demo-captcha-card__tip--success';
+                        imageClickVerified = true;
+                        canvas.onclick = null;
+                    } else {
+                        statusEl.textContent = `已点击 ${currentIndex + 1}/${targets.length}`;
+                        statusEl.className = 'demo-captcha-card__tip demo-captcha-card__tip--success';
+                    }
+                } else {
+                    const mark = document.createElement('div');
+                    mark.className = 'yc-captcha-click__mark yc-captcha-click__mark--error';
+                    mark.style.left = clickX + 'px';
+                    mark.style.top = clickY + 'px';
+                    mark.textContent = '×';
+                    canvas.parentElement.appendChild(mark);
+
+                    tipEl.textContent = '验证失败，请重试';
+                    tipEl.className = 'yc-captcha-click__tip yc-captcha-click__tip--error';
+                    statusEl.textContent = '点击了错误的图形';
+                    statusEl.className = 'demo-captcha-card__tip demo-captcha-card__tip--error';
+
+                    setTimeout(() => {
+                        refreshImageClickCaptcha();
+                    }, 1000);
+                }
+            };
+        }
+
+        function refreshImageClickCaptcha() {
+            const marks = document.querySelectorAll('.yc-captcha-click__mark');
+            marks.forEach(m => m.remove());
+            const tipEl = document.getElementById('captcha-image-tip');
+            tipEl.className = 'yc-captcha-click__tip';
+            initImageClickCaptcha();
+        }
+
+        let textClickVerified = false;
+        function initTextClickCaptcha() {
+            const canvas = document.getElementById('captcha-text-canvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const width = 340;
+            const height = 200;
+
+            const allChars = '安柏餐茶店福好家美';
+            const shuffled = allChars.split('').sort(() => Math.random() - 0.5);
+            const targetChars = shuffled.slice(0, 3);
+            const distractors = shuffled.slice(3, 8);
+
+            document.getElementById('captcha-text-target-text').textContent = targetChars.join('、');
+
+            canvas.width = width;
+            canvas.height = height;
+            ctx.clearRect(0, 0, width, height);
+
+            const bgGradient = ctx.createLinearGradient(0, 0, width, height);
+            bgGradient.addColorStop(0, '#ff9a56');
+            bgGradient.addColorStop(0.5, '#ff6b6b');
+            bgGradient.addColorStop(1, '#ee5a24');
+            ctx.fillStyle = bgGradient;
+            ctx.fillRect(0, 0, width, height);
+
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.15)';
+            for (let i = 0; i < 3; i++) {
+                ctx.beginPath();
+                ctx.moveTo(0, 60 + i * 50);
+                ctx.lineTo(width, 40 + i * 60);
+                ctx.lineTo(width, 80 + i * 60);
+                ctx.lineTo(0, 100 + i * 50);
+                ctx.fill();
+            }
+
+            const positions = [];
+            const allCharsToDraw = [...targetChars, ...distractors];
+
+            allCharsToDraw.forEach((char) => {
+                let x, y, overlap;
+                let attempts = 0;
+                do {
+                    x = 35 + Math.random() * (width - 70);
+                    y = 35 + Math.random() * (height - 70);
+                    overlap = positions.some(p => Math.abs(p.x - x) < 45 && Math.abs(p.y - y) < 45);
+                    attempts++;
+                } while (overlap && attempts < 50);
+
+                positions.push({ x, y, char });
+
+                ctx.save();
+                ctx.font = `bold ${30 + Math.random() * 14}px Arial`;
+                ctx.fillStyle = `rgba(${200 + Math.random() * 55}, ${180 + Math.random() * 50}, ${80 + Math.random() * 60}, ${0.8 + Math.random() * 0.2})`;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.translate(x, y);
+                ctx.rotate((Math.random() - 0.5) * 0.5);
+                ctx.fillText(char, 0, 0);
+                ctx.restore();
+            });
+
+            const tipEl = document.getElementById('captcha-text-tip');
+            const statusEl = document.getElementById('captcha-text-status');
+            tipEl.textContent = '';
+            statusEl.textContent = '按顺序依次点击图中文字即可完成验证';
+            statusEl.className = 'demo-captcha-card__tip';
+            textClickVerified = false;
+            canvas.dataset.currentIndex = '0';
+            canvas.dataset.targets = targetChars.join('');
+
+            const marks = canvas.parentElement.querySelectorAll('.yc-captcha-click__mark');
+            marks.forEach(m => m.remove());
+
+            canvas.onclick = function (e) {
+                if (textClickVerified) return;
+                const rect = canvas.getBoundingClientRect();
+                const clickX = e.clientX - rect.left;
+                const clickY = e.clientY - rect.top;
+
+                const targets = canvas.dataset.targets;
+                const currentIndex = parseInt(canvas.dataset.currentIndex);
+                const currentTarget = targets[currentIndex];
+
+                let clickedCorrect = false;
+                let correctPos = null;
+
+                positions.forEach((pos) => {
+                    const dist = Math.sqrt(Math.pow(clickX - pos.x, 2) + Math.pow(clickY - pos.y, 2));
+                    if (dist < 35 && pos.char === currentTarget) {
+                        clickedCorrect = true;
+                        correctPos = pos;
+                    }
+                });
+
+                if (clickedCorrect) {
+                    canvas.dataset.currentIndex = (currentIndex + 1).toString();
+
+                    const mark = document.createElement('div');
+                    mark.className = 'yc-captcha-click__mark yc-captcha-click__mark--pending';
+                    mark.style.left = correctPos.x + 'px';
+                    mark.style.top = correctPos.y + 'px';
+                    mark.textContent = currentIndex + 1;
+                    canvas.parentElement.appendChild(mark);
+
+                    if (currentIndex + 1 >= targets.length) {
+                        tipEl.textContent = '验证成功！';
+                        tipEl.className = 'yc-captcha-click__tip yc-captcha-click__tip--success';
+                        statusEl.textContent = '文字验证成功！';
+                        statusEl.className = 'demo-captcha-card__tip demo-captcha-card__tip--success';
+                        textClickVerified = true;
+                        canvas.onclick = null;
+                    } else {
+                        statusEl.textContent = `已点击 ${currentIndex + 1}/${targets.length}`;
+                        statusEl.className = 'demo-captcha-card__tip demo-captcha-card__tip--success';
+                    }
+                } else {
+                    const mark = document.createElement('div');
+                    mark.className = 'yc-captcha-click__mark yc-captcha-click__mark--error';
+                    mark.style.left = clickX + 'px';
+                    mark.style.top = clickY + 'px';
+                    mark.textContent = '×';
+                    canvas.parentElement.appendChild(mark);
+
+                    tipEl.textContent = '验证失败，请重试';
+                    tipEl.className = 'yc-captcha-click__tip yc-captcha-click__tip--error';
+                    statusEl.textContent = '点击了错误的文字';
+                    statusEl.className = 'demo-captcha-card__tip demo-captcha-card__tip--error';
+
+                    setTimeout(() => {
+                        refreshTextClickCaptcha();
+                    }, 1000);
+                }
+            };
+        }
+
+        function refreshTextClickCaptcha() {
+            const marks = document.querySelectorAll('.yc-captcha-click__mark');
+            marks.forEach(m => m.remove());
+            const tipEl = document.getElementById('captcha-text-tip');
+            tipEl.className = 'yc-captcha-click__tip';
+            initTextClickCaptcha();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            refreshBasicCaptcha();
+            refreshComboCaptcha();
+            initSliderCaptcha();
+            refreshImageClickCaptcha();
+            refreshTextClickCaptcha();
+
+            document.getElementById('captcha-basic').addEventListener('click', refreshBasicCaptcha);
+            document.getElementById('captcha-combo').addEventListener('click', refreshComboCaptcha);
+        });
+    </script>
+</body>
+</html>

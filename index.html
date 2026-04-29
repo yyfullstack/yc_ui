@@ -575,6 +575,12 @@
                             <span>OrgChart 组织架构</span>
                         </a>
                     </li>
+                    <li class="yc-demo-sidebar__menu-item">
+                        <a href="./views/demo-captcha.html" class="yc-demo-sidebar__menu-link">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Captcha 验证码</span>
+                        </a>
+                    </li>
                 </ul>
             </aside>
 
@@ -1050,6 +1056,19 @@
                                     </div>
                                 </div>
                             </a>
+                            <a href="./views/demo-captcha.html" class="yc-card yc-card--hoverable" style="text-decoration: none;">
+                                <div class="yc-card__header">
+                                    <h3 class="yc-card__title">Captcha 验证码</h3>
+                                </div>
+                                <div class="yc-card__body">
+                                    <div class="yc-captcha" style="font-size: 12px;">
+                                        <canvas class="yc-captcha__canvas" width="100" height="32" id="captcha-preview"></canvas>
+                                        <button class="yc-captcha__refresh" style="width: 28px; height: 28px; font-size: 11px;">
+                                            <i class="fas fa-sync-alt"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </a>
                         </div>
                     </section>
 
@@ -1184,6 +1203,52 @@
                 document.getElementById('backdrop').classList.remove('is-visible');
             }
         }
+
+        function generateCaptchaPreview() {
+            const canvas = document.getElementById('captcha-preview');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const width = canvas.width;
+            const height = canvas.height;
+
+            ctx.fillStyle = '#f5f7fa';
+            ctx.fillRect(0, 0, width, height);
+
+            const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+            let code = '';
+            for (let i = 0; i < 4; i++) {
+                code += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+
+            for (let i = 0; i < 3; i++) {
+                ctx.strokeStyle = `rgba(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255}, 0.3)`;
+                ctx.beginPath();
+                ctx.moveTo(Math.random() * width, Math.random() * height);
+                ctx.lineTo(Math.random() * width, Math.random() * height);
+                ctx.stroke();
+            }
+
+            const colors = ['#409eff', '#67c23a', '#e6a23c', '#f56c6c'];
+            for (let i = 0; i < code.length; i++) {
+                ctx.font = `${16 + Math.random() * 4}px Arial`;
+                ctx.fillStyle = colors[Math.floor(Math.random() * colors.length)];
+                ctx.save();
+                ctx.translate(15 + i * 20, 20 + Math.random() * 6);
+                ctx.rotate((Math.random() - 0.5) * 0.3);
+                ctx.fillText(code[i], 0, 0);
+                ctx.restore();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            generateCaptchaPreview();
+
+            // 点击预览画布刷新
+            const previewCanvas = document.getElementById('captcha-preview');
+            if (previewCanvas) {
+                previewCanvas.addEventListener('click', generateCaptchaPreview);
+            }
+        });
 
         checkScreenWidth();
         window.addEventListener('resize', checkScreenWidth);

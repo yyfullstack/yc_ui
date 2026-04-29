@@ -155,10 +155,85 @@
             <h3>带标签的条码</h3>
             <div class="demo-block">
                 <div class="demo-block-title">显示商品编号</div>
-                <div class="demo-row">
+                <div class="demo-row" style="gap: 20px; flex-wrap: wrap;">
                     <div class="yc-barcode">
-                        <svg class="yc-barcode-svg" id="barcode-with-label"></svg>
-                        <span class="yc-barcode-label" id="barcode-label-text">1234567890123</span>
+                        <svg class="yc-barcode-svg" id="barcode-label-1"></svg>
+                        <span class="yc-barcode-label">商品 6901234567892</span>
+                    </div>
+                    <div class="yc-barcode">
+                        <svg class="yc-barcode-svg" id="barcode-label-2"></svg>
+                        <span class="yc-barcode-label">订单 20240101001</span>
+                    </div>
+                    <div class="yc-barcode">
+                        <svg class="yc-barcode-svg" id="barcode-label-3"></svg>
+                        <span class="yc-barcode-label">物流单 7891234560123</span>
+                    </div>
+                </div>
+            </div>
+            <div class="demo-block">
+                <div class="demo-block-title">条形码尺寸变体</div>
+                <div class="demo-row" style="gap: 20px; flex-wrap: wrap;">
+                    <div class="yc-barcode yc-barcode-small">
+                        <svg class="yc-barcode-svg" id="barcode-label-size-xs"></svg>
+                        <span class="yc-barcode-label">超小 商品A</span>
+                    </div>
+                    <div class="yc-barcode yc-barcode-small">
+                        <svg class="yc-barcode-svg" id="barcode-label-size-sm"></svg>
+                        <span class="yc-barcode-label">小尺寸 商品B</span>
+                    </div>
+                    <div class="yc-barcode">
+                        <svg class="yc-barcode-svg" id="barcode-label-size-md"></svg>
+                        <span class="yc-barcode-label">中尺寸 商品C</span>
+                    </div>
+                    <div class="yc-barcode yc-barcode-large">
+                        <svg class="yc-barcode-svg" id="barcode-label-size-lg"></svg>
+                        <span class="yc-barcode-label">大尺寸 商品D</span>
+                    </div>
+                    <div class="yc-barcode yc-barcode-large">
+                        <svg class="yc-barcode-svg" id="barcode-label-size-xl"></svg>
+                        <span class="yc-barcode-label">超大 商品E</span>
+                    </div>
+                </div>
+            </div>
+            <div class="demo-block">
+                <div class="demo-block-title">带二维码标签</div>
+                <div class="demo-row" style="gap: 20px; flex-wrap: wrap;">
+                    <div class="yc-barcode">
+                        <div class="yc-qrcode" id="qrcode-label-1"></div>
+                        <span class="yc-barcode-label">产品追溯码</span>
+                    </div>
+                    <div class="yc-barcode">
+                        <div class="yc-qrcode" id="qrcode-label-2"></div>
+                        <span class="yc-barcode-label">支付二维码</span>
+                    </div>
+                    <div class="yc-barcode">
+                        <div class="yc-qrcode" id="qrcode-label-3"></div>
+                        <span class="yc-barcode-label">会员二维码</span>
+                    </div>
+                </div>
+            </div>
+            <div class="demo-block">
+                <div class="demo-block-title">二维码尺寸变体</div>
+                <div class="demo-row" style="gap: 20px; flex-wrap: wrap;">
+                    <div class="yc-barcode yc-barcode-small">
+                        <div class="yc-qrcode" id="qrcode-label-size-xs"></div>
+                        <span class="yc-barcode-label">超小 64x64</span>
+                    </div>
+                    <div class="yc-barcode yc-barcode-small">
+                        <div class="yc-qrcode" id="qrcode-label-size-sm"></div>
+                        <span class="yc-barcode-label">小尺寸 96x96</span>
+                    </div>
+                    <div class="yc-barcode">
+                        <div class="yc-qrcode" id="qrcode-label-size-md"></div>
+                        <span class="yc-barcode-label">中尺寸 128x128</span>
+                    </div>
+                    <div class="yc-barcode yc-barcode-large">
+                        <div class="yc-qrcode" id="qrcode-label-size-lg"></div>
+                        <span class="yc-barcode-label">大尺寸 192x192</span>
+                    </div>
+                    <div class="yc-barcode yc-barcode-large">
+                        <div class="yc-qrcode" id="qrcode-label-size-xl"></div>
+                        <span class="yc-barcode-label">超大 256x256</span>
                     </div>
                 </div>
             </div>
@@ -167,25 +242,54 @@
         <div class="demo-section">
             <h3>尺寸变体</h3>
             <div class="demo-block">
-                <div class="demo-block-title">大小尺寸对比</div>
+                <div class="demo-block-title">条形码尺寸对比</div>
                 <div class="demo-row" style="gap: 20px; flex-wrap: wrap;">
-                    <div class="yc-barcode yc-barcode-small">
-                        <div class="yc-qrcode" id="qrcode-size-small"></div>
-                        <span class="yc-barcode-label">小二维码</span>
-                    </div>
-                    <div class="yc-barcode yc-barcode-small">
-                        <svg class="yc-barcode-svg" id="barcode-size-small"></svg>
-                        <span class="yc-barcode-label">小条形码</span>
-                    </div>
-                    <div class="yc-barcode yc-barcode-large">
-                        <div class="yc-qrcode" id="qrcode-size-large"></div>
-                        <span class="yc-barcode-label">大二维码</span>
-                    </div>
-                    <div class="yc-barcode yc-barcode-large">
-                        <svg class="yc-barcode-svg" id="barcode-size-large"></svg>
-                        <span class="yc-barcode-label">大条形码</span>
-                    </div>
-                </div>
+                     <div class="yc-barcode yc-barcode-small">
+                         <svg class="yc-barcode-svg" id="barcode-size-xs"></svg>
+                         <span class="yc-barcode-label">超小</span>
+                     </div>
+                     <div class="yc-barcode yc-barcode-small">
+                         <svg class="yc-barcode-svg" id="barcode-size-sm"></svg>
+                         <span class="yc-barcode-label">小尺寸</span>
+                     </div>
+                     <div class="yc-barcode">
+                         <svg class="yc-barcode-svg" id="barcode-size-md"></svg>
+                         <span class="yc-barcode-label">中尺寸</span>
+                     </div>
+                     <div class="yc-barcode yc-barcode-large">
+                         <svg class="yc-barcode-svg" id="barcode-size-lg"></svg>
+                         <span class="yc-barcode-label">大尺寸</span>
+                     </div>
+                     <div class="yc-barcode yc-barcode-large">
+                         <svg class="yc-barcode-svg" id="barcode-size-xl"></svg>
+                         <span class="yc-barcode-label">超大</span>
+                     </div>
+                 </div>
+             </div>
+             <div class="demo-block">
+                 <div class="demo-block-title">二维码尺寸对比</div>
+                 <div class="demo-row" style="gap: 20px; flex-wrap: wrap;">
+                     <div class="yc-barcode yc-barcode-small">
+                         <div class="yc-qrcode" id="qrcode-size-xs"></div>
+                         <span class="yc-barcode-label">超小 32x32</span>
+                     </div>
+                     <div class="yc-barcode yc-barcode-small">
+                         <div class="yc-qrcode" id="qrcode-size-sm"></div>
+                         <span class="yc-barcode-label">小 64x64</span>
+                     </div>
+                     <div class="yc-barcode">
+                         <div class="yc-qrcode" id="qrcode-size-md"></div>
+                         <span class="yc-barcode-label">中 128x128</span>
+                     </div>
+                     <div class="yc-barcode yc-barcode-large">
+                         <div class="yc-qrcode" id="qrcode-size-lg"></div>
+                         <span class="yc-barcode-label">大 192x192</span>
+                     </div>
+                     <div class="yc-barcode yc-barcode-large">
+                         <div class="yc-qrcode" id="qrcode-size-xl"></div>
+                         <span class="yc-barcode-label">超大 256x256</span>
+                     </div>
+                 </div>
             </div>
         </div>
 
@@ -289,7 +393,7 @@
                 margin: 5
             });
 
-            JsBarcode('#barcode-with-label', '1234567890123', {
+            JsBarcode('#barcode-label-1', '6901234567892', {
                 format: 'EAN13',
                 width: 2,
                 height: 60,
@@ -297,32 +401,178 @@
                 margin: 10
             });
 
-            new QRCode(document.getElementById('qrcode-size-small'), {
+            JsBarcode('#barcode-label-2', '20240101001', {
+                format: 'CODE128',
+                width: 2,
+                height: 50,
+                displayValue: false,
+                margin: 10
+            });
+
+            JsBarcode('#barcode-label-3', '7891234560123', {
+                format: 'CODE128',
+                width: 2,
+                height: 50,
+                displayValue: false,
+                margin: 10
+            });
+
+            new QRCode(document.getElementById('qrcode-label-1'), {
+                text: 'https://trace.example.com/product/123',
+                width: 100,
+                height: 100
+            });
+
+            new QRCode(document.getElementById('qrcode-label-2'), {
+                text: 'https://pay.example.com/order/456',
+                width: 100,
+                height: 100
+            });
+
+            new QRCode(document.getElementById('qrcode-label-3'), {
+                text: 'https://member.example.com/user/789',
+                width: 100,
+                height: 100
+            });
+
+            JsBarcode('#barcode-label-size-xs', 'PROD001', {
+                format: 'CODE128',
+                width: 1,
+                height: 30,
+                displayValue: false,
+                margin: 3
+            });
+
+            JsBarcode('#barcode-label-size-sm', 'PROD002', {
+                format: 'CODE128',
+                width: 1.5,
+                height: 45,
+                displayValue: false,
+                margin: 5
+            });
+
+            JsBarcode('#barcode-label-size-md', 'PROD003', {
+                format: 'CODE128',
+                width: 2,
+                height: 60,
+                displayValue: false,
+                margin: 8
+            });
+
+            JsBarcode('#barcode-label-size-lg', 'PROD004', {
+                format: 'CODE128',
+                width: 2.5,
+                height: 75,
+                displayValue: false,
+                margin: 10
+            });
+
+            JsBarcode('#barcode-label-size-xl', 'PROD005', {
+                format: 'CODE128',
+                width: 3,
+                height: 90,
+                displayValue: false,
+                margin: 12
+            });
+
+            new QRCode(document.getElementById('qrcode-label-size-xs'), {
+                text: 'https://trace.example.com/product/xs',
+                width: 64,
+                height: 64
+            });
+
+            new QRCode(document.getElementById('qrcode-label-size-sm'), {
+                text: 'https://trace.example.com/product/sm',
+                width: 96,
+                height: 96
+            });
+
+            new QRCode(document.getElementById('qrcode-label-size-md'), {
+                text: 'https://trace.example.com/product/md',
+                width: 128,
+                height: 128
+            });
+
+            new QRCode(document.getElementById('qrcode-label-size-lg'), {
+                text: 'https://trace.example.com/product/lg',
+                width: 192,
+                height: 192
+            });
+
+            new QRCode(document.getElementById('qrcode-label-size-xl'), {
+                text: 'https://trace.example.com/product/xl',
+                width: 256,
+                height: 256
+            });
+
+            new QRCode(document.getElementById('qrcode-size-xs'), {
+                text: 'XS',
+                width: 32,
+                height: 32
+            });
+
+            new QRCode(document.getElementById('qrcode-size-sm'), {
                 text: 'Small',
                 width: 64,
                 height: 64
             });
 
-            new QRCode(document.getElementById('qrcode-size-large'), {
-                text: 'Large',
-                width: 200,
-                height: 200
+            new QRCode(document.getElementById('qrcode-size-md'), {
+                text: 'Medium',
+                width: 128,
+                height: 128
             });
 
-            JsBarcode('#barcode-size-small', 'Small Bar', {
+            new QRCode(document.getElementById('qrcode-size-lg'), {
+                text: 'Large',
+                width: 192,
+                height: 192
+            });
+
+            new QRCode(document.getElementById('qrcode-size-xl'), {
+                text: 'XLarge',
+                width: 256,
+                height: 256
+            });
+
+            JsBarcode('#barcode-size-xs', 'XS', {
                 format: 'CODE128',
                 width: 1,
-                height: 30,
+                height: 25,
+                displayValue: false,
+                margin: 3
+            });
+
+            JsBarcode('#barcode-size-sm', 'Small', {
+                format: 'CODE128',
+                width: 1.5,
+                height: 40,
                 displayValue: false,
                 margin: 5
             });
 
-            JsBarcode('#barcode-size-large', 'Large Bar', {
+            JsBarcode('#barcode-size-md', 'Medium', {
                 format: 'CODE128',
-                width: 3,
+                width: 2,
+                height: 60,
+                displayValue: false,
+                margin: 8
+            });
+
+            JsBarcode('#barcode-size-lg', 'Large', {
+                format: 'CODE128',
+                width: 2.5,
                 height: 80,
                 displayValue: false,
                 margin: 10
+            });
+
+            JsBarcode('#barcode-size-xl', 'XLarge', {
+                format: 'CODE128',
+                width: 3,
+                height: 100,
+                displayValue: false,
+                margin: 12
             });
         }
 

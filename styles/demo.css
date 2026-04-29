@@ -425,3 +425,44 @@
 .demo-tag--warning {
     background: var(--yc-color-warning);
 }
+
+/* Affix 组件演示样式 */
+.demo-affix-container {
+    height: 400px;
+    overflow-y: auto;
+    position: relative;
+    background: var(--yc-color-bg);
+    padding: 20px;
+    border: 1px solid var(--yc-color-border-light);
+    border-radius: var(--yc-border-radius-md);
+}
+
+.demo-affix-nav {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 12px 24px;
+    background: var(--yc-color-bg);
+    border-bottom: 1px solid var(--yc-color-border-light);
+    box-shadow: var(--yc-box-shadow-sm);
+}
+
+.demo-affix-nav__item {
+    font-size: var(--yc-font-size-base);
+    color: var(--yc-color-text-regular);
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: var(--yc-border-radius-sm);
+    transition: all 0.2s;
+}
+
+.demo-affix-nav__item:hover {
+    color: var(--yc-color-primary);
+    background: var(--yc-color-primary-light-9);
+}
+
+.demo-affix-nav__item.is-active {
+    color: var(--yc-color-primary);
+    font-weight: var(--yc-font-weight-medium);
+    background: var(--yc-color-primary-light-9);
+}

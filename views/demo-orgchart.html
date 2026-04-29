@@ -47,23 +47,22 @@
                 <div class="yc-orgchart">
                     <div class="yc-orgchart__toolbar">
                         <span class="yc-orgchart__toolbar-title">公司组织架构图</span>
-                        <button class="yc-orgchart__toolbar-btn"><i class="fas fa-expand"></i> 展开全部</button>
-                        <button class="yc-orgchart__toolbar-btn"><i class="fas fa-compress"></i> 收起全部</button>
+                        <button class="yc-orgchart__toolbar-btn" id="expandAllBtn"><i class="fas fa-expand"></i> 展开全部</button>
+                        <button class="yc-orgchart__toolbar-btn" id="collapseAllBtn"><i class="fas fa-compress"></i> 收起全部</button>
                         <div class="yc-orgchart__zoom-controls">
-                            <button class="yc-orgchart__zoom-btn"><i class="fas fa-minus"></i></button>
-                            <span class="yc-orgchart__zoom-level">100%</span>
-                            <button class="yc-orgchart__zoom-btn"><i class="fas fa-plus"></i></button>
+                            <button class="yc-orgchart__zoom-btn" id="zoomOutBtn"><i class="fas fa-minus"></i></button>
+                            <span class="yc-orgchart__zoom-level" id="zoomLevel">100%</span>
+                            <button class="yc-orgchart__zoom-btn" id="zoomInBtn"><i class="fas fa-plus"></i></button>
                         </div>
                     </div>
 
                     <div class="yc-orgchart__search">
-                        <input type="text" class="yc-orgchart__search-input" placeholder="搜索员工...">
+                        <input type="text" class="yc-orgchart__search-input" placeholder="搜索员工..." id="searchInput">
                     </div>
 
-                    <div class="yc-orgchart__viewport">
-                        <div class="yc-orgchart__tree">
-                            <!-- Root Node -->
-                            <div class="yc-orgchart__node">
+                    <div class="yc-orgchart__viewport" id="orgchartViewport">
+                        <div class="yc-orgchart__tree" id="orgchartTree">
+                            <div class="yc-orgchart__node" data-dept="总裁办">
                                 <div class="yc-orgchart__node-wrapper">
                                     <div class="yc-orgchart__node-card yc-orgchart__node-card--root is-selected">
                                         <div class="yc-orgchart__node-avatar yc-orgchart__node-avatar--primary">张</div>
@@ -74,23 +73,21 @@
                                     </div>
                                 </div>
 
-                                <!-- Children -->
                                 <div class="yc-orgchart__children">
-                                    <!-- 技术部 -->
-                                    <div class="yc-orgchart__node">
+                                    <div class="yc-orgchart__node" data-dept="技术部">
                                         <div class="yc-orgchart__node-wrapper">
                                             <div class="yc-orgchart__node-card yc-orgchart__node-card--root">
                                                 <div class="yc-orgchart__node-avatar yc-orgchart__node-avatar--success">李</div>
                                                 <div class="yc-orgchart__node-name">李经理</div>
                                                 <div class="yc-orgchart__node-title">技术总监 CTO</div>
                                                 <span class="yc-orgchart__node-dept">技术部</span>
-                                                <span class="yc-orgchart__node-badge">5</span>
+                                                <span class="yc-orgchart__node-badge">3</span>
                                                 <div class="yc-orgchart__toggle"><i class="fas fa-minus"></i></div>
                                             </div>
                                         </div>
 
                                         <div class="yc-orgchart__children">
-                                            <div class="yc-orgchart__node">
+                                            <div class="yc-orgchart__node" data-dept="技术部">
                                                 <div class="yc-orgchart__node-wrapper">
                                                     <div class="yc-orgchart__node-card">
                                                         <div class="yc-orgchart__node-avatar">王</div>
@@ -99,7 +96,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="yc-orgchart__node">
+                                            <div class="yc-orgchart__node" data-dept="技术部">
                                                 <div class="yc-orgchart__node-wrapper">
                                                     <div class="yc-orgchart__node-card">
                                                         <div class="yc-orgchart__node-avatar">赵</div>
@@ -108,7 +105,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="yc-orgchart__node">
+                                            <div class="yc-orgchart__node" data-dept="技术部">
                                                 <div class="yc-orgchart__node-wrapper">
                                                     <div class="yc-orgchart__node-card">
                                                         <div class="yc-orgchart__node-avatar">陈</div>
@@ -120,21 +117,20 @@
                                         </div>
                                     </div>
 
-                                    <!-- 产品部 -->
-                                    <div class="yc-orgchart__node">
+                                    <div class="yc-orgchart__node" data-dept="产品部">
                                         <div class="yc-orgchart__node-wrapper">
                                             <div class="yc-orgchart__node-card yc-orgchart__node-card--root">
                                                 <div class="yc-orgchart__node-avatar yc-orgchart__node-avatar--warning">刘</div>
                                                 <div class="yc-orgchart__node-name">刘经理</div>
                                                 <div class="yc-orgchart__node-title">产品总监 CPO</div>
                                                 <span class="yc-orgchart__node-dept">产品部</span>
-                                                <span class="yc-orgchart__node-badge">3</span>
+                                                <span class="yc-orgchart__node-badge">2</span>
                                                 <div class="yc-orgchart__toggle"><i class="fas fa-minus"></i></div>
                                             </div>
                                         </div>
 
                                         <div class="yc-orgchart__children">
-                                            <div class="yc-orgchart__node">
+                                            <div class="yc-orgchart__node" data-dept="产品部">
                                                 <div class="yc-orgchart__node-wrapper">
                                                     <div class="yc-orgchart__node-card">
                                                         <div class="yc-orgchart__node-avatar">周</div>
@@ -143,7 +139,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="yc-orgchart__node">
+                                            <div class="yc-orgchart__node" data-dept="产品部">
                                                 <div class="yc-orgchart__node-wrapper">
                                                     <div class="yc-orgchart__node-card">
                                                         <div class="yc-orgchart__node-avatar">吴</div>
@@ -155,8 +151,7 @@
                                         </div>
                                     </div>
 
-                                    <!-- 市场部 -->
-                                    <div class="yc-orgchart__node">
+                                    <div class="yc-orgchart__node" data-dept="市场部">
                                         <div class="yc-orgchart__node-wrapper">
                                             <div class="yc-orgchart__node-card">
                                                 <div class="yc-orgchart__node-avatar yc-orgchart__node-avatar--danger">黄</div>
@@ -169,7 +164,7 @@
                                         </div>
 
                                         <div class="yc-orgchart__children">
-                                            <div class="yc-orgchart__node">
+                                            <div class="yc-orgchart__node" data-dept="市场部">
                                                 <div class="yc-orgchart__node-wrapper">
                                                     <div class="yc-orgchart__node-card">
                                                         <div class="yc-orgchart__node-avatar">孙</div>
@@ -178,7 +173,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="yc-orgchart__node">
+                                            <div class="yc-orgchart__node" data-dept="市场部">
                                                 <div class="yc-orgchart__node-wrapper">
                                                     <div class="yc-orgchart__node-card yc-orgchart__node-card--leaf">
                                                         <div class="yc-orgchart__node-avatar">钱</div>
@@ -197,7 +192,7 @@
                     <div class="yc-orgchart__stats">
                         <div class="yc-orgchart__stat-item">
                             <i class="fas fa-users"></i>
-                            <span>总人数: <span class="yc-orgchart__stat-value">12</span></span>
+                            <span>总人数: <span class="yc-orgchart__stat-value">10</span></span>
                         </div>
                         <div class="yc-orgchart__stat-item">
                             <i class="fas fa-sitemap"></i>
@@ -212,7 +207,7 @@
             </section>
 
             <section class="demo-section">
-                <h2 class="demo-section__title">节点样式说明</h2>
+                <h2 class="demo-section__title">节点类型说明</h2>
                 <div class="yc-space yc-space--vertical" style="gap: 16px;">
                     <div style="display: flex; gap: 24px; flex-wrap: wrap;">
                         <div class="yc-card" style="padding: 16px;">
@@ -230,7 +225,7 @@
                                 <div class="yc-orgchart__node-name">部门经理</div>
                                 <div class="yc-orgchart__node-title">总监/经理</div>
                                 <span class="yc-orgchart__node-dept">各部门</span>
-                                <span class="yc-orgchart__node-badge">5</span>
+                                <span class="yc-orgchart__node-badge">3</span>
                             </div>
                             <p style="font-size: 12px; color: var(--yc-color-text-secondary);">中间节点 - 部门主管</p>
                         </div>
@@ -276,7 +271,7 @@
             });
         });
 
-        document.querySelector('.yc-orgchart__viewport').addEventListener('click', function(e) {
+        document.getElementById('orgchartViewport').addEventListener('click', function(e) {
             if (e.target === this || e.target.closest('.yc-orgchart__tree')) {
                 if (!e.target.closest('.yc-orgchart__node-card')) {
                     document.querySelectorAll('.yc-orgchart__node-card').forEach(c => c.classList.remove('is-selected'));
@@ -284,48 +279,59 @@
             }
         });
 
-        const zoomControls = document.querySelector('.yc-orgchart__zoom-controls');
-        if (zoomControls) {
-            let zoomLevel = 100;
-            zoomControls.querySelectorAll('.yc-orgchart__zoom-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const icon = this.querySelector('i');
-                    if (icon.classList.contains('fa-plus')) {
-                        zoomLevel = Math.min(zoomLevel + 10, 200);
-                    } else if (icon.classList.contains('fa-minus')) {
-                        zoomLevel = Math.max(zoomLevel - 10, 50);
-                    }
-                    this.parentElement.querySelector('.yc-orgchart__zoom-level').textContent = zoomLevel + '%';
-                });
-            });
-        }
+        let zoomLevel = 100;
+        const zoomLevelEl = document.getElementById('zoomLevel');
+        const orgchartTree = document.getElementById('orgchartTree');
 
-        const expandAllBtn = document.querySelector('.yc-orgchart__toolbar-btn i.fa-expand')?.closest('button');
-        const collapseAllBtn = document.querySelector('.yc-orgchart__toolbar-btn i.fa-compress')?.closest('button');
+        document.getElementById('zoomInBtn').addEventListener('click', function() {
+            zoomLevel = Math.min(zoomLevel + 10, 200);
+            zoomLevelEl.textContent = zoomLevel + '%';
+            orgchartTree.style.transform = `scale(${zoomLevel / 100})`;
+            orgchartTree.style.transformOrigin = 'top center';
+        });
 
-        if (expandAllBtn) {
-            expandAllBtn.addEventListener('click', function() {
-                document.querySelectorAll('.yc-orgchart__children').forEach(children => {
-                    children.style.display = 'flex';
-                });
-                document.querySelectorAll('.yc-orgchart__toggle').forEach(toggle => {
-                    toggle.classList.remove('is-collapsed');
-                    toggle.innerHTML = '<i class="fas fa-minus"></i>';
-                });
-            });
-        }
+        document.getElementById('zoomOutBtn').addEventListener('click', function() {
+            zoomLevel = Math.max(zoomLevel - 10, 50);
+            zoomLevelEl.textContent = zoomLevel + '%';
+            orgchartTree.style.transform = `scale(${zoomLevel / 100})`;
+            orgchartTree.style.transformOrigin = 'top center';
+        });
 
-        if (collapseAllBtn) {
-            collapseAllBtn.addEventListener('click', function() {
-                document.querySelectorAll('.yc-orgchart__children').forEach(children => {
-                    children.style.display = 'none';
-                });
-                document.querySelectorAll('.yc-orgchart__toggle').forEach(toggle => {
-                    toggle.classList.add('is-collapsed');
-                    toggle.innerHTML = '<i class="fas fa-plus"></i>';
-                });
+        document.getElementById('expandAllBtn').addEventListener('click', function() {
+            document.querySelectorAll('.yc-orgchart__children').forEach(children => {
+                children.style.display = 'flex';
             });
-        }
+            document.querySelectorAll('.yc-orgchart__toggle').forEach(toggle => {
+                toggle.classList.remove('is-collapsed');
+                toggle.innerHTML = '<i class="fas fa-minus"></i>';
+            });
+        });
+
+        document.getElementById('collapseAllBtn').addEventListener('click', function() {
+            document.querySelectorAll('.yc-orgchart__children').forEach(children => {
+                children.style.display = 'none';
+            });
+            document.querySelectorAll('.yc-orgchart__toggle').forEach(toggle => {
+                toggle.classList.add('is-collapsed');
+                toggle.innerHTML = '<i class="fas fa-plus"></i>';
+            });
+        });
+
+        document.getElementById('searchInput').addEventListener('input', function() {
+            const keyword = this.value.toLowerCase();
+            document.querySelectorAll('.yc-orgchart__node').forEach(node => {
+                const card = node.querySelector('.yc-orgchart__node-card');
+                const name = card.querySelector('.yc-orgchart__node-name').textContent.toLowerCase();
+                const title = card.querySelector('.yc-orgchart__node-title').textContent.toLowerCase();
+                const dept = card.querySelector('.yc-orgchart__node-dept').textContent.toLowerCase();
+                
+                if (keyword && (name.includes(keyword) || title.includes(keyword) || dept.includes(keyword))) {
+                    node.classList.add('yc-orgchart__highlight');
+                } else {
+                    node.classList.remove('yc-orgchart__highlight');
+                }
+            });
+        });
     </script>
 </body>
 </html>

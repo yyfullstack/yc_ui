@@ -7,6 +7,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../styles/index.css">
     <link rel="stylesheet" href="../styles/demo.css">
+    <style>
+        .demo-carousel-row {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+        .demo-carousel-col {
+            flex: 1;
+            min-width: 300px;
+        }
+    </style>
 </head>
 <body>
     <div class="demo-container">
@@ -20,7 +31,7 @@
             <div class="demo-block">
                 <div class="demo-block-title">基础的走马灯轮播</div>
                 <div class="demo-row" style="flex-direction: column; gap: 12px;">
-                    <div class="yc-carousel" id="carousel1">
+                    <div class="yc-carousel" data-mode="default">
                         <div class="yc-carousel__container">
                             <div class="yc-carousel__slides">
                                 <div class="yc-carousel__item" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
@@ -36,13 +47,13 @@
                                     <span style="color: white; font-size: 48px; font-weight: 600;">4</span>
                                 </div>
                             </div>
-                            <button class="yc-carousel__arrow yc-carousel__arrow--prev" id="prev1"><i class="fas fa-chevron-left"></i></button>
-                            <button class="yc-carousel__arrow yc-carousel__arrow--next" id="next1"><i class="fas fa-chevron-right"></i></button>
-                            <div class="yc-carousel__indicators" id="indicators1">
-                                <button class="yc-carousel__indicator is-active" data-index="0"></button>
-                                <button class="yc-carousel__indicator" data-index="1"></button>
-                                <button class="yc-carousel__indicator" data-index="2"></button>
-                                <button class="yc-carousel__indicator" data-index="3"></button>
+                            <button class="yc-carousel__arrow yc-carousel__arrow--prev"><i class="fas fa-chevron-left"></i></button>
+                            <button class="yc-carousel__arrow yc-carousel__arrow--next"><i class="fas fa-chevron-right"></i></button>
+                            <div class="yc-carousel__indicators">
+                                <button class="yc-carousel__indicator is-active"></button>
+                                <button class="yc-carousel__indicator"></button>
+                                <button class="yc-carousel__indicator"></button>
+                                <button class="yc-carousel__indicator"></button>
                             </div>
                         </div>
                     </div>
@@ -55,7 +66,7 @@
             <div class="demo-block">
                 <div class="demo-block-title">指示器可以显示在外部</div>
                 <div class="demo-row" style="flex-direction: column; gap: 12px;">
-                    <div class="yc-carousel">
+                    <div class="yc-carousel" data-mode="default">
                         <div class="yc-carousel__container">
                             <div class="yc-carousel__slides">
                                 <div class="yc-carousel__item" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
@@ -82,35 +93,26 @@
         </div>
 
         <div class="demo-section">
-            <h3>卡片化样式</h3>
+            <h3>圆点指示器</h3>
             <div class="demo-block">
-                <div class="demo-block-title">卡片样式的走马灯</div>
+                <div class="demo-block-title">使用圆点样式指示器</div>
                 <div class="demo-row" style="flex-direction: column; gap: 12px;">
-                    <div class="yc-carousel" style="max-width: 600px; margin: 0 auto;">
-                        <div class="yc-carousel__container yc-carousel__container--16-9" style="border-radius: 8px; overflow: hidden;">
+                    <div class="yc-carousel" data-mode="default">
+                        <div class="yc-carousel__container" style="border-radius: 8px; overflow: hidden;">
                             <div class="yc-carousel__slides">
                                 <div class="yc-carousel__item" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-                                    <div style="color: white; text-align: center;">
-                                        <div style="font-size: 32px; font-weight: 600; margin-bottom: 8px;">卡片 1</div>
-                                        <div style="font-size: 14px; opacity: 0.9;">卡片内容描述</div>
-                                    </div>
+                                    <span style="color: white; font-size: 48px; font-weight: 600;">1</span>
                                 </div>
                                 <div class="yc-carousel__item" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
-                                    <div style="color: white; text-align: center;">
-                                        <div style="font-size: 32px; font-weight: 600; margin-bottom: 8px;">卡片 2</div>
-                                        <div style="font-size: 14px; opacity: 0.9;">卡片内容描述</div>
-                                    </div>
+                                    <span style="color: white; font-size: 48px; font-weight: 600;">2</span>
                                 </div>
                                 <div class="yc-carousel__item" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
-                                    <div style="color: white; text-align: center;">
-                                        <div style="font-size: 32px; font-weight: 600; margin-bottom: 8px;">卡片 3</div>
-                                        <div style="font-size: 14px; opacity: 0.9;">卡片内容描述</div>
-                                    </div>
+                                    <span style="color: white; font-size: 48px; font-weight: 600;">3</span>
                                 </div>
                             </div>
                             <button class="yc-carousel__arrow yc-carousel__arrow--prev"><i class="fas fa-chevron-left"></i></button>
                             <button class="yc-carousel__arrow yc-carousel__arrow--next"><i class="fas fa-chevron-right"></i></button>
-                            <div class="yc-carousel__indicators">
+                            <div class="yc-carousel__indicators yc-carousel__indicators--dots">
                                 <button class="yc-carousel__indicator is-active"></button>
                                 <button class="yc-carousel__indicator"></button>
                                 <button class="yc-carousel__indicator"></button>
@@ -120,35 +122,514 @@
                 </div>
             </div>
         </div>
+
+        <div class="demo-section">
+            <h3>卡片模式</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">卡片样式的走马灯，两侧显示前后卡片，带有 3D 透视效果</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div class="yc-carousel yc-carousel--card" data-mode="card">
+                        <div class="yc-carousel__container" style="overflow: visible;">
+                            <div class="yc-carousel__slides">
+                                <div class="yc-carousel__item" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                                    <div style="color: white; text-align: center;">
+                                        <div style="font-size: 28px; font-weight: 600; margin-bottom: 8px;">卡片 1</div>
+                                        <div style="font-size: 13px; opacity: 0.9;">精致设计 · 优雅体验</div>
+                                    </div>
+                                </div>
+                                <div class="yc-carousel__item" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                                    <div style="color: white; text-align: center;">
+                                        <div style="font-size: 28px; font-weight: 600; margin-bottom: 8px;">卡片 2</div>
+                                        <div style="font-size: 13px; opacity: 0.9;">流畅动画 · 丝滑过渡</div>
+                                    </div>
+                                </div>
+                                <div class="yc-carousel__item" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                                    <div style="color: white; text-align: center;">
+                                        <div style="font-size: 28px; font-weight: 600; margin-bottom: 8px;">卡片 3</div>
+                                        <div style="font-size: 13px; opacity: 0.9;">3D 透视 · 空间层次</div>
+                                    </div>
+                                </div>
+                                <div class="yc-carousel__item" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                                    <div style="color: white; text-align: center;">
+                                        <div style="font-size: 28px; font-weight: 600; margin-bottom: 8px;">卡片 4</div>
+                                        <div style="font-size: 13px; opacity: 0.9;">响应式布局 · 适配全端</div>
+                                    </div>
+                                </div>
+                                <div class="yc-carousel__item" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                                    <div style="color: white; text-align: center;">
+                                        <div style="font-size: 28px; font-weight: 600; margin-bottom: 8px;">卡片 5</div>
+                                        <div style="font-size: 13px; opacity: 0.9;">高性能 · 低功耗</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="yc-carousel__arrow yc-carousel__arrow--prev"><i class="fas fa-chevron-left"></i></button>
+                            <button class="yc-carousel__arrow yc-carousel__arrow--next"><i class="fas fa-chevron-right"></i></button>
+                            <div class="yc-carousel__indicators yc-carousel__indicators--dots">
+                                <button class="yc-carousel__indicator is-active"></button>
+                                <button class="yc-carousel__indicator"></button>
+                                <button class="yc-carousel__indicator"></button>
+                                <button class="yc-carousel__indicator"></button>
+                                <button class="yc-carousel__indicator"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>3D 效果</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">带有强烈 3D 透视变换效果的走马灯，营造沉浸式空间感</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div class="yc-carousel yc-carousel--3d" data-mode="3d">
+                        <div class="yc-carousel__container" style="overflow: visible;">
+                            <div class="yc-carousel__slides">
+                                <div class="yc-carousel__item" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                                    <div style="color: white; text-align: center;">
+                                        <div style="font-size: 28px; font-weight: 600; margin-bottom: 8px;">3D 卡片 1</div>
+                                        <div style="font-size: 13px; opacity: 0.9;">深度透视 · 空间错觉</div>
+                                    </div>
+                                </div>
+                                <div class="yc-carousel__item" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                                    <div style="color: white; text-align: center;">
+                                        <div style="font-size: 28px; font-weight: 600; margin-bottom: 8px;">3D 卡片 2</div>
+                                        <div style="font-size: 13px; opacity: 0.9;">旋转动画 · 动态视野</div>
+                                    </div>
+                                </div>
+                                <div class="yc-carousel__item" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                                    <div style="color: white; text-align: center;">
+                                        <div style="font-size: 28px; font-weight: 600; margin-bottom: 8px;">3D 卡片 3</div>
+                                        <div style="font-size: 13px; opacity: 0.9;">景深效果 · 层次分明</div>
+                                    </div>
+                                </div>
+                                <div class="yc-carousel__item" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                                    <div style="color: white; text-align: center;">
+                                        <div style="font-size: 28px; font-weight: 600; margin-bottom: 8px;">3D 卡片 4</div>
+                                        <div style="font-size: 13px; opacity: 0.9;">光影变幻 · 立体质感</div>
+                                    </div>
+                                </div>
+                                <div class="yc-carousel__item" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                                    <div style="color: white; text-align: center;">
+                                        <div style="font-size: 28px; font-weight: 600; margin-bottom: 8px;">3D 卡片 5</div>
+                                        <div style="font-size: 13px; opacity: 0.9;">沉浸体验 · 身临其境</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="yc-carousel__arrow yc-carousel__arrow--prev"><i class="fas fa-chevron-left"></i></button>
+                            <button class="yc-carousel__arrow yc-carousel__arrow--next"><i class="fas fa-chevron-right"></i></button>
+                            <div class="yc-carousel__indicators yc-carousel__indicators--dots">
+                                <button class="yc-carousel__indicator is-active"></button>
+                                <button class="yc-carousel__indicator"></button>
+                                <button class="yc-carousel__indicator"></button>
+                                <button class="yc-carousel__indicator"></button>
+                                <button class="yc-carousel__indicator"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>淡入淡出</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">使用淡入淡出切换效果</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div class="yc-carousel yc-carousel--fade" data-mode="fade">
+                        <div class="yc-carousel__container" style="border-radius: 8px; overflow: hidden;">
+                            <div class="yc-carousel__slides">
+                                <div class="yc-carousel__item" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                                    <span style="color: white; font-size: 48px; font-weight: 600;">1</span>
+                                </div>
+                                <div class="yc-carousel__item" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                                    <span style="color: white; font-size: 48px; font-weight: 600;">2</span>
+                                </div>
+                                <div class="yc-carousel__item" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                                    <span style="color: white; font-size: 48px; font-weight: 600;">3</span>
+                                </div>
+                            </div>
+                            <button class="yc-carousel__arrow yc-carousel__arrow--prev"><i class="fas fa-chevron-left"></i></button>
+                            <button class="yc-carousel__arrow yc-carousel__arrow--next"><i class="fas fa-chevron-right"></i></button>
+                            <div class="yc-carousel__indicators yc-carousel__indicators--dots">
+                                <button class="yc-carousel__indicator is-active"></button>
+                                <button class="yc-carousel__indicator"></button>
+                                <button class="yc-carousel__indicator"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>封面模式</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">带有渐变遮罩和文字内容的封面样式</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div class="yc-carousel yc-carousel--cover" data-mode="cover">
+                        <div class="yc-carousel__container" style="border-radius: 0;">
+                            <div class="yc-carousel__slides">
+                                <div class="yc-carousel__item" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                                    <div class="yc-carousel__item-content">
+                                        <div class="yc-carousel__item-title">探索自然之美</div>
+                                        <div class="yc-carousel__item-desc">感受大自然的魅力，领略山水风光</div>
+                                    </div>
+                                    <span style="color: white; font-size: 64px; opacity: 0.3;">🏔️</span>
+                                </div>
+                                <div class="yc-carousel__item" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                                    <div class="yc-carousel__item-content">
+                                        <div class="yc-carousel__item-title">城市夜景</div>
+                                        <div class="yc-carousel__item-desc">繁华都市的霓虹灯光</div>
+                                    </div>
+                                    <span style="color: white; font-size: 64px; opacity: 0.3;">🌃</span>
+                                </div>
+                                <div class="yc-carousel__item" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                                    <div class="yc-carousel__item-content">
+                                        <div class="yc-carousel__item-title">海洋世界</div>
+                                        <div class="yc-carousel__item-desc">潜入深海，探索未知</div>
+                                    </div>
+                                    <span style="color: white; font-size: 64px; opacity: 0.3;">🌊</span>
+                                </div>
+                            </div>
+                            <button class="yc-carousel__arrow yc-carousel__arrow--prev"><i class="fas fa-chevron-left"></i></button>
+                            <button class="yc-carousel__arrow yc-carousel__arrow--next"><i class="fas fa-chevron-right"></i></button>
+                            <div class="yc-carousel__indicators yc-carousel__indicators--fraction">
+                                <span class="yc-carousel__indicator"><span class="yc-carousel__indicator-current">1</span> / 3</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>自动播放</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">支持自动轮播，鼠标悬停暂停</div>
+                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                    <div class="yc-carousel yc-carousel--autoplay yc-carousel--card" data-mode="card" data-autoplay="true" data-autoplay-duration="4000">
+                        <div class="yc-carousel__container" style="overflow: visible;">
+                            <div class="yc-carousel__slides">
+                                <div class="yc-carousel__item" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                                    <div style="color: white; text-align: center;">
+                                        <div style="font-size: 28px; font-weight: 600; margin-bottom: 8px;">自动播放 1</div>
+                                        <div style="font-size: 13px; opacity: 0.9;">悬停暂停 · 释放继续</div>
+                                    </div>
+                                </div>
+                                <div class="yc-carousel__item" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                                    <div style="color: white; text-align: center;">
+                                        <div style="font-size: 28px; font-weight: 600; margin-bottom: 8px;">自动播放 2</div>
+                                        <div style="font-size: 13px; opacity: 0.9;">流畅动画 · 无缝衔接</div>
+                                    </div>
+                                </div>
+                                <div class="yc-carousel__item" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                                    <div style="color: white; text-align: center;">
+                                        <div style="font-size: 28px; font-weight: 600; margin-bottom: 8px;">自动播放 3</div>
+                                        <div style="font-size: 13px; opacity: 0.9;">智能控制 · 体验升级</div>
+                                    </div>
+                                </div>
+                                <div class="yc-carousel__item" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                                    <div style="color: white; text-align: center;">
+                                        <div style="font-size: 28px; font-weight: 600; margin-bottom: 8px;">自动播放 4</div>
+                                        <div style="font-size: 13px; opacity: 0.9;">循环展示 · 持续播放</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="yc-carousel__arrow yc-carousel__arrow--prev"><i class="fas fa-chevron-left"></i></button>
+                            <button class="yc-carousel__arrow yc-carousel__arrow--next"><i class="fas fa-chevron-right"></i></button>
+                            <div class="yc-carousel__indicators yc-carousel__indicators--dots">
+                                <button class="yc-carousel__indicator is-active"></button>
+                                <button class="yc-carousel__indicator"></button>
+                                <button class="yc-carousel__indicator"></button>
+                                <button class="yc-carousel__indicator"></button>
+                            </div>
+                            <div class="yc-carousel__autoplay-progress">
+                                <div class="yc-carousel__autoplay-progress-bar"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
-        function initCarousel(container) {
-            let currentIndex = 0;
-            const slides = container.querySelector('.yc-carousel__slides');
-            const indicators = container.querySelectorAll('.yc-carousel__indicator');
-            const prevBtn = container.querySelector('.yc-carousel__arrow--prev');
-            const nextBtn = container.querySelector('.yc-carousel__arrow--next');
-            const totalSlides = indicators.length;
+        class Carousel {
+            constructor(container) {
+                this.container = container;
+                this.mode = container.dataset.mode || 'default';
+                this.autoplay = container.dataset.autoplay === 'true';
+                this.autoplayDuration = parseInt(container.dataset.autoplayDuration) || 5000;
+                this.loop = container.dataset.loop === 'true';
+                this.slides = container.querySelector('.yc-carousel__slides');
+                this.items = container.querySelectorAll('.yc-carousel__item');
+                this.indicators = container.querySelectorAll('.yc-carousel__indicator');
+                this.prevBtn = container.querySelector('.yc-carousel__arrow--prev');
+                this.nextBtn = container.querySelector('.yc-carousel__arrow--next');
+                this.totalSlides = this.items.length;
+                this.currentIndex = 0;
+                this.isAnimating = false;
+                this.autoplayTimer = null;
+                this.isPaused = false;
+                this.touchStartX = 0;
+                this.touchEndX = 0;
+                this.touchDeltaX = 0;
 
-            function goToSlide(index) {
-                if (index < 0) index = totalSlides - 1;
-                if (index >= totalSlides) index = 0;
-                currentIndex = index;
-                slides.style.transform = `translateX(-${currentIndex * 100}%)`;
-                indicators.forEach((indicator, i) => {
-                    indicator.classList.toggle('is-active', i === currentIndex);
-                });
+                this.init();
             }
 
-            prevBtn?.addEventListener('click', () => goToSlide(currentIndex - 1));
-            nextBtn?.addEventListener('click', () => goToSlide(currentIndex + 1));
-            indicators.forEach((indicator, index) => {
-                indicator.addEventListener('click', () => goToSlide(index));
-            });
+            init() {
+                this.updateItems();
+                this.bindEvents();
+                if (this.autoplay) {
+                    this.startAutoplay();
+                }
+            }
+
+            bindEvents() {
+                this.prevBtn?.addEventListener('click', () => this.prev());
+                this.nextBtn?.addEventListener('click', () => this.next());
+
+                this.indicators.forEach((indicator, index) => {
+                    indicator.addEventListener('click', () => this.goTo(index));
+                });
+
+                this.container.addEventListener('mouseenter', () => {
+                    if (this.autoplay && !this.isPaused) {
+                        this.container.classList.add('is-paused');
+                    }
+                });
+
+                this.container.addEventListener('mouseleave', () => {
+                    if (this.autoplay && !this.isPaused) {
+                        this.container.classList.remove('is-paused');
+                    }
+                });
+
+                this.slides.addEventListener('touchstart', (e) => this.onTouchStart(e), { passive: true });
+                this.slides.addEventListener('touchmove', (e) => this.onTouchMove(e), { passive: false });
+                this.slides.addEventListener('touchend', (e) => this.onTouchEnd(e), { passive: true });
+
+                this.slides.addEventListener('mousedown', (e) => this.onMouseDown(e));
+                this.slides.addEventListener('mousemove', (e) => this.onMouseMove(e));
+                this.slides.addEventListener('mouseup', (e) => this.onMouseUp(e));
+                this.slides.addEventListener('mouseleave', (e) => this.onMouseUp(e));
+
+                this.container.addEventListener('keydown', (e) => this.onKeyDown(e));
+                this.container.setAttribute('tabindex', '0');
+            }
+
+            onTouchStart(e) {
+                this.touchStartX = e.touches[0].clientX;
+                this.touchEndX = e.touches[0].clientX;
+                this.touchDeltaX = 0;
+                if (this.autoplay) {
+                    this.pauseAutoplay();
+                }
+            }
+
+            onTouchMove(e) {
+                this.touchEndX = e.touches[0].clientX;
+                this.touchDeltaX = this.touchEndX - this.touchStartX;
+
+                if (Math.abs(this.touchDeltaX) > 10) {
+                    e.preventDefault();
+                }
+
+                const movePercent = (this.touchDeltaX / this.slides.offsetWidth) * 100;
+                if (this.mode === 'card' || this.mode === '3d') {
+                    this.slides.style.transition = 'none';
+                } else {
+                    this.slides.style.transition = 'none';
+                    this.slides.style.transform = `translateX(calc(-${this.currentIndex * 100}% + ${movePercent}%))`;
+                }
+            }
+
+            onTouchEnd() {
+                const swipeThreshold = 50;
+                const velocity = this.touchDeltaX / 200;
+
+                if (this.touchDeltaX < -swipeThreshold || velocity < -0.5) {
+                    this.next();
+                } else if (this.touchDeltaX > swipeThreshold || velocity > 0.5) {
+                    this.prev();
+                } else {
+                    this.goTo(this.currentIndex);
+                }
+
+                this.touchDeltaX = 0;
+                if (this.autoplay) {
+                    this.resumeAutoplay();
+                }
+            }
+
+            isDragging = false;
+            dragStartX = 0;
+            dragCurrentX = 0;
+
+            onMouseDown(e) {
+                if (e.target.closest('.yc-carousel__arrow') || e.target.closest('.yc-carousel__indicator')) return;
+                this.isDragging = true;
+                this.dragStartX = e.clientX;
+                this.dragCurrentX = e.clientX;
+                this.slides.style.cursor = 'grabbing';
+            }
+
+            onMouseMove(e) {
+                if (!this.isDragging) return;
+                this.dragCurrentX = e.clientX;
+                this.touchDeltaX = this.dragCurrentX - this.dragStartX;
+                const movePercent = (this.touchDeltaX / this.slides.offsetWidth) * 100;
+
+                this.slides.style.transition = 'none';
+                if (this.mode !== 'card' && this.mode !== '3d') {
+                    this.slides.style.transform = `translateX(calc(-${this.currentIndex * 100}% + ${movePercent}%))`;
+                }
+            }
+
+            onMouseUp() {
+                if (!this.isDragging) return;
+                this.isDragging = false;
+                this.slides.style.cursor = 'grab';
+
+                const swipeThreshold = 50;
+                const velocity = this.touchDeltaX / 200;
+
+                if (this.touchDeltaX < -swipeThreshold || velocity < -0.5) {
+                    this.next();
+                } else if (this.touchDeltaX > swipeThreshold || velocity > 0.5) {
+                    this.prev();
+                } else {
+                    this.goTo(this.currentIndex);
+                }
+
+                this.touchDeltaX = 0;
+            }
+
+            onKeyDown(e) {
+                if (e.key === 'ArrowLeft') {
+                    e.preventDefault();
+                    this.prev();
+                } else if (e.key === 'ArrowRight') {
+                    e.preventDefault();
+                    this.next();
+                } else if (e.key === 'Home') {
+                    e.preventDefault();
+                    this.goTo(0);
+                } else if (e.key === 'End') {
+                    e.preventDefault();
+                    this.goTo(this.totalSlides - 1);
+                }
+            }
+
+            updateItems() {
+                if (this.mode === 'card' || this.mode === '3d') {
+                    this.items.forEach((item, i) => {
+                        item.classList.remove('is-active', 'is-prev', 'is-next', 'is-far-prev', 'is-far-next');
+                        let offset = i - this.currentIndex;
+
+                        if (this.loop) {
+                            if (offset > this.totalSlides / 2) offset -= this.totalSlides;
+                            if (offset < -this.totalSlides / 2) offset += this.totalSlides;
+                        }
+
+                        if (offset === 0) item.classList.add('is-active');
+                        else if (offset === -1 || offset === this.totalSlides - 1) item.classList.add('is-prev');
+                        else if (offset === 1 || offset === -(this.totalSlides - 1)) item.classList.add('is-next');
+                        else if (offset === -2 || offset === this.totalSlides - 2) item.classList.add('is-far-prev');
+                        else if (offset === 2 || offset === -(this.totalSlides - 2)) item.classList.add('is-far-next');
+                    });
+                } else {
+                    this.items.forEach((item, i) => {
+                        item.classList.toggle('is-active', i === this.currentIndex);
+                    });
+                }
+            }
+
+            goTo(index) {
+                if (this.isAnimating) return;
+
+                if (index < 0) {
+                    index = this.loop ? this.totalSlides - 1 : 0;
+                }
+                if (index >= this.totalSlides) {
+                    index = this.loop ? 0 : this.totalSlides - 1;
+                }
+
+                this.isAnimating = true;
+                this.currentIndex = index;
+
+                if (this.mode === 'fade') {
+                    this.slides.style.transform = 'translateX(0)';
+                    this.items.forEach((item, i) => {
+                        item.style.opacity = i === this.currentIndex ? '1' : '0';
+                        item.style.zIndex = i === this.currentIndex ? '1' : '0';
+                    });
+                } else if (this.mode !== 'card' && this.mode !== '3d') {
+                    this.slides.style.transition = 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                    this.slides.style.transform = `translateX(-${this.currentIndex * 100}%)`;
+                }
+
+                this.indicators.forEach((indicator, i) => {
+                    indicator.classList.toggle('is-active', i === this.currentIndex);
+                });
+
+                if (this.mode === 'cover') {
+                    const fractionIndicator = this.container.querySelector('.yc-carousel__indicators--fraction .yc-carousel__indicator-current');
+                    if (fractionIndicator) {
+                        fractionIndicator.textContent = this.currentIndex + 1;
+                    }
+                }
+
+                this.updateItems();
+
+                setTimeout(() => {
+                    this.isAnimating = false;
+                }, 500);
+            }
+
+            prev() {
+                this.goTo(this.currentIndex - 1);
+            }
+
+            next() {
+                this.goTo(this.currentIndex + 1);
+            }
+
+            startAutoplay() {
+                this.container.classList.add('is-autoplay-running');
+                this.container.style.setProperty('--yc-carousel-autoplay-duration', `${this.autoplayDuration}ms`);
+
+                this.autoplayTimer = setInterval(() => {
+                    if (!this.isPaused) {
+                        this.next();
+                    }
+                }, this.autoplayDuration);
+            }
+
+            pauseAutoplay() {
+                this.isPaused = true;
+                this.container.classList.add('is-paused');
+                this.container.classList.remove('is-autoplay-running');
+            }
+
+            resumeAutoplay() {
+                this.isPaused = false;
+                this.container.classList.remove('is-paused');
+                this.container.classList.add('is-autoplay-running');
+            }
+
+            destroy() {
+                if (this.autoplayTimer) {
+                    clearInterval(this.autoplayTimer);
+                }
+            }
         }
 
-        document.querySelectorAll('.yc-carousel').forEach(initCarousel);
+        document.querySelectorAll('.yc-carousel').forEach(container => {
+            new Carousel(container);
+        });
     </script>
 </body>
 </html>
