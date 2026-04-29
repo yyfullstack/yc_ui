@@ -539,30 +539,33 @@
         function setupTimeColumnScroll(column, type, tempTime, timeLabelId, picker) {
             if (!column) return;
 
-            let scrollTimer = null;
-
             column.addEventListener('scroll', function() {
-                if (scrollTimer) {
-                    clearTimeout(scrollTimer);
+                const scrollContainer = column;
+                const scrollTop = scrollContainer.scrollTop;
+                const itemHeight = 32;
+                
+                // 计算中心位置的索引
+                const centerIndex = Math.round((scrollTop + scrollContainer.clientHeight / 2 - itemHeight / 2) / itemHeight);
+
+                const items = column.querySelectorAll('.yc-date-picker__time-item');
+                if (items.length === 0) return;
+
+                const safeIndex = Math.max(0, Math.min(centerIndex, items.length - 1));
+                const targetItem = items[safeIndex];
+
+                if (!targetItem) return;
+
+                // 移除之前的选中状态
+                const prevSelected = column.querySelector('.yc-date-picker__time-item.is-selected');
+                if (prevSelected && prevSelected !== targetItem) {
+                    prevSelected.classList.remove('is-selected');
                 }
 
-                scrollTimer = setTimeout(function() {
-                    const scrollTop = column.scrollTop;
-                    const itemHeight = 32;
-                    const centerIndex = Math.round(scrollTop / itemHeight);
-
-                    const items = column.querySelectorAll('.yc-date-picker__time-item');
-                    if (items.length === 0) return;
-
-                    const targetItem = items[Math.min(centerIndex, items.length - 1)];
-
-                    const prevSelected = column.querySelector('.yc-date-picker__time-item.is-selected');
-                    if (prevSelected) {
-                        prevSelected.classList.remove('is-selected');
-                    }
-
+                // 设置新的选中状态
+                if (!targetItem.classList.contains('is-selected')) {
                     targetItem.classList.add('is-selected');
 
+                    // 更新临时时间值
                     if (type === 'hour') {
                         tempTime.hours = parseInt(targetItem.dataset.hour);
                     } else if (type === 'minute') {
@@ -571,6 +574,7 @@
                         tempTime.seconds = parseInt(targetItem.dataset.second);
                     }
 
+                    // 更新时间标签
                     const timeLabel = document.getElementById(timeLabelId);
                     if (timeLabel) {
                         const hours = String(tempTime.hours).padStart(2, '0');
@@ -578,7 +582,7 @@
                         const seconds = String(tempTime.seconds).padStart(2, '0');
                         timeLabel.textContent = `${hours}:${minutes}:${seconds}`;
                     }
-                }, 100);
+                }
             });
         }
 
