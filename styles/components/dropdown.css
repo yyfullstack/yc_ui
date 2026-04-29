@@ -181,6 +181,7 @@
 .yc-dropdown-btn {
     display: inline-flex;
     position: relative;
+    align-items: stretch;
 }
 
 .yc-dropdown-btn .yc-dropdown-btn__trigger {
@@ -188,14 +189,15 @@
     align-items: center;
 }
 
-.yc-dropdown-btn .yc-dropdown-btn__default {
+.yc-dropdown-btn .yc-button {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
+    border-right: none;
     position: relative;
     z-index: 2;
 }
 
-.yc-dropdown-btn .yc-dropdown-btn__default:focus {
+.yc-dropdown-btn .yc-button:focus {
     z-index: 4;
 }
 
@@ -203,8 +205,10 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 32px;
-    height: 100%;
+    width: 36px;
+    min-width: 36px;
+    height: auto;
+    align-self: stretch;
     border: 1px solid var(--yc-color-border);
     border-left: none;
     border-radius: 0 var(--yc-border-radius-base) var(--yc-border-radius-base) 0;
@@ -214,6 +218,10 @@
     transition: all 0.2s ease;
     position: relative;
     z-index: 2;
+    margin-left: -1px;
+    padding: 0;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 .yc-dropdown-btn .yc-dropdown-btn__trigger-btn:hover {
@@ -232,11 +240,60 @@
 }
 
 .yc-dropdown-btn .yc-dropdown-btn__caret {
+    font-size: 10px;
     transition: transform 0.3s ease;
 }
 
 .yc-dropdown-btn--opened .yc-dropdown-btn__caret {
     transform: rotate(180deg);
+}
+
+.yc-dropdown-btn .yc-button--primary + .yc-dropdown-btn__trigger-btn {
+    border-color: var(--yc-color-primary);
+    background-color: var(--yc-color-primary);
+    color: #ffffff;
+}
+
+.yc-dropdown-btn .yc-button--primary + .yc-dropdown-btn__trigger-btn:hover {
+    background-color: var(--yc-color-primary-hover, #66b1ff);
+    border-color: var(--yc-color-primary-hover, #66b1ff);
+    color: #ffffff;
+}
+
+.yc-dropdown-btn .yc-button--success + .yc-dropdown-btn__trigger-btn {
+    border-color: var(--yc-color-success);
+    background-color: var(--yc-color-success);
+    color: #ffffff;
+}
+
+.yc-dropdown-btn .yc-button--success + .yc-dropdown-btn__trigger-btn:hover {
+    background-color: var(--yc-color-success-hover, #73d13d);
+    border-color: var(--yc-color-success-hover, #73d13d);
+    color: #ffffff;
+}
+
+.yc-dropdown-btn .yc-button--warning + .yc-dropdown-btn__trigger-btn {
+    border-color: var(--yc-color-warning);
+    background-color: var(--yc-color-warning);
+    color: #ffffff;
+}
+
+.yc-dropdown-btn .yc-button--warning + .yc-dropdown-btn__trigger-btn:hover {
+    background-color: var(--yc-color-warning-hover, #e6a23c);
+    border-color: var(--yc-color-warning-hover, #e6a23c);
+    color: #ffffff;
+}
+
+.yc-dropdown-btn .yc-button--danger + .yc-dropdown-btn__trigger-btn {
+    border-color: var(--yc-color-danger);
+    background-color: var(--yc-color-danger);
+    color: #ffffff;
+}
+
+.yc-dropdown-btn .yc-button--danger + .yc-dropdown-btn__trigger-btn:hover {
+    background-color: var(--yc-color-danger-hover, #f78989);
+    border-color: var(--yc-color-danger-hover, #f78989);
+    color: #ffffff;
 }
 
 /* ==================== Disabled State ==================== */
