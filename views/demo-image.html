@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Image 图片 - YC UI</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.6/viewer.min.css">
     <link rel="stylesheet" href="../styles/index.css">
     <link rel="stylesheet" href="../styles/demo.css">
 </head>
@@ -12,24 +13,30 @@
     <div class="demo-container">
         <div class="demo-page-header">
             <h1 class="demo-page-title">Image 图片</h1>
-            <p class="demo-page-subtitle">除了支持原生图片的所有特性之外，还提供图片懒加载、占位图、加载失败提示等功能</p>
+            <p class="demo-page-subtitle">除了支持原生图片的所有特性之外，还提供图片预览、缩放、旋转、翻转和懒加载等功能</p>
         </div>
 
         <div class="demo-section">
-            <h3>基础用法</h3>
+            <h3>图片画廊</h3>
             <div class="demo-block">
-                <div class="demo-block-title">基础的图片展示</div>
-                <div class="demo-row" style="flex-direction: column; gap: 12px;">
-                    <div style="display: flex; gap: 16px; flex-wrap: wrap;">
-                        <div class="yc-image yc-image--default" style="border-radius: 4px;">
-                            <img src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg" class="yc-image__inner" alt="demo">
-                        </div>
-                        <div class="yc-image yc-image--default yc-image--preview" style="border-radius: 4px;">
-                            <img src="https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg" class="yc-image__inner" alt="demo">
+                <div class="demo-block-title">点击图片查看大图预览，支持缩放、旋转、播放</div>
+                <div class="demo-row">
+                    <div id="galleryViewer" class="yc-image-gallery" style="display: flex; gap: 12px; flex-wrap: wrap;">
+                        <div class="yc-image yc-image--default yc-image--preview">
+                            <img src="https://picsum.photos/seed/picsum1/400/300" class="yc-image__inner" alt="图片 1" data-index="0">
                             <div class="yc-image__preview-mask"><i class="fas fa-search-plus"></i></div>
                         </div>
-                        <div class="yc-image yc-image--default" style="border-radius: 50%; overflow: hidden;">
-                            <img src="https://fuss10.elemecdn.com/1/34/19aa98b1f2485b6356d1785d37d47jpeg.jpeg" class="yc-image__inner" alt="demo">
+                        <div class="yc-image yc-image--default yc-image--preview">
+                            <img src="https://picsum.photos/seed/picsum2/400/300" class="yc-image__inner" alt="图片 2" data-index="1">
+                            <div class="yc-image__preview-mask"><i class="fas fa-search-plus"></i></div>
+                        </div>
+                        <div class="yc-image yc-image--default yc-image--preview">
+                            <img src="https://picsum.photos/seed/picsum3/400/300" class="yc-image__inner" alt="图片 3" data-index="2">
+                            <div class="yc-image__preview-mask"><i class="fas fa-search-plus"></i></div>
+                        </div>
+                        <div class="yc-image yc-image--default yc-image--preview">
+                            <img src="https://picsum.photos/seed/picsum4/400/300" class="yc-image__inner" alt="图片 4" data-index="3">
+                            <div class="yc-image__preview-mask"><i class="fas fa-search-plus"></i></div>
                         </div>
                     </div>
                 </div>
@@ -40,62 +47,22 @@
             <h3>填充模式</h3>
             <div class="demo-block">
                 <div class="demo-block-title">可以设置图片的填充模式</div>
-                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                <div class="demo-row">
                     <div style="display: flex; gap: 16px; flex-wrap: wrap;">
                         <div class="yc-image yc-image--small">
-                            <img src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg" class="yc-image__inner yc-image__inner--fill" alt="fill">
+                            <img src="https://picsum.photos/seed/fill/100/100" class="yc-image__inner yc-image__inner--fill" alt="fill">
                         </div>
                         <div class="yc-image yc-image--small">
-                            <img src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg" class="yc-image__inner yc-image__inner--contain" alt="contain">
+                            <img src="https://picsum.photos/seed/contain/100/100" class="yc-image__inner yc-image__inner--contain" alt="contain">
                         </div>
                         <div class="yc-image yc-image--small">
-                            <img src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg" class="yc-image__inner yc-image__inner--cover" alt="cover">
+                            <img src="https://picsum.photos/seed/cover/100/100" class="yc-image__inner yc-image__inner--cover" alt="cover">
                         </div>
                         <div class="yc-image yc-image--small">
-                            <img src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg" class="yc-image__inner yc-image__inner--scale-down" alt="scale-down">
+                            <img src="https://picsum.photos/seed/scaledown/100/100" class="yc-image__inner yc-image__inner--scale-down" alt="scale-down">
                         </div>
                         <div class="yc-image yc-image--small">
-                            <img src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg" class="yc-image__inner yc-image__inner--none" alt="none">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="demo-section">
-            <h3>加载失败</h3>
-            <div class="demo-block">
-                <div class="demo-block-title">图片加载失败时的处理</div>
-                <div class="demo-row" style="flex-direction: column; gap: 12px;">
-                    <div style="display: flex; gap: 16px; flex-wrap: wrap;">
-                        <div class="yc-image yc-image--default">
-                            <img src="https://error.url/fake.jpg" class="yc-image__inner" alt="error" onerror="this.style.display='none'; this.parentElement.querySelector('.yc-image__error').style.display='flex';">
-                            <div class="yc-image__error" style="display: none;">
-                                <i class="fas fa-image"></i>
-                                <span>加载失败</span>
-                            </div>
-                        </div>
-                        <div class="yc-image yc-image--default">
-                            <div class="yc-image__loading"><i class="fas fa-spinner fa-spin"></i></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="demo-section">
-            <h3>懒加载</h3>
-            <div class="demo-block">
-                <div class="demo-block-title">使用 IntersectionObserver 实现懒加载</div>
-                <div class="demo-row" style="flex-direction: column; gap: 12px;">
-                    <div style="display: flex; gap: 16px; flex-wrap: wrap;">
-                        <div class="yc-image yc-image--default">
-                            <img data-src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg" class="yc-image__inner lazy-load" alt="lazy">
-                            <div class="yc-image__placeholder"><i class="fas fa-image"></i></div>
-                        </div>
-                        <div class="yc-image yc-image--default">
-                            <img data-src="https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg" class="yc-image__inner lazy-load" alt="lazy">
-                            <div class="yc-image__placeholder"><i class="fas fa-image"></i></div>
+                            <img src="https://picsum.photos/seed/none/100/100" class="yc-image__inner yc-image__inner--none" alt="none">
                         </div>
                     </div>
                 </div>
@@ -106,17 +73,101 @@
             <h3>不同尺寸</h3>
             <div class="demo-block">
                 <div class="demo-block-title">图片提供大、默认、小三种尺寸</div>
-                <div class="demo-row" style="flex-direction: column; gap: 12px;">
+                <div class="demo-row">
                     <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
                         <div class="yc-image yc-image--large">
-                            <img src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg" class="yc-image__inner yc-image__inner--cover" alt="large">
+                            <img src="https://picsum.photos/seed/large/200/200" class="yc-image__inner yc-image__inner--cover" alt="large">
                         </div>
                         <div class="yc-image yc-image--default">
-                            <img src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg" class="yc-image__inner yc-image__inner--cover" alt="default">
+                            <img src="https://picsum.photos/seed/default/150/150" class="yc-image__inner yc-image__inner--cover" alt="default">
                         </div>
                         <div class="yc-image yc-image--small">
-                            <img src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg" class="yc-image__inner yc-image__inner--cover" alt="small">
+                            <img src="https://picsum.photos/seed/small/100/100" class="yc-image__inner yc-image__inner--cover" alt="small">
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>加载状态</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">图片加载中的占位和加载失败的处理</div>
+                <div class="demo-row">
+                    <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                        <div class="yc-image yc-image--default" id="loadingImage">
+                            <div class="yc-image__loading"><i class="fas fa-spinner fa-spin"></i></div>
+                        </div>
+                        <div class="yc-image yc-image--default" id="errorImage">
+                            <div class="yc-image__error" style="display: flex;">
+                                <i class="fas fa-image"></i>
+                                <span>加载失败</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>懒加载</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">滚动到可视区域才加载图片</div>
+                <div class="demo-row">
+                    <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                        <div class="yc-image yc-image--default" id="lazyContainer1">
+                            <img data-src="https://picsum.photos/seed/lazy1/200/200" class="yc-image__inner lazy-load" alt="lazy 1">
+                            <div class="yc-image__placeholder"><i class="fas fa-image"></i></div>
+                        </div>
+                        <div class="yc-image yc-image--default" id="lazyContainer2">
+                            <img data-src="https://picsum.photos/seed/lazy2/200/200" class="yc-image__inner lazy-load" alt="lazy 2">
+                            <div class="yc-image__placeholder"><i class="fas fa-image"></i></div>
+                        </div>
+                        <div class="yc-image yc-image--default" id="lazyContainer3">
+                            <img data-src="https://picsum.photos/seed/lazy3/200/200" class="yc-image__inner lazy-load" alt="lazy 3">
+                            <div class="yc-image__placeholder"><i class="fas fa-image"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>ViewerJS 高级功能</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">使用 ViewerJS 实现的图片预览、缩放、旋转等功能</div>
+                <div class="demo-row" style="flex-direction: column; gap: 16px;">
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+                        <button class="yc-button yc-button--primary" onclick="zoomIn()">
+                            <i class="fas fa-search-plus"></i> 放大
+                        </button>
+                        <button class="yc-button yc-button--primary" onclick="zoomOut()">
+                            <i class="fas fa-search-minus"></i> 缩小
+                        </button>
+                        <button class="yc-button yc-button--primary" onclick="rotateLeft()">
+                            <i class="fas fa-undo"></i> 向左旋转
+                        </button>
+                        <button class="yc-button yc-button--primary" onclick="rotateRight()">
+                            <i class="fas fa-redo"></i> 向右旋转
+                        </button>
+                        <button class="yc-button yc-button--primary" onclick="flipHorizontal()">
+                            <i class="fas fa-arrows-alt-h"></i> 水平翻转
+                        </button>
+                        <button class="yc-button yc-button--primary" onclick="flipVertical()">
+                            <i class="fas fa-arrows-alt-v"></i> 垂直翻转
+                        </button>
+                        <button class="yc-button yc-button--primary" onclick="resetViewer()">
+                            <i class="fas fa-sync-alt"></i> 重置
+                        </button>
+                        <button class="yc-button yc-button--primary" onclick="playViewer()">
+                            <i class="fas fa-play"></i> 播放
+                        </button>
+                        <button class="yc-button yc-button--primary" onclick="prevImage()">
+                            <i class="fas fa-step-backward"></i> 上一张
+                        </button>
+                        <button class="yc-button yc-button--primary" onclick="nextImage()">
+                            <i class="fas fa-step-forward"></i> 下一张
+                        </button>
                     </div>
                 </div>
             </div>
@@ -124,6 +175,8 @@
     </div>
 
     <script>
+        let viewerInstance = null;
+
         document.addEventListener('DOMContentLoaded', () => {
             const lazyImages = document.querySelectorAll('.lazy-load');
             const observer = new IntersectionObserver((entries) => {
@@ -131,13 +184,110 @@
                     if (entry.isIntersecting) {
                         const img = entry.target;
                         img.src = img.dataset.src;
-                        img.onload = () => img.parentElement.querySelector('.yc-image__placeholder').style.display = 'none';
+                        img.onload = () => {
+                            const placeholder = img.parentElement.querySelector('.yc-image__placeholder');
+                            if (placeholder) placeholder.style.display = 'none';
+                        };
                         observer.unobserve(img);
                     }
                 });
-            });
+            }, { threshold: 0.1 });
+            
             lazyImages.forEach(img => observer.observe(img));
+
+            const galleryElement = document.getElementById('galleryViewer');
+            if (galleryElement && typeof Viewer !== 'undefined') {
+                viewerInstance = new Viewer(galleryElement, {
+                    button: true,
+                    navbar: true,
+                    title: true,
+                    toolbar: {
+                        zoomIn: 1,
+                        zoomOut: 1,
+                        oneToOne: 1,
+                        reset: 1,
+                        prev: 1,
+                        play: 1,
+                        next: 1,
+                        rotateLeft: 1,
+                        rotateRight: 1,
+                        flipHorizontal: 1,
+                        flipVertical: 1,
+                    },
+                    tooltip: true,
+                    movable: true,
+                    zoomable: true,
+                    rotatable: true,
+                    scalable: true,
+                    transition: true,
+                    fullscreen: true,
+                    keyboard: true,
+                    zoomRatio: 0.1,
+                    minZoomRatio: 0.01,
+                    maxZoomRatio: 10,
+                    initialViewIndex: 0,
+                    loop: true,
+                    interval: 3000,
+                    viewed() {
+                        console.log('图片已查看');
+                    },
+                });
+            }
+
+            setTimeout(() => {
+                const loadingImage = document.getElementById('loadingImage');
+                if (loadingImage) {
+                    const loadingEl = loadingImage.querySelector('.yc-image__loading');
+                    if (loadingEl) loadingEl.style.display = 'none';
+                    const img = document.createElement('img');
+                    img.src = 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg';
+                    img.className = 'yc-image__inner';
+                    img.alt = 'loaded';
+                    loadingImage.appendChild(img);
+                }
+            }, 2000);
         });
+
+        function zoomIn() {
+            if (viewerInstance) viewerInstance.zoom(0.5);
+        }
+
+        function zoomOut() {
+            if (viewerInstance) viewerInstance.zoom(-0.5);
+        }
+
+        function rotateLeft() {
+            if (viewerInstance) viewerInstance.rotate(-45);
+        }
+
+        function rotateRight() {
+            if (viewerInstance) viewerInstance.rotate(45);
+        }
+
+        function flipHorizontal() {
+            if (viewerInstance) viewerInstance.scaleX(-viewerInstance.getImageData().scaleX || -1);
+        }
+
+        function flipVertical() {
+            if (viewerInstance) viewerInstance.scaleY(-viewerInstance.getImageData().scaleY || -1);
+        }
+
+        function resetViewer() {
+            if (viewerInstance) viewerInstance.reset();
+        }
+
+        function playViewer() {
+            if (viewerInstance) viewerInstance.play();
+        }
+
+        function prevImage() {
+            if (viewerInstance) viewerInstance.prev();
+        }
+
+        function nextImage() {
+            if (viewerInstance) viewerInstance.next();
+        }
     </script>
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.6/viewer.min.js"></script>
 </html>
