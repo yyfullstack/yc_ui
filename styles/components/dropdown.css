@@ -4,7 +4,13 @@
  * YC UI Dropdown Component
  * Dropdown menu triggered by hover, click, or focus
  * Styled according to Element Plus dropdown design
+ * 
+ * Design Principles:
+ * 1. .yc-dropdown (plain trigger): trigger has border & radius
+ * 2. .yc-dropdown-btn (split button): buttons have border & radius, trigger is transparent
  */
+
+/* ==================== Base Dropdown ==================== */
 
 .yc-dropdown {
     position: relative;
@@ -12,30 +18,35 @@
     outline: none;
 }
 
+/* ==================== Plain Trigger (Text-based) ==================== */
+
 .yc-dropdown__trigger {
     cursor: pointer;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 0;
+    gap: 6px;
+    padding: 0 15px;
+    min-height: 32px;
     font-size: var(--yc-font-size-base, 14px);
     color: var(--yc-color-text-regular, #606266);
     line-height: 1.5;
     white-space: nowrap;
-    border: none;
-    background: transparent;
-    transition: color 0.2s;
+    border: 1px solid var(--yc-color-border, #dcdfe6);
+    border-radius: 4px;
+    background: var(--yc-color-bg, #ffffff);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
 }
 
 .yc-dropdown__trigger:hover {
     color: var(--yc-color-primary, #409eff);
+    border-color: var(--yc-color-primary, #409eff);
 }
 
-.yc-dropdown__trigger .yc-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+.yc-dropdown--opened .yc-dropdown__trigger {
+    border-color: var(--yc-color-primary, #409eff);
+    color: var(--yc-color-primary, #409eff);
 }
 
 .yc-dropdown__trigger .yc-dropdown__caret {
@@ -88,7 +99,7 @@
 
 .yc-dropdown__menu--dropup {
     top: auto;
-    bottom: calc(100% + 6px);
+    bottom: calc(100% + 8px);
     transform: scaleY(0);
     transform-origin: bottom center;
 }
@@ -229,16 +240,37 @@
     outline: none;
 }
 
+/* Trigger wrapper inside split button - transparent, no border */
 .yc-dropdown-btn .yc-dropdown__trigger {
+    padding: 0;
+    min-height: auto;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    gap: 0;
     display: inline-flex;
     align-items: stretch;
 }
 
+.yc-dropdown-btn .yc-dropdown__trigger:hover {
+    color: inherit;
+    border-color: inherit;
+}
+
+.yc-dropdown-btn--opened .yc-dropdown__trigger {
+    border-color: inherit;
+    color: inherit;
+}
+
+/* Main button - left side with left border & radius */
 .yc-dropdown-btn .yc-dropdown-btn__default {
-    border-top-right-radius: 0 !important;
-    border-bottom-right-radius: 0 !important;
-    border-right: 1px solid rgba(255, 255, 255, 0.35) !important;
-    margin-right: 0 !important;
+    border: 1px solid;
+    border-right: none;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    margin-right: 0;
     position: relative;
     z-index: 1;
 }
@@ -247,6 +279,7 @@
     z-index: 2;
 }
 
+/* Trigger button - right side with right border & radius */
 .yc-dropdown-btn .yc-dropdown-btn__trigger-btn {
     display: inline-flex;
     align-items: center;
@@ -257,8 +290,11 @@
     padding: 0 10px;
     align-self: stretch;
     border: 1px solid;
-    border-left: 1px solid rgba(255, 255, 255, 0.35);
-    border-radius: 0 4px 4px 0 !important;
+    border-left: 1px solid;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
     background-color: inherit;
     color: inherit;
     cursor: pointer;
@@ -271,6 +307,7 @@
 
 .yc-dropdown-btn .yc-dropdown-btn__trigger-btn:hover {
     z-index: 2;
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 .yc-dropdown-btn .yc-dropdown-btn__trigger-btn.is-active {
@@ -294,96 +331,108 @@
 
 /* ==================== Split Button Colors ==================== */
 
+/* Primary button */
 .yc-dropdown-btn .yc-button--primary {
-    border-color: var(--yc-color-primary, #409eff) !important;
-    background-color: var(--yc-color-primary, #409eff) !important;
-    color: #ffffff !important;
+    border-color: var(--yc-color-primary, #409eff);
+    background-color: var(--yc-color-primary, #409eff);
+    color: #ffffff;
 }
 
 .yc-dropdown-btn .yc-button--primary + .yc-dropdown-btn__trigger-btn {
-    border-color: var(--yc-color-primary, #409eff) !important;
-    background-color: var(--yc-color-primary, #409eff) !important;
-    color: #ffffff !important;
+    border-color: var(--yc-color-primary, #409eff);
+    background-color: var(--yc-color-primary, #409eff);
+    color: #ffffff;
 }
 
 .yc-dropdown-btn .yc-button--primary + .yc-dropdown-btn__trigger-btn:hover {
-    background-color: #66b1ff !important;
+    background-color: #66b1ff;
 }
 
-.yc-dropdown-btn .yc-button--success {
-    border-color: var(--yc-color-success, #67c23a) !important;
-    background-color: var(--yc-color-success, #67c23a) !important;
-    color: #ffffff !important;
-}
-
-.yc-dropdown-btn .yc-button--success + .yc-dropdown-btn__trigger-btn {
-    border-color: var(--yc-color-success, #67c23a) !important;
-    background-color: var(--yc-color-success, #67c23a) !important;
-    color: #ffffff !important;
-}
-
-.yc-dropdown-btn .yc-button--success + .yc-dropdown-btn__trigger-btn:hover {
-    background-color: #85ce61 !important;
-}
-
-.yc-dropdown-btn .yc-button--warning {
-    border-color: var(--yc-color-warning, #e6a23c) !important;
-    background-color: var(--yc-color-warning, #e6a23c) !important;
-    color: #ffffff !important;
-}
-
-.yc-dropdown-btn .yc-button--warning + .yc-dropdown-btn__trigger-btn {
-    border-color: var(--yc-color-warning, #e6a23c) !important;
-    background-color: var(--yc-color-warning, #e6a23c) !important;
-    color: #ffffff !important;
-}
-
-.yc-dropdown-btn .yc-button--warning + .yc-dropdown-btn__trigger-btn:hover {
-    background-color: #ebb563 !important;
-}
-
-.yc-dropdown-btn .yc-button--danger {
-    border-color: var(--yc-color-danger, #f56c6c) !important;
-    background-color: var(--yc-color-danger, #f56c6c) !important;
-    color: #ffffff !important;
-}
-
-.yc-dropdown-btn .yc-button--danger + .yc-dropdown-btn__trigger-btn {
-    border-color: var(--yc-color-danger, #f56c6c) !important;
-    background-color: var(--yc-color-danger, #f56c6c) !important;
-    color: #ffffff !important;
-}
-
-.yc-dropdown-btn .yc-button--danger + .yc-dropdown-btn__trigger-btn:hover {
-    background-color: #f78989 !important;
-}
-
-.yc-dropdown-btn .yc-button--info {
-    border-color: var(--yc-color-info, #909399) !important;
-    background-color: var(--yc-color-info, #909399) !important;
-    color: #ffffff !important;
-}
-
-.yc-dropdown-btn .yc-button--info + .yc-dropdown-btn__trigger-btn {
-    border-color: var(--yc-color-info, #909399) !important;
-    background-color: var(--yc-color-info, #909399) !important;
-    color: #ffffff !important;
-}
-
-.yc-dropdown-btn .yc-button--info + .yc-dropdown-btn__trigger-btn:hover {
-    background-color: #a6a9ad !important;
+/* Default button */
+.yc-dropdown-btn .yc-button--default {
+    border-color: var(--yc-color-border, #dcdfe6);
+    background-color: #ffffff;
+    color: var(--yc-color-text-regular, #606266);
 }
 
 .yc-dropdown-btn .yc-button--default + .yc-dropdown-btn__trigger-btn {
-    border-color: var(--yc-color-border, #dcdfe6) !important;
-    background-color: #ffffff !important;
-    color: var(--yc-color-text-regular, #606266) !important;
+    border-color: var(--yc-color-border, #dcdfe6);
+    background-color: #ffffff;
+    color: var(--yc-color-text-regular, #606266);
 }
 
 .yc-dropdown-btn .yc-button--default + .yc-dropdown-btn__trigger-btn:hover {
-    color: var(--yc-color-primary, #409eff) !important;
-    background-color: var(--yc-color-fill-light, #f5f7fa) !important;
-    border-color: var(--yc-color-primary, #409eff) !important;
+    color: var(--yc-color-primary, #409eff);
+    background-color: var(--yc-color-fill-light, #f5f7fa);
+    border-color: var(--yc-color-primary, #409eff);
+}
+
+/* Success button */
+.yc-dropdown-btn .yc-button--success {
+    border-color: var(--yc-color-success, #67c23a);
+    background-color: var(--yc-color-success, #67c23a);
+    color: #ffffff;
+}
+
+.yc-dropdown-btn .yc-button--success + .yc-dropdown-btn__trigger-btn {
+    border-color: var(--yc-color-success, #67c23a);
+    background-color: var(--yc-color-success, #67c23a);
+    color: #ffffff;
+}
+
+.yc-dropdown-btn .yc-button--success + .yc-dropdown-btn__trigger-btn:hover {
+    background-color: #85ce61;
+}
+
+/* Warning button */
+.yc-dropdown-btn .yc-button--warning {
+    border-color: var(--yc-color-warning, #e6a23c);
+    background-color: var(--yc-color-warning, #e6a23c);
+    color: #ffffff;
+}
+
+.yc-dropdown-btn .yc-button--warning + .yc-dropdown-btn__trigger-btn {
+    border-color: var(--yc-color-warning, #e6a23c);
+    background-color: var(--yc-color-warning, #e6a23c);
+    color: #ffffff;
+}
+
+.yc-dropdown-btn .yc-button--warning + .yc-dropdown-btn__trigger-btn:hover {
+    background-color: #ebb563;
+}
+
+/* Danger button */
+.yc-dropdown-btn .yc-button--danger {
+    border-color: var(--yc-color-danger, #f56c6c);
+    background-color: var(--yc-color-danger, #f56c6c);
+    color: #ffffff;
+}
+
+.yc-dropdown-btn .yc-button--danger + .yc-dropdown-btn__trigger-btn {
+    border-color: var(--yc-color-danger, #f56c6c);
+    background-color: var(--yc-color-danger, #f56c6c);
+    color: #ffffff;
+}
+
+.yc-dropdown-btn .yc-button--danger + .yc-dropdown-btn__trigger-btn:hover {
+    background-color: #f78989;
+}
+
+/* Info button */
+.yc-dropdown-btn .yc-button--info {
+    border-color: var(--yc-color-info, #909399);
+    background-color: var(--yc-color-info, #909399);
+    color: #ffffff;
+}
+
+.yc-dropdown-btn .yc-button--info + .yc-dropdown-btn__trigger-btn {
+    border-color: var(--yc-color-info, #909399);
+    background-color: var(--yc-color-info, #909399);
+    color: #ffffff;
+}
+
+.yc-dropdown-btn .yc-button--info + .yc-dropdown-btn__trigger-btn:hover {
+    background-color: #a6a9ad;
 }
 
 /* ==================== Disabled State ==================== */
