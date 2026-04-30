@@ -62,10 +62,12 @@
                 <div class="demo-block-title">下拉按钮组合，支持多种按钮样式</div>
                 <div class="demo-row">
                     <div class="yc-dropdown-btn" id="dropdownBtn1">
-                        <button class="yc-button yc-button--primary yc-dropdown-btn__default">主要按钮</button>
-                        <button class="yc-dropdown-btn__trigger-btn">
-                            <i class="fas fa-chevron-down yc-dropdown-btn__caret"></i>
-                        </button>
+                        <div class="yc-dropdown__trigger">
+                            <button class="yc-button yc-button--primary yc-dropdown-btn__default">主要按钮</button>
+                            <button class="yc-dropdown-btn__trigger-btn">
+                                <i class="fas fa-chevron-down yc-dropdown-btn__caret"></i>
+                            </button>
+                        </div>
                         <div class="yc-dropdown__menu yc-dropdown__menu--right">
                             <div class="yc-dropdown__item" data-command="apple">黄金糕</div>
                             <div class="yc-dropdown__item" data-command="fish">狮子头</div>
@@ -74,10 +76,12 @@
                     </div>
 
                     <div class="yc-dropdown-btn" id="dropdownBtn2">
-                        <button class="yc-button yc-button--default yc-dropdown-btn__default">默认按钮</button>
-                        <button class="yc-dropdown-btn__trigger-btn">
-                            <i class="fas fa-chevron-down yc-dropdown-btn__caret"></i>
-                        </button>
+                        <div class="yc-dropdown__trigger">
+                            <button class="yc-button yc-button--default yc-dropdown-btn__default">默认按钮</button>
+                            <button class="yc-dropdown-btn__trigger-btn">
+                                <i class="fas fa-chevron-down yc-dropdown-btn__caret"></i>
+                            </button>
+                        </div>
                         <div class="yc-dropdown__menu yc-dropdown__menu--right">
                             <div class="yc-dropdown__item">黄金糕</div>
                             <div class="yc-dropdown__item">狮子头</div>
@@ -86,10 +90,12 @@
                     </div>
 
                     <div class="yc-dropdown-btn" id="dropdownBtn3">
-                        <button class="yc-button yc-button--success yc-dropdown-btn__default">成功按钮</button>
-                        <button class="yc-dropdown-btn__trigger-btn">
-                            <i class="fas fa-chevron-down yc-dropdown-btn__caret"></i>
-                        </button>
+                        <div class="yc-dropdown__trigger">
+                            <button class="yc-button yc-button--success yc-dropdown-btn__default">成功按钮</button>
+                            <button class="yc-dropdown-btn__trigger-btn">
+                                <i class="fas fa-chevron-down yc-dropdown-btn__caret"></i>
+                            </button>
+                        </div>
                         <div class="yc-dropdown__menu yc-dropdown__menu--right">
                             <div class="yc-dropdown__item">黄金糕</div>
                             <div class="yc-dropdown__item">狮子头</div>
@@ -106,10 +112,12 @@
                 <div class="demo-block-title">使用组件作为触发源</div>
                 <div class="demo-row">
                     <div class="yc-dropdown" id="dropdown2">
-                        <button class="yc-button yc-button--default">
-                            点击显示下拉菜单
-                            <i class="fas fa-chevron-down yc-dropdown__caret"></i>
-                        </button>
+                        <span class="yc-dropdown__trigger">
+                            <button class="yc-button yc-button--default">
+                                点击显示下拉菜单
+                                <i class="fas fa-chevron-down yc-dropdown__caret"></i>
+                            </button>
+                        </span>
                         <div class="yc-dropdown__menu">
                             <div class="yc-dropdown__item">黄金糕</div>
                             <div class="yc-dropdown__item">狮子头</div>
@@ -118,11 +126,13 @@
                     </div>
 
                     <div class="yc-dropdown" id="dropdown3">
-                        <button class="yc-button yc-button--warning">
-                            <i class="fas fa-bell"></i>
-                            通知
-                            <i class="fas fa-chevron-down yc-dropdown__caret"></i>
-                        </button>
+                        <span class="yc-dropdown__trigger">
+                            <button class="yc-button yc-button--warning">
+                                <i class="fas fa-bell"></i>
+                                通知
+                                <i class="fas fa-chevron-down yc-dropdown__caret"></i>
+                            </button>
+                        </span>
                         <div class="yc-dropdown__menu">
                             <div class="yc-dropdown__item">黄金糕</div>
                             <div class="yc-dropdown__item">狮子头</div>
@@ -289,44 +299,85 @@
             const menu = dropdown.querySelector('.yc-dropdown__menu');
             const items = dropdown.querySelectorAll('.yc-dropdown__item');
             const triggerBtn = dropdown.querySelector('.yc-dropdown-btn__trigger-btn');
+            const defaultBtn = dropdown.querySelector('.yc-dropdown-btn__default');
 
             if (!trigger || !menu) return;
+
+            let isOpen = false;
 
             function show() {
                 if (dropdown.classList.contains('is-disabled')) return;
                 menu.classList.add('yc-dropdown__menu--show');
                 dropdown.classList.add('yc-dropdown--opened');
+                isOpen = true;
+                if (triggerBtn) {
+                    triggerBtn.classList.add('is-active');
+                    dropdown.classList.add('yc-dropdown-btn--opened');
+                }
             }
 
             function hide() {
                 menu.classList.remove('yc-dropdown__menu--show');
                 dropdown.classList.remove('yc-dropdown--opened');
+                isOpen = false;
+                if (triggerBtn) {
+                    triggerBtn.classList.remove('is-active');
+                    dropdown.classList.remove('yc-dropdown-btn--opened');
+                }
             }
 
-            trigger.addEventListener('mouseenter', show);
-            trigger.addEventListener('mouseleave', hide);
-
-            trigger.addEventListener('click', (e) => {
+            function toggle(e) {
                 e.stopPropagation();
-                if (menu.classList.contains('yc-dropdown__menu--show')) {
+                if (isOpen) {
                     hide();
                 } else {
                     show();
                 }
+            }
+
+            trigger.addEventListener('mouseenter', () => {
+                show();
             });
+
+            trigger.addEventListener('mouseleave', (e) => {
+                const relatedTarget = e.relatedTarget;
+                if (!menu.contains(relatedTarget)) {
+                    setTimeout(() => {
+                        if (!dropdown.matches(':hover') && !menu.matches(':hover')) {
+                            hide();
+                        }
+                    }, 150);
+                }
+            });
+
+            menu.addEventListener('mouseenter', () => {
+                show();
+            });
+
+            menu.addEventListener('mouseleave', (e) => {
+                const relatedTarget = e.relatedTarget;
+                if (!dropdown.contains(relatedTarget)) {
+                    setTimeout(() => {
+                        if (!dropdown.matches(':hover') && !menu.matches(':hover')) {
+                            hide();
+                        }
+                    }, 150);
+                }
+            });
+
+            trigger.addEventListener('click', toggle);
 
             if (triggerBtn) {
                 triggerBtn.addEventListener('click', (e) => {
                     e.stopPropagation();
-                    if (menu.classList.contains('yc-dropdown__menu--show')) {
-                        hide();
-                        triggerBtn.classList.remove('is-active');
-                        dropdown.classList.remove('yc-dropdown-btn--opened');
-                    } else {
-                        show();
-                        triggerBtn.classList.add('is-active');
-                        dropdown.classList.add('yc-dropdown-btn--opened');
-                    }
+                    toggle(e);
+                });
+            }
+
+            if (defaultBtn) {
+                defaultBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    console.log('Default button clicked - main action');
                 });
             }
 
@@ -336,19 +387,18 @@
                     if (item.classList.contains('yc-dropdown__item--disabled')) return;
 
                     const command = item.dataset.command;
-                    if (command) {
-                        const output = document.getElementById('commandOutput');
-                        if (output) {
-                            output.textContent = `选中了: ${item.textContent.trim()} (command: ${command})`;
-                            output.style.color = '#409eff';
-                        }
+                    console.log(`选中了: ${item.textContent.trim()}`, command ? `(command: ${command})` : '');
+
+                    items.forEach(i => i.classList.remove('yc-dropdown__item--active'));
+                    item.classList.add('yc-dropdown__item--active');
+
+                    const output = document.getElementById('commandOutput');
+                    if (output) {
+                        output.textContent = `选中了: ${item.textContent.trim()}${command ? ' (command: ' + command + ')' : ''}`;
+                        output.style.color = '#409eff';
                     }
 
-                    hide();
-                    if (triggerBtn) {
-                        triggerBtn.classList.remove('is-active');
-                        dropdown.classList.remove('yc-dropdown-btn--opened');
-                    }
+                    setTimeout(hide, 150);
                 });
             });
 
