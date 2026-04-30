@@ -514,9 +514,10 @@
 
 /* ==================== Disabled State ==================== */
 
-.yc-dropdown.is-disabled {
+/* .yc-dropdown.is-disabled {
     pointer-events: none;
-}
+    cursor: not-allowed;
+} */
 
 .yc-dropdown.is-disabled .yc-dropdown__trigger {
     cursor: not-allowed;
