@@ -107,13 +107,25 @@
         </div>
 
         <div class="demo-section">
-            <h3>触发对象</h3>
+            <h3>主题颜色</h3>
             <div class="demo-block">
-                <div class="demo-block-title">使用组件作为触发源</div>
+                <div class="demo-block-title">下拉菜单支持多种主题颜色</div>
                 <div class="demo-row">
-                    <div class="yc-dropdown" id="dropdown2">
+                    <div class="yc-dropdown yc-dropdown--primary" id="dropdownPrimary">
                         <span class="yc-dropdown__trigger">
-                            点击显示下拉菜单
+                            主要按钮
+                            <i class="fas fa-chevron-down yc-dropdown__caret"></i>
+                        </span>
+                        <div class="yc-dropdown__menu">
+                            <div class="yc-dropdown__item" data-command="apple">黄金糕</div>
+                            <div class="yc-dropdown__item" data-command="fish">狮子头</div>
+                            <div class="yc-dropdown__item" data-command="cake">螺蛳粉</div>
+                        </div>
+                    </div>
+
+                    <div class="yc-dropdown yc-dropdown--success" id="dropdownSuccess">
+                        <span class="yc-dropdown__trigger">
+                            成功按钮
                             <i class="fas fa-chevron-down yc-dropdown__caret"></i>
                         </span>
                         <div class="yc-dropdown__menu">
@@ -123,10 +135,33 @@
                         </div>
                     </div>
 
-                    <div class="yc-dropdown" id="dropdown3">
+                    <div class="yc-dropdown yc-dropdown--warning" id="dropdownWarning">
                         <span class="yc-dropdown__trigger">
-                            <i class="fas fa-bell"></i>
-                            通知
+                            警告按钮
+                            <i class="fas fa-chevron-down yc-dropdown__caret"></i>
+                        </span>
+                        <div class="yc-dropdown__menu">
+                            <div class="yc-dropdown__item">黄金糕</div>
+                            <div class="yc-dropdown__item">狮子头</div>
+                            <div class="yc-dropdown__item">螺蛳粉</div>
+                        </div>
+                    </div>
+
+                    <div class="yc-dropdown yc-dropdown--danger" id="dropdownDanger">
+                        <span class="yc-dropdown__trigger">
+                            危险按钮
+                            <i class="fas fa-chevron-down yc-dropdown__caret"></i>
+                        </span>
+                        <div class="yc-dropdown__menu">
+                            <div class="yc-dropdown__item">黄金糕</div>
+                            <div class="yc-dropdown__item">狮子头</div>
+                            <div class="yc-dropdown__item">螺蛳粉</div>
+                        </div>
+                    </div>
+
+                    <div class="yc-dropdown yc-dropdown--info" id="dropdownInfo">
+                        <span class="yc-dropdown__trigger">
+                            信息按钮
                             <i class="fas fa-chevron-down yc-dropdown__caret"></i>
                         </span>
                         <div class="yc-dropdown__menu">
