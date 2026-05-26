@@ -1,0 +1,206 @@
+@charset "UTF-8";
+
+.yc-filter {
+    display: flex;
+    flex-direction: column;
+    gap: var(--yc-spacing-base);
+    padding: var(--yc-spacing-lg);
+    border: 1px solid var(--yc-color-border-light);
+    border-radius: var(--yc-border-radius-large);
+    background: var(--yc-color-bg);
+    box-shadow: var(--yc-box-shadow-sm);
+}
+
+.yc-filter__body,
+.yc-filter__toolbar,
+.yc-filter__row {
+    display: flex;
+    align-items: flex-end;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.yc-filter__group {
+    display: grid;
+    gap: 14px;
+}
+
+.yc-filter__item {
+    flex: 1 1 220px;
+    min-width: 220px;
+    display: grid;
+    gap: 8px;
+}
+
+.yc-filter__item--compact {
+    flex-basis: 180px;
+    min-width: 180px;
+}
+
+.yc-filter__item--wide {
+    flex-basis: 320px;
+}
+
+.yc-filter__label {
+    color: var(--yc-color-text-secondary);
+    font-size: var(--yc-font-size-small);
+    line-height: 1.6;
+}
+
+.yc-filter .yc-input-wrapper,
+.yc-filter .yc-select,
+.yc-filter .yc-date-picker,
+.yc-filter .yc-time-picker,
+.yc-filter .yc-textarea {
+    width: 100%;
+}
+
+.yc-filter__range {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+}
+
+.yc-filter__date-separator {
+    color: var(--yc-color-text-placeholder);
+    font-size: var(--yc-font-size-small);
+    white-space: nowrap;
+}
+
+.yc-filter__actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto;
+    flex-wrap: wrap;
+}
+
+.yc-filter__summary {
+    display: grid;
+    gap: 10px;
+}
+
+.yc-filter__summary-title {
+    margin: 0;
+    color: var(--yc-color-text-primary);
+    font-size: var(--yc-font-size-base);
+    font-weight: var(--yc-font-weight-semibold);
+}
+
+.yc-filter__tags {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    padding: 12px 14px;
+    border: 1px dashed var(--yc-color-border);
+    border-radius: var(--yc-border-radius-medium);
+    background: var(--yc-color-fill-extra-light);
+}
+
+.yc-filter__tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 28px;
+    padding: 0 10px;
+    border: 1px solid var(--yc-layer-primary);
+    border-radius: var(--yc-border-radius-round);
+    background: var(--yc-layer-primary-soft);
+    color: var(--yc-color-primary);
+    font-size: var(--yc-font-size-extra-small);
+}
+
+.yc-filter__tag-remove {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    color: inherit;
+    cursor: pointer;
+    opacity: 0.72;
+    transition: opacity var(--yc-transition-fast);
+}
+
+.yc-filter__tag-remove:hover {
+    opacity: 1;
+}
+
+.yc-filter__toggle,
+.yc-filter__reset {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: var(--yc-color-primary);
+    cursor: pointer;
+    font-size: var(--yc-font-size-small);
+}
+
+.yc-filter__reset {
+    color: var(--yc-color-text-secondary);
+}
+
+.yc-filter__reset:hover {
+    color: var(--yc-color-primary);
+}
+
+.yc-filter__checkbox-group,
+.yc-filter__radio-group {
+    display: flex;
+    gap: 12px 18px;
+    flex-wrap: wrap;
+}
+
+.yc-filter--collapsible .yc-filter__body {
+    display: none;
+}
+
+.yc-filter--collapsible.is-expanded .yc-filter__body {
+    display: flex;
+}
+
+.yc-filter__input,
+.yc-filter__select {
+    width: 100%;
+    min-height: var(--yc-input-height);
+    padding: 0 var(--yc-spacing-md);
+    border: 1px solid var(--yc-color-border);
+    border-radius: var(--yc-border-radius-base);
+    background: var(--yc-color-bg);
+    color: var(--yc-color-text-primary);
+    font-size: var(--yc-font-size-base);
+}
+
+.yc-filter__input:focus,
+.yc-filter__select:focus {
+    outline: none;
+    border-color: var(--yc-color-primary);
+    box-shadow: var(--yc-focus-ring-primary-soft);
+}
+
+@media (max-width: 768px) {
+    .yc-filter,
+    .yc-filter__body,
+    .yc-filter__toolbar,
+    .yc-filter__row {
+        gap: 12px;
+    }
+
+    .yc-filter__item {
+        min-width: 100%;
+    }
+
+    .yc-filter__actions {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .yc-filter__range {
+        flex-wrap: wrap;
+    }
+}

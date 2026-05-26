@@ -1,0 +1,96 @@
+@charset "UTF-8";
+
+/* ==================== Badge ==================== */
+
+.yc-badge {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.yc-badge__content {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 18px;
+    padding: 0 6px;
+    line-height: 18px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: var(--yc-font-weight-medium);
+    color: var(--yc-color-white);
+    background-color: var(--yc-color-danger);
+    border-radius: 9px;
+    border: 1px solid var(--yc-color-white);
+    white-space: nowrap;
+    transform: translate(50%, -50%);
+    transform-origin: center;
+    box-shadow: 0 0 0 2px var(--yc-color-white);
+    min-width: 18px;
+    z-index: 1;
+}
+
+.yc-badge__content--dot {
+    min-width: 10px;
+    width: 10px;
+    height: 10px;
+    padding: 0;
+    border-radius: 50%;
+    box-shadow: none;
+}
+
+.yc-badge__content--success {
+    background-color: var(--yc-color-success);
+}
+
+.yc-badge__content--warning {
+    background-color: var(--yc-color-warning);
+}
+
+.yc-badge__content--info {
+    background-color: var(--yc-color-info);
+}
+
+.yc-badge__content--danger {
+    background-color: var(--yc-color-danger);
+}
+
+.yc-badge__content--primary {
+    background-color: var(--yc-color-primary);
+}
+
+.yc-badge__status {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.yc-badge__status--success {
+    background-color: var(--yc-color-success);
+}
+
+.yc-badge__status--warning {
+    background-color: var(--yc-color-warning);
+}
+
+.yc-badge__status--info {
+    background-color: var(--yc-color-info);
+}
+
+.yc-badge__status--danger {
+    background-color: var(--yc-color-danger);
+}
+
+.yc-badge__status-text {
+    margin-left: 8px;
+    font-size: var(--yc-font-size-small);
+    color: var(--yc-color-text-regular);
+    vertical-align: middle;
+}
+
+.yc-badge--max .yc-badge__content::after {
+    content: '+';
+    margin-left: 1px;
+}

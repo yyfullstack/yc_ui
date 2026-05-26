@@ -1,0 +1,97 @@
+@charset "UTF-8";
+
+.yc-barcode {
+    --yc-barcode-padding: var(--yc-spacing-base);
+    --yc-barcode-bg: var(--yc-color-bg);
+    --yc-barcode-border-color: var(--yc-color-border-light);
+    --yc-barcode-color: var(--yc-color-text-primary);
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--yc-spacing-sm);
+    min-width: 144px;
+    max-width: 100%;
+    padding: var(--yc-barcode-padding);
+    border: var(--yc-border-width-thin) solid var(--yc-barcode-border-color);
+    border-radius: var(--yc-border-radius-large);
+    background:
+        linear-gradient(180deg, var(--yc-barcode-bg) 0%, var(--yc-color-fill-extra-light) 100%);
+    box-shadow: var(--yc-box-shadow-sm);
+    color: var(--yc-barcode-color);
+    transition: border-color var(--yc-transition-duration-base),
+        box-shadow var(--yc-transition-duration-base),
+        transform var(--yc-transition-duration-base);
+}
+
+.yc-barcode:hover {
+    border-color: var(--yc-layer-primary-strong);
+    box-shadow: var(--yc-box-shadow-floating-panel);
+    transform: translateY(-1px);
+}
+
+.yc-barcode:focus-within {
+    border-color: var(--yc-color-primary);
+    box-shadow: var(--yc-focus-ring-primary);
+}
+
+.yc-barcode .yc-qrcode,
+.yc-barcode .yc-barcode-svg {
+    flex: 0 0 auto;
+}
+
+.yc-barcode .yc-qrcode {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+    border-radius: var(--yc-border-radius-medium);
+    background: var(--yc-color-bg);
+    box-shadow: inset 0 0 0 1px var(--yc-color-border-light);
+}
+
+.yc-barcode .yc-qrcode canvas,
+.yc-barcode .yc-qrcode img {
+    display: block;
+    max-width: 100%;
+    border-radius: var(--yc-border-radius-small);
+}
+
+.yc-barcode-svg {
+    max-width: min(100%, 320px);
+    padding: 4px;
+    border-radius: var(--yc-border-radius-medium);
+    background: var(--yc-color-bg);
+    box-shadow: inset 0 0 0 1px var(--yc-color-border-light);
+    color: var(--yc-barcode-color);
+}
+
+.yc-barcode--plain {
+    border-color: transparent;
+    box-shadow: none;
+}
+
+.yc-barcode--plain:hover {
+    border-color: transparent;
+    box-shadow: none;
+    transform: none;
+}
+
+.yc-barcode-small {
+    --yc-barcode-padding: var(--yc-spacing-sm);
+    min-width: 96px;
+}
+
+.yc-barcode-large {
+    --yc-barcode-padding: var(--yc-spacing-xl);
+    min-width: 180px;
+}
+
+.yc-barcode-label {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--yc-color-text-regular);
+    font-size: var(--yc-font-size-small);
+}

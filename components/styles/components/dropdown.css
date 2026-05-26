@@ -1,0 +1,613 @@
+@charset "UTF-8";
+
+/**
+ * YC UI Dropdown Component
+ * Dropdown menu triggered by hover, click, or focus
+ * Styled according to Element Plus dropdown design
+ * 
+ * Design Principles:
+ * 1. .yc-dropdown (plain trigger): trigger has border & radius
+ * 2. .yc-dropdown-btn (split button): buttons have border & radius, trigger is transparent
+ */
+
+/* ==================== Base Dropdown ==================== */
+
+.yc-dropdown {
+    position: relative;
+    display: inline-flex;
+    outline: none;
+}
+
+/* ==================== Plain Trigger (Text-based) ==================== */
+
+.yc-dropdown__trigger {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 0 15px;
+    min-height: 32px;
+    font-size: var(--yc-font-size-base);
+    color: var(--yc-color-text-regular);
+    line-height: 1.5;
+    white-space: nowrap;
+    border: 1px solid var(--yc-color-border);
+    border-radius: 4px;
+    background: var(--yc-color-bg);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.yc-dropdown__trigger:hover {
+    color: var(--yc-color-primary);
+    border-color: var(--yc-color-primary);
+}
+
+.yc-dropdown:focus-visible .yc-dropdown__trigger,
+.yc-dropdown__trigger:focus-visible {
+    border-color: var(--yc-color-primary);
+    box-shadow: var(--yc-focus-ring);
+}
+
+.yc-dropdown--opened .yc-dropdown__trigger {
+    border-color: var(--yc-color-primary);
+    color: var(--yc-color-primary);
+}
+
+.yc-dropdown__trigger .yc-dropdown__caret {
+    font-size: 12px;
+    transition: transform 0.3s ease;
+    margin-left: 2px;
+}
+
+.yc-dropdown--opened .yc-dropdown__trigger .yc-dropdown__caret {
+    transform: rotate(180deg);
+}
+
+/* ==================== Plain Trigger Color Variants ==================== */
+
+.yc-dropdown--primary .yc-dropdown__trigger {
+    border-color: var(--yc-color-primary);
+    background-color: var(--yc-color-primary);
+    color: var(--yc-color-white);
+}
+
+.yc-dropdown--primary .yc-dropdown__trigger:hover {
+    background-color: var(--yc-color-primary-hover);
+    border-color: var(--yc-color-primary-hover);
+}
+
+.yc-dropdown--primary .yc-dropdown__trigger .yc-dropdown__caret {
+    color: var(--yc-color-white);
+}
+
+.yc-dropdown--success .yc-dropdown__trigger {
+    border-color: var(--yc-color-success);
+    background-color: var(--yc-color-success);
+    color: var(--yc-color-white);
+}
+
+.yc-dropdown--success .yc-dropdown__trigger:hover {
+    background-color: var(--yc-color-success-hover);
+    border-color: var(--yc-color-success-hover);
+}
+
+.yc-dropdown--success .yc-dropdown__trigger .yc-dropdown__caret {
+    color: var(--yc-color-white);
+}
+
+.yc-dropdown--warning .yc-dropdown__trigger {
+    border-color: var(--yc-color-warning);
+    background-color: var(--yc-color-warning);
+    color: var(--yc-color-white);
+}
+
+.yc-dropdown--warning .yc-dropdown__trigger:hover {
+    background-color: var(--yc-color-warning-hover);
+    border-color: var(--yc-color-warning-hover);
+}
+
+.yc-dropdown--warning .yc-dropdown__trigger .yc-dropdown__caret {
+    color: var(--yc-color-white);
+}
+
+.yc-dropdown--danger .yc-dropdown__trigger {
+    border-color: var(--yc-color-danger);
+    background-color: var(--yc-color-danger);
+    color: var(--yc-color-white);
+}
+
+.yc-dropdown--danger .yc-dropdown__trigger:hover {
+    background-color: var(--yc-color-danger-hover);
+    border-color: var(--yc-color-danger-hover);
+}
+
+.yc-dropdown--danger .yc-dropdown__trigger .yc-dropdown__caret {
+    color: var(--yc-color-white);
+}
+
+.yc-dropdown--info .yc-dropdown__trigger {
+    border-color: var(--yc-color-info);
+    background-color: var(--yc-color-info);
+    color: var(--yc-color-white);
+}
+
+.yc-dropdown--info .yc-dropdown__trigger:hover {
+    background-color: var(--yc-color-info-hover);
+    border-color: var(--yc-color-info-hover);
+}
+
+.yc-dropdown--info .yc-dropdown__trigger .yc-dropdown__caret {
+    color: var(--yc-color-white);
+}
+
+/* ==================== Dropdown Menu ==================== */
+
+.yc-dropdown__menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    min-width: 152px;
+    max-height: 400px;
+    overflow-y: auto;
+    padding: 6px 0;
+    margin: 0;
+    background: var(--yc-color-bg);
+    border: 1px solid var(--yc-color-border-lighter);
+    border-radius: 4px;
+    box-shadow: var(--yc-box-shadow-lg);
+    z-index: var(--yc-z-index-dropdown);
+    opacity: 0;
+    visibility: hidden;
+    transform: scaleY(0);
+    transform-origin: top center;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    will-change: transform, opacity, visibility;
+    pointer-events: none;
+}
+
+.yc-dropdown__menu--show,
+.yc-dropdown--opened > .yc-dropdown__menu {
+    opacity: 1;
+    visibility: visible;
+    transform: scaleY(1);
+    pointer-events: auto;
+}
+
+.yc-dropdown__menu--right {
+    left: auto;
+    right: 0;
+}
+
+.yc-dropdown__menu--dropup {
+    top: auto;
+    bottom: calc(100% + 8px);
+    transform: scaleY(0);
+    transform-origin: bottom center;
+}
+
+.yc-dropdown__menu--dropup.yc-dropdown__menu--show,
+.yc-dropdown--opened > .yc-dropdown__menu--dropup {
+    transform: scaleY(1);
+}
+
+/* ==================== Dropdown Menu Scrollbar ==================== */
+
+.yc-dropdown__menu::-webkit-scrollbar {
+    width: 6px;
+}
+
+.yc-dropdown__menu::-webkit-scrollbar-thumb {
+    background: var(--yc-color-text-placeholder);
+    border-radius: 3px;
+}
+
+.yc-dropdown__menu::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* ==================== Dropdown Item ==================== */
+
+.yc-dropdown__item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 16px;
+    height: 34px;
+    line-height: 1;
+    font-size: var(--yc-font-size-base);
+    color: var(--yc-color-text-regular);
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    white-space: nowrap;
+    user-select: none;
+    position: relative;
+}
+
+.yc-dropdown__item:hover {
+    background: var(--yc-color-fill-light);
+    color: var(--yc-color-text-primary);
+}
+
+.yc-dropdown__item:focus-visible {
+    background: var(--yc-color-primary-light-2);
+    color: var(--yc-color-primary);
+}
+
+.yc-dropdown__item:active {
+    background: var(--yc-color-primary-light-2);
+}
+
+.yc-dropdown__item i {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    font-size: 14px;
+    color: inherit;
+    flex-shrink: 0;
+    margin-right: 4px;
+}
+
+/* ==================== Dropdown Divider ==================== */
+
+.yc-dropdown__divider {
+    height: 1px;
+    background: var(--yc-color-border-light);
+    margin: 5px 0;
+}
+
+/* ==================== Dropdown Item States ==================== */
+
+.yc-dropdown__item--divided {
+    margin-top: 5px;
+    border-top: 1px solid var(--yc-color-border-light);
+    padding-top: 5px;
+}
+
+.yc-dropdown__item--disabled {
+    color: var(--yc-color-text-placeholder);
+    cursor: not-allowed;
+}
+
+.yc-dropdown__item--disabled:hover {
+    background: transparent;
+    color: var(--yc-color-text-placeholder);
+}
+
+.yc-dropdown__item--danger {
+    color: var(--yc-color-danger);
+}
+
+.yc-dropdown__item--danger:hover {
+    background: var(--yc-color-danger-light-9);
+    color: var(--yc-color-danger);
+}
+
+.yc-dropdown__item--active {
+    color: var(--yc-color-primary);
+    font-weight: 500;
+}
+
+.yc-dropdown__item--active::after {
+    content: '\f00c';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    position: absolute;
+    right: 16px;
+    font-size: 12px;
+}
+
+/* ==================== Dropdown Title (Group) ==================== */
+
+.yc-dropdown__title {
+    padding: 6px 16px;
+    height: auto;
+    line-height: 1.5;
+    font-size: 12px;
+    color: var(--yc-color-text-secondary);
+    font-weight: 400;
+    cursor: default;
+    user-select: none;
+    border-bottom: 1px solid var(--yc-color-border-light);
+}
+
+.yc-dropdown__title:hover {
+    background: transparent;
+    color: var(--yc-color-text-secondary);
+}
+
+/* ==================== Dropdown Button Split ==================== */
+
+.yc-dropdown-btn {
+    display: inline-flex;
+    position: relative;
+    align-items: stretch;
+    vertical-align: middle;
+    outline: none;
+}
+
+/* Trigger wrapper inside split button - transparent, no border */
+.yc-dropdown-btn .yc-dropdown__trigger {
+    padding: 0;
+    min-height: auto;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    gap: 0;
+    display: inline-flex;
+    align-items: stretch;
+}
+
+.yc-dropdown-btn .yc-dropdown__trigger:hover {
+    color: inherit;
+    border-color: inherit;
+}
+
+.yc-dropdown-btn--opened .yc-dropdown__trigger {
+    border-color: inherit;
+    color: inherit;
+}
+
+/* Main button - left side with left border & radius */
+.yc-dropdown-btn .yc-dropdown-btn__default {
+    border: 1px solid;
+    border-right: none;
+    border-radius: 4px 0 0 4px;
+    margin-right: 0;
+    position: relative;
+    z-index: 1;
+}
+
+.yc-dropdown-btn .yc-dropdown-btn__default:hover {
+    z-index: 2;
+}
+
+/* Trigger button - right side with right border & radius */
+.yc-dropdown-btn .yc-dropdown-btn__trigger-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    min-width: 32px;
+    height: auto;
+    padding: 0 10px;
+    align-self: stretch;
+    border: 1px solid var(--yc-color-border);
+    border-radius: 0 4px 4px 0;
+    background-color: inherit;
+    color: inherit;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    z-index: 1;
+    margin-left: 0;
+    font-size: 12px;
+}
+
+.yc-dropdown-btn .yc-dropdown-btn__trigger-btn:hover {
+    z-index: 2;
+    background-color: var(--yc-overlay-surface-base);
+}
+
+.yc-dropdown-btn .yc-dropdown-btn__trigger-btn.is-active {
+    background-color: var(--yc-shadow-color-medium);
+}
+
+.yc-dropdown-btn .yc-dropdown__menu {
+    top: calc(100% + 4px);
+    right: 0;
+    left: auto;
+}
+
+.yc-dropdown-btn .yc-dropdown-btn__caret {
+    font-size: 12px;
+    transition: transform 0.3s ease;
+}
+
+.yc-dropdown-btn--opened .yc-dropdown-btn__caret {
+    transform: rotate(180deg);
+}
+
+/* ==================== Split Button Colors ==================== */
+
+/* Primary button */
+.yc-dropdown-btn .yc-button--primary {
+    border-color: var(--yc-color-primary);
+    background-color: var(--yc-color-primary);
+    color: var(--yc-color-white);
+}
+
+.yc-dropdown-btn .yc-button--primary + .yc-dropdown-btn__trigger-btn {
+    border-color: var(--yc-color-primary);
+    background-color: var(--yc-color-primary);
+    color: var(--yc-color-white);
+}
+
+.yc-dropdown-btn .yc-button--primary + .yc-dropdown-btn__trigger-btn:hover {
+    background-color: var(--yc-color-primary-hover);
+}
+
+/* Default button */
+.yc-dropdown-btn .yc-button--default {
+    border-color: var(--yc-color-border);
+    background-color: var(--yc-color-bg);
+    color: var(--yc-color-text-regular);
+}
+
+.yc-dropdown-btn .yc-button--default + .yc-dropdown-btn__trigger-btn {
+    border-color: var(--yc-color-border);
+    background-color: var(--yc-color-bg);
+    color: var(--yc-color-text-regular);
+}
+
+.yc-dropdown-btn .yc-button--default + .yc-dropdown-btn__trigger-btn:hover {
+    color: var(--yc-color-primary);
+    background-color: var(--yc-color-fill-light);
+    border-color: var(--yc-color-primary);
+}
+
+/* Success button */
+.yc-dropdown-btn .yc-button--success {
+    border-color: var(--yc-color-success);
+    background-color: var(--yc-color-success);
+    color: var(--yc-color-white);
+}
+
+.yc-dropdown-btn .yc-button--success + .yc-dropdown-btn__trigger-btn {
+    border-color: var(--yc-color-success);
+    background-color: var(--yc-color-success);
+    color: var(--yc-color-white);
+}
+
+.yc-dropdown-btn .yc-button--success + .yc-dropdown-btn__trigger-btn:hover {
+    background-color: var(--yc-color-success-hover);
+}
+
+/* Warning button */
+.yc-dropdown-btn .yc-button--warning {
+    border-color: var(--yc-color-warning);
+    background-color: var(--yc-color-warning);
+    color: var(--yc-color-white);
+}
+
+.yc-dropdown-btn .yc-button--warning + .yc-dropdown-btn__trigger-btn {
+    border-color: var(--yc-color-warning);
+    background-color: var(--yc-color-warning);
+    color: var(--yc-color-white);
+}
+
+.yc-dropdown-btn .yc-button--warning + .yc-dropdown-btn__trigger-btn:hover {
+    background-color: var(--yc-color-warning-hover);
+}
+
+/* Danger button */
+.yc-dropdown-btn .yc-button--danger {
+    border-color: var(--yc-color-danger);
+    background-color: var(--yc-color-danger);
+    color: var(--yc-color-white);
+}
+
+.yc-dropdown-btn .yc-button--danger + .yc-dropdown-btn__trigger-btn {
+    border-color: var(--yc-color-danger);
+    background-color: var(--yc-color-danger);
+    color: var(--yc-color-white);
+}
+
+.yc-dropdown-btn .yc-button--danger + .yc-dropdown-btn__trigger-btn:hover {
+    background-color: var(--yc-color-danger-hover);
+}
+
+/* Info button */
+.yc-dropdown-btn .yc-button--info {
+    border-color: var(--yc-color-info);
+    background-color: var(--yc-color-info);
+    color: var(--yc-color-white);
+}
+
+.yc-dropdown-btn .yc-button--info + .yc-dropdown-btn__trigger-btn {
+    border-color: var(--yc-color-info);
+    background-color: var(--yc-color-info);
+    color: var(--yc-color-white);
+}
+
+.yc-dropdown-btn .yc-button--info + .yc-dropdown-btn__trigger-btn:hover {
+    background-color: var(--yc-color-info-hover);
+}
+
+/* ==================== Disabled State ==================== */
+
+/* .yc-dropdown.is-disabled {
+    pointer-events: none;
+    cursor: not-allowed;
+} */
+
+.yc-dropdown.is-disabled .yc-dropdown__trigger {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.yc-dropdown.is-disabled .yc-dropdown__caret {
+    opacity: 0.5;
+}
+
+/* ==================== Dropdown Sizes ==================== */
+
+.yc-dropdown--medium .yc-dropdown__item {
+    height: 36px;
+    line-height: 36px;
+    padding: 0 20px;
+    font-size: 14px;
+}
+
+.yc-dropdown--small .yc-dropdown__item {
+    height: 28px;
+    line-height: 28px;
+    padding: 0 12px;
+    font-size: 13px;
+}
+
+.yc-dropdown--large .yc-dropdown__item {
+    height: 42px;
+    line-height: 42px;
+    padding: 0 24px;
+    font-size: 15px;
+}
+
+/* ==================== Dropdown Prefix/Suffix ==================== */
+
+.yc-dropdown__prefix {
+    margin-right: 6px;
+    color: var(--yc-color-text-secondary);
+    font-size: 14px;
+}
+
+.yc-dropdown__suffix {
+    margin-left: 6px;
+    color: var(--yc-color-text-secondary);
+    font-size: 12px;
+}
+
+/* ==================== Transition Animations ==================== */
+
+.yc-dropdown__menu-enter-active,
+.yc-dropdown__menu-leave-active {
+    transition: opacity 0.2s cubic-bezier(0.23, 1, 0.32, 1),
+                transform 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.yc-dropdown__menu-enter-from,
+.yc-dropdown__menu-leave-to {
+    opacity: 0;
+    transform: scaleY(0);
+}
+
+/* ==================== Dropdown Popover Style ==================== */
+
+.yc-dropdown__menu.is-light {
+    background: var(--yc-color-white);
+    border-color: var(--yc-color-border-light);
+}
+
+.yc-dropdown__menu.is-dark {
+    background: var(--yc-color-text-primary);
+    border-color: var(--yc-color-text-primary);
+}
+
+.yc-dropdown__menu.is-dark .yc-dropdown__item {
+    color: var(--yc-color-white);
+}
+
+.yc-dropdown__menu.is-dark .yc-dropdown__item:hover {
+    background: var(--yc-color-primary);
+}
+
+.yc-dropdown__menu.is-dark .yc-dropdown__title {
+    color: var(--yc-overlay-text-muted);
+    border-bottom-color: var(--yc-overlay-surface-soft);
+}
+
+.yc-dropdown__menu.is-dark .yc-dropdown__divider {
+    background: var(--yc-overlay-surface-soft);
+}

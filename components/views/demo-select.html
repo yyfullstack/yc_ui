@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select 选择器组件示例 - YC UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+    <style>
+        .select-demo-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .select-demo-stack {
+            display: grid;
+            gap: 12px;
+        }
+
+        .select-demo-note {
+            padding: 16px 18px;
+            border: 1px solid var(--yc-color-border-light);
+            border-radius: var(--yc-border-radius-large);
+            background: linear-gradient(180deg, var(--yc-color-bg) 0%, var(--yc-color-fill-extra-light) 100%);
+            color: var(--yc-color-text-regular);
+            line-height: 1.7;
+        }
+
+        .select-demo-note strong {
+            color: var(--yc-color-text-primary);
+        }
+
+        .select-demo-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .select-demo-chip-row {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .select-demo-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: var(--yc-border-radius-round);
+            background: var(--yc-color-fill-extra-light);
+            color: var(--yc-color-text-secondary);
+            font-size: var(--yc-font-size-extra-small);
+        }
+
+        .select-demo-result {
+            display: grid;
+            gap: 10px;
+            padding: 14px 16px;
+            border: 1px solid var(--yc-color-border-light);
+            border-radius: var(--yc-border-radius-large);
+            background: var(--yc-color-bg);
+        }
+
+        .select-demo-result__title {
+            margin: 0;
+            color: var(--yc-color-text-primary);
+            font-size: var(--yc-font-size-small);
+            font-weight: var(--yc-font-weight-semibold);
+        }
+
+        .select-demo-result__value {
+            color: var(--yc-color-text-regular);
+            font-size: var(--yc-font-size-small);
+        }
+
+        .select-demo-size-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 960px) {
+            .select-demo-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">Select 选择器</h1>
+            <p class="demo-page-subtitle">统一下拉触发器、图标选中态、清空反馈和搜索面板，让表单、筛选和工作台里的选择体验保持同一套节奏。</p>
+        </div>
+
+        <div class="demo-section">
+            <h3>图标化选择</h3>
+            <div class="select-demo-grid">
+                <div class="demo-block">
+                    <div class="demo-block-title">业务空间</div>
+                    <div class="demo-block-description">选中后在输入框前显示对应图标，清空图标与展开箭头共享右侧操作位。</div>
+                    <div class="select-demo-stack">
+                        <div class="yc-select has-value" id="workspaceSelect" data-result-target="workspaceSelectResult">
+                            <div class="yc-select__input-wrapper">
+                                <span class="yc-select__selection-icon" hidden></span>
+                                <input type="text" class="yc-select__input" readonly placeholder="请选择工作空间">
+                                <i class="fas fa-times yc-select__clear"></i>
+                                <i class="fas fa-chevron-down yc-select__arrow"></i>
+                            </div>
+                            <div class="yc-select__popper">
+                                <div class="yc-select-dropdown">
+                                    <div class="yc-select-dropdown__list">
+                                        <div class="yc-select-dropdown__item is-selected" data-value="ops" data-label="运营工作台" data-icon="fas fa-chart-line">
+                                            <span class="yc-select-dropdown__item-icon"><i class="fas fa-chart-line"></i></span>
+                                            <span class="yc-select-dropdown__item-content">
+                                                <span class="yc-select-dropdown__item-label">运营工作台</span>
+                                                <span class="yc-select-dropdown__item-meta">日报、渠道转化、指标看板</span>
+                                            </span>
+                                            <span class="yc-select-dropdown__item-check">✓</span>
+                                        </div>
+                                        <div class="yc-select-dropdown__item" data-value="asset" data-label="素材中心" data-icon="fas fa-photo-film">
+                                            <span class="yc-select-dropdown__item-icon"><i class="fas fa-photo-film"></i></span>
+                                            <span class="yc-select-dropdown__item-content">
+                                                <span class="yc-select-dropdown__item-label">素材中心</span>
+                                                <span class="yc-select-dropdown__item-meta">图片、视频和批量上传入口</span>
+                                            </span>
+                                            <span class="yc-select-dropdown__item-check">✓</span>
+                                        </div>
+                                        <div class="yc-select-dropdown__item" data-value="dev" data-label="研发平台" data-icon="fas fa-code-branch">
+                                            <span class="yc-select-dropdown__item-icon"><i class="fas fa-code-branch"></i></span>
+                                            <span class="yc-select-dropdown__item-content">
+                                                <span class="yc-select-dropdown__item-label">研发平台</span>
+                                                <span class="yc-select-dropdown__item-meta">版本、发布和联调环境</span>
+                                            </span>
+                                            <span class="yc-select-dropdown__item-check">✓</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="select-demo-result" id="workspaceSelectResult">
+                            <p class="select-demo-result__title">当前选择</p>
+                            <div class="select-demo-result__value">运营工作台</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="demo-block">
+                    <div class="demo-block-title">负责人</div>
+                    <div class="demo-block-description">图标槽位可以承载成员、渠道、平台等抽象对象，便于工作台扫描当前上下文。</div>
+                    <div class="select-demo-stack">
+                        <div class="yc-select" id="assigneeSelect" data-result-target="assigneeSelectResult">
+                            <div class="yc-select__input-wrapper">
+                                <span class="yc-select__selection-icon" hidden></span>
+                                <input type="text" class="yc-select__input" readonly placeholder="请选择负责人">
+                                <i class="fas fa-times yc-select__clear"></i>
+                                <i class="fas fa-chevron-down yc-select__arrow"></i>
+                            </div>
+                            <div class="yc-select__popper">
+                                <div class="yc-select-dropdown">
+                                    <div class="yc-select-dropdown__list">
+                                        <div class="yc-select-dropdown__item" data-value="alice" data-label="Alice" data-icon="fas fa-user-astronaut">
+                                            <span class="yc-select-dropdown__item-icon"><i class="fas fa-user-astronaut"></i></span>
+                                            <span class="yc-select-dropdown__item-content">
+                                                <span class="yc-select-dropdown__item-label">Alice</span>
+                                                <span class="yc-select-dropdown__item-meta">前端负责人</span>
+                                            </span>
+                                            <span class="yc-select-dropdown__item-check">✓</span>
+                                        </div>
+                                        <div class="yc-select-dropdown__item" data-value="dylan" data-label="Dylan" data-icon="fas fa-user-tie">
+                                            <span class="yc-select-dropdown__item-icon"><i class="fas fa-user-tie"></i></span>
+                                            <span class="yc-select-dropdown__item-content">
+                                                <span class="yc-select-dropdown__item-label">Dylan</span>
+                                                <span class="yc-select-dropdown__item-meta">项目经理</span>
+                                            </span>
+                                            <span class="yc-select-dropdown__item-check">✓</span>
+                                        </div>
+                                        <div class="yc-select-dropdown__item" data-value="sara" data-label="Sara" data-icon="fas fa-user-shield">
+                                            <span class="yc-select-dropdown__item-icon"><i class="fas fa-user-shield"></i></span>
+                                            <span class="yc-select-dropdown__item-content">
+                                                <span class="yc-select-dropdown__item-label">Sara</span>
+                                                <span class="yc-select-dropdown__item-meta">质量负责人</span>
+                                            </span>
+                                            <span class="yc-select-dropdown__item-check">✓</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="select-demo-result" id="assigneeSelectResult">
+                            <p class="select-demo-result__title">当前选择</p>
+                            <div class="select-demo-result__value">未选择</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>搜索与分组</h3>
+            <div class="demo-block">
+                <div class="select-demo-meta">
+                    <div>
+                        <div class="demo-block-title">搜索面板</div>
+                        <div class="demo-block-description">下拉层保留独立搜索区，适合承载大列表和说明性副文案。</div>
+                    </div>
+                    <div class="select-demo-chip-row">
+                        <span class="select-demo-chip"><i class="fas fa-search"></i> 搜索</span>
+                        <span class="select-demo-chip"><i class="fas fa-layer-group"></i> 分组</span>
+                        <span class="select-demo-chip"><i class="fas fa-broom"></i> 清空</span>
+                    </div>
+                </div>
+                <div class="select-demo-stack">
+                    <div class="yc-select yc-select--large has-value" id="citySelect" data-result-target="citySelectResult">
+                        <div class="yc-select__input-wrapper">
+                            <span class="yc-select__selection-icon" hidden></span>
+                            <input type="text" class="yc-select__input" readonly placeholder="请选择城市或区域">
+                            <i class="fas fa-times yc-select__clear"></i>
+                            <i class="fas fa-chevron-down yc-select__arrow"></i>
+                        </div>
+                        <div class="yc-select__popper">
+                            <div class="yc-select-dropdown">
+                                <div class="yc-select-dropdown__search-wrapper">
+                                    <i class="fas fa-search yc-select-dropdown__search-icon"></i>
+                                    <input type="text" class="yc-select-dropdown__search" placeholder="搜索城市、区域或业务线">
+                                </div>
+                                <div class="yc-select-dropdown__list">
+                                    <div class="yc-select-dropdown__group">
+                                        <div class="yc-select-dropdown__group-title">华东区域</div>
+                                        <div class="yc-select-dropdown__item is-selected" data-value="shanghai" data-label="上海 / 核心城区" data-icon="fas fa-city" data-keywords="上海 华东 核心城区 金桥 徐汇">
+                                            <span class="yc-select-dropdown__item-icon"><i class="fas fa-city"></i></span>
+                                            <span class="yc-select-dropdown__item-content">
+                                                <span class="yc-select-dropdown__item-label">上海 / 核心城区</span>
+                                                <span class="yc-select-dropdown__item-meta">适合总部运营与平台联调</span>
+                                            </span>
+                                            <span class="yc-select-dropdown__item-check">✓</span>
+                                        </div>
+                                        <div class="yc-select-dropdown__item" data-value="hangzhou" data-label="杭州 / 电商业务" data-icon="fas fa-store" data-keywords="杭州 电商 华东 滨江">
+                                            <span class="yc-select-dropdown__item-icon"><i class="fas fa-store"></i></span>
+                                            <span class="yc-select-dropdown__item-content">
+                                                <span class="yc-select-dropdown__item-label">杭州 / 电商业务</span>
+                                                <span class="yc-select-dropdown__item-meta">营销投放、直播和商品管理</span>
+                                            </span>
+                                            <span class="yc-select-dropdown__item-check">✓</span>
+                                        </div>
+                                    </div>
+                                    <div class="yc-select-dropdown__group">
+                                        <div class="yc-select-dropdown__group-title">华南区域</div>
+                                        <div class="yc-select-dropdown__item" data-value="shenzhen" data-label="深圳 / 增长团队" data-icon="fas fa-rocket" data-keywords="深圳 增长 华南 南山">
+                                            <span class="yc-select-dropdown__item-icon"><i class="fas fa-rocket"></i></span>
+                                            <span class="yc-select-dropdown__item-content">
+                                                <span class="yc-select-dropdown__item-label">深圳 / 增长团队</span>
+                                                <span class="yc-select-dropdown__item-meta">用户增长、活动实验和数据洞察</span>
+                                            </span>
+                                            <span class="yc-select-dropdown__item-check">✓</span>
+                                        </div>
+                                        <div class="yc-select-dropdown__item" data-value="guangzhou" data-label="广州 / 供应链" data-icon="fas fa-truck-fast" data-keywords="广州 供应链 仓储 华南">
+                                            <span class="yc-select-dropdown__item-icon"><i class="fas fa-truck-fast"></i></span>
+                                            <span class="yc-select-dropdown__item-content">
+                                                <span class="yc-select-dropdown__item-label">广州 / 供应链</span>
+                                                <span class="yc-select-dropdown__item-meta">仓配调度、库存和履约</span>
+                                            </span>
+                                            <span class="yc-select-dropdown__item-check">✓</span>
+                                        </div>
+                                    </div>
+                                    <div class="yc-select-dropdown__no-data" hidden>没有匹配结果</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="select-demo-result" id="citySelectResult">
+                        <p class="select-demo-result__title">当前选择</p>
+                        <div class="select-demo-result__value">上海 / 核心城区</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>尺寸与状态</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">统一状态表达</div>
+                <div class="demo-block-description">同一套 icon、arrow、clear 规则可直接套在不同尺寸和校验状态上。</div>
+                <div class="select-demo-size-row">
+                    <div class="yc-select yc-select--small yc-select--success has-value">
+                        <div class="yc-select__input-wrapper">
+                            <span class="yc-select__selection-icon is-filled"><i class="fas fa-check"></i></span>
+                            <input type="text" class="yc-select__input" readonly value="已通过">
+                            <i class="fas fa-times yc-select__clear"></i>
+                            <i class="fas fa-chevron-down yc-select__arrow"></i>
+                        </div>
+                    </div>
+                    <div class="yc-select yc-select--warning has-value">
+                        <div class="yc-select__input-wrapper">
+                            <span class="yc-select__selection-icon is-filled"><i class="fas fa-clock"></i></span>
+                            <input type="text" class="yc-select__input" readonly value="待确认">
+                            <i class="fas fa-times yc-select__clear"></i>
+                            <i class="fas fa-chevron-down yc-select__arrow"></i>
+                        </div>
+                    </div>
+                    <div class="yc-select yc-select--large yc-select--error">
+                        <div class="yc-select__input-wrapper">
+                            <input type="text" class="yc-select__input" readonly placeholder="请选择失败原因">
+                            <i class="fas fa-chevron-down yc-select__arrow"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>平台建议</h3>
+            <div class="select-demo-note">
+                <strong>推荐做法：</strong>
+                Select 在平台层最好统一成“输入框外观 + 下拉层内容 + 清空/箭头操作位 + 选中图标语义”四件套。这样无论是表单字段、顶部筛选器还是工作台切换器，都能沿用相同的视觉和交互心智。
+            </div>
+        </div>
+    </div>
+
+    <script src="../scripts/demo-composed-controls.js"></script>
+    <script>
+        function updateResult(select) {
+            const resultId = select.dataset.resultTarget;
+            const result = resultId ? document.getElementById(resultId) : null;
+            if (!result) return;
+
+            const valueEl = result.querySelector('.select-demo-result__value');
+            if (!valueEl) return;
+
+            const input = select.querySelector('.yc-select__input');
+            valueEl.textContent = input && input.value ? input.value : '未选择';
+        }
+
+        function bindSearch(select) {
+            const searchInput = select.querySelector('.yc-select-dropdown__search');
+            if (!searchInput) return;
+
+            const items = Array.from(select.querySelectorAll('.yc-select-dropdown__item'));
+            const groups = Array.from(select.querySelectorAll('.yc-select-dropdown__group'));
+            const empty = select.querySelector('.yc-select-dropdown__no-data');
+
+            function applyFilter(keyword) {
+                const normalized = keyword.trim().toLowerCase();
+                let visibleCount = 0;
+
+                items.forEach((item) => {
+                    const haystack = `${item.dataset.label || ''} ${item.dataset.keywords || ''}`.toLowerCase();
+                    const visible = !normalized || haystack.includes(normalized);
+                    item.hidden = !visible;
+                    if (visible) visibleCount += 1;
+                });
+
+                groups.forEach((group) => {
+                    const hasVisible = Array.from(group.querySelectorAll('.yc-select-dropdown__item')).some((item) => !item.hidden);
+                    group.hidden = !hasVisible;
+                });
+
+                if (empty) {
+                    empty.hidden = visibleCount !== 0;
+                }
+            }
+
+            searchInput.addEventListener('input', (event) => {
+                applyFilter(event.target.value);
+            });
+
+            searchInput.addEventListener('click', (event) => {
+                event.stopPropagation();
+            });
+
+            select.addEventListener('yc-select:change', () => {
+                searchInput.value = '';
+                applyFilter('');
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const pageSelects = document.querySelectorAll('.yc-select[data-result-target]');
+            pageSelects.forEach((select) => {
+                updateResult(select);
+                bindSearch(select);
+                select.addEventListener('yc-select:change', () => updateResult(select));
+            });
+        });
+    </script>
+    <script src="../scripts/demo-shell.js"></script>
+</body>
+</html>

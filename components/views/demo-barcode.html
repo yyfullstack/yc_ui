@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barcode 条码组件示例 - YC UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+    <style>
+        .barcode-demo-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .barcode-demo-row {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .barcode-demo-stack {
+            display: grid;
+            gap: 12px;
+        }
+
+        .barcode-demo-control-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 12px;
+        }
+
+        .barcode-demo-control-grid .yc-input {
+            width: 100%;
+        }
+
+        .barcode-demo-note {
+            padding: 16px 18px;
+            border: 1px solid var(--yc-color-border-light);
+            border-radius: var(--yc-border-radius-large);
+            background: linear-gradient(180deg, var(--yc-color-bg) 0%, var(--yc-color-fill-extra-light) 100%);
+            color: var(--yc-color-text-regular);
+            line-height: 1.7;
+        }
+
+        .barcode-demo-note strong {
+            color: var(--yc-color-text-primary);
+        }
+
+        .barcode-demo-alert {
+            padding: 12px 14px;
+            border: 1px solid var(--yc-layer-warning-strong);
+            border-radius: var(--yc-border-radius-base);
+            background: var(--yc-layer-warning-tint);
+            color: var(--yc-color-text-regular);
+            font-size: var(--yc-font-size-small);
+        }
+
+        .barcode-demo-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .barcode-demo-chip-row {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .barcode-demo-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: var(--yc-border-radius-round);
+            background: var(--yc-color-fill-extra-light);
+            color: var(--yc-color-text-secondary);
+            font-size: var(--yc-font-size-extra-small);
+        }
+
+        @media (max-width: 960px) {
+            .barcode-demo-grid,
+            .barcode-demo-control-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">Barcode 条码组件</h1>
+            <p class="demo-page-subtitle">统一二维码和条形码的卡片容器、标签信息和明暗主题重绘逻辑，让深色工作台里的编码展示也保持完整一致。</p>
+        </div>
+
+        <div class="demo-section">
+            <h3>主题联动</h3>
+            <div class="barcode-demo-grid">
+                <div class="demo-block">
+                    <div class="demo-block-title">二维码</div>
+                    <div class="demo-block-description">切换 demo 页主题时，二维码会重新读取 token 并重绘前景/背景色。</div>
+                    <div class="barcode-demo-row">
+                        <div class="yc-barcode">
+                            <div class="yc-qrcode" id="qrcode-theme"></div>
+                            <span class="yc-barcode-label">主题同步二维码</span>
+                        </div>
+                        <div class="yc-barcode">
+                            <svg class="yc-barcode-svg" id="barcode-theme"></svg>
+                            <span class="yc-barcode-label">主题同步条形码</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="demo-block">
+                    <div class="demo-block-title">说明</div>
+                    <div class="demo-block-description">在深色主题下，不再固定使用纯白背景和纯黑码色，而是跟随组件 token 自适应渲染。</div>
+                    <div class="barcode-demo-stack">
+                        <div class="barcode-demo-alert">
+                            当前示例会监听 <code>yc-theme</code> 属性变化，并自动重新渲染所有二维码和条形码。
+                        </div>
+                        <div class="barcode-demo-note">
+                            <strong>推荐做法：</strong>
+                            将二维码/条码的前景色映射到 <code>--yc-color-text-primary</code>，背景色映射到 <code>--yc-color-bg</code> 或业务容器背景，避免深色主题里出现突兀的固定白底。
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>尺寸体系</h3>
+            <div class="demo-block">
+                <div class="barcode-demo-meta">
+                    <div>
+                        <div class="demo-block-title">统一尺寸表达</div>
+                        <div class="demo-block-description">同一套容器可以承接扫码、标签、物流和支付等不同业务密度。</div>
+                    </div>
+                    <div class="barcode-demo-chip-row">
+                        <span class="barcode-demo-chip"><i class="fas fa-qrcode"></i> QR</span>
+                        <span class="barcode-demo-chip"><i class="fas fa-barcode"></i> CODE128</span>
+                        <span class="barcode-demo-chip"><i class="fas fa-moon"></i> Dark Ready</span>
+                    </div>
+                </div>
+                <div class="barcode-demo-row">
+                    <div class="yc-barcode yc-barcode-small">
+                        <div class="yc-qrcode" id="qrcode-small"></div>
+                        <span class="yc-barcode-label">小尺寸 64x64</span>
+                    </div>
+                    <div class="yc-barcode">
+                        <div class="yc-qrcode" id="qrcode-medium"></div>
+                        <span class="yc-barcode-label">中尺寸 128x128</span>
+                    </div>
+                    <div class="yc-barcode yc-barcode-large">
+                        <div class="yc-qrcode" id="qrcode-large"></div>
+                        <span class="yc-barcode-label">大尺寸 192x192</span>
+                    </div>
+                    <div class="yc-barcode yc-barcode-small">
+                        <svg class="yc-barcode-svg" id="barcode-small"></svg>
+                        <span class="yc-barcode-label">紧凑标签</span>
+                    </div>
+                    <div class="yc-barcode">
+                        <svg class="yc-barcode-svg" id="barcode-medium"></svg>
+                        <span class="yc-barcode-label">标准标签</span>
+                    </div>
+                    <div class="yc-barcode yc-barcode-large">
+                        <svg class="yc-barcode-svg" id="barcode-large"></svg>
+                        <span class="yc-barcode-label">物流宽码</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>业务标签</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">电商与履约场景</div>
+                <div class="demo-block-description">商品追溯、支付入口和包裹流转都可以落在统一的条码卡片规范里。</div>
+                <div class="barcode-demo-row">
+                    <div class="yc-barcode">
+                        <svg class="yc-barcode-svg" id="barcode-ean13"></svg>
+                        <span class="yc-barcode-label">商品条码 / EAN13</span>
+                    </div>
+                    <div class="yc-barcode">
+                        <svg class="yc-barcode-svg" id="barcode-upc"></svg>
+                        <span class="yc-barcode-label">零售条码 / UPC</span>
+                    </div>
+                    <div class="yc-barcode">
+                        <div class="yc-qrcode" id="qrcode-trace"></div>
+                        <span class="yc-barcode-label">追溯二维码</span>
+                    </div>
+                    <div class="yc-barcode">
+                        <div class="yc-qrcode" id="qrcode-pay"></div>
+                        <span class="yc-barcode-label">支付二维码</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>动态生成</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">交互式生成器</div>
+                <div class="demo-block-description">用于验证不同内容、格式和尺寸在明暗主题下的重绘一致性。</div>
+                <div class="barcode-demo-control-grid">
+                    <input class="yc-input" id="barcodeTextInput" type="text" value="YC-ORDER-20260512" placeholder="请输入条码内容">
+                    <select class="yc-input" id="barcodeFormatSelect">
+                        <option value="CODE128">CODE128</option>
+                        <option value="CODE39">CODE39</option>
+                        <option value="EAN13">EAN13</option>
+                        <option value="UPC">UPC</option>
+                    </select>
+                    <input class="yc-input" id="qrcodeTextInput" type="text" value="https://yc-ui.example.com/workbench" placeholder="请输入二维码内容">
+                    <select class="yc-input" id="qrcodeSizeSelect">
+                        <option value="96">96x96</option>
+                        <option value="128" selected>128x128</option>
+                        <option value="192">192x192</option>
+                        <option value="256">256x256</option>
+                    </select>
+                </div>
+                <div class="demo-btn-row">
+                    <button class="yc-button yc-button--primary" type="button" id="refreshQrcode">
+                        <i class="fas fa-qrcode"></i>
+                        生成二维码
+                    </button>
+                    <button class="yc-button yc-button--success" type="button" id="refreshBarcode">
+                        <i class="fas fa-barcode"></i>
+                        生成条形码
+                    </button>
+                </div>
+                <div class="barcode-demo-row">
+                    <div class="yc-barcode">
+                        <div class="yc-qrcode" id="qrcode-dynamic"></div>
+                        <span class="yc-barcode-label">动态二维码</span>
+                    </div>
+                    <div class="yc-barcode">
+                        <svg class="yc-barcode-svg" id="barcode-dynamic"></svg>
+                        <span class="yc-barcode-label">动态条形码</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function getBarcodeThemeColors() {
+            const style = getComputedStyle(document.documentElement);
+            return {
+                dark: style.getPropertyValue('--yc-color-text-primary').trim() || '#1f1f1f',
+                light: style.getPropertyValue('--yc-color-bg').trim() || '#ffffff'
+            };
+        }
+
+        const qrRegistry = [
+            { id: 'qrcode-theme', text: 'https://yc-ui.example.com/theme', size: 128 },
+            { id: 'qrcode-small', text: 'YC-SMALL', size: 64 },
+            { id: 'qrcode-medium', text: 'YC-MEDIUM', size: 128 },
+            { id: 'qrcode-large', text: 'YC-LARGE', size: 192 },
+            { id: 'qrcode-trace', text: 'https://trace.example.com/product/20260512', size: 108 },
+            { id: 'qrcode-pay', text: 'https://pay.example.com/order/20260512', size: 108 },
+            { id: 'qrcode-dynamic', text: 'https://yc-ui.example.com/workbench', size: 128, dynamic: true }
+        ];
+
+        const barcodeRegistry = [
+            { id: 'barcode-theme', text: 'YC-THEME-READY', options: { format: 'CODE128', width: 2, height: 64, fontSize: 14, margin: 10 } },
+            { id: 'barcode-small', text: 'SMALL-LOG-01', options: { format: 'CODE128', width: 1.3, height: 36, displayValue: false, margin: 4 } },
+            { id: 'barcode-medium', text: 'MEDIUM-LOG-02', options: { format: 'CODE128', width: 2, height: 54, displayValue: true, fontSize: 12, margin: 8 } },
+            { id: 'barcode-large', text: 'LARGE-LOG-03', options: { format: 'CODE128', width: 2.6, height: 72, displayValue: true, fontSize: 14, margin: 10 } },
+            { id: 'barcode-ean13', text: '6901234567892', options: { format: 'EAN13', width: 2, height: 60, displayValue: true, fontSize: 13, margin: 10 } },
+            { id: 'barcode-upc', text: '012345678905', options: { format: 'UPC', width: 2, height: 60, displayValue: true, fontSize: 13, margin: 10 } },
+            { id: 'barcode-dynamic', text: 'YC-ORDER-20260512', options: { format: 'CODE128', width: 2, height: 64, displayValue: true, fontSize: 14, margin: 10 }, dynamic: true }
+        ];
+
+        function renderQRCode(id, text, size, options = {}) {
+            const target = document.getElementById(id);
+            if (!target) return;
+            target.innerHTML = '';
+
+            if (typeof QRCode !== 'function') {
+                target.textContent = '二维码库未加载';
+                return;
+            }
+
+            const theme = getBarcodeThemeColors();
+            new QRCode(target, {
+                text,
+                width: size,
+                height: size,
+                colorDark: theme.dark,
+                colorLight: theme.light,
+                correctLevel: QRCode.CorrectLevel.M,
+                ...options
+            });
+        }
+
+        function renderBarcode(id, text, options = {}) {
+            const target = document.getElementById(id);
+            if (!target) return;
+
+            if (typeof JsBarcode !== 'function') {
+                target.outerHTML = '<div class="barcode-demo-alert">条形码库未加载</div>';
+                return;
+            }
+
+            const theme = getBarcodeThemeColors();
+            target.innerHTML = '';
+
+            try {
+                JsBarcode(target, text, {
+                    lineColor: theme.dark,
+                    background: theme.light,
+                    displayValue: true,
+                    ...options
+                });
+            } catch (error) {
+                console.error('条形码生成失败:', error);
+                target.innerHTML = '';
+            }
+        }
+
+        function renderAllCodes() {
+            qrRegistry.forEach((item) => renderQRCode(item.id, item.text, item.size, item.options));
+            barcodeRegistry.forEach((item) => renderBarcode(item.id, item.text, item.options));
+        }
+
+        function refreshDynamicQrcode() {
+            const text = document.getElementById('qrcodeTextInput').value.trim() || 'https://yc-ui.example.com/workbench';
+            const size = Number(document.getElementById('qrcodeSizeSelect').value || 128);
+            const registry = qrRegistry.find((item) => item.id === 'qrcode-dynamic');
+            registry.text = text;
+            registry.size = size;
+            renderQRCode(registry.id, registry.text, registry.size, registry.options);
+        }
+
+        function refreshDynamicBarcode() {
+            const text = document.getElementById('barcodeTextInput').value.trim() || 'YC-ORDER-20260512';
+            const format = document.getElementById('barcodeFormatSelect').value || 'CODE128';
+            const registry = barcodeRegistry.find((item) => item.id === 'barcode-dynamic');
+            registry.text = text;
+            registry.options = {
+                ...registry.options,
+                format
+            };
+            renderBarcode(registry.id, registry.text, registry.options);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderAllCodes();
+
+            document.getElementById('refreshQrcode').addEventListener('click', refreshDynamicQrcode);
+            document.getElementById('refreshBarcode').addEventListener('click', refreshDynamicBarcode);
+
+            const observer = new MutationObserver((mutations) => {
+                if (mutations.some((mutation) => mutation.attributeName === 'yc-theme')) {
+                    renderAllCodes();
+                }
+            });
+
+            observer.observe(document.documentElement, {
+                attributes: true,
+                attributeFilter: ['yc-theme']
+            });
+        });
+    </script>
+    <script src="../scripts/demo-shell.js"></script>
+</body>
+</html>

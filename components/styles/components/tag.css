@@ -1,0 +1,189 @@
+@charset "UTF-8";
+
+/* ==================== Tag ==================== */
+
+.yc-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 0 10px;
+    height: 26px;
+    border-radius: var(--yc-border-radius-round);
+    font-size: var(--yc-font-size-extra-small);
+    line-height: 26px;
+    border: 1px solid var(--yc-color-border);
+    background-color: var(--yc-color-bg);
+    color: var(--yc-color-text-regular);
+    cursor: default;
+    user-select: none;
+    gap: 4px;
+    vertical-align: middle;
+    transition: color var(--yc-transition-fast), background-color var(--yc-transition-fast), border-color var(--yc-transition-fast);
+    white-space: nowrap;
+}
+
+.yc-tag__content {
+    display: inline-flex;
+    align-items: center;
+}
+
+.yc-tag__close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 10px;
+    transition: all 0.2s;
+    color: inherit;
+    opacity: 0.7;
+}
+
+.yc-tag__close:hover {
+    opacity: 1;
+    background-color: var(--yc-shadow-color-medium);
+}
+
+/* ==================== Types ==================== */
+
+.yc-tag--plain {
+    background-color: transparent;
+}
+
+.yc-tag--plain.yc-tag--primary {
+    border-color: var(--yc-color-primary);
+    color: var(--yc-color-primary);
+}
+
+.yc-tag--plain.yc-tag--success {
+    border-color: var(--yc-color-success);
+    color: var(--yc-color-success);
+}
+
+.yc-tag--plain.yc-tag--warning {
+    border-color: var(--yc-color-warning);
+    color: var(--yc-color-warning);
+}
+
+.yc-tag--plain.yc-tag--danger {
+    border-color: var(--yc-color-danger);
+    color: var(--yc-color-danger);
+}
+
+.yc-tag--plain.yc-tag--info {
+    border-color: var(--yc-color-info);
+    color: var(--yc-color-info);
+}
+
+.yc-tag--primary {
+    border-color: var(--yc-layer-primary-strong);
+    background-color: var(--yc-layer-primary-soft);
+    color: var(--yc-color-primary);
+}
+
+.yc-tag--success {
+    border-color: var(--yc-layer-success-strong);
+    background-color: var(--yc-layer-success-tint);
+    color: var(--yc-color-success);
+}
+
+.yc-tag--warning {
+    border-color: var(--yc-layer-warning-strong);
+    background-color: var(--yc-layer-warning-tint);
+    color: var(--yc-color-warning);
+}
+
+.yc-tag--danger {
+    border-color: var(--yc-layer-danger-strong);
+    background-color: var(--yc-layer-danger-tint);
+    color: var(--yc-color-danger);
+}
+
+.yc-tag--info {
+    border-color: var(--yc-layer-info-strong);
+    background-color: var(--yc-layer-info);
+    color: var(--yc-color-info);
+}
+
+/* ==================== Sizes ==================== */
+
+.yc-tag--large {
+    height: 30px;
+    padding: 0 12px;
+    font-size: var(--yc-font-size-small);
+    line-height: 30px;
+}
+
+.yc-tag--default {
+    height: 26px;
+    padding: 0 10px;
+    font-size: var(--yc-font-size-extra-small);
+    line-height: 26px;
+}
+
+.yc-tag--small {
+    height: 22px;
+    padding: 0 6px;
+    font-size: 10px;
+    line-height: 22px;
+}
+
+/* ==================== Rounded ==================== */
+
+.yc-tag--round {
+    border-radius: 100px;
+}
+
+/* ==================== Checkable ==================== */
+
+.yc-tag--checkable {
+    cursor: pointer;
+}
+
+.yc-tag--checkable:hover {
+    border-color: var(--yc-color-primary);
+    color: var(--yc-color-primary);
+}
+
+.yc-tag--checkable.is-checked {
+    background-color: var(--yc-color-primary);
+    border-color: var(--yc-color-primary);
+    color: var(--yc-color-white);
+}
+
+/* ==================== Icon ==================== */
+
+.yc-tag__icon {
+    font-size: 12px;
+    display: inline-flex;
+    align-items: center;
+}
+
+/* ==================== Effects ==================== */
+
+.yc-tag--dark {
+    background-color: var(--yc-color-primary);
+    border-color: var(--yc-color-primary);
+    color: var(--yc-color-white);
+}
+
+.yc-tag--dark.yc-tag--success {
+    background-color: var(--yc-color-success);
+    border-color: var(--yc-color-success);
+}
+
+.yc-tag--dark.yc-tag--warning {
+    background-color: var(--yc-color-warning);
+    border-color: var(--yc-color-warning);
+}
+
+.yc-tag--dark.yc-tag--danger {
+    background-color: var(--yc-color-danger);
+    border-color: var(--yc-color-danger);
+}
+
+.yc-tag--dark.yc-tag--info {
+    background-color: var(--yc-color-info);
+    border-color: var(--yc-color-info);
+}

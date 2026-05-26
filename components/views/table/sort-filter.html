@@ -1,0 +1,217 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>排序与筛选 - Table Workbench</title>
+    <script src="../../scripts/table-workbench-theme.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../styles/index.css">
+    <link rel="stylesheet" href="../../styles/components/button.css">
+    <link rel="stylesheet" href="../../styles/table-workbench.css">
+    <script src="https://unpkg.com/vue@3.4.0/dist/vue.global.prod.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+           <!-- <div class="page-header">
+                <h1>排序与筛选</h1>
+                <p>让表头排序与条件筛选共享统一的信息密度、状态标签和操作反馈。</p>
+            </div>
+
+            <div class="actions">
+                <a class="yc-button yc-button&#45;&#45;small" href="../demo-table.html">
+                    <i class="fas fa-arrow-left"></i>
+                    返回 Table Workbench
+                </a>
+            </div>-->
+
+            <div class="demo-card">
+                <h3>列排序</h3>
+                <table class="yc-data-table stripe border">
+                    <thead>
+                        <tr>
+                            <th class="cell-center" style="width: 72px;">序号</th>
+                            <th @click="sortBy('name')">
+                                <span class="table-header-sortable">
+                                    姓名
+                                    <i class="fas sort-icon" :class="sortIconClass('name')"></i>
+                                </span>
+                            </th>
+                            <th class="cell-center" style="width: 100px;" @click="sortBy('age')">
+                                <span class="table-header-sortable">
+                                    年龄
+                                    <i class="fas sort-icon" :class="sortIconClass('age')"></i>
+                                </span>
+                            </th>
+                            <th style="width: 140px;" @click="sortBy('salary')">
+                                <span class="table-header-sortable">
+                                    月薪
+                                    <i class="fas sort-icon" :class="sortIconClass('salary')"></i>
+                                </span>
+                            </th>
+                            <th class="cell-center" style="width: 120px;" @click="sortBy('score')">
+                                <span class="table-header-sortable">
+                                    绩效
+                                    <i class="fas sort-icon" :class="sortIconClass('score')"></i>
+                                </span>
+                            </th>
+                            <th class="cell-center" style="width: 140px;" @click="sortBy('joinDate')">
+                                <span class="table-header-sortable">
+                                    入职日期
+                                    <i class="fas sort-icon" :class="sortIconClass('joinDate')"></i>
+                                </span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(row, index) in sortedRows" :key="row.id">
+                            <td class="cell-center">{{ index + 1 }}</td>
+                            <td>{{ row.name }}</td>
+                            <td class="cell-center">{{ row.age }}</td>
+                            <td>¥ {{ row.salary.toLocaleString('zh-CN') }}</td>
+                            <td class="cell-center">{{ row.score }}</td>
+                            <td class="cell-center">{{ row.joinDate }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="demo-card">
+                <h3>条件筛选</h3>
+                <div class="filter-bar">
+                    <select v-model="filters.gender">
+                        <option value="">全部性别</option>
+                        <option value="男">男</option>
+                        <option value="女">女</option>
+                    </select>
+                    <select v-model="filters.department">
+                        <option value="">全部部门</option>
+                        <option value="技术研发部">技术研发部</option>
+                        <option value="产品设计部">产品设计部</option>
+                        <option value="增长运营部">增长运营部</option>
+                    </select>
+                    <select v-model="filters.status">
+                        <option value="">全部状态</option>
+                        <option value="在职">在职</option>
+                        <option value="试用">试用</option>
+                        <option value="离职">离职</option>
+                    </select>
+                    <button class="yc-button yc-button--small" type="button" @click="resetFilters">重置筛选</button>
+                </div>
+                <table class="yc-data-table stripe border">
+                    <thead>
+                        <tr>
+                            <th class="cell-center" style="width: 72px;">序号</th>
+                            <th>姓名</th>
+                            <th class="cell-center" style="width: 88px;">性别</th>
+                            <th class="cell-center" style="width: 88px;">年龄</th>
+                            <th>角色</th>
+                            <th>部门</th>
+                            <th class="cell-center" style="width: 100px;">状态</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(row, index) in filteredRows" :key="`filter-${row.id}`">
+                            <td class="cell-center">{{ index + 1 }}</td>
+                            <td>{{ row.name }}</td>
+                            <td class="cell-center">{{ row.gender }}</td>
+                            <td class="cell-center">{{ row.age }}</td>
+                            <td>{{ row.role }}</td>
+                            <td>{{ row.department }}</td>
+                            <td class="cell-center">
+                                <span class="table-status" :class="statusClass(row.status)">{{ row.status }}</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="result">状态：筛选后 {{ filteredRows.length }} 条记录</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const { createApp, computed, ref } = Vue;
+
+        createApp({
+            setup() {
+                const rows = ref([
+                    { id: 1, name: '张三', gender: '男', age: 28, department: '技术研发部', role: '前端工程师', salary: 18000, score: 88, joinDate: '2022-03-15', status: '在职' },
+                    { id: 2, name: '李四', gender: '女', age: 32, department: '技术研发部', role: '后端工程师', salary: 22000, score: 93, joinDate: '2020-06-02', status: '在职' },
+                    { id: 3, name: '王五', gender: '男', age: 26, department: '产品设计部', role: '测试工程师', salary: 15000, score: 81, joinDate: '2023-01-10', status: '试用' },
+                    { id: 4, name: '赵六', gender: '女', age: 31, department: '产品设计部', role: '产品经理', salary: 24000, score: 90, joinDate: '2021-11-18', status: '在职' },
+                    { id: 5, name: '孙七', gender: '男', age: 29, department: '增长运营部', role: 'UI 设计师', salary: 17000, score: 84, joinDate: '2021-05-26', status: '在职' },
+                    { id: 6, name: '周八', gender: '女', age: 27, department: '增长运营部', role: '运营经理', salary: 16500, score: 86, joinDate: '2022-09-08', status: '在职' }
+                ]);
+
+                const sortField = ref('joinDate');
+                const sortOrder = ref('desc');
+                const filters = ref({
+                    gender: '',
+                    department: '',
+                    status: ''
+                });
+
+                const sortedRows = computed(() => {
+                    const list = [...rows.value];
+                    list.sort((left, right) => {
+                        const a = left[sortField.value];
+                        const b = right[sortField.value];
+                        if (a === b) return 0;
+                        return sortOrder.value === 'asc' ? (a > b ? 1 : -1) : (a > b ? -1 : 1);
+                    });
+                    return list;
+                });
+
+                const filteredRows = computed(() => {
+                    return rows.value.filter(row => {
+                        return (!filters.value.gender || row.gender === filters.value.gender)
+                            && (!filters.value.department || row.department === filters.value.department)
+                            && (!filters.value.status || row.status === filters.value.status);
+                    });
+                });
+
+                function sortBy(field) {
+                    if (sortField.value === field) {
+                        sortOrder.value = sortOrder.value === 'asc' ? 'desc' : 'asc';
+                    } else {
+                        sortField.value = field;
+                        sortOrder.value = 'asc';
+                    }
+                }
+
+                function resetFilters() {
+                    filters.value = {
+                        gender: '',
+                        department: '',
+                        status: ''
+                    };
+                }
+
+                function sortIconClass(field) {
+                    if (sortField.value !== field) return 'fa-sort';
+                    return sortOrder.value === 'asc' ? 'fa-sort-up active' : 'fa-sort-down active';
+                }
+
+                function statusClass(status) {
+                    if (status === '在职') return 'table-status--success';
+                    if (status === '离职') return 'table-status--danger';
+                    return 'table-status--warning';
+                }
+
+                return {
+                    rows,
+                    sortField,
+                    sortedRows,
+                    filteredRows,
+                    filters,
+                    sortBy,
+                    resetFilters,
+                    sortIconClass,
+                    statusClass
+                };
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>

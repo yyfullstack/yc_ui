@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input 输入框 - YC UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+    <style>
+        .input-demo-grid,
+        .input-demo-format-grid,
+        .input-demo-type-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .input-demo-card {
+            padding: 20px;
+            border: 1px solid var(--yc-color-border-light);
+            border-radius: var(--yc-border-radius-large);
+            background: linear-gradient(180deg, var(--yc-color-bg) 0%, var(--yc-color-fill-extra-light) 100%);
+            box-shadow: var(--yc-box-shadow-sm);
+        }
+
+        .input-demo-card__title {
+            margin: 0 0 12px;
+            color: var(--yc-color-text-primary);
+            font-size: var(--yc-font-size-small);
+            font-weight: var(--yc-font-weight-semibold);
+        }
+
+        .input-demo-stack,
+        .input-demo-field {
+            display: grid;
+            gap: 10px;
+        }
+
+        .input-demo-field__label {
+            color: var(--yc-color-text-secondary);
+            font-size: var(--yc-font-size-small);
+        }
+
+        .input-demo-help {
+            color: var(--yc-color-text-secondary);
+            font-size: var(--yc-font-size-extra-small);
+            line-height: 1.7;
+        }
+
+        .input-demo-wide {
+            width: min(360px, 100%);
+        }
+
+        .input-demo-inline {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px;
+        }
+
+        @media (max-width: 960px) {
+            .input-demo-grid,
+            .input-demo-format-grid,
+            .input-demo-type-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="demo-container">
+    <div class="demo-page-header">
+        <h1 class="demo-page-title">Input 输入框</h1>
+        <p class="demo-page-subtitle">统一文本输入、前后缀、清除、状态反馈与格式化输入能力。MaskedInput 已并入 Input，统一使用
+            yc-input 体系。</p>
+    </div>
+
+    <div class="demo-section">
+        <h3>基础输入</h3>
+        <div class="demo-block">
+            <div class="demo-block-title">常见输入态</div>
+            <div class="demo-row demo-flex-start">
+                <input class="yc-input input-demo-wide" type="text" placeholder="请输入内容">
+                <input class="yc-input input-demo-wide" type="text" value="只读内容" readonly>
+                <input class="yc-input input-demo-wide" type="text" placeholder="禁用状态" disabled>
+            </div>
+        </div>
+    </div>
+
+    <div class="demo-section">
+        <h3>组合与状态</h3>
+        <div class="input-demo-grid">
+            <div class="input-demo-card">
+                <p class="input-demo-card__title">前缀与清除</p>
+                <div class="input-demo-stack">
+                    <div class="yc-input-wrapper input-demo-wide">
+                        <input class="yc-input yc-input--prefix" type="text" placeholder="请输入邮箱账号">
+                        <span class="yc-input-prefix"><i class="fas fa-at"></i></span>
+                    </div>
+                    <div class="yc-input-wrapper yc-input-wrapper--clearable input-demo-wide">
+                        <input class="yc-input yc-input--prefix yc-input--clearable" id="componentSearchInput"
+                               type="search" placeholder="搜索组件或关键字">
+                        <span class="yc-input-prefix"><i class="fas fa-search"></i></span>
+                        <button class="yc-input__clear" type="button" aria-label="清除搜索内容">
+                            <i class="fas fa-times-circle"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-demo-card">
+                <p class="input-demo-card__title">密码输入</p>
+                <div class="input-demo-stack">
+                    <div class="yc-input-wrapper input-demo-wide">
+                        <input class="yc-input yc-input--suffix" id="passwordInput" type="password"
+                               placeholder="请输入登录密码">
+                        <span class="yc-input-suffix">
+                                <span class="yc-input-suffix-icon" id="togglePassword" role="button" tabindex="0"
+                                      aria-label="切换密码可见性">
+                                    <i class="fas fa-eye"></i>
+                                </span>
+                            </span>
+                    </div>
+                    <p class="input-demo-help">后缀交互仍然使用 Input 自身的前后缀结构，不再拆出单独的 MaskedInput
+                        变体。</p>
+                </div>
+            </div>
+
+            <div class="input-demo-card">
+                <p class="input-demo-card__title">验证状态</p>
+                <div class="input-demo-stack">
+                    <div class="yc-input-wrapper yc-input-wrapper--success input-demo-wide">
+                        <input class="yc-input yc-input--suffix" type="text" value="13800138000"
+                               placeholder="请输入手机号">
+                        <span class="yc-input-suffix"><i
+                                class="fas fa-circle-check yc-input-suffix-icon yc-input-suffix-icon--success"></i></span>
+                    </div>
+                    <div class="yc-input-wrapper yc-input-wrapper--warning input-demo-wide">
+                        <input class="yc-input yc-input--suffix" type="text" value="1380013" placeholder="请输入手机号">
+                        <span class="yc-input-suffix"><i
+                                class="fas fa-triangle-exclamation yc-input-suffix-icon yc-input-suffix-icon--warning"></i></span>
+                    </div>
+                    <div class="yc-input-wrapper yc-input-wrapper--error input-demo-wide">
+                        <input class="yc-input yc-input--suffix" type="text" value="12345678901"
+                               placeholder="请输入手机号">
+                        <span class="yc-input-suffix"><i
+                                class="fas fa-circle-xmark yc-input-suffix-icon yc-input-suffix-icon--error"></i></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-demo-card">
+                <p class="input-demo-card__title">尺寸体系</p>
+                <div class="input-demo-stack">
+                    <input class="yc-input yc-input--large input-demo-wide" type="text" placeholder="Large">
+                    <input class="yc-input input-demo-wide" type="text" placeholder="Default">
+                    <input class="yc-input yc-input--small input-demo-wide" type="text" placeholder="Small">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="demo-section">
+        <h3>原生类型</h3>
+        <div class="input-demo-type-grid">
+            <div class="input-demo-card">
+                <p class="input-demo-card__title">业务常用类型</p>
+                <div class="input-demo-stack">
+                    <input class="yc-input input-demo-wide" type="email" placeholder="name@example.com">
+                    <input class="yc-input input-demo-wide" type="url" placeholder="https://example.com">
+                    <input class="yc-input input-demo-wide" type="tel" placeholder="请输入联系电话">
+                </div>
+            </div>
+
+            <div class="input-demo-card">
+                <p class="input-demo-card__title">数值与搜索</p>
+                <div class="input-demo-stack">
+                    <input class="yc-input input-demo-wide" type="number" min="0" max="100" step="1"
+                           placeholder="请输入数量">
+                    <input class="yc-input input-demo-wide" type="search" placeholder="原生 search 类型">
+                    <input class="yc-input input-demo-wide" type="text" inputmode="decimal"
+                           placeholder="支持移动端小数键盘">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="demo-section" id="formatted-input">
+        <h3>格式化输入</h3>
+        <div class="demo-block">
+            <div class="demo-block-title">统一使用 yc-input 与 data-input-format，Input 现在直接支持常见格式化场景。</div>
+            <div class="input-demo-format-grid">
+                <div class="input-demo-card">
+                    <div class="input-demo-field">
+                        <div class="input-demo-field__label">手机号</div>
+                        <div class="yc-input-wrapper yc-input-wrapper--clearable input-demo-wide">
+                            <input class="yc-input yc-input--prefix yc-input--clearable" type="text"
+                                   placeholder="请输入手机号" data-input-format="phone">
+                            <span class="yc-input-prefix"><i class="fas fa-mobile-screen-button"></i></span>
+                            <button class="yc-input__clear" type="button" aria-label="清除手机号">
+                                <i class="fas fa-times-circle"></i>
+                            </button>
+                        </div>
+                        <div class="yc-input__format-label">格式：138-0013-8000</div>
+                    </div>
+                </div>
+
+                <div class="input-demo-card">
+                    <div class="input-demo-field">
+                        <div class="input-demo-field__label">身份证号</div>
+                        <div class="yc-input-wrapper yc-input-wrapper--clearable input-demo-wide">
+                            <input class="yc-input yc-input--prefix yc-input--clearable" type="text"
+                                   placeholder="请输入身份证号" data-input-format="idcard">
+                            <span class="yc-input-prefix"><i class="fas fa-id-card"></i></span>
+                            <button class="yc-input__clear" type="button" aria-label="清除内容">
+                                <i class="fas fa-times-circle"></i>
+                            </button>
+                        </div>
+                        <div class="yc-input__format-label">格式：110101 1990-01-01 123X</div>
+                    </div>
+                </div>
+
+                <div class="input-demo-card">
+                    <div class="input-demo-field">
+                        <div class="input-demo-field__label">银行卡号</div>
+                        <div class="yc-input-wrapper yc-input-wrapper--clearable input-demo-wide">
+                            <input class="yc-input yc-input--prefix yc-input--clearable" type="text"
+                                   placeholder="请输入银行卡号" data-input-format="bankcard">
+                            <span class="yc-input-prefix"><i class="fas fa-credit-card"></i></span>
+                            <button class="yc-input__clear" type="button" aria-label="清除银行卡号">
+                                <i class="fas fa-times-circle"></i>
+                            </button>
+                        </div>
+                        <div class="yc-input__format-label">格式：6222 8888 8888 8888</div>
+                    </div>
+                </div>
+
+                <div class="input-demo-card">
+                    <div class="input-demo-field">
+                        <div class="input-demo-field__label">日期</div>
+                        <div class="yc-input-wrapper yc-input-wrapper--clearable input-demo-wide">
+                            <input class="yc-input yc-input--prefix" type="text" placeholder="YYYY-MM-DD"
+                                   data-input-format="date">
+                            <span class="yc-input-prefix"><i class="fas fa-calendar"></i></span>
+                            <button class="yc-input__clear" type="button" aria-label="清除日期">
+                                <i class="fas fa-times-circle"></i>
+                            </button>
+                        </div>
+                        <div class="yc-input__format-label">格式：2026-05-12</div>
+                    </div>
+                </div>
+
+                <div class="input-demo-card">
+                    <div class="input-demo-field">
+                        <div class="input-demo-field__label">时间</div>
+                        <div class="yc-input-wrapper yc-input-wrapper--clearable input-demo-wide">
+                            <input class="yc-input yc-input--prefix" type="text" placeholder="HH:MM:SS"
+                                   data-input-format="time">
+                            <span class="yc-input-prefix"><i class="fas fa-clock"></i></span>
+                            <button class="yc-input__clear" type="button" aria-label="清除时间">
+                                <i class="fas fa-times-circle"></i>
+                            </button>
+                        </div>
+                        <div class="yc-input__format-label">格式：09:30:45</div>
+                    </div>
+                </div>
+
+                <div class="input-demo-card">
+                    <div class="input-demo-field">
+                        <div class="input-demo-field__label">邮政编码</div>
+                        <div class="yc-input-wrapper yc-input-wrapper--clearable input-demo-wide">
+                            <input class="yc-input yc-input--prefix" type="text" placeholder="请输入 6 位邮编"
+                                   data-input-format="zipcode">
+                            <span class="yc-input-prefix"><i class="fas fa-envelope"></i></span>
+                            <button class="yc-input__clear" type="button" aria-label="清除邮政编码">
+                                <i class="fas fa-times-circle"></i>
+                            </button>
+                        </div>
+                        <div class="yc-input__format-label">规则：限制为 6 位数字</div>
+                    </div>
+                </div>
+
+                <div class="input-demo-card">
+                    <div class="input-demo-field">
+                        <div class="input-demo-field__label">IP 地址</div>
+                        <div class="yc-input-wrapper yc-input-wrapper--clearable input-demo-wide">
+                            <input class="yc-input yc-input--prefix" type="text" placeholder="请输入 IP 地址" data-input-format="ip">
+                            <span class="yc-input-prefix"><i class="fas fa-wifi"></i></span>
+                            <button class="yc-input__clear" type="button" aria-label="清除IP地址">
+                                <i class="fas fa-times-circle"></i>
+                            </button>
+                        </div>
+                        <div class="yc-input__format-label">规则：自动按 3 位分段，例如 192.168.001.001</div>
+                    </div>
+                </div>
+
+                <div class="input-demo-card">
+                    <div class="input-demo-field">
+                        <div class="input-demo-field__label">最近一次原始值</div>
+                        <p class="input-demo-help">格式化后的显示值会写回输入框，原始值保存在
+                            data-raw-value，适合表单提交前再统一取值。</p>
+                        <div class="demo-result" id="inputFormatResult">状态：等待输入</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="demo-section">
+        <h3>文本域</h3>
+        <div class="demo-block">
+            <div class="demo-row demo-flex-start">
+                <textarea class="yc-textarea" rows="4" placeholder="请输入多行内容"
+                          style="width: min(480px, 100%);"></textarea>
+                <textarea class="yc-textarea" rows="4" placeholder="禁用状态" style="width: min(480px, 100%);"
+                          disabled></textarea>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../scripts/input-enhance.js"></script>
+<script>
+    function initPasswordToggle() {
+        const toggle = document.getElementById('togglePassword');
+        const input = document.getElementById('passwordInput');
+
+        if (!toggle || !input) return;
+
+        const icon = toggle.querySelector('i');
+        const handleToggle = () => {
+            const nextType = input.type === 'password' ? 'text' : 'password';
+            input.type = nextType;
+            if (icon) {
+                icon.className = nextType === 'password' ? 'fas fa-eye' : 'fas fa-eye-slash';
+            }
+        };
+
+        toggle.addEventListener('click', handleToggle);
+        toggle.addEventListener('keydown', event => {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                handleToggle();
+            }
+        });
+    }
+
+    function bindFormatInspector() {
+        const result = document.getElementById('inputFormatResult');
+        if (!result) return;
+
+        document.querySelectorAll('[data-input-format]').forEach(input => {
+            input.addEventListener('input', () => {
+                const formatName = input.dataset.inputFormat;
+                const rawValue = input.dataset.rawValue || '';
+                result.textContent = rawValue
+                    ? `状态：${formatName} => ${rawValue}`
+                    : '状态：等待输入';
+            });
+        });
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+        if (window.YcInputEnhance) {
+            window.YcInputEnhance.init(document);
+        }
+        initPasswordToggle();
+        bindFormatInspector();
+    });
+</script>
+<script src="../scripts/demo-shell.js"></script>
+</body>
+</html>

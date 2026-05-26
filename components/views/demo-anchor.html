@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anchor 锚点 - YC UI</title>
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .anchor-demo-layout {
+            display: grid;
+            grid-template-columns: 260px minmax(0, 1fr);
+            gap: 24px;
+            align-items: start;
+        }
+
+        .anchor-demo-sections {
+            display: grid;
+            gap: 20px;
+        }
+
+        .anchor-demo-panel {
+            min-height: 360px;
+            padding: 20px;
+            border: 1px solid var(--yc-color-border-light);
+            border-radius: var(--yc-border-radius-large);
+            background: var(--yc-color-bg);
+            box-shadow: var(--yc-box-shadow-sm);
+        }
+
+        .anchor-demo-panel h4 {
+            margin: 0 0 10px;
+            font-size: var(--yc-font-size-medium);
+        }
+
+        .anchor-demo-panel p {
+            margin: 0;
+            color: var(--yc-color-text-secondary);
+            line-height: 1.8;
+        }
+
+        .anchor-demo-horizontal {
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 960px) {
+            .anchor-demo-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">Anchor 锚点</h1>
+            <p class="demo-page-subtitle">用于长页面导航、文档目录和属性面板快速跳转，支持吸顶侧栏和横向导航两种常见工作台布局。</p>
+        </div>
+
+        <div class="demo-section">
+            <h3>侧边吸顶导航</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">常用于组件文档、帮助中心和复杂设置页</div>
+                <div class="anchor-demo-layout">
+                    <aside class="yc-anchor yc-anchor--card yc-anchor--sticky" id="anchorSidebar">
+                        <h4 class="yc-anchor__title">页面目录</h4>
+                        <div class="yc-anchor__body">
+                            <span class="yc-anchor__rail"></span>
+                            <span class="yc-anchor__line"></span>
+                            <ul class="yc-anchor__list">
+                                <li class="yc-anchor__item"><a class="yc-anchor__link yc-anchor__link--active" href="#anchor-section-1">基础说明</a></li>
+                                <li class="yc-anchor__item"><a class="yc-anchor__link" href="#anchor-section-2">筛选工作区</a></li>
+                                <li class="yc-anchor__item"><a class="yc-anchor__link yc-anchor__link--level-1" href="#anchor-section-3">可见字段</a></li>
+                                <li class="yc-anchor__item"><a class="yc-anchor__link yc-anchor__link--level-1" href="#anchor-section-4">权限策略</a></li>
+                                <li class="yc-anchor__item"><a class="yc-anchor__link" href="#anchor-section-5">审计记录</a></li>
+                            </ul>
+                        </div>
+                    </aside>
+
+                    <div class="anchor-demo-sections">
+                        <section class="anchor-demo-panel" id="anchor-section-1">
+                            <h4>基础说明</h4>
+                            <p>Anchor 组件负责把长页面中的关键节点压缩成一条稳定的导航路径。对于平台型组件库，它不仅是 demo 页的辅助导航，也是在配置页、文档页和高级工作台中提升扫描效率的重要基础设施。</p>
+                        </section>
+                        <section class="anchor-demo-panel" id="anchor-section-2">
+                            <h4>筛选工作区</h4>
+                            <p>在复杂后台里，筛选工作区经常与列表、表单、图表并列出现。我们通常会把目录固定在左侧，右侧保留足够宽的内容面，用锚点在“搜索条件”“默认视图”“导出策略”等模块间快速切换。</p>
+                        </section>
+                        <section class="anchor-demo-panel" id="anchor-section-3">
+                            <h4>可见字段</h4>
+                            <p>字段较多时，可以把“基础字段”“高级字段”“只读字段”“动态字段”等分层组织，一级标题和二级标题都进入锚点列表，用户滚动时仍能清楚知道自己正在编辑哪一段内容。</p>
+                        </section>
+                        <section class="anchor-demo-panel" id="anchor-section-4">
+                            <h4>权限策略</h4>
+                            <p>锚点的视觉层级需要克制但明确。当前样式用统一 token 控制 hover、active、focus 与 rail 指示线，后续做主题微调时不需要逐个页面返工。</p>
+                        </section>
+                        <section class="anchor-demo-panel" id="anchor-section-5">
+                            <h4>审计记录</h4>
+                            <p>当内容很长、分区很多时，滚动联动比单纯点击跳转更重要。这个 demo 会根据当前滚动位置同步高亮 active 项，保证目录始终能反映页面阅读位置。</p>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>横向导航</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">适合吸附在列表页或大卡片顶部</div>
+                <div class="anchor-demo-horizontal yc-anchor yc-anchor--horizontal" id="anchorHorizontal">
+                    <ul class="yc-anchor__list">
+                        <li class="yc-anchor__item"><a class="yc-anchor__link yc-anchor__link--active" href="#horizontal-1">概览</a></li>
+                        <li class="yc-anchor__item"><a class="yc-anchor__link" href="#horizontal-2">字段规范</a></li>
+                        <li class="yc-anchor__item"><a class="yc-anchor__link" href="#horizontal-3">交互约束</a></li>
+                        <li class="yc-anchor__item"><a class="yc-anchor__link" href="#horizontal-4">验收建议</a></li>
+                    </ul>
+                </div>
+
+                <div class="demo-data-grid">
+                    <div class="demo-card" id="horizontal-1">
+                        <div class="demo-block-title">概览</div>
+                        <p class="demo-description">顶部锚点适合比较轻的页面分区，点击后依然可以平滑滚动到对应卡片。</p>
+                    </div>
+                    <div class="demo-card" id="horizontal-2">
+                        <div class="demo-block-title">字段规范</div>
+                        <p class="demo-description">建议把标题长度控制在 4 到 8 个字之间，避免横向 anchor 在窄屏下过度拥挤。</p>
+                    </div>
+                    <div class="demo-card" id="horizontal-3">
+                        <div class="demo-block-title">交互约束</div>
+                        <p class="demo-description">当前实现对 hover、focus、active 状态都做了统一处理，保持与按钮、tab 的节奏一致。</p>
+                    </div>
+                    <div class="demo-card" id="horizontal-4">
+                        <div class="demo-block-title">验收建议</div>
+                        <p class="demo-description">重点检查目录高亮、滚动定位、移动端换行以及深色主题下的对比度。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function initAnchor(anchorId, selector) {
+            const anchor = document.getElementById(anchorId);
+            if (!anchor) return;
+
+            const links = Array.from(anchor.querySelectorAll('.yc-anchor__link'));
+            const line = anchor.querySelector('.yc-anchor__line');
+            const sections = links
+                .map(link => document.querySelector(link.getAttribute('href')))
+                .filter(Boolean);
+
+            function setActive(activeLink) {
+                links.forEach(link => link.classList.toggle('yc-anchor__link--active', link === activeLink));
+
+                if (!line || !activeLink || anchor.classList.contains('yc-anchor--horizontal')) return;
+
+                line.style.top = `${activeLink.offsetTop}px`;
+                line.style.height = `${activeLink.offsetHeight}px`;
+            }
+
+            function updateByScroll() {
+                let current = links[0];
+                const offset = window.scrollY + 120;
+
+                sections.forEach((section, index) => {
+                    if (section.offsetTop <= offset) {
+                        current = links[index];
+                    }
+                });
+
+                setActive(current);
+            }
+
+            links.forEach(link => {
+                link.addEventListener('click', event => {
+                    event.preventDefault();
+                    const target = document.querySelector(link.getAttribute('href'));
+                    if (!target) return;
+
+                    const top = target.getBoundingClientRect().top + window.scrollY - 110;
+                    window.scrollTo({ top, behavior: 'smooth' });
+                    setActive(link);
+                });
+            });
+
+            if (selector === 'scroll') {
+                updateByScroll();
+                window.addEventListener('scroll', updateByScroll, { passive: true });
+                window.addEventListener('resize', updateByScroll);
+            } else {
+                setActive(links[0]);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            initAnchor('anchorSidebar', 'scroll');
+            initAnchor('anchorHorizontal', 'static');
+        });
+    </script>
+    <script src="../scripts/demo-shell.js"></script>
+</body>
+</html>

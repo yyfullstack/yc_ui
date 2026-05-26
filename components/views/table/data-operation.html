@@ -1,0 +1,367 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据操作 - Table Workbench</title>
+    <script src="../../scripts/table-workbench-theme.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../styles/index.css">
+    <link rel="stylesheet" href="../../styles/components/button.css">
+    <link rel="stylesheet" href="../../styles/table-workbench.css">
+    <script src="https://unpkg.com/vue@3.4.0/dist/vue.global.prod.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <!--<div class="page-header">
+                <h1>数据操作</h1>
+                <p>把查询、列配置、导出打印、全局搜索和事件日志统一收拢到一个表格工作台里，模拟真实后台的操作密度。</p>
+            </div>
+
+            <div class="actions">
+                <a class="yc-button yc-button&#45;&#45;small" href="../demo-table.html">
+                    <i class="fas fa-arrow-left"></i>
+                    返回 Table Workbench
+                </a>
+            </div>-->
+
+            <div class="demo-card">
+                <h3>查询表单</h3>
+                <div class="query-form">
+                    <div class="form-item">
+                        <label>姓名</label>
+                        <input v-model="queryForm.name" type="text" placeholder="输入姓名关键字">
+                    </div>
+                    <div class="form-item">
+                        <label>部门</label>
+                        <select v-model="queryForm.department">
+                            <option value="">全部部门</option>
+                            <option value="技术研发部">技术研发部</option>
+                            <option value="产品设计部">产品设计部</option>
+                            <option value="增长运营部">增长运营部</option>
+                        </select>
+                    </div>
+                    <div class="form-item">
+                        <label>状态</label>
+                        <select v-model="queryForm.status">
+                            <option value="">全部状态</option>
+                            <option value="在职">在职</option>
+                            <option value="试用">试用</option>
+                            <option value="离职">离职</option>
+                        </select>
+                    </div>
+                    <button class="yc-button yc-button--primary" type="button" @click="applyQuery">
+                        <i class="fas fa-search"></i>
+                        查询
+                    </button>
+                    <button class="yc-button" type="button" @click="resetQuery">
+                        <i class="fas fa-rotate-left"></i>
+                        重置
+                    </button>
+                </div>
+                <table class="yc-data-table stripe border">
+                    <thead>
+                        <tr>
+                            <th class="cell-center" style="width: 72px;">序号</th>
+                            <th>姓名</th>
+                            <th>部门</th>
+                            <th>角色</th>
+                            <th class="cell-center" style="width: 88px;">年龄</th>
+                            <th class="cell-center" style="width: 100px;">状态</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(row, index) in queryRows" :key="row.id">
+                            <td class="cell-center">{{ index + 1 }}</td>
+                            <td>{{ row.name }}</td>
+                            <td>{{ row.department }}</td>
+                            <td>{{ row.role }}</td>
+                            <td class="cell-center">{{ row.age }}</td>
+                            <td class="cell-center">
+                                <span class="table-status" :class="statusClass(row.status)">{{ row.status }}</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="result">状态：查询到 {{ queryRows.length }} 条记录</div>
+            </div>
+
+            <div class="demo-card">
+                <h3>列配置与导出打印</h3>
+                <div class="actions">
+                    <button class="yc-button yc-button--primary yc-button--small" type="button" @click="showColumnDialog = true">
+                        <i class="fas fa-sliders"></i>
+                        列配置
+                    </button>
+                    <button class="yc-button yc-button--small" type="button" @click="exportCsv">
+                        <i class="fas fa-file-arrow-down"></i>
+                        导出 CSV
+                    </button>
+                    <button class="yc-button yc-button--small" type="button" @click="printTable">
+                        <i class="fas fa-print"></i>
+                        打印
+                    </button>
+                </div>
+                <table class="yc-data-table stripe border" id="exportTable">
+                    <thead>
+                        <tr>
+                            <th v-if="visibleColumns.seq" class="cell-center" style="width: 72px;">序号</th>
+                            <th v-if="visibleColumns.name">姓名</th>
+                            <th v-if="visibleColumns.department">部门</th>
+                            <th v-if="visibleColumns.role">角色</th>
+                            <th v-if="visibleColumns.email">邮箱</th>
+                            <th v-if="visibleColumns.phone">电话</th>
+                            <th v-if="visibleColumns.status" class="cell-center" style="width: 100px;">状态</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(row, index) in exportRows" :key="`column-${row.id}`">
+                            <td v-if="visibleColumns.seq" class="cell-center">{{ index + 1 }}</td>
+                            <td v-if="visibleColumns.name">{{ row.name }}</td>
+                            <td v-if="visibleColumns.department">{{ row.department }}</td>
+                            <td v-if="visibleColumns.role">{{ row.role }}</td>
+                            <td v-if="visibleColumns.email">{{ row.email }}</td>
+                            <td v-if="visibleColumns.phone">{{ row.phone }}</td>
+                            <td v-if="visibleColumns.status" class="cell-center">
+                                <span class="table-status" :class="statusClass(row.status)">{{ row.status }}</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="demo-card">
+                <h3>全局搜索</h3>
+                <div class="actions">
+                    <input v-model="searchKeyword" class="table-search-input table-search-input--wide" type="search" placeholder="输入姓名、角色、部门或邮箱">
+                    <span class="table-meta">共 {{ searchRows.length }} 条结果</span>
+                </div>
+                <table class="yc-data-table stripe border">
+                    <thead>
+                        <tr>
+                            <th class="cell-center" style="width: 72px;">序号</th>
+                            <th>姓名</th>
+                            <th>角色</th>
+                            <th>部门</th>
+                            <th>邮箱</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(row, index) in searchRows" :key="`search-${row.id}`">
+                            <td class="cell-center">{{ index + 1 }}</td>
+                            <td>{{ row.name }}</td>
+                            <td>{{ row.role }}</td>
+                            <td>{{ row.department }}</td>
+                            <td>{{ row.email }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="demo-card">
+                <h3>事件日志</h3>
+                <div class="actions">
+                    <button class="yc-button yc-button--small" type="button" @click="eventLogs = []">清空日志</button>
+                </div>
+                <table class="yc-data-table stripe border">
+                    <thead>
+                        <tr>
+                            <th class="cell-center" style="width: 72px;">序号</th>
+                            <th>姓名</th>
+                            <th>角色</th>
+                            <th>部门</th>
+                            <th class="cell-center" style="width: 88px;">年龄</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(row, index) in eventRows" :key="`event-${row.id}`" @click="logEvent('row-click', row)">
+                            <td class="cell-center">{{ index + 1 }}</td>
+                            <td @click.stop="logEvent('cell-click', row, 'name')">{{ row.name }}</td>
+                            <td @click.stop="logEvent('cell-click', row, 'role')">{{ row.role }}</td>
+                            <td @click.stop="logEvent('cell-click', row, 'department')">{{ row.department }}</td>
+                            <td class="cell-center" @click.stop="logEvent('cell-click', row, 'age')">{{ row.age }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="event-log">
+                    <div v-if="eventLogs.length === 0" class="event-log-empty">暂无事件日志，点击表格行或单元格后会记录在这里。</div>
+                    <div v-for="(log, index) in eventLogs" :key="`${log.time}-${index}`" class="event-log-item">
+                        [{{ log.time }}] {{ log.type }} - {{ log.detail }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div v-if="showColumnDialog" class="modal-overlay" @click.self="showColumnDialog = false">
+            <div class="modal-content">
+                <h3 style="margin: 0 0 16px;">列配置</h3>
+                <div class="table-detail-grid">
+                    <label v-for="(label, key) in columnLabels" :key="key" class="table-chip">
+                        <input class="table-checkbox" type="checkbox" v-model="visibleColumns[key]">
+                        <span>{{ label }}</span>
+                    </label>
+                </div>
+                <div class="actions" style="margin-top: 20px; justify-content: flex-end;">
+                    <button class="yc-button" type="button" @click="showColumnDialog = false">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const { createApp, computed, ref } = Vue;
+
+        createApp({
+            setup() {
+                const members = ref([
+                    { id: 1, name: '张三', department: '技术研发部', role: '前端工程师', age: 28, status: '在职', email: 'zhangsan@example.com', phone: '13800138001' },
+                    { id: 2, name: '李四', department: '技术研发部', role: '后端工程师', age: 32, status: '在职', email: 'lisi@example.com', phone: '13800138002' },
+                    { id: 3, name: '王五', department: '产品设计部', role: '测试工程师', age: 26, status: '试用', email: 'wangwu@example.com', phone: '13800138003' },
+                    { id: 4, name: '赵六', department: '产品设计部', role: '产品经理', age: 31, status: '在职', email: 'zhaoliu@example.com', phone: '13800138004' },
+                    { id: 5, name: '孙七', department: '增长运营部', role: 'UI 设计师', age: 29, status: '在职', email: 'sunqi@example.com', phone: '13800138005' },
+                    { id: 6, name: '周八', department: '增长运营部', role: '运营经理', age: 27, status: '在职', email: 'zhouba@example.com', phone: '13800138006' }
+                ]);
+
+                const queryForm = ref({ name: '', department: '', status: '' });
+                const queryRows = ref([...members.value]);
+                const searchKeyword = ref('');
+                const showColumnDialog = ref(false);
+                const eventLogs = ref([]);
+
+                const visibleColumns = ref({
+                    seq: true,
+                    name: true,
+                    department: true,
+                    role: true,
+                    email: true,
+                    phone: true,
+                    status: true
+                });
+
+                const columnLabels = {
+                    seq: '序号',
+                    name: '姓名',
+                    department: '部门',
+                    role: '角色',
+                    email: '邮箱',
+                    phone: '电话',
+                    status: '状态'
+                };
+
+                const exportRows = computed(() => members.value.slice(0, 5));
+
+                const searchRows = computed(() => {
+                    const keyword = searchKeyword.value.trim().toLowerCase();
+                    if (!keyword) return members.value;
+                    return members.value.filter(row => {
+                        return Object.values(row).some(value => String(value).toLowerCase().includes(keyword));
+                    });
+                });
+
+                const eventRows = computed(() => members.value.slice(0, 5));
+
+                function statusClass(status) {
+                    if (status === '在职') return 'table-status--success';
+                    if (status === '离职') return 'table-status--danger';
+                    return 'table-status--warning';
+                }
+
+                function applyQuery() {
+                    queryRows.value = members.value.filter(row => {
+                        return (!queryForm.value.name || row.name.includes(queryForm.value.name))
+                            && (!queryForm.value.department || row.department === queryForm.value.department)
+                            && (!queryForm.value.status || row.status === queryForm.value.status);
+                    });
+                }
+
+                function resetQuery() {
+                    queryForm.value = { name: '', department: '', status: '' };
+                    queryRows.value = [...members.value];
+                }
+
+                function exportCsv() {
+                    const headers = ['序号', '姓名', '部门', '角色', '邮箱', '电话', '状态'];
+                    const rows = exportRows.value.map((row, index) => [
+                        index + 1,
+                        row.name,
+                        row.department,
+                        row.role,
+                        row.email,
+                        row.phone,
+                        row.status
+                    ]);
+                    const content = [headers, ...rows].map(row => row.join(',')).join('\n');
+                    const blob = new Blob(['\ufeff' + content], { type: 'text/csv;charset=utf-8;' });
+                    const link = document.createElement('a');
+                    link.href = URL.createObjectURL(blob);
+                    link.download = 'table-workbench-export.csv';
+                    link.click();
+                }
+
+                function printTable() {
+                    const table = document.getElementById('exportTable');
+                    if (!table) return;
+
+                    const styles = getComputedStyle(document.documentElement);
+                    const fontFamily = styles.getPropertyValue('--yc-font-family').trim() || 'Arial, sans-serif';
+                    const borderColor = styles.getPropertyValue('--yc-color-border').trim() || 'currentColor';
+                    const headBackground = styles.getPropertyValue('--yc-color-fill-light').trim() || 'transparent';
+
+                    const printWindow = window.open('', '_blank');
+                    if (!printWindow) return;
+
+                    printWindow.document.write(`
+                        <html>
+                        <head>
+                            <title>打印表格</title>
+                            <style>
+                                body { font-family: ${fontFamily}; padding: 24px; }
+                                table { width: 100%; border-collapse: collapse; }
+                                th, td { padding: 10px 12px; border: 1px solid ${borderColor}; text-align: left; }
+                                th { background: ${headBackground}; font-weight: 600; }
+                            </style>
+                        </head>
+                        <body>${table.outerHTML}</body>
+                        </html>
+                    `);
+                    printWindow.document.close();
+                    printWindow.print();
+                }
+
+                function logEvent(type, row, field = '') {
+                    const now = new Date();
+                    const detail = field ? `${row.name} / ${field}` : `${row.name} / ${row.role}`;
+                    eventLogs.value.unshift({
+                        time: now.toLocaleTimeString('zh-CN', { hour12: false }),
+                        type,
+                        detail
+                    });
+                    if (eventLogs.value.length > 40) {
+                        eventLogs.value.pop();
+                    }
+                }
+
+                return {
+                    queryForm,
+                    queryRows,
+                    searchKeyword,
+                    showColumnDialog,
+                    eventLogs,
+                    visibleColumns,
+                    columnLabels,
+                    exportRows,
+                    searchRows,
+                    eventRows,
+                    statusClass,
+                    applyQuery,
+                    resetQuery,
+                    exportCsv,
+                    printTable,
+                    logEvent
+                };
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>

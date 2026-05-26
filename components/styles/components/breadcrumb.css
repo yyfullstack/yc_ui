@@ -1,0 +1,94 @@
+@charset "UTF-8";
+
+.yc-breadcrumb {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--yc-spacing-sm);
+    font-size: var(--yc-font-size-base);
+    color: var(--yc-color-text-secondary);
+    line-height: 1.6;
+}
+
+.yc-breadcrumb__item {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--yc-spacing-sm);
+    min-width: 0;
+}
+
+.yc-breadcrumb__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--yc-color-text-secondary);
+    text-decoration: none;
+    border-radius: var(--yc-border-radius-small);
+    transition: color var(--yc-transition-fast), background-color var(--yc-transition-fast);
+}
+
+.yc-breadcrumb__link:hover,
+.yc-breadcrumb__link:focus-visible {
+    color: var(--yc-color-primary);
+    text-decoration: none;
+}
+
+.yc-breadcrumb__separator {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--yc-color-text-placeholder);
+    font-size: var(--yc-font-size-small);
+}
+
+.yc-breadcrumb__separator::before {
+    content: "/";
+}
+
+.yc-breadcrumb__current {
+    color: var(--yc-color-text-primary);
+    font-weight: var(--yc-font-weight-medium);
+}
+
+.yc-breadcrumb--arrow .yc-breadcrumb__separator::before {
+    content: ">";
+}
+
+.yc-breadcrumb--dot .yc-breadcrumb__separator::before {
+    content: "•";
+}
+
+.yc-breadcrumb--slash .yc-breadcrumb__separator::before {
+    content: "/";
+}
+
+.yc-breadcrumb--center {
+    justify-content: center;
+}
+
+.yc-breadcrumb--end {
+    justify-content: flex-end;
+}
+
+.yc-breadcrumb--large {
+    font-size: var(--yc-font-size-medium);
+}
+
+.yc-breadcrumb--small {
+    font-size: var(--yc-font-size-small);
+}
+
+.yc-breadcrumb--success .yc-breadcrumb__link:hover,
+.yc-breadcrumb--success .yc-breadcrumb__current {
+    color: var(--yc-color-success);
+}
+
+.yc-breadcrumb--warning .yc-breadcrumb__link:hover,
+.yc-breadcrumb--warning .yc-breadcrumb__current {
+    color: var(--yc-color-warning);
+}
+
+.yc-breadcrumb--danger .yc-breadcrumb__link:hover,
+.yc-breadcrumb--danger .yc-breadcrumb__current {
+    color: var(--yc-color-danger);
+}

@@ -1,0 +1,132 @@
+@charset "UTF-8";
+
+/* ==================== Statistic ==================== */
+
+.yc-statistic {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.yc-statistic__title {
+    font-size: var(--yc-font-size-small);
+    color: var(--yc-color-text-secondary);
+    font-weight: var(--yc-font-weight-normal);
+}
+
+.yc-statistic__content {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+}
+
+.yc-statistic__prefix {
+    font-size: var(--yc-font-size-base);
+    color: var(--yc-color-text-primary);
+}
+
+.yc-statistic__value {
+    font-size: var(--yc-font-size-large);
+    font-weight: var(--yc-font-weight-semibold);
+    color: var(--yc-color-text-primary);
+    line-height: 1.2;
+}
+
+.yc-statistic__suffix {
+    font-size: var(--yc-font-size-base);
+    color: var(--yc-color-text-primary);
+}
+
+.yc-statistic__description {
+    font-size: var(--yc-font-size-extra-small);
+    color: var(--yc-color-text-secondary);
+    margin-top: 4px;
+}
+
+.yc-statistic__value--success {
+    color: var(--yc-color-success);
+}
+
+.yc-statistic__value--warning {
+    color: var(--yc-color-warning);
+}
+
+.yc-statistic__value--danger {
+    color: var(--yc-color-danger);
+}
+
+/* ==================== Sizes ==================== */
+
+.yc-statistic--large .yc-statistic__value {
+    font-size: 32px;
+}
+
+.yc-statistic--small .yc-statistic__value {
+    font-size: 18px;
+}
+
+.yc-statistic--small .yc-statistic__prefix,
+.yc-statistic--small .yc-statistic__suffix {
+    font-size: 12px;
+}
+
+/* ==================== Card ==================== */
+
+.yc-statistic__card {
+    padding: 20px;
+    background-color: var(--yc-color-bg);
+    border-radius: var(--yc-border-radius-base);
+    box-shadow: var(--yc-box-shadow-sm);
+}
+
+.yc-statistic__card--primary {
+    background-color: var(--yc-color-primary);
+    color: var(--yc-color-white);
+}
+
+.yc-statistic__card--primary .yc-statistic__title,
+.yc-statistic__card--primary .yc-statistic__value,
+.yc-statistic__card--primary .yc-statistic__prefix,
+.yc-statistic__card--primary .yc-statistic__suffix,
+.yc-statistic__card--primary .yc-statistic__description {
+    color: var(--yc-color-white);
+}
+
+.yc-statistic__card--success {
+    background: linear-gradient(135deg, var(--yc-color-success), var(--yc-color-success-hover));
+    color: var(--yc-color-white);
+}
+
+.yc-statistic__card--success .yc-statistic__title,
+.yc-statistic__card--success .yc-statistic__value,
+.yc-statistic__card--success .yc-statistic__prefix,
+.yc-statistic__card--success .yc-statistic__suffix,
+.yc-statistic__card--success .yc-statistic__description {
+    color: var(--yc-color-white);
+}
+
+.yc-statistic__card--warning {
+    background: linear-gradient(135deg, var(--yc-color-warning), var(--yc-color-warning-hover));
+    color: var(--yc-color-white);
+}
+
+.yc-statistic__card--warning .yc-statistic__title,
+.yc-statistic__card--warning .yc-statistic__value,
+.yc-statistic__card--warning .yc-statistic__prefix,
+.yc-statistic__card--warning .yc-statistic__suffix,
+.yc-statistic__card--warning .yc-statistic__description {
+    color: var(--yc-color-white);
+}
+
+.yc-statistic__card--danger {
+    background: linear-gradient(135deg, var(--yc-color-danger), var(--yc-color-danger-hover));
+    color: var(--yc-color-white);
+}
+
+.yc-statistic__card--danger .yc-statistic__title,
+.yc-statistic__card--danger .yc-statistic__value,
+.yc-statistic__card--danger .yc-statistic__prefix,
+.yc-statistic__card--danger .yc-statistic__suffix,
+.yc-statistic__card--danger .yc-statistic__description {
+    color: var(--yc-color-white);
+}

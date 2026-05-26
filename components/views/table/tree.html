@@ -1,0 +1,259 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>树形表格 - Table Workbench</title>
+    <script src="../../scripts/table-workbench-theme.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../styles/index.css">
+    <link rel="stylesheet" href="../../styles/components/button.css">
+    <link rel="stylesheet" href="../../styles/table-workbench.css">
+    <script src="https://unpkg.com/vue@3.4.0/dist/vue.global.prod.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+           <!-- <div class="page-header">
+                <h1>树形与展开</h1>
+                <p>把目录树、展开行和分页列表整合到一套表格容器中，用于模拟多层级数据管理场景。</p>
+            </div>
+
+            <div class="actions">
+                <a class="yc-button yc-button&#45;&#45;small" href="../demo-table.html">
+                    <i class="fas fa-arrow-left"></i>
+                    返回 Table Workbench
+                </a>
+            </div>-->
+
+            <div class="demo-card">
+                <h3>树形目录</h3>
+                <table class="yc-data-table stripe border">
+                    <thead>
+                        <tr>
+                            <th>名称</th>
+                            <th class="cell-center" style="width: 110px;">类型</th>
+                            <th class="cell-right" style="width: 120px;">大小</th>
+                            <th class="cell-center" style="width: 180px;">更新时间</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="row in flatNodes" :key="row.id">
+                            <td>
+                                <span v-for="step in row.level" :key="`${row.id}-${step}`" class="tree-indent"></span>
+                                <span v-if="row.children?.length" class="tree-icon" @click="toggleNode(row.id)">
+                                    <i class="fas" :class="expandedNodes.includes(row.id) ? 'fa-chevron-down' : 'fa-chevron-right'"></i>
+                                </span>
+                                <span v-else class="tree-indent"></span>
+                                <i class="fas fa-folder table-folder-icon" v-if="row.type === 'folder'"></i>
+                                <i class="fas fa-file table-file-icon" v-else></i>
+                                {{ row.name }}
+                            </td>
+                            <td class="cell-center">{{ row.type === 'folder' ? '文件夹' : '文件' }}</td>
+                            <td class="cell-right">{{ row.size }}</td>
+                            <td class="cell-center">{{ row.updatedAt }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="demo-card">
+                <h3>展开详情行</h3>
+                <table class="yc-data-table stripe border">
+                    <thead>
+                        <tr>
+                            <th style="width: 48px;"></th>
+                            <th>姓名</th>
+                            <th>角色</th>
+                            <th>部门</th>
+                            <th class="cell-center" style="width: 88px;">年龄</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template v-for="row in detailRows" :key="`detail-${row.id}`">
+                            <tr>
+                                <td class="cell-center">
+                                    <span class="expand-icon" :class="{ expanded: expandedDetailIds.includes(row.id) }" @click="toggleDetail(row.id)">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </td>
+                                <td>{{ row.name }}</td>
+                                <td>{{ row.role }}</td>
+                                <td>{{ row.department }}</td>
+                                <td class="cell-center">{{ row.age }}</td>
+                            </tr>
+                            <tr v-if="expandedDetailIds.includes(row.id)">
+                                <td colspan="5" class="table-expand-panel">
+                                    <div class="table-detail-grid">
+                                        <div><strong>邮箱：</strong>{{ row.email }}</div>
+                                        <div><strong>电话：</strong>{{ row.phone }}</div>
+                                        <div><strong>入职日期：</strong>{{ row.joinDate }}</div>
+                                        <div><strong>所在城市：</strong>{{ row.city }}</div>
+                                        <div><strong>技能方向：</strong>{{ row.skill }}</div>
+                                        <div><strong>月薪：</strong>¥ {{ row.salary.toLocaleString('zh-CN') }}</div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="demo-card">
+                <h3>分页列表</h3>
+                <table class="yc-data-table stripe border">
+                    <thead>
+                        <tr>
+                            <th class="cell-center" style="width: 72px;">序号</th>
+                            <th>姓名</th>
+                            <th>角色</th>
+                            <th>部门</th>
+                            <th class="cell-center" style="width: 88px;">年龄</th>
+                            <th>所在城市</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(row, index) in pagedRows" :key="`page-${row.id}`">
+                            <td class="cell-center">{{ (pageCurrent - 1) * pageSize + index + 1 }}</td>
+                            <td>{{ row.name }}</td>
+                            <td>{{ row.role }}</td>
+                            <td>{{ row.department }}</td>
+                            <td class="cell-center">{{ row.age }}</td>
+                            <td>{{ row.city }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="table-pagination">
+                    <button :disabled="pageCurrent === 1" @click="pageCurrent -= 1">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button v-for="page in pageNumbers" :key="page" :class="{ active: page === pageCurrent }" @click="pageCurrent = page">
+                        {{ page }}
+                    </button>
+                    <button :disabled="pageCurrent === pageCount" @click="pageCurrent += 1">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <span class="page-info">共 {{ pageRows.length }} 条记录，当前 {{ pageCurrent }} / {{ pageCount }} 页</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const { createApp, computed, ref } = Vue;
+
+        createApp({
+            setup() {
+                const treeNodes = ref([
+                    {
+                        id: 1,
+                        name: '运营素材',
+                        type: 'folder',
+                        size: '-',
+                        updatedAt: '2026-05-10 10:30',
+                        children: [
+                            { id: 2, name: 'banner-home.png', type: 'file', size: '1.2 MB', updatedAt: '2026-05-10 09:18' },
+                            {
+                                id: 3,
+                                name: '活动策划',
+                                type: 'folder',
+                                size: '-',
+                                updatedAt: '2026-05-09 17:20',
+                                children: [
+                                    { id: 4, name: 'summer-campaign.psd', type: 'file', size: '18.4 MB', updatedAt: '2026-05-09 16:50' },
+                                    { id: 5, name: 'coupon-rules.docx', type: 'file', size: '420 KB', updatedAt: '2026-05-08 15:40' }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        id: 6,
+                        name: '数据报表',
+                        type: 'folder',
+                        size: '-',
+                        updatedAt: '2026-05-08 11:00',
+                        children: [
+                            { id: 7, name: 'weekly-report.xlsx', type: 'file', size: '3.6 MB', updatedAt: '2026-05-08 10:12' },
+                            { id: 8, name: 'roi-analysis.pdf', type: 'file', size: '2.1 MB', updatedAt: '2026-05-07 18:26' }
+                        ]
+                    }
+                ]);
+
+                const expandedNodes = ref([1]);
+
+                function flatten(nodes, level = 0) {
+                    return nodes.flatMap(node => {
+                        const base = [{ ...node, level }];
+                        if (node.children?.length && expandedNodes.value.includes(node.id)) {
+                            return base.concat(flatten(node.children, level + 1));
+                        }
+                        return base;
+                    });
+                }
+
+                const flatNodes = computed(() => flatten(treeNodes.value));
+
+                const detailRows = ref([
+                    { id: 1, name: '张三', role: '前端工程师', department: '技术研发部', age: 28, email: 'zhangsan@example.com', phone: '13800138001', joinDate: '2022-03-15', city: '北京', skill: 'Vue / Design Token', salary: 18000 },
+                    { id: 2, name: '李四', role: '后端工程师', department: '技术研发部', age: 32, email: 'lisi@example.com', phone: '13800138002', joinDate: '2020-06-02', city: '上海', skill: 'Java / Service Mesh', salary: 22000 },
+                    { id: 3, name: '赵六', role: '产品经理', department: '产品设计部', age: 31, email: 'zhaoliu@example.com', phone: '13800138004', joinDate: '2021-11-18', city: '深圳', skill: 'B 端工作台', salary: 24000 }
+                ]);
+                const expandedDetailIds = ref([1]);
+
+                const pageRows = ref([
+                    { id: 101, name: '张三', role: '前端工程师', department: '技术研发部', age: 28, city: '北京' },
+                    { id: 102, name: '李四', role: '后端工程师', department: '技术研发部', age: 32, city: '上海' },
+                    { id: 103, name: '王五', role: '测试工程师', department: '技术研发部', age: 26, city: '广州' },
+                    { id: 104, name: '赵六', role: '产品经理', department: '产品设计部', age: 31, city: '深圳' },
+                    { id: 105, name: '孙七', role: 'UI 设计师', department: '产品设计部', age: 29, city: '杭州' },
+                    { id: 106, name: '周八', role: '运营经理', department: '增长运营部', age: 27, city: '成都' },
+                    { id: 107, name: '吴九', role: '数据分析师', department: '增长运营部', age: 30, city: '南京' },
+                    { id: 108, name: '郑十', role: '实施顾问', department: '客户成功部', age: 33, city: '武汉' }
+                ]);
+                const pageCurrent = ref(1);
+                const pageSize = 4;
+
+                const pageCount = computed(() => Math.ceil(pageRows.value.length / pageSize));
+                const pagedRows = computed(() => {
+                    const start = (pageCurrent.value - 1) * pageSize;
+                    return pageRows.value.slice(start, start + pageSize);
+                });
+                const pageNumbers = computed(() => Array.from({ length: pageCount.value }, (_, index) => index + 1));
+
+                function toggleNode(id) {
+                    const index = expandedNodes.value.indexOf(id);
+                    if (index > -1) {
+                        expandedNodes.value.splice(index, 1);
+                    } else {
+                        expandedNodes.value.push(id);
+                    }
+                }
+
+                function toggleDetail(id) {
+                    const index = expandedDetailIds.value.indexOf(id);
+                    if (index > -1) {
+                        expandedDetailIds.value.splice(index, 1);
+                    } else {
+                        expandedDetailIds.value.push(id);
+                    }
+                }
+
+                return {
+                    flatNodes,
+                    expandedNodes,
+                    toggleNode,
+                    detailRows,
+                    expandedDetailIds,
+                    toggleDetail,
+                    pageRows,
+                    pageCurrent,
+                    pageCount,
+                    pagedRows,
+                    pageNumbers,
+                    pageSize
+                };
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>

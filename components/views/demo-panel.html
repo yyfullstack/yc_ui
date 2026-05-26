@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel 面板组件 - YC UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+    <style>
+        .panel-demo-stage {
+            min-height: 520px;
+        }
+
+        .panel-demo-stack {
+            display: grid;
+            gap: 16px;
+            padding: 18px;
+        }
+
+        .panel-demo-toolbar-note {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .panel-demo-nav {
+            display: grid;
+            gap: 8px;
+        }
+
+        .panel-demo-nav__item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 10px 12px;
+            border: 1px solid var(--yc-color-border-light);
+            border-radius: var(--yc-border-radius-medium);
+            background: var(--yc-color-bg);
+            color: var(--yc-color-text-regular);
+        }
+
+        .panel-demo-nav__item.is-active {
+            border-color: var(--yc-color-border-hover);
+            background: var(--yc-layer-primary-soft);
+            color: var(--yc-color-primary);
+        }
+
+        .panel-demo-board {
+            display: grid;
+            gap: 16px;
+            padding: 18px;
+            height: 100%;
+            box-sizing: border-box;
+        }
+
+        .panel-demo-board__hero {
+            display: grid;
+            gap: 12px;
+        }
+
+        .panel-demo-board__header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .panel-demo-board__actions {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .panel-demo-form {
+            display: grid;
+            gap: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .panel-demo-board__header {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">Panel 面板组件</h1>
+            <p class="demo-page-subtitle">
+                把属性区、概览区、任务区、筛选区和工作台侧栏统一成可复用的面板语言，
+                让 Layout、Splitter、Window、Container 这类骨架组件在组合时拥有一致的内部结构。
+            </p>
+        </div>
+
+        <div class="demo-shell-toolbar">
+            <div class="demo-shell-meta">
+                <a class="yc-button yc-button--small" href="../index.html#components">返回组件平台</a>
+                <span class="demo-shell-pill">Panel</span>
+                <span class="demo-shell-pill">../styles/components/panel.css</span>
+                <span class="demo-shell-pill"><i class="fas fa-table-cells"></i> 面板语义</span>
+                <span class="demo-shell-pill"><i class="fas fa-layer-group"></i> Header / Body / Footer</span>
+                <span class="demo-shell-pill"><i class="fas fa-sliders"></i> 属性区 / 状态区 / 指标区</span>
+            </div>
+            <div class="demo-shell-actions">
+                <button class="yc-button yc-button--small" type="button" id="panelThemeToggle">切换深色</button>
+                <a class="demo-shell-anchor" href="#panel-workbench">工作台组合</a>
+                <a class="demo-shell-anchor" href="#panel-variants">状态变体</a>
+                <a class="demo-shell-anchor" href="#panel-form">属性面板</a>
+            </div>
+        </div>
+
+        <div class="demo-section" id="panel-workbench">
+            <h3>工作台组合</h3>
+            <p class="demo-description">
+                Panel 更像骨架型组件的内部语言。它不负责整个页面排版，而是负责把侧栏、属性区、摘要区和任务区组织成稳定的块级结构。
+            </p>
+
+            <div class="demo-workbench-layout">
+                <aside class="demo-workbench-sidebar">
+                    <div class="demo-workbench-card">
+                        <h4 class="demo-workbench-card__title">适用位置</h4>
+                        <div class="demo-workbench-list">
+                            <div class="demo-workbench-list-item">
+                                <div class="demo-workbench-list-item__title">工作台侧栏</div>
+                                <div class="demo-workbench-list-item__meta">承接导航、统计、最近操作和筛选条件。</div>
+                            </div>
+                            <div class="demo-workbench-list-item">
+                                <div class="demo-workbench-list-item__title">属性与设置区</div>
+                                <div class="demo-workbench-list-item__meta">和表单控件组合时，信息层级更容易稳定下来。</div>
+                            </div>
+                            <div class="demo-workbench-list-item">
+                                <div class="demo-workbench-list-item__title">窗口内部内容</div>
+                                <div class="demo-workbench-list-item__meta">适合在 Window、Drawer、Dialog 内部做摘要块和说明块。</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="demo-workbench-card">
+                        <h4 class="demo-workbench-card__title">推荐结构</h4>
+                        <p class="demo-workbench-card__text">统一使用 Header / Body / Footer 三段式，正文里再按指标、列表、表单和说明块继续拆分，避免每个 demo 自己拼装。</p>
+                    </div>
+
+                    <div class="demo-workbench-status">状态：这页演示的是“面板语言”如何服务工作台，不是另起一套孤立视觉。</div>
+                </aside>
+
+                <div class="demo-workbench-surface">
+                    <div class="demo-workbench-toolbar">
+                        <div class="demo-workbench-toolbar__group">
+                            <span class="demo-tag">Panel Workbench</span>
+                            <div class="demo-workbench-pills">
+                                <span class="demo-shell-pill">属性区</span>
+                                <span class="demo-shell-pill">状态区</span>
+                                <span class="demo-shell-pill">任务区</span>
+                            </div>
+                        </div>
+                        <div class="demo-workbench-toolbar__actions">
+                            <span class="demo-shell-pill panel-demo-toolbar-note"><i class="fas fa-diagram-project"></i> 作为骨架组件的内部块级语言</span>
+                        </div>
+                    </div>
+
+                    <div class="demo-workbench-stage demo-workbench-stage--grid panel-demo-stage">
+                        <div class="panel-demo-board">
+                            <div class="demo-workbench-panel-grid demo-workbench-panel-grid--3">
+                                <article class="yc-panel yc-panel--soft">
+                                    <div class="yc-panel__header">
+                                        <div class="yc-panel__heading">
+                                            <span class="yc-panel__eyebrow">在线节点</span>
+                                            <h4 class="yc-panel__title">基础状态面板</h4>
+                                        </div>
+                                        <span class="demo-shell-pill">Primary</span>
+                                    </div>
+                                    <div class="yc-panel__body">
+                                        <div class="demo-workbench-panel__value">128</div>
+                                        <p class="demo-workbench-panel__text">适合作为工作台 KPI、摘要信息或告警总览的第一层入口。</p>
+                                    </div>
+                                    <div class="yc-panel__footer">
+                                        <span class="demo-shell-pill">更新时间 09:40</span>
+                                        <button class="yc-button yc-button--small yc-button--primary" type="button">查看详情</button>
+                                    </div>
+                                </article>
+
+                                <article class="yc-panel yc-panel--primary">
+                                    <div class="yc-panel__header">
+                                        <div class="yc-panel__heading">
+                                            <span class="yc-panel__eyebrow">当前阶段</span>
+                                            <h4 class="yc-panel__title">重点信息面板</h4>
+                                        </div>
+                                        <span class="demo-shell-pill">Focused</span>
+                                    </div>
+                                    <div class="yc-panel__body">
+                                        <div class="demo-workbench-panel__value">排期中</div>
+                                        <p class="demo-workbench-panel__text">通过轻度高亮把当前最值得处理的区块提起来，但不破坏整页的密度和平衡。</p>
+                                    </div>
+                                    <div class="yc-panel__footer">
+                                        <span class="demo-shell-pill">负责人：体验平台组</span>
+                                        <button class="yc-button yc-button--small" type="button">编辑</button>
+                                    </div>
+                                </article>
+
+                                <article class="yc-panel yc-panel--floating yc-panel--success">
+                                    <div class="yc-panel__header">
+                                        <div class="yc-panel__heading">
+                                            <span class="yc-panel__eyebrow">工作流健康度</span>
+                                            <h4 class="yc-panel__title">浮层摘要面板</h4>
+                                        </div>
+                                        <span class="demo-shell-pill">Floating</span>
+                                    </div>
+                                    <div class="yc-panel__body">
+                                        <div class="demo-workbench-panel__value">96%</div>
+                                        <p class="demo-workbench-panel__text">更适合悬浮信息层、概览卡和工作区内的辅助观察模块。</p>
+                                    </div>
+                                    <div class="yc-panel__footer">
+                                        <span class="demo-shell-pill">本周趋势稳定</span>
+                                    </div>
+                                </article>
+                            </div>
+
+                            <div class="demo-workbench-panel-grid demo-workbench-panel-grid--2">
+                                <article class="yc-panel">
+                                    <div class="yc-panel__header">
+                                        <div class="yc-panel__heading">
+                                            <span class="yc-panel__eyebrow">侧栏导航</span>
+                                            <h4 class="yc-panel__title">树 / 列表 / 资源区</h4>
+                                            <p class="yc-panel__meta">在 Splitter、Container 和 Layout 中都常见。</p>
+                                        </div>
+                                        <div class="yc-panel__tools">
+                                            <button class="yc-button yc-button--small" type="button">刷新</button>
+                                        </div>
+                                    </div>
+                                    <div class="yc-panel__body">
+                                        <div class="panel-demo-nav">
+                                            <div class="panel-demo-nav__item is-active"><span>指标总览</span><span>12</span></div>
+                                            <div class="panel-demo-nav__item"><span>发布队列</span><span>6</span></div>
+                                            <div class="panel-demo-nav__item"><span>权限策略</span><span>3</span></div>
+                                            <div class="panel-demo-nav__item"><span>接口日志</span><span>18</span></div>
+                                        </div>
+                                    </div>
+                                </article>
+
+                                <article class="yc-panel yc-panel--soft">
+                                    <div class="yc-panel__header">
+                                        <div class="yc-panel__heading">
+                                            <span class="yc-panel__eyebrow">主任务区辅助块</span>
+                                            <h4 class="yc-panel__title">说明 / 任务 / 最近记录</h4>
+                                            <p class="yc-panel__meta">适合和 Window、Dialog、Drawer 的正文组合。</p>
+                                        </div>
+                                    </div>
+                                    <div class="yc-panel__body">
+                                        <div class="demo-workbench-list">
+                                            <div class="demo-workbench-list-item">
+                                                <div class="demo-workbench-list-item__title">统一内容密度</div>
+                                                <div class="demo-workbench-list-item__meta">避免一个面板里标题、列表、按钮、标签全部各用一套间距。</div>
+                                            </div>
+                                            <div class="demo-workbench-list-item">
+                                                <div class="demo-workbench-list-item__title">明确操作区域</div>
+                                                <div class="demo-workbench-list-item__meta">Footer 固定承接提交、恢复、切换、跳转等动作。</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section" id="panel-variants">
+            <h3>状态变体</h3>
+            <p class="demo-description">
+                当面板承担不同语义时，可以通过边框、头部背景和阴影强度做轻量区分，而不是每种场景都新造一套卡片样式。
+            </p>
+
+            <div class="demo-workbench-panel-grid demo-workbench-panel-grid--2">
+                <article class="yc-panel yc-panel--success yc-panel--hoverable">
+                    <div class="yc-panel__header">
+                        <div class="yc-panel__heading">
+                            <span class="yc-panel__eyebrow">成功态</span>
+                            <h4 class="yc-panel__title">稳定运行</h4>
+                            <p class="yc-panel__meta">适合发布成功、配置生效、指标达标等低风险提示。</p>
+                        </div>
+                        <div class="yc-panel__actions">
+                            <button class="yc-button yc-button--small yc-button--primary" type="button">查看结果</button>
+                        </div>
+                    </div>
+                    <div class="yc-panel__body">
+                        <div class="demo-workbench-list">
+                            <div class="demo-workbench-list-item">
+                                <div class="demo-workbench-list-item__title">本次发布耗时 3 分 12 秒</div>
+                                <div class="demo-workbench-list-item__meta">版本已同步到预发、生产与镜像环境。</div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="yc-panel yc-panel--warning yc-panel--hoverable">
+                    <div class="yc-panel__header">
+                        <div class="yc-panel__heading">
+                            <span class="yc-panel__eyebrow">提醒态</span>
+                            <h4 class="yc-panel__title">需要人工确认</h4>
+                            <p class="yc-panel__meta">适合审批、复核、资源不足或策略冲突的中风险场景。</p>
+                        </div>
+                        <div class="yc-panel__actions">
+                            <button class="yc-button yc-button--small" type="button">稍后处理</button>
+                        </div>
+                    </div>
+                    <div class="yc-panel__body">
+                        <div class="demo-workbench-list">
+                            <div class="demo-workbench-list-item">
+                                <div class="demo-workbench-list-item__title">仍有 2 条权限变更待确认</div>
+                                <div class="demo-workbench-list-item__meta">建议在下一个发布窗口前完成复核。</div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+
+        <div class="demo-section" id="panel-form">
+            <h3>属性面板</h3>
+            <p class="demo-description">
+                这是最接近企业后台真实场景的一种组合：左侧工作区，右侧属性 Panel。它应该和 Form、Input、Select、Switch 等控件一起形成稳定的设置体验。
+            </p>
+
+            <div class="demo-workbench-surface">
+                <div class="demo-workbench-toolbar">
+                    <div class="demo-workbench-toolbar__group">
+                        <span class="demo-tag demo-tag--warning">Property Panel</span>
+                        <div class="demo-workbench-pills">
+                            <span class="demo-shell-pill">Header</span>
+                            <span class="demo-shell-pill">Body</span>
+                            <span class="demo-shell-pill">Footer</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="demo-workbench-stage panel-demo-stage">
+                    <div class="panel-demo-stack">
+                        <article class="yc-panel yc-panel--floating panel-demo-form">
+                            <div class="yc-panel__header">
+                                <div class="yc-panel__heading">
+                                    <span class="yc-panel__eyebrow">组件属性</span>
+                                    <h4 class="yc-panel__title">表格工作台设置</h4>
+                                    <p class="yc-panel__meta">让属性区也遵循统一的面板节奏，而不是裸露控件堆叠。</p>
+                                </div>
+                                <div class="yc-panel__tools">
+                                    <span class="demo-shell-pill">Draft</span>
+                                </div>
+                            </div>
+                            <div class="yc-panel__body">
+                                <div class="demo-workbench-form">
+                                    <div class="demo-workbench-field">
+                                        <label class="demo-workbench-field__label" for="panelTitle">面板标题</label>
+                                        <input id="panelTitle" class="yc-input" value="销售看板属性">
+                                    </div>
+                                    <div class="demo-workbench-field">
+                                        <label class="demo-workbench-field__label" for="panelOwner">负责人</label>
+                                        <div class="demo-workbench-inline">
+                                            <input id="panelOwner" class="yc-input" value="运营分析组">
+                                            <span class="demo-workbench-chip">只读字段</span>
+                                        </div>
+                                    </div>
+                                    <div class="demo-workbench-field">
+                                        <label class="demo-workbench-field__label" for="panelMode">展示密度</label>
+                                        <div class="yc-select has-value has-prefix">
+                                            <div class="yc-select__input-wrapper">
+                                                <span class="yc-select__selection-icon is-filled"><i class="fas fa-table-cells-large"></i></span>
+                                                <input id="panelMode" type="text" class="yc-select__input" readonly value="紧凑">
+                                                <i class="fas fa-chevron-down yc-select__arrow"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="demo-workbench-field">
+                                        <label class="demo-workbench-field__label" for="panelDesc">备注</label>
+                                        <textarea id="panelDesc" class="yc-textarea" rows="4">Panel 更适合在属性区承接说明、控件和提交动作，而不是直接把表单裸铺在工作台上。</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="yc-panel__footer">
+                                <span class="demo-shell-pill">最近保存：09:42</span>
+                                <div class="yc-panel__actions">
+                                    <button class="yc-button yc-button--small" type="button">取消</button>
+                                    <button class="yc-button yc-button--small yc-button--primary" type="button">保存配置</button>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            const themeButton = document.getElementById("panelThemeToggle");
+            if (!themeButton) return;
+
+            function syncTheme(theme) {
+                document.documentElement.setAttribute("yc-theme", theme);
+                localStorage.setItem("yc-theme", theme);
+                themeButton.textContent = theme === "dark" ? "切换浅色" : "切换深色";
+            }
+
+            themeButton.addEventListener("click", () => {
+                const currentTheme = document.documentElement.getAttribute("yc-theme") || "light";
+                syncTheme(currentTheme === "dark" ? "light" : "dark");
+            });
+
+            syncTheme(localStorage.getItem("yc-theme") || "light");
+        })();
+    </script>
+    <script src="../scripts/demo-shell.js"></script>
+</body>
+</html>

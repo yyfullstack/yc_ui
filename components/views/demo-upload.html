@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload 组件演示</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+    <style>
+        .upload-demo-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .upload-demo-note {
+            padding: 16px 18px;
+            border: 1px solid var(--yc-color-border-light);
+            border-radius: var(--yc-border-radius-large);
+            background: linear-gradient(180deg, var(--yc-color-bg) 0%, var(--yc-color-fill-extra-light) 100%);
+            color: var(--yc-color-text-regular);
+            line-height: 1.7;
+        }
+
+        .upload-demo-note strong {
+            color: var(--yc-color-text-primary);
+        }
+
+        .upload-demo-preview {
+            position: fixed;
+            inset: 0;
+            z-index: var(--yc-z-index-modal);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            background: var(--yc-overlay-color-emphasis);
+            cursor: zoom-out;
+        }
+
+        .upload-demo-preview__image {
+            max-width: min(960px, 92vw);
+            max-height: 88vh;
+            border-radius: var(--yc-border-radius-large);
+            box-shadow: var(--yc-box-shadow-2xl);
+            background: var(--yc-color-bg);
+            object-fit: contain;
+        }
+
+        @media (max-width: 960px) {
+            .upload-demo-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">Upload 组件</h1>
+            <p class="demo-page-subtitle">统一上传触发器、列表态、图片墙和手动上传流程，方便在平台里快速验证上传交互与视觉一致性。</p>
+        </div>
+
+        <div class="demo-section">
+            <h3>上传场景</h3>
+            <div class="upload-demo-grid">
+                <div class="demo-block">
+                    <div class="demo-block-title">单文件上传</div>
+                    <div class="demo-block-description">适合表单附件、文档补充等标准场景。</div>
+                    <div class="yc-upload" id="uploadBasic" data-list="uploadBasicList" data-result="uploadBasicResult">
+                        <input class="yc-upload__input" id="uploadBasicInput" type="file">
+                        <div class="yc-upload__trigger" data-open-input="uploadBasicInput">
+                            <i class="fas fa-cloud-upload-alt yc-upload__trigger-icon"></i>
+                            <span class="yc-upload__trigger-text">点击上传文件</span>
+                            <span class="yc-upload__trigger-hint">支持任意文件类型</span>
+                        </div>
+                    </div>
+                    <div class="yc-upload__file-list" id="uploadBasicList"></div>
+                    <div class="result-box" id="uploadBasicResult">状态：等待上传</div>
+                </div>
+
+                <div class="demo-block">
+                    <div class="demo-block-title">拖拽上传</div>
+                    <div class="demo-block-description">更适合批量导入和工作台场景。</div>
+                    <div class="yc-upload yc-upload--drag" id="uploadDrag" data-list="uploadDragList" data-result="uploadDragResult" data-multiple="true">
+                        <input class="yc-upload__input" id="uploadDragInput" type="file" multiple>
+                        <div class="yc-upload__trigger yc-upload__trigger--drag" data-open-input="uploadDragInput">
+                            <i class="fas fa-inbox yc-upload__trigger-icon"></i>
+                            <span class="yc-upload__trigger-text">
+                                将文件拖到此处，或
+                                <em class="yc-upload__trigger-emphasis">点击上传</em>
+                            </span>
+                            <span class="yc-upload__trigger-hint">支持多文件并行加入上传队列</span>
+                        </div>
+                    </div>
+                    <div class="yc-upload__file-list" id="uploadDragList"></div>
+                    <div class="result-box" id="uploadDragResult">状态：等待上传</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>图片与卡片</h3>
+            <div class="upload-demo-grid">
+                <div class="demo-block">
+                    <div class="demo-block-title">图片列表</div>
+                    <div class="demo-block-description">上传后直接提供预览、删除和进度反馈。</div>
+                    <div class="yc-upload" id="uploadImage" data-list="uploadImageList" data-result="uploadImageResult" data-multiple="true" data-mode="picture">
+                        <input class="yc-upload__input" id="uploadImageInput" type="file" accept="image/*" multiple>
+                        <div class="yc-upload__trigger" data-open-input="uploadImageInput">
+                            <i class="fas fa-image yc-upload__trigger-icon"></i>
+                            <span class="yc-upload__trigger-text">上传图片素材</span>
+                            <span class="yc-upload__trigger-hint">支持 JPG、PNG、GIF 和 WebP</span>
+                        </div>
+                    </div>
+                    <div class="yc-upload__picture-list" id="uploadImageList"></div>
+                    <div class="result-box" id="uploadImageResult">状态：等待上传</div>
+                </div>
+
+                <div class="demo-block">
+                    <div class="demo-block-title">图片墙</div>
+                    <div class="demo-block-description">更适合运营素材、图库或商品媒体管理。</div>
+                    <div class="demo-row">
+                        <div class="yc-upload" id="uploadPictureWall" data-list="uploadPictureWallList" data-result="uploadPictureWallResult" data-multiple="true" data-mode="picture">
+                            <input class="yc-upload__input" id="uploadPictureWallInput" type="file" accept="image/*" multiple>
+                            <div class="yc-upload__trigger yc-upload__trigger--picture-card" data-open-input="uploadPictureWallInput">
+                                <i class="fas fa-plus yc-upload__trigger-icon"></i>
+                                <span class="yc-upload__trigger-text">添加图片</span>
+                            </div>
+                        </div>
+                        <div class="yc-upload__picture-list" id="uploadPictureWallList"></div>
+                    </div>
+                    <div class="result-box" id="uploadPictureWallResult">状态：等待上传</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>约束与手动流程</h3>
+            <div class="upload-demo-grid">
+                <div class="demo-block">
+                    <div class="demo-block-title">限制条件</div>
+                    <div class="demo-block-description">模拟业务侧“数量限制 + 大小限制”的常见组合。</div>
+                    <div class="yc-upload" id="uploadLimit" data-list="uploadLimitList" data-result="uploadLimitResult" data-multiple="true" data-max-size="2" data-max-count="3">
+                        <input class="yc-upload__input" id="uploadLimitInput" type="file" multiple>
+                        <div class="yc-upload__trigger" data-open-input="uploadLimitInput">
+                            <i class="fas fa-shield-halved yc-upload__trigger-icon"></i>
+                            <span class="yc-upload__trigger-text">上传受限文件</span>
+                            <span class="yc-upload__trigger-hint">最多 3 个文件，单个文件不超过 2MB</span>
+                        </div>
+                    </div>
+                    <div class="yc-upload__file-list" id="uploadLimitList"></div>
+                    <p class="yc-upload__tip yc-upload__tip--warning">提示：超过大小或数量限制时，会在结果区域给出即时反馈。</p>
+                    <div class="result-box" id="uploadLimitResult">状态：等待上传</div>
+                </div>
+
+                <div class="demo-block">
+                    <div class="demo-block-title">手动上传</div>
+                    <div class="demo-block-description">适合需要先校验、再批量提交的流程。</div>
+                    <div class="yc-upload" id="uploadManual" data-list="uploadManualList" data-result="uploadManualResult" data-multiple="true" data-auto-upload="false">
+                        <input class="yc-upload__input" id="uploadManualInput" type="file" multiple>
+                        <div class="yc-upload__trigger" data-open-input="uploadManualInput">
+                            <i class="fas fa-hand-pointer yc-upload__trigger-icon"></i>
+                            <span class="yc-upload__trigger-text">先选择，再手动上传</span>
+                            <span class="yc-upload__trigger-hint">加入队列后不会自动提交</span>
+                        </div>
+                    </div>
+                    <div class="yc-upload__file-list" id="uploadManualList"></div>
+                    <div class="demo-btn-row">
+                        <button class="yc-button yc-button--primary yc-button--small" type="button" onclick="handleManualUpload('uploadManual')">
+                            <i class="fas fa-upload"></i>
+                            开始上传
+                        </button>
+                        <button class="yc-button yc-button--small" type="button" onclick="clearUploadHost('uploadManual')">
+                            <i class="fas fa-trash"></i>
+                            清空列表
+                        </button>
+                    </div>
+                    <div class="result-box" id="uploadManualResult">状态：等待选择文件</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>平台建议</h3>
+            <div class="upload-demo-note">
+                <strong>建议做法：</strong>
+                在组件平台层统一上传触发器、进度反馈、图片预览遮罩和列表状态文案。这样后续无论是表单附件、素材中心还是工作台导入入口，都能沿用同一套交互心智和视觉语义。
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const uploadState = new Map();
+        let uploadSeed = 0;
+
+        function formatFileSize(bytes) {
+            if (!bytes) return '0 B';
+            const units = ['B', 'KB', 'MB', 'GB'];
+            const step = 1024;
+            let value = bytes;
+            let unitIndex = 0;
+
+            while (value >= step && unitIndex < units.length - 1) {
+                value /= step;
+                unitIndex += 1;
+            }
+
+            return `${value.toFixed(value >= 10 || unitIndex === 0 ? 0 : 1)} ${units[unitIndex]}`;
+        }
+
+        function getFileIcon(file) {
+            const type = file.type || '';
+            const name = file.name.toLowerCase();
+
+            if (type.startsWith('image/')) return { icon: 'fa-image', kind: 'image' };
+            if (type.startsWith('video/')) return { icon: 'fa-video', kind: 'video' };
+            if (type.startsWith('audio/')) return { icon: 'fa-music', kind: 'audio' };
+            if (type === 'application/pdf' || name.endsWith('.pdf')) return { icon: 'fa-file-pdf', kind: 'pdf' };
+            if (name.endsWith('.zip') || name.endsWith('.rar') || name.endsWith('.7z')) return { icon: 'fa-file-archive', kind: 'archive' };
+            return { icon: 'fa-file-lines', kind: 'document' };
+        }
+
+        function getRecordsByHost(hostId) {
+            return Array.from(uploadState.values()).filter(record => record.hostId === hostId);
+        }
+
+        function setResult(hostId, text) {
+            const host = document.getElementById(hostId);
+            const resultId = host?.dataset.result;
+            const result = resultId ? document.getElementById(resultId) : null;
+            if (result) result.textContent = text;
+        }
+
+        function openPreview(src) {
+            const overlay = document.createElement('div');
+            overlay.className = 'upload-demo-preview';
+            overlay.innerHTML = `<img class="upload-demo-preview__image" src="${src}" alt="预览图片">`;
+            overlay.addEventListener('click', () => overlay.remove());
+            document.body.appendChild(overlay);
+        }
+
+        function removeUpload(itemId) {
+            const record = uploadState.get(itemId);
+            if (!record) return;
+
+            record.element?.remove();
+            if (record.previewUrl) {
+                URL.revokeObjectURL(record.previewUrl);
+            }
+
+            uploadState.delete(itemId);
+
+            const records = getRecordsByHost(record.hostId);
+            if (records.length === 0) {
+                setResult(record.hostId, record.hostId === 'uploadManual' ? '状态：等待选择文件' : '状态：等待上传');
+            } else {
+                setResult(record.hostId, `状态：当前队列 ${records.length} 个文件`);
+            }
+        }
+
+        function createPictureItem(record) {
+            const item = document.createElement('div');
+            item.className = 'yc-upload__picture-item';
+            item.id = record.id;
+            item.innerHTML = `
+                <img src="${record.previewUrl}" alt="${record.file.name}">
+                <div class="yc-upload__picture-item-overlay">
+                    <button class="yc-upload__picture-item-btn yc-upload__picture-item-btn--preview" type="button" title="预览">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                    <button class="yc-upload__picture-item-btn yc-upload__picture-item-btn--delete" type="button" title="删除">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+                <div class="yc-upload__picture-item-status" hidden>
+                    <i class="fas fa-check"></i>
+                </div>
+                <div class="yc-upload__picture-item-progress" hidden>
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <span class="yc-upload__picture-item-progress-text">0%</span>
+                    <div class="yc-upload__picture-item-progress-bar">
+                        <div class="yc-upload__picture-item-progress-fill"></div>
+                    </div>
+                </div>
+            `;
+
+            item.querySelector('.yc-upload__picture-item-btn--preview').addEventListener('click', () => openPreview(record.previewUrl));
+            item.querySelector('.yc-upload__picture-item-btn--delete').addEventListener('click', () => removeUpload(record.id));
+            return item;
+        }
+
+        function createFileItem(record) {
+            const iconInfo = getFileIcon(record.file);
+            const item = document.createElement('div');
+            item.className = 'yc-upload__file';
+            item.id = record.id;
+            item.innerHTML = `
+                <div class="yc-upload__file-icon yc-upload__file-icon--${iconInfo.kind}">
+                    <i class="fas ${iconInfo.icon}"></i>
+                </div>
+                <div class="yc-upload__file-info">
+                    <div class="yc-upload__file-name" title="${record.file.name}">${record.file.name}</div>
+                    <div class="yc-upload__file-meta">${formatFileSize(record.file.size)}</div>
+                    <div class="yc-upload__progress">
+                        <div class="yc-upload__progress-bar">
+                            <div class="yc-upload__progress-fill"></div>
+                        </div>
+                    </div>
+                </div>
+                <span class="yc-upload__progress-text" hidden>0%</span>
+                <div class="yc-upload__file-status" hidden></div>
+                <div class="yc-upload__file-actions">
+                    <button class="yc-upload__file-btn yc-upload__file-btn--retry" type="button" title="重试" hidden>
+                        <i class="fas fa-rotate-right"></i>
+                    </button>
+                    <button class="yc-upload__file-btn yc-upload__file-btn--delete" type="button" title="删除">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            `;
+
+            item.querySelector('.yc-upload__file-btn--delete').addEventListener('click', () => removeUpload(record.id));
+            item.querySelector('.yc-upload__file-btn--retry').addEventListener('click', () => retryUpload(record.id));
+            return item;
+        }
+
+        function createRecord(host, file) {
+            const id = `upload-item-${++uploadSeed}`;
+            const mode = host.dataset.mode === 'picture' ? 'picture' : 'file';
+            const previewUrl = mode === 'picture' ? URL.createObjectURL(file) : '';
+
+            return {
+                id,
+                hostId: host.id,
+                file,
+                mode,
+                previewUrl,
+                status: 'pending',
+                progress: 0,
+                element: mode === 'picture' ? createPictureItem({ id, file, previewUrl }) : createFileItem({ id, file })
+            };
+        }
+
+        function updateRecordProgress(record, progress, status) {
+            record.progress = progress;
+            record.status = status;
+            record.element.classList.remove('is-uploading', 'is-success', 'is-error');
+            record.element.classList.add(`is-${status}`);
+
+            if (record.mode === 'picture') {
+                const progressPanel = record.element.querySelector('.yc-upload__picture-item-progress');
+                const progressText = record.element.querySelector('.yc-upload__picture-item-progress-text');
+                const progressFill = record.element.querySelector('.yc-upload__picture-item-progress-fill');
+                const successBadge = record.element.querySelector('.yc-upload__picture-item-status');
+
+                progressPanel.hidden = false;
+                progressText.textContent = status === 'error' ? '上传失败' : status === 'success' ? '上传完成' : `${progress}%`;
+                progressFill.style.setProperty('--yc-upload-progress', `${progress}%`);
+
+                if (status === 'success') {
+                    progressPanel.innerHTML = `
+                        <i class="fas fa-check"></i>
+                        <span class="yc-upload__picture-item-progress-text">上传完成</span>
+                    `;
+                    window.setTimeout(() => {
+                        progressPanel.hidden = true;
+                        successBadge.hidden = false;
+                    }, 900);
+                } else if (status === 'error') {
+                    progressPanel.innerHTML = `
+                        <i class="fas fa-circle-exclamation"></i>
+                        <span class="yc-upload__picture-item-progress-text">上传失败，请重新选择</span>
+                    `;
+                }
+
+                return;
+            }
+
+            const progressBar = record.element.querySelector('.yc-upload__progress');
+            const progressFill = record.element.querySelector('.yc-upload__progress-fill');
+            const progressText = record.element.querySelector('.yc-upload__progress-text');
+            const statusBadge = record.element.querySelector('.yc-upload__file-status');
+            const retryButton = record.element.querySelector('.yc-upload__file-btn--retry');
+
+            progressBar.style.display = 'block';
+            progressText.hidden = false;
+            progressText.textContent = `${progress}%`;
+            progressFill.style.setProperty('--yc-upload-progress', `${progress}%`);
+            statusBadge.hidden = true;
+            retryButton.hidden = true;
+
+            if (status === 'success') {
+                statusBadge.hidden = false;
+                statusBadge.className = 'yc-upload__file-status yc-upload__file-status--success';
+                statusBadge.innerHTML = '<i class="fas fa-check"></i>';
+                progressBar.querySelector('.yc-upload__progress-bar')?.classList.add('yc-upload__progress-bar--success');
+                progressBar.querySelector('.yc-upload__progress-bar')?.classList.remove('yc-upload__progress-bar--error');
+                progressBar.style.display = 'none';
+                progressText.hidden = true;
+                retryButton.hidden = true;
+            } else if (status === 'error') {
+                statusBadge.hidden = false;
+                statusBadge.className = 'yc-upload__file-status yc-upload__file-status--error';
+                statusBadge.innerHTML = '<i class="fas fa-xmark"></i>';
+                progressBar.querySelector('.yc-upload__progress-bar')?.classList.add('yc-upload__progress-bar--error');
+                progressBar.querySelector('.yc-upload__progress-bar')?.classList.remove('yc-upload__progress-bar--success');
+                retryButton.hidden = false;
+            } else {
+                progressBar.querySelector('.yc-upload__progress-bar')?.classList.remove('yc-upload__progress-bar--success', 'yc-upload__progress-bar--error');
+            }
+        }
+
+        function finalizeHostResult(hostId) {
+            const records = getRecordsByHost(hostId);
+            const successCount = records.filter(record => record.status === 'success').length;
+            const errorCount = records.filter(record => record.status === 'error').length;
+            const pendingCount = records.filter(record => record.status === 'pending' || record.status === 'uploading').length;
+
+            if (pendingCount > 0) {
+                setResult(hostId, `状态：队列中 ${records.length} 个文件，正在处理 ${pendingCount} 个`);
+                return;
+            }
+
+            if (records.length === 0) {
+                setResult(hostId, hostId === 'uploadManual' ? '状态：等待选择文件' : '状态：等待上传');
+                return;
+            }
+
+            setResult(hostId, `状态：成功 ${successCount} 个，失败 ${errorCount} 个`);
+        }
+
+        function simulateUpload(record) {
+            const hostId = record.hostId;
+            updateRecordProgress(record, 0, 'uploading');
+            setResult(hostId, `状态：正在上传 ${record.file.name}`);
+
+            let progress = 0;
+            const timer = window.setInterval(() => {
+                progress = Math.min(progress + Math.floor(Math.random() * 26) + 12, 100);
+                updateRecordProgress(record, progress, 'uploading');
+
+                if (progress >= 100) {
+                    window.clearInterval(timer);
+                    window.setTimeout(() => {
+                        const success = Math.random() > 0.14;
+                        updateRecordProgress(record, 100, success ? 'success' : 'error');
+                        finalizeHostResult(hostId);
+                    }, 160);
+                }
+            }, 180);
+        }
+
+        function retryUpload(itemId) {
+            const record = uploadState.get(itemId);
+            if (!record) return;
+            simulateUpload(record);
+        }
+
+        function appendRecord(host, record) {
+            const list = document.getElementById(host.dataset.list);
+            if (!list) return;
+
+            list.appendChild(record.element);
+            uploadState.set(record.id, record);
+        }
+
+        function normalizeFiles(host, files) {
+            const result = [];
+            const maxSize = Number(host.dataset.maxSize || 0);
+            const maxCount = Number(host.dataset.maxCount || 0);
+            const currentCount = getRecordsByHost(host.id).length;
+
+            if (maxCount > 0 && currentCount + files.length > maxCount) {
+                setResult(host.id, `状态：最多只能上传 ${maxCount} 个文件`);
+            }
+
+            for (const file of files) {
+                if (maxCount > 0 && currentCount + result.length >= maxCount) {
+                    break;
+                }
+
+                if (maxSize > 0 && file.size > maxSize * 1024 * 1024) {
+                    setResult(host.id, `状态：${file.name} 超过 ${maxSize}MB 限制`);
+                    continue;
+                }
+
+                result.push(file);
+            }
+
+            return result;
+        }
+
+        function handleHostFiles(host, fileList) {
+            const files = normalizeFiles(host, Array.from(fileList || []));
+            if (!files.length) return;
+
+            const autoUpload = host.dataset.autoUpload !== 'false';
+            files.forEach(file => {
+                const record = createRecord(host, file);
+                appendRecord(host, record);
+                if (autoUpload) {
+                    simulateUpload(record);
+                }
+            });
+
+            if (!autoUpload) {
+                setResult(host.id, `状态：已加入 ${files.length} 个文件，请手动上传`);
+            } else {
+                finalizeHostResult(host.id);
+            }
+        }
+
+        function handleManualUpload(hostId) {
+            const records = getRecordsByHost(hostId).filter(record => record.status === 'pending' || record.status === 'error');
+            if (!records.length) {
+                setResult(hostId, '状态：没有可上传的文件');
+                return;
+            }
+
+            records.forEach(record => simulateUpload(record));
+            setResult(hostId, `状态：开始手动上传 ${records.length} 个文件`);
+        }
+
+        function clearUploadHost(hostId) {
+            getRecordsByHost(hostId).forEach(record => removeUpload(record.id));
+            setResult(hostId, hostId === 'uploadManual' ? '状态：等待选择文件' : '状态：等待上传');
+        }
+
+        document.querySelectorAll('[data-open-input]').forEach(trigger => {
+            trigger.addEventListener('click', event => {
+                const inputId = event.currentTarget.getAttribute('data-open-input');
+                const input = document.getElementById(inputId);
+                if (input && !input.disabled) input.click();
+            });
+        });
+
+        document.querySelectorAll('.yc-upload').forEach(host => {
+            const input = host.querySelector('.yc-upload__input');
+            if (!input) return;
+
+            input.addEventListener('change', event => {
+                handleHostFiles(host, event.target.files);
+                event.target.value = '';
+            });
+        });
+
+        document.querySelectorAll('.yc-upload--drag').forEach(host => {
+            const trigger = host.querySelector('.yc-upload__trigger');
+            if (!trigger) return;
+
+            trigger.addEventListener('dragover', event => {
+                event.preventDefault();
+                trigger.classList.add('is-dragover');
+            });
+
+            trigger.addEventListener('dragleave', event => {
+                event.preventDefault();
+                trigger.classList.remove('is-dragover');
+            });
+
+            trigger.addEventListener('drop', event => {
+                event.preventDefault();
+                trigger.classList.remove('is-dragover');
+                handleHostFiles(host, event.dataTransfer.files);
+            });
+        });
+    </script>
+    <script src="../scripts/demo-shell.js"></script>
+</body>
+</html>

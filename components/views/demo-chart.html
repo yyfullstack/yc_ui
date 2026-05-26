@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chart 图表组件 - YC UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">Chart 图表组件</h1>
+            <p class="demo-page-subtitle">基于 ECharts 封装常用业务图表，覆盖趋势、对比、构成、组合与迷你概览等日常 Web 页面场景。</p>
+        </div>
+
+        <div class="demo-section">
+            <h3>业务概览</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">适合作为看板首页首屏摘要，卡片与迷你趋势图统一受主题切换控制。</div>
+                <div class="yc-chart-layout">
+                    <div class="yc-chart-col--3">
+                        <div class="yc-chart-summary yc-chart-summary--primary">
+                            <div class="yc-chart-summary__top">
+                                <div>
+                                    <span class="yc-chart-summary__label">支付成交额</span>
+                                    <div class="yc-chart-summary__value">¥ 1,284,320</div>
+                                </div>
+                                <span class="yc-chart-summary__delta"><i class="fas fa-arrow-up"></i> 12.8%</span>
+                            </div>
+                            <div class="yc-chart__canvas yc-chart__canvas--mini" id="sparkRevenue"></div>
+                            <div class="yc-chart-summary__meta">
+                                <span>近 7 天</span>
+                                <span>峰值出现在周四</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="yc-chart-col--3">
+                        <div class="yc-chart-summary yc-chart-summary--success">
+                            <div class="yc-chart-summary__top">
+                                <div>
+                                    <span class="yc-chart-summary__label">线索转化数</span>
+                                    <div class="yc-chart-summary__value">3,482</div>
+                                </div>
+                                <span class="yc-chart-summary__delta"><i class="fas fa-arrow-up"></i> 8.4%</span>
+                            </div>
+                            <div class="yc-chart__canvas yc-chart__canvas--mini" id="sparkLeads"></div>
+                            <div class="yc-chart-summary__meta">
+                                <span>营销链路</span>
+                                <span>转化成本下降</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="yc-chart-col--3">
+                        <div class="yc-chart-summary yc-chart-summary--warning">
+                            <div class="yc-chart-summary__top">
+                                <div>
+                                    <span class="yc-chart-summary__label">待处理工单</span>
+                                    <div class="yc-chart-summary__value">186</div>
+                                </div>
+                                <span class="yc-chart-summary__delta"><i class="fas fa-arrow-down"></i> 5.1%</span>
+                            </div>
+                            <div class="yc-chart__canvas yc-chart__canvas--mini" id="sparkTicket"></div>
+                            <div class="yc-chart-summary__meta">
+                                <span>客服中心</span>
+                                <span>高优先级 24 单</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="yc-chart-col--3">
+                        <div class="yc-chart-summary yc-chart-summary--danger">
+                            <div class="yc-chart-summary__top">
+                                <div>
+                                    <span class="yc-chart-summary__label">异常告警</span>
+                                    <div class="yc-chart-summary__value">17</div>
+                                </div>
+                                <span class="yc-chart-summary__delta"><i class="fas fa-bell"></i> 实时</span>
+                            </div>
+                            <div class="yc-chart__canvas yc-chart__canvas--mini" id="sparkAlert"></div>
+                            <div class="yc-chart-summary__meta">
+                                <span>基础设施</span>
+                                <span>CPU 波动偏高</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>趋势图</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">线图和面积图适合展示指标趋势、峰谷变化与阶段性活动影响。</div>
+                <div class="yc-chart-layout">
+                    <div class="yc-chart-col--7">
+                        <article class="yc-chart">
+                            <div class="yc-chart__header">
+                                <div class="yc-chart__heading">
+                                    <span class="yc-chart__eyebrow"><i class="fas fa-chart-line"></i> Line Chart</span>
+                                    <h3 class="yc-chart__title">访问与付费趋势</h3>
+                                    <p class="yc-chart__subtitle">双折线适合同时观察流量与成交，便于看活动投放与转化同步关系。</p>
+                                </div>
+                                <div class="yc-chart__meta">
+                                    <span class="yc-chart__chip"><i class="fas fa-calendar-week"></i> 近 7 天</span>
+                                    <span class="yc-chart__chip"><i class="fas fa-wave-square"></i> 双序列</span>
+                                </div>
+                            </div>
+                            <div class="yc-chart__body">
+                                <div class="yc-chart__canvas" id="lineChartDemo"></div>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="yc-chart-col--5">
+                        <article class="yc-chart">
+                            <div class="yc-chart__header">
+                                <div class="yc-chart__heading">
+                                    <span class="yc-chart__eyebrow"><i class="fas fa-chart-area"></i> Area Chart</span>
+                                    <h3 class="yc-chart__title">月度收入累计</h3>
+                                    <p class="yc-chart__subtitle">面积图强调增长体量和节奏，对经营看板很友好。</p>
+                                </div>
+                            </div>
+                            <div class="yc-chart__body">
+                                <div class="yc-chart__canvas" id="areaChartDemo"></div>
+                            </div>
+                            <div class="yc-chart__footer">
+                                <span class="yc-chart__chip"><i class="fas fa-arrow-trend-up"></i> 累计增长 24.6%</span>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>对比图</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">柱状图适合做横向对比，支持单序列、堆叠和横向排行榜。</div>
+                <div class="yc-chart-layout">
+                    <div class="yc-chart-col--6">
+                        <article class="yc-chart">
+                            <div class="yc-chart__header">
+                                <div class="yc-chart__heading">
+                                    <span class="yc-chart__eyebrow"><i class="fas fa-chart-column"></i> Bar Chart</span>
+                                    <h3 class="yc-chart__title">各渠道成交额</h3>
+                                    <p class="yc-chart__subtitle">适合展示渠道、门店、品类等离散维度之间的量级差异。</p>
+                                </div>
+                            </div>
+                            <div class="yc-chart__body">
+                                <div class="yc-chart__canvas" id="barChartDemo"></div>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="yc-chart-col--6">
+                        <article class="yc-chart">
+                            <div class="yc-chart__header">
+                                <div class="yc-chart__heading">
+                                    <span class="yc-chart__eyebrow"><i class="fas fa-layer-group"></i> Stacked Bar</span>
+                                    <h3 class="yc-chart__title">部门工时构成</h3>
+                                    <p class="yc-chart__subtitle">堆叠柱适合看总量和构成占比，常用于资源投入分析。</p>
+                                </div>
+                            </div>
+                            <div class="yc-chart__body">
+                                <div class="yc-chart__canvas" id="stackedBarChartDemo"></div>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="yc-chart-col--12">
+                        <article class="yc-chart">
+                            <div class="yc-chart__header">
+                                <div class="yc-chart__heading">
+                                    <span class="yc-chart__eyebrow"><i class="fas fa-ranking-star"></i> Horizontal Bar</span>
+                                    <h3 class="yc-chart__title">客户经理签约排行</h3>
+                                    <p class="yc-chart__subtitle">横向柱适合长文本标签和排名场景，用在排行榜、区域表现会更稳定。</p>
+                                </div>
+                            </div>
+                            <div class="yc-chart__body">
+                                <div class="yc-chart__canvas yc-chart__canvas--compact" id="horizontalBarDemo"></div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>构成图</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">饼图 / 环图适合展示占比关系，适用于订单来源、终端分布、业务结构分析。</div>
+                <div class="yc-chart-layout">
+                    <div class="yc-chart-col--5">
+                        <article class="yc-chart">
+                            <div class="yc-chart__header">
+                                <div class="yc-chart__heading">
+                                    <span class="yc-chart__eyebrow"><i class="fas fa-chart-pie"></i> Pie Chart</span>
+                                    <h3 class="yc-chart__title">订单来源占比</h3>
+                                    <p class="yc-chart__subtitle">适合来源构成、设备分布、地区占比等一眼看整体结构的场景。</p>
+                                </div>
+                            </div>
+                            <div class="yc-chart__body">
+                                <div class="yc-chart__canvas" id="pieChartDemo"></div>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="yc-chart-col--7">
+                        <article class="yc-chart">
+                            <div class="yc-chart__header">
+                                <div class="yc-chart__heading">
+                                    <span class="yc-chart__eyebrow"><i class="fas fa-circle-notch"></i> Donut Chart</span>
+                                    <h3 class="yc-chart__title">客户生命周期分层</h3>
+                                    <p class="yc-chart__subtitle">环图适合在中心区域叠加关键数值，让结构和总量同时可读。</p>
+                                </div>
+                                <div class="yc-chart__meta">
+                                    <span class="yc-chart__chip"><i class="fas fa-users"></i> 活跃用户 48,920</span>
+                                </div>
+                            </div>
+                            <div class="yc-chart__body">
+                                <div class="yc-chart__canvas" id="donutChartDemo"></div>
+                            </div>
+                            <div class="yc-chart__legend">
+                                <span class="yc-chart__legend-item"><span class="yc-chart__legend-dot" style="background: var(--yc-color-primary);"></span> 新客</span>
+                                <span class="yc-chart__legend-item"><span class="yc-chart__legend-dot" style="background: var(--yc-color-success);"></span> 成长用户</span>
+                                <span class="yc-chart__legend-item"><span class="yc-chart__legend-dot" style="background: var(--yc-color-warning);"></span> 高价值用户</span>
+                                <span class="yc-chart__legend-item"><span class="yc-chart__legend-dot" style="background: var(--yc-color-danger);"></span> 风险流失</span>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>组合场景</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">柱线组合适合经营驾驶舱，既能看体量，又能看效率和转化率。</div>
+                <div class="yc-chart-panel">
+                    <div class="yc-chart-panel__row">
+                        <div>
+                            <h3 class="yc-chart-panel__title">销售额与转化率</h3>
+                            <p class="yc-chart-panel__desc">左轴展示销售额，右轴展示转化率。适合投放、销售、客服等双指标监控场景。</p>
+                        </div>
+                        <div class="yc-chart__toolbar">
+                            <button class="yc-button yc-button--small yc-button--primary" type="button" data-chart-range="week">本周</button>
+                            <button class="yc-button yc-button--small" type="button" data-chart-range="month">本月</button>
+                            <button class="yc-button yc-button--small" type="button" data-chart-range="quarter">本季度</button>
+                        </div>
+                    </div>
+                    <div class="yc-chart__canvas yc-chart__canvas--tall" id="comboChartDemo"></div>
+                    <div class="yc-chart-stats">
+                        <div class="yc-chart-stat">
+                            <div class="yc-chart-stat__label">销售额</div>
+                            <div class="yc-chart-stat__value">¥ 4.82M</div>
+                            <div class="yc-chart-stat__note">较上周期 +9.4%</div>
+                        </div>
+                        <div class="yc-chart-stat">
+                            <div class="yc-chart-stat__label">整体转化率</div>
+                            <div class="yc-chart-stat__value">23.8%</div>
+                            <div class="yc-chart-stat__note">高于目标线 1.6pt</div>
+                        </div>
+                        <div class="yc-chart-stat">
+                            <div class="yc-chart-stat__label">峰值日期</div>
+                            <div class="yc-chart-stat__value">周四</div>
+                            <div class="yc-chart-stat__note">活动投放拉升明显</div>
+                        </div>
+                        <div class="yc-chart-stat">
+                            <div class="yc-chart-stat__label">异常波动</div>
+                            <div class="yc-chart-stat__value">2 次</div>
+                            <div class="yc-chart-stat__note">集中在移动端入口</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/echarts@6.0.0/dist/echarts.min.js"></script>
+    <script src="../scripts/chart-core.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var weekCategories = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
+            var getTokens = function() {
+                return YCChart.getThemeTokens();
+            };
+
+            YCChart.create('#sparkRevenue', {
+                preset: 'sparkline',
+                categories: weekCategories,
+                data: [108, 136, 152, 188, 172, 196, 214]
+            });
+
+            YCChart.create('#sparkLeads', {
+                preset: 'sparkline',
+                categories: weekCategories,
+                color: getTokens().success,
+                rgb: getTokens().successRgb,
+                data: [46, 52, 61, 58, 66, 72, 84]
+            });
+
+            YCChart.create('#sparkTicket', {
+                preset: 'sparkline',
+                categories: weekCategories,
+                color: getTokens().warning,
+                rgb: getTokens().warningRgb,
+                data: [38, 32, 28, 24, 22, 20, 18]
+            });
+
+            YCChart.create('#sparkAlert', {
+                preset: 'sparkline',
+                categories: weekCategories,
+                color: getTokens().danger,
+                rgb: getTokens().dangerRgb,
+                data: [4, 5, 3, 7, 6, 5, 4]
+            });
+
+            YCChart.create('#lineChartDemo', {
+                preset: 'line',
+                categories: weekCategories,
+                series: [
+                    { name: '访问量', data: [8200, 9320, 9010, 11340, 10820, 12400, 13980] },
+                    { name: '付费用户', data: [860, 940, 910, 1240, 1180, 1320, 1488], color: getTokens().success }
+                ]
+            });
+
+            YCChart.create('#areaChartDemo', {
+                preset: 'area',
+                categories: ['1 月', '2 月', '3 月', '4 月', '5 月', '6 月', '7 月', '8 月'],
+                series: [
+                    { name: '累计收入', data: [420, 510, 588, 720, 862, 984, 1152, 1298] }
+                ]
+            });
+
+            YCChart.create('#barChartDemo', {
+                preset: 'bar',
+                categories: ['官网', '小程序', '渠道代理', '门店', '直播', '私域'],
+                series: [
+                    { name: '成交额', data: [128, 186, 152, 98, 166, 120] }
+                ]
+            });
+
+            YCChart.create('#stackedBarChartDemo', {
+                preset: 'stacked-bar',
+                categories: ['研发', '产品', '设计', '运营', '客服'],
+                series: [
+                    { name: '项目交付', data: [120, 98, 76, 54, 48], color: getTokens().primary },
+                    { name: '需求支持', data: [42, 66, 58, 72, 68], color: getTokens().success },
+                    { name: '内部协同', data: [18, 24, 26, 22, 20], color: getTokens().warning }
+                ]
+            });
+
+            YCChart.create('#horizontalBarDemo', {
+                preset: 'bar',
+                horizontal: true,
+                categories: ['林川', '苏宁', '杨卓', '唐越', '陆然', '陈星'],
+                series: [
+                    { name: '签约额', data: [182, 166, 152, 138, 120, 108] }
+                ]
+            });
+
+            YCChart.create('#pieChartDemo', {
+                preset: 'pie',
+                data: [
+                    { name: '自然流量', value: 35 },
+                    { name: '广告投放', value: 28 },
+                    { name: '渠道合作', value: 18 },
+                    { name: '社群裂变', value: 12 },
+                    { name: '线下活动', value: 7 }
+                ]
+            });
+
+            YCChart.create('#donutChartDemo', {
+                preset: 'donut',
+                data: [
+                    { name: '新客', value: 12800 },
+                    { name: '成长用户', value: 18420 },
+                    { name: '高价值用户', value: 12160 },
+                    { name: '风险流失', value: 5540 }
+                ]
+            });
+
+            var comboDataMap = {
+                week: {
+                    categories: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+                    sales: [420, 560, 610, 780, 720, 836, 892],
+                    rate: [18, 20, 19, 26, 24, 27, 29]
+                },
+                month: {
+                    categories: ['第 1 周', '第 2 周', '第 3 周', '第 4 周'],
+                    sales: [1820, 2140, 2080, 2360],
+                    rate: [19, 23, 21, 26]
+                },
+                quarter: {
+                    categories: ['1 月', '2 月', '3 月'],
+                    sales: [4820, 5160, 5680],
+                    rate: [21, 22, 25]
+                }
+            };
+
+            function getComboSource(key) {
+                var data = comboDataMap[key];
+                return {
+                    preset: 'combo',
+                    categories: data.categories,
+                    barSeries: [
+                        { name: '销售额', data: data.sales }
+                    ],
+                    lineSeries: [
+                        { name: '转化率', data: data.rate, color: getTokens().danger }
+                    ],
+                    rightAxisFormatter: '{value}%'
+                };
+            }
+
+            var comboChart = YCChart.create('#comboChartDemo', getComboSource('week'));
+
+            document.querySelectorAll('[data-chart-range]').forEach(function(button) {
+                button.addEventListener('click', function() {
+                    document.querySelectorAll('[data-chart-range]').forEach(function(item) {
+                        item.classList.remove('yc-button--primary');
+                    });
+                    button.classList.add('yc-button--primary');
+
+                    var key = button.getAttribute('data-chart-range');
+                    comboChart.setSource(getComboSource(key));
+                });
+            });
+        });
+    </script>
+    <script src="../scripts/demo-shell.js"></script>
+</body>
+</html>

@@ -1,0 +1,193 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table Workbench</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+    <link rel="stylesheet" href="../styles/components/button.css">
+    <link rel="stylesheet" href="../styles/table-workbench.css">
+    <script src="https://unpkg.com/vue@3.4.0/dist/vue.global.prod.js"></script>
+</head>
+<body>
+    <div id="app" class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">Table Workbench</h1>
+            <p class="demo-page-subtitle">把基础展示、选择、排序、编辑、树形、数据操作与虚拟滚动统一组织成平台级表格工作台，形成更接近 Kendo UI for jQuery 的导航与预览体验。</p>
+        </div>
+
+        <div class="table-kpi-grid">
+            <div class="table-kpi-card">
+                <div class="table-kpi-card__value">{{ scenarios.length }}</div>
+                <div class="table-kpi-card__label">场景页面</div>
+            </div>
+            <div class="table-kpi-card">
+                <div class="table-kpi-card__value">0</div>
+                <div class="table-kpi-card__label">当前变量缺失</div>
+            </div>
+            <div class="table-kpi-card">
+                <div class="table-kpi-card__value">Token</div>
+                <div class="table-kpi-card__label">统一阴影与透明层 token</div>
+            </div>
+        </div>
+
+        <div class="table-workbench-shell"> 
+            <aside class="table-workbench-nav">
+                <span class="table-workbench-nav__eyebrow">
+                    <i class="fas fa-table-cells"></i>
+                    Table Workbench
+                </span>
+                <h2 class="table-workbench-nav__title">场景导航</h2>
+                <p class="table-workbench-nav__desc">左侧切换场景，右侧实时预览子页面。把分散的表格 demo 收拢为统一平台入口后，浏览和比对会清晰很多。</p>
+
+                <div class="table-workbench-nav__list">
+                    <button
+                        v-for="scenario in scenarios"
+                        :key="scenario.id"
+                        class="table-workbench-nav__item"
+                        :class="{ 'is-active': scenario.id === activeId }"
+                        type="button"
+                        @click="activeId = scenario.id"
+                    >
+                        <span class="table-workbench-nav__item-title">
+                            <span>{{ scenario.title }}</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </span>
+                        <span class="table-workbench-nav__item-desc">{{ scenario.description }}</span>
+                        <span class="table-workbench-nav__meta">
+                            <span class="table-chip">{{ scenario.tag }}</span>
+                            <span class="table-chip">{{ scenario.level }}</span>
+                        </span>
+                    </button>
+                </div>
+            </aside>
+
+            <section class="table-workbench-preview">
+                <div class="table-workbench-preview__header">
+                    <div>
+                        <h2 class="table-workbench-preview__title">{{ activeScenario.title }}</h2>
+                        <p class="table-workbench-preview__desc">{{ activeScenario.description }}</p>
+                        <div class="table-chip-row">
+                            <span class="table-chip">{{ activeScenario.tag }}</span>
+                            <span class="table-chip">{{ activeScenario.level }}</span>
+                            <span class="table-chip">{{ activeScenario.href }}</span>
+                        </div>
+                    </div>
+                    <div class="table-workbench-preview__actions">
+                        <button class="yc-button yc-button--small" type="button" @click="openScenario(activeScenario.href)">
+                            <i class="fas fa-up-right-from-square"></i>
+                            新窗口打开
+                        </button>
+                        <a class="yc-button yc-button--primary yc-button--small" href="../index.html#components">
+                            <i class="fas fa-layer-group"></i>
+                            返回组件平台
+                        </a>
+                    </div>
+                </div>
+                <iframe
+                    ref="previewFrame"
+                    class="table-workbench-preview__frame"
+                    :src="activeScenario.href"
+                    :title="activeScenario.title"
+                    @load="syncPreviewTheme"
+                ></iframe>
+            </section>
+        </div>
+
+        <div class="demo-section">
+            <h3>工作台说明</h3>
+            <div class="table-surface-note">这里的 Table Workbench 不再只是单页示例，而是把基础展示、选择、编辑和数据操作组织成一个可切换、可预览、可扩展的表格平台，用来模拟企业后台常见的多场景数据界面。</div>
+        </div>
+    </div>
+
+    <script>
+        const { computed, createApp, onMounted, onUnmounted, ref } = Vue;
+
+        createApp({
+            setup() {
+                const scenarios = ref([
+                    { id: 'basic', title: '基础展示', description: '标准列表、合并单元格与汇总 footer。', href: 'table/basic.html', tag: '基础能力', level: 'L1' },
+                    { id: 'selection', title: '选择功能', description: '单选、复选与批量操作反馈。', href: 'table/selection.html', tag: '选择', level: 'L1' },
+                    { id: 'sort-filter', title: '排序与筛选', description: '表头排序、条件过滤与状态标签。', href: 'table/sort-filter.html', tag: '查询', level: 'L1' },
+                    { id: 'edit-validate', title: '编辑与校验', description: '可编辑单元格、字段校验与上下文菜单。', href: 'table/edit-validate.html', tag: '编辑', level: 'L2' },
+                    { id: 'tree', title: '树形与展开', description: '目录结构、行展开和分页列表。', href: 'table/tree.html', tag: '层级数据', level: 'L2' },
+                    { id: 'data-operation', title: '数据操作', description: '查询、列配置、导出打印与事件日志。', href: 'table/data-operation.html', tag: '业务工作台', level: 'L3' },
+                    { id: 'virtual-scroll', title: '虚拟滚动', description: '大数据量列表渲染与滚动性能验证。', href: 'table/virtual-scroll.html', tag: '性能', level: 'L3' },
+                    { id: 'drag-resize', title: '拖拽与列宽', description: '列宽调整与拖拽排序交互。', href: 'table/drag-resize.html', tag: '高级交互', level: 'L3' }
+                ]);
+
+                const activeId = ref('data-operation');
+                const previewFrame = ref(null);
+                let themeObserver = null;
+                const activeScenario = computed(() => {
+                    return scenarios.value.find(item => item.id === activeId.value) || scenarios.value[0];
+                });
+
+                function getCurrentTheme() {
+                    return document.documentElement.getAttribute('yc-theme') || localStorage.getItem('yc-theme') || 'light';
+                }
+
+                function syncPreviewTheme() {
+                    const iframe = previewFrame.value;
+                    if (!iframe) return;
+
+                    const theme = getCurrentTheme();
+
+                    try {
+                        const frameWindow = iframe.contentWindow;
+                        const frameDocument = iframe.contentDocument || (frameWindow ? frameWindow.document : null);
+
+                        if (frameDocument && frameDocument.documentElement) {
+                            frameDocument.documentElement.setAttribute('yc-theme', theme);
+                        }
+
+                        if (frameWindow) {
+                            frameWindow.postMessage({ type: 'yc-theme-sync', theme }, '*');
+                        }
+                    } catch (error) {
+                        // Ignore cross-context sync issues and keep the parent responsive.
+                    }
+                }
+
+                function openScenario(href) {
+                    window.open(href, '_blank', 'noopener');
+                }
+
+                onMounted(() => {
+                    themeObserver = new MutationObserver(mutations => {
+                        if (mutations.some(mutation => mutation.attributeName === 'yc-theme')) {
+                            window.requestAnimationFrame(syncPreviewTheme);
+                        }
+                    });
+
+                    themeObserver.observe(document.documentElement, {
+                        attributes: true,
+                        attributeFilter: ['yc-theme']
+                    });
+
+                    window.requestAnimationFrame(syncPreviewTheme);
+                });
+
+                onUnmounted(() => {
+                    if (themeObserver) {
+                        themeObserver.disconnect();
+                    }
+                });
+
+                return {
+                    scenarios,
+                    activeId,
+                    previewFrame,
+                    activeScenario,
+                    openScenario,
+                    syncPreviewTheme
+                };
+            }
+        }).mount('#app');
+    </script>
+    <script src="../scripts/demo-shell.js"></script>
+</body>
+</html>
+

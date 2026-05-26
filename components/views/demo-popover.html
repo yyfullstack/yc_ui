@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Popover 弹出框组件示例 - YC UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">Popover 弹出框</h1>
+            <p class="demo-page-subtitle">常用于展示某个元素的补充信息，支持多种触发方式和弹出方向</p>
+        </div>
+
+        <div class="demo-section">
+            <h3>基本用法</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">悬停触发</div>
+                <div class="demo-row">
+                    <div id="basic-popover-target" class="yc-popover-target">
+                        <i class="fas fa-mouse-pointer"></i> 悬停我
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>点击触发</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">点击按钮显示弹出框</div>
+                <div class="demo-row">
+                    <div id="click-popover-target" class="yc-popover-target">
+                        <i class="fas fa-hand-pointer"></i> 点击我
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>弹出位置</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">支持上、下、左、右侧弹出</div>
+                <div class="demo-popover-placements">
+                    <div class="demo-popover-placement-grid">
+                        <div></div>
+                        <div>
+                            <button class="yc-button yc-button--small yc-button--primary" id="top-popover-target">上</button>
+                        </div>
+                        <div></div>
+                        <div>
+                            <button class="yc-button yc-button--small yc-button--primary" id="left-popover-target">左</button>
+                        </div>
+                        <div class="demo-popover-reference">
+                            <i class="fas fa-crosshairs"></i> 参考元素
+                        </div>
+                        <div>
+                            <button class="yc-button yc-button--small yc-button--primary" id="right-popover-target">右</button>
+                        </div>
+                        <div></div>
+                        <div>
+                            <button class="yc-button yc-button--small yc-button--primary" id="bottom-popover-target">下</button>
+                        </div>
+                        <div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>对齐位置</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">支持 start、end 对齐方式</div>
+                <div class="demo-row" style="flex-wrap: wrap; gap: 12px;">
+                    <button class="yc-button yc-button--small yc-button--primary" id="top-start-target">上-左 (top-start)</button>
+                    <button class="yc-button yc-button--small yc-button--primary" id="top-end-target">上-右 (top-end)</button>
+                    <button class="yc-button yc-button--small yc-button--primary" id="bottom-start-target">下-左 (bottom-start)</button>
+                    <button class="yc-button yc-button--small yc-button--primary" id="bottom-end-target">下-右 (bottom-end)</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>手动控制</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">使用 trigger='manual' 手动控制显示/隐藏</div>
+                <div class="demo-row" style="gap: 16px;">
+                    <div id="manual-popover-target" class="yc-popover-target">
+                        <i class="fas fa-cog"></i> 手动控制
+                    </div>
+                    <button class="yc-button yc-button--primary" onclick="manualPopover.open()">
+                        <i class="fas fa-folder-open"></i> 显示
+                    </button>
+                    <button class="yc-button" onclick="manualPopover.close()">
+                        <i class="fas fa-times"></i> 隐藏
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>嵌套操作</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">在弹出框中嵌套操作按钮</div>
+                <div class="demo-row">
+                    <div id="nested-popover-target" class="yc-popover-target">
+                        <i class="fas fa-edit"></i> 嵌套操作
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="height: 300px">
+        </div>
+    </div>
+
+    <script>
+        class Popover {
+            constructor(options) {
+                if (options.target instanceof HTMLElement) {
+                    this.target = options.target;
+                } else {
+                    this.target = document.querySelector(options.target);
+                }
+                this.content = options.content || '';
+                this.title = options.title || '';
+                this.trigger = options.trigger || 'click';
+                this.placement = options.placement || 'bottom';
+                this.theme = options.theme || '';
+                this.width = options.width || 'auto';
+                this.visible = false;
+                this.popoverEl = null;
+                this.arrowEl = null;
+                this.contentEl = null;
+
+                if (this.target) {
+                    this.init();
+                }
+            }
+
+            init() {
+                this.popoverEl = document.createElement('div');
+                this.popoverEl.className = 'yc-popover';
+                if (this.theme) {
+                    this.popoverEl.classList.add('yc-popover-' + this.theme);
+                }
+
+                this.popoverEl.style.width = this.width !== 'auto' ? this.width : '';
+                this.popoverEl.style.display = 'none';
+
+                this.arrowEl = document.createElement('div');
+                this.arrowEl.className = 'yc-popover-arrow yc-popover-arrow-' + this.placement;
+                this.popoverEl.appendChild(this.arrowEl);
+
+                var innerEl = document.createElement('div');
+                innerEl.className = 'yc-popover-inner';
+
+                if (this.title) {
+                    var titleEl = document.createElement('div');
+                    titleEl.className = 'yc-popover-title';
+                    titleEl.textContent = this.title;
+                    innerEl.appendChild(titleEl);
+                }
+
+                this.contentEl = document.createElement('div');
+                this.contentEl.className = 'yc-popover-content';
+
+                if (typeof this.content === 'function') {
+                    var result = this.content();
+                    if (result instanceof HTMLElement) {
+                        this.contentEl.appendChild(result);
+                    } else if (typeof result === 'string') {
+                        this.contentEl.innerHTML = result;
+                    }
+                } else if (this.content instanceof HTMLElement) {
+                    this.contentEl.appendChild(this.content);
+                } else {
+                    this.contentEl.innerHTML = this.content;
+                }
+
+                innerEl.appendChild(this.contentEl);
+                this.popoverEl.appendChild(innerEl);
+                document.body.appendChild(this.popoverEl);
+
+                this.bindEvents();
+            }
+
+            bindEvents() {
+                var self = this;
+
+                if (this.trigger === 'hover') {
+                    this.target.addEventListener('mouseenter', function() {
+                        self.show();
+                    });
+                    this.target.addEventListener('mouseleave', function() {
+                        self.hide();
+                    });
+                    this.popoverEl.addEventListener('mouseenter', function() {
+                        self.show();
+                    });
+                    this.popoverEl.addEventListener('mouseleave', function() {
+                        self.hide();
+                    });
+                } else if (this.trigger === 'click') {
+                    this.target.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        self.toggle();
+                    });
+                    document.addEventListener('click', function(e) {
+                        if (!self.popoverEl.contains(e.target) && !self.target.contains(e.target)) {
+                            self.hide();
+                        }
+                    });
+                }
+
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape' && self.visible) {
+                        self.hide();
+                    }
+                });
+            }
+
+            show() {
+                if (this.visible) return;
+
+                this.visible = true;
+                this.popoverEl.style.display = 'block';
+                this.popoverEl.classList.add('yc-popover--visible');
+
+                var self = this;
+                requestAnimationFrame(function() {
+                    self.updatePosition();
+                });
+            }
+
+            hide() {
+                if (!this.visible) return;
+
+                this.visible = false;
+                this.popoverEl.classList.remove('yc-popover--visible');
+
+                var self = this;
+                setTimeout(function() {
+                    if (!self.visible) {
+                        self.popoverEl.style.display = 'none';
+                    }
+                }, 200);
+            }
+
+            close() {
+                this.hide();
+            }
+
+            open() {
+                this.show();
+            }
+
+            toggle() {
+                if (this.visible) {
+                    this.hide();
+                } else {
+                    this.show();
+                }
+            }
+
+            updatePosition() {
+                if (!this.target || !this.popoverEl) return;
+
+                var targetRect = this.target.getBoundingClientRect();
+                var popoverRect = this.popoverEl.getBoundingClientRect();
+                var gap = 10;
+
+                var top, left;
+
+                switch (this.placement) {
+                    case 'top':
+                        top = targetRect.top - popoverRect.height - gap;
+                        left = targetRect.left + (targetRect.width - popoverRect.width) / 2;
+                        break;
+                    case 'top-start':
+                        top = targetRect.top - popoverRect.height - gap;
+                        left = targetRect.left;
+                        break;
+                    case 'top-end':
+                        top = targetRect.top - popoverRect.height - gap;
+                        left = targetRect.right - popoverRect.width;
+                        break;
+                    case 'bottom':
+                        top = targetRect.bottom + gap;
+                        left = targetRect.left + (targetRect.width - popoverRect.width) / 2;
+                        break;
+                    case 'bottom-start':
+                        top = targetRect.bottom + gap;
+                        left = targetRect.left;
+                        break;
+                    case 'bottom-end':
+                        top = targetRect.bottom + gap;
+                        left = targetRect.right - popoverRect.width;
+                        break;
+                    case 'left':
+                        top = targetRect.top + (targetRect.height - popoverRect.height) / 2;
+                        left = targetRect.left - popoverRect.width - gap;
+                        break;
+                    case 'left-start':
+                        top = targetRect.top;
+                        left = targetRect.left - popoverRect.width - gap;
+                        break;
+                    case 'left-end':
+                        top = targetRect.bottom - popoverRect.height;
+                        left = targetRect.left - popoverRect.width - gap;
+                        break;
+                    case 'right':
+                        top = targetRect.top + (targetRect.height - popoverRect.height) / 2;
+                        left = targetRect.right + gap;
+                        break;
+                    case 'right-start':
+                        top = targetRect.top;
+                        left = targetRect.right + gap;
+                        break;
+                    case 'right-end':
+                        top = targetRect.bottom - popoverRect.height;
+                        left = targetRect.right + gap;
+                        break;
+                    default:
+                        top = targetRect.bottom + gap;
+                        left = targetRect.left + (targetRect.width - popoverRect.width) / 2;
+                }
+
+                // 调整位置，确保弹出框在视口内
+                top = Math.max(gap, top);
+                left = Math.max(gap, left);
+
+                const viewportWidth = window.innerWidth;
+                const viewportHeight = window.innerHeight;
+
+                if (left + popoverRect.width > viewportWidth) {
+                    left = viewportWidth - popoverRect.width - gap;
+                }
+
+                if (top + popoverRect.height > viewportHeight) {
+                    top = viewportHeight - popoverRect.height - gap;
+                }
+
+                this.popoverEl.style.top = top + 'px';
+                this.popoverEl.style.left = left + 'px';
+            }
+
+            setContent(content) {
+                this.content = content;
+                this.contentEl.innerHTML = '';
+
+                if (typeof content === 'function') {
+                    var result = content();
+                    if (result instanceof HTMLElement) {
+                        this.contentEl.appendChild(result);
+                    } else if (typeof result === 'string') {
+                        this.contentEl.innerHTML = result;
+                    }
+                } else {
+                    this.contentEl.innerHTML = content;
+                }
+
+                if (this.visible) {
+                    this.updatePosition();
+                }
+            }
+        }
+
+        var basicPopover = new Popover({
+            target: '#basic-popover-target',
+            title: '鼠标悬停',
+            content: '这是一段提示内容，鼠标悬停时显示',
+            trigger: 'hover',
+            placement: 'bottom'
+        });
+
+        var clickPopover = new Popover({
+            target: '#click-popover-target',
+            title: '点击触发',
+            content: '这是一段提示内容，点击时显示',
+            trigger: 'click',
+            placement: 'bottom'
+        });
+
+        var topPopover = new Popover({
+            target: '#top-popover-target',
+            title: '上',
+            content: '弹出框显示在目标上方',
+            placement: 'top'
+        });
+
+        var bottomPopover = new Popover({
+            target: '#bottom-popover-target',
+            title: '下',
+            content: '弹出框显示在目标下方',
+            placement: 'bottom'
+        });
+
+        var leftPopover = new Popover({
+            target: '#left-popover-target',
+            title: '左',
+            content: '弹出框显示在目标左侧',
+            placement: 'left'
+        });
+
+        var rightPopover = new Popover({
+            target: '#right-popover-target',
+            title: '右',
+            content: '弹出框显示在目标右侧',
+            placement: 'right'
+        });
+
+        var topStartPopover = new Popover({
+            target: '#top-start-target',
+            title: '上-左对齐',
+            content: '弹出框左边缘与目标左边缘对齐',
+            placement: 'top-start'
+        });
+
+        var topEndPopover = new Popover({
+            target: '#top-end-target',
+            title: '上-右对齐',
+            content: '弹出框右边缘与目标右边缘对齐',
+            placement: 'top-end'
+        });
+
+        var bottomStartPopover = new Popover({
+            target: '#bottom-start-target',
+            title: '下-左对齐',
+            content: '弹出框左边缘与目标左边缘对齐',
+            placement: 'bottom-start'
+        });
+
+        var bottomEndPopover = new Popover({
+            target: '#bottom-end-target',
+            title: '下-右对齐',
+            content: '弹出框右边缘与目标右边缘对齐',
+            placement: 'bottom-end'
+        });
+
+        var nestedContent = document.createElement('div');
+        nestedContent.innerHTML = '<p>这是一段嵌套操作的弹出框内容</p><div style="display: flex; gap: 8px; margin-top: 12px;"><button class="yc-button yc-button--small yc-button--primary" onclick="alert(\'确认操作\')">确认</button><button class="yc-button yc-button--small" onclick="nestedPopover.hide()">取消</button></div>';
+
+        var nestedPopover = new Popover({
+            target: '#nested-popover-target',
+            title: '嵌套操作',
+            content: nestedContent,
+            trigger: 'click',
+            width: '240px',
+            placement: 'bottom'
+        });
+
+        window.nestedPopover = nestedPopover;
+
+        var manualPopover = new Popover({
+            target: '#manual-popover-target',
+            title: '手动控制',
+            content: '<p>这是一个可以通过按钮手动打开和关闭的弹出框</p><div style="display: flex; gap: 8px; margin-top: 12px;"><button class="yc-button yc-button--small yc-button--primary" onclick="manualPopover.hide()">确定</button><button class="yc-button yc-button--small" onclick="manualPopover.hide()">取消</button></div>',
+            trigger: 'manual',
+            width: '220px'
+        });
+
+        window.manualPopover = manualPopover;
+    </script>
+    <script src="../scripts/demo-shell.js"></script>
+</body>
+</html>

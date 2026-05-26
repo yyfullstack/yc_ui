@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backtop 回到顶部 - YC UI</title>
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .backtop-demo-stage {
+            min-height: 1280px;
+            padding: 24px;
+            border: 1px dashed var(--yc-color-border);
+            border-radius: var(--yc-border-radius-large);
+            background:
+                linear-gradient(180deg, var(--yc-color-fill-extra-light) 0%, var(--yc-color-bg) 18%, var(--yc-color-fill-extra-light) 100%);
+        }
+
+        .backtop-demo-stage p {
+            max-width: 720px;
+            color: var(--yc-color-text-secondary);
+            line-height: 1.8;
+        }
+
+        .backtop-demo-scrollbox {
+            position: relative;
+            height: 320px;
+            overflow: auto;
+            padding: 20px;
+            border: 1px solid var(--yc-color-border-light);
+            border-radius: var(--yc-border-radius-large);
+            background: var(--yc-color-bg);
+            box-shadow: var(--yc-box-shadow-sm);
+        }
+
+        .backtop-demo-scrollbox-content {
+            min-height: 920px;
+        }
+
+        .backtop-demo-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .backtop-demo-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">Backtop 回到顶部</h1>
+            <p class="demo-page-subtitle">支持页面级和容器级回顶交互，适合列表、长文档和设置中心等滚动内容密集场景。</p>
+        </div>
+
+        <div class="demo-section">
+            <h3>页面级回顶</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">滚动页面后显示默认回顶按钮</div>
+                <div class="backtop-demo-stage">
+                    <h4>平台说明</h4>
+                    <p>Backtop 最典型的场景是超长页面。当前按钮使用统一阴影 token、hover 过渡和 focus ring，避免它在不同主题下出现独立风格。</p>
+                    <p>继续向下滚动页面，右下角会出现主按钮。这个案例覆盖了“滚动阈值显示”“平滑滚回顶部”和“固定位置浮层”三个基础行为。</p>
+                </div>
+                <button type="button" class="yc-backtop yc-backtop--hidden" id="pageBacktop" aria-label="回到顶部">
+                    <i class="fas fa-arrow-up"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>容器内回顶</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">在滚动容器里也能独立工作</div>
+                <div class="backtop-demo-grid">
+                    <div class="backtop-demo-scrollbox" id="boxA">
+                        <div class="backtop-demo-scrollbox-content">
+                            <h4>运营公告中心</h4>
+                            <p class="demo-description">方形按钮更适合和工具栏、面板控件一起出现。</p>
+                        </div>
+                        <button type="button" class="yc-backtop yc-backtop--square yc-backtop--container yc-backtop--hidden" data-target="#boxA" aria-label="容器回顶">
+                            <i class="fas fa-chevron-up"></i>
+                        </button>
+                    </div>
+
+                    <div class="backtop-demo-scrollbox" id="boxB">
+                        <div class="backtop-demo-scrollbox-content">
+                            <h4>知识库详情</h4>
+                            <p class="demo-description">带文字的 subtle 版本更像操作工具，适合内容阅读区。</p>
+                        </div>
+                        <button type="button" class="yc-backtop yc-backtop--label yc-backtop--subtle yc-backtop--container yc-backtop--hidden" data-target="#boxB" aria-label="返回顶部">
+                            <i class="fas fa-arrow-up"></i>
+                            <span class="yc-backtop__label">返回顶部</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>多尺寸与多阈值</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">适配不同业务区域的按钮规格</div>
+                <div class="backtop-demo-grid">
+                    <div class="backtop-demo-scrollbox" id="boxC">
+                        <div class="backtop-demo-scrollbox-content">
+                            <h4>小型筛选抽屉</h4>
+                            <p class="demo-description">小尺寸按钮适合空间紧张的浮层或抽屉。</p>
+                        </div>
+                        <button type="button" class="yc-backtop yc-backtop--small yc-backtop--subtle yc-backtop--container yc-backtop--hidden" data-target="#boxC" data-threshold="120" aria-label="回到顶部">
+                            <i class="fas fa-angle-up"></i>
+                        </button>
+                    </div>
+
+                    <div class="backtop-demo-scrollbox" id="boxD">
+                        <div class="backtop-demo-scrollbox-content">
+                            <h4>报表工作区</h4>
+                            <p class="demo-description">大尺寸按钮在图表和长列表环境里更容易被发现。</p>
+                        </div>
+                        <button type="button" class="yc-backtop yc-backtop--large yc-backtop--container yc-backtop--hidden" data-target="#boxD" data-threshold="260" aria-label="回到顶部">
+                            <i class="fas fa-arrow-up"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function bindBacktop(button, target, threshold) {
+            const isWindow = target === window;
+
+            function getTop() {
+                return isWindow ? window.scrollY : target.scrollTop;
+            }
+
+            function scrollToTop() {
+                if (isWindow) {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    return;
+                }
+
+                target.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            function update() {
+                button.classList.toggle('yc-backtop--hidden', getTop() <= threshold);
+            }
+
+            (isWindow ? window : target).addEventListener('scroll', update, { passive: true });
+            button.addEventListener('click', scrollToTop);
+            update();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            bindBacktop(document.getElementById('pageBacktop'), window, 260);
+
+            document.querySelectorAll('.yc-backtop[data-target]').forEach(button => {
+                const target = document.querySelector(button.dataset.target);
+                const threshold = Number(button.dataset.threshold || 180);
+                if (!target) return;
+                bindBacktop(button, target, threshold);
+            });
+        });
+    </script>
+    <script src="../scripts/demo-shell.js"></script>
+</body>
+</html>

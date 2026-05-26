@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagram 流程图 - YC UI</title>
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">Diagram 流程图</h1>
+            <p class="demo-page-subtitle">围绕流程建模、审批路径和工作流配置，构建更完整的流程图工作台示例。</p>
+        </div>
+
+        <div class="demo-section">
+            <h3>流程概览</h3>
+            <div class="demo-stat-cards">
+                <div class="demo-stat-card demo-stat-card--purple">
+                    <div class="demo-stat-card__value" id="diagramMetricNodes">6</div>
+                    <div class="demo-stat-card__label">节点数量</div>
+                </div>
+                <div class="demo-stat-card demo-stat-card--green">
+                    <div class="demo-stat-card__value" id="diagramMetricBranches">2</div>
+                    <div class="demo-stat-card__label">分支出口</div>
+                </div>
+                <div class="demo-stat-card demo-stat-card--blue">
+                    <div class="demo-stat-card__value" id="diagramMetricMode">选择</div>
+                    <div class="demo-stat-card__label">当前模式</div>
+                </div>
+                <div class="demo-stat-card demo-stat-card--pink">
+                    <div class="demo-stat-card__value" id="diagramMetricZoom">100%</div>
+                    <div class="demo-stat-card__label">画布缩放</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>流程编辑工作台</h3>
+            <div class="yc-diagram yc-diagram-workbench">
+                <div class="yc-diagram__toolbar">
+                    <div class="yc-diagram__toolbar-group">
+                        <button class="yc-diagram__toolbar-btn is-active" type="button" data-diagram-mode="select" data-diagram-mode-label="选择"><i class="demo-icon" data-icon="arrow-pointer" aria-hidden="true"></i></button>
+                        <button class="yc-diagram__toolbar-btn" type="button" data-diagram-mode="connect" data-diagram-mode-label="连线"><i class="demo-icon" data-icon="share-nodes" aria-hidden="true"></i></button>
+                        <button class="yc-diagram__toolbar-btn" type="button" data-diagram-mode="pan" data-diagram-mode-label="平移"><i class="demo-icon" data-icon="hand" aria-hidden="true"></i></button>
+                    </div>
+                    <div class="yc-diagram__toolbar-group">
+                        <button class="yc-diagram__toolbar-btn" type="button"><i class="demo-icon" data-icon="rotate-left" aria-hidden="true"></i></button>
+                        <button class="yc-diagram__toolbar-btn" type="button"><i class="demo-icon" data-icon="rotate-right" aria-hidden="true"></i></button>
+                    </div>
+                    <div class="yc-diagram__toolbar-group">
+                        <button class="yc-diagram__toolbar-btn" type="button"><i class="demo-icon" data-icon="download" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+
+                <div class="yc-diagram__wrapper">
+                    <aside class="yc-diagram__sidebar">
+                        <div class="yc-diagram__sidebar-header">
+                            <div class="yc-diagram__sidebar-title">节点库</div>
+                        </div>
+                        <div class="yc-diagram__palette">
+                            <div class="yc-diagram__palette-section">
+                                <div class="yc-diagram__palette-section-title">基础节点</div>
+                                <div class="yc-diagram__palette-item yc-diagram__palette-item--start"><i class="demo-icon" data-icon="play" aria-hidden="true"></i><span>开始</span></div>
+                                <div class="yc-diagram__palette-item yc-diagram__palette-item--process"><i class="demo-icon" data-icon="rectangle-list" aria-hidden="true"></i><span>处理</span></div>
+                                <div class="yc-diagram__palette-item yc-diagram__palette-item--decision"><i class="demo-icon" data-icon="code-branch" aria-hidden="true"></i><span>判断</span></div>
+                                <div class="yc-diagram__palette-item yc-diagram__palette-item--end"><i class="demo-icon" data-icon="stop" aria-hidden="true"></i><span>结束</span></div>
+                            </div>
+                            <div class="yc-diagram__palette-section">
+                                <div class="yc-diagram__palette-section-title">业务节点</div>
+                                <div class="yc-diagram__palette-item"><i class="demo-icon" data-icon="user-check" aria-hidden="true"></i><span>审批人</span></div>
+                                <div class="yc-diagram__palette-item"><i class="demo-icon" data-icon="database" aria-hidden="true"></i><span>数据校验</span></div>
+                                <div class="yc-diagram__palette-item"><i class="demo-icon" data-icon="bell" aria-hidden="true"></i><span>通知分发</span></div>
+                            </div>
+                        </div>
+                    </aside>
+
+                    <div class="yc-diagram__canvas-container">
+                        <div class="yc-diagram-workbench__status" id="diagramStatus">当前模式：选择</div>
+                        <div class="yc-diagram__canvas" id="diagramCanvasViewport">
+                            <div class="yc-diagram-workbench__board" id="diagramBoard">
+                                <svg viewBox="0 0 900 580" preserveAspectRatio="none" aria-hidden="true">
+                                    <defs>
+                                        <marker id="diagramArrowPrimary" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+                                            <polygon points="0 0, 10 3.5, 0 7" fill="var(--yc-color-primary)"></polygon>
+                                        </marker>
+                                        <marker id="diagramArrowSuccess" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+                                            <polygon points="0 0, 10 3.5, 0 7" fill="var(--yc-color-success)"></polygon>
+                                        </marker>
+                                        <marker id="diagramArrowDanger" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+                                            <polygon points="0 0, 10 3.5, 0 7" fill="var(--yc-color-danger)"></polygon>
+                                        </marker>
+                                    </defs>
+                                    <path class="yc-diagram__connection" d="M 180 88 L 180 150" marker-end="url(#diagramArrowPrimary)"></path>
+                                    <path class="yc-diagram__connection" d="M 180 214 L 180 286" marker-end="url(#diagramArrowPrimary)"></path>
+                                    <path class="yc-diagram__connection yc-diagram__connection--success" d="M 180 356 L 80 430" marker-end="url(#diagramArrowSuccess)"></path>
+                                    <path class="yc-diagram__connection yc-diagram__connection--danger" d="M 180 356 L 280 430" marker-end="url(#diagramArrowDanger)"></path>
+                                    <path class="yc-diagram__connection" d="M 80 492 L 80 538 L 180 538 L 180 510" marker-end="url(#diagramArrowPrimary)"></path>
+                                    <path class="yc-diagram__connection" d="M 280 492 L 280 538 L 180 538 L 180 510" marker-end="url(#diagramArrowPrimary)"></path>
+                                    <text class="yc-diagram__connection-label" x="116" y="390">通过</text>
+                                    <text class="yc-diagram__connection-label" x="246" y="390">驳回</text>
+                                </svg>
+
+                                <div class="yc-diagram__node yc-diagram__node--start" style="left: 110px; top: 40px;" data-node-id="start" data-node-title="开始节点">
+                                    <div class="yc-diagram__node-content">提交申请</div>
+                                </div>
+
+                                <div class="yc-diagram__node yc-diagram__node--process" style="left: 90px; top: 150px;" data-node-id="validate" data-node-title="表单校验">
+                                    <div class="yc-diagram__node-title">表单校验</div>
+                                    <div class="yc-diagram__node-content">检查必填字段、格式和附件完整性</div>
+                                </div>
+
+                                <div class="yc-diagram__node yc-diagram__node--decision" style="left: 130px; top: 286px;" data-node-id="decision" data-node-title="是否满足规则">
+                                    <div class="yc-diagram__node-content">是否满足规则</div>
+                                </div>
+
+                                <div class="yc-diagram__node yc-diagram__node--process" style="left: 14px; top: 430px;" data-node-id="approve" data-node-title="进入审批">
+                                    <div class="yc-diagram__node-title">进入审批链</div>
+                                    <div class="yc-diagram__node-content">通知审批人并记录时间线</div>
+                                </div>
+
+                                <div class="yc-diagram__node yc-diagram__node--process" style="left: 224px; top: 430px;" data-node-id="revise" data-node-title="驳回修正">
+                                    <div class="yc-diagram__node-title">驳回修正</div>
+                                    <div class="yc-diagram__node-content">提示申请人修改后重新提交</div>
+                                </div>
+
+                                <div class="yc-diagram__node yc-diagram__node--end" style="left: 110px; top: 480px;" data-node-id="end" data-node-title="结束节点">
+                                    <div class="yc-diagram__node-content">流程完成</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <aside class="yc-diagram__inspector">
+                            <div class="yc-diagram__inspector-title">属性面板</div>
+                            <div id="diagramInspector"></div>
+                        </aside>
+
+                        <div class="yc-diagram__zoom-controls">
+                            <button class="yc-diagram__zoom-btn" type="button" id="diagramZoomIn"><i class="demo-icon" data-icon="plus" aria-hidden="true"></i></button>
+                            <div class="yc-diagram__zoom-level" id="diagramZoomLabel">100%</div>
+                            <button class="yc-diagram__zoom-btn" type="button" id="diagramZoomOut"><i class="demo-icon" data-icon="minus" aria-hidden="true"></i></button>
+                            <button class="yc-diagram__zoom-btn" type="button" id="diagramZoomReset"><i class="demo-icon" data-icon="arrows-to-dot" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>使用场景</h3>
+            <div class="demo-data-grid">
+                <div class="demo-card">
+                    <div class="demo-block-title">审批流</div>
+                    <p class="demo-description">节点标题、状态颜色和分支连线足够表达请假、报销、发布等常见审批路径。</p>
+                </div>
+                <div class="demo-card">
+                    <div class="demo-block-title">配置中心</div>
+                    <p class="demo-description">左侧节点库、中央画布、右侧属性面板和底部缩放控制，接近真实流程设计器的工作台结构。</p>
+                </div>
+                <div class="demo-card">
+                    <div class="demo-block-title">风格统一</div>
+                    <p class="demo-description">画布、网格、节点 hover、选中态和 toolbar 都统一落在当前 token 系统里。</p>
+                </div>
+                <div class="demo-card">
+                    <div class="demo-block-title">可扩展性</div>
+                    <p class="demo-description">后续接入真实拖拽和连线引擎时，可以直接复用现在这层视觉骨架。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../scripts/demo-diagram-workbench.js"></script>
+    <script src="../scripts/demo-shell.js"></script>
+</body>
+</html>

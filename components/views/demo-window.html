@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Window 窗口组件示例 - YC UI</title>
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+    <style>
+        .window-demo-checklist {
+            margin: 0;
+            padding-left: 18px;
+            color: var(--yc-color-text-regular);
+            font-size: var(--yc-font-size-small);
+            line-height: 1.9;
+        }
+
+        .window-demo-checklist strong {
+            color: var(--yc-color-text-primary);
+        }
+
+        .window-demo-workbench {
+            min-height: 640px;
+        }
+
+        .window-demo-stage {
+            min-height: 540px;
+        }
+
+        .window-demo-dock {
+            padding-top: 0;
+        }
+
+        .window-demo-dock__header,
+        .window-demo-dock__list {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .window-demo-dock__header {
+            justify-content: space-between;
+        }
+
+        .window-demo-dock__label {
+            color: var(--yc-color-text-secondary);
+            font-size: var(--yc-font-size-small);
+        }
+
+        .window-demo-dock__placeholder {
+            color: var(--yc-color-text-placeholder);
+            font-size: var(--yc-font-size-small);
+        }
+
+        .window-demo-dock-item {
+            min-width: 220px;
+            display: flex;
+            align-items: stretch;
+            gap: 8px;
+        }
+
+        .window-demo-dock-item__button,
+        .window-demo-dock-item__close {
+            border: 1px solid var(--yc-color-border);
+            border-radius: var(--yc-border-radius-base);
+            background: var(--yc-color-bg);
+            color: var(--yc-color-text-primary);
+            transition: var(--yc-transition-all-fast);
+        }
+
+        .window-demo-dock-item__button {
+            flex: 1;
+            min-height: 44px;
+            display: grid;
+            justify-items: start;
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+
+        .window-demo-dock-item__button:hover {
+            border-color: var(--yc-color-primary);
+            box-shadow: var(--yc-box-shadow-sm);
+        }
+
+        .window-demo-dock-item__close {
+            width: 44px;
+            cursor: pointer;
+        }
+
+        .window-demo-dock-item__close:hover {
+            color: var(--yc-color-danger);
+            border-color: var(--yc-color-danger);
+            background: var(--yc-layer-danger-soft);
+        }
+
+        .window-demo-dock-item__title {
+            font-size: var(--yc-font-size-small);
+            font-weight: var(--yc-font-weight-semibold);
+        }
+
+        .window-demo-dock-item__meta {
+            color: var(--yc-color-text-secondary);
+            font-size: var(--yc-font-size-extra-small);
+        }
+
+        .window-demo-window-content {
+            display: grid;
+            gap: 16px;
+        }
+
+        .window-demo-window-content--split {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .window-demo-progress {
+            display: grid;
+            gap: 12px;
+        }
+
+        .window-demo-progress-row {
+            display: grid;
+            gap: 8px;
+        }
+
+        .window-demo-progress-row__label {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            color: var(--yc-color-text-secondary);
+            font-size: var(--yc-font-size-small);
+        }
+
+        @media (max-width: 1100px) {
+            .window-demo-workbench {
+                min-height: 720px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .window-demo-window-content--split {
+                grid-template-columns: 1fr;
+            }
+
+            .window-demo-stage {
+                min-height: 480px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">Window 窗口</h1>
+            <p class="demo-page-subtitle">重构为工作台式窗口体验，统一拖动、八向缩放、最小化停靠、最大化铺满和关闭行为，让 demo 本身就像一个可操作的桌面容器。</p>
+        </div>
+
+        <div class="demo-shell-toolbar">
+            <div class="demo-shell-meta">
+                <a class="yc-button yc-button--small" href="../index.html#components">返回组件平台</a>
+                <span class="demo-shell-pill">Window</span>
+                <span class="demo-shell-pill">../styles/components/window.css</span>
+            </div>
+            <div class="demo-shell-actions">
+                <button class="yc-button yc-button--small" type="button" id="windowThemeToggle">切换深色</button>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>工作台演示</h3>
+            <div class="demo-workbench-layout">
+                <aside class="demo-workbench-sidebar">
+                    <div class="demo-workbench-card">
+                        <h4 class="demo-workbench-card__title">快速启动</h4>
+                        <div class="demo-workbench-launchers">
+                            <button class="yc-button yc-button--primary yc-button--small" type="button" data-open-window="overview">打开总览</button>
+                            <button class="yc-button yc-button--small" type="button" data-open-window="monitor">打开监控</button>
+                            <button class="yc-button yc-button--small" type="button" data-open-window="editor">打开编辑器</button>
+                            <button class="yc-button yc-button--small" type="button" data-open-window="warning">打开提醒</button>
+                            <button class="yc-button yc-button--small" type="button" id="windowOpenBatch">批量打开</button>
+                        </div>
+                    </div>
+
+                    <div class="demo-workbench-card">
+                        <h4 class="demo-workbench-card__title">当前状态</h4>
+                        <div class="demo-workbench-stats">
+                            <div class="demo-workbench-stat">
+                                <span class="demo-workbench-stat__label">已打开</span>
+                                <strong class="demo-workbench-stat__value" id="windowCount">0</strong>
+                            </div>
+                            <div class="demo-workbench-stat">
+                                <span class="demo-workbench-stat__label">已最小化</span>
+                                <strong class="demo-workbench-stat__value" id="windowMinimizedCount">0</strong>
+                            </div>
+                            <div class="demo-workbench-stat">
+                                <span class="demo-workbench-stat__label">活动窗口</span>
+                                <strong class="demo-workbench-stat__value" id="windowActiveCount">0</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="demo-workbench-card">
+                        <h4 class="demo-workbench-card__title">这一版重点</h4>
+                        <ul class="window-demo-checklist">
+                            <li><strong>状态类统一：</strong>全部围绕 <code>is-active</code>、<code>is-dragging</code>、<code>is-resizing</code>、<code>is-minimized</code>、<code>is-maximized</code> 运转。</li>
+                            <li><strong>拖动更稳：</strong>窗口只在工作区内移动，聚焦时自动抬升层级。</li>
+                            <li><strong>缩放更自然：</strong>支持八向缩放，最小尺寸和边界统一收口。</li>
+                            <li><strong>最小化更完整：</strong>窗口会进入下方停靠区，可一键恢复或关闭。</li>
+                            <li><strong>最大化更清晰：</strong>只铺满工作区，不会把页面其他 demo 区域挤乱。</li>
+                        </ul>
+                    </div>
+
+                    <div class="demo-workbench-status" id="windowStatus">状态：工作台已就绪，可以直接打开窗口开始测试。</div>
+                </aside>
+
+                <div class="demo-workbench-surface window-demo-workbench">
+                    <div class="demo-workbench-toolbar">
+                        <div class="demo-workbench-toolbar__group">
+                            <span class="demo-tag">Window Workbench</span>
+                            <div class="demo-workbench-pills">
+                                <span class="demo-shell-pill">拖动</span>
+                                <span class="demo-shell-pill">缩放</span>
+                                <span class="demo-shell-pill">最小化</span>
+                                <span class="demo-shell-pill">最大化</span>
+                                <span class="demo-shell-pill">关闭</span>
+                            </div>
+                        </div>
+                        <div class="demo-workbench-toolbar__actions">
+                            <button class="yc-button yc-button--small" type="button" id="windowCascade">级联整理</button>
+                            <button class="yc-button yc-button--small" type="button" id="windowCloseAll">关闭全部</button>
+                        </div>
+                    </div>
+
+                    <div class="demo-workbench-stage demo-workbench-stage--grid window-demo-stage" id="windowStage">
+                        <div class="demo-workbench-stage__empty" id="windowStageEmpty">当前没有打开窗口，使用上方按钮创建一组可拖动的工作窗体。</div>
+                    </div>
+
+                    <div class="demo-workbench-footer window-demo-dock">
+                        <div class="window-demo-dock__header">
+                            <span class="window-demo-dock__label">最小化停靠区</span>
+                            <span class="window-demo-dock__placeholder" id="windowDockPlaceholder">还没有最小化窗口</span>
+                        </div>
+                        <div class="window-demo-dock__list" id="windowDock"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            function clamp(value, min, max) {
+                return Math.max(min, Math.min(max, value));
+            }
+
+            function createOverviewContent() {
+                return `
+                    <div class="window-demo-window-content">
+                        <div class="demo-workbench-panel-grid demo-workbench-panel-grid--3">
+                            <div class="demo-workbench-panel">
+                                <div class="demo-workbench-panel__eyebrow">活动任务</div>
+                                <div class="demo-workbench-panel__value">12</div>
+                            </div>
+                            <div class="demo-workbench-panel">
+                                <div class="demo-workbench-panel__eyebrow">待确认</div>
+                                <div class="demo-workbench-panel__value">4</div>
+                            </div>
+                            <div class="demo-workbench-panel">
+                                <div class="demo-workbench-panel__eyebrow">异常告警</div>
+                                <div class="demo-workbench-panel__value">2</div>
+                            </div>
+                        </div>
+                        <div class="window-demo-window-content window-demo-window-content--split">
+                            <div class="demo-workbench-panel demo-workbench-panel--soft">
+                                <h4 class="demo-workbench-panel__title">发布窗口</h4>
+                                <p class="demo-workbench-panel__text">这个主窗口适合测试层级聚焦、拖动和最大化。双击标题栏也可以直接切换最大化状态。</p>
+                            </div>
+                            <div class="demo-workbench-panel demo-workbench-panel--soft">
+                                <h4 class="demo-workbench-panel__title">视觉规则</h4>
+                                <p class="demo-workbench-panel__text">激活窗口会抬升阴影，缩放热区只在活跃或缩放时显形，避免整个工作区始终显得发虚。</p>
+                            </div>
+                        </div>
+                        <div class="demo-workbench-list">
+                            <div class="demo-workbench-list-item">
+                                <div class="demo-workbench-list-item__title">桌面端交互统一</div>
+                                <div class="demo-workbench-list-item__meta">拖动限制在工作区内，最大化只覆盖工作区，不影响整个 demo 页面。</div>
+                            </div>
+                            <div class="demo-workbench-list-item">
+                                <div class="demo-workbench-list-item__title">状态切换简化</div>
+                                <div class="demo-workbench-list-item__meta">最小化进入停靠区，恢复后回到之前位置；最大化还原则回到最后一次普通尺寸。</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            function createMonitorContent() {
+                return `
+                    <div class="window-demo-window-content">
+                        <div class="demo-workbench-panel demo-workbench-panel--soft">
+                            <h4 class="demo-workbench-panel__title">资源使用</h4>
+                            <div class="window-demo-progress">
+                                <div class="window-demo-progress-row">
+                                    <div class="window-demo-progress-row__label"><span>CPU</span><strong>63%</strong></div>
+                                    <div class="demo-workbench-meter"><div class="demo-workbench-meter__fill" style="width: 63%;"></div></div>
+                                </div>
+                                <div class="window-demo-progress-row">
+                                    <div class="window-demo-progress-row__label"><span>内存</span><strong>48%</strong></div>
+                                    <div class="demo-workbench-meter"><div class="demo-workbench-meter__fill" style="width: 48%;"></div></div>
+                                </div>
+                                <div class="window-demo-progress-row">
+                                    <div class="window-demo-progress-row__label"><span>网络</span><strong>71%</strong></div>
+                                    <div class="demo-workbench-meter"><div class="demo-workbench-meter__fill" style="width: 71%;"></div></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="demo-workbench-list">
+                            <div class="demo-workbench-list-item">
+                                <div class="demo-workbench-list-item__title">09:41 网关恢复</div>
+                                <div class="demo-workbench-list-item__meta">自动扩容完成，入口流量已回落到正常区间。</div>
+                            </div>
+                            <div class="demo-workbench-list-item">
+                                <div class="demo-workbench-list-item__title">09:36 布局刷新</div>
+                                <div class="demo-workbench-list-item__meta">测试缩放时，这类长内容窗口能更直观看到 body 的滚动区域是否稳定。</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            function createEditorContent() {
+                return `
+                    <div class="window-demo-window-content">
+                        <div class="demo-workbench-form">
+                            <div class="demo-workbench-field">
+                                <label class="demo-workbench-field__label" for="windowEditorName">窗口标题</label>
+                                <input id="windowEditorName" class="yc-input" value="交互规范回顾">
+                            </div>
+                            <div class="demo-workbench-field">
+                                <label class="demo-workbench-field__label" for="windowEditorOwner">负责人</label>
+                                <div class="demo-workbench-inline">
+                                    <input id="windowEditorOwner" class="yc-input" value="体验平台组">
+                                    <span class="demo-workbench-chip">草稿</span>
+                                    <span class="demo-workbench-chip">窗口表单</span>
+                                </div>
+                            </div>
+                            <div class="demo-workbench-field">
+                                <label class="demo-workbench-field__label" for="windowEditorDesc">备注</label>
+                                <textarea id="windowEditorDesc" class="yc-textarea" rows="4">这里适合测试表单型窗口在拖动、缩放和最大化后的整体密度表现。</textarea>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            function createWarningContent() {
+                return `
+                    <div class="window-demo-window-content">
+                        <div class="demo-workbench-panel demo-workbench-panel--danger">
+                            <h4 class="demo-workbench-panel__title">关闭前确认</h4>
+                            <p class="demo-workbench-panel__text">这是一个更紧凑的提醒型窗口，适合观察危险态窗口在激活、最小化和还原时的边框、阴影和按钮反馈是否统一。</p>
+                        </div>
+                        <div class="demo-workbench-panel demo-workbench-panel--soft">
+                            <h4 class="demo-workbench-panel__title">建议测试</h4>
+                            <p class="demo-workbench-panel__text">先最大化，再最小化到停靠区，最后恢复并继续拖动，确认状态切换没有残留内联样式。</p>
+                        </div>
+                    </div>
+                `;
+            }
+
+            const presets = {
+                overview() {
+                    return {
+                        title: "项目总览",
+                        subtitle: "主工作窗口",
+                        tone: "info",
+                        width: 620,
+                        height: 420,
+                        content: createOverviewContent(),
+                        actions: [
+                            { label: "稍后处理", type: "default", message: "已保留总览窗口。" },
+                            { label: "确认排期", type: "primary", message: "已确认总览窗口中的操作。", close: true }
+                        ]
+                    };
+                },
+                monitor() {
+                    return {
+                        title: "资源监控",
+                        subtitle: "适合测试缩放和滚动",
+                        tone: "success",
+                        width: 440,
+                        height: 360,
+                        content: createMonitorContent(),
+                        actions: [
+                            { label: "忽略", type: "default", message: "已忽略当前监控提示。" },
+                            { label: "刷新视图", type: "primary", message: "监控窗口已刷新。", close: false }
+                        ]
+                    };
+                },
+                editor() {
+                    return {
+                        title: "批量编辑",
+                        subtitle: "表单型窗口",
+                        tone: "warning",
+                        width: 520,
+                        height: 390,
+                        content: createEditorContent(),
+                        actions: [
+                            { label: "取消", type: "default", message: "已取消编辑。" },
+                            { label: "保存草稿", type: "primary", message: "编辑内容已保存。", close: true }
+                        ]
+                    };
+                },
+                warning() {
+                    return {
+                        title: "风险提醒",
+                        subtitle: "紧凑型窗口",
+                        tone: "danger",
+                        width: 380,
+                        height: 300,
+                        content: createWarningContent(),
+                        actions: [
+                            { label: "继续观察", type: "default", message: "提醒窗口保留在桌面。" },
+                            { label: "关闭提醒", type: "primary", message: "提醒窗口已关闭。", close: true }
+                        ]
+                    };
+                }
+            };
+
+            class WorkbenchWindow {
+                constructor(manager, config) {
+                    this.manager = manager;
+                    this.id = `yc-window-${manager.seed += 1}`;
+                    this.config = config;
+                    this.minWidth = config.minWidth || 320;
+                    this.minHeight = config.minHeight || 220;
+                    this.isMinimized = false;
+                    this.isMaximized = false;
+                    this.resumeMaximized = false;
+                    this.normalRect = null;
+                    this.dockItem = null;
+                    this.element = this.createElement();
+                    this.handlePointerMove = this.onPointerMove.bind(this);
+                    this.handlePointerUp = this.onPointerUp.bind(this);
+                    this.dragState = null;
+                    this.resizeState = null;
+                    this.bindEvents();
+                }
+
+                createElement() {
+                    const element = document.createElement("section");
+                    element.className = `yc-window yc-window--${this.config.tone || "info"}`;
+                    element.dataset.windowId = this.id;
+                    element.innerHTML = `
+                        <div class="yc-window-resize-handle yc-window-resize-n" data-direction="n"></div>
+                        <div class="yc-window-resize-handle yc-window-resize-ne" data-direction="ne"></div>
+                        <div class="yc-window-resize-handle yc-window-resize-e" data-direction="e"></div>
+                        <div class="yc-window-resize-handle yc-window-resize-se" data-direction="se"></div>
+                        <div class="yc-window-resize-handle yc-window-resize-s" data-direction="s"></div>
+                        <div class="yc-window-resize-handle yc-window-resize-sw" data-direction="sw"></div>
+                        <div class="yc-window-resize-handle yc-window-resize-w" data-direction="w"></div>
+                        <div class="yc-window-resize-handle yc-window-resize-nw" data-direction="nw"></div>
+                        <div class="yc-window-header">
+                            <div>
+                                <div class="yc-window-title">${this.config.title}</div>
+                                <div class="yc-window-subtitle">${this.config.subtitle}</div>
+                            </div>
+                            <div class="yc-window-header-buttons">
+                                <button class="yc-window-minimize" type="button" title="最小化">
+                                    <span class="yc-window__control-icon">-</span>
+                                </button>
+                                <button class="yc-window-maximize" type="button" title="最大化">
+                                    <span class="yc-window__control-icon">□</span>
+                                </button>
+                                <button class="yc-window-close" type="button" title="关闭">
+                                    <span class="yc-window__control-icon">×</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="yc-window-body">${this.config.content}</div>
+                        <div class="yc-window-footer">
+                            ${this.renderFooterButtons()}
+                        </div>
+                    `;
+                    return element;
+                }
+
+                renderFooterButtons() {
+                    const actions = Array.isArray(this.config.actions) && this.config.actions.length > 0
+                        ? this.config.actions
+                        : [
+                            { label: "取消", type: "default", close: true },
+                            { label: "确定", type: "primary", close: true }
+                        ];
+
+                    return actions.map((action, index) => `
+                        <button
+                            class="yc-button yc-button--small ${action.type === "primary" ? "yc-button--primary yc-window-btn-primary" : "yc-window-btn"}"
+                            type="button"
+                            data-action-index="${index}">
+                            ${action.label}
+                        </button>
+                    `).join("");
+                }
+
+                bindEvents() {
+                    const header = this.element.querySelector(".yc-window-header");
+                    const minimizeButton = this.element.querySelector(".yc-window-minimize");
+                    const maximizeButton = this.element.querySelector(".yc-window-maximize");
+                    const closeButton = this.element.querySelector(".yc-window-close");
+
+                    this.element.addEventListener("pointerdown", () => {
+                        this.manager.focusWindow(this);
+                    });
+
+                    header.addEventListener("dblclick", () => {
+                        this.toggleMaximize();
+                    });
+
+                    header.addEventListener("pointerdown", (event) => {
+                        if (event.button !== 0) return;
+                        if (event.target.closest(".yc-window-header-buttons")) return;
+
+                        if (this.isMinimized) {
+                            this.restoreFromMinimize();
+                            return;
+                        }
+
+                        if (this.isMaximized) return;
+                        this.startDrag(event);
+                    });
+
+                    this.element.querySelectorAll(".yc-window-resize-handle").forEach((handle) => {
+                        handle.addEventListener("pointerdown", (event) => {
+                            if (event.button !== 0 || this.isMinimized || this.isMaximized) return;
+                            this.startResize(event, handle.dataset.direction || "se");
+                        });
+                    });
+
+                    minimizeButton.addEventListener("click", (event) => {
+                        event.stopPropagation();
+                        this.toggleMinimize();
+                    });
+
+                    maximizeButton.addEventListener("click", (event) => {
+                        event.stopPropagation();
+                        this.toggleMaximize();
+                    });
+
+                    closeButton.addEventListener("click", (event) => {
+                        event.stopPropagation();
+                        this.close();
+                    });
+
+                    this.element.querySelector(".yc-window-footer").addEventListener("click", (event) => {
+                        const button = event.target.closest("[data-action-index]");
+                        if (!button) return;
+
+                        const index = Number(button.dataset.actionIndex || 0);
+                        const action = this.config.actions[index];
+                        if (!action) return;
+
+                        if (action.message) {
+                            this.manager.setStatus(`状态：${action.message}`);
+                        }
+
+                        if (typeof action.handler === "function") {
+                            action.handler(this, this.manager);
+                        }
+
+                        if (action.close) {
+                            this.close();
+                        }
+                    });
+                }
+
+                mount() {
+                    const rect = this.manager.getNextRect(this.config.width, this.config.height);
+                    this.applyRect(rect);
+                    this.normalRect = { ...rect };
+                    this.syncControlIcons();
+                }
+
+                getRect() {
+                    return {
+                        left: Number.parseFloat(this.element.style.left) || 0,
+                        top: Number.parseFloat(this.element.style.top) || 0,
+                        width: Number.parseFloat(this.element.style.width) || this.config.width,
+                        height: Number.parseFloat(this.element.style.height) || this.config.height
+                    };
+                }
+
+                applyRect(rect) {
+                    this.element.style.left = `${rect.left}px`;
+                    this.element.style.top = `${rect.top}px`;
+                    this.element.style.width = `${rect.width}px`;
+                    this.element.style.height = `${rect.height}px`;
+                }
+
+                setActive(active) {
+                    this.element.classList.toggle("is-active", active);
+                }
+
+                syncControlIcons() {
+                    const maximizeIcon = this.element.querySelector(".yc-window-maximize .yc-window__control-icon");
+                    if (maximizeIcon) {
+                        maximizeIcon.textContent = this.isMaximized ? "❐" : "□";
+                    }
+                }
+
+                startDrag(event) {
+                    event.preventDefault();
+                    this.manager.focusWindow(this);
+                    this.dragState = {
+                        startX: event.clientX,
+                        startY: event.clientY,
+                        rect: this.getRect()
+                    };
+                    this.element.classList.add("is-dragging");
+                    window.addEventListener("pointermove", this.handlePointerMove);
+                    window.addEventListener("pointerup", this.handlePointerUp);
+                }
+
+                startResize(event, direction) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    this.manager.focusWindow(this);
+                    this.resizeState = {
+                        direction,
+                        startX: event.clientX,
+                        startY: event.clientY,
+                        rect: this.getRect()
+                    };
+                    this.element.classList.add("is-resizing");
+                    window.addEventListener("pointermove", this.handlePointerMove);
+                    window.addEventListener("pointerup", this.handlePointerUp);
+                }
+
+                onPointerMove(event) {
+                    if (this.dragState) {
+                        const bounds = this.manager.getStageBounds();
+                        const nextLeft = clamp(
+                            this.dragState.rect.left + (event.clientX - this.dragState.startX),
+                            0,
+                            bounds.width - this.dragState.rect.width
+                        );
+                        const nextTop = clamp(
+                            this.dragState.rect.top + (event.clientY - this.dragState.startY),
+                            0,
+                            bounds.height - this.dragState.rect.height
+                        );
+                        this.applyRect({
+                            left: nextLeft,
+                            top: nextTop,
+                            width: this.dragState.rect.width,
+                            height: this.dragState.rect.height
+                        });
+                        return;
+                    }
+
+                    if (!this.resizeState) return;
+
+                    const bounds = this.manager.getStageBounds();
+                    const start = this.resizeState.rect;
+                    const dx = event.clientX - this.resizeState.startX;
+                    const dy = event.clientY - this.resizeState.startY;
+                    const direction = this.resizeState.direction;
+
+                    let left = start.left;
+                    let top = start.top;
+                    let width = start.width;
+                    let height = start.height;
+
+                    if (direction.includes("e")) {
+                        width = clamp(start.width + dx, this.minWidth, bounds.width - start.left);
+                    }
+
+                    if (direction.includes("s")) {
+                        height = clamp(start.height + dy, this.minHeight, bounds.height - start.top);
+                    }
+
+                    if (direction.includes("w")) {
+                        left = clamp(start.left + dx, 0, start.left + start.width - this.minWidth);
+                        width = clamp(start.width + (start.left - left), this.minWidth, bounds.width - left);
+                    }
+
+                    if (direction.includes("n")) {
+                        top = clamp(start.top + dy, 0, start.top + start.height - this.minHeight);
+                        height = clamp(start.height + (start.top - top), this.minHeight, bounds.height - top);
+                    }
+
+                    this.applyRect({ left, top, width, height });
+                }
+
+                onPointerUp() {
+                    if (this.dragState) {
+                        this.dragState = null;
+                        this.element.classList.remove("is-dragging");
+                        this.normalRect = this.getRect();
+                    }
+
+                    if (this.resizeState) {
+                        this.resizeState = null;
+                        this.element.classList.remove("is-resizing");
+                        this.normalRect = this.getRect();
+                    }
+
+                    window.removeEventListener("pointermove", this.handlePointerMove);
+                    window.removeEventListener("pointerup", this.handlePointerUp);
+                }
+
+                toggleMinimize() {
+                    if (this.isMinimized) {
+                        this.restoreFromMinimize();
+                        return;
+                    }
+
+                    this.resumeMaximized = this.isMaximized;
+                    if (!this.isMaximized) {
+                        this.normalRect = this.getRect();
+                    }
+
+                    this.isMinimized = true;
+                    this.isMaximized = false;
+                    this.element.classList.remove("is-maximized");
+                    this.element.classList.add("is-minimized");
+                    this.syncControlIcons();
+                    this.manager.moveToDock(this);
+                    this.manager.setStatus(`状态：已最小化“${this.config.title}”。`);
+                }
+
+                restoreFromMinimize() {
+                    if (!this.isMinimized) return;
+
+                    this.isMinimized = false;
+                    this.element.classList.remove("is-minimized");
+                    this.manager.restoreFromDock(this);
+
+                    if (this.resumeMaximized) {
+                        this.maximize(true);
+                    } else if (this.normalRect) {
+                        this.applyRect(this.normalRect);
+                    }
+
+                    this.resumeMaximized = false;
+                    this.manager.focusWindow(this);
+                    this.manager.setStatus(`状态：已恢复“${this.config.title}”。`);
+                }
+
+                toggleMaximize() {
+                    if (this.isMinimized) {
+                        this.restoreFromMinimize();
+                        return;
+                    }
+
+                    if (this.isMaximized) {
+                        this.restoreFromMaximize();
+                    } else {
+                        this.maximize(false);
+                    }
+                }
+
+                maximize(fromRestore) {
+                    if (!fromRestore) {
+                        this.normalRect = this.getRect();
+                    }
+
+                    const bounds = this.manager.getStageBounds();
+                    this.isMaximized = true;
+                    this.element.classList.add("is-maximized");
+                    this.applyRect({
+                        left: 0,
+                        top: 0,
+                        width: bounds.width,
+                        height: bounds.height
+                    });
+                    this.syncControlIcons();
+                    this.manager.focusWindow(this);
+                    this.manager.setStatus(`状态：已最大化“${this.config.title}”。`);
+                }
+
+                restoreFromMaximize() {
+                    this.isMaximized = false;
+                    this.element.classList.remove("is-maximized");
+                    this.applyRect(this.normalRect || this.manager.getNextRect(this.config.width, this.config.height));
+                    this.syncControlIcons();
+                    this.manager.focusWindow(this);
+                    this.manager.setStatus(`状态：已还原“${this.config.title}”。`);
+                }
+
+                close() {
+                    this.onPointerUp();
+                    this.manager.removeWindow(this);
+                }
+            }
+
+            class WindowWorkbench {
+                constructor(stage, dock, status, counts, emptyHint, dockPlaceholder) {
+                    this.stage = stage;
+                    this.dock = dock;
+                    this.status = status;
+                    this.counts = counts;
+                    this.emptyHint = emptyHint;
+                    this.dockPlaceholder = dockPlaceholder;
+                    this.windows = new Map();
+                    this.seed = 0;
+                    this.offsetSeed = 0;
+                    this.zIndex = 10;
+                    this.activeWindow = null;
+
+                    window.addEventListener("resize", () => {
+                        this.reflow();
+                    });
+
+                    document.addEventListener("keydown", (event) => {
+                        if (event.key === "Escape" && this.activeWindow) {
+                            this.activeWindow.close();
+                        }
+                    });
+                }
+
+                getStageBounds() {
+                    return {
+                        width: this.stage.clientWidth,
+                        height: this.stage.clientHeight
+                    };
+                }
+
+                getNextRect(width, height) {
+                    const bounds = this.getStageBounds();
+                    const nextWidth = Math.min(width, Math.max(320, bounds.width - 24));
+                    const nextHeight = Math.min(height, Math.max(220, bounds.height - 24));
+                    const offset = (this.offsetSeed % 6) * 28;
+                    this.offsetSeed += 1;
+
+                    return {
+                        left: clamp(24 + offset, 0, bounds.width - nextWidth),
+                        top: clamp(24 + offset, 0, bounds.height - nextHeight),
+                        width: nextWidth,
+                        height: nextHeight
+                    };
+                }
+
+                open(config) {
+                    const windowInstance = new WorkbenchWindow(this, config);
+                    this.windows.set(windowInstance.id, windowInstance);
+                    this.stage.appendChild(windowInstance.element);
+                    windowInstance.mount();
+                    this.focusWindow(windowInstance);
+                    this.updateCounts();
+                    return windowInstance;
+                }
+
+                focusWindow(windowInstance) {
+                    if (!windowInstance || windowInstance.isMinimized) return;
+
+                    this.windows.forEach((item) => {
+                        item.setActive(item === windowInstance);
+                    });
+
+                    this.zIndex += 1;
+                    windowInstance.element.style.zIndex = String(this.zIndex);
+                    this.activeWindow = windowInstance;
+                    this.updateCounts();
+                }
+
+                moveToDock(windowInstance) {
+                    this.stage.contains(windowInstance.element) && this.stage.removeChild(windowInstance.element);
+                    const dockItem = this.createDockItem(windowInstance);
+                    this.dock.appendChild(dockItem);
+
+                    if (this.activeWindow === windowInstance) {
+                        this.activeWindow = null;
+                        this.focusTopWindow();
+                    }
+
+                    this.updateCounts();
+                }
+
+                restoreFromDock(windowInstance) {
+                    if (!this.stage.contains(windowInstance.element)) {
+                        this.stage.appendChild(windowInstance.element);
+                    }
+
+                    if (windowInstance.dockItem && windowInstance.dockItem.parentNode) {
+                        windowInstance.dockItem.parentNode.removeChild(windowInstance.dockItem);
+                    }
+
+                    this.updateCounts();
+                }
+
+                removeWindow(windowInstance) {
+                    if (windowInstance.dockItem && windowInstance.dockItem.parentNode) {
+                        windowInstance.dockItem.parentNode.removeChild(windowInstance.dockItem);
+                    }
+
+                    if (windowInstance.element.parentNode) {
+                        windowInstance.element.parentNode.removeChild(windowInstance.element);
+                    }
+
+                    this.windows.delete(windowInstance.id);
+
+                    if (this.activeWindow === windowInstance) {
+                        this.activeWindow = null;
+                    }
+
+                    this.focusTopWindow();
+                    this.updateCounts();
+                    this.setStatus(`状态：已关闭“${windowInstance.config.title}”。`);
+                }
+
+                createDockItem(windowInstance) {
+                    if (windowInstance.dockItem) {
+                        return windowInstance.dockItem;
+                    }
+
+                    const item = document.createElement("div");
+                    item.className = "window-demo-dock-item";
+                    item.innerHTML = `
+                        <button class="window-demo-dock-item__button" type="button">
+                            <span class="window-demo-dock-item__title">${windowInstance.config.title}</span>
+                            <span class="window-demo-dock-item__meta">点击恢复窗口</span>
+                        </button>
+                        <button class="window-demo-dock-item__close" type="button" title="关闭">×</button>
+                    `;
+
+                    item.querySelector(".window-demo-dock-item__button").addEventListener("click", () => {
+                        windowInstance.restoreFromMinimize();
+                    });
+
+                    item.querySelector(".window-demo-dock-item__close").addEventListener("click", () => {
+                        windowInstance.close();
+                    });
+
+                    windowInstance.dockItem = item;
+                    return item;
+                }
+
+                focusTopWindow() {
+                    const visibleWindows = Array.from(this.windows.values())
+                        .filter((item) => !item.isMinimized)
+                        .sort((left, right) => {
+                            const leftZ = Number(left.element.style.zIndex || 0);
+                            const rightZ = Number(right.element.style.zIndex || 0);
+                            return rightZ - leftZ;
+                        });
+
+                    if (visibleWindows.length > 0) {
+                        this.focusWindow(visibleWindows[0]);
+                    }
+                }
+
+                cascade() {
+                    let order = 0;
+                    Array.from(this.windows.values()).forEach((windowInstance) => {
+                        if (windowInstance.isMinimized) return;
+                        if (windowInstance.isMaximized) {
+                            windowInstance.restoreFromMaximize();
+                        }
+
+                        const next = this.getNextRect(windowInstance.config.width, windowInstance.config.height);
+                        const offset = order * 24;
+                        order += 1;
+                        windowInstance.applyRect({
+                            left: clamp(next.left + offset, 0, this.stage.clientWidth - next.width),
+                            top: clamp(next.top + offset, 0, this.stage.clientHeight - next.height),
+                            width: next.width,
+                            height: next.height
+                        });
+                        windowInstance.normalRect = windowInstance.getRect();
+                    });
+
+                    this.setStatus("状态：已重新整理窗口级联位置。");
+                }
+
+                closeAll() {
+                    Array.from(this.windows.values()).forEach((windowInstance) => {
+                        windowInstance.close();
+                    });
+                    this.setStatus("状态：所有窗口都已关闭。");
+                }
+
+                reflow() {
+                    const bounds = this.getStageBounds();
+
+                    this.windows.forEach((windowInstance) => {
+                        if (windowInstance.isMinimized) return;
+
+                        if (windowInstance.isMaximized) {
+                            windowInstance.applyRect({
+                                left: 0,
+                                top: 0,
+                                width: bounds.width,
+                                height: bounds.height
+                            });
+                            return;
+                        }
+
+                        const rect = windowInstance.getRect();
+                        const width = Math.min(rect.width, bounds.width);
+                        const height = Math.min(rect.height, bounds.height);
+                        const left = clamp(rect.left, 0, bounds.width - width);
+                        const top = clamp(rect.top, 0, bounds.height - height);
+                        windowInstance.applyRect({ left, top, width, height });
+                        windowInstance.normalRect = windowInstance.getRect();
+                    });
+                }
+
+                setStatus(message) {
+                    this.status.textContent = message;
+                }
+
+                updateCounts() {
+                    const openCount = this.windows.size;
+                    const minimizedCount = Array.from(this.windows.values()).filter((item) => item.isMinimized).length;
+                    const activeCount = this.activeWindow ? 1 : 0;
+
+                    this.counts.open.textContent = String(openCount);
+                    this.counts.minimized.textContent = String(minimizedCount);
+                    this.counts.active.textContent = String(activeCount);
+                    this.emptyHint.classList.toggle("is-hidden", openCount > 0);
+                    this.dockPlaceholder.style.display = minimizedCount > 0 ? "none" : "inline";
+                }
+            }
+
+            const stage = document.getElementById("windowStage");
+            const dock = document.getElementById("windowDock");
+            const status = document.getElementById("windowStatus");
+            const emptyHint = document.getElementById("windowStageEmpty");
+            const dockPlaceholder = document.getElementById("windowDockPlaceholder");
+            const workbench = new WindowWorkbench(
+                stage,
+                dock,
+                status,
+                {
+                    open: document.getElementById("windowCount"),
+                    minimized: document.getElementById("windowMinimizedCount"),
+                    active: document.getElementById("windowActiveCount")
+                },
+                emptyHint,
+                dockPlaceholder
+            );
+
+            document.querySelectorAll("[data-open-window]").forEach((button) => {
+                button.addEventListener("click", () => {
+                    const key = button.dataset.openWindow;
+                    if (!key || !presets[key]) return;
+                    const config = presets[key]();
+                    workbench.open(config);
+                    workbench.setStatus(`状态：已打开“${config.title}”。`);
+                });
+            });
+
+            document.getElementById("windowOpenBatch").addEventListener("click", () => {
+                workbench.open(presets.overview());
+                workbench.open(presets.monitor());
+                workbench.open(presets.editor());
+                workbench.setStatus("状态：已批量打开三种类型的窗口。");
+            });
+
+            document.getElementById("windowCascade").addEventListener("click", () => {
+                workbench.cascade();
+            });
+
+            document.getElementById("windowCloseAll").addEventListener("click", () => {
+                workbench.closeAll();
+            });
+
+            const themeButton = document.getElementById("windowThemeToggle");
+
+            function setTheme(theme) {
+                document.documentElement.setAttribute("yc-theme", theme);
+                localStorage.setItem("yc-theme", theme);
+                themeButton.textContent = theme === "dark" ? "切换浅色" : "切换深色";
+            }
+
+            themeButton.addEventListener("click", () => {
+                const currentTheme = document.documentElement.getAttribute("yc-theme") || "light";
+                setTheme(currentTheme === "dark" ? "light" : "dark");
+            });
+
+            setTheme(localStorage.getItem("yc-theme") || "light");
+            workbench.open(presets.overview());
+            workbench.open(presets.monitor());
+            workbench.setStatus("状态：已初始化一组窗口，可以继续拖动、缩放、最小化和最大化测试。");
+        })();
+    </script>
+</body>
+</html>

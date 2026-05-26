@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Splitter 分割面板组件 - YC UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+    <style>
+        .splitter-demo-stage {
+            min-height: 540px;
+        }
+
+        .splitter-demo-stage--compact {
+            min-height: 320px;
+        }
+
+        .splitter-demo-stage--nested {
+            min-height: 580px;
+        }
+
+        .splitter-demo-pane {
+            display: grid;
+            gap: 14px;
+            height: 100%;
+            padding: 18px;
+            box-sizing: border-box;
+        }
+
+        .splitter-demo-pane__top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .splitter-demo-pane__heading {
+            display: grid;
+            gap: 8px;
+        }
+
+        .splitter-demo-pane__eyebrow {
+            color: var(--yc-color-text-secondary);
+            font-size: var(--yc-font-size-extra-small);
+            letter-spacing: 0;
+        }
+
+        .splitter-demo-pane__title {
+            margin: 0;
+            color: var(--yc-color-text-primary);
+            font-size: var(--yc-font-size-base);
+            font-weight: var(--yc-font-weight-semibold);
+        }
+
+        .splitter-demo-pane__text {
+            color: var(--yc-color-text-regular);
+            font-size: var(--yc-font-size-small);
+            line-height: 1.75;
+        }
+
+        .splitter-demo-pane__badges,
+        .splitter-demo-pane__meta,
+        .splitter-demo-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .splitter-demo-pane__meta {
+            gap: 8px;
+        }
+
+        .splitter-demo-pane__badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            min-height: 28px;
+            padding: 0 10px;
+            border: 1px solid var(--yc-color-border-light);
+            border-radius: var(--yc-border-radius-round);
+            background: var(--yc-color-fill-extra-light);
+            color: var(--yc-color-text-secondary);
+            font-size: var(--yc-font-size-extra-small);
+        }
+
+        .splitter-demo-pane__stack {
+            display: grid;
+            gap: 10px;
+        }
+
+        .splitter-demo-pane__grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+        }
+
+        .splitter-demo-pane__card,
+        .splitter-demo-note,
+        .splitter-demo-mini-card {
+            border: 1px solid var(--yc-color-border-light);
+            border-radius: var(--yc-border-radius-medium);
+            background: var(--yc-color-bg);
+            box-shadow: var(--yc-box-shadow-base);
+        }
+
+        .splitter-demo-pane__card {
+            display: grid;
+            gap: 8px;
+            padding: 12px;
+        }
+
+        .splitter-demo-pane__card-title,
+        .splitter-demo-note__title,
+        .splitter-demo-mini-card__title {
+            color: var(--yc-color-text-primary);
+            font-size: var(--yc-font-size-small);
+            font-weight: var(--yc-font-weight-semibold);
+        }
+
+        .splitter-demo-pane__card-meta,
+        .splitter-demo-note__meta,
+        .splitter-demo-mini-card__meta {
+            color: var(--yc-color-text-secondary);
+            font-size: var(--yc-font-size-extra-small);
+            line-height: 1.7;
+        }
+
+        .splitter-demo-pane__meter {
+            height: 8px;
+            overflow: hidden;
+            border-radius: var(--yc-border-radius-round);
+            background: var(--yc-color-fill);
+        }
+
+        .splitter-demo-pane__meter-fill {
+            height: 100%;
+            border-radius: inherit;
+            background: linear-gradient(90deg, var(--yc-color-primary) 0%, var(--yc-color-primary-hover) 100%);
+        }
+
+        .splitter-demo-note {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 12px 14px;
+        }
+
+        .splitter-demo-note__value {
+            color: var(--yc-color-primary);
+            font-size: 24px;
+            font-weight: var(--yc-font-weight-bold);
+            line-height: 1;
+        }
+
+        .splitter-demo-mini-card {
+            display: grid;
+            gap: 6px;
+            padding: 10px 12px;
+        }
+
+        .splitter-demo-mini-card__value {
+            color: var(--yc-color-text-primary);
+            font-size: 18px;
+            font-weight: var(--yc-font-weight-semibold);
+            line-height: 1;
+        }
+
+        .splitter-demo-list {
+            display: grid;
+            gap: 8px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .splitter-demo-list__item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 10px 12px;
+            border-radius: var(--yc-border-radius-medium);
+            background: var(--yc-color-fill-extra-light);
+            border: 1px solid var(--yc-color-border-light);
+            color: var(--yc-color-text-regular);
+            font-size: var(--yc-font-size-small);
+            line-height: 1.7;
+        }
+
+        .splitter-demo-list__icon {
+            width: 24px;
+            height: 24px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex: 0 0 auto;
+            border-radius: var(--yc-border-radius-round);
+            background: var(--yc-layer-primary-soft);
+            color: var(--yc-color-primary);
+            font-size: 12px;
+        }
+
+        .splitter-demo-list__content {
+            display: grid;
+            gap: 2px;
+        }
+
+        .splitter-demo-list__title {
+            color: var(--yc-color-text-primary);
+            font-weight: var(--yc-font-weight-medium);
+        }
+
+        .splitter-demo-actions {
+            padding: 14px 16px 0;
+        }
+
+        .splitter-demo-nested-host {
+            width: 100%;
+            height: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .splitter-demo-pane__grid {
+                grid-template-columns: 1fr;
+            }
+
+            .splitter-demo-stage {
+                min-height: 460px;
+            }
+
+            .splitter-demo-stage--nested {
+                min-height: 520px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">Splitter 分割面板</h1>
+            <p class="demo-page-subtitle">
+                用一套更稳的拖拽逻辑和更完整的工作台语言，把左右布局、上下布局、可折叠侧栏和嵌套工作区统一起来。
+                这版重点优化嵌套 Splitter 的拖拽手感，让父子面板在尺寸变化后依然保持顺滑、可控、可读。
+            </p>
+        </div>
+
+        <div class="demo-shell-toolbar">
+            <div class="demo-shell-meta">
+                <a class="yc-button yc-button--small" href="../index.html#components">返回组件平台</a>
+                <span class="demo-shell-pill"><i class="fas fa-up-down-left-right"></i> 拖拽分区</span>
+                <span class="demo-shell-pill"><i class="fas fa-table-columns"></i> 水平 / 垂直</span>
+                <span class="demo-shell-pill"><i class="fas fa-sitemap"></i> 嵌套工作台</span>
+                <span class="demo-shell-pill"><i class="fas fa-layer-group"></i> 工作台骨架</span>
+            </div>
+            <div class="demo-shell-actions">
+                <button class="yc-button yc-button--small" type="button" id="splitterThemeToggle">切换深色</button>
+                <a class="demo-shell-anchor" href="#splitter-workbench">主工作台</a>
+                <a class="demo-shell-anchor" href="#splitter-patterns">布局模式</a>
+                <a class="demo-shell-anchor" href="#splitter-nested">嵌套布局</a>
+            </div>
+        </div>
+
+        <div class="demo-section" id="splitter-workbench">
+            <h3>主工作台</h3>
+            <p class="demo-description">
+                最常见的 Splitter 场景，是左侧导航或筛选区配合右侧主工作区。默认把空间优先留给主区，再允许用户按任务阶段自行调整，
+                会比一开始就把页面切成很多固定块更适合企业级后台。
+            </p>
+
+            <div class="demo-workbench-layout">
+                <aside class="demo-workbench-sidebar">
+                    <div class="demo-workbench-card">
+                        <h4 class="demo-workbench-card__title">这版优化重点</h4>
+                        <div class="demo-workbench-list">
+                            <div class="demo-workbench-list-item">
+                                <div class="demo-workbench-list-item__title">实时测量拖拽基线</div>
+                                <div class="demo-workbench-list-item__meta">不再缓存容器宽高，而是按当前相邻面板的实际尺寸计算拖拽结果。</div>
+                            </div>
+                            <div class="demo-workbench-list-item">
+                                <div class="demo-workbench-list-item__title">嵌套场景更稳定</div>
+                                <div class="demo-workbench-list-item__meta">父级尺寸变化后，子级 Splitter 继续按实时尺寸工作，不会出现边界漂移。</div>
+                            </div>
+                            <div class="demo-workbench-list-item">
+                                <div class="demo-workbench-list-item__title">状态与视觉统一</div>
+                                <div class="demo-workbench-list-item__meta">拖拽态、悬停态、折叠态和嵌套态都收拢到统一的工作台骨架语言里。</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="demo-workbench-card">
+                        <h4 class="demo-workbench-card__title">适合的页面类型</h4>
+                        <p class="demo-workbench-card__text">
+                            数据看板、表格工作台、低代码搭建器、属性配置中心、图表分析台和编辑器都很适合先由 Splitter 划出主次区域，再在区域内部继续组合 Panel、Layout、Window 等组件。
+                        </p>
+                    </div>
+
+                    <div class="demo-workbench-status" id="splitterStatus">
+                        状态：工作台已就绪，可以直接拖拽分割条观察导航区和主工作区的实时变化。
+                    </div>
+                </aside>
+
+                <div class="demo-workbench-surface">
+                    <div class="demo-workbench-toolbar">
+                        <div class="demo-workbench-toolbar__group">
+                            <span class="demo-tag">Splitter Workbench</span>
+                            <div class="demo-workbench-pills">
+                                <span class="demo-shell-pill">资源导航</span>
+                                <span class="demo-shell-pill">主工作区</span>
+                                <span class="demo-shell-pill">百分比布局</span>
+                            </div>
+                        </div>
+                        <div class="demo-workbench-toolbar__actions">
+                            <span class="demo-shell-pill"><i class="fas fa-grip-lines-vertical"></i> 拖拽结束后会同步派发 resize</span>
+                        </div>
+                    </div>
+
+                    <div class="demo-workbench-stage splitter-demo-stage">
+                        <div class="demo-splitter-wrapper demo-splitter-wrapper--large" id="horizontal-splitter"></div>
+                    </div>
+
+                    <div class="demo-workbench-footer">
+                        <div class="demo-workbench-status" id="horizontalStatus">
+                            状态：默认比例为 30 / 70，适合“导航 + 主内容”的企业级工作台结构。
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section" id="splitter-patterns">
+            <h3>布局模式</h3>
+            <p class="demo-description">
+                除了左右分区，上下分区和可折叠分区也很常见。编辑区与日志区、预览区与参数区、筛选器与结果区，都可以用同一套交互规则管理，
+                避免不同页面各自写一版拖拽逻辑。
+            </p>
+
+            <div class="demo-layout-row-gap">
+                <div class="demo-layout-direction-demo">
+                    <div class="demo-layout-direction-title">
+                        <span class="demo-tag demo-tag--success">垂直分区</span>
+                        <code class="demo-code">top + bottom</code>
+                    </div>
+                    <div class="demo-layout-wrapper">
+                        <div class="demo-layout-label">适合编辑区 + 实时日志、画布区 + 历史记录、预览区 + 控制台。</div>
+                        <div class="demo-splitter-wrapper demo-splitter-wrapper--small" id="vertical-splitter"></div>
+                    </div>
+                    <div class="demo-workbench-status" id="verticalStatus">
+                        状态：上下区块保持 42 / 58 的默认比例，拖拽后会实时反馈最新尺寸。
+                    </div>
+                </div>
+
+                <div class="demo-layout-direction-demo">
+                    <div class="demo-layout-direction-title">
+                        <span class="demo-tag demo-tag--warning">折叠分区</span>
+                        <code class="demo-code">collapse / expand</code>
+                    </div>
+                    <div class="demo-layout-wrapper">
+                        <div class="demo-layout-label">适合临时收起过滤器、目录树或属性栏，把更多空间留给结果区。</div>
+                        <div class="demo-splitter-wrapper demo-splitter-wrapper--small" id="collapsible-splitter"></div>
+                        <div class="splitter-demo-actions">
+                            <button class="yc-button yc-button--small" type="button" id="toggleStartPane">
+                                <i class="fas fa-chevrons-left"></i> 切换左侧
+                            </button>
+                            <button class="yc-button yc-button--small" type="button" id="toggleEndPane">
+                                切换右侧 <i class="fas fa-chevrons-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="demo-workbench-status" id="collapseStatus">
+                        状态：两侧都支持折叠，适合演示筛选器和结果区之间的空间切换。
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section" id="splitter-nested">
+            <h3>嵌套布局</h3>
+            <p class="demo-description">
+                一个成熟的工作台几乎一定会进入嵌套 Splitter 场景：左侧目录树，右侧上方主画布，右侧下方日志或属性摘要。
+                这里最大的坑不是样式，而是父级尺寸变动之后，子级拖拽还能不能继续稳定工作。这一版就是围绕这个点做的优化。
+            </p>
+
+            <div class="demo-workbench-layout">
+                <aside class="demo-workbench-sidebar">
+                    <div class="demo-workbench-card">
+                        <h4 class="demo-workbench-card__title">嵌套拖拽改进</h4>
+                        <div class="demo-workbench-list">
+                            <div class="demo-workbench-list-item">
+                                <div class="demo-workbench-list-item__title">按相邻 pane 实测尺寸计算</div>
+                                <div class="demo-workbench-list-item__meta">拖拽只关心当前两块面板的真实尺寸，不依赖构造时缓存的容器宽高。</div>
+                            </div>
+                            <div class="demo-workbench-list-item">
+                                <div class="demo-workbench-list-item__title">结果回写为百分比</div>
+                                <div class="demo-workbench-list-item__meta">父级整体拉伸或压缩后，子面板的比例关系仍然能自然延续。</div>
+                            </div>
+                            <div class="demo-workbench-list-item">
+                                <div class="demo-workbench-list-item__title">拖拽结束后派发工作台刷新</div>
+                                <div class="demo-workbench-list-item__meta">给内部图表、表格或其他可监听 resize 的组件一个统一刷新信号。</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="demo-workbench-card">
+                        <h4 class="demo-workbench-card__title">适用业务场景</h4>
+                        <p class="demo-workbench-card__text">
+                            低代码搭建器、组织关系图编辑器、流程编排台、BI 分析台、地图标注台和复杂表格工作台，都适合采用这种“导航树 + 主画布 + 辅助区”的嵌套骨架。
+                        </p>
+                    </div>
+
+                    <div class="demo-workbench-status" id="nestedStatus">
+                        状态：拖动外层或内层分割条后，都可以继续平滑地调整另一层布局。
+                    </div>
+                </aside>
+
+                <div class="demo-workbench-surface">
+                    <div class="demo-workbench-toolbar">
+                        <div class="demo-workbench-toolbar__group">
+                            <span class="demo-tag">Nested Splitter</span>
+                            <div class="demo-workbench-pills">
+                                <span class="demo-shell-pill">资源树</span>
+                                <span class="demo-shell-pill">主画布</span>
+                                <span class="demo-shell-pill">运行日志</span>
+                            </div>
+                        </div>
+                        <div class="demo-workbench-toolbar__actions">
+                            <span class="demo-shell-pill"><i class="fas fa-sitemap"></i> 水平 + 垂直嵌套</span>
+                        </div>
+                    </div>
+
+                    <div class="demo-workbench-stage splitter-demo-stage splitter-demo-stage--nested">
+                        <div class="demo-splitter-wrapper demo-splitter-wrapper--large" id="nested-splitter"></div>
+                    </div>
+
+                    <div class="demo-workbench-footer">
+                        <div class="demo-workbench-footer__group">
+                            <span class="demo-shell-pill">适合低代码搭建器</span>
+                            <span class="demo-shell-pill">适合图表分析台</span>
+                            <span class="demo-shell-pill">适合复杂控制台</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            function clamp(value, min, max) {
+                return Math.max(min, Math.min(max, value));
+            }
+
+            function roundSize(value) {
+                return Math.round(value || 0);
+            }
+
+            function formatSizes(sizes) {
+                return sizes.map((size) => `${roundSize(size)}px`).join(" / ");
+            }
+
+            class Splitter {
+                constructor(options) {
+                    this.options = options || {};
+                    this.container = this.resolveContainer(this.options.container);
+                    this.layout = this.options.layout || "horizontal";
+                    this.originalContainerClasses = Array.from(this.container.classList);
+                    this.panes = (this.options.panes || []).map((pane) => ({
+                        ...pane,
+                        resizable: pane.resizable !== false,
+                        collapsible: pane.collapsible === true,
+                        min: typeof pane.min === "number" ? pane.min : 0,
+                        max: typeof pane.max === "number" ? pane.max : Infinity,
+                        collapsed: false,
+                        originalSize: null
+                    }));
+                    this.splitBars = [];
+                    this.isDragging = false;
+                    this.dragState = null;
+                    this.events = {
+                        "resize-start": [],
+                        "resize": [],
+                        "resize-end": [],
+                        "collapse": []
+                    };
+
+                    this.handlePointerDown = this.handlePointerDown.bind(this);
+                    this.handlePointerMove = this.handlePointerMove.bind(this);
+                    this.handlePointerUp = this.handlePointerUp.bind(this);
+                    this.handleResize = this.handleResize.bind(this);
+
+                    this.init();
+                }
+
+                resolveContainer(container) {
+                    if (container instanceof HTMLElement) {
+                        return container;
+                    }
+
+                    if (typeof container === "string") {
+                        return document.querySelector(container);
+                    }
+
+                    throw new Error("Splitter container is required.");
+                }
+
+                init() {
+                    if (!this.container) {
+                        return;
+                    }
+
+                    this.container.innerHTML = "";
+                    this.container.className = [
+                        ...this.originalContainerClasses,
+                        "yc-splitter",
+                        `yc-splitter-${this.layout}`,
+                        this.options.className || ""
+                    ]
+                        .filter(Boolean)
+                        .join(" ");
+
+                    this.panes.forEach((pane, index) => {
+                        if (index > 0) {
+                            this.createSplitBar(index - 1);
+                        }
+                        this.createPane(index);
+                    });
+
+                    this.bindEvents();
+                    this.observeResize();
+                    this.scheduleNestingSync();
+                }
+
+                bindEvents() {
+                    this.container.addEventListener("pointerdown", this.handlePointerDown);
+                    window.addEventListener("pointermove", this.handlePointerMove);
+                    window.addEventListener("pointerup", this.handlePointerUp);
+                    window.addEventListener("pointercancel", this.handlePointerUp);
+                }
+
+                observeResize() {
+                    if (typeof ResizeObserver !== "function") {
+                        window.addEventListener("resize", this.handleResize);
+                        return;
+                    }
+
+                    this.resizeObserver = new ResizeObserver(this.handleResize);
+                    this.resizeObserver.observe(this.container);
+                }
+
+                clearSelection() {
+                    const selection = typeof window.getSelection === "function" ? window.getSelection() : null;
+                    if (selection && typeof selection.removeAllRanges === "function") {
+                        selection.removeAllRanges();
+                    }
+                }
+
+                handleResize() {
+                    if (this.isDragging) {
+                        return;
+                    }
+
+                    this.scheduleNestingSync();
+                }
+
+                scheduleNestingSync() {
+                    if (this.nestingRaf) {
+                        cancelAnimationFrame(this.nestingRaf);
+                    }
+
+                    this.nestingRaf = requestAnimationFrame(() => {
+                        this.syncNestingState();
+                    });
+                }
+
+                syncNestingState() {
+                    const parentSplitter = this.container.parentElement
+                        ? this.container.parentElement.closest(".yc-splitter")
+                        : null;
+                    const nestedChildren = Array.from(this.container.querySelectorAll(".yc-splitter"))
+                        .filter((node) => node !== this.container);
+
+                    this.container.classList.toggle("is-nested", Boolean(parentSplitter));
+                    this.container.classList.toggle("has-nested", nestedChildren.length > 0);
+
+                    if (parentSplitter) {
+                        parentSplitter.classList.add("has-nested");
+                    }
+                }
+
+                on(event, handler) {
+                    if (this.events[event]) {
+                        this.events[event].push(handler);
+                    }
+                }
+
+                emit(event, ...args) {
+                    if (!this.events[event]) {
+                        return;
+                    }
+
+                    this.events[event].forEach((handler) => handler(...args));
+                }
+
+                createPane(index) {
+                    const pane = this.panes[index];
+                    const paneElement = document.createElement("div");
+                    paneElement.className = "yc-splitter-pane";
+
+                    if (pane.className) {
+                        paneElement.classList.add(pane.className);
+                    }
+
+                    if (pane.size) {
+                        paneElement.style.flexBasis = typeof pane.size === "number" ? `${pane.size}px` : pane.size;
+                        if (this.layout === "horizontal") {
+                            paneElement.style.width = "0";
+                        } else {
+                            paneElement.style.height = "0";
+                        }
+                    } else {
+                        paneElement.style.flex = "1 1 0";
+                    }
+
+                    const contentElement = document.createElement("div");
+                    contentElement.className = "yc-splitter-pane-content";
+
+                    if (typeof pane.content === "function") {
+                        this.appendContent(contentElement, pane.content());
+                    } else {
+                        this.appendContent(contentElement, pane.content);
+                    }
+
+                    if (pane.collapsible) {
+                        const collapseButton = document.createElement("button");
+                        collapseButton.type = "button";
+                        collapseButton.className = "yc-splitter-collapse-btn";
+                        collapseButton.setAttribute("aria-label", "切换面板展开状态");
+                        collapseButton.innerHTML = this.layout === "horizontal"
+                            ? '<i class="fas fa-chevron-right"></i>'
+                            : '<i class="fas fa-chevron-down"></i>';
+                        collapseButton.addEventListener("click", () => {
+                            this.togglePane(index);
+                        });
+                        paneElement.appendChild(collapseButton);
+                    }
+
+                    paneElement.appendChild(contentElement);
+                    this.container.appendChild(paneElement);
+
+                    pane.element = paneElement;
+                    pane.contentElement = contentElement;
+                }
+
+                appendContent(contentElement, content) {
+                    if (content instanceof HTMLElement) {
+                        contentElement.appendChild(content);
+                        return;
+                    }
+
+                    if (typeof content === "string") {
+                        contentElement.innerHTML = content;
+                    }
+                }
+
+                createSplitBar(index) {
+                    const splitBar = document.createElement("div");
+                    splitBar.className = `yc-splitter-bar yc-splitter-bar-${this.layout}`;
+                    splitBar.dataset.index = String(index);
+
+                    const resizeHandle = document.createElement("div");
+                    resizeHandle.className = "yc-splitter-resize-handle";
+                    splitBar.appendChild(resizeHandle);
+
+                    this.container.appendChild(splitBar);
+                    this.splitBars.push(splitBar);
+                }
+
+                handlePointerDown(event) {
+                    const splitBar = event.target.closest(".yc-splitter-bar");
+                    if (!splitBar || !this.container.contains(splitBar)) {
+                        return;
+                    }
+
+                    if (event.button !== 0 && event.pointerType !== "touch") {
+                        return;
+                    }
+
+                    const index = Number(splitBar.dataset.index);
+                    const currentPane = this.panes[index];
+                    const adjacentPane = this.panes[index + 1];
+
+                    if (!currentPane || !adjacentPane) {
+                        return;
+                    }
+
+                    if (currentPane.resizable === false || adjacentPane.resizable === false) {
+                        return;
+                    }
+
+                    if (currentPane.collapsed || adjacentPane.collapsed) {
+                        return;
+                    }
+
+                    event.preventDefault();
+                    event.stopPropagation();
+                    this.startDrag(event, index);
+                }
+
+                startDrag(event, index) {
+                    const splitBar = this.splitBars[index];
+                    const currentPane = this.panes[index];
+                    const adjacentPane = this.panes[index + 1];
+
+                    this.isDragging = true;
+                    this.dragState = {
+                        pointerId: event.pointerId,
+                        index,
+                        startPos: this.getPointerPosition(event),
+                        startCurrentSize: this.measurePane(currentPane),
+                        startAdjacentSize: this.measurePane(adjacentPane)
+                    };
+
+                    this.container.classList.add("is-dragging", "is-resizing");
+                    splitBar.classList.add("dragging");
+                    document.body.classList.add("yc-splitter-dragging", `yc-splitter-dragging--${this.layout}`);
+                    this.clearSelection();
+
+                    if (typeof splitBar.setPointerCapture === "function") {
+                        try {
+                            splitBar.setPointerCapture(event.pointerId);
+                        } catch (error) {
+                            void error;
+                        }
+                    }
+
+                    this.emit("resize-start", index, this.getPaneSizes());
+                }
+
+                handlePointerMove(event) {
+                    if (!this.isDragging || !this.dragState) {
+                        return;
+                    }
+
+                    if (typeof this.dragState.pointerId === "number" && event.pointerId !== this.dragState.pointerId) {
+                        return;
+                    }
+
+                    this.onDrag(event);
+                }
+
+                onDrag(event) {
+                    const { index, startPos, startCurrentSize, startAdjacentSize } = this.dragState;
+                    const pairSize = startCurrentSize + startAdjacentSize;
+                    const delta = this.getPointerPosition(event) - startPos;
+                    const bounds = this.getPairBounds(index, pairSize);
+                    const nextCurrentSize = clamp(startCurrentSize + delta, bounds.minCurrent, bounds.maxCurrent);
+                    const nextAdjacentSize = Math.max(pairSize - nextCurrentSize, 0);
+
+                    this.applyPairSizes(index, nextCurrentSize, nextAdjacentSize);
+                    this.clearSelection();
+                    this.emit("resize", index, this.getPaneSizes());
+                }
+
+                handlePointerUp(event) {
+                    if (!this.isDragging || !this.dragState) {
+                        return;
+                    }
+
+                    if (typeof this.dragState.pointerId === "number" && event.pointerId !== this.dragState.pointerId) {
+                        return;
+                    }
+
+                    this.endDrag();
+                }
+
+                endDrag() {
+                    const index = this.dragState ? this.dragState.index : -1;
+
+                    if (index >= 0) {
+                        this.emit("resize-end", index, this.getPaneSizes());
+                    }
+
+                    if (index >= 0 && this.splitBars[index]) {
+                        this.splitBars[index].classList.remove("dragging");
+                    }
+
+                    this.container.classList.remove("is-dragging", "is-resizing");
+                    document.body.classList.remove(
+                        "yc-splitter-dragging",
+                        "yc-splitter-dragging--horizontal",
+                        "yc-splitter-dragging--vertical"
+                    );
+                    this.clearSelection();
+
+                    this.isDragging = false;
+                    this.dragState = null;
+                    this.notifyLayoutChange();
+                }
+
+                getPointerPosition(event) {
+                    return this.layout === "horizontal" ? event.clientX : event.clientY;
+                }
+
+                measurePane(pane) {
+                    if (!pane || !pane.element) {
+                        return 0;
+                    }
+
+                    const rect = pane.element.getBoundingClientRect();
+                    return this.layout === "horizontal" ? rect.width : rect.height;
+                }
+
+                getSplitBarSize(splitBar) {
+                    if (!splitBar) {
+                        return 0;
+                    }
+
+                    return this.layout === "horizontal" ? splitBar.offsetWidth : splitBar.offsetHeight;
+                }
+
+                getAvailablePaneSize() {
+                    const containerSize = this.layout === "horizontal"
+                        ? this.container.clientWidth
+                        : this.container.clientHeight;
+                    const splitBarSize = this.splitBars.reduce((total, splitBar) => total + this.getSplitBarSize(splitBar), 0);
+
+                    return Math.max(containerSize - splitBarSize, 0);
+                }
+
+                getPairBounds(index, pairSize) {
+                    const currentPane = this.panes[index];
+                    const adjacentPane = this.panes[index + 1];
+                    const currentMin = Number.isFinite(currentPane.min) ? currentPane.min : 0;
+                    const currentMax = Number.isFinite(currentPane.max) ? currentPane.max : pairSize;
+                    const adjacentMin = Number.isFinite(adjacentPane.min) ? adjacentPane.min : 0;
+                    const adjacentMax = Number.isFinite(adjacentPane.max) ? adjacentPane.max : pairSize;
+
+                    let minCurrent = Math.max(0, currentMin, pairSize - adjacentMax);
+                    let maxCurrent = Math.min(pairSize, currentMax, pairSize - adjacentMin);
+
+                    if (minCurrent > maxCurrent) {
+                        const fallback = clamp(pairSize / 2, 0, pairSize);
+                        minCurrent = fallback;
+                        maxCurrent = fallback;
+                    }
+
+                    return { minCurrent, maxCurrent };
+                }
+
+                applyPanePixelSize(pane, pixelSize, totalAvailable) {
+                    const percent = totalAvailable > 0 ? (pixelSize / totalAvailable) * 100 : 0;
+                    pane.element.style.flexBasis = `${percent}%`;
+                    pane.element.style.flexGrow = "0";
+                    pane.element.style.flexShrink = "0";
+
+                    if (this.layout === "horizontal") {
+                        pane.element.style.width = "0";
+                    } else {
+                        pane.element.style.height = "0";
+                    }
+                }
+
+                applyPairSizes(index, currentSize, adjacentSize) {
+                    const totalAvailable = this.getAvailablePaneSize();
+
+                    this.applyPanePixelSize(this.panes[index], currentSize, totalAvailable);
+                    this.applyPanePixelSize(this.panes[index + 1], adjacentSize, totalAvailable);
+                }
+
+                getPaneSizes() {
+                    return this.panes.map((pane) => roundSize(this.measurePane(pane)));
+                }
+
+                notifyLayoutChange() {
+                    this.scheduleNestingSync();
+                    this.container.dispatchEvent(new CustomEvent("yc:splitter-layout", {
+                        bubbles: true,
+                        detail: {
+                            layout: this.layout,
+                            sizes: this.getPaneSizes()
+                        }
+                    }));
+
+                    window.dispatchEvent(new Event("resize"));
+                }
+
+                emitLayoutAfterTransition(callback) {
+                    window.setTimeout(() => {
+                        callback(this.getPaneSizes());
+                    }, 280);
+                }
+
+                togglePane(index) {
+                    const pane = this.panes[index];
+                    if (!pane || !pane.collapsible) {
+                        return;
+                    }
+
+                    if (pane.collapsed) {
+                        this.expandPane(index);
+                    } else {
+                        this.collapsePane(index);
+                    }
+                }
+
+                resolveSiblingIndex(index) {
+                    if (index < this.panes.length - 1) {
+                        return index + 1;
+                    }
+                    if (index > 0) {
+                        return index - 1;
+                    }
+                    return -1;
+                }
+
+                collapsePane(index) {
+                    const pane = this.panes[index];
+                    const siblingIndex = this.resolveSiblingIndex(index);
+
+                    if (!pane || !pane.collapsible || pane.collapsed || siblingIndex < 0) {
+                        return;
+                    }
+
+                    const siblingPane = this.panes[siblingIndex];
+                    const paneSize = this.measurePane(pane);
+                    const siblingSize = this.measurePane(siblingPane);
+                    const pairSize = paneSize + siblingSize;
+
+                    pane.originalSize = paneSize || pane.originalSize || 0;
+                    pane.collapsed = true;
+                    pane.element.classList.add("collapsed");
+
+                    if (index < siblingIndex) {
+                        this.applyPairSizes(index, 0, pairSize);
+                    } else {
+                        this.applyPairSizes(siblingIndex, pairSize, 0);
+                    }
+
+                    this.notifyLayoutChange();
+                    this.emitLayoutAfterTransition((sizes) => {
+                        this.emit("collapse", index, "collapse", sizes);
+                    });
+                }
+
+                expandPane(index) {
+                    const pane = this.panes[index];
+                    const siblingIndex = this.resolveSiblingIndex(index);
+
+                    if (!pane || !pane.collapsible || !pane.collapsed || siblingIndex < 0) {
+                        return;
+                    }
+
+                    const siblingPane = this.panes[siblingIndex];
+                    const paneSize = this.measurePane(pane);
+                    const siblingSize = this.measurePane(siblingPane);
+                    const pairSize = paneSize + siblingSize;
+                    const targetSize = pane.originalSize || Math.max(pane.min, pairSize * 0.35);
+
+                    pane.collapsed = false;
+                    pane.element.classList.remove("collapsed");
+
+                    if (index < siblingIndex) {
+                        const bounds = this.getPairBounds(index, pairSize);
+                        const nextCurrent = clamp(targetSize, bounds.minCurrent, bounds.maxCurrent);
+                        this.applyPairSizes(index, nextCurrent, Math.max(pairSize - nextCurrent, 0));
+                    } else {
+                        const bounds = this.getPairBounds(siblingIndex, pairSize);
+                        const nextSibling = clamp(pairSize - targetSize, bounds.minCurrent, bounds.maxCurrent);
+                        this.applyPairSizes(siblingIndex, nextSibling, Math.max(pairSize - nextSibling, 0));
+                    }
+
+                    this.notifyLayoutChange();
+                    this.emitLayoutAfterTransition((sizes) => {
+                        this.emit("collapse", index, "expand", sizes);
+                    });
+                }
+            }
+
+            function createPaneContent(config) {
+                const badges = (config.badges || []).map((badge) => `
+                    <span class="splitter-demo-pane__badge">${badge}</span>
+                `).join("");
+
+                const notes = (config.notes || []).map((note) => `
+                    <div class="splitter-demo-note">
+                        <div>
+                            <div class="splitter-demo-note__title">${note.title}</div>
+                            <div class="splitter-demo-note__meta">${note.meta}</div>
+                        </div>
+                        <div class="splitter-demo-note__value">${note.value}</div>
+                    </div>
+                `).join("");
+
+                const cards = (config.cards || []).map((card) => `
+                    <div class="splitter-demo-pane__card">
+                        <div class="splitter-demo-pane__card-title">${card.title}</div>
+                        <div class="splitter-demo-pane__card-meta">${card.meta}</div>
+                        ${card.progress ? `
+                            <div class="splitter-demo-pane__meter">
+                                <div class="splitter-demo-pane__meter-fill" style="width: ${card.progress};"></div>
+                            </div>
+                        ` : ""}
+                    </div>
+                `).join("");
+
+                const miniCards = (config.miniCards || []).map((card) => `
+                    <div class="splitter-demo-mini-card">
+                        <div class="splitter-demo-mini-card__title">${card.title}</div>
+                        <div class="splitter-demo-mini-card__meta">${card.meta}</div>
+                        <div class="splitter-demo-mini-card__value">${card.value}</div>
+                    </div>
+                `).join("");
+
+                const list = (config.list || []).map((item) => `
+                    <li class="splitter-demo-list__item">
+                        <span class="splitter-demo-list__icon"><i class="${item.icon}"></i></span>
+                        <span class="splitter-demo-list__content">
+                            <span class="splitter-demo-list__title">${item.title}</span>
+                            <span>${item.meta}</span>
+                        </span>
+                    </li>
+                `).join("");
+
+                return `
+                    <div class="splitter-demo-pane">
+                        <div class="splitter-demo-pane__top">
+                            <div class="splitter-demo-pane__heading">
+                                <span class="splitter-demo-pane__eyebrow">${config.eyebrow}</span>
+                                <h4 class="splitter-demo-pane__title">${config.title}</h4>
+                            </div>
+                            ${badges ? `<div class="splitter-demo-pane__badges">${badges}</div>` : ""}
+                        </div>
+                        <div class="splitter-demo-pane__text">${config.description}</div>
+                        ${notes}
+                        ${miniCards ? `<div class="splitter-demo-pane__grid">${miniCards}</div>` : ""}
+                        ${cards ? `<div class="splitter-demo-pane__stack">${cards}</div>` : ""}
+                        ${list ? `<ul class="splitter-demo-list">${list}</ul>` : ""}
+                    </div>
+                `;
+            }
+
+            document.addEventListener("DOMContentLoaded", function() {
+                const html = document.documentElement;
+                const splitterStatus = document.getElementById("splitterStatus");
+                const horizontalStatus = document.getElementById("horizontalStatus");
+                const verticalStatus = document.getElementById("verticalStatus");
+                const collapseStatus = document.getElementById("collapseStatus");
+                const nestedStatus = document.getElementById("nestedStatus");
+                const themeToggle = document.getElementById("splitterThemeToggle");
+
+                function syncThemeButton() {
+                    const isDark = html.getAttribute("yc-theme") === "dark";
+                    themeToggle.textContent = isDark ? "切换浅色" : "切换深色";
+                }
+
+                themeToggle.addEventListener("click", function() {
+                    const isDark = html.getAttribute("yc-theme") === "dark";
+                    html.setAttribute("yc-theme", isDark ? "light" : "dark");
+                    syncThemeButton();
+                });
+                syncThemeButton();
+
+                const horizontalSplitter = new Splitter({
+                    container: "#horizontal-splitter",
+                    layout: "horizontal",
+                    panes: [
+                        {
+                            size: "30%",
+                            min: 180,
+                            className: "yc-splitter-pane--pane1",
+                            content: createPaneContent({
+                                eyebrow: "左侧导航区",
+                                title: "资源与筛选入口",
+                                description: "适合放目录树、资源列表、业务分组和快捷筛选。默认保持较窄宽度，把主要空间留给右侧主工作区。",
+                                badges: ["导航", "筛选", "可折叠思路"],
+                                notes: [
+                                    { title: "推荐宽度", meta: "保持浏览效率与信息密度的平衡", value: "30%" }
+                                ],
+                                miniCards: [
+                                    { title: "页面集合", meta: "按模块组织入口", value: "12" },
+                                    { title: "快捷筛选", meta: "状态 / 标签 / 最近更新", value: "8" }
+                                ],
+                                list: [
+                                    { icon: "fas fa-folder-tree", title: "资源树", meta: "先定位，再进入编辑或分析流程。" },
+                                    { icon: "fas fa-filter", title: "快速筛选", meta: "常驻在左侧比散落在页面顶部更稳。 " },
+                                    { icon: "fas fa-thumbtack", title: "固定辅助区", meta: "让主工作区持续保持清爽和聚焦。" }
+                                ]
+                            })
+                        },
+                        {
+                            size: "70%",
+                            min: 320,
+                            className: "yc-splitter-pane--pane2",
+                            content: createPaneContent({
+                                eyebrow: "右侧主区",
+                                title: "主工作区",
+                                description: "承载表格、图表、画布、详情页或复杂编辑器。它是整个 Splitter 里最需要被优先保护阅读与操作空间的区域。",
+                                badges: ["主区优先", "可持续放大"],
+                                notes: [
+                                    { title: "任务进度", meta: "适合承载高密度业务内容", value: "72%" }
+                                ],
+                                cards: [
+                                    { title: "当前焦点", meta: "继续把页面骨架类组件统一到一套工作台语言里。", progress: "72%" },
+                                    { title: "下一步建议", meta: "Splitter 负责切出主次区，内部再组合 Panel、Window、Chart、PropertyGrid。", progress: "54%" }
+                                ],
+                                list: [
+                                    { icon: "fas fa-table", title: "表格工作台", meta: "大多数后台页面最终都要落到主区中展示结果。" },
+                                    { icon: "fas fa-chart-line", title: "分析主画布", meta: "适合把可视化结果与交互入口集中在同一块区域。" }
+                                ]
+                            })
+                        }
+                    ]
+                });
+
+                horizontalSplitter.on("resize", function(index, sizes) {
+                    horizontalStatus.textContent = `状态：正在拖拽第 ${index + 1} 条分割线，当前尺寸为 ${formatSizes(sizes)}。`;
+                });
+
+                horizontalSplitter.on("resize-end", function(index, sizes) {
+                    splitterStatus.textContent = `状态：主工作台拖拽完成，左右分区最新尺寸为 ${formatSizes(sizes)}。`;
+                    horizontalStatus.textContent = `状态：拖拽结束后保留当前比例，后续容器变化仍能延续布局关系。`;
+                });
+
+                const verticalSplitter = new Splitter({
+                    container: "#vertical-splitter",
+                    layout: "vertical",
+                    panes: [
+                        {
+                            size: "42%",
+                            min: 90,
+                            className: "yc-splitter-pane--pane3",
+                            content: createPaneContent({
+                                eyebrow: "上方区域",
+                                title: "编辑区 / 预览区",
+                                description: "适合参数编辑、规则配置、内容输入或画布预览。通常是当前用户最专注的部分。",
+                                badges: ["编辑区", "主输入"],
+                                miniCards: [
+                                    { title: "字段组", meta: "拆分更清晰", value: "6" },
+                                    { title: "联动项", meta: "实时更新", value: "14" }
+                                ]
+                            })
+                        },
+                        {
+                            size: "58%",
+                            min: 120,
+                            className: "yc-splitter-pane--pane4",
+                            content: createPaneContent({
+                                eyebrow: "下方区域",
+                                title: "日志与反馈",
+                                description: "适合展示执行日志、历史记录、差异对比、结果摘要或帮助信息，让用户保持上下文连续。",
+                                badges: ["日志", "反馈"],
+                                cards: [
+                                    { title: "最近输出", meta: "09:42 已完成基础布局统一。", progress: "68%" },
+                                    { title: "当前建议", meta: "继续把骨架组件的工作台 demo 向同一语言收拢。", progress: "46%" }
+                                ]
+                            })
+                        }
+                    ]
+                });
+
+                verticalSplitter.on("resize", function(index, sizes) {
+                    verticalStatus.textContent = `状态：垂直分区正在调整，上下区尺寸为 ${formatSizes(sizes)}。`;
+                });
+
+                verticalSplitter.on("resize-end", function(index, sizes) {
+                    verticalStatus.textContent = `状态：垂直分区调整完成，新的上下比例为 ${formatSizes(sizes)}。`;
+                });
+
+                const collapsibleSplitter = new Splitter({
+                    container: "#collapsible-splitter",
+                    layout: "horizontal",
+                    panes: [
+                        {
+                            size: "34%",
+                            min: 120,
+                            collapsible: true,
+                            className: "yc-splitter-pane--pane1",
+                            content: createPaneContent({
+                                eyebrow: "可折叠左栏",
+                                title: "过滤条件",
+                                description: "适合承载筛选器、资源树、分组面板或查询条件。临时收起时，主区可以更专注地展示结果。",
+                                badges: ["折叠", "筛选器"],
+                                list: [
+                                    { icon: "fas fa-filter", title: "状态", meta: "待处理 / 进行中 / 已完成" },
+                                    { icon: "fas fa-user", title: "负责人", meta: "按团队或人员过滤" },
+                                    { icon: "fas fa-clock", title: "时间范围", meta: "最近 7 天 / 30 天 / 自定义" }
+                                ]
+                            })
+                        },
+                        {
+                            size: "66%",
+                            min: 200,
+                            collapsible: true,
+                            className: "yc-splitter-pane--pane2",
+                            content: createPaneContent({
+                                eyebrow: "可折叠右栏",
+                                title: "结果区",
+                                description: "用来放表格、结果列表或联动分析内容。必要时也可以反过来收起结果区，只保留条件侧进行集中配置。",
+                                badges: ["结果区", "双向折叠"],
+                                notes: [
+                                    { title: "当前结果", meta: "适合承载结果列表和联动视图", value: "24" }
+                                ]
+                            })
+                        }
+                    ]
+                });
+
+                collapsibleSplitter.on("collapse", function(index, action, sizes) {
+                    const side = index === 0 ? "左侧" : "右侧";
+                    collapseStatus.textContent = `状态：${side}面板已${action === "collapse" ? "折叠" : "展开"}，当前尺寸为 ${formatSizes(sizes)}。`;
+                });
+
+                document.getElementById("toggleStartPane").addEventListener("click", function() {
+                    collapsibleSplitter.togglePane(0);
+                });
+
+                document.getElementById("toggleEndPane").addEventListener("click", function() {
+                    collapsibleSplitter.togglePane(1);
+                });
+
+                const nestedInnerHost = document.createElement("div");
+                nestedInnerHost.className = "splitter-demo-nested-host";
+
+                const nestedSplitter = new Splitter({
+                    container: "#nested-splitter",
+                    layout: "horizontal",
+                    panes: [
+                        {
+                            size: "28%",
+                            min: 170,
+                            className: "yc-splitter-pane--pane1",
+                            content: createPaneContent({
+                                eyebrow: "左侧结构区",
+                                title: "资源树 / 图层树",
+                                description: "适合目录、图层、资产、流程节点或组织结构。让用户先定位对象，再进入右侧主画布工作。",
+                                badges: ["导航树", "结构区"],
+                                list: [
+                                    { icon: "fas fa-folder-open", title: "页面结构", meta: "首页 / 图表中心 / 上传体系 / 主题配置" },
+                                    { icon: "fas fa-diagram-project", title: "节点视图", meta: "按模块、页面或流程阶段组织。" },
+                                    { icon: "fas fa-clock-rotate-left", title: "最近更新", meta: "优先展示高频修改资源。" }
+                                ]
+                            })
+                        },
+                        {
+                            size: "72%",
+                            min: 360,
+                            className: "yc-splitter-pane--pane4",
+                            content: nestedInnerHost
+                        }
+                    ]
+                });
+
+                const nestedVerticalSplitter = new Splitter({
+                    container: nestedInnerHost,
+                    layout: "vertical",
+                    panes: [
+                        {
+                            size: "56%",
+                            min: 160,
+                            className: "yc-splitter-pane--pane2",
+                            content: createPaneContent({
+                                eyebrow: "右上主区",
+                                title: "主画布 / 主结果区",
+                                description: "放图表、表格、低代码画布、地图或图形编辑区域。这里通常是用户当前最重要的工作位置。",
+                                badges: ["主画布", "高密度内容"],
+                                notes: [
+                                    { title: "内容密度", meta: "适合承载大面积业务内容", value: "80%" }
+                                ],
+                                miniCards: [
+                                    { title: "联动视图", meta: "跨组件同步", value: "4" },
+                                    { title: "活动图层", meta: "当前已激活", value: "12" }
+                                ]
+                            })
+                        },
+                        {
+                            size: "44%",
+                            min: 140,
+                            className: "yc-splitter-pane--pane3",
+                            content: createPaneContent({
+                                eyebrow: "右下辅助区",
+                                title: "运行日志 / 摘要面板",
+                                description: "负责呈现日志、结果摘要、校验反馈、变更历史或上下文提示，帮助用户在主区工作时保持连续性。",
+                                badges: ["日志", "辅助区"],
+                                cards: [
+                                    { title: "最近动作", meta: "10:13 更新了画布布局和资源树宽度。", progress: "64%" },
+                                    { title: "布局稳定度", meta: "父级拖拽后仍可继续平滑调整内层纵向区域。", progress: "91%" }
+                                ]
+                            })
+                        }
+                    ]
+                });
+
+                nestedSplitter.on("resize", function(index, sizes) {
+                    nestedStatus.textContent = `状态：外层分区调整中，左右区尺寸为 ${formatSizes(sizes)}，随后仍可继续拖拽内层区域。`;
+                });
+
+                nestedSplitter.on("resize-end", function(index, sizes) {
+                    nestedStatus.textContent = `状态：外层拖拽完成，左右区尺寸为 ${formatSizes(sizes)}。现在可以继续拖拽右侧内层分区。`;
+                });
+
+                nestedVerticalSplitter.on("resize", function(index, sizes) {
+                    nestedStatus.textContent = `状态：内层分区调整中，右侧上下区域尺寸为 ${formatSizes(sizes)}。`;
+                });
+
+                nestedVerticalSplitter.on("resize-end", function(index, sizes) {
+                    nestedStatus.textContent = `状态：内层拖拽完成，右侧上下区域最新尺寸为 ${formatSizes(sizes)}。父子布局都已保持同步。`;
+                });
+            });
+        })();
+    </script>
+    <script src="../scripts/demo-shell.js"></script>
+</body>
+</html>

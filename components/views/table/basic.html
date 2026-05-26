@@ -1,0 +1,170 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>基础表格 - Table Workbench</title>
+    <script src="../../scripts/table-workbench-theme.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../styles/index.css">
+    <link rel="stylesheet" href="../../styles/components/button.css">
+    <link rel="stylesheet" href="../../styles/table-workbench.css">
+    <script src="https://unpkg.com/vue@3.4.0/dist/vue.global.prod.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <!--<div class="page-header">
+                <h1>基础表格</h1>
+                <p>统一展示标准列表、合并单元格和表尾汇总，让表格基础能力保持同一套后台语义与视觉节奏。</p>
+            </div>
+
+            <div class="actions">
+                <a class="yc-button yc-button&#45;&#45;small" href="../demo-table.html">
+                    <i class="fas fa-arrow-left"></i>
+                    返回 Table Workbench
+                </a>
+            </div>-->
+
+            <div class="demo-card">
+                <h3>标准列表</h3>
+                <table class="yc-data-table stripe border">
+                    <thead>
+                        <tr>
+                            <th class="cell-center" style="width: 72px;">序号</th>
+                            <th>姓名</th>
+                            <th class="cell-center" style="width: 88px;">性别</th>
+                            <th class="cell-center" style="width: 88px;">年龄</th>
+                            <th>角色</th>
+                            <th>所在城市</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(row, index) in members" :key="row.id">
+                            <td class="cell-center">{{ index + 1 }}</td>
+                            <td>{{ row.name }}</td>
+                            <td class="cell-center">{{ row.gender }}</td>
+                            <td class="cell-center">{{ row.age }}</td>
+                            <td>{{ row.role }}</td>
+                            <td>{{ row.city }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="demo-card">
+                <h3>单元格合并</h3>
+                <table class="yc-data-table stripe border">
+                    <thead>
+                        <tr>
+                            <th class="cell-center" style="width: 72px;">序号</th>
+                            <th class="cell-center" style="width: 120px;">部门</th>
+                            <th>成员</th>
+                            <th>职责</th>
+                            <th>项目</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(row, index) in mergeRows" :key="`${row.department}-${row.name}`">
+                            <td class="cell-center">{{ index + 1 }}</td>
+                            <td v-if="row.departmentSpan" :rowspan="row.departmentSpan" class="cell-center table-merge-cell">{{ row.department }}</td>
+                            <td>{{ row.name }}</td>
+                            <td>{{ row.role }}</td>
+                            <td v-if="row.projectSpan" :rowspan="row.projectSpan">{{ row.project }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="demo-card">
+                <h3>表尾汇总</h3>
+                <table class="yc-data-table stripe border">
+                    <thead>
+                        <tr>
+                            <th class="cell-center" style="width: 72px;">序号</th>
+                            <th>姓名</th>
+                            <th class="cell-center" style="width: 88px;">年龄</th>
+                            <th class="cell-right" style="width: 140px;">月薪</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(row, index) in members" :key="`salary-${row.id}`">
+                            <td class="cell-center">{{ index + 1 }}</td>
+                            <td>{{ row.name }}</td>
+                            <td class="cell-center">{{ row.age }}</td>
+                            <td class="cell-right">{{ formatCurrency(row.salary) }}</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr class="table-summary-row">
+                            <td class="cell-center">-</td>
+                            <td>合计</td>
+                            <td class="cell-center">-</td>
+                            <td class="cell-right">{{ formatCurrency(totalSalary) }}</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const { createApp, computed, ref } = Vue;
+
+        createApp({
+            setup() {
+                const members = ref([
+                    { id: 1, name: '张三', gender: '男', age: 28, role: '前端工程师', city: '北京', salary: 18000 },
+                    { id: 2, name: '李四', gender: '女', age: 32, role: '后端工程师', city: '上海', salary: 22000 },
+                    { id: 3, name: '王五', gender: '男', age: 26, role: '测试工程师', city: '广州', salary: 15000 },
+                    { id: 4, name: '赵六', gender: '女', age: 31, role: '产品经理', city: '深圳', salary: 24000 },
+                    { id: 5, name: '孙七', gender: '男', age: 29, role: 'UI 设计师', city: '杭州', salary: 17000 }
+                ]);
+
+                const mergeSource = ref([
+                    { department: '研发团队', name: '张三', role: '前端工程师', project: '工作台升级' },
+                    { department: '研发团队', name: '李四', role: '后端工程师', project: '工作台升级' },
+                    { department: '研发团队', name: '王五', role: '测试工程师', project: '权限系统' },
+                    { department: '产品设计部', name: '赵六', role: '产品经理', project: '数据中台' },
+                    { department: '产品设计部', name: '孙七', role: 'UI 设计师', project: '数据中台' }
+                ]);
+
+                const mergeRows = computed(() => {
+                    return mergeSource.value.map((row, index, rows) => {
+                        const departmentSpan = index === 0 || row.department !== rows[index - 1].department
+                            ? rows.slice(index).findIndex(item => item.department !== row.department) === -1
+                                ? rows.length - index
+                                : rows.slice(index).findIndex(item => item.department !== row.department)
+                            : 0;
+
+                        const projectSpan = index === 0 || row.project !== rows[index - 1].project
+                            ? rows.slice(index).findIndex(item => item.project !== row.project) === -1
+                                ? rows.length - index
+                                : rows.slice(index).findIndex(item => item.project !== row.project)
+                            : 0;
+
+                        return {
+                            ...row,
+                            departmentSpan,
+                            projectSpan
+                        };
+                    });
+                });
+
+                const totalSalary = computed(() => members.value.reduce((sum, item) => sum + item.salary, 0));
+
+                function formatCurrency(value) {
+                    return `¥ ${value.toLocaleString('zh-CN')}`;
+                }
+
+                return {
+                    members,
+                    mergeRows,
+                    totalSalary,
+                    formatCurrency
+                };
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filter 过滤器 - YC UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">Filter 过滤器</h1>
+            <p class="demo-page-subtitle">复用 input、select、checkbox、radio、date picker 和 time picker 组件构建统一筛选工作区。</p>
+        </div>
+
+        <div class="demo-section">
+            <h3>紧凑型工具栏</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">适合列表页顶部的常用检索条件</div>
+                <div class="yc-filter">
+                    <div class="yc-filter__toolbar">
+                        <div class="yc-filter__item yc-filter__item--wide">
+                            <label class="yc-filter__label">关键字</label>
+                            <div class="yc-input-wrapper">
+                                <input type="text" class="yc-input" placeholder="搜索姓名、工号、手机号">
+                            </div>
+                        </div>
+
+                        <div class="yc-filter__item yc-filter__item--compact">
+                            <label class="yc-filter__label">状态</label>
+                            <div class="yc-select">
+                                <div class="yc-select__input-wrapper">
+                                    <input type="text" class="yc-select__input" readonly placeholder="全部状态">
+                                    <i class="fas fa-chevron-down yc-select__arrow"></i>
+                                </div>
+                                <div class="yc-select__popper">
+                                    <div class="yc-select-dropdown">
+                                        <div class="yc-select-dropdown__list">
+                                            <div class="yc-select-dropdown__item" data-value="all">全部状态</div>
+                                            <div class="yc-select-dropdown__item" data-value="active">启用</div>
+                                            <div class="yc-select-dropdown__item" data-value="pending">待入职</div>
+                                            <div class="yc-select-dropdown__item" data-value="disable">停用</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="yc-filter__item yc-filter__item--compact">
+                            <label class="yc-filter__label">部门</label>
+                            <div class="yc-select has-value">
+                                <div class="yc-select__input-wrapper">
+                                    <input type="text" class="yc-select__input" value="平台研发部" readonly placeholder="全部部门">
+                                    <i class="fas fa-chevron-down yc-select__arrow"></i>
+                                </div>
+                                <div class="yc-select__popper">
+                                    <div class="yc-select-dropdown">
+                                        <div class="yc-select-dropdown__list">
+                                            <div class="yc-select-dropdown__item" data-value="all">全部部门</div>
+                                            <div class="yc-select-dropdown__item is-selected" data-value="engineering">平台研发部</div>
+                                            <div class="yc-select-dropdown__item" data-value="product">产品设计部</div>
+                                            <div class="yc-select-dropdown__item" data-value="sales">销售支持部</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="yc-filter__actions">
+                            <button class="yc-button"><i class="fas fa-rotate-left"></i> 重置</button>
+                            <button class="yc-button yc-button--primary"><i class="fas fa-magnifying-glass"></i> 查询</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>高级筛选面板</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">按业务类型、日期和通知方式做精细筛选</div>
+                <div class="yc-filter yc-filter--collapsible is-expanded" id="advancedFilter">
+                    <div class="yc-filter__body">
+                        <div class="yc-filter__row">
+                            <div class="yc-filter__item">
+                                <label class="yc-filter__label">业务类型</label>
+                                <div class="yc-radio-group yc-filter__radio-group">
+                                    <label class="yc-radio is-checked">
+                                        <input type="radio" class="yc-radio__input" name="filterBiz" checked>
+                                        <span class="yc-radio__wrapper"></span>
+                                        <span class="yc-radio__label">全部</span>
+                                    </label>
+                                    <label class="yc-radio">
+                                        <input type="radio" class="yc-radio__input" name="filterBiz">
+                                        <span class="yc-radio__wrapper"></span>
+                                        <span class="yc-radio__label">合同</span>
+                                    </label>
+                                    <label class="yc-radio">
+                                        <input type="radio" class="yc-radio__input" name="filterBiz">
+                                        <span class="yc-radio__wrapper"></span>
+                                        <span class="yc-radio__label">采购</span>
+                                    </label>
+                                    <label class="yc-radio">
+                                        <input type="radio" class="yc-radio__input" name="filterBiz">
+                                        <span class="yc-radio__wrapper"></span>
+                                        <span class="yc-radio__label">售后</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="yc-filter__item">
+                                <label class="yc-filter__label">同步方式</label>
+                                <div class="yc-checkbox-group yc-filter__checkbox-group">
+                                    <label class="yc-checkbox is-checked">
+                                        <input type="checkbox" class="yc-checkbox__input" checked>
+                                        <span class="yc-checkbox__wrapper"></span>
+                                        <span class="yc-checkbox__label">手动创建</span>
+                                    </label>
+                                    <label class="yc-checkbox">
+                                        <input type="checkbox" class="yc-checkbox__input">
+                                        <span class="yc-checkbox__wrapper"></span>
+                                        <span class="yc-checkbox__label">API 导入</span>
+                                    </label>
+                                    <label class="yc-checkbox is-checked">
+                                        <input type="checkbox" class="yc-checkbox__input" checked>
+                                        <span class="yc-checkbox__wrapper"></span>
+                                        <span class="yc-checkbox__label">批量同步</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="yc-filter__row">
+                            <div class="yc-filter__item">
+                                <label class="yc-filter__label">开始日期</label>
+                                <div class="yc-date-picker" data-demo-picker data-value="2026-05-01">
+                                    <div class="yc-date-picker__trigger" data-placeholder="请选择日期">
+                                        <div class="yc-date-picker__trigger-content">
+                                            <span class="yc-date-picker__trigger-value">2026-05-01</span>
+                                        </div>
+                                        <span class="yc-date-picker__icon"><i class="fas fa-calendar-alt"></i></span>
+                                    </div>
+                                    <div class="yc-date-picker__panel">
+                                        <div class="yc-date-picker__header">
+                                            <div class="yc-date-picker__header-nav">
+                                                <button type="button" class="yc-date-picker__header-prev" data-action="prev-month"><i class="fas fa-chevron-left"></i></button>
+                                            </div>
+                                            <div class="yc-date-picker__header-label"></div>
+                                            <div class="yc-date-picker__header-nav">
+                                                <button type="button" class="yc-date-picker__header-next" data-action="next-month"><i class="fas fa-chevron-right"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="yc-date-picker__content-wrapper">
+                                            <div class="yc-date-picker__weekdays">
+                                                <div class="yc-date-picker__weekday">日</div>
+                                                <div class="yc-date-picker__weekday">一</div>
+                                                <div class="yc-date-picker__weekday">二</div>
+                                                <div class="yc-date-picker__weekday">三</div>
+                                                <div class="yc-date-picker__weekday">四</div>
+                                                <div class="yc-date-picker__weekday">五</div>
+                                                <div class="yc-date-picker__weekday">六</div>
+                                            </div>
+                                            <div class="yc-date-picker__dates"></div>
+                                        </div>
+                                        <div class="yc-date-picker__footer">
+                                            <div class="yc-date-picker__footer--left">
+                                                <button type="button" class="yc-date-picker__footer-btn yc-date-picker__footer-btn--text" data-action="today">今天</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="yc-filter__item">
+                                <label class="yc-filter__label">开始时间</label>
+                                <div class="yc-time-picker yc-time-picker--clearable" data-demo-picker data-seconds="false" data-value="09:00">
+                                    <div class="yc-time-picker__input-wrapper">
+                                        <i class="fas fa-clock yc-time-picker__icon"></i>
+                                        <input type="text" class="yc-time-picker__input" readonly placeholder="选择时间">
+                                        <span class="yc-time-picker__clear"><i class="fas fa-times"></i></span>
+                                    </div>
+                                    <div class="yc-time-picker__popper">
+                                        <div class="yc-time-panel">
+                                            <div class="yc-time-panel__content">
+                                                <div class="yc-time-panel__column"><div class="yc-time-panel__list" data-time-unit="hour"></div></div>
+                                                <div class="yc-time-panel__column"><div class="yc-time-panel__list" data-time-unit="minute"></div></div>
+                                            </div>
+                                            <div class="yc-time-panel__footer">
+                                                <button type="button" class="yc-time-panel__btn yc-time-panel__btn--text" data-action="time-now">当前时间</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="yc-filter__item">
+                                <label class="yc-filter__label">负责人</label>
+                                <div class="yc-input-wrapper">
+                                    <input type="text" class="yc-input" placeholder="输入负责人姓名">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="yc-filter__actions">
+                        <button type="button" class="yc-filter__toggle" id="advancedFilterToggle">
+                            <i class="fas fa-sliders"></i>
+                            <span>收起高级条件</span>
+                        </button>
+                        <button class="yc-button">保存视图</button>
+                        <button class="yc-button yc-button--primary">应用筛选</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>筛选摘要</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">在结果区顶部反馈当前筛选状态</div>
+                <div class="yc-filter__summary">
+                    <h4 class="yc-filter__summary-title">已应用条件</h4>
+                    <div class="yc-filter__tags" id="filterTags">
+                        <span class="yc-filter__tag">部门：平台研发部 <span class="yc-filter__tag-remove"><i class="fas fa-xmark"></i></span></span>
+                        <span class="yc-filter__tag">状态：启用 <span class="yc-filter__tag-remove"><i class="fas fa-xmark"></i></span></span>
+                        <span class="yc-filter__tag">开始时间：2026-05-01 09:00 <span class="yc-filter__tag-remove"><i class="fas fa-xmark"></i></span></span>
+                        <button type="button" class="yc-filter__reset" id="clearFilterTags"><i class="fas fa-trash-can"></i> 清空全部</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../scripts/demo-composed-controls.js"></script>
+    <script src="../scripts/demo-picker-lite.js"></script>
+    <script>
+        document.getElementById('advancedFilterToggle').addEventListener('click', function() {
+            const filter = document.getElementById('advancedFilter');
+            const expanded = filter.classList.toggle('is-expanded');
+            this.querySelector('span').textContent = expanded ? '收起高级条件' : '展开高级条件';
+        });
+
+        document.getElementById('filterTags').addEventListener('click', function(event) {
+            const remove = event.target.closest('.yc-filter__tag-remove');
+            if (!remove) return;
+            remove.closest('.yc-filter__tag').remove();
+        });
+
+        document.getElementById('clearFilterTags').addEventListener('click', function() {
+            document.querySelectorAll('#filterTags .yc-filter__tag').forEach(tag => tag.remove());
+        });
+    </script>
+    <script src="../scripts/demo-shell.js"></script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+@charset "UTF-8";
+
+/**
+ * Deprecated compatibility entry.
+ * MaskedInput has been merged into Input.
+ * Prefer importing `input.css` and using `.yc-input` with `data-input-format`.
+ */
+@import url('./input.css');

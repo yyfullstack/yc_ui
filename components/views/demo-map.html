@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map 地图 - YC UI</title>
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">Map 地图</h1>
+            <p class="demo-page-subtitle">用稳定的前端模拟场景展示地图工作台，包括站点标记、区域圈选、协作路线和信息弹层，不依赖外部地图 Key 也能完整验收。</p>
+        </div>
+
+        <div class="demo-section">
+            <h3>地图概览</h3>
+            <div class="demo-stat-cards">
+                <div class="demo-stat-card demo-stat-card--purple">
+                    <div class="demo-stat-card__value" id="mapMetricSites">0</div>
+                    <div class="demo-stat-card__label">站点数量</div>
+                </div>
+                <div class="demo-stat-card demo-stat-card--green">
+                    <div class="demo-stat-card__value" id="mapMetricShapes">0</div>
+                    <div class="demo-stat-card__label">临时标记</div>
+                </div>
+                <div class="demo-stat-card demo-stat-card--blue">
+                    <div class="demo-stat-card__value" id="mapMetricTool">浏览</div>
+                    <div class="demo-stat-card__label">当前工具</div>
+                </div>
+                <div class="demo-stat-card demo-stat-card--pink">
+                    <div class="demo-stat-card__value" id="mapMetricFocus">北京总部</div>
+                    <div class="demo-stat-card__label">当前焦点</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>地图工作台</h3>
+            <div class="yc-map-workbench">
+                <aside class="yc-map-workbench__sidebar">
+                    <h4 class="yc-map-workbench__title">站点分布</h4>
+                    <p class="yc-map-workbench__description">点击右侧地图中的节点或左侧列表，可以查看对应站点的工作职责和说明。</p>
+                    <div class="yc-map-workbench__location-list" id="mapMarkerList"></div>
+                    <div class="yc-map-workbench__summary" id="mapWorkbenchStatus">当前聚焦北京总部，分类：总部</div>
+                    <button class="yc-button yc-button--small" type="button" id="mapClearDrawings">
+                        <i class="demo-icon" data-icon="trash-can" aria-hidden="true"></i> 清除临时绘制
+                    </button>
+                </aside>
+
+                <div class="yc-map yc-map-workbench__main">
+                    <div class="yc-map-workbench__toolbar">
+                        <button class="yc-map-workbench__tool is-active" type="button" data-map-tool="pointer"><i class="demo-icon" data-icon="arrow-pointer" aria-hidden="true"></i> 浏览</button>
+                        <button class="yc-map-workbench__tool" type="button" data-map-tool="marker"><i class="demo-icon" data-icon="location-dot" aria-hidden="true"></i> 标记</button>
+                        <button class="yc-map-workbench__tool" type="button" data-map-tool="line"><i class="demo-icon" data-icon="share-nodes" aria-hidden="true"></i> 路线</button>
+                        <button class="yc-map-workbench__tool" type="button" data-map-tool="zone"><i class="demo-icon" data-icon="draw-polygon" aria-hidden="true"></i> 区域</button>
+                        <button class="yc-map-workbench__tool" type="button" data-map-tool="reset"><i class="demo-icon" data-icon="rotate-right" aria-hidden="true"></i> 重置</button>
+                    </div>
+
+                    <div class="yc-map__container">
+                        <div class="yc-map__viewport" id="mapViewport">
+                            <div class="yc-map-workbench__canvas">
+                                <svg class="yc-map-workbench__routes" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+                                    <path class="yc-map-workbench__route yc-map-workbench__route--primary" d="M58 22 L73 36 L55 58" />
+                                    <path class="yc-map-workbench__route yc-map-workbench__route--success" d="M58 22 L32 46 L48 40" />
+                                </svg>
+                                <div class="yc-map__layer is-interactive" id="mapShapeLayer"></div>
+                                <div class="yc-map__layer is-interactive" id="mapMarkerLayer"></div>
+                                <div class="yc-map__popup" id="mapPopup" hidden></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>能力说明</h3>
+            <div class="demo-data-grid">
+                <div class="demo-card">
+                    <div class="demo-block-title">站点标记</div>
+                    <p class="demo-description">用语义化 marker tone 表达总部、研发、运营、交付等不同业务站点。</p>
+                </div>
+                <div class="demo-card">
+                    <div class="demo-block-title">区域圈选</div>
+                    <p class="demo-description">点击区域模式后可在地图中打点，模拟重点服务区域或巡检区域。</p>
+                </div>
+                <div class="demo-card">
+                    <div class="demo-block-title">协作路线</div>
+                    <p class="demo-description">背景路线展示跨城市协作链路，适合业务流转和交付路径说明。</p>
+                </div>
+                <div class="demo-card">
+                    <div class="demo-block-title">离线可验收</div>
+                    <p class="demo-description">不依赖高德或其他在线地图 Key，示例页面在本地静态打开也能稳定演示。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../scripts/demo-map-workbench.js"></script>
+    <script src="../scripts/demo-shell.js"></script>
+</body>
+</html>

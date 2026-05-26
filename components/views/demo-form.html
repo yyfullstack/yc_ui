@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form 表单组件示例 - YC UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">Form 表单组件</h1>
+            <p class="demo-page-subtitle">使用输入框、选择器、单选、多选、日期和时间组件构建统一的企业表单体验。</p>
+        </div>
+
+        <div class="demo-section">
+            <h3>基础资料表单</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">按常见后台资料录入场景组织字段</div>
+                <form class="yc-form yc-form--card" id="profileForm">
+                    <div class="yc-form__section">
+                        <h4 class="yc-form__section-title">账户信息</h4>
+                        <p class="yc-form__section-description">复用现有 input、select、radio 和 date picker 组件完成基础资料维护。</p>
+
+                        <div class="yc-form-item is-success" data-field="username">
+                            <label class="yc-form-item__label" for="formUsername">用户名<span class="yc-form-item__required">*</span></label>
+                            <div class="yc-form-item__content">
+                                <div class="yc-input-wrapper">
+                                    <input id="formUsername" type="text" class="yc-input" value="liwei.admin" placeholder="请输入用户名">
+                                </div>
+                                <div class="yc-form-item__meta">
+                                    <span class="yc-form-item__hint">用于登录和审计展示，推荐使用英文、数字和中划线。</span>
+                                    <span class="yc-form-item__status yc-form-item__status--success"><i class="fas fa-check-circle"></i> 已通过</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="yc-form-item" data-field="nickname">
+                            <label class="yc-form-item__label" for="formNickname">姓名</label>
+                            <div class="yc-form-item__content">
+                                <div class="yc-input-wrapper">
+                                    <input id="formNickname" type="text" class="yc-input" value="李维" placeholder="请输入姓名">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="yc-form-item is-error" data-field="email">
+                            <label class="yc-form-item__label" for="formEmail">邮箱<span class="yc-form-item__required">*</span></label>
+                            <div class="yc-form-item__content">
+                                <div class="yc-input-wrapper">
+                                    <input id="formEmail" type="email" class="yc-input" value="liwei.example.com" placeholder="请输入企业邮箱">
+                                </div>
+                                <div class="yc-form-item__error">邮箱格式不正确，请输入有效的企业邮箱地址。</div>
+                            </div>
+                        </div>
+
+                        <div class="yc-form-item" data-field="phone">
+                            <label class="yc-form-item__label" for="formPhone">手机号</label>
+                            <div class="yc-form-item__content">
+                                <div class="yc-input-wrapper">
+                                    <input id="formPhone" type="text" class="yc-input" data-input-format="phone" value="13800138000" placeholder="请输入手机号">
+                                </div>
+                                <span class="yc-form-item__hint">该输入框已经合并 maskedInput 的格式化能力。</span>
+                            </div>
+                        </div>
+
+                        <div class="yc-form-item" data-field="department">
+                            <label class="yc-form-item__label">部门</label>
+                            <div class="yc-form-item__content">
+                                <div class="yc-select has-value">
+                                    <div class="yc-select__input-wrapper">
+                                        <input type="text" class="yc-select__input" value="平台研发部" readonly placeholder="请选择部门">
+                                        <i class="fas fa-chevron-down yc-select__arrow"></i>
+                                    </div>
+                                    <div class="yc-select__popper">
+                                        <div class="yc-select-dropdown">
+                                            <div class="yc-select-dropdown__list">
+                                                <div class="yc-select-dropdown__item" data-value="product">产品设计部</div>
+                                                <div class="yc-select-dropdown__item is-selected" data-value="engineering">平台研发部</div>
+                                                <div class="yc-select-dropdown__item" data-value="operation">运营支持部</div>
+                                                <div class="yc-select-dropdown__item" data-value="finance">财务共享部</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="yc-form-item" data-field="gender">
+                            <label class="yc-form-item__label">性别</label>
+                            <div class="yc-form-item__content">
+                                <div class="yc-radio-group">
+                                    <label class="yc-radio is-checked">
+                                        <input type="radio" class="yc-radio__input" name="formGender" checked>
+                                        <span class="yc-radio__wrapper"></span>
+                                        <span class="yc-radio__label">男</span>
+                                    </label>
+                                    <label class="yc-radio">
+                                        <input type="radio" class="yc-radio__input" name="formGender">
+                                        <span class="yc-radio__wrapper"></span>
+                                        <span class="yc-radio__label">女</span>
+                                    </label>
+                                    <label class="yc-radio">
+                                        <input type="radio" class="yc-radio__input" name="formGender">
+                                        <span class="yc-radio__wrapper"></span>
+                                        <span class="yc-radio__label">不公开</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="yc-form-item" data-field="birthday">
+                            <label class="yc-form-item__label">生日</label>
+                            <div class="yc-form-item__content">
+                                <div class="yc-date-picker" data-demo-picker data-value="1994-07-19">
+                                    <div class="yc-date-picker__trigger" data-placeholder="请选择日期">
+                                        <div class="yc-date-picker__trigger-content">
+                                            <span class="yc-date-picker__trigger-value">1994-07-19</span>
+                                        </div>
+                                        <span class="yc-date-picker__icon"><i class="fas fa-calendar-alt"></i></span>
+                                    </div>
+                                    <div class="yc-date-picker__panel">
+                                        <div class="yc-date-picker__header">
+                                            <div class="yc-date-picker__header-nav">
+                                                <button type="button" class="yc-date-picker__header-prev" data-action="prev-month"><i class="fas fa-chevron-left"></i></button>
+                                            </div>
+                                            <div class="yc-date-picker__header-label"></div>
+                                            <div class="yc-date-picker__header-nav">
+                                                <button type="button" class="yc-date-picker__header-next" data-action="next-month"><i class="fas fa-chevron-right"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="yc-date-picker__content-wrapper">
+                                            <div class="yc-date-picker__weekdays">
+                                                <div class="yc-date-picker__weekday">日</div>
+                                                <div class="yc-date-picker__weekday">一</div>
+                                                <div class="yc-date-picker__weekday">二</div>
+                                                <div class="yc-date-picker__weekday">三</div>
+                                                <div class="yc-date-picker__weekday">四</div>
+                                                <div class="yc-date-picker__weekday">五</div>
+                                                <div class="yc-date-picker__weekday">六</div>
+                                            </div>
+                                            <div class="yc-date-picker__dates"></div>
+                                        </div>
+                                        <div class="yc-date-picker__footer">
+                                            <div class="yc-date-picker__footer--left">
+                                                <button type="button" class="yc-date-picker__footer-btn yc-date-picker__footer-btn--text" data-action="today">今天</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="yc-form__section">
+                        <h4 class="yc-form__section-title">通知与权限</h4>
+                        <p class="yc-form__section-description">多选、时间和文本域组合，保持和其他组件一致的输入体验。</p>
+
+                        <div class="yc-form-item" data-field="notify">
+                            <label class="yc-form-item__label">通知偏好</label>
+                            <div class="yc-form-item__content">
+                                <div class="yc-checkbox-group">
+                                    <label class="yc-checkbox is-checked">
+                                        <input type="checkbox" class="yc-checkbox__input" checked>
+                                        <span class="yc-checkbox__wrapper"></span>
+                                        <span class="yc-checkbox__label">邮件通知</span>
+                                    </label>
+                                    <label class="yc-checkbox is-checked">
+                                        <input type="checkbox" class="yc-checkbox__input" checked>
+                                        <span class="yc-checkbox__wrapper"></span>
+                                        <span class="yc-checkbox__label">站内提醒</span>
+                                    </label>
+                                    <label class="yc-checkbox">
+                                        <input type="checkbox" class="yc-checkbox__input">
+                                        <span class="yc-checkbox__wrapper"></span>
+                                        <span class="yc-checkbox__label">短信通知</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="yc-form-item is-warning" data-field="loginTime">
+                            <label class="yc-form-item__label">值班时段</label>
+                            <div class="yc-form-item__content">
+                                <div class="yc-time-picker yc-time-picker--clearable" data-demo-picker data-seconds="false" data-value="09:30">
+                                    <div class="yc-time-picker__input-wrapper">
+                                        <i class="fas fa-clock yc-time-picker__icon"></i>
+                                        <input type="text" class="yc-time-picker__input" readonly placeholder="选择时间">
+                                        <span class="yc-time-picker__clear"><i class="fas fa-times"></i></span>
+                                    </div>
+                                    <div class="yc-time-picker__popper">
+                                        <div class="yc-time-panel">
+                                            <div class="yc-time-panel__content">
+                                                <div class="yc-time-panel__column">
+                                                    <div class="yc-time-panel__list" data-time-unit="hour"></div>
+                                                </div>
+                                                <div class="yc-time-panel__column">
+                                                    <div class="yc-time-panel__list" data-time-unit="minute"></div>
+                                                </div>
+                                            </div>
+                                            <div class="yc-time-panel__footer">
+                                                <button type="button" class="yc-time-panel__btn yc-time-panel__btn--text" data-action="time-now">当前时间</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <span class="yc-form-item__hint">建议配置统一的可联系时间，方便工单转派。</span>
+                            </div>
+                        </div>
+
+                        <div class="yc-form-item" data-field="bio">
+                            <label class="yc-form-item__label" for="formBio">个人简介</label>
+                            <div class="yc-form-item__content">
+                                <textarea id="formBio" class="yc-textarea" rows="4" placeholder="补充你的职责、擅长方向和协作偏好">负责设计系统、平台组件和中后台体验统一。</textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="yc-form__actions">
+                        <button type="button" class="yc-button">取消</button>
+                        <button type="button" class="yc-button">保存草稿</button>
+                        <button type="button" class="yc-button yc-button--primary" id="validateProfileForm">提交</button>
+                    </div>
+                </form>
+                <div class="demo-result" id="profileFormResult">当前状态: 检查邮箱字段后即可提交</div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>行内检索表单</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">紧凑型表单适合列表页顶部筛选</div>
+                <form class="yc-form yc-form--inline yc-form--card">
+                    <div class="yc-form-item">
+                        <label class="yc-form-item__label" for="inlineKeyword">关键字</label>
+                        <div class="yc-form-item__content">
+                            <div class="yc-input-wrapper">
+                                <input id="inlineKeyword" type="text" class="yc-input" placeholder="搜索成员、部门或角色">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="yc-form-item">
+                        <label class="yc-form-item__label">状态</label>
+                        <div class="yc-form-item__content">
+                            <div class="yc-select">
+                                <div class="yc-select__input-wrapper">
+                                    <input type="text" class="yc-select__input" readonly placeholder="全部状态">
+                                    <i class="fas fa-chevron-down yc-select__arrow"></i>
+                                </div>
+                                <div class="yc-select__popper">
+                                    <div class="yc-select-dropdown">
+                                        <div class="yc-select-dropdown__list">
+                                            <div class="yc-select-dropdown__item" data-value="all">全部状态</div>
+                                            <div class="yc-select-dropdown__item" data-value="enabled">启用</div>
+                                            <div class="yc-select-dropdown__item" data-value="disabled">停用</div>
+                                            <div class="yc-select-dropdown__item" data-value="pending">待激活</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="yc-form__actions">
+                        <button type="button" class="yc-button">重置</button>
+                        <button type="button" class="yc-button yc-button--primary">查询</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="../scripts/input-enhance.js"></script>
+    <script src="../scripts/demo-composed-controls.js"></script>
+    <script src="../scripts/demo-picker-lite.js"></script>
+    <script>
+        function setResult(text) {
+            document.getElementById('profileFormResult').textContent = text;
+        }
+
+        document.getElementById('validateProfileForm').addEventListener('click', function() {
+            const emailField = document.querySelector('[data-field="email"]');
+            const emailInput = document.getElementById('formEmail');
+            const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value.trim());
+
+            emailField.classList.toggle('is-error', !isValidEmail);
+            emailField.classList.toggle('is-success', isValidEmail);
+
+            if (isValidEmail) {
+                setResult('当前状态: 表单校验通过，可以提交到业务接口');
+                return;
+            }
+
+            setResult('当前状态: 邮箱字段校验失败，请修正后重新提交');
+        });
+    </script>
+    <script src="../scripts/demo-shell.js"></script>
+</body>
+</html>

@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InputNumber 数字输入框组件示例 - YC UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+    <style>
+        .input-number-demo-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .input-number-demo-stack {
+            display: grid;
+            gap: 12px;
+        }
+
+        .input-number-demo-inline {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .input-number-demo-stat {
+            padding: 14px 16px;
+            border: 1px solid var(--yc-color-border-light);
+            border-radius: var(--yc-border-radius-large);
+            background: linear-gradient(180deg, var(--yc-color-bg) 0%, var(--yc-color-fill-extra-light) 100%);
+        }
+
+        .input-number-demo-stat__label {
+            color: var(--yc-color-text-secondary);
+            font-size: var(--yc-font-size-extra-small);
+        }
+
+        .input-number-demo-stat__value {
+            display: block;
+            margin-top: 8px;
+            color: var(--yc-color-text-primary);
+            font-size: 28px;
+            font-weight: var(--yc-font-weight-bold);
+            line-height: 1;
+        }
+
+        .input-number-demo-note {
+            padding: 16px 18px;
+            border: 1px solid var(--yc-color-border-light);
+            border-radius: var(--yc-border-radius-large);
+            background: linear-gradient(180deg, var(--yc-color-bg) 0%, var(--yc-color-fill-extra-light) 100%);
+            color: var(--yc-color-text-regular);
+            line-height: 1.7;
+        }
+
+        .input-number-demo-note strong {
+            color: var(--yc-color-text-primary);
+        }
+
+        @media (max-width: 960px) {
+            .input-number-demo-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">InputNumber 数字输入框组件</h1>
+            <p class="demo-page-subtitle">统一前后图标、数值操作按钮、范围校验和尺寸状态，让数量类输入看起来更像平台组件，而不是普通文本框。</p>
+        </div>
+
+        <div class="demo-section">
+            <h3>基础交互</h3>
+            <div class="input-number-demo-grid">
+                <div class="demo-block">
+                    <div class="demo-block-title">标准增减</div>
+                    <div class="demo-block-description">控制按钮与输入框保持一体化边界，适合频繁调节的数量场景。</div>
+                    <div class="input-number-demo-stack">
+                        <div class="yc-input-number" id="inputNumberPrimary">
+                            <input type="number" class="yc-input-number__input" value="12" min="0" max="100">
+                            <div class="yc-input-number__controls">
+                                <button class="yc-input-number__increase" type="button" aria-label="增加"></button>
+                                <button class="yc-input-number__decrease" type="button" aria-label="减少"></button>
+                            </div>
+                        </div>
+                        <div class="demo-btn-row">
+                            <button class="yc-button yc-button--primary yc-button--small" type="button" id="increasePrimary">
+                                <i class="fas fa-plus"></i>
+                                增加
+                            </button>
+                            <button class="yc-button yc-button--small" type="button" id="decreasePrimary">
+                                <i class="fas fa-minus"></i>
+                                减少
+                            </button>
+                            <button class="yc-button yc-button--small" type="button" id="resetPrimary">
+                                <i class="fas fa-rotate-left"></i>
+                                重置
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="demo-block">
+                    <div class="demo-block-title">当前数值</div>
+                    <div class="demo-block-description">工作台里常见的数量调整，最好有清晰的即时反馈。</div>
+                    <div class="input-number-demo-stack">
+                        <div class="input-number-demo-stat">
+                            <span class="input-number-demo-stat__label">已分配配额</span>
+                            <span class="input-number-demo-stat__value" id="primaryValue">12</span>
+                        </div>
+                        <div class="result-box" id="primaryStatus">状态：可继续调整</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>图标与前后缀</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">统一前后图标语义</div>
+                <div class="demo-block-description">既支持纯图标，也支持文字单位，让财务、存储、折扣这些场景共用一套外观。</div>
+                <div class="input-number-demo-inline">
+                    <div class="yc-input-number yc-input-number--with-prefix" data-demo-name="预算">
+                        <span class="yc-input-number__prefix"><i class="fas fa-yen-sign"></i></span>
+                        <input type="number" class="yc-input-number__input" value="4800" min="0" step="100">
+                        <div class="yc-input-number__controls">
+                            <button class="yc-input-number__increase" type="button" aria-label="增加"></button>
+                            <button class="yc-input-number__decrease" type="button" aria-label="减少"></button>
+                        </div>
+                    </div>
+                    <div class="yc-input-number yc-input-number--with-suffix" data-demo-name="折扣">
+                        <input type="number" class="yc-input-number__input" value="85" min="0" max="100">
+                        <span class="yc-input-number__suffix">%</span>
+                        <div class="yc-input-number__controls">
+                            <button class="yc-input-number__increase" type="button" aria-label="增加"></button>
+                            <button class="yc-input-number__decrease" type="button" aria-label="减少"></button>
+                        </div>
+                    </div>
+                    <div class="yc-input-number yc-input-number--with-prefix yc-input-number--with-suffix" data-demo-name="存储">
+                        <span class="yc-input-number__prefix"><i class="fas fa-hard-drive"></i></span>
+                        <input type="number" class="yc-input-number__input" value="256" min="64" step="64">
+                        <span class="yc-input-number__suffix">GB</span>
+                        <div class="yc-input-number__controls">
+                            <button class="yc-input-number__increase" type="button" aria-label="增加"></button>
+                            <button class="yc-input-number__decrease" type="button" aria-label="减少"></button>
+                        </div>
+                    </div>
+                    <div class="yc-input-number yc-input-number--with-prefix" data-demo-name="优先级">
+                        <span class="yc-input-number__prefix"><i class="fas fa-bolt"></i></span>
+                        <input type="number" class="yc-input-number__input" value="3" min="1" max="5">
+                        <div class="yc-input-number__controls">
+                            <button class="yc-input-number__increase" type="button" aria-label="增加"></button>
+                            <button class="yc-input-number__decrease" type="button" aria-label="减少"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>尺寸与状态</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">统一验证表达</div>
+                <div class="demo-block-description">输入错误、警告和成功状态，都复用与 Input / Select 相同的边框和焦点语义。</div>
+                <div class="input-number-demo-inline">
+                    <div class="yc-input-number yc-input-number--large yc-input-number--success">
+                        <input type="number" class="yc-input-number__input" value="128" min="0">
+                        <div class="yc-input-number__controls">
+                            <button class="yc-input-number__increase" type="button" aria-label="增加"></button>
+                            <button class="yc-input-number__decrease" type="button" aria-label="减少"></button>
+                        </div>
+                    </div>
+                    <div class="yc-input-number yc-input-number--warning yc-input-number--with-suffix">
+                        <input type="number" class="yc-input-number__input" value="95" min="0" max="100">
+                        <span class="yc-input-number__suffix">%</span>
+                        <div class="yc-input-number__controls">
+                            <button class="yc-input-number__increase" type="button" aria-label="增加"></button>
+                            <button class="yc-input-number__decrease" type="button" aria-label="减少"></button>
+                        </div>
+                    </div>
+                    <div class="yc-input-number yc-input-number--small yc-input-number--error">
+                        <input type="number" class="yc-input-number__input" value="-1" min="0">
+                        <div class="yc-input-number__controls">
+                            <button class="yc-input-number__increase" type="button" aria-label="增加"></button>
+                            <button class="yc-input-number__decrease" type="button" aria-label="减少"></button>
+                        </div>
+                    </div>
+                    <div class="yc-input-number is-disabled yc-input-number--with-prefix">
+                        <span class="yc-input-number__prefix"><i class="fas fa-lock"></i></span>
+                        <input type="number" class="yc-input-number__input" value="10" disabled>
+                        <div class="yc-input-number__controls">
+                            <button class="yc-input-number__increase" type="button" aria-label="增加" disabled></button>
+                            <button class="yc-input-number__decrease" type="button" aria-label="减少" disabled></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>精度与范围</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">步长控制</div>
+                <div class="demo-block-description">支持最小值、最大值和精度控制，适合金额、倍率、库存等数值场景。</div>
+                <div class="input-number-demo-inline">
+                    <div class="yc-input-number yc-input-number--with-prefix" data-demo-name="倍率">
+                        <span class="yc-input-number__prefix"><i class="fas fa-sliders"></i></span>
+                        <input type="number" class="yc-input-number__input" value="1.25" min="0.5" max="2" step="0.05" data-precision="2">
+                        <div class="yc-input-number__controls">
+                            <button class="yc-input-number__increase" type="button" aria-label="增加"></button>
+                            <button class="yc-input-number__decrease" type="button" aria-label="减少"></button>
+                        </div>
+                    </div>
+                    <div class="yc-input-number yc-input-number--with-suffix" data-demo-name="库存预警">
+                        <input type="number" class="yc-input-number__input" value="20" min="0" max="50" step="5">
+                        <span class="yc-input-number__suffix">件</span>
+                        <div class="yc-input-number__controls">
+                            <button class="yc-input-number__increase" type="button" aria-label="增加"></button>
+                            <button class="yc-input-number__decrease" type="button" aria-label="减少"></button>
+                        </div>
+                    </div>
+                    <div class="yc-input-number yc-input-number--small yc-input-number--with-prefix" data-demo-name="层级">
+                        <span class="yc-input-number__prefix"><i class="fas fa-layer-group"></i></span>
+                        <input type="number" class="yc-input-number__input" value="2" min="1" max="5">
+                        <div class="yc-input-number__controls">
+                            <button class="yc-input-number__increase" type="button" aria-label="增加"></button>
+                            <button class="yc-input-number__decrease" type="button" aria-label="减少"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>平台建议</h3>
+            <div class="input-number-demo-note">
+                <strong>推荐做法：</strong>
+                InputNumber 最值得统一的是输入框边界、前后缀布局和增减按钮密度。这样业务页面只要切换单位或图标，不需要重新设计组件结构，视觉上也能和 Input、Select 连成一套。
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function clamp(value, min, max) {
+            return Math.min(Math.max(value, min), max);
+        }
+
+        function enhanceInputNumber(container) {
+            if (!container || container.dataset.ycInputNumberEnhanced === 'true') return;
+
+            const input = container.querySelector('.yc-input-number__input');
+            const increaseBtn = container.querySelector('.yc-input-number__increase');
+            const decreaseBtn = container.querySelector('.yc-input-number__decrease');
+            if (!input || !increaseBtn || !decreaseBtn) return;
+
+            const precision = Number(input.dataset.precision || 0);
+            const min = input.min === '' ? -Infinity : Number(input.min);
+            const max = input.max === '' ? Infinity : Number(input.max);
+            const step = input.step === '' ? 1 : Number(input.step);
+
+            function formatValue(value) {
+                if (!Number.isFinite(value)) return '';
+                return precision > 0 ? Number(value).toFixed(precision) : String(Math.round(value));
+            }
+
+            function getValue() {
+                const parsed = Number(input.value);
+                if (Number.isNaN(parsed)) {
+                    return Number.isFinite(min) ? min : 0;
+                }
+                return parsed;
+            }
+
+            function emitChange() {
+                container.dispatchEvent(new CustomEvent('yc-input-number:change', {
+                    bubbles: true,
+                    detail: {
+                        value: input.value,
+                        name: container.dataset.demoName || ''
+                    }
+                }));
+            }
+
+            function updateButtons() {
+                const value = getValue();
+                const disabled = input.disabled || container.classList.contains('is-disabled');
+
+                decreaseBtn.disabled = disabled || value <= min;
+                increaseBtn.disabled = disabled || value >= max;
+            }
+
+            function setValue(nextValue, emit = true) {
+                const clamped = clamp(nextValue, min, max);
+                input.value = formatValue(clamped);
+                updateButtons();
+                if (emit) {
+                    emitChange();
+                }
+            }
+
+            increaseBtn.addEventListener('click', () => {
+                setValue(getValue() + step);
+            });
+
+            decreaseBtn.addEventListener('click', () => {
+                setValue(getValue() - step);
+            });
+
+            input.addEventListener('input', () => {
+                updateButtons();
+                emitChange();
+            });
+
+            input.addEventListener('blur', () => {
+                setValue(getValue());
+            });
+
+            container.dataset.ycInputNumberEnhanced = 'true';
+            updateButtons();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.yc-input-number').forEach(enhanceInputNumber);
+
+            const primary = document.getElementById('inputNumberPrimary');
+            const primaryInput = primary.querySelector('.yc-input-number__input');
+            const primaryValue = document.getElementById('primaryValue');
+            const primaryStatus = document.getElementById('primaryStatus');
+
+            function syncPrimary() {
+                primaryValue.textContent = primaryInput.value || '0';
+                primaryStatus.textContent = Number(primaryInput.value) >= 100
+                    ? '状态：已达到上限'
+                    : Number(primaryInput.value) <= 0
+                        ? '状态：已达到下限'
+                        : '状态：可继续调整';
+            }
+
+            primary.addEventListener('yc-input-number:change', syncPrimary);
+            syncPrimary();
+
+            document.getElementById('increasePrimary').addEventListener('click', () => {
+                primary.querySelector('.yc-input-number__increase').click();
+            });
+
+            document.getElementById('decreasePrimary').addEventListener('click', () => {
+                primary.querySelector('.yc-input-number__decrease').click();
+            });
+
+            document.getElementById('resetPrimary').addEventListener('click', () => {
+                primaryInput.value = '12';
+                primaryInput.dispatchEvent(new Event('blur'));
+            });
+        });
+    </script>
+    <script src="../scripts/demo-shell.js"></script>
+</body>
+</html>

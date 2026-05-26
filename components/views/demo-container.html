@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Container 布局容器组件 - YC UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+    <style>
+        .demo-container-stage--sm {
+            height: 220px;
+        }
+
+        .demo-container-stage--md {
+            height: 280px;
+        }
+
+        .demo-container-stage--lg {
+            height: 460px;
+        }
+
+        .demo-container-stage--xl {
+            height: 520px;
+        }
+
+        .demo-container-row-reset {
+            padding: 0;
+        }
+
+        .demo-container-dark-label {
+            border-bottom-color: var(--yc-overlay-surface-border);
+            background: transparent;
+            color: var(--yc-overlay-text-muted);
+        }
+
+        .yc-aside--dark .demo-layout-aside-item {
+            color: var(--yc-overlay-text-regular);
+        }
+
+        .yc-aside--dark .demo-layout-aside-item:hover {
+            background: var(--yc-overlay-surface-soft);
+            color: var(--yc-color-white);
+        }
+
+        .demo-container-side-stack {
+            display: grid;
+            gap: var(--yc-spacing-base);
+            padding: var(--yc-spacing-base);
+        }
+
+        @media (max-width: 991px) {
+            .demo-container-stage--lg,
+            .demo-container-stage--xl {
+                height: auto;
+                min-height: 420px;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .demo-container-stage--sm,
+            .demo-container-stage--md,
+            .demo-container-stage--lg,
+            .demo-container-stage--xl {
+                height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">Container 布局容器组件</h1>
+            <p class="demo-page-subtitle">
+                参考 Element Plus 的布局骨架能力，对 Header、Aside、Main、Footer 做了统一语义化升级，
+                适配后台工作台、内容页、双栏协作页以及响应式页面等常见布局风格。
+            </p>
+        </div>
+
+        <div class="demo-shell-toolbar">
+            <div class="demo-shell-meta">
+                <span class="demo-shell-pill"><i class="fas fa-layer-group"></i> 布局骨架升级</span>
+                <span class="demo-shell-pill"><i class="fas fa-ruler-combined"></i> 支持多种密度与宽度</span>
+                <span class="demo-shell-pill"><i class="fas fa-table-columns"></i> 适配后台与内容型页面</span>
+            </div>
+            <div class="demo-shell-actions">
+                <a class="demo-shell-anchor" href="#container-basic">基础结构</a>
+                <a class="demo-shell-anchor" href="#container-shell">后台工作台</a>
+                <a class="demo-shell-anchor" href="#container-docs">文档布局</a>
+                <a class="demo-shell-anchor" href="#container-workspace">协作工作区</a>
+                <a class="demo-shell-anchor" href="#container-mobile">响应式</a>
+            </div>
+        </div>
+
+        <div class="demo-section" id="container-basic">
+            <h3>基础结构与布局方向</h3>
+            <p class="demo-description">
+                默认采用 Flex 布局，可直接组合成横向主内容区或纵向页面骨架。通过 `is-vertical`、尺寸类和宽度类，
+                可以快速搭建一致的页面结构。
+            </p>
+
+            <div class="demo-block">
+                <div class="demo-block-title">默认横向布局 / 纵向页面布局</div>
+                <div class="demo-layout-wrapper">
+                    <div class="demo-layout-label">适合快速理解 Container 的基础组合方式</div>
+                    <div class="demo-layout-row-gap">
+                        <div class="demo-layout-direction-demo">
+                            <div class="demo-layout-direction-title">
+                                <span class="demo-tag">横向布局</span>
+                                <code class="demo-code">Aside + Main</code>
+                            </div>
+                            <div class="yc-container yc-container--carded demo-container-stage--sm">
+                                <aside class="yc-aside yc-aside--width-small yc-aside--soft">
+                                    <div class="demo-layout-aside-item"><i class="fas fa-table-columns"></i> 数据概览</div>
+                                    <div class="demo-layout-aside-item"><i class="fas fa-users"></i> 用户管理</div>
+                                    <div class="demo-layout-aside-item"><i class="fas fa-shield-halved"></i> 权限策略</div>
+                                    <div class="demo-layout-aside-item"><i class="fas fa-gears"></i> 系统设置</div>
+                                </aside>
+                                <main class="yc-main">
+                                    <div class="yc-container__section yc-container__section--grow">
+                                        <div>
+                                            <h4 class="yc-container__title">横向主工作区</h4>
+                                            <div class="yc-container__meta">左侧菜单保持稳定宽度，右侧内容区自动填充剩余空间。</div>
+                                        </div>
+                                    </div>
+                                    <div class="demo-row">
+                                        <span class="demo-shell-pill"><i class="fas fa-check"></i> `yc-aside--width-small`</span>
+                                        <span class="demo-shell-pill"><i class="fas fa-check"></i> `yc-container--carded`</span>
+                                    </div>
+                                    <div class="demo-layout-row-gap demo-container-row-reset">
+                                        <div class="demo-layout-direction-demo">
+                                            <div class="demo-card">
+                                                <div class="yc-container__title">内容承载</div>
+                                                <div class="yc-container__meta">将筛选器、表格、图表或表单放在 Main，滚动行为更集中。</div>
+                                            </div>
+                                        </div>
+                                        <div class="demo-layout-direction-demo">
+                                            <div class="demo-card">
+                                                <div class="yc-container__title">导航稳定</div>
+                                                <div class="yc-container__meta">Aside 保持固定宽度后，页面切换时整体节奏会更稳定。</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </main>
+                            </div>
+                        </div>
+
+                        <div class="demo-layout-direction-demo">
+                            <div class="demo-layout-direction-title">
+                                <span class="demo-tag demo-tag--success">纵向布局</span>
+                                <code class="demo-code">Header + Main + Footer</code>
+                            </div>
+                            <div class="yc-container is-vertical yc-container--carded yc-container--compact demo-container-stage--sm">
+                                <header class="yc-header yc-header--soft">
+                                    <div class="yc-container__section yc-container__section--grow">
+                                        <i class="fas fa-compass"></i>
+                                        <div>
+                                            <div class="yc-container__title">内容导航页</div>
+                                            <div class="yc-container__meta">适合单栏详情页、说明页或向导页。</div>
+                                        </div>
+                                    </div>
+                                    <div class="yc-container__toolbar">
+                                        <span class="demo-shell-pill"><i class="fas fa-clock"></i> 7 分钟阅读</span>
+                                    </div>
+                                </header>
+                                <main class="yc-main">
+                                    <div class="demo-card">
+                                        <div class="yc-container__title">布局说明</div>
+                                        <div class="yc-container__meta">Header 与 Footer 高度统一，Main 负责内容滚动与留白控制。</div>
+                                    </div>
+                                </main>
+                                <footer class="yc-footer">
+                                    <span>最近更新：2026-05-13</span>
+                                    <span>布局语义更统一</span>
+                                </footer>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section" id="container-shell">
+            <h3>后台工作台布局</h3>
+            <p class="demo-description">
+                面向后台管理系统的典型壳层布局。顶部是全局导航，左侧是深色导航栏，主内容区可以承载卡片、表格和数据看板。
+            </p>
+
+            <div class="demo-block">
+                <div class="demo-block-title">经典 Admin Shell</div>
+                <div class="demo-layout-wrapper">
+                    <div class="demo-layout-label">更接近真实项目中的管理后台骨架</div>
+                    <div class="yc-container is-vertical yc-container--shell demo-container-stage--xl">
+                        <header class="yc-header yc-header--primary">
+                            <div class="yc-container__section yc-container__section--grow">
+                                <i class="fas fa-cubes"></i>
+                                <div>
+                                    <div class="yc-container__title">YC Console</div>
+                                    <div class="yc-container__meta">统一管理组件、主题、发布与可视化能力</div>
+                                </div>
+                            </div>
+                            <div class="yc-container__toolbar">
+                                <span class="demo-shell-pill"><i class="fas fa-cloud-arrow-up"></i> 已发布 24 次</span>
+                                <span class="demo-shell-pill"><i class="fas fa-user-shield"></i> 管理员</span>
+                            </div>
+                        </header>
+                        <div class="yc-container">
+                            <aside class="yc-aside yc-aside--dark yc-aside--width-small">
+                                <div class="demo-layout-label demo-container-dark-label">
+                                    导航菜单
+                                </div>
+                                <div class="demo-layout-aside-item"><i class="fas fa-gauge-high"></i> 控制台</div>
+                                <div class="demo-layout-aside-item"><i class="fas fa-layer-group"></i> 组件资产</div>
+                                <div class="demo-layout-aside-item"><i class="fas fa-table"></i> 数据表格</div>
+                                <div class="demo-layout-aside-item"><i class="fas fa-chart-line"></i> 指标分析</div>
+                                <div class="demo-layout-aside-item"><i class="fas fa-code-branch"></i> 发布流水线</div>
+                                <div class="demo-layout-aside-item"><i class="fas fa-sliders"></i> 主题配置</div>
+                            </aside>
+                            <main class="yc-main">
+                                <div class="demo-row">
+                                    <span class="demo-shell-pill"><i class="fas fa-sparkles"></i> `yc-container--shell`</span>
+                                    <span class="demo-shell-pill"><i class="fas fa-moon"></i> 支持深色侧栏</span>
+                                    <span class="demo-shell-pill"><i class="fas fa-ruler-horizontal"></i> 统一页头高度</span>
+                                </div>
+                                <div class="demo-stat-cards demo-mb-16">
+                                    <div class="demo-stat-card demo-stat-card--purple">
+                                        <div class="demo-stat-card__value">128</div>
+                                        <div class="demo-stat-card__label">在线组件</div>
+                                    </div>
+                                    <div class="demo-stat-card demo-stat-card--blue">
+                                        <div class="demo-stat-card__value">4,892</div>
+                                        <div class="demo-stat-card__label">今日请求</div>
+                                    </div>
+                                    <div class="demo-stat-card demo-stat-card--green">
+                                        <div class="demo-stat-card__value">99.97%</div>
+                                        <div class="demo-stat-card__label">可用率</div>
+                                    </div>
+                                    <div class="demo-stat-card demo-stat-card--pink">
+                                        <div class="demo-stat-card__value">17</div>
+                                        <div class="demo-stat-card__label">待审合并</div>
+                                    </div>
+                                </div>
+                                <div class="demo-layout-row-gap demo-container-row-reset">
+                                    <div class="demo-layout-direction-demo">
+                                        <div class="demo-card">
+                                            <div class="yc-container__title">发布节奏</div>
+                                            <div class="yc-container__meta">本周共完成 6 次组件更新，主要集中在表格、容器与上传体系。</div>
+                                        </div>
+                                    </div>
+                                    <div class="demo-layout-direction-demo">
+                                        <div class="demo-card">
+                                            <div class="yc-container__title">设计一致性</div>
+                                            <div class="yc-container__meta">所有布局间距、阴影和边框都通过 token 驱动，更利于后续主题调优。</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </main>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section" id="container-docs">
+            <h3>内容页与文档布局</h3>
+            <p class="demo-description">
+                对于文档站、帮助中心和知识库，容器更需要稳定的阅读宽度、目录区和内容留白。这里演示更轻量的内容型布局。
+            </p>
+
+            <div class="demo-block">
+                <div class="demo-block-title">目录侧栏 + 正文内容 + 辅助信息</div>
+                <div class="demo-layout-wrapper">
+                    <div class="demo-layout-label">适合文档中心、组件说明页、设计规范页</div>
+                    <div class="yc-container yc-container--inset yc-container--comfortable demo-container-stage--lg">
+                        <aside class="yc-aside yc-aside--width-small yc-aside--soft">
+                            <div class="demo-layout-label">章节目录</div>
+                            <div class="demo-layout-aside-item"><i class="fas fa-book-open"></i> 快速开始</div>
+                            <div class="demo-layout-aside-item"><i class="fas fa-box-open"></i> 布局结构</div>
+                            <div class="demo-layout-aside-item"><i class="fas fa-vector-square"></i> Header / Aside</div>
+                            <div class="demo-layout-aside-item"><i class="fas fa-arrows-left-right"></i> 响应式策略</div>
+                            <div class="demo-layout-aside-item"><i class="fas fa-wand-magic-sparkles"></i> 最佳实践</div>
+                        </aside>
+                        <main class="yc-main">
+                            <div class="yc-container__section yc-container__section--grow demo-mb-16">
+                                <div>
+                                    <div class="yc-container__title">Container 设计指南</div>
+                                    <div class="yc-container__meta">让页面骨架保持一致，是大型组件库体验稳定的基础。</div>
+                                </div>
+                            </div>
+                            <div class="demo-card demo-mb-16">
+                                <div class="yc-container__title">推荐做法</div>
+                                <div class="yc-container__meta">
+                                    1. Header 负责全局导航与操作。2. Aside 保持稳定宽度。3. Main 专注内容滚动与承载。4. Footer 用于状态信息与辅助说明。
+                                </div>
+                            </div>
+                            <div class="demo-layout-row-gap demo-container-row-reset">
+                                <div class="demo-layout-direction-demo">
+                                    <div class="demo-card">
+                                        <div class="yc-container__title">舒适留白</div>
+                                        <div class="yc-container__meta">`yc-container--comfortable` 适合文档与详情页。</div>
+                                    </div>
+                                </div>
+                                <div class="demo-layout-direction-demo">
+                                    <div class="demo-card">
+                                        <div class="yc-container__title">内嵌面板</div>
+                                        <div class="yc-container__meta">`yc-container--inset` 可以快速构建内容被包裹的阅读区。</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </main>
+                        <aside class="yc-aside yc-aside--width-xs">
+                            <div class="demo-layout-label">辅助信息</div>
+                            <div class="demo-container-side-stack">
+                                <div class="demo-card">
+                                    <div class="yc-container__title">当前版本</div>
+                                    <div class="yc-container__meta">v2.3.0</div>
+                                </div>
+                                <div class="demo-card">
+                                    <div class="yc-container__title">阅读建议</div>
+                                    <div class="yc-container__meta">从基础结构开始，再到变体与响应式布局。</div>
+                                </div>
+                            </div>
+                        </aside>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section" id="container-workspace">
+            <h3>双栏协作与多区域工作区</h3>
+            <p class="demo-description">
+                除了传统后台壳层，容器也适合做带工具栏、主编辑区、属性面板的工作区页面，满足更复杂的操作场景。
+            </p>
+
+            <div class="demo-block">
+                <div class="demo-block-title">主画布 + 属性栏 + 底部状态区</div>
+                <div class="demo-layout-wrapper">
+                    <div class="demo-layout-label">适合低代码搭建器、可视化编辑器、流程设计器</div>
+                    <div class="yc-container is-vertical yc-container--carded yc-container--spacious demo-container-stage--xl">
+                        <header class="yc-header">
+                            <div class="yc-container__section yc-container__section--grow">
+                                <i class="fas fa-pen-ruler"></i>
+                                <div>
+                                    <div class="yc-container__title">页面搭建工作区</div>
+                                    <div class="yc-container__meta">将画布、组件面板、属性面板放进统一骨架，布局更稳定。</div>
+                                </div>
+                            </div>
+                            <div class="yc-container__toolbar">
+                                <span class="demo-shell-pill"><i class="fas fa-floppy-disk"></i> 自动保存</span>
+                                <span class="demo-shell-pill"><i class="fas fa-rotate-left"></i> 可撤销 24 步</span>
+                            </div>
+                        </header>
+                        <div class="yc-container yc-container--carded">
+                            <aside class="yc-aside yc-aside--width-small">
+                                <div class="demo-layout-label">组件面板</div>
+                                <div class="demo-layout-aside-item"><i class="fas fa-font"></i> 文本区块</div>
+                                <div class="demo-layout-aside-item"><i class="fas fa-image"></i> 图片卡片</div>
+                                <div class="demo-layout-aside-item"><i class="fas fa-chart-pie"></i> 图表模块</div>
+                                <div class="demo-layout-aside-item"><i class="fas fa-table-list"></i> 数据表格</div>
+                                <div class="demo-layout-aside-item"><i class="fas fa-toggle-on"></i> 交互控件</div>
+                            </aside>
+                            <main class="yc-main yc-main--plain">
+                                <div class="demo-card demo-mb-16">
+                                    <div class="yc-container__title">中心画布</div>
+                                    <div class="yc-container__meta">可以与 Window、Splitter、Table、Chart 等组件组合成更复杂的工作台。</div>
+                                </div>
+                                <div class="demo-layout-row-gap demo-container-row-reset">
+                                    <div class="demo-layout-direction-demo">
+                                        <div class="demo-card">
+                                            <div class="yc-container__title">图层信息</div>
+                                            <div class="yc-container__meta">画布区尽量让 `Main` 承担滚动，避免整体页面滚动跳跃。</div>
+                                        </div>
+                                    </div>
+                                    <div class="demo-layout-direction-demo">
+                                        <div class="demo-card">
+                                            <div class="yc-container__title">联动属性</div>
+                                            <div class="yc-container__meta">复杂业务布局推荐使用 `Aside + Main + Aside` 的三栏组合。</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </main>
+                            <aside class="yc-aside yc-aside--width-xs yc-aside--muted">
+                                <div class="demo-layout-label">属性面板</div>
+                                <div class="demo-container-side-stack">
+                                    <div class="demo-card">
+                                        <div class="yc-container__title">尺寸</div>
+                                        <div class="yc-container__meta">宽度 1200 / 高度 自适应</div>
+                                    </div>
+                                    <div class="demo-card">
+                                        <div class="yc-container__title">间距</div>
+                                        <div class="yc-container__meta">统一使用组件级 spacing token。</div>
+                                    </div>
+                                </div>
+                            </aside>
+                        </div>
+                        <footer class="yc-footer yc-footer--soft">
+                            <span>当前草稿：官网首页改版</span>
+                            <span>上次保存：1 分钟前</span>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section" id="container-mobile">
+            <h3>响应式与密度控制</h3>
+            <p class="demo-description">
+                在移动端场景下，Container 会自动收敛内边距、让侧栏转为纵向堆叠。通过 compact / comfortable 等密度类，也能覆盖更多页面风格。
+            </p>
+
+            <div class="demo-block">
+                <div class="demo-block-title">桌面布局与移动布局对比</div>
+                <div class="demo-layout-wrapper">
+                    <div class="demo-layout-label">缩放浏览器窗口可以观察侧栏与内容区的堆叠变化</div>
+                    <div class="demo-layout-row-gap">
+                        <div class="demo-layout-direction-demo">
+                            <div class="demo-layout-direction-title">
+                                <span class="demo-tag">桌面工作台</span>
+                                <code class="demo-code">comfortable</code>
+                            </div>
+                            <div class="yc-container yc-container--shell yc-container--comfortable demo-container-stage--md">
+                                <aside class="yc-aside yc-aside--width-small">
+                                    <div class="demo-layout-aside-item"><i class="fas fa-house"></i> 首页</div>
+                                    <div class="demo-layout-aside-item"><i class="fas fa-rectangle-list"></i> 内容</div>
+                                    <div class="demo-layout-aside-item"><i class="fas fa-chart-column"></i> 报表</div>
+                                </aside>
+                                <main class="yc-main">
+                                    <div class="yc-container__title demo-mb-16">舒适型后台页面</div>
+                                    <div class="yc-container__meta">适合日常管理系统，主内容区有更稳定的呼吸感。</div>
+                                </main>
+                            </div>
+                        </div>
+
+                        <div class="demo-layout-direction-demo">
+                            <div class="demo-layout-direction-title">
+                                <span class="demo-tag demo-tag--warning">移动端结构</span>
+                                <code class="demo-code">vertical + compact</code>
+                            </div>
+                            <div class="yc-container is-vertical yc-container--carded yc-container--compact demo-container-stage--md">
+                                <header class="yc-header yc-header--primary">
+                                    <div class="yc-container__section yc-container__section--grow">
+                                        <i class="fas fa-bars"></i>
+                                        <div class="yc-container__title">移动页面骨架</div>
+                                    </div>
+                                </header>
+                                <aside class="yc-aside demo-mobile-aside">
+                                    <div class="demo-layout-aside-item"><i class="fas fa-house"></i> 首页</div>
+                                    <div class="demo-layout-aside-item"><i class="fas fa-bell"></i> 通知</div>
+                                    <div class="demo-layout-aside-item"><i class="fas fa-user"></i> 我的</div>
+                                </aside>
+                                <main class="yc-main demo-flex-center">
+                                    <div>
+                                        <div class="yc-container__title">自动堆叠的内容区</div>
+                                        <div class="yc-container__meta">在窄屏下，顶部、菜单、内容会按更自然的阅读顺序排列。</div>
+                                    </div>
+                                </main>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../scripts/demo-shell.js"></script>
+</body>
+</html>

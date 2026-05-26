@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Affix 固钉 - YC UI</title>
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .demo-scroll-area {
+            background: var(--yc-color-bg-page);
+            border-radius: var(--yc-border-radius-base);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .demo-scroll-area__icon {
+            font-size: 48px;
+            color: var(--yc-color-text-placeholder);
+        }
+
+        .demo-scroll-area__text {
+            color: var(--yc-color-text-secondary);
+            font-size: var(--yc-font-size-base);
+        }
+
+        .demo-affix-status-bar {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: var(--yc-color-bg);
+            border: 1px solid var(--yc-color-border-light);
+            border-radius: var(--yc-border-radius-base);
+            margin-bottom: 16px;
+        }
+
+        .demo-affix-status-bar__label {
+            font-size: var(--yc-font-size-small);
+            color: var(--yc-color-text-secondary);
+        }
+
+        .demo-affix-status-bar__value {
+            font-size: var(--yc-font-size-small);
+            font-weight: var(--yc-font-weight-medium);
+            color: var(--yc-color-text-regular);
+            font-family: monospace;
+        }
+
+        .demo-affix-status-bar__value.is-fixed {
+            color: var(--yc-color-success);
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-header__title">Affix 固钉</h1>
+            <p class="demo-page-header__desc">将页面元素固定在特定可视区域位置，滚动时保持可见。参考 Ant Design 设计。</p>
+        </div>
+
+        <!-- 基础用法 -->
+        <div class="demo-section">
+            <h2 class="demo-section__title">基础用法</h2>
+            <p class="demo-section__desc">最简单的固钉用法，固定在顶部。当元素滚动到视口顶部时自动固定。</p>
+
+            <div class="demo-affix-status-bar">
+                <span class="demo-affix-status-bar__label">固定状态:</span>
+                <span class="demo-affix-status-bar__value" id="status-top">未固定</span>
+                <span class="demo-affix-status-bar__label">滚动位置:</span>
+                <span class="demo-affix-status-bar__value" id="scroll-top">0px</span>
+            </div>
+
+            <div class="demo-block">
+                <div id="affix-top" class="yc-affix yc-affix--top yc-affix--bordered">
+                    <div class="yc-affix__content">
+                        <button class="yc-button yc-button--primary" style="margin: 12px 24px;">
+                            <i class="fas fa-thumbtack"></i> 固定在顶部
+                        </button>
+                    </div>
+                </div>
+                <div class="demo-scroll-area" style="height: 400px;">
+                    <i class="fas fa-arrow-up demo-scroll-area__icon"></i>
+                    <span class="demo-scroll-area__text">向上滚动查看固钉效果</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 偏移距离 -->
+        <div class="demo-section">
+            <h2 class="demo-section__title">偏移距离</h2>
+            <p class="demo-section__desc">通过设置 offset 属性来改变固定距离，默认值为 0。常用于避开顶部导航栏。</p>
+
+            <div class="demo-affix-status-bar">
+                <span class="demo-affix-status-bar__label">固定状态:</span>
+                <span class="demo-affix-status-bar__value" id="status-offset">未固定</span>
+                <span class="demo-affix-status-bar__label">偏移距离:</span>
+                <span class="demo-affix-status-bar__value">120px</span>
+            </div>
+
+            <div class="demo-block">
+                <div id="affix-offset" class="yc-affix yc-affix--top yc-affix--bordered" data-offset="120">
+                    <div class="yc-affix__content">
+                        <div style="display: flex; align-items: center; gap: 12px; padding: 12px 24px;">
+                            <i class="fas fa-ruler-vertical" style="color: var(--yc-color-primary);"></i>
+                            <span>偏移 120px 固定</span>
+                            <span style="margin-left: auto; font-size: var(--yc-font-size-small); color: var(--yc-color-text-secondary);">
+                                滚动到距离顶部 120px 时固定
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="demo-scroll-area" style="height: 600px;">
+                    <i class="fas fa-arrows-alt-v demo-scroll-area__icon"></i>
+                    <span class="demo-scroll-area__text">向上滚动查看偏移效果</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 固定位置 -->
+        <div class="demo-section">
+            <h2 class="demo-section__title">固定位置</h2>
+            <p class="demo-section__desc">Affix 组件提供两种固定位置：top 和 bottom。底部固定常用于操作栏。</p>
+
+            <div class="demo-affix-status-bar">
+                <span class="demo-affix-status-bar__label">顶部状态:</span>
+                <span class="demo-affix-status-bar__value" id="status-top-demo">未固定</span>
+                <span class="demo-affix-status-bar__label">底部状态:</span>
+                <span class="demo-affix-status-bar__value" id="status-bottom-demo">未固定</span>
+            </div>
+
+            <div class="demo-block">
+                <div id="affix-top-demo" class="yc-affix yc-affix--top yc-affix--primary" data-offset="60">
+                    <div class="yc-affix__content">
+                        <div style="padding: 12px 24px; display: flex; align-items: center; gap: 8px;">
+                            <i class="fas fa-thumbtack"></i>
+                            <span>顶部固定 - 带主题色背景</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="height: 500px; background: var(--yc-color-bg-page); display: flex; align-items: center; justify-content: center;">
+                    <div style="text-align: center;">
+                        <i class="fas fa-sync-alt demo-scroll-area__icon" style="animation: rotating 2s linear infinite;"></i>
+                        <p class="demo-scroll-area__text">滚动查看顶部和底部固定效果</p>
+                    </div>
+                </div>
+
+                <div id="affix-bottom-demo" class="yc-affix yc-affix--bottom yc-affix--dark" data-offset="60">
+                    <div class="yc-affix__content">
+                        <div style="padding: 12px 24px; display: flex; align-items: center; gap: 8px;">
+                            <i class="fas fa-thumbtack"></i>
+                            <span>底部固定 - 深色主题</span>
+                            <div style="margin-left: auto; display: flex; gap: 8px;">
+                                <button class="yc-button yc-button--small" style="background: rgba(255,255,255,0.15); color: #fff; border: none;">
+                                    取消
+                                </button>
+                                <button class="yc-button yc-button--small yc-button--primary">
+                                    确定
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 指定容器 -->
+        <div class="demo-section">
+            <h2 class="demo-section__title">指定容器</h2>
+            <p class="demo-section__desc">可以设置 target 属性让固钉在特定容器内固定，超出容器范围时自动取消固定。</p>
+
+            <div class="demo-affix-status-bar">
+                <span class="demo-affix-status-bar__label">容器内固定状态:</span>
+                <span class="demo-affix-status-bar__value" id="status-container">未固定</span>
+            </div>
+
+            <div class="demo-block">
+                <div id="affix-container" class="demo-affix-container">
+                    <div style="padding: 24px;">
+                        <h4 style="margin-bottom: 16px; color: var(--yc-color-text-primary);">容器内滚动区域</h4>
+                        <p style="color: var(--yc-color-text-secondary); margin-bottom: 24px;">
+                            在这个容器内滚动，固钉元素会在容器范围内固定，超出容器后自动取消固定。
+                        </p>
+                    </div>
+
+                    <div id="affix-inner" class="yc-affix yc-affix--top yc-affix--bordered" data-offset="0">
+                        <div class="yc-affix__content">
+                            <div style="padding: 12px 24px; display: flex; align-items: center; gap: 8px; background: var(--yc-color-primary-light-9);">
+                                <i class="fas fa-thumbtack" style="color: var(--yc-color-primary);"></i>
+                                <span style="color: var(--yc-color-primary); font-weight: var(--yc-font-weight-medium);">
+                                    在容器内固定
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="padding: 24px;">
+                        <div style="height: 600px; background: linear-gradient(180deg, var(--yc-color-bg-page) 0%, var(--yc-color-primary-light-9) 100%); border-radius: var(--yc-border-radius-base); display: flex; align-items: center; justify-content: center;">
+                            <div style="text-align: center;">
+                                <i class="fas fa-mouse demo-scroll-area__icon"></i>
+                                <p class="demo-scroll-area__text">在容器内滚动查看效果</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 固定导航栏 -->
+        <div class="demo-section">
+            <h2 class="demo-section__title">固定导航栏</h2>
+            <p class="demo-section__desc">常见的应用场景是固定导航栏，滚动时保持导航始终可见。</p>
+
+            <div class="demo-affix-status-bar">
+                <span class="demo-affix-status-bar__label">导航栏状态:</span>
+                <span class="demo-affix-status-bar__value" id="status-nav">未固定</span>
+            </div>
+
+            <div class="demo-block">
+                <div id="affix-nav" class="yc-affix yc-affix--top yc-affix--bordered" data-offset="0">
+                    <div class="yc-affix__content">
+                        <nav class="demo-affix-nav">
+                            <a href="#" class="demo-affix-nav__item is-active">
+                                <i class="fas fa-home"></i> 首页
+                            </a>
+                            <a href="#" class="demo-affix-nav__item">
+                                <i class="fas fa-book"></i> 文档
+                            </a>
+                            <a href="#" class="demo-affix-nav__item">
+                                <i class="fas fa-cubes"></i> 组件
+                            </a>
+                            <a href="#" class="demo-affix-nav__item">
+                                <i class="fas fa-code"></i> 示例
+                            </a>
+                            <a href="#" class="demo-affix-nav__item">
+                                <i class="fas fa-info-circle"></i> 关于
+                            </a>
+                        </nav>
+                    </div>
+                </div>
+                <div style="height: 500px; background: var(--yc-color-bg-page); display: flex; align-items: center; justify-content: center;">
+                    <div style="text-align: center;">
+                        <i class="fas fa-bars demo-scroll-area__icon"></i>
+                        <p class="demo-scroll-area__text">向上滚动查看导航栏固定效果</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 状态指示器演示 -->
+        <div class="demo-section">
+            <h2 class="demo-section__title">状态监听</h2>
+            <p class="demo-section__desc">Affix 组件会触发自定义事件，可以监听固定状态的变化。</p>
+            <div class="demo-block">
+                <div style="padding: 24px; background: var(--yc-color-bg-page); border-radius: var(--yc-border-radius-base);">
+                    <div style="margin-bottom: 16px;">
+                        <span style="font-weight: var(--yc-font-weight-medium); color: var(--yc-color-text-primary);">事件日志:</span>
+                    </div>
+                    <div id="event-log" style="font-family: monospace; font-size: var(--yc-font-size-small); color: var(--yc-color-text-secondary); line-height: 2; max-height: 200px; overflow-y: auto;">
+                        <div>等待滚动事件...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class Affix {
+            constructor(element, options = {}) {
+                this.element = element;
+                this.content = element.querySelector('.yc-affix__content');
+                this.options = Object.assign({
+                    offset: parseInt(element.dataset.offset) || 0,
+                    position: element.classList.contains('yc-affix--bottom') ? 'bottom' : 'top',
+                    target: null
+                }, options);
+
+                this.placeholder = null;
+                this.isFixed = false;
+                this.targetRect = null;
+                this.targetEl = null;
+
+                this.init();
+            }
+
+            init() {
+                this.createPlaceholder();
+                this.bindEvents();
+                this.update();
+            }
+
+            createPlaceholder() {
+                this.placeholder = document.createElement('div');
+                this.placeholder.className = 'yc-affix__placeholder';
+                this.placeholder.style.width = this.element.offsetWidth + 'px';
+                this.placeholder.style.height = this.element.offsetHeight + 'px';
+                this.element.parentNode.insertBefore(this.placeholder, this.element);
+            }
+
+            bindEvents() {
+                this._scrollHandler = () => this.update();
+                this._resizeHandler = () => {
+                    this.updatePlaceholderSize();
+                    this.update();
+                };
+
+                if (this.options.target) {
+                    const targetEl = typeof this.options.target === 'string'
+                        ? document.querySelector(this.options.target)
+                        : this.options.target;
+
+                    if (targetEl) {
+                        this.targetEl = targetEl;
+                        this.targetEl.addEventListener('scroll', this._scrollHandler);
+                    }
+                } else {
+                    window.addEventListener('scroll', this._scrollHandler);
+                    window.addEventListener('resize', this._resizeHandler);
+                }
+            }
+
+            update() {
+                const scrollTop = this.targetEl ? this.targetEl.scrollTop : window.scrollY;
+                const elementTop = this.getElementTop();
+                const elementHeight = this.element.offsetHeight;
+
+                let shouldBeFixed = false;
+
+                if (this.options.position === 'top') {
+                    // 顶部固定：当元素顶部滚动到视口顶部 + offset 时固定
+                    shouldBeFixed = scrollTop >= elementTop - this.options.offset;
+                } else {
+                    // 底部固定：当元素底部接近视口底部时固定
+                    const windowHeight = window.innerHeight;
+                    shouldBeFixed = scrollTop + windowHeight <= elementTop + elementHeight + this.options.offset;
+                }
+
+                // 检查是否在容器范围内
+                const inContainer = this.isInContainer();
+
+                if (inContainer) {
+                    if (shouldBeFixed && !this.isFixed) {
+                        this.fix();
+                    } else if (!shouldBeFixed && this.isFixed) {
+                        this.unfix();
+                    }
+                } else if (this.isFixed) {
+                    this.unfix();
+                }
+            }
+
+            getElementTop() {
+                if (this.targetEl) {
+                    return this.element.offsetTop;
+                }
+                return this.element.getBoundingClientRect().top + window.scrollY - this.element.offsetHeight;
+            }
+
+            isInContainer() {
+                if (!this.targetEl) return true;
+
+                const containerRect = this.targetEl.getBoundingClientRect();
+                const elementRect = this.element.getBoundingClientRect();
+
+                return elementRect.top >= containerRect.top &&
+                       elementRect.bottom <= containerRect.bottom;
+            }
+
+            fix() {
+                this.isFixed = true;
+                this.element.classList.add('is-fixed');
+                this.placeholder.classList.add('is-active');
+                this.placeholder.style.display = 'block';
+
+                // 设置固定位置
+                if (this.options.position === 'top') {
+                    this.element.style.top = this.options.offset + 'px';
+                    this.element.style.bottom = '';
+                } else {
+                    this.element.style.bottom = this.options.offset + 'px';
+                    this.element.style.top = '';
+                }
+
+                this.element.style.left = '0';
+                this.element.style.right = '0';
+
+                this.element.dispatchEvent(new CustomEvent('affix-change', {
+                    detail: { fixed: true, position: this.options.position }
+                }));
+            }
+
+            unfix() {
+                this.isFixed = false;
+                this.element.classList.remove('is-fixed');
+                this.placeholder.classList.remove('is-active');
+                this.placeholder.style.display = 'none';
+
+                // 清除固定样式
+                this.element.style.top = '';
+                this.element.style.bottom = '';
+                this.element.style.left = '';
+                this.element.style.right = '';
+
+                this.element.dispatchEvent(new CustomEvent('affix-change', {
+                    detail: { fixed: false, position: this.options.position }
+                }));
+            }
+
+            updatePlaceholderSize() {
+                this.placeholder.style.width = this.element.offsetWidth + 'px';
+                this.placeholder.style.height = this.element.offsetHeight + 'px';
+            }
+
+            destroy() {
+                if (this.targetEl) {
+                    this.targetEl.removeEventListener('scroll', this._scrollHandler);
+                } else {
+                    window.removeEventListener('scroll', this._scrollHandler);
+                    window.removeEventListener('resize', this._resizeHandler);
+                }
+                if (this.placeholder && this.placeholder.parentNode) {
+                    this.placeholder.parentNode.removeChild(this.placeholder);
+                }
+            }
+        }
+
+        // 日志功能
+        function addLog(message) {
+            const log = document.getElementById('event-log');
+            const time = new Date().toLocaleTimeString();
+            const div = document.createElement('div');
+            div.textContent = `[${time}] ${message}`;
+            log.insertBefore(div, log.firstChild);
+
+            // 保持最多 20 条日志
+            while (log.children.length > 20) {
+                log.removeChild(log.lastChild);
+            }
+        }
+
+        // 更新状态显示
+        function updateStatus(id, fixed) {
+            const el = document.getElementById(id);
+            if (el) {
+                el.textContent = fixed ? '已固定' : '未固定';
+                el.classList.toggle('is-fixed', fixed);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const affixInstances = [];
+
+            // 基础用法
+            const affixTop = document.getElementById('affix-top');
+            if (affixTop) {
+                const instance = new Affix(affixTop);
+                affixInstances.push(instance);
+                affixTop.addEventListener('affix-change', (e) => {
+                    updateStatus('status-top', e.detail.fixed);
+                    addLog(`顶部固钉: ${e.detail.fixed ? '固定' : '取消固定'}`);
+                });
+            }
+
+            // 偏移距离
+            const affixOffset = document.getElementById('affix-offset');
+            if (affixOffset) {
+                const instance = new Affix(affixOffset);
+                affixInstances.push(instance);
+                affixOffset.addEventListener('affix-change', (e) => {
+                    updateStatus('status-offset', e.detail.fixed);
+                    addLog(`偏移固钉: ${e.detail.fixed ? '固定' : '取消固定'}`);
+                });
+            }
+
+            // 顶部固定演示
+            const affixTopDemo = document.getElementById('affix-top-demo');
+            if (affixTopDemo) {
+                const instance = new Affix(affixTopDemo);
+                affixInstances.push(instance);
+                affixTopDemo.addEventListener('affix-change', (e) => {
+                    updateStatus('status-top-demo', e.detail.fixed);
+                });
+            }
+
+            // 底部固定演示
+            const affixBottomDemo = document.getElementById('affix-bottom-demo');
+            if (affixBottomDemo) {
+                const instance = new Affix(affixBottomDemo);
+                affixInstances.push(instance);
+                affixBottomDemo.addEventListener('affix-change', (e) => {
+                    updateStatus('status-bottom-demo', e.detail.fixed);
+                });
+            }
+
+            // 容器内固定
+            const container = document.getElementById('affix-container');
+            const affixInner = document.getElementById('affix-inner');
+            if (container && affixInner) {
+                const instance = new Affix(affixInner, {
+                    target: container,
+                    offset: parseInt(affixInner.dataset.offset) || 0
+                });
+                affixInstances.push(instance);
+                affixInner.addEventListener('affix-change', (e) => {
+                    updateStatus('status-container', e.detail.fixed);
+                    addLog(`容器固钉: ${e.detail.fixed ? '固定' : '取消固定'}`);
+                });
+            }
+
+            // 导航栏固定
+            const affixNav = document.getElementById('affix-nav');
+            if (affixNav) {
+                const instance = new Affix(affixNav);
+                affixInstances.push(instance);
+                affixNav.addEventListener('affix-change', (e) => {
+                    updateStatus('status-nav', e.detail.fixed);
+                    addLog(`导航栏: ${e.detail.fixed ? '固定' : '取消固定'}`);
+                });
+            }
+
+            // 全局滚动监听 - 更新滚动位置显示
+            window.addEventListener('scroll', () => {
+                const scrollTopEl = document.getElementById('scroll-top');
+                if (scrollTopEl) {
+                    scrollTopEl.textContent = Math.round(window.scrollY) + 'px';
+                }
+            });
+
+            // 导航点击效果
+            document.querySelectorAll('.demo-affix-nav__item').forEach(item => {
+                item.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    document.querySelectorAll('.demo-affix-nav__item').forEach(i => i.classList.remove('is-active'));
+                    item.classList.add('is-active');
+                });
+            });
+        });
+    </script>
+    <script src="../scripts/demo-shell.js"></script>
+</body>
+</html>

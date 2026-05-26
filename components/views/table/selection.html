@@ -1,0 +1,189 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>选择功能 - Table Workbench</title>
+    <script src="../../scripts/table-workbench-theme.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../styles/index.css">
+    <link rel="stylesheet" href="../../styles/components/button.css">
+    <link rel="stylesheet" href="../../styles/table-workbench.css">
+    <script src="https://unpkg.com/vue@3.4.0/dist/vue.global.prod.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+           <!-- <div class="page-header">
+                <h1>选择功能</h1>
+                <p>统一展示单选、复选与批量操作反馈，让选择行为在不同表格场景下都保持一致。</p>
+            </div>
+
+            <div class="actions">
+                <a class="yc-button yc-button&#45;&#45;small" href="../demo-table.html">
+                    <i class="fas fa-arrow-left"></i>
+                    返回 Table Workbench
+                </a>
+            </div>-->
+
+            <div class="demo-card">
+                <h3>复选模式</h3>
+                <div class="actions">
+                    <button class="yc-button yc-button--primary yc-button--small" @click="getSelectedRows">获取选中</button>
+                    <button class="yc-button yc-button--small" @click="selectAllRows">全选</button>
+                    <button class="yc-button yc-button--small" @click="clearSelection">清空</button>
+                    <button class="yc-button yc-button--danger yc-button--small" @click="removeSelectedRows">删除选中</button>
+                    <span v-if="selectedIds.length" class="table-selection-summary">已选择 {{ selectedIds.length }} 项</span>
+                </div>
+                <table class="yc-data-table stripe border">
+                    <thead>
+                        <tr>
+                            <th class="cell-center" style="width: 60px;">
+                                <input class="table-checkbox" type="checkbox" :checked="isAllSelected" @change="toggleAll">
+                            </th>
+                            <th class="cell-center" style="width: 72px;">序号</th>
+                            <th>姓名</th>
+                            <th>角色</th>
+                            <th class="cell-center" style="width: 88px;">年龄</th>
+                            <th>所在城市</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(row, index) in multiRows" :key="row.id" :class="{ selected: selectedIds.includes(row.id) }">
+                            <td class="cell-center">
+                                <input class="table-checkbox" type="checkbox" :checked="selectedIds.includes(row.id)" @change="toggleRow(row.id)">
+                            </td>
+                            <td class="cell-center">{{ index + 1 }}</td>
+                            <td>{{ row.name }}</td>
+                            <td>{{ row.role }}</td>
+                            <td class="cell-center">{{ row.age }}</td>
+                            <td>{{ row.city }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="result">{{ multiResult }}</div>
+            </div>
+
+            <div class="demo-card">
+                <h3>单选模式</h3>
+                <table class="yc-data-table stripe border">
+                    <thead>
+                        <tr>
+                            <th class="cell-center" style="width: 60px;"></th>
+                            <th class="cell-center" style="width: 72px;">序号</th>
+                            <th>姓名</th>
+                            <th>角色</th>
+                            <th class="cell-center" style="width: 88px;">年龄</th>
+                            <th>所在城市</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(row, index) in singleRows" :key="row.id" :class="{ selected: selectedSingleId === row.id }">
+                            <td class="cell-center">
+                                <input class="table-radio" type="radio" name="row-radio" :value="row.id" v-model="selectedSingleId">
+                            </td>
+                            <td class="cell-center">{{ index + 1 }}</td>
+                            <td>{{ row.name }}</td>
+                            <td>{{ row.role }}</td>
+                            <td class="cell-center">{{ row.age }}</td>
+                            <td>{{ row.city }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="result">{{ singleResult }}</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const { createApp, computed, ref } = Vue;
+
+        createApp({
+            setup() {
+                const seedRows = [
+                    { id: 1, name: '张三', role: '前端工程师', age: 28, city: '北京' },
+                    { id: 2, name: '李四', role: '后端工程师', age: 32, city: '上海' },
+                    { id: 3, name: '王五', role: '测试工程师', age: 26, city: '广州' },
+                    { id: 4, name: '赵六', role: '产品经理', age: 31, city: '深圳' },
+                    { id: 5, name: '孙七', role: 'UI 设计师', age: 29, city: '杭州' }
+                ];
+
+                const multiRows = ref([...seedRows]);
+                const singleRows = ref(seedRows.slice(0, 4));
+                const selectedIds = ref([]);
+                const selectedSingleId = ref(singleRows.value[0].id);
+                const multiResult = ref('状态：等待选择');
+
+                const isAllSelected = computed(() => multiRows.value.length > 0 && selectedIds.value.length === multiRows.value.length);
+                const singleResult = computed(() => {
+                    const row = singleRows.value.find(item => item.id === selectedSingleId.value);
+                    return row ? `状态：当前单选为 ${row.name} / ${row.role}` : '状态：等待选择';
+                });
+
+                function toggleRow(id) {
+                    const index = selectedIds.value.indexOf(id);
+                    if (index > -1) {
+                        selectedIds.value.splice(index, 1);
+                    } else {
+                        selectedIds.value.push(id);
+                    }
+                }
+
+                function toggleAll() {
+                    selectedIds.value = isAllSelected.value ? [] : multiRows.value.map(item => item.id);
+                }
+
+                function getSelectedRows() {
+                    if (!selectedIds.value.length) {
+                        multiResult.value = '状态：当前没有选中任何记录';
+                        return;
+                    }
+
+                    const names = multiRows.value
+                        .filter(item => selectedIds.value.includes(item.id))
+                        .map(item => item.name)
+                        .join('、');
+                    multiResult.value = `状态：已选中 ${selectedIds.value.length} 条记录 - ${names}`;
+                }
+
+                function selectAllRows() {
+                    selectedIds.value = multiRows.value.map(item => item.id);
+                    multiResult.value = `状态：已全选 ${selectedIds.value.length} 条记录`;
+                }
+
+                function clearSelection() {
+                    selectedIds.value = [];
+                    multiResult.value = '状态：已清空选择';
+                }
+
+                function removeSelectedRows() {
+                    if (!selectedIds.value.length) {
+                        multiResult.value = '状态：请先选择要删除的记录';
+                        return;
+                    }
+
+                    multiRows.value = multiRows.value.filter(item => !selectedIds.value.includes(item.id));
+                    multiResult.value = '状态：已删除选中记录';
+                    selectedIds.value = [];
+                }
+
+                return {
+                    multiRows,
+                    singleRows,
+                    selectedIds,
+                    selectedSingleId,
+                    multiResult,
+                    singleResult,
+                    isAllSelected,
+                    toggleRow,
+                    toggleAll,
+                    getSelectedRows,
+                    selectAllRows,
+                    clearSelection,
+                    removeSelectedRows
+                };
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>

@@ -1,0 +1,144 @@
+@charset "UTF-8";
+
+/**
+ * Shared interaction and accessibility states.
+ * Keep component files focused on structure while this layer standardizes
+ * focus, disabled, reduced-motion, and RTL behavior across YC UI.
+ */
+
+.yc-visually-hidden {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+    clip: rect(0, 0, 0, 0) !important;
+    clip-path: inset(50%) !important;
+}
+
+:where(
+    .yc-button,
+    .yc-link,
+    .yc-input,
+    .yc-textarea,
+    .yc-select__input,
+    .yc-select-dropdown__search,
+    .yc-dropdown,
+    .yc-dropdown__trigger,
+    .yc-dropdown-btn,
+    .yc-dropdown-btn__trigger-btn,
+    .yc-dropdown__item,
+    .yc-backtop,
+    .yc-popover-target,
+    .yc-menu,
+    .yc-menu-item,
+    .yc-sub-menu__title,
+    .yc-pagination__button,
+    .yc-pagination__pager,
+    .yc-pagination__jumper input,
+    .yc-pagination__size select,
+    .yc-radio,
+    .yc-checkbox,
+    .yc-switch__wrapper,
+    .yc-tabs__nav-item,
+    .yc-time-picker__input,
+    .yc-time-panel__btn,
+    .yc-table__cell-input
+):focus-visible {
+    outline: 2px solid var(--yc-color-primary);
+    outline-offset: 2px;
+    box-shadow: var(--yc-focus-ring);
+}
+
+:where(.yc-input, .yc-textarea, .yc-select__input, .yc-table__cell-input):focus-visible {
+    outline: 0;
+}
+
+:where(
+    .yc-button,
+    .yc-dropdown__trigger,
+    .yc-dropdown-btn__trigger-btn,
+    .yc-backtop,
+    .yc-popover-target,
+    .yc-menu-item,
+    .yc-sub-menu__title,
+    .yc-pagination__button,
+    .yc-pagination__pager,
+    .yc-time-panel__btn
+):disabled,
+:where(
+    .yc-button,
+    .yc-dropdown,
+    .yc-menu-item,
+    .yc-sub-menu,
+    .yc-link,
+    .yc-time-picker
+).is-disabled {
+    cursor: not-allowed;
+}
+
+:where(
+    .yc-button,
+    .yc-dropdown__trigger,
+    .yc-dropdown-btn__trigger-btn,
+    .yc-backtop,
+    .yc-popover-target,
+    .yc-menu-item,
+    .yc-sub-menu__title,
+    .yc-pagination__button,
+    .yc-pagination__pager,
+    .yc-time-panel__btn
+):disabled {
+    opacity: 0.6;
+}
+
+[dir="rtl"] :where(.yc-input--prefix),
+.yc-rtl :where(.yc-input--prefix) {
+    padding-right: var(--yc-spacing-xxl);
+    padding-left: var(--yc-spacing-md);
+}
+
+[dir="rtl"] :where(.yc-input--suffix),
+.yc-rtl :where(.yc-input--suffix) {
+    padding-right: var(--yc-spacing-md);
+    padding-left: var(--yc-spacing-xxl);
+}
+
+[dir="rtl"] :where(.yc-input-prefix),
+.yc-rtl :where(.yc-input-prefix) {
+    right: var(--yc-spacing-sm);
+    left: auto;
+}
+
+[dir="rtl"] :where(.yc-input-suffix),
+.yc-rtl :where(.yc-input-suffix) {
+    right: auto;
+    left: var(--yc-spacing-sm);
+}
+
+[dir="rtl"] .yc-dropdown__item--active::after,
+.yc-rtl .yc-dropdown__item--active::after {
+    right: auto;
+    left: 16px;
+}
+
+[dir="rtl"] :where(.yc-menu-item__icon, .yc-sub-menu__icon),
+.yc-rtl :where(.yc-menu-item__icon, .yc-sub-menu__icon) {
+    margin-right: 0;
+    margin-left: 10px;
+}
+
+[dir="rtl"] :where(.yc-sub-menu__arrow),
+.yc-rtl :where(.yc-sub-menu__arrow) {
+    margin-right: auto;
+    margin-left: 0;
+    transform: rotate(180deg);
+}
+
+[dir="rtl"] :where(.yc-sub-menu.is-opened > .yc-sub-menu__title .yc-sub-menu__arrow),
+.yc-rtl :where(.yc-sub-menu.is-opened > .yc-sub-menu__title .yc-sub-menu__arrow) {
+    transform: rotate(90deg);
+}

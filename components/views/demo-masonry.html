@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masonry 瀑布流组件示例 - YC UI</title>
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">Masonry 瀑布流</h1>
+            <p class="demo-page-subtitle">适合素材中心、卡片流和灵感墙，用较轻的 CSS 结构快速搭建不等高卡片布局。</p>
+        </div>
+
+        <div class="demo-section">
+            <h3>素材墙</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">三列布局</div>
+                <div class="yc-masonry yc-masonry--3">
+                    <div class="yc-masonry__item">
+                        <article class="yc-masonry__card">
+                            <div class="yc-masonry__media" style="height: 180px;"></div>
+                            <div class="yc-masonry__title">品牌 KV</div>
+                            <div class="yc-masonry__text">适合投放封面和首页头图，强调视觉质感和统一卡片边界。</div>
+                        </article>
+                    </div>
+                    <div class="yc-masonry__item">
+                        <article class="yc-masonry__card">
+                            <div class="yc-masonry__media" style="height: 120px;"></div>
+                            <div class="yc-masonry__title">短视频脚本</div>
+                            <div class="yc-masonry__text">瀑布流比规整表格更适合浏览不同密度的图文素材。</div>
+                        </article>
+                    </div>
+                    <div class="yc-masonry__item">
+                        <article class="yc-masonry__card">
+                            <div class="yc-masonry__media" style="height: 220px;"></div>
+                            <div class="yc-masonry__title">商品详情页</div>
+                            <div class="yc-masonry__text">同一套卡片结构可以混合图像、文案和标签信息。</div>
+                        </article>
+                    </div>
+                    <div class="yc-masonry__item">
+                        <article class="yc-masonry__card">
+                            <div class="yc-masonry__media" style="height: 150px;"></div>
+                            <div class="yc-masonry__title">海报备选稿</div>
+                            <div class="yc-masonry__text">适合团队做评审、收藏和快速比稿。</div>
+                        </article>
+                    </div>
+                    <div class="yc-masonry__item">
+                        <article class="yc-masonry__card">
+                            <div class="yc-masonry__media" style="height: 260px;"></div>
+                            <div class="yc-masonry__title">拍摄分镜</div>
+                            <div class="yc-masonry__text">不同高度内容自动自然排布，不需要额外的 JS 流式计算。</div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../scripts/demo-shell.js"></script>
+</body>
+</html>

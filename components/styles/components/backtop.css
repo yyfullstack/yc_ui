@@ -1,0 +1,97 @@
+@charset "UTF-8";
+
+.yc-backtop {
+    --yc-backtop-bg: var(--yc-color-primary);
+    --yc-backtop-hover-bg: var(--yc-color-primary-hover);
+    --yc-backtop-color: var(--yc-color-white);
+    --yc-backtop-size: 40px;
+    --yc-backtop-border-radius: 50%;
+    position: fixed;
+    right: 40px;
+    bottom: 40px;
+    z-index: var(--yc-z-index-fixed);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: var(--yc-backtop-size);
+    height: var(--yc-backtop-size);
+    padding: 0;
+    border: none;
+    border-radius: var(--yc-backtop-border-radius);
+    background: var(--yc-backtop-bg);
+    color: var(--yc-backtop-color);
+    cursor: pointer;
+    box-shadow: var(--yc-box-shadow-floating-panel);
+    transition: transform var(--yc-transition-fast), opacity var(--yc-transition-fast), visibility var(--yc-transition-fast), background-color var(--yc-transition-fast), box-shadow var(--yc-transition-fast);
+}
+
+.yc-backtop:hover {
+    background: var(--yc-backtop-hover-bg);
+    transform: translateY(-2px);
+    box-shadow: var(--yc-box-shadow-floating-md);
+}
+
+.yc-backtop:focus-visible {
+    outline: 2px solid var(--yc-color-primary);
+    outline-offset: 3px;
+    box-shadow: var(--yc-focus-ring), var(--yc-box-shadow-floating-md);
+}
+
+.yc-backtop:active {
+    transform: translateY(0);
+}
+
+.yc-backtop--hidden {
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.88);
+    pointer-events: none;
+}
+
+.yc-backtop--square {
+    --yc-backtop-border-radius: var(--yc-border-radius-medium);
+}
+
+.yc-backtop--small {
+    --yc-backtop-size: 32px;
+}
+
+.yc-backtop--large {
+    --yc-backtop-size: 48px;
+}
+
+.yc-backtop--label {
+    width: auto;
+    min-width: 48px;
+    height: auto;
+    padding: 0 14px;
+    border-radius: var(--yc-border-radius-round);
+}
+
+.yc-backtop--subtle {
+    --yc-backtop-bg: var(--yc-color-bg);
+    --yc-backtop-hover-bg: var(--yc-color-fill-extra-light);
+    --yc-backtop-color: var(--yc-color-primary);
+    border: 1px solid var(--yc-color-border-light);
+    box-shadow: var(--yc-box-shadow-sm);
+}
+
+.yc-backtop--container {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+}
+
+.yc-backtop__label {
+    font-size: var(--yc-font-size-small);
+    font-weight: var(--yc-font-weight-medium);
+    white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+    .yc-backtop {
+        right: 20px;
+        bottom: 20px;
+    }
+}

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breadcrumb 面包屑 - YC UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">Breadcrumb 面包屑</h1>
+            <p class="demo-page-subtitle">用于页面层级、工作流节点和对象上下文导航，适合后台平台与业务工作台场景。</p>
+        </div>
+
+        <div class="demo-section">
+            <h3>基础路径</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">最常见的目录型导航</div>
+                <div class="demo-card">
+                    <nav class="yc-breadcrumb yc-breadcrumb--slash" aria-label="基础面包屑">
+                        <span class="yc-breadcrumb__item">
+                            <a class="yc-breadcrumb__link" href="#">工作台</a>
+                            <span class="yc-breadcrumb__separator" aria-hidden="true"></span>
+                        </span>
+                        <span class="yc-breadcrumb__item">
+                            <a class="yc-breadcrumb__link" href="#">客户管理</a>
+                            <span class="yc-breadcrumb__separator" aria-hidden="true"></span>
+                        </span>
+                        <span class="yc-breadcrumb__item">
+                            <span class="yc-breadcrumb__current">客户详情</span>
+                        </span>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>分隔符风格</h3>
+            <div class="demo-data-grid">
+                <div class="demo-card">
+                    <div class="demo-block-title">Slash</div>
+                    <nav class="yc-breadcrumb yc-breadcrumb--slash" aria-label="斜杠分隔">
+                        <span class="yc-breadcrumb__item">
+                            <a class="yc-breadcrumb__link" href="#">设计系统</a>
+                            <span class="yc-breadcrumb__separator" aria-hidden="true"></span>
+                        </span>
+                        <span class="yc-breadcrumb__item">
+                            <a class="yc-breadcrumb__link" href="#">组件平台</a>
+                            <span class="yc-breadcrumb__separator" aria-hidden="true"></span>
+                        </span>
+                        <span class="yc-breadcrumb__item">
+                            <span class="yc-breadcrumb__current">Breadcrumb</span>
+                        </span>
+                    </nav>
+                </div>
+
+                <div class="demo-card">
+                    <div class="demo-block-title">Arrow</div>
+                    <nav class="yc-breadcrumb yc-breadcrumb--arrow" aria-label="箭头分隔">
+                        <span class="yc-breadcrumb__item">
+                            <a class="yc-breadcrumb__link" href="#">订单中心</a>
+                            <span class="yc-breadcrumb__separator" aria-hidden="true"></span>
+                        </span>
+                        <span class="yc-breadcrumb__item">
+                            <a class="yc-breadcrumb__link" href="#">退货单</a>
+                            <span class="yc-breadcrumb__separator" aria-hidden="true"></span>
+                        </span>
+                        <span class="yc-breadcrumb__item">
+                            <span class="yc-breadcrumb__current">售后审批</span>
+                        </span>
+                    </nav>
+                </div>
+
+                <div class="demo-card">
+                    <div class="demo-block-title">Dot</div>
+                    <nav class="yc-breadcrumb yc-breadcrumb--dot" aria-label="圆点分隔">
+                        <span class="yc-breadcrumb__item">
+                            <a class="yc-breadcrumb__link" href="#">运营报表</a>
+                            <span class="yc-breadcrumb__separator" aria-hidden="true"></span>
+                        </span>
+                        <span class="yc-breadcrumb__item">
+                            <a class="yc-breadcrumb__link" href="#">周报</a>
+                            <span class="yc-breadcrumb__separator" aria-hidden="true"></span>
+                        </span>
+                        <span class="yc-breadcrumb__item">
+                            <span class="yc-breadcrumb__current">转化率分析</span>
+                        </span>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>图标与业务语义</h3>
+            <div class="demo-data-grid">
+                <div class="demo-card">
+                    <div class="demo-block-title">带图标的对象上下文</div>
+                    <nav class="yc-breadcrumb yc-breadcrumb--arrow" aria-label="对象上下文">
+                        <span class="yc-breadcrumb__item">
+                            <a class="yc-breadcrumb__link" href="#"><i class="fas fa-house"></i> 首页</a>
+                            <span class="yc-breadcrumb__separator" aria-hidden="true"></span>
+                        </span>
+                        <span class="yc-breadcrumb__item">
+                            <a class="yc-breadcrumb__link" href="#"><i class="fas fa-boxes-stacked"></i> SKU 列表</a>
+                            <span class="yc-breadcrumb__separator" aria-hidden="true"></span>
+                        </span>
+                        <span class="yc-breadcrumb__item">
+                            <span class="yc-breadcrumb__current"><i class="fas fa-tag"></i> YC-NT-2048</span>
+                        </span>
+                    </nav>
+                </div>
+
+                <div class="demo-card">
+                    <div class="demo-block-title">状态强调</div>
+                    <nav class="yc-breadcrumb yc-breadcrumb--slash yc-breadcrumb--warning" aria-label="状态强调">
+                        <span class="yc-breadcrumb__item">
+                            <a class="yc-breadcrumb__link" href="#">发布中心</a>
+                            <span class="yc-breadcrumb__separator" aria-hidden="true"></span>
+                        </span>
+                        <span class="yc-breadcrumb__item">
+                            <a class="yc-breadcrumb__link" href="#">灰度任务</a>
+                            <span class="yc-breadcrumb__separator" aria-hidden="true"></span>
+                        </span>
+                        <span class="yc-breadcrumb__item">
+                            <span class="yc-breadcrumb__current">待确认回滚</span>
+                        </span>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>长路径与换行</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">复杂业务路径也能保持清晰</div>
+                <div class="demo-card">
+                    <nav class="yc-breadcrumb yc-breadcrumb--slash" aria-label="长路径">
+                        <span class="yc-breadcrumb__item">
+                            <a class="yc-breadcrumb__link" href="#">企业管理后台</a>
+                            <span class="yc-breadcrumb__separator" aria-hidden="true"></span>
+                        </span>
+                        <span class="yc-breadcrumb__item">
+                            <a class="yc-breadcrumb__link" href="#">品牌资产中心</a>
+                            <span class="yc-breadcrumb__separator" aria-hidden="true"></span>
+                        </span>
+                        <span class="yc-breadcrumb__item">
+                            <a class="yc-breadcrumb__link" href="#">2026 夏季活动专题配置</a>
+                            <span class="yc-breadcrumb__separator" aria-hidden="true"></span>
+                        </span>
+                        <span class="yc-breadcrumb__item">
+                            <span class="yc-breadcrumb__current">主视觉与下载资源</span>
+                        </span>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../scripts/demo-shell.js"></script>
+</body>
+</html>

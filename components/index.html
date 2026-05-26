@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YC UI - Enterprise Component Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./styles/index.css">
+    <link rel="stylesheet" href="./styles/platform.css">
+</head>
+<body>
+    <div class="yc-platform">
+        <div class="yc-platform-shell">
+            <aside class="yc-platform-sidebar" aria-label="平台导航">
+                <div class="yc-platform-brand">
+                    <div class="yc-platform-brand__mark">YC</div>
+                    <div>
+                        <h1 class="yc-platform-brand__name">YC UI</h1>
+                        <p class="yc-platform-brand__desc">面向企业 Web 场景的原生组件平台</p>
+                    </div>
+                </div>
+
+                <nav class="yc-platform-nav">
+                    <a class="yc-platform-nav__link" href="#workbenches"><i class="fas fa-flask"></i>测试工作台</a>
+                    <a class="yc-platform-nav__link" href="#components"><i class="fas fa-layer-group"></i>组件目录</a>
+                    <a class="yc-platform-nav__link" href="#foundation"><i class="fas fa-sliders"></i>设计 Token</a>
+                    <a class="yc-platform-nav__link" href="#capabilities"><i class="fas fa-shield-halved"></i>平台能力</a>
+                    <a class="yc-platform-nav__link" href="#usage"><i class="fas fa-code"></i>接入方式</a>
+                </nav>
+
+                <div class="yc-platform-sidebar__meta">
+                    <p class="yc-platform-sidebar__meta-title">当前覆盖</p>
+                    <div class="yc-platform-sidebar__meta-value">
+                        <strong id="sidebarComponentCount">0</strong>
+                        <span>个组件样式模块</span>
+                    </div>
+                </div>
+            </aside>
+
+            <main class="yc-platform-main">
+                <div class="yc-platform-topbar">
+                    <label class="yc-platform-search" for="componentSearch">
+                        <i class="fas fa-search"></i>
+                        <input id="componentSearch" class="yc-input" type="search" placeholder="搜索组件、分类、能力或测试入口">
+                    </label>
+                    <div class="yc-platform-actions">
+                        <button class="yc-button" type="button" id="rtlToggle">
+                            <i class="fas fa-align-right"></i>
+                            RTL
+                        </button>
+                        <button class="yc-button yc-button--primary" type="button" id="themeToggle">
+                            <i class="fas fa-moon"></i>
+                            切换主题
+                        </button>
+                    </div>
+                </div>
+
+                <div class="yc-platform-content">
+                    <section class="yc-platform-intro" id="overview">
+                        <div class="yc-platform-heading">
+                            <span class="yc-platform-eyebrow"><i class="fas fa-star"></i> 组件平台</span>
+                            <h2 class="yc-platform-title">统一样式、统一调用、统一测试入口的企业级组件中心</h2>
+                            <p class="yc-platform-subtitle">
+                                参考 Ant Design 的秩序感和 Kendo UI for jQuery 的平台组织方式，
+                                YC UI 把组件样式、设计 token、demo shell 和测试工作台整合成一套可持续演进的入口。
+                            </p>
+                            <div class="yc-platform-quick-actions">
+                                <a class="yc-button yc-button--primary" href="#workbenches"><i class="fas fa-flask"></i>进入工作台</a>
+                                <a class="yc-button" href="./views/demo-table.html"><i class="fas fa-table"></i>查看 Table Workbench</a>
+                                <a class="yc-button" href="#components"><i class="fas fa-table-cells"></i>浏览组件</a>
+                            </div>
+                        </div>
+
+                        <div class="yc-platform-preview" aria-label="平台预览">
+                            <div class="yc-platform-preview__header">
+                                <h3 class="yc-platform-preview__title">组合预览</h3>
+                                <span class="yc-platform-chip yc-platform-chip--success">Light / Dark</span>
+                            </div>
+                            <div class="yc-platform-preview__body">
+                                <div class="yc-platform-preview__row">
+                                    <button class="yc-button yc-button--primary" type="button">保存</button>
+                                    <button class="yc-button" type="button">取消</button>
+                                    <button class="yc-button yc-button--danger" type="button">删除</button>
+                                </div>
+                                <input class="yc-input" type="text" value="统一输入态、边界和焦点反馈">
+                                <div class="yc-platform-mini-table">
+                                    <div class="yc-platform-mini-table__row yc-platform-mini-table__row--head">
+                                        <span>能力</span><span>状态</span><span>特点</span>
+                                    </div>
+                                    <div class="yc-platform-mini-table__row">
+                                        <span>Button</span><span>Ready</span><span>Token 驱动</span>
+                                    </div>
+                                    <div class="yc-platform-mini-table__row">
+                                        <span>Upload</span><span>Updated</span><span>统一进度反馈</span>
+                                    </div>
+                                    <div class="yc-platform-mini-table__row">
+                                        <span>Table</span><span>Workbench</span><span>平台化测试入口</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="yc-platform-metrics" aria-label="平台指标">
+                        <div class="yc-platform-metric">
+                            <div class="yc-platform-metric__value" id="metricComponentCount">0</div>
+                            <div class="yc-platform-metric__label">组件 CSS 文件</div>
+                        </div>
+                        <div class="yc-platform-metric">
+                            <div class="yc-platform-metric__value">80+</div>
+                            <div class="yc-platform-metric__label">示例与测试页面</div>
+                        </div>
+                        <div class="yc-platform-metric">
+                            <div class="yc-platform-metric__value">300+</div>
+                            <div class="yc-platform-metric__label">颜色、阴影与状态 Token</div>
+                        </div>
+                        <div class="yc-platform-metric">
+                            <div class="yc-platform-metric__value">0</div>
+                            <div class="yc-platform-metric__label">当前未声明变量引用</div>
+                        </div>
+                    </section>
+
+                    <section class="yc-platform-section" id="workbenches">
+                        <div class="yc-platform-section__header">
+                            <div>
+                                <h2 class="yc-platform-section__title">测试工作台</h2>
+                                <p class="yc-platform-section__desc">把复杂组件拆成平台化测试入口，让验证路径和演示路径都更稳定。</p>
+                            </div>
+                        </div>
+                        <div class="yc-platform-grid" id="workbenchGrid"></div>
+                    </section>
+
+                    <section class="yc-platform-section" id="components">
+                        <div class="yc-platform-section__header">
+                            <div>
+                                <h2 class="yc-platform-section__title">组件目录</h2>
+                                <p class="yc-platform-section__desc">按能力域组织组件入口，统一风格、统一命名、统一 demo 调用方式。</p>
+                            </div>
+                            <span class="yc-platform-chip" id="visibleCount">0 个组件</span>
+                        </div>
+                        <div class="yc-platform-tabs" id="categoryTabs" role="toolbar" aria-label="组件分类"></div>
+                        <div class="yc-platform-grid" id="componentGrid"></div>
+                        <div class="yc-platform-empty" id="emptyState">没有找到匹配的组件。</div>
+                    </section>
+
+                    <section class="yc-platform-section" id="foundation">
+                        <div class="yc-platform-section__header">
+                            <div>
+                                <h2 class="yc-platform-section__title">设计变量</h2>
+                                <p class="yc-platform-section__desc">通过 CSS 自定义属性统一颜色、圆角、间距、阴影、焦点环和组件尺寸。</p>
+                            </div>
+                        </div>
+                        <div class="yc-platform-token-board">
+                            <div class="yc-platform-code">
+<pre><code>:root {
+  --yc-layer-primary: var(--yc-color-primary-light-3);
+  --yc-box-shadow-floating-panel: 0 2px 12px var(--yc-shadow-color-medium);
+  --yc-border-radius-base: 6px;
+  --yc-focus-ring-primary-soft: 0 0 0 3px var(--yc-layer-primary);
+}</code></pre>
+                            </div>
+                            <div class="yc-platform-swatches">
+                                <div class="yc-platform-swatch yc-platform-swatch--primary">Primary<span>var(--yc-color-primary)</span></div>
+                                <div class="yc-platform-swatch yc-platform-swatch--success">Success<span>var(--yc-color-success)</span></div>
+                                <div class="yc-platform-swatch yc-platform-swatch--warning">Warning<span>var(--yc-color-warning)</span></div>
+                                <div class="yc-platform-swatch yc-platform-swatch--danger">Danger<span>var(--yc-color-danger)</span></div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="yc-platform-section" id="capabilities">
+                        <div class="yc-platform-section__header">
+                            <div>
+                                <h2 class="yc-platform-section__title">平台能力</h2>
+                                <p class="yc-platform-section__desc">让组件库从样式集合演进成统一设计语言、统一演示结构和统一测试心智的平台。</p>
+                            </div>
+                        </div>
+                        <div class="yc-platform-capabilities">
+                            <article class="yc-platform-capability">
+                                <div class="yc-platform-capability__icon"><i class="fas fa-palette"></i></div>
+                                <h3>主题与 Token</h3>
+                                <p>颜色层、阴影层、透明层和状态层统一收口，便于品牌换肤和明暗主题扩展。</p>
+                            </article>
+                            <article class="yc-platform-capability">
+                                <div class="yc-platform-capability__icon"><i class="fas fa-keyboard"></i></div>
+                                <h3>状态一致性</h3>
+                                <p>hover、focus、disabled、selected 和 loading 在核心组件之间保持统一节奏，降低认知切换成本。</p>
+                            </article>
+                            <article class="yc-platform-capability">
+                                <div class="yc-platform-capability__icon"><i class="fas fa-flask"></i></div>
+                                <h3>工作台式测试</h3>
+                                <p>复杂组件提供稳定的总入口和子场景拆分，更适合做平台级联调、验收和回归测试。</p>
+                            </article>
+                            <article class="yc-platform-capability">
+                                <div class="yc-platform-capability__icon"><i class="fas fa-puzzle-piece"></i></div>
+                                <h3>按需接入</h3>
+                                <p>既保留单组件 CSS 文件，也提供完整入口文件，兼容传统页面集成和渐进式接入。</p>
+                            </article>
+                        </div>
+                    </section>
+
+                    <section class="yc-platform-section" id="usage">
+                        <div class="yc-platform-section__header">
+                            <div>
+                                <h2 class="yc-platform-section__title">快速使用</h2>
+                                <p class="yc-platform-section__desc">平台首页负责发现组件，demo 页负责验证交互，CSS 文件负责项目接入。</p>
+                            </div>
+                        </div>
+                        <div class="yc-platform-token-board">
+                            <div class="yc-platform-code">
+<pre><code>&lt;link rel="stylesheet" href="./styles/index.css"&gt;
+
+&lt;button class="yc-button yc-button--primary"&gt;
+  主要按钮
+&lt;/button&gt;</code></pre>
+                            </div>
+                            <div class="yc-platform-reference">
+                                <h3>建议的调用方式</h3>
+                                <p>首页用于发现组件，demo 工作台用于验证状态和交互，样式入口用于正式接入项目代码。</p>
+                                <ul class="yc-platform-reference__list">
+                                    <li><i class="fas fa-check"></i><span>复杂组件优先提供 workbench 入口，再拆分子场景测试页。</span></li>
+                                    <li><i class="fas fa-check"></i><span>保持 demo 页标题、CSS 路径、工作台入口与实际样式文件一一对应。</span></li>
+                                    <li><i class="fas fa-check"></i><span>新增颜色或透明层语义时，优先进入 variables.css，而不是写死在页面里。</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+
+                    <footer class="yc-platform-footer">
+                        YC UI 现在已经形成“组件目录 + 平台首页 + demo shell + Table Workbench”的统一骨架，后续可以继续扩展更多复杂组件工作台。
+                    </footer>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        const featuredWorkbenches = [
+            {
+                title: 'Layout Workbench',
+                href: './views/demo-layout.html',
+                category: 'Workbench',
+                status: 'Updated',
+                icon: 'fa-table-cells-large',
+                description: '把 24 栅格、分栏配方和响应式策略统一收进工作台式页面骨架。'
+            },
+            {
+                title: 'Panel Demo',
+                href: './views/demo-panel.html',
+                category: 'Workbench',
+                status: 'New',
+                icon: 'fa-table-cells',
+                description: '统一属性区、状态区、任务区与侧栏面板语言，服务 Layout / Splitter / Window。'
+            },
+            {
+                title: 'Splitter Workbench',
+                href: './views/demo-splitter.html',
+                category: 'Workbench',
+                status: 'Updated',
+                icon: 'fa-up-down-left-right',
+                description: '让主工作区与辅助区的空间分配、折叠和嵌套布局形成稳定测试入口。'
+            },
+            {
+                title: 'Window Workbench',
+                href: './views/demo-window.html',
+                category: 'Workbench',
+                status: 'Updated',
+                icon: 'fa-window-maximize',
+                description: '统一拖动、缩放、最小化、最大化和停靠区行为，形成桌面式工作台演示。'
+            },
+            {
+                title: 'Table Workbench',
+                href: './views/demo-table.html',
+                category: 'Workbench',
+                status: 'Ready',
+                icon: 'fa-table',
+                description: '统一承接基础展示、编辑校验、树形、虚拟滚动和拖拽调整等子场景。'
+            },
+            {
+                title: 'Upload Demo',
+                href: './views/demo-upload.html',
+                category: 'Demo',
+                status: 'Updated',
+                icon: 'fa-cloud-arrow-up',
+                description: '覆盖点击上传、拖拽、图片墙、限制条件和手动上传的完整链路。'
+            },
+            {
+                title: 'Button Demo',
+                href: './views/demo-button.html',
+                category: 'Demo',
+                status: 'Updated',
+                icon: 'fa-rectangle-list',
+                description: '统一按钮语义、尺寸、形态和主题渐变，便于对齐整套基础操作语言。'
+            },
+            {
+                title: 'Chart Demo',
+                href: './views/demo-chart.html',
+                category: 'Demo',
+                status: 'New',
+                icon: 'fa-chart-line',
+                description: '基于 ECharts 的趋势、对比、构成与组合图表统一入口，适合经营看板和分析页。'
+            }
+        ];
+
+        const componentGroups = [
+            {
+                name: '基础',
+                icon: 'fa-cube',
+                items: [
+                    ['Button', 'demo-button.html', 'button'],
+                    ['Link', 'demo-link.html', 'link'],
+                    ['Text', 'demo-text.html', 'text'],
+                    ['Tag', 'demo-tag.html', 'tag'],
+                    ['Badge', 'demo-badge.html', 'badge'],
+                    ['Avatar', 'demo-avatar.html', 'avatar'],
+                    ['Divider', 'demo-divider.html', 'divider'],
+                    ['Skeleton', 'demo-skeleton.html', 'skeleton'],
+                    ['Empty', 'demo-empty.html', 'empty'],
+                    ['Result', 'demo-result.html', 'result']
+                ]
+            },
+            {
+                name: '输入',
+                icon: 'fa-keyboard',
+                items: [
+                    ['Input', 'demo-input.html', 'input'],
+                    ['InputNumber', 'demo-input-number.html', 'input-number'],
+                    ['InputTag', 'demo-input-tag.html', 'input-tag'],
+                    ['Select', 'demo-select.html', 'select'],
+                    ['Checkbox', 'demo-checkbox.html', 'checkbox'],
+                    ['Radio', 'demo-radio.html', 'radio'],
+                    ['Switch', 'demo-switch.html', 'switch'],
+                    ['Slider', 'demo-slider.html', 'slider'],
+                    ['Rating', 'demo-rate.html', 'rating'],
+                    ['Form', 'demo-form.html', 'form'],
+                    ['Autocomplete', 'demo-autocomplete.html', 'autocomplete'],
+                    ['Cascader', 'demo-cascader.html', 'cascader'],
+                    ['TreeSelect', 'demo-tree-select.html', 'tree-select'],
+                    ['Transfer', 'demo-transfer.html', 'transfer'],
+                    ['Upload', 'demo-upload.html', 'upload'],
+                    ['ColorPicker', 'demo-color-picker.html', 'color-picker']
+                ]
+            },
+            {
+                name: '日期时间',
+                icon: 'fa-calendar-days',
+                items: [
+                    ['DatePicker', 'demo-date-picker.html', 'date-picker'],
+                    ['DateTimePicker', 'demo-date-time-picker.html', 'date-picker'],
+                    ['TimePicker', 'demo-time-picker.html', 'time-picker'],
+                    ['Calendar', 'demo-calendar.html', 'calendar']
+                ]
+            },
+            {
+                name: '导航',
+                icon: 'fa-compass',
+                items: [
+                    ['Menu', 'demo-menu.html', 'menu'],
+                    ['Tabs', 'demo-tabs.html', 'tabs'],
+                    ['Breadcrumb', 'demo-breadcrumb.html', 'breadcrumb'],
+                    ['Dropdown', 'demo-dropdown.html', 'dropdown'],
+                    ['Anchor', 'demo-anchor.html', 'anchor'],
+                    ['Affix', 'demo-affix.html', 'affix'],
+                    ['BackTop', 'demo-backtop.html', 'backtop'],
+                    ['PageHeader', 'demo-page-header.html', 'page-header'],
+                    ['Pagination', 'demo-pagination.html', 'pagination'],
+                    ['Scrollbar', 'demo-scrollbar.html', 'scrollbar']
+                ]
+            },
+            {
+                name: '数据展示',
+                icon: 'fa-database',
+                items: [
+                    ['Table', 'demo-table.html', 'table'],
+                    ['Tree', 'demo-tree.html', 'tree'],
+                    ['ListView', 'demo-listview.html', 'listview'],
+                    ['Descriptions', 'demo-descriptions.html', 'descriptions'],
+                    ['Statistic', 'demo-statistic.html', 'statistic'],
+                    ['Progress', 'demo-progress.html', 'progress'],
+                    ['Chart', 'demo-chart.html', 'chart'],
+                    ['Timeline', 'demo-timeline.html', 'timeline'],
+                    ['Image', 'demo-image.html', 'image'],
+                    ['Filter', 'demo-filter.html', 'filter'],
+                    ['PropertyGrid', 'demo-property-grid.html', 'property-grid']
+                ]
+            },
+            {
+                name: '布局',
+                icon: 'fa-border-all',
+                items: [
+                    ['Container', 'demo-container.html', 'container'],
+                    ['Layout', 'demo-layout.html', 'layout'],
+                    ['Panel', 'demo-panel.html', 'panel'],
+                    ['Card', 'demo-card.html', 'card'],
+                    ['Collapse', 'demo-collapse.html', 'collapse'],
+                    ['Space', 'demo-space.html', 'space'],
+                    ['Flex', 'demo-flex.html', 'flex'],
+                    ['Splitter', 'demo-splitter.html', 'splitter'],
+                    ['TileLayout', 'demo-tilelayout.html', 'tilelayout'],
+                    ['Masonry', 'demo-masonry.html', 'masonry']
+                ]
+            },
+            {
+                name: '反馈',
+                icon: 'fa-comment-dots',
+                items: [
+                    ['Alert', 'demo-alert.html', 'alert'],
+                    ['Dialog', 'demo-dialog.html', 'dialog'],
+                    ['Window', 'demo-window.html', 'window'],
+                    ['Drawer', 'demo-drawer.html', 'drawer'],
+                    ['Notification', 'demo-notification.html', 'notification'],
+                    ['MessageBox', 'demo-messagebox.html', 'messagebox'],
+                    ['Loading', 'demo-loading.html', 'loading'],
+                    ['Popover', 'demo-popover.html', 'popover']
+                ]
+            },
+            {
+                name: '高级',
+                icon: 'fa-wand-magic-sparkles',
+                items: [
+                    ['Segmented', 'demo-segmented.html', 'segmented'],
+                    ['Carousel', 'demo-carousel.html', 'carousel'],
+                    ['Tour', 'demo-tour.html', 'tour'],
+                    ['Spreadsheet', 'demo-spreadsheet.html', 'spreadsheet'],
+                    ['Diagram', 'demo-diagram.html', 'diagram'],
+                    ['Map', 'demo-map.html', 'map'],
+                    ['OrgChart', 'demo-orgchart.html', 'orgchart'],
+                    ['Captcha', 'demo-captcha.html', 'captcha'],
+                    ['Barcode', 'demo-barcode.html', 'barcode'],
+                    ['Watermark', 'demo-watermark.html', 'watermark']
+                ]
+            }
+        ];
+
+        const descriptionMap = {
+            button: '统一主按钮、次按钮、危险按钮与按钮组。',
+            input: '统一输入框、前后缀、清除、状态反馈与格式化输入能力。',
+            select: '统一选择器、下拉层与搜索输入结构。',
+            container: '页级 Header / Aside / Main / Footer 骨架，适合后台壳层、文档页和协作工作区。',
+            layout: '统一 24 栅格工作台编排、分栏配方与响应式断点策略。',
+            panel: '统一属性区、状态区、任务区和侧栏面板结构，服务骨架型页面组件。',
+            card: '承接轻量信息块与面板化内容，是 Panel 语言里的基础内容容器。',
+            flex: '统一弹性布局方向、对齐、分布和间距语义。',
+            table: '提供 Table Workbench 入口，覆盖展示、交互、性能与数据操作。',
+            splitter: '统一主工作区与辅助区的拖动分栏、折叠区和嵌套布局结构。',
+            masonry: '适合素材墙、灵感流和不等高卡片展示。',
+            upload: '统一进度反馈、图片墙和上传状态语言。',
+            progress: '统一线性、环形与状态反馈视觉语言。',
+            chart: '基于 ECharts 封装常见业务图表，覆盖趋势、对比、构成与组合分析。',
+            dialog: '统一模态窗口、标题区与操作区节奏。',
+            window: '统一桌面式窗口的拖动、缩放、最小化、最大化与停靠区行为。',
+            popover: '统一浮层、箭头定位和轻量提示交互。',
+            spreadsheet: '高密度数据输入与网格编辑场景。',
+            'property-grid': '属性面板、分组行和表单编辑场景。',
+            watermark: '为预览页、导出页和共享视图提供统一水印层。'
+        };
+
+        const componentGrid = document.getElementById('componentGrid');
+        const workbenchGrid = document.getElementById('workbenchGrid');
+        const categoryTabs = document.getElementById('categoryTabs');
+        const searchInput = document.getElementById('componentSearch');
+        const visibleCount = document.getElementById('visibleCount');
+        const emptyState = document.getElementById('emptyState');
+        const allComponents = componentGroups.flatMap(group => group.items.map(item => ({
+            category: group.name,
+            icon: group.icon,
+            name: item[0],
+            href: item[1],
+            css: item[2]
+        })));
+
+        const cssFileCount = new Set(allComponents.map(item => item.css)).size;
+        let activeCategory = '全部';
+
+        function getDescription(component) {
+            return descriptionMap[component.css] || `${component.name} 适用于 ${component.category} 场景，保持统一 demo shell 和样式入口。`;
+        }
+
+        function setTheme(theme) {
+            document.documentElement.setAttribute('yc-theme', theme);
+            localStorage.setItem('yc-theme', theme);
+            const icon = document.querySelector('#themeToggle i');
+            if (icon) icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        }
+
+        function renderWorkbenchCards() {
+            workbenchGrid.innerHTML = featuredWorkbenches.map(item => `
+                <a class="yc-platform-component" href="${item.href}" aria-label="${item.title}">
+                    <span class="yc-platform-component__icon"><i class="fas ${item.icon}"></i></span>
+                    <span>
+                        <span class="yc-platform-component__title">
+                            <span>${item.title}</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </span>
+                        <span class="yc-platform-component__desc">${item.description}</span>
+                        <span class="yc-platform-component__meta">
+                            <span class="yc-platform-chip">${item.category}</span>
+                            <span class="yc-platform-chip yc-platform-chip--success">${item.status}</span>
+                        </span>
+                    </span>
+                </a>
+            `).join('');
+        }
+
+        function renderTabs() {
+            const categories = ['全部', ...componentGroups.map(group => group.name)];
+            categoryTabs.innerHTML = categories.map(category => `
+                <button class="yc-platform-tab" type="button" data-category="${category}" aria-pressed="${category === activeCategory}">
+                    ${category}
+                </button>
+            `).join('');
+        }
+
+        function renderComponents() {
+            const keyword = searchInput.value.trim().toLowerCase();
+            const filtered = allComponents.filter(component => {
+                const matchCategory = activeCategory === '全部' || component.category === activeCategory;
+                const haystack = `${component.name} ${component.category} ${component.css} ${getDescription(component)}`.toLowerCase();
+                return matchCategory && (!keyword || haystack.includes(keyword));
+            });
+
+            componentGrid.innerHTML = filtered.map(component => {
+                const isDemoReady = Boolean(component.href);
+                const target = isDemoReady ? `./views/${component.href}` : `./styles/components/${component.css}.css`;
+                const statusText = isDemoReady ? 'Demo' : 'CSS only';
+                const statusClass = isDemoReady ? 'yc-platform-chip--success' : 'yc-platform-chip--warning';
+
+                return `
+                    <a class="yc-platform-component${isDemoReady ? '' : ' is-muted'}" href="${target}" aria-label="${component.name}">
+                        <span class="yc-platform-component__icon"><i class="fas ${component.icon}"></i></span>
+                        <span>
+                            <span class="yc-platform-component__title">
+                                <span>${component.name}</span>
+                                <i class="fas ${isDemoReady ? 'fa-arrow-right' : 'fa-file-code'}"></i>
+                            </span>
+                            <span class="yc-platform-component__desc">${getDescription(component)}</span>
+                            <span class="yc-platform-component__meta">
+                                <span class="yc-platform-chip">${component.category}</span>
+                                <span class="yc-platform-chip">${component.css}.css</span>
+                                <span class="yc-platform-chip ${statusClass}">${statusText}</span>
+                            </span>
+                        </span>
+                    </a>
+                `;
+            }).join('');
+
+            visibleCount.textContent = `${filtered.length} 个组件`;
+            document.getElementById('metricComponentCount').textContent = `${filtered.length}`;
+            document.getElementById('sidebarComponentCount').textContent = `${filtered.length} `;
+            emptyState.classList.toggle('is-visible', filtered.length === 0);
+            componentGrid.hidden = filtered.length === 0;
+        }
+
+        categoryTabs.addEventListener('click', event => {
+            const button = event.target.closest('[data-category]');
+            if (!button) return;
+            activeCategory = button.dataset.category;
+            renderTabs();
+            renderComponents();
+        });
+
+        searchInput.addEventListener('input', renderComponents);
+
+        document.getElementById('themeToggle').addEventListener('click', () => {
+            const current = document.documentElement.getAttribute('yc-theme') || 'light';
+            setTheme(current === 'dark' ? 'light' : 'dark');
+        });
+
+        document.getElementById('rtlToggle').addEventListener('click', event => {
+            const rtlEnabled = document.documentElement.getAttribute('dir') === 'rtl';
+            document.documentElement.setAttribute('dir', rtlEnabled ? 'ltr' : 'rtl');
+            event.currentTarget.classList.toggle('yc-button--primary', !rtlEnabled);
+        });
+
+        const savedTheme = localStorage.getItem('yc-theme') || 'light';
+
+        setTheme(savedTheme);
+        renderWorkbenchCards();
+        renderTabs();
+        renderComponents();
+    </script>
+</body>
+</html>

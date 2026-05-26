@@ -1,0 +1,136 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>虚拟滚动 - Table Workbench</title>
+    <script src="../../scripts/table-workbench-theme.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../styles/index.css">
+    <link rel="stylesheet" href="../../styles/components/button.css">
+    <link rel="stylesheet" href="../../styles/table-workbench.css">
+    <script src="https://unpkg.com/vue@3.4.0/dist/vue.global.prod.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <!--<div class="page-header">
+                <h1>虚拟滚动</h1>
+                <p>用统一样式验证大数据量表格的渲染性能，确保长列表滚动和固定表头都保持稳定。</p>
+            </div>
+
+            <div class="actions">
+                <a class="yc-button yc-button&#45;&#45;small" href="../demo-table.html">
+                    <i class="fas fa-arrow-left"></i>
+                    返回 Table Workbench
+                </a>
+            </div>-->
+
+            <div class="demo-card">
+                <h3>虚拟滚动列表</h3>
+                <div class="actions">
+                    <button class="yc-button yc-button--primary yc-button--small" type="button" @click="loadRows(1000)">加载 1,000 条</button>
+                    <button class="yc-button yc-button--small" type="button" @click="loadRows(10000)">加载 10,000 条</button>
+                    <button class="yc-button yc-button--small" type="button" @click="loadRows(30000)">加载 30,000 条</button>
+                    <span class="table-meta">当前数据量：{{ rows.length.toLocaleString('zh-CN') }} 条</span>
+                </div>
+                <div class="virtual-scroll-container" ref="container" @scroll="handleScroll">
+                    <div :style="{ height: `${totalHeight}px`, position: 'relative' }">
+                        <table class="yc-data-table" :style="{ position: 'absolute', top: '0', left: '0', width: '100%' }">
+                            <thead class="table-sticky-head">
+                                <tr>
+                                    <th class="cell-center" style="width: 88px;">ID</th>
+                                    <th>姓名</th>
+                                    <th>角色</th>
+                                    <th>部门</th>
+                                    <th class="cell-center" style="width: 88px;">年龄</th>
+                                    <th>所在城市</th>
+                                    <th class="cell-center" style="width: 88px;">评分</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr
+                                    v-for="row in visibleRows"
+                                    :key="row.id"
+                                    :style="{ transform: `translateY(${offsetY}px)` }"
+                                >
+                                    <td class="cell-center">{{ row.id }}</td>
+                                    <td>{{ row.name }}</td>
+                                    <td>{{ row.role }}</td>
+                                    <td>{{ row.department }}</td>
+                                    <td class="cell-center">{{ row.age }}</td>
+                                    <td>{{ row.city }}</td>
+                                    <td class="cell-center">{{ row.score }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="result">状态：当前渲染 {{ visibleRows.length }} 行，偏移 {{ offsetY }}px</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const { createApp, computed, onMounted, ref } = Vue;
+
+        createApp({
+            setup() {
+                const rows = ref([]);
+                const rowHeight = 44;
+                const viewportHeight = 400;
+                const scrollTop = ref(0);
+
+                const totalHeight = computed(() => rows.value.length * rowHeight);
+                const startIndex = computed(() => Math.floor(scrollTop.value / rowHeight));
+                const visibleCount = computed(() => Math.ceil(viewportHeight / rowHeight) + 6);
+                const offsetY = computed(() => startIndex.value * rowHeight);
+                const visibleRows = computed(() => {
+                    const start = Math.max(0, startIndex.value);
+                    const end = Math.min(rows.value.length, start + visibleCount.value);
+                    return rows.value.slice(start, end);
+                });
+
+                const namePool = ['张三', '李四', '王五', '赵六', '孙七', '周八', '吴九', '郑十'];
+                const rolePool = ['前端工程师', '后端工程师', '测试工程师', '产品经理', 'UI 设计师', '数据分析师'];
+                const departmentPool = ['技术研发部', '产品设计部', '增长运营部', '客户成功部'];
+                const cityPool = ['北京', '上海', '广州', '深圳', '杭州', '成都', '武汉', '南京'];
+
+                function buildRows(count) {
+                    return Array.from({ length: count }, (_, index) => ({
+                        id: index + 1,
+                        name: `${namePool[index % namePool.length]}-${index + 1}`,
+                        role: rolePool[index % rolePool.length],
+                        department: departmentPool[index % departmentPool.length],
+                        age: 22 + (index % 14),
+                        city: cityPool[index % cityPool.length],
+                        score: 70 + (index % 30)
+                    }));
+                }
+
+                function loadRows(count) {
+                    rows.value = buildRows(count);
+                    scrollTop.value = 0;
+                }
+
+                function handleScroll(event) {
+                    scrollTop.value = event.target.scrollTop;
+                }
+
+                onMounted(() => {
+                    loadRows(1000);
+                });
+
+                return {
+                    rows,
+                    totalHeight,
+                    visibleRows,
+                    offsetY,
+                    loadRows,
+                    handleScroll
+                };
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>

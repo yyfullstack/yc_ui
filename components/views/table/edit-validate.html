@@ -1,0 +1,261 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>编辑与校验 - Table Workbench</title>
+    <script src="../../scripts/table-workbench-theme.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../styles/index.css">
+    <link rel="stylesheet" href="../../styles/components/button.css">
+    <link rel="stylesheet" href="../../styles/table-workbench.css">
+    <script src="https://unpkg.com/vue@3.4.0/dist/vue.global.prod.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <!--<div class="page-header">
+                <h1>编辑与校验</h1>
+                <p>把可编辑单元格、字段校验和右键菜单放到同一页里，便于验证表格的业务编辑体验。</p>
+            </div>
+
+            <div class="actions">
+                <a class="yc-button yc-button&#45;&#45;small" href="../demo-table.html">
+                    <i class="fas fa-arrow-left"></i>
+                    返回 Table Workbench
+                </a>
+            </div>-->
+
+            <div class="demo-card">
+                <h3>可编辑表格</h3>
+                <div class="actions">
+                    <button class="yc-button yc-button--primary yc-button--small" type="button" @click="insertRow">新增记录</button>
+                    <button class="yc-button yc-button--small" type="button" @click="saveRows">保存</button>
+                </div>
+                <table class="yc-data-table stripe border">
+                    <thead>
+                        <tr>
+                            <th class="cell-center" style="width: 72px;">序号</th>
+                            <th>姓名</th>
+                            <th class="cell-center" style="width: 110px;">性别</th>
+                            <th class="cell-center" style="width: 96px;">年龄</th>
+                            <th>角色</th>
+                            <th>所在城市</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(row, index) in editableRows" :key="row.id">
+                            <td class="cell-center">{{ index + 1 }}</td>
+                            <td><input class="edit-input" v-model="row.name" type="text"></td>
+                            <td class="cell-center">
+                                <select class="edit-input" v-model="row.gender">
+                                    <option value="男">男</option>
+                                    <option value="女">女</option>
+                                </select>
+                            </td>
+                            <td class="cell-center"><input class="edit-input" v-model.number="row.age" type="number"></td>
+                            <td><input class="edit-input" v-model="row.role" type="text"></td>
+                            <td><input class="edit-input" v-model="row.city" type="text"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="result">{{ saveResult }}</div>
+            </div>
+
+            <div class="demo-card">
+                <h3>字段校验</h3>
+                <div class="actions">
+                    <button class="yc-button yc-button--primary yc-button--small" type="button" @click="validateRows">执行校验</button>
+                </div>
+                <table class="yc-data-table stripe border">
+                    <thead>
+                        <tr>
+                            <th class="cell-center" style="width: 72px;">序号</th>
+                            <th>姓名</th>
+                            <th class="cell-center" style="width: 96px;">年龄</th>
+                            <th>邮箱</th>
+                            <th>手机号</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(row, index) in validationRows" :key="`validate-${row.id}`">
+                            <td class="cell-center">{{ index + 1 }}</td>
+                            <td><input class="edit-input" :class="{ 'cell-error': validationErrors[row.id]?.name }" v-model="row.name" type="text"></td>
+                            <td class="cell-center"><input class="edit-input" :class="{ 'cell-error': validationErrors[row.id]?.age }" v-model.number="row.age" type="number"></td>
+                            <td><input class="edit-input" :class="{ 'cell-error': validationErrors[row.id]?.email }" v-model="row.email" type="email"></td>
+                            <td><input class="edit-input" :class="{ 'cell-error': validationErrors[row.id]?.phone }" v-model="row.phone" type="text"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="result">{{ validationResult }}</div>
+            </div>
+
+            <div class="demo-card">
+                <h3>右键菜单</h3>
+                <table class="yc-data-table stripe border" @contextmenu.prevent>
+                    <thead>
+                        <tr>
+                            <th class="cell-center" style="width: 72px;">序号</th>
+                            <th>姓名</th>
+                            <th>角色</th>
+                            <th>部门</th>
+                            <th class="cell-center" style="width: 88px;">年龄</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(row, index) in contextRows" :key="`context-${row.id}`" @contextmenu.prevent="openContextMenu($event, row)">
+                            <td class="cell-center">{{ index + 1 }}</td>
+                            <td>{{ row.name }}</td>
+                            <td>{{ row.role }}</td>
+                            <td>{{ row.department }}</td>
+                            <td class="cell-center">{{ row.age }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="result">{{ contextResult }}</div>
+            </div>
+        </div>
+
+        <div v-if="contextMenu.visible" class="context-menu" :style="{ left: `${contextMenu.x}px`, top: `${contextMenu.y}px` }">
+            <div class="context-menu-item" @click="applyContextAction('copy')">
+                <i class="fas fa-copy"></i>
+                复制
+            </div>
+            <div class="context-menu-item" @click="applyContextAction('detail')">
+                <i class="fas fa-eye"></i>
+                查看详情
+            </div>
+            <div class="context-menu-divider"></div>
+            <div class="context-menu-item" @click="applyContextAction('remove')">
+                <i class="fas fa-trash"></i>
+                删除记录
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const { createApp, onMounted, onUnmounted, ref } = Vue;
+
+        createApp({
+            setup() {
+                const editableRows = ref([
+                    { id: 1, name: '张三', gender: '男', age: 28, role: '前端工程师', city: '北京' },
+                    { id: 2, name: '李四', gender: '女', age: 32, role: '后端工程师', city: '上海' },
+                    { id: 3, name: '王五', gender: '男', age: 26, role: '测试工程师', city: '广州' }
+                ]);
+                const saveResult = ref('状态：等待编辑');
+
+                const validationRows = ref([
+                    { id: 11, name: '赵六', age: 31, email: 'zhaoliu@example.com', phone: '13800138004' },
+                    { id: 12, name: '', age: 16, email: 'invalid-email', phone: '123' },
+                    { id: 13, name: '孙七', age: 29, email: 'sunqi@example.com', phone: '13800138005' }
+                ]);
+                const validationErrors = ref({});
+                const validationResult = ref('状态：等待校验');
+
+                const contextRows = ref([
+                    { id: 21, name: '张三', role: '前端工程师', department: '技术研发部', age: 28 },
+                    { id: 22, name: '李四', role: '后端工程师', department: '技术研发部', age: 32 },
+                    { id: 23, name: '赵六', role: '产品经理', department: '产品设计部', age: 31 },
+                    { id: 24, name: '周八', role: '运营经理', department: '增长运营部', age: 27 }
+                ]);
+                const contextMenu = ref({
+                    visible: false,
+                    x: 0,
+                    y: 0,
+                    row: null
+                });
+                const contextResult = ref('状态：等待右键操作');
+
+                function insertRow() {
+                    editableRows.value.unshift({
+                        id: Date.now(),
+                        name: '',
+                        gender: '男',
+                        age: 24,
+                        role: '',
+                        city: ''
+                    });
+                    saveResult.value = '状态：已插入新记录';
+                }
+
+                function saveRows() {
+                    saveResult.value = `状态：已保存 ${editableRows.value.length} 条可编辑记录`;
+                }
+
+                function validateRows() {
+                    const nextErrors = {};
+
+                    validationRows.value.forEach(row => {
+                        nextErrors[row.id] = {};
+                        if (!row.name.trim()) nextErrors[row.id].name = true;
+                        if (!row.age || row.age < 18 || row.age > 60) nextErrors[row.id].age = true;
+                        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(row.email)) nextErrors[row.id].email = true;
+                        if (!/^1[3-9]\d{9}$/.test(row.phone)) nextErrors[row.id].phone = true;
+                    });
+
+                    validationErrors.value = nextErrors;
+                    const hasError = Object.values(nextErrors).some(item => Object.keys(item).length > 0);
+                    validationResult.value = hasError
+                        ? '状态：发现校验异常，请检查红色输入框'
+                        : '状态：全部字段校验通过';
+                }
+
+                function openContextMenu(event, row) {
+                    contextMenu.value = {
+                        visible: true,
+                        x: event.clientX,
+                        y: event.clientY,
+                        row
+                    };
+                }
+
+                function closeContextMenu() {
+                    contextMenu.value.visible = false;
+                }
+
+                function applyContextAction(action) {
+                    const row = contextMenu.value.row;
+                    if (!row) return;
+
+                    if (action === 'remove') {
+                        contextRows.value = contextRows.value.filter(item => item.id !== row.id);
+                    }
+
+                    const labelMap = {
+                        copy: '复制',
+                        detail: '查看详情',
+                        remove: '删除记录'
+                    };
+                    contextResult.value = `状态：已对 ${row.name} 执行 ${labelMap[action] || action}`;
+                    closeContextMenu();
+                }
+
+                onMounted(() => {
+                    document.addEventListener('click', closeContextMenu);
+                });
+
+                onUnmounted(() => {
+                    document.removeEventListener('click', closeContextMenu);
+                });
+
+                return {
+                    editableRows,
+                    saveResult,
+                    validationRows,
+                    validationErrors,
+                    validationResult,
+                    contextRows,
+                    contextMenu,
+                    contextResult,
+                    insertRow,
+                    saveRows,
+                    validateRows,
+                    openContextMenu,
+                    applyContextAction
+                };
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>

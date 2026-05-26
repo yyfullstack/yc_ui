@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OrgChart 组织架构 - YC UI</title>
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">OrgChart 组织架构</h1>
+            <p class="demo-page-subtitle">把组织树、筛选、缩放和成员详情放进同一工作台，更适合企业级管理、审批链路和团队可视化场景。</p>
+        </div>
+
+        <div class="demo-section">
+            <h3>组织总览</h3>
+            <div class="demo-stat-cards">
+                <div class="demo-stat-card demo-stat-card--purple">
+                    <div class="demo-stat-card__value" id="orgchartMetricPeople">0</div>
+                    <div class="demo-stat-card__label">成员总数</div>
+                </div>
+                <div class="demo-stat-card demo-stat-card--green">
+                    <div class="demo-stat-card__value" id="orgchartMetricDept">0</div>
+                    <div class="demo-stat-card__label">部门数量</div>
+                </div>
+                <div class="demo-stat-card demo-stat-card--blue">
+                    <div class="demo-stat-card__value" id="orgchartMetricDepth">0</div>
+                    <div class="demo-stat-card__label">层级深度</div>
+                </div>
+                <div class="demo-stat-card demo-stat-card--pink">
+                    <div class="demo-stat-card__value" id="orgchartZoomLabel">100%</div>
+                    <div class="demo-stat-card__label">当前缩放</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>组织工作台</h3>
+            <div class="yc-orgchart yc-orgchart-workbench">
+                <div class="yc-orgchart__toolbar">
+                    <span class="yc-orgchart__toolbar-title">组织结构视图</span>
+                    <button class="yc-orgchart__toolbar-btn" type="button" id="orgchartExpandAll"><i class="demo-icon" data-icon="expand" aria-hidden="true"></i> 展开全部</button>
+                    <button class="yc-orgchart__toolbar-btn" type="button" id="orgchartCollapseAll"><i class="demo-icon" data-icon="compress" aria-hidden="true"></i> 收起全部</button>
+                    <div class="yc-orgchart__zoom-controls">
+                        <button class="yc-orgchart__zoom-btn" type="button" id="orgchartZoomOut"><i class="demo-icon" data-icon="minus" aria-hidden="true"></i></button>
+                        <button class="yc-orgchart__zoom-btn" type="button" id="orgchartZoomIn"><i class="demo-icon" data-icon="plus" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+
+                <div class="yc-orgchart-workbench__filters">
+                    <div class="yc-orgchart__search">
+                        <input id="orgchartSearch" type="text" class="yc-orgchart__search-input" placeholder="搜索成员、岗位或部门">
+                    </div>
+                    <div class="yc-orgchart-workbench__chips">
+                        <button type="button" class="yc-orgchart-workbench__chip is-active" data-org-filter="全部">全部</button>
+                        <button type="button" class="yc-orgchart-workbench__chip" data-org-filter="平台研发">平台研发</button>
+                        <button type="button" class="yc-orgchart-workbench__chip" data-org-filter="产品设计">产品设计</button>
+                        <button type="button" class="yc-orgchart-workbench__chip" data-org-filter="运营支持">运营支持</button>
+                        <button type="button" class="yc-orgchart-workbench__chip" data-org-filter="管理层">管理层</button>
+                    </div>
+                </div>
+
+                <div class="yc-orgchart-workbench__layout">
+                    <div class="yc-orgchart-workbench__canvas">
+                        <div class="yc-orgchart__viewport">
+                            <div class="yc-orgchart__tree" id="orgchartTree"></div>
+                        </div>
+                    </div>
+
+                    <aside class="yc-orgchart-workbench__inspector">
+                        <h4 class="yc-orgchart-workbench__inspector-title">成员详情</h4>
+                        <div id="orgchartInspector"></div>
+                        <div class="yc-orgchart-workbench__legend">
+                            <div class="yc-orgchart-workbench__legend-title">图例</div>
+                            <div class="yc-orgchart-workbench__legend-item"><span class="yc-orgchart-workbench__legend-dot yc-orgchart__node-avatar--primary"></span> 管理层 / 核心负责人</div>
+                            <div class="yc-orgchart-workbench__legend-item"><span class="yc-orgchart-workbench__legend-dot yc-orgchart__node-avatar--success"></span> 研发与工程</div>
+                            <div class="yc-orgchart-workbench__legend-item"><span class="yc-orgchart-workbench__legend-dot yc-orgchart__node-avatar--warning"></span> 产品与设计</div>
+                            <div class="yc-orgchart-workbench__legend-item"><span class="yc-orgchart-workbench__legend-dot yc-orgchart__node-avatar--danger"></span> 运营与支持</div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../scripts/demo-orgchart-workbench.js"></script>
+    <script src="../scripts/demo-shell.js"></script>
+</body>
+</html>

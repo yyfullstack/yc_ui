@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layout 栅格布局组件 - YC UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+    <style>
+        .layout-demo-stage--dashboard {
+            min-height: 500px;
+        }
+
+        .layout-demo-stage--recipes,
+        .layout-demo-stage--responsive {
+            min-height: 340px;
+        }
+
+        .layout-demo-canvas,
+        .layout-demo-responsive-shell {
+            display: grid;
+            gap: 16px;
+            padding: 20px;
+            height: 100%;
+            box-sizing: border-box;
+        }
+
+        .layout-demo-row {
+            width: 100%;
+        }
+
+        .layout-demo-row--gutter {
+            --yc-row-gutter: 16px;
+        }
+
+        .layout-demo-row--compact {
+            --yc-row-gutter: 12px;
+        }
+
+        .layout-demo-block {
+            display: grid;
+            gap: 8px;
+            min-height: 72px;
+            padding: 14px;
+            border: 1px solid var(--yc-color-border-light);
+            border-radius: var(--yc-border-radius-medium);
+            background: linear-gradient(180deg, var(--yc-color-bg) 0%, var(--yc-color-fill-extra-light) 100%);
+            box-shadow: var(--yc-box-shadow-base);
+            color: var(--yc-color-text-primary);
+        }
+
+        .layout-demo-block--kpi {
+            min-height: 96px;
+        }
+
+        .layout-demo-block--primary {
+            border-color: var(--yc-color-border-hover);
+            background: linear-gradient(135deg, var(--yc-layer-primary-soft) 0%, var(--yc-color-bg) 100%);
+        }
+
+        .layout-demo-block--success {
+            background: linear-gradient(135deg, var(--yc-layer-success-tint) 0%, var(--yc-color-bg) 100%);
+        }
+
+        .layout-demo-block--warning {
+            background: linear-gradient(135deg, var(--yc-layer-warning-tint) 0%, var(--yc-color-bg) 100%);
+        }
+
+        .layout-demo-block--danger {
+            background: linear-gradient(135deg, var(--yc-layer-danger-tint) 0%, var(--yc-color-bg) 100%);
+        }
+
+        .layout-demo-block__eyebrow {
+            color: var(--yc-color-text-secondary);
+            font-size: var(--yc-font-size-extra-small);
+        }
+
+        .layout-demo-block__title {
+            margin: 0;
+            color: var(--yc-color-text-primary);
+            font-size: var(--yc-font-size-small);
+            font-weight: var(--yc-font-weight-semibold);
+        }
+
+        .layout-demo-block__meta {
+            color: var(--yc-color-text-secondary);
+            font-size: var(--yc-font-size-extra-small);
+            line-height: 1.6;
+        }
+
+        .layout-demo-block__value {
+            font-size: 28px;
+            font-weight: var(--yc-font-weight-bold);
+            line-height: 1;
+        }
+
+        .layout-demo-breakpoint-list {
+            display: grid;
+            gap: 10px;
+        }
+
+        .layout-demo-breakpoint-item {
+            display: grid;
+            gap: 6px;
+            padding: 12px;
+            border: 1px solid var(--yc-color-border-light);
+            border-radius: var(--yc-border-radius-medium);
+            background: var(--yc-color-bg);
+        }
+
+        .layout-demo-breakpoint-item__title {
+            color: var(--yc-color-text-primary);
+            font-size: var(--yc-font-size-small);
+            font-weight: var(--yc-font-weight-semibold);
+        }
+
+        .layout-demo-breakpoint-item__meta {
+            color: var(--yc-color-text-secondary);
+            font-size: var(--yc-font-size-extra-small);
+            line-height: 1.6;
+        }
+
+        .layout-demo-note-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 12px 14px;
+            border-radius: var(--yc-border-radius-medium);
+            background: var(--yc-color-bg);
+            border: 1px solid var(--yc-color-border-light);
+        }
+
+        .layout-demo-note-row__label {
+            color: var(--yc-color-text-primary);
+            font-size: var(--yc-font-size-small);
+            font-weight: var(--yc-font-weight-medium);
+        }
+
+        .layout-demo-note-row__meta {
+            color: var(--yc-color-text-secondary);
+            font-size: var(--yc-font-size-extra-small);
+        }
+
+        .layout-demo-chip-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .layout-demo-chip-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">Layout 栅格布局组件</h1>
+            <p class="demo-page-subtitle">
+                用统一的 24 栅格系统组织后台工作台、筛选区、图表区和属性区，
+                让复杂页面的编排方式、留白节奏和响应式断点保持一致。
+            </p>
+        </div>
+
+        <div class="demo-shell-toolbar">
+            <div class="demo-shell-meta">
+                <a class="yc-button yc-button--small" href="../index.html#components">返回组件平台</a>
+                <span class="demo-shell-pill"><i class="fas fa-table-cells-large"></i> 24 栅格</span>
+                <span class="demo-shell-pill"><i class="fas fa-ruler-combined"></i> 布局配方</span>
+                <span class="demo-shell-pill"><i class="fas fa-mobile-screen-button"></i> 响应式断点</span>
+            </div>
+            <div class="demo-shell-actions">
+                <a class="demo-shell-anchor" href="#layout-workbench">工作台编排</a>
+                <a class="demo-shell-anchor" href="#layout-recipes">分栏配方</a>
+                <a class="demo-shell-anchor" href="#layout-responsive">响应式</a>
+            </div>
+        </div>
+
+        <div class="demo-section" id="layout-workbench">
+            <h3>工作台编排</h3>
+            <p class="demo-description">
+                这类页面通常会同时承载导航、筛选、指标卡片、表格和属性栏。栅格组件的价值，不是把数字摆整齐，而是让整页节奏更稳定。
+            </p>
+
+            <div class="demo-workbench-layout">
+                <aside class="demo-workbench-sidebar">
+                    <div class="demo-workbench-card">
+                        <h4 class="demo-workbench-card__title">布局配方</h4>
+                        <p class="demo-workbench-card__text">推荐先用 24 栅格切大区，再在每个区块内部使用更小的行列组合，避免页面一上来就碎成很多小块。</p>
+                    </div>
+
+                    <div class="demo-workbench-card">
+                        <h4 class="demo-workbench-card__title">常见比例</h4>
+                        <div class="layout-demo-breakpoint-list">
+                            <div class="layout-demo-breakpoint-item">
+                                <div class="layout-demo-breakpoint-item__title">16 / 8</div>
+                                <div class="layout-demo-breakpoint-item__meta">主内容区 + 右侧概览栏，适合分析页与详情页。</div>
+                            </div>
+                            <div class="layout-demo-breakpoint-item">
+                                <div class="layout-demo-breakpoint-item__title">8 / 8 / 8</div>
+                                <div class="layout-demo-breakpoint-item__meta">三栏信息对比，适合监控、状态概览和运营数据面板。</div>
+                            </div>
+                            <div class="layout-demo-breakpoint-item">
+                                <div class="layout-demo-breakpoint-item__title">6 / 6 / 6 / 6</div>
+                                <div class="layout-demo-breakpoint-item__meta">四块指标卡片，适合工作台首屏 KPI。</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="demo-workbench-card">
+                        <h4 class="demo-workbench-card__title">断点建议</h4>
+                        <p class="demo-workbench-card__text">桌面端优先保持多列阅读效率，小屏时按 24 列自动堆叠为单列，保证筛选器和主内容阅读顺序自然。</p>
+                    </div>
+                </aside>
+
+                <div class="demo-workbench-surface">
+                    <div class="demo-workbench-toolbar">
+                        <div class="demo-workbench-toolbar__group">
+                            <span class="demo-tag">Layout Workbench</span>
+                            <div class="demo-workbench-pills">
+                                <span class="demo-shell-pill">KPI 编排</span>
+                                <span class="demo-shell-pill">筛选器布局</span>
+                                <span class="demo-shell-pill">主内容区 + 侧栏</span>
+                            </div>
+                        </div>
+                        <div class="demo-workbench-toolbar__actions">
+                            <span class="demo-shell-pill"><i class="fas fa-columns"></i> `yc-row` / `yc-col-*`</span>
+                        </div>
+                    </div>
+
+                    <div class="demo-workbench-stage demo-workbench-stage--grid layout-demo-stage--dashboard">
+                        <div class="layout-demo-canvas">
+                            <div class="yc-row layout-demo-row layout-demo-row--gutter">
+                                <div class="yc-col-6">
+                                    <div class="layout-demo-block layout-demo-block--kpi layout-demo-block--primary">
+                                        <span class="layout-demo-block__eyebrow">col-6</span>
+                                        <span class="layout-demo-block__value">128</span>
+                                        <span class="layout-demo-block__meta">在线组件</span>
+                                    </div>
+                                </div>
+                                <div class="yc-col-6">
+                                    <div class="layout-demo-block layout-demo-block--kpi layout-demo-block--success">
+                                        <span class="layout-demo-block__eyebrow">col-6</span>
+                                        <span class="layout-demo-block__value">4,892</span>
+                                        <span class="layout-demo-block__meta">今日请求</span>
+                                    </div>
+                                </div>
+                                <div class="yc-col-6">
+                                    <div class="layout-demo-block layout-demo-block--kpi layout-demo-block--warning">
+                                        <span class="layout-demo-block__eyebrow">col-6</span>
+                                        <span class="layout-demo-block__value">36</span>
+                                        <span class="layout-demo-block__meta">待审核变更</span>
+                                    </div>
+                                </div>
+                                <div class="yc-col-6">
+                                    <div class="layout-demo-block layout-demo-block--kpi layout-demo-block--danger">
+                                        <span class="layout-demo-block__eyebrow">col-6</span>
+                                        <span class="layout-demo-block__value">2</span>
+                                        <span class="layout-demo-block__meta">高优先级告警</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="yc-row layout-demo-row layout-demo-row--gutter">
+                                <div class="yc-col-16">
+                                    <div class="layout-demo-block">
+                                        <span class="layout-demo-block__eyebrow">col-16</span>
+                                        <h4 class="layout-demo-block__title">主分析区</h4>
+                                        <div class="layout-demo-block__meta">放图表、表格或详情正文。大区优先稳定，内部再继续细分二级栅格。</div>
+                                    </div>
+                                </div>
+                                <div class="yc-col-8">
+                                    <div class="layout-demo-block layout-demo-block--primary">
+                                        <span class="layout-demo-block__eyebrow">col-8</span>
+                                        <h4 class="layout-demo-block__title">右侧策略栏</h4>
+                                        <div class="layout-demo-block__meta">适合承载摘要、提醒、快捷操作和属性面板。</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="yc-row layout-demo-row layout-demo-row--gutter">
+                                <div class="yc-col-8">
+                                    <div class="layout-demo-block">
+                                        <span class="layout-demo-block__eyebrow">col-8</span>
+                                        <h4 class="layout-demo-block__title">筛选条件</h4>
+                                        <div class="layout-demo-block__meta">表单控件可以先按 8 / 8 / 8 规划，再在内部按字段长度细调。</div>
+                                    </div>
+                                </div>
+                                <div class="yc-col-8">
+                                    <div class="layout-demo-block">
+                                        <span class="layout-demo-block__eyebrow">col-8</span>
+                                        <h4 class="layout-demo-block__title">执行状态</h4>
+                                        <div class="layout-demo-block__meta">中间区域适合承载时间轴、步骤状态和发布流水线信息。</div>
+                                    </div>
+                                </div>
+                                <div class="yc-col-8">
+                                    <div class="layout-demo-block">
+                                        <span class="layout-demo-block__eyebrow">col-8</span>
+                                        <h4 class="layout-demo-block__title">风险提示</h4>
+                                        <div class="layout-demo-block__meta">边缘区块可承载提醒、审批或补充信息，不打断主内容阅读。</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="demo-workbench-footer">
+                        <div class="demo-workbench-status">当前示例：使用 24 栅格完成后台工作台的 KPI、主内容区和辅助侧栏编排。</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section" id="layout-recipes">
+            <h3>分栏配方</h3>
+            <p class="demo-description">
+                把常见的偏移、对齐和间距能力组织成更像真实页面的配方，会比单纯的数字演示更容易迁移到项目中。
+            </p>
+
+            <div class="demo-layout-row-gap">
+                <div class="demo-layout-direction-demo">
+                    <div class="demo-layout-direction-title">
+                        <span class="demo-tag">偏移与留白</span>
+                        <code class="demo-code">offset + gutter</code>
+                    </div>
+                    <div class="demo-layout-wrapper">
+                        <div class="demo-layout-label">用偏移把表单区或摘要区推到更自然的位置</div>
+                        <div class="layout-demo-canvas">
+                            <div class="yc-row layout-demo-row layout-demo-row--gutter">
+                                <div class="yc-col-8 yc-col-offset-4">
+                                    <div class="layout-demo-block layout-demo-block--primary">
+                                        <span class="layout-demo-block__eyebrow">col-8 offset-4</span>
+                                        <h4 class="layout-demo-block__title">主筛选区</h4>
+                                        <div class="layout-demo-block__meta">将核心表单推到视线更集中的位置。</div>
+                                    </div>
+                                </div>
+                                <div class="yc-col-8">
+                                    <div class="layout-demo-block">
+                                        <span class="layout-demo-block__eyebrow">col-8</span>
+                                        <h4 class="layout-demo-block__title">摘要区</h4>
+                                        <div class="layout-demo-block__meta">放统计摘要或操作提示，保持页面平衡。</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layout-demo-note-row">
+                                <span class="layout-demo-note-row__label">推荐做法</span>
+                                <span class="layout-demo-note-row__meta">偏移用来调整阅读重心，不建议用来弥补结构本身的问题。</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="demo-layout-direction-demo">
+                    <div class="demo-layout-direction-title">
+                        <span class="demo-tag demo-tag--success">对齐与节奏</span>
+                        <code class="demo-code">justify + align</code>
+                    </div>
+                    <div class="demo-layout-wrapper">
+                        <div class="demo-layout-label">更接近操作栏、筛选栏和状态栏的排布方式</div>
+                        <div class="layout-demo-canvas">
+                            <div class="yc-row yc-row--justify-space-between yc-row--align-middle layout-demo-row layout-demo-row--compact">
+                                <div class="yc-col-6">
+                                    <div class="layout-demo-block">
+                                        <span class="layout-demo-block__eyebrow">左操作区</span>
+                                        <h4 class="layout-demo-block__title">批量操作</h4>
+                                    </div>
+                                </div>
+                                <div class="yc-col-6">
+                                    <div class="layout-demo-block layout-demo-block--success">
+                                        <span class="layout-demo-block__eyebrow">中状态区</span>
+                                        <h4 class="layout-demo-block__title">同步完成</h4>
+                                    </div>
+                                </div>
+                                <div class="yc-col-6">
+                                    <div class="layout-demo-block">
+                                        <span class="layout-demo-block__eyebrow">右快捷区</span>
+                                        <h4 class="layout-demo-block__title">导出 / 刷新</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layout-demo-chip-grid">
+                                <div class="demo-workbench-card">
+                                    <h4 class="demo-workbench-card__title">空间优先级</h4>
+                                    <p class="demo-workbench-card__text">让主操作与状态信息保持清晰分区，比单纯平均分栏更适合企业后台。</p>
+                                </div>
+                                <div class="demo-workbench-card">
+                                    <h4 class="demo-workbench-card__title">行内对齐</h4>
+                                    <p class="demo-workbench-card__text">带筛选器的工作台建议统一垂直居中，避免控件高度不一致造成跳动。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section" id="layout-responsive">
+            <h3>响应式策略</h3>
+            <p class="demo-description">
+                大屏更强调并排信息密度，小屏更强调阅读顺序。响应式栅格的重点是“按场景收拢”，而不是机械地把所有卡片缩小。
+            </p>
+
+            <div class="demo-workbench-surface">
+                <div class="demo-workbench-toolbar">
+                    <div class="demo-workbench-toolbar__group">
+                        <span class="demo-tag demo-tag--warning">Responsive Layout</span>
+                        <div class="demo-workbench-pills">
+                            <span class="demo-shell-pill">xs: 24</span>
+                            <span class="demo-shell-pill">sm: 12</span>
+                            <span class="demo-shell-pill">lg: 6</span>
+                        </div>
+                    </div>
+                    <div class="demo-workbench-toolbar__actions">
+                        <span class="demo-shell-pill"><i class="fas fa-up-right-and-down-left-from-center"></i> 缩放浏览器观察断点切换</span>
+                    </div>
+                </div>
+
+                <div class="demo-workbench-stage demo-workbench-stage--grid layout-demo-stage--responsive">
+                    <div class="layout-demo-responsive-shell">
+                        <div class="yc-row layout-demo-row layout-demo-row--gutter">
+                            <div class="yc-col-xs-24 yc-col-sm-12 yc-col-lg-6">
+                                <div class="layout-demo-block layout-demo-block--primary">
+                                    <span class="layout-demo-block__eyebrow">xs-24 / sm-12 / lg-6</span>
+                                    <h4 class="layout-demo-block__title">总览卡片</h4>
+                                    <div class="layout-demo-block__meta">首屏指标在宽屏并排，小屏自动堆叠成单列。</div>
+                                </div>
+                            </div>
+                            <div class="yc-col-xs-24 yc-col-sm-12 yc-col-lg-6">
+                                <div class="layout-demo-block">
+                                    <span class="layout-demo-block__eyebrow">xs-24 / sm-12 / lg-6</span>
+                                    <h4 class="layout-demo-block__title">执行状态</h4>
+                                    <div class="layout-demo-block__meta">适合监控、审批或发布状态模块。</div>
+                                </div>
+                            </div>
+                            <div class="yc-col-xs-24 yc-col-sm-12 yc-col-lg-6">
+                                <div class="layout-demo-block">
+                                    <span class="layout-demo-block__eyebrow">xs-24 / sm-12 / lg-6</span>
+                                    <h4 class="layout-demo-block__title">消息摘要</h4>
+                                    <div class="layout-demo-block__meta">在移动端中，这类信息会按主次顺序自然向下排列。</div>
+                                </div>
+                            </div>
+                            <div class="yc-col-xs-24 yc-col-sm-12 yc-col-lg-6">
+                                <div class="layout-demo-block layout-demo-block--success">
+                                    <span class="layout-demo-block__eyebrow">xs-24 / sm-12 / lg-6</span>
+                                    <h4 class="layout-demo-block__title">快捷操作</h4>
+                                    <div class="layout-demo-block__meta">让操作入口在各断点下都保持可发现性。</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="demo-workbench-status">断点原则：信息越关键，越应该在窄屏时优先靠前；辅助信息则跟随到下方或折叠进入二级区域。</div>
+                    </div>
+                </div>
+
+                <div class="demo-workbench-footer">
+                    <div class="demo-workbench-footer__group">
+                        <span class="demo-shell-pill">适合后台首页</span>
+                        <span class="demo-shell-pill">适合内容详情页</span>
+                        <span class="demo-shell-pill">适合监控控制台</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../scripts/demo-shell.js"></script>
+</body>
+</html>

@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PropertyGrid 属性表格 - YC UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/demo.css">
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-page-header">
+            <h1 class="demo-page-title">PropertyGrid 属性表格</h1>
+            <p class="demo-page-subtitle">使用现有 input、select、checkbox、radio、date picker 和 time picker 组件组织结构化属性编辑体验。</p>
+        </div>
+
+        <div class="demo-section">
+            <h3>基础属性面板</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">适合用户资料、设备信息和可视化配置面板</div>
+                <div class="yc-property-grid">
+                    <div class="yc-property-grid__header">
+                        <span class="yc-property-grid__title">成员资料</span>
+                        <div class="yc-property-grid__actions">
+                            <button class="yc-button yc-button--small">取消</button>
+                            <button class="yc-button yc-button--primary yc-button--small">保存</button>
+                        </div>
+                    </div>
+
+                    <div class="yc-property-grid__body">
+                        <div class="yc-property-grid__category is-expanded">
+                            <div class="yc-property-grid__category-header" data-action="toggle-category">
+                                <span class="yc-property-grid__category-icon"><i class="fas fa-caret-right"></i></span>
+                                <span class="yc-property-grid__category-title">基础信息</span>
+                            </div>
+                            <div class="yc-property-grid__category-body">
+                                <div class="yc-property-grid__row">
+                                    <div class="yc-property-grid__name yc-property-grid__name-required">用户名</div>
+                                    <div class="yc-property-grid__value">
+                                        <div class="yc-input-wrapper">
+                                            <input type="text" class="yc-input" value="liwei.admin">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="yc-property-grid__row">
+                                    <div class="yc-property-grid__name">岗位</div>
+                                    <div class="yc-property-grid__value">
+                                        <div class="yc-select has-value">
+                                            <div class="yc-select__input-wrapper">
+                                                <input type="text" class="yc-select__input" value="高级前端工程师" readonly>
+                                                <i class="fas fa-chevron-down yc-select__arrow"></i>
+                                            </div>
+                                            <div class="yc-select__popper">
+                                                <div class="yc-select-dropdown">
+                                                    <div class="yc-select-dropdown__list">
+                                                        <div class="yc-select-dropdown__item" data-value="designer">交互设计师</div>
+                                                        <div class="yc-select-dropdown__item is-selected" data-value="fe">高级前端工程师</div>
+                                                        <div class="yc-select-dropdown__item" data-value="pm">产品经理</div>
+                                                        <div class="yc-select-dropdown__item" data-value="qa">测试工程师</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="yc-property-grid__row">
+                                    <div class="yc-property-grid__name">手机号</div>
+                                    <div class="yc-property-grid__value">
+                                        <div class="yc-input-wrapper">
+                                            <input type="text" class="yc-input" data-input-format="phone" value="13800138000">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="yc-property-grid__row">
+                                    <div class="yc-property-grid__name">通知方式</div>
+                                    <div class="yc-property-grid__value">
+                                        <div class="yc-checkbox-group">
+                                            <label class="yc-checkbox is-checked">
+                                                <input type="checkbox" class="yc-checkbox__input" checked>
+                                                <span class="yc-checkbox__wrapper"></span>
+                                                <span class="yc-checkbox__label">邮件</span>
+                                            </label>
+                                            <label class="yc-checkbox is-checked">
+                                                <input type="checkbox" class="yc-checkbox__input" checked>
+                                                <span class="yc-checkbox__wrapper"></span>
+                                                <span class="yc-checkbox__label">站内信</span>
+                                            </label>
+                                            <label class="yc-checkbox">
+                                                <input type="checkbox" class="yc-checkbox__input">
+                                                <span class="yc-checkbox__wrapper"></span>
+                                                <span class="yc-checkbox__label">短信</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="yc-property-grid__category is-expanded">
+                            <div class="yc-property-grid__category-header" data-action="toggle-category">
+                                <span class="yc-property-grid__category-icon"><i class="fas fa-caret-right"></i></span>
+                                <span class="yc-property-grid__category-title">排班信息</span>
+                            </div>
+                            <div class="yc-property-grid__category-body">
+                                <div class="yc-property-grid__row">
+                                    <div class="yc-property-grid__name">值班日期</div>
+                                    <div class="yc-property-grid__value">
+                                        <div class="yc-date-picker" data-demo-picker data-value="2026-05-12">
+                                            <div class="yc-date-picker__trigger" data-placeholder="请选择日期">
+                                                <div class="yc-date-picker__trigger-content">
+                                                    <span class="yc-date-picker__trigger-value">2026-05-12</span>
+                                                </div>
+                                                <span class="yc-date-picker__icon"><i class="fas fa-calendar-alt"></i></span>
+                                            </div>
+                                            <div class="yc-date-picker__panel">
+                                                <div class="yc-date-picker__header">
+                                                    <div class="yc-date-picker__header-nav">
+                                                        <button type="button" class="yc-date-picker__header-prev" data-action="prev-month"><i class="fas fa-chevron-left"></i></button>
+                                                    </div>
+                                                    <div class="yc-date-picker__header-label"></div>
+                                                    <div class="yc-date-picker__header-nav">
+                                                        <button type="button" class="yc-date-picker__header-next" data-action="next-month"><i class="fas fa-chevron-right"></i></button>
+                                                    </div>
+                                                </div>
+                                                <div class="yc-date-picker__content-wrapper">
+                                                    <div class="yc-date-picker__weekdays">
+                                                        <div class="yc-date-picker__weekday">日</div>
+                                                        <div class="yc-date-picker__weekday">一</div>
+                                                        <div class="yc-date-picker__weekday">二</div>
+                                                        <div class="yc-date-picker__weekday">三</div>
+                                                        <div class="yc-date-picker__weekday">四</div>
+                                                        <div class="yc-date-picker__weekday">五</div>
+                                                        <div class="yc-date-picker__weekday">六</div>
+                                                    </div>
+                                                    <div class="yc-date-picker__dates"></div>
+                                                </div>
+                                                <div class="yc-date-picker__footer">
+                                                    <div class="yc-date-picker__footer--left">
+                                                        <button type="button" class="yc-date-picker__footer-btn yc-date-picker__footer-btn--text" data-action="today">今天</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="yc-property-grid__row">
+                                    <div class="yc-property-grid__name">值班时间</div>
+                                    <div class="yc-property-grid__value">
+                                        <div class="yc-time-picker yc-time-picker--clearable" data-demo-picker data-seconds="false" data-value="18:30">
+                                            <div class="yc-time-picker__input-wrapper">
+                                                <i class="fas fa-clock yc-time-picker__icon"></i>
+                                                <input type="text" class="yc-time-picker__input" readonly placeholder="选择时间">
+                                                <span class="yc-time-picker__clear"><i class="fas fa-times"></i></span>
+                                            </div>
+                                            <div class="yc-time-picker__popper">
+                                                <div class="yc-time-panel">
+                                                    <div class="yc-time-panel__content">
+                                                        <div class="yc-time-panel__column"><div class="yc-time-panel__list" data-time-unit="hour"></div></div>
+                                                        <div class="yc-time-panel__column"><div class="yc-time-panel__list" data-time-unit="minute"></div></div>
+                                                    </div>
+                                                    <div class="yc-time-panel__footer">
+                                                        <button type="button" class="yc-time-panel__btn yc-time-panel__btn--text" data-action="time-now">当前时间</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="yc-property-grid__row">
+                                    <div class="yc-property-grid__name">简介</div>
+                                    <div class="yc-property-grid__value">
+                                        <textarea class="yc-textarea" rows="4">负责组件平台与设计系统落地，偏好多团队协作与体验治理。</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="yc-property-grid__description">PropertyGrid 负责的是分组、层级和属性语义，具体输入能力由已有组件接管。</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>带标签页的属性面板</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">适合产品配置、表单设计器和对象编辑器</div>
+                <div class="yc-property-grid">
+                    <div class="yc-property-grid__header">
+                        <span class="yc-property-grid__title">组件发布配置</span>
+                    </div>
+
+                    <div class="yc-property-grid__tabs">
+                        <div class="yc-property-grid__tab is-active" data-tab-target="property-basic">基础</div>
+                        <div class="yc-property-grid__tab" data-tab-target="property-publish">发布</div>
+                        <div class="yc-property-grid__tab" data-tab-target="property-meta">元数据</div>
+                    </div>
+
+                    <div class="yc-property-grid__body">
+                        <div class="yc-property-grid__tab-panel" id="property-basic">
+                            <div class="yc-property-grid__category is-expanded">
+                                <div class="yc-property-grid__category-body">
+                                    <div class="yc-property-grid__row">
+                                        <div class="yc-property-grid__name yc-property-grid__name-required">组件名称</div>
+                                        <div class="yc-property-grid__value">
+                                            <div class="yc-input-wrapper">
+                                                <input type="text" class="yc-input" value="Anchor">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="yc-property-grid__row">
+                                        <div class="yc-property-grid__name">分类</div>
+                                        <div class="yc-property-grid__value">
+                                            <div class="yc-select has-value">
+                                                <div class="yc-select__input-wrapper">
+                                                    <input type="text" class="yc-select__input" value="Navigation" readonly>
+                                                    <i class="fas fa-chevron-down yc-select__arrow"></i>
+                                                </div>
+                                                <div class="yc-select__popper">
+                                                    <div class="yc-select-dropdown">
+                                                        <div class="yc-select-dropdown__list">
+                                                            <div class="yc-select-dropdown__item is-selected" data-value="navigation">Navigation</div>
+                                                            <div class="yc-select-dropdown__item" data-value="data-entry">Data Entry</div>
+                                                            <div class="yc-select-dropdown__item" data-value="feedback">Feedback</div>
+                                                            <div class="yc-select-dropdown__item" data-value="display">Display</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="yc-property-grid__row">
+                                        <div class="yc-property-grid__name">适用端</div>
+                                        <div class="yc-property-grid__value">
+                                            <div class="yc-checkbox-group">
+                                                <label class="yc-checkbox is-checked">
+                                                    <input type="checkbox" class="yc-checkbox__input" checked>
+                                                    <span class="yc-checkbox__wrapper"></span>
+                                                    <span class="yc-checkbox__label">桌面端</span>
+                                                </label>
+                                                <label class="yc-checkbox is-checked">
+                                                    <input type="checkbox" class="yc-checkbox__input" checked>
+                                                    <span class="yc-checkbox__wrapper"></span>
+                                                    <span class="yc-checkbox__label">移动端</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="yc-property-grid__tab-panel" id="property-publish" hidden>
+                            <div class="yc-property-grid__category is-expanded">
+                                <div class="yc-property-grid__category-body">
+                                    <div class="yc-property-grid__row">
+                                        <div class="yc-property-grid__name">发布方式</div>
+                                        <div class="yc-property-grid__value">
+                                            <div class="yc-radio-group">
+                                                <label class="yc-radio is-checked">
+                                                    <input type="radio" class="yc-radio__input" name="publishMode" checked>
+                                                    <span class="yc-radio__wrapper"></span>
+                                                    <span class="yc-radio__label">灰度</span>
+                                                </label>
+                                                <label class="yc-radio">
+                                                    <input type="radio" class="yc-radio__input" name="publishMode">
+                                                    <span class="yc-radio__wrapper"></span>
+                                                    <span class="yc-radio__label">全量</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="yc-property-grid__row">
+                                        <div class="yc-property-grid__name">发布窗口</div>
+                                        <div class="yc-property-grid__value">
+                                            <div class="yc-time-picker yc-time-picker--clearable" data-demo-picker data-seconds="false" data-value="22:30">
+                                                <div class="yc-time-picker__input-wrapper">
+                                                    <i class="fas fa-clock yc-time-picker__icon"></i>
+                                                    <input type="text" class="yc-time-picker__input" readonly placeholder="选择时间">
+                                                    <span class="yc-time-picker__clear"><i class="fas fa-times"></i></span>
+                                                </div>
+                                                <div class="yc-time-picker__popper">
+                                                    <div class="yc-time-panel">
+                                                        <div class="yc-time-panel__content">
+                                                            <div class="yc-time-panel__column"><div class="yc-time-panel__list" data-time-unit="hour"></div></div>
+                                                            <div class="yc-time-panel__column"><div class="yc-time-panel__list" data-time-unit="minute"></div></div>
+                                                        </div>
+                                                        <div class="yc-time-panel__footer">
+                                                            <button type="button" class="yc-time-panel__btn yc-time-panel__btn--text" data-action="time-now">当前时间</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="yc-property-grid__row">
+                                        <div class="yc-property-grid__name">最大并发</div>
+                                        <div class="yc-property-grid__value">
+                                            <div class="yc-input-wrapper">
+                                                <input type="number" class="yc-input" value="200">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="yc-property-grid__tab-panel" id="property-meta" hidden>
+                            <div class="yc-property-grid__category is-expanded">
+                                <div class="yc-property-grid__category-body">
+                                    <div class="yc-property-grid__row">
+                                        <div class="yc-property-grid__name">当前版本</div>
+                                        <div class="yc-property-grid__value">
+                                            <span class="yc-property-grid__value-text yc-property-grid__value-number">2.4.0</span>
+                                        </div>
+                                    </div>
+                                    <div class="yc-property-grid__row is-warning">
+                                        <div class="yc-property-grid__name">风险提示</div>
+                                        <div class="yc-property-grid__value">
+                                            <span class="yc-property-grid__value-text yc-property-grid__state-text--warning">该组件仍在进行 demo 结构重构，发布前请再次验收交互。</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>嵌套配置与校验状态</h3>
+            <div class="demo-block">
+                <div class="demo-block-title">适合环境变量、连接配置和带错误提示的对象编辑</div>
+                <div class="yc-property-grid">
+                    <div class="yc-property-grid__body">
+                        <div class="yc-property-grid__category is-expanded">
+                            <div class="yc-property-grid__category-header" data-action="toggle-category">
+                                <span class="yc-property-grid__category-icon"><i class="fas fa-caret-right"></i></span>
+                                <span class="yc-property-grid__category-title">服务配置</span>
+                            </div>
+                            <div class="yc-property-grid__category-body">
+                                <div class="yc-property-grid__row yc-property-grid__row--nested is-expanded">
+                                    <div class="yc-property-grid__name">数据库连接</div>
+                                    <div class="yc-property-grid__value">
+                                        <div class="yc-property-grid__nested-toggle" data-action="toggle-nested">
+                                            <i class="fas fa-caret-right"></i>
+                                            <span>展开连接详情</span>
+                                        </div>
+                                        <div class="yc-property-grid__nested-body">
+                                            <div class="yc-property-grid__row">
+                                                <div class="yc-property-grid__name">Host</div>
+                                                <div class="yc-property-grid__value">
+                                                    <div class="yc-input-wrapper">
+                                                        <input type="text" class="yc-input" value="db.internal.yc">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="yc-property-grid__row">
+                                                <div class="yc-property-grid__name">Port</div>
+                                                <div class="yc-property-grid__value">
+                                                    <div class="yc-input-wrapper">
+                                                        <input type="number" class="yc-input" value="5432">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="yc-property-grid__row is-error">
+                                    <div class="yc-property-grid__name yc-property-grid__name-required">Webhook 地址</div>
+                                    <div class="yc-property-grid__value">
+                                        <div class="yc-input-wrapper">
+                                            <input type="url" class="yc-input" value="http:/invalid-url">
+                                        </div>
+                                        <span class="yc-property-grid__value-text yc-property-grid__state-text--danger">地址不合法，请提供完整的 https URL。</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../scripts/input-enhance.js"></script>
+    <script src="../scripts/demo-composed-controls.js"></script>
+    <script src="../scripts/demo-picker-lite.js"></script>
+    <script>
+        document.addEventListener('click', function(event) {
+            const categoryHeader = event.target.closest('[data-action="toggle-category"]');
+            if (categoryHeader) {
+                categoryHeader.closest('.yc-property-grid__category').classList.toggle('is-expanded');
+            }
+
+            const nestedToggle = event.target.closest('[data-action="toggle-nested"]');
+            if (nestedToggle) {
+                nestedToggle.closest('.yc-property-grid__row--nested').classList.toggle('is-expanded');
+            }
+
+            const tab = event.target.closest('.yc-property-grid__tab');
+            if (tab) {
+                const container = tab.closest('.yc-property-grid');
+                const targetId = tab.dataset.tabTarget;
+                container.querySelectorAll('.yc-property-grid__tab').forEach(item => item.classList.toggle('is-active', item === tab));
+                container.querySelectorAll('.yc-property-grid__tab-panel').forEach(panel => {
+                    panel.hidden = panel.id !== targetId;
+                });
+            }
+        });
+    </script>
+    <script src="../scripts/demo-shell.js"></script>
+</body>
+</html>

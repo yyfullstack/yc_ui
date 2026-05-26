@@ -1,0 +1,207 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN" yc-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拖拽与调整 - Table Workbench</title>
+    <script src="../../scripts/table-workbench-theme.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../styles/index.css">
+    <link rel="stylesheet" href="../../styles/components/button.css">
+    <link rel="stylesheet" href="../../styles/table-workbench.css">
+    <script src="https://unpkg.com/vue@3.4.0/dist/vue.global.prod.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <!--<div class="page-header">
+                <h1>拖拽与列宽</h1>
+                <p>统一验证列宽调整与拖拽排序，让表格高级交互保持一致的反馈与视觉表现。</p>
+            </div>
+
+            <div class="actions">
+                <a class="yc-button yc-button&#45;&#45;small" href="../demo-table.html">
+                    <i class="fas fa-arrow-left"></i>
+                    返回 Table Workbench
+                </a>
+            </div>-->
+
+            <div class="demo-card">
+                <h3>列宽调整</h3>
+                <div class="table-range-controls">
+                    <div class="table-chip">姓名：{{ columnWidths.name }}px</div>
+                    <div class="table-chip">角色：{{ columnWidths.role }}px</div>
+                    <div class="table-chip">部门：{{ columnWidths.department }}px</div>
+                    <button class="yc-button yc-button--small" type="button" @click="resetWidths">恢复默认</button>
+                </div>
+                <table class="yc-data-table stripe border">
+                    <thead>
+                        <tr>
+                            <th class="cell-center" style="width: 72px;">序号</th>
+                            <th :style="{ width: `${columnWidths.name}px` }">
+                                姓名
+                                <span class="resize-handle" @mousedown="startResize('name', $event)"></span>
+                            </th>
+                            <th :style="{ width: `${columnWidths.role}px` }">
+                                角色
+                                <span class="resize-handle" @mousedown="startResize('role', $event)"></span>
+                            </th>
+                            <th :style="{ width: `${columnWidths.department}px` }">
+                                部门
+                                <span class="resize-handle" @mousedown="startResize('department', $event)"></span>
+                            </th>
+                            <th class="cell-center" style="width: 88px;">年龄</th>
+                            <th>邮箱</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(row, index) in widthRows" :key="row.id">
+                            <td class="cell-center">{{ index + 1 }}</td>
+                            <td>{{ row.name }}</td>
+                            <td>{{ row.role }}</td>
+                            <td>{{ row.department }}</td>
+                            <td class="cell-center">{{ row.age }}</td>
+                            <td>{{ row.email }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="demo-card">
+                <h3>行拖拽排序</h3>
+                <div class="table-surface-note">
+                    拖动整行即可调整顺序，拖拽状态沿用统一阴影和透明层 token，更贴近平台化工作台体验。
+                </div>
+                <table class="yc-data-table stripe border">
+                    <thead>
+                        <tr>
+                            <th style="width: 48px;"></th>
+                            <th class="cell-center" style="width: 72px;">序号</th>
+                            <th>姓名</th>
+                            <th>角色</th>
+                            <th>部门</th>
+                            <th class="cell-center" style="width: 88px;">年龄</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                            v-for="(row, index) in dragRows"
+                            :key="row.id"
+                            :class="{ dragging: draggingIndex === index }"
+                            draggable="true"
+                            @dragstart="startDrag(index)"
+                            @dragover.prevent
+                            @drop="dropRow(index)"
+                            @dragend="draggingIndex = null"
+                        >
+                            <td class="cell-center">
+                                <span class="drag-handle">
+                                    <i class="fas fa-grip-vertical"></i>
+                                </span>
+                            </td>
+                            <td class="cell-center">{{ index + 1 }}</td>
+                            <td>{{ row.name }}</td>
+                            <td>{{ row.role }}</td>
+                            <td>{{ row.department }}</td>
+                            <td class="cell-center">{{ row.age }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="result">状态：当前首行 {{ dragRows[0]?.name || '无数据' }}</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const { createApp, onMounted, onUnmounted, ref } = Vue;
+
+        createApp({
+            setup() {
+                const defaultWidths = {
+                    name: 160,
+                    role: 180,
+                    department: 150
+                };
+
+                const columnWidths = ref({ ...defaultWidths });
+                const widthRows = ref([
+                    { id: 1, name: '张三', role: '前端工程师', department: '技术研发部', age: 28, email: 'zhangsan@example.com' },
+                    { id: 2, name: '李四', role: '后端工程师', department: '技术研发部', age: 32, email: 'lisi@example.com' },
+                    { id: 3, name: '赵六', role: '产品经理', department: '产品设计部', age: 31, email: 'zhaoliu@example.com' },
+                    { id: 4, name: '周八', role: '运营经理', department: '增长运营部', age: 27, email: 'zhouba@example.com' }
+                ]);
+
+                const dragRows = ref([
+                    { id: 11, name: '张三', role: '前端工程师', department: '技术研发部', age: 28 },
+                    { id: 12, name: '李四', role: '后端工程师', department: '技术研发部', age: 32 },
+                    { id: 13, name: '王五', role: '测试工程师', department: '技术研发部', age: 26 },
+                    { id: 14, name: '赵六', role: '产品经理', department: '产品设计部', age: 31 },
+                    { id: 15, name: '孙七', role: 'UI 设计师', department: '产品设计部', age: 29 }
+                ]);
+
+                const draggingIndex = ref(null);
+                const resizeState = ref({
+                    key: '',
+                    startX: 0,
+                    startWidth: 0
+                });
+
+                function startResize(key, event) {
+                    resizeState.value = {
+                        key,
+                        startX: event.clientX,
+                        startWidth: columnWidths.value[key]
+                    };
+                }
+
+                function handleResize(event) {
+                    if (!resizeState.value.key) return;
+                    const delta = event.clientX - resizeState.value.startX;
+                    const nextWidth = Math.max(120, resizeState.value.startWidth + delta);
+                    columnWidths.value[resizeState.value.key] = nextWidth;
+                }
+
+                function stopResize() {
+                    resizeState.value.key = '';
+                }
+
+                function resetWidths() {
+                    columnWidths.value = { ...defaultWidths };
+                }
+
+                function startDrag(index) {
+                    draggingIndex.value = index;
+                }
+
+                function dropRow(targetIndex) {
+                    if (draggingIndex.value === null || draggingIndex.value === targetIndex) return;
+                    const moved = dragRows.value.splice(draggingIndex.value, 1)[0];
+                    dragRows.value.splice(targetIndex, 0, moved);
+                    draggingIndex.value = null;
+                }
+
+                onMounted(() => {
+                    document.addEventListener('mousemove', handleResize);
+                    document.addEventListener('mouseup', stopResize);
+                });
+
+                onUnmounted(() => {
+                    document.removeEventListener('mousemove', handleResize);
+                    document.removeEventListener('mouseup', stopResize);
+                });
+
+                return {
+                    columnWidths,
+                    widthRows,
+                    dragRows,
+                    draggingIndex,
+                    startResize,
+                    resetWidths,
+                    startDrag,
+                    dropRow
+                };
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>
